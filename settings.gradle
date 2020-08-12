@@ -15,5 +15,4 @@ include 'shared'
 include 'api'
 include 'services:webservice'
 */
-
-rootProject.name = 'db_app'
+rootProject.name = 'fyp_app'
