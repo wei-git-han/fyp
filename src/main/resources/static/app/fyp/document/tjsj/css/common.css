@@ -1,0 +1,195 @@
+html,body{
+	background-color:ffffff;
+	/* font-family:"微软雅黑"; */
+}
+*{
+	border-radius:0px
+}
+.table_portlet .table-advance thead tr th {
+    background-color: #3598DC;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+}
+.table_portlet .has-success .help-block, 
+.table_portlet .has-success .help-inline, 
+.table_portlet .has-success .control-label, 
+.table_portlet .has-success .radio, 
+.table_portlet .has-success .checkbox, 
+.table_portlet .has-success .radio-inline, 
+.table_portlet .has-success .checkbox-inline {
+    color: #6ac3b8;
+}
+.table_portlet .has-success .form-control {
+    border-color: #6ac3b8;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.table_portlet .portlet{
+	position:relative;width:100%;height:100%;margin-bottom:0px;
+}
+.table_portlet .portlet-title{
+	position:absolute;width:100%;z-index:1;
+}
+.table_portlet .box .portlet-body{
+	position:absolute;width:100%;height:100%;z-index:0;padding:41px 0 0 0;
+}
+.table_portlet .portlet-body .portlet_cont{
+	height:100%;position:relative;
+}
+.table_portlet .portlet_form{
+	position:absolute;width:100%;z-index:1;padding:10px;box-shadow:0 0 10px #cccccc inset;
+}
+.table_portlet .portlet_list{
+	position:absolute;width:100%;height:100%;z-index:0;
+}
+.table_portlet .row1{
+	height:48px;
+}
+.table_portlet .top_row1{
+	padding-top:48px;
+}
+.table_portlet .row2{
+	height:91px;
+}
+.table_portlet .top_row2{
+	padding-top:91px;
+}
+.table_portlet .row3{
+	height:134px;
+}
+.table_portlet .top_row3{
+	padding-top:134px;
+}
+.table_portlet .row4{
+	height:177px;
+}
+.table_portlet .top_row4{
+	padding-top:177px;
+}
+.table_portlet .row5{
+	height:220px;
+}
+.table_portlet .top_row5{
+	padding-top:220px;
+}
+.table_portlet .row6{
+	height:263px;
+}
+.table_portlet .top_row6{
+	padding-top:263px;
+}
+.table_portlet .row7{
+	height:306px;
+}
+.table_portlet .top_row7{
+	padding-top:306px;
+}
+.table_portlet .portlet_inner{
+	width:100%;height:100%;padding:10px;
+}
+/*readonly元素 hover属性*/
+input[readonly]{
+	cursor: pointer !important;
+	background: inherit !important;
+}
+table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.table-advance thead tr th {
+    background-color: #70abcd;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    text-align:center;
+ }
+.control-label .required {
+	float: left;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    /* padding: 10px 8px 10px 9px !important;
+    line-height: 1.42857143;
+    vertical-align: middle; */
+    padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+   }
+   
+
+.modal-header {
+    background-color: #1273AA;
+    color: #fff;
+    padding: 10px;
+}
+
+.newclose {
+    position: absolute;
+    top: 10px;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    right: 10px;
+    cursor: pointer;
+}
+.red,.required{
+	color: red;
+}
+.divrelative{
+	position:relative;
+}
+/* 人员选择树图标位置*/
+.userpic {
+    position: absolute;
+    top: 0px;
+    right: 16px;
+    background: #45B6AF;
+    width: 34px;
+    text-align: center;
+    color: #fff;
+    height: 33px;
+    line-height: 33px;
+    cursor: pointer;
+}
+.users{
+	font-size: 16px!important;
+}
+
+.btn-success, .btn-default {
+    border-radius: 2px!important;
+    -moz-border-radius: 2px!important;
+}
+
+
+.form-control[disabled], fieldset[disabled] .form-control {/*所有表单元素设置了readonly或者disabled以后，添加此class设置鼠标划过是箭头*/
+    cursor: default;
+    background-color: #eeeeee;
+}
+.addpointer, .form-control[readonly]{   /*所有表单元素设置了readonly或者disabled以后，添加此class设置鼠标划过是小手*/
+	cursor: pointer!important;
+}
+/********弹出框样式*******/
+.bootbox-body{
+	color:#000;
+	line-height:130px;
+	font-size:15px!important;
+	text-align:center;
+}
+.modal-dialog {
+    width: 400px;
+}
+.modal-footer {
+	text-align: center;
+}
+.required {
+    position: absolute;
+    right: -10px;
+    top: 5px;
+    color: #f00;
+    font-size: 14px;
+    font-family: simsun;
+}
+.divInline {
+    position: relative;
+}
+

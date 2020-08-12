@@ -1,0 +1,35 @@
+{
+    "children": [
+        {
+            "id": "a29211c145436d0",
+            "text": "某单位1",
+            "type": "0"
+        },
+        {
+            "id": "a29211c1rtyrt7-1905055ec6d0",
+            "text": "某单位2",
+            "type": "0"
+        },
+        {
+            "id": "a29211c1hhh6d0",
+            "text": "某单位3",
+            "type": "0"
+        },
+         {
+            "id": "a298c6d0",
+            "text": "某单位4",
+            "type": "0"
+        },
+         {
+            "id": "a29215055ec6d0",
+            "text": "某单位5",
+            "type": "0"
+        }
+    ],
+    "id": "root",
+    "state": {
+        "opened": true
+    },
+    "text": "某单位",
+    "type": "0"
+}

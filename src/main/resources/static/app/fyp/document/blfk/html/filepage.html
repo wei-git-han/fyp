@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8"/>
+	<title>阅件管理</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../assets/global/plugins/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../assets/global/plugins/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../assets/global/plugins/uniform/css/uniform.default.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../assets/global/css/components.css" id="style_components"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../assets/global/css/plugins.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../common/css/common.css"/>
+	<link rel="stylesheet" type="text/css"  href="../css/filepage.css"/>
+</head>
+<body>
+     <h3 style="color: #3c763d;text-align:center;margin-top:35px;">请选择文件并上传(支持格式为xls,xlsx的文件)</h3>
+   	 <form class="form-horizontal" id="form2" target="iframe7" role="form" style="padding-left:100px;padding-right:100px;" method="post" enctype="multipart/form-data" action="/filefj/savePDF">
+	      <div class="form-body" style="padding-top:10px;padding-bottom:10px;border:1px solid #cccccc">
+	           <div class="form-group new_success">
+	               <div class="col-xs-12">
+	                     <div class="fileinput fileinput-new" data-provides="fileinput">
+	                        <span style="padding-left:10px;">
+	                         	<button type="button" id="uploadFile" class="btn btn-primary"><i class="fa fa-download  uploadPdf"></i> 选择文件</button>
+	                        	<input type="file" name="file" id="file" style="display:none" />
+	                        </span>
+	                        <span class="fileinput-filename" style="padding-left:10px;line-height:30px;"></span>
+	                    </div> 
+	                </div>
+	            </div>
+	      </div>
+		  <div class="form-actions" style="text-align:center;padding:10px;">
+		      <button type="button" class="btn btn-primary" id="shangchuan2">确定</button>
+		      <button type="button" class="btn default" id="close">取消</button>
+		  </div>
+     </form>
+	<script type="text/javascript" src="../../../../../assets/global/plugins/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../../assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../../../assets/global/plugins/uniform/jquery.uniform.min.js"></script>
+	<script type="text/javascript" src="../../../../../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" ></script>
+	<script type="text/javascript" src="../../../../../assets/global/scripts/metronic.js"></script>
+	<script type="text/javascript" src="../../../../../assets/admin/layout/scripts/layout.js"></script>
+	<script type="text/javascript" src="../../../../../assets/admin/layout/scripts/quick-sidebar.js"></script>
+	<script type="text/javascript" src="../../../../../assets/admin/layout/scripts/demo.js"></script>
+	<script type="text/javascript" src="../../../../../assets/global/plugins/gridtable/gridtable.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../../../../../templates/admin/commons/js/jquery.form.js"></script>
+	<script type="text/javascript" src="../../../../../templates/admin/commons/js/commons.js"></script>
+	<script type="text/javascript" src="../../../common/js/commons.js"></script>
+	<script type="text/javascript" src="../js/filepage.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			pageModule.initControl();
+		});
+	</script>
+	
+</body>
+</html>

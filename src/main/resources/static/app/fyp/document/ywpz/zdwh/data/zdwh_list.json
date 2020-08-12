@@ -1,0 +1,118 @@
+/****************
+功能：字典维护列表页面，zdwh.html中引用
+进度：已完成
+request
+	pagesize:每页显示条数
+	page 当前页
+response
+	total 总条数
+	page 当前页
+	"securityClassification":"密级",
+	"officialDocumentType":"公文类型",
+	"hostDepartment":"主办部门",
+******************/
+
+{
+	"total": 3,
+	"page": 1,
+	"rows": [
+		{
+			"type": "hostDepartment",
+			"name": "主办部门",
+			"children": [
+				{
+					"id": "a6e37b0d-520c-4457-a05c-632ed44307d3",
+					"value": "第二事业部"
+				}, {
+					"id": "c815d9bd-e31e-4f8a-8eab-a89683262619",
+					"value": "第一事业部"
+				}, {
+					"id": "0df450f9-dfe0-41eb-bab3-78e20d8b5393",
+					"value": "第二事业部"
+				}, {
+					"id": "327e5a0d-453e-4875-8b52-a99d727af8ce",
+					"value": "第三事业部"
+				}, {
+					"id": "fff8dbfd-31ee-4ce0-a769-54e9610ba434",
+					"value": "第四事业部"
+				}, {
+					"id": "d3154f5c-3581-4711-bf00-7c04cc828ed2",
+					"value": "第五事业部"
+				}, {
+					"id": "44328860-f6ca-4d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "443282860-f6ca-4d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "443284860-f6ca-4d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "44328860-5f6ca-47d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "44328860-f6ca-4d53-b76a8-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "4432881110-f6ca-4d53-b76a-9b929aeb9d0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "222-f6ca-4d53-b76a-9b929aebd00a6",
+					"value": "第六事业部"
+				}, {
+					"id": "443283442860-f6ca-4d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "443243384860-f6ca-4d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "443258860-5f6ca-47d53-b76a-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "443328860-f6ca-4d53-b76a8-9b929aebd0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "44355628860-f6ca-4d53-b76a-9b929aeb9d0a6",
+					"value": "第六事业部"
+				}, {
+					"id": "44328878960-f6ca-4d53-b76a-9b929aebd00a6",
+					"value": "第六事业部"
+				}
+				
+			]
+		}, {
+			"type": "officialDocumentType",
+			"name": "公文类型",
+			"children": [
+				{
+					"id": "411b7a65-eea2-45df-ac81-836be6d107e3",
+					"value": "呈批件"
+				}, {
+					"id": "670e05b2-d74e-41ed-8b2e-5d981d5076d7",
+					"value": "申请单"
+				}, {
+					"id": "3bfd0791-3887-46d0-bd83-48af62b3c92c",
+					"value": "采购单"
+				}
+			]
+		}, {
+			"type": "securityClassification",
+			"name": "密级",
+			"children": [
+				{
+					"id": "d535105b-28aa-4e50-ab50-8cfb209543b6",
+					"value": "秘密"
+				}, {
+					"id": "3c5a1243-01b2-4e03-9734-8664896cedf8",
+					"value": "机密"
+				}, {
+					"id": "1531fa8c-1462-4f37-83a1-2a65eb48aa27",
+					"value": "绝密"
+				}, {
+					"id": "a490bd71-6783-4cde-a6bc-c14d5b517a7f",
+					"value": "内部"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/plugins/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/plugins/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/css/components.css" id="style_components"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/css/plugins.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/plugins/jstree/dist/themes/default/style.min.css" />
+	<link rel="stylesheet" type="text/css"  href="../../../../../../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+	<link rel="stylesheet" type="text/css"  href="../../../../common/css/common.css"/>
+	<link rel="stylesheet" type="text/css"  href="../css/remindedit.css"/>
+</head>
+<body>
+	<div class="newpage1">
+		<div class="newpage5">
+			<div class="newpage1">
+				<div class="newpage6">
+					<div class="newpage7">
+						<div class="scroller newpage8">
+							<div style="padding-top:20px;">
+								<div class="form-body" style="width:100%;margin:0 auto;">
+							        <div class="form-group">
+							       		<label class="col-xs-2 control-label">提醒角色</label>
+							            <div class="col-xs-10">
+					                        <input disabled type="text" class="form-control" id="remindRole" name="remindRole" placeholder="请输入提醒角色"/>
+<!-- 					                        <input type="hidden" id="id" name="id" /> -->
+					                    </div>
+					                    <div class="clearfix"></div>
+							        </div>
+							        <input type="hidden" id="state" name="state" />
+							        <div class="form-group" id="showFlag" style="display:none">
+							       		<label class="col-xs-2 control-label">提醒时段<span class="startStyle">*</span></label>
+							            <div class="col-xs-10">
+					                        <div style="width:48%;float:left" class="input-group date" id="datetimepicker1" data-target-input="nearest">
+					                        	<input readonly type="text" class ="form-control" id="startTime" name="startTime" data-target="#datetimepicker1"/>
+					                        	<span class="input-group-addon">
+					                        		<span class="glyphicon glyphicon-calendar"></span>
+					                        	</span>
+					                        </div>
+					                        <div style="width:4%;float:left" class="dateDivText">至</div>
+					                        <div style="width:48%;float:left" class="input-group date" id="datetimepicker2" data-target-input="nearest">
+					                        	<input readonly type="text" class ="form-control" id="endTime" name="endTime" data-target="#datetimepicker2"/>
+					                        	<span class="input-group-addon">
+					                        		<span class="glyphicon glyphicon-calendar"></span>
+					                        	</span>
+					                        </div>
+					                        <!-- <select class="form-control" id="remindTime" name="remindTime" required="required">
+							                    <option value="">请选择(默认每日九点)</option>
+							                </select> -->
+					                    </div>
+					                    <div class="clearfix"></div>
+							        </div>							        
+							        <div class="form-group">
+							       		<label class="col-xs-2 control-label">提醒时间<span class="startStyle">*</span></label>
+							            <div class="col-xs-10">
+					                        <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+					                        	<input readonly type="text" class ="form-control" id="remindTime" name="remindTime" data-target="#datetimepicker"/>
+					                        	<span class="input-group-addon">
+					                        		<span class="glyphicon glyphicon-calendar"></span>
+					                        	</span>
+					                        </div>
+					                        <!-- <select class="form-control" id="remindTime" name="remindTime" required="required">
+							                    <option value="">请选择(默认每日九点)</option>
+							                </select> -->
+					                    </div>
+					                    <div class="clearfix"></div>
+							        </div>
+							        <div class="clearfix"></div>
+							        <div class="form-group">
+							       		 <label class="col-xs-2 control-label">提醒内容</label>
+							       		 <div class="col-xs-10">
+									     	<textarea id="remindContent" class="form-control" name="remindContent" style="resize:none;height:200px;"  placeholder="请尽快填写本轮办理反馈"></textarea>
+								         </div>
+					              	 </div>
+							   	  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="newpage23">
+			<button class="btn btn-primary btn-button1" style="width:150px;" id="save"> 保存 </button>
+			<button class="btn btn-default btn-button2" style="width:150px;" id="quxiao"> 取消 </button>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../../../../../../assets/global/plugins/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/global/scripts/metronic.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/admin/layout/scripts/layout.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/admin/layout/scripts/quick-sidebar.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/admin/layout/scripts/demo.js"></script>
+	<script type="text/javascript" src="../../../../../../templates/admin/commons/js/commons.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+	<script type="text/javascript" src="../../../../../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../../../../../../assets/global/plugins/jquery-validation/js/additional-methods.js"></script>
+    <script type="text/javascript" src="../../../../../../assets/global/plugins/jquery-validation/js/localization/messages_zh.js"></script>
+    <script type="text/javascript" src="../../../../../../templates/admin/commons/js/commons.js"></script>
+    <script type="text/javascript" src="../../../../common/js/commons.js"></script>
+	<script type="text/javascript" src="../js/remindedit.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			pageModule.initControl();
+		});
+	</script>
+	<script>
+		$(function(){
+			$("#remindTime").datetimepicker({
+				format: 'hh',
+				language:"zh-CN",
+				bootcssVer:false,
+				autoclose: true,
+				startView: 1,
+				minuteStep:5,
+				minView:1,
+				maxView:0,
+				keyboardNavigation: false,
+			}).on('show',function(){
+				$(".table-condensed").children("thead").css("opacity","0")
+				$(".datetimepicker-hours").css("position","relative")
+				$(".datetimepicker-hours").css("top","-15px")
+			}).on('hide',function(time){
+				var time = $("#remindTime").val()+":00";
+				$("#remindTime").val(time)
+			})
+			
+			
+			$("#startTime").datetimepicker({
+				format: 'yyyy-mm-dd',
+				language:"zh-CN",
+				bootcssVer:false,
+				autoclose: true,
+				startView: 4,
+				minuteStep:5,
+				minView:2,
+				maxView:4,
+				keyboardNavigation: false,
+				startDate: new Date(),
+				initialDate: new Date(),
+			}).on('show',function(){
+				$(".table-condensed").children("thead").css("opacity","1")
+				$(".datetimepicker-hours").css("position","initial")
+				$(".datetimepicker-hours").css("top","0")
+			}).on('hide',function(time){
+			}).on('changeDate',function(data){
+				console.log(data,"0011")
+				if(data){
+					$("#endTime").datetimepicker('setStartDate',new Date(data.date))
+				}else{
+					$("#endTime").datetimepicker('setStartDate',null)
+				}
+			})
+			
+			$("#endTime").datetimepicker({
+				format: 'yyyy-mm-dd',
+				language:"zh-CN",
+				bootcssVer:false,
+				autoclose: true,
+				startView: 4,
+				minuteStep:5,
+				minView:2,
+				maxView:4,
+				keyboardNavigation: false,
+				startDate: new Date(),
+				initialDate: new Date(),
+			}).on('show',function(){
+				$(".table-condensed").children("thead").css("opacity","1")
+				$(".datetimepicker-hours").css("position","initial")
+				$(".datetimepicker-hours").css("top","0")
+			}).on('hide',function(time){
+			}).on('changeDate',function(data){
+				console.log(data,"0011")
+				if(data){
+					$("#startTime").datetimepicker('setEndDate',new Date(data.date))
+				}else{
+					$("#startTime").datetimepicker('setEndDate',null)
+				}
+			})
+		})
+	</script>
+</body>
+</html>

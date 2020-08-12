@@ -1,0 +1,11 @@
+{
+	"legend":["JW主席批示指示","党,军,国务院决策部署","其他重要工作","JW首长批示指示","ZBFZB重要工作分工","ZBFZB领导批示指示"],
+	"valdata":[
+	    {"value":10, "name":"JW主席批示指示"},
+	    {"value":20, "name":"党,军,国务院决策部署"},
+	    {"value":30, "name":"其他重要工作"},
+	    {"value":20, "name":"JW首长批示指示"},
+	    {"value":10, "name":"ZBFZB重要工作分工"},
+	    {"value":10, "name":"ZBFZB领导批示指示"}
+	]
+}

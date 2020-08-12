@@ -1,0 +1,48 @@
+{
+    "rows": [
+        {	
+        	"id":"1",
+        	"num":"1",
+            "title": "阿斯顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回顿kg回家看",
+            "progress":"审批",
+			"select":[{
+								"id":"01",
+								"text":"意见一",
+								"optiontype":"意见"
+						},
+						{
+								"id":"02",
+								"text":"意见二",
+								"optiontype":"进度"
+						},
+						{
+								"id":"03",
+								"text":"意见三",
+								"optiontype":"审批"
+						}
+						]
+        },
+           {	
+        	"id":"2",
+        	"num":"2",
+            "title": "222222s防诞节个三大发喱亏",
+			"progress":"草拟",
+			"select":[{
+								"id":"012",
+								"text":"草拟草拟",
+								"optiontype":"审核"
+						},
+						{
+								"id":"022",
+								"text":"草拟草拟",
+								"optiontype":"起草"
+						},
+						{
+								"id":"032",
+								"text":"草拟草拟",
+								"optiontype":"草拟"
+						}
+						]
+        },
+    ]
+}				

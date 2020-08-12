@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8"/>
+	<title>查看</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/uniform/css/uniform.default.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/jstree/dist/themes/default/style.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/css/components.css" id="style_components"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/css/plugins.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/admin/pages/css/tasks.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/admin/layout/css/layout.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/admin/layout/css/custom.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/easyui2/themes/bootstrap/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/easyui2/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="../../../../../assets/global/plugins/easyui2/demo/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../../../common/css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/view.css"/>
+</head>
+<body>
+	<input type="hidden"  id="id" name="id" />
+	<div class="pr100">
+		<div class="leftwrap">
+			<div class="pr100">
+				<div class="left_menu">
+					<div class="titlecont">
+						<div class="titleleft">
+							<div class="facont">
+								<button type="button" id="goback"  class="btn btn-xs" style="background:transparent;padding:1px 5px;"><i class="fa fa-arrow-circle-left " style="font-size: 27px!important;"></i></button>
+							</div>
+						</div>
+						<div class="titleleft">
+							<div class="titlefont">
+								<font id="gwName">公文名称</font>
+							</div>
+						</div>
+					</div>
+					<div id="ttcont">
+					</div>
+				</div>
+				<div class="left_main">
+				<!-- newlayout2_left开始 -->
+				<div class="newlayout2_left" style="height:100%;width: 100%;">
+					<div class="newlayout3" style="height:100%;width: 100%;" >
+						<div class="newlayout3_top">
+							<div class="newbuttoncont">
+				        		<form class="form-horizontal" id="form3" target="iframe7" role="form" method="post" enctype="multipart/form-data" action="/filefj/savePDF">
+									<input type="hidden"  id="idpdf" name="idpdf"/>
+									<div class="fileinput fileinput-new" data-provides="fileinput">
+										<span class="fileinput-filename" style="padding-right:10px;line-height:30px;display:none"></span>
+			                            <span>
+			                            	<input type="file" name="pdf" id="pdf" accept=".pdf,.ofd,.doc,.docx,.wps,.jpg,.png" style="display:none" multiple  />
+			                            </span>
+			                        </div> 
+		                        </form>
+		                        <iframe name="iframe7" style="display: none;"></iframe>
+							</div> 
+						</div>
+						
+						<div class="newlayout3_cont" style="height:100%;width: 100%;">
+							<div class="wh100 content1" style="height:100%;width: 100%;">
+				           		<div class="filecontent pr100" style="height:100%;width: 100%;">
+				           			<select class="form-control" name="List" id="List" onchange="ChangeScanData(this.value)" style="display: none"></select>
+									<text id="text_filename" style="display:none; "></text>
+									<form class="form-horizontal" id="smjForm" name="smjForm" target="iframe7" role="form" style="height:100%;width: 100%;" method="post" enctype="multipart/form-data" action="">
+							           	<!-- 加一个遮罩层 -->
+										<div id="dialogzz" style="width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;z-index:9999;background:rgba(0,0,0,.2);text-align:center;display:none;">
+											<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:60px;text-align:center;color:#1273AA;display: table-cell;vertical-align: middle;"></i>
+										</div>
+							           	<div style="height:100%;width: 100%;" id="embedwrap">
+							           		<div id="showPsAreaDiv" class="filecontent pr100">
+							           			<!--批示首页数据ID-->
+												<input type="hidden" id="scanId" name="scanId"/>
+												<input type="hidden" name="infoId" id="infoId" />
+												<input type="hidden" id="smwj" name="smwj" /> 
+												<input type="hidden" id="smwjNum" name="smwjNum" value="0" />
+							           			<div id="suwell" style="width:100%;height:100%;"></div>
+							           			<object id="csseOfficeplugin" type="application/x-csse" width="0px" height="0px" ></object>
+							           		</div>
+							           	</div>
+						           	</form>
+				           		</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- newlayout2_left结束 -->
+<!-- 					<div class="pr100">
+						<div id="suwell" class="wh100">
+							这里放版式插件
+						</div>
+						<object id="csseOfficeplugin" type="application/x-csse" width="0px" height="0px" ></object>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="rightwrap">
+			<div class="pr100">
+				<div class="right_menu">
+					<div class="tabbable-line">
+					    <ul class="nav nav-tabs">
+					        <li>
+					            <a href="#tab_15_1" data-toggle="tab">文件列表</a>
+					        </li>
+					        <li  class="active">
+					            <a href="#tab_15_2" data-toggle="tab">办理反馈</a>
+					        </li>
+					        <li>
+					            <a href="#tab_15_3" data-toggle="tab">文件转办</a>
+					        </li>
+					    </ul>
+					</div>
+				</div>
+				<div class="right_main">
+					<div class="pr100">
+						<div class="tabbable-line wh100">
+					    	<div class="tab-content wh100" style="padding:0px!important">
+						        <div class="tab-pane" id="tab_15_1">
+						            <div class="scroller right_top" style="padding: 0px 20px">
+						            	<div class="commonHtml">
+						            	</div>
+						            	<!-- <div class="line3">
+						            		<table>
+						            			<tr>
+						            				<td class="ps_title">批示指示</td>
+						            				<td>
+						            					<div class="psMain">
+						            				
+						            					</div>
+						            				</td>
+						            			</tr>
+						            		</table>
+						            	</div> -->
+						            	<div class="xgfileWrap">
+							           		<div class="btn-group">
+											    <div class="btn-group">
+											        <button type="button" class="btn dropdown-toggle tableBtns" data-toggle="dropdown">
+											        	新增文件  <i class="fa fa-angle-down"></i>
+											        </button>
+											        <ul class="dropdown-menu">
+											            <li>
+											                <a href="javascript:;" id="addFj">上传文件</a>
+											            </li>
+											            <li>
+											                <a href="javascript:;" id="addScan" onclick="tryScan()">扫描录入</a>
+											            </li>
+											           <!--  <li>
+											                <a href="javascript:;" id="scanKeepTransfer">扫描续传</a>
+											            </li> -->
+											        </ul>
+											    </div>
+											</div>
+							           		<button type="button" class="btn tableBtns" id="scanSet">扫描设置</button>
+											<!-- <button type="button" class="btn tableBtns"  id="delfj">删除</button> -->
+							           	</div>
+						            	<div style="heigth:50px; line-heigth:50px;margin-top:10px">
+						            		<span style="font-size: 18px; color: #000; font-weight: 700;">文件</span>
+ 						            		<a id="downLoadfj" style="float:right; font-size: 14px;">下载</a>
+						            	</div>
+						            	<div class="wjlb_title"></div>
+						            	<ul class="line4" id="fjList">
+					            		</ul>
+						            </div>
+						        </div>
+						        <div class="tab-pane active" id="tab_15_2" style="position: relative;">
+						        	<form action="" class="pr100" id="commentForm" method="post" enctype="multipart/form-data">
+							        	<div class="pr100">
+							        		<div class="newtop" style="position:absolute;bottom:50px;left:0;width:100%;top:0;right:0;">
+							        			<!-- 判断是否有催办内容 -->
+									        	<div id="ifcuibanContent" class="ifcuibanContent">
+									        	</div>
+									        	<div class="blfkchangeH" style="overflow:hidden;height: 100%;">
+										        	<div class="pr100">
+										        		<div class="blfk_top">
+										        			<div class="scroller"  style="padding: 0px 20px">
+										        				<div class="commonHtml">
+												            	</div>
+												            	<div class="line3">
+												            		<table>
+												            			<tr>
+												            				<td class="ps_title">批示指示</td>
+												            				<td>
+												            					<div class="psMain">
+												            				
+												            					</div>
+												            				</td>
+												            			</tr>
+												            		</table>
+												            	</div>
+												            	<div class="timelinesview">
+																	<div class="pagemenu">
+																	</div>
+							    								</div>
+										        			</div>
+										            	</div>
+										            	<div class="ifShow blfk_bottom">
+										            		<div class="pr100">
+										            			<div style="width:100%;height:50%;overflow: hidden;">
+										            				<div class="pr100">
+										            					<div style="width:100%;height:40px;position:absolute;left:0;top:0;">
+										            						<div class="hrline"></div>
+										            						<span class="yjsjstyle">意见收集 <i class="fa fa-caret-down"></i></span>
+										            					</div>
+
+																		<div style="width:100%;position:absolute;left:39px;top:33px;font-weight: 700;color: #6699FF;font-size: 15px;">
+																			<!--<span style="float:left;">承办人：</span>-->
+																			<!--<span id="chenban" style="float:left;"></span>-->
+																			<!--<span style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;协办人：</span>-->
+																			<span id="xieban" style="overflow:hidden;
+																			white-space:nowrap; text-overflow:ellipsis; width:93%;  height:50px;display:inline-block;float:left;">
+
+																			</span>
+																		</div>
+
+																		<div style="position:absolute;top:60px;bottom:0;left: 35px;right: 2px;">
+										            						<div class="pr100">
+										            							<div class="scroller"  style="height:100%;">
+											            							<div class="opinionList" id="opinionList">
+			    																	</div>
+											            						</div>
+										            						</div>
+										            					</div>
+										            				</div>
+										            			</div>
+										            			<div style="width:100%;height:50%;border-top: 1px solid #D3E1FB;background:#E5EBF7;padding:15px;">
+										            				<div class="pr100">	
+											            				<input type="hidden" id="editRecordId" name="editRecordId" /><!-- 编辑的附件id -->
+											            				<input type="hidden" id="editTeamId" name="editTeamId" /><!-- 编辑的反馈的teamId -->
+																		
+																		<div class="sryj_title">
+																			<span class="pull-left css3" data="0" id="shuru">输入意见/反馈：</span>
+																			
+																			<a class="pull-right changeStatus"  id="changewrite"  style="display:none;">
+																	        	<img src='../../../common/images/u618.png' /> 切换为手写签批
+																	        </a>
+																	        <a class="pull-right changeStatus" id="changejianpan" style="display:none;">
+																	        	<img src='../../../common/images/Asset1.png' /> 切换为键盘输入
+																	        </a>
+																	        
+																	        <span class="pull-right setpen">
+																	        	<img src="../../../common/images/u619.png" /> 笔粗(<span id="penNum">0.5</span>)
+																	        </span>
+																		</div>
+													        			<div class="sryj_center" style="padding-top:40px;">
+													        				<div class="pr100 newstyle" style="padding-top:10px;">
+													        					<div class="wh100" style="border:1px dashed #ccc;">
+													        			    		<textarea class="opinionContent"  id="replyContent" maxlength="500" placeholder="此处填写意见收集"  maxlength="500"></textarea> 
+													        			    		<div id="write" class="wh100" style="display:none;">
+													        			    			<input type="hidden" id= "tabletbutton" value="手写工具" onclick="tablet()"/>
+																						<input type="hidden" value="全屏手写" onclick="fullscreen()"/>
+																						<input type="hidden" value="批注颜色" onclick="setcolor()"/>
+																						<input type="hidden" id="clearbutton"  value="清空" onclick="clearsign()"/>
+																						<input type="hidden" id="endbutton"  value="签批确定" onclick="end()"/>
+																						<input type="hidden" id="uploadbutton"   value="上传" onclick="upload()"/>
+																						<div class="pr100">
+																							<embed id="signtool" type="application/ofdsign" class="wh100"/>
+																						</div>
+																						<div style="display:none;">
+																							<img  alt="" id="showimg" src="" />
+																						</div>
+													        			    		</div>
+													        			    		
+													        			    		<ul id="setpenchoose">
+																			        	<li data="signpen_05mm"><img src="../images/0.5.png"/><font>0.5</font></li>
+																			        	<li data="signpen_1mm"><img src="../images/pen1.png" /><font>1</font></li>
+																			        	<li data="softpen_2mm"><img src="../images/pen1.png" /><font>2</font></li>
+																			        	<li data="softpen_3mm"><img src="../images/pen3.png" /><font>3</font></li>
+																			        </ul>
+																		        </div>
+													        			    </div>
+													        			</div>
+												        			</div>
+										            			</div>
+										            		
+									            				
+										            		</div>
+										            	</div>
+										        	</div>
+									        	</div>
+							        		</div>
+							        		<div class="ifShow newbottom">
+							        			<button type="button" class="ifShow" id="sptg">审批通过</button>
+						        				<button type="button" class="ifShow" id="fhxg">返回修改</button>
+						        				<button type="button" class="ifShow" id="tijiao">送审批</button>
+						        				<button type="button" class="ifShow" id="send">送审批</button> <!-- 局长送审 -->
+						        				<button type="button" class="ifShow" id="save">保存</button>
+						        				
+						        				<button class="ifShow" type="button" id="chengban">承办</button>
+								            	<button class="ifShow" type="button" id="zhuanban">转办</button>
+								            	<button class="ifShow" type="button" id="fasong">发送</button>
+						        				<button class="ifShow" type="button" id="clear">清屏</button>
+						        				
+						        				<!-- <div class="btn-group dropup ifShow" id="bjandls" style="display:inline-block;margin-top:-7px;" title="点击确认">
+													<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background: #6699FF;color:#fff!important">办结 <i class="fa fa-angle-up"></i>
+													</button>
+													<ul class="dropdown-menu pull-right" role="menu">
+														<li id="banjie">
+															<a href="javascript:;">确认办结</a>
+														</li>
+														<li id="luoshi">
+															<a href="javascript:;">常态落实</a>
+														</li>
+													</ul>
+												</div> -->
+						        				<div class="ifShow" id="ifaddfj" style="display:inline-block;vertical-align: top;margin-right: 20px;margin-top: 6px;float:right;">
+													<a class="filebutton addfjbtn" id="file1"><i class="fa fa-link"></i> 添加附件 </a>
+									                <div class="filelist"  name="file1">
+									                	附件列表:
+									                </div>
+						        				</div>
+						        				<button type="button" class="ifShow showfj" id="showfj">附件</button>
+						        				<a style="float:right;vertical-align: top;margin-right: 20px;margin-top: 5px;font-size:14px;color: #6699FF !important;" id="yjsj" >意见收集</a>
+							        		</div>
+							        	</div>
+						        	</form>
+						        </div>
+						        <div class="tab-pane" id="tab_15_3">
+						        	<div class="pr100">
+							            <div class="right_top right_top_zbjl">
+							            	<div class="pr100">
+							            		<div class="part_zbjl_top">
+									            	<div class="tabbable-line">
+													    <ul class="nav nav-tabs" style="padding-left:20px;border-bottom: 1px solid #ddd;">
+													        <li class="active">
+													            <a href="#tab_16_1" data-toggle="tab">转办记录</a>
+													        </li>
+													        <li>
+													            <a href="#tab_16_2" data-toggle="tab">催办记录</a>
+													        </li>
+													        <li>
+													            <a href="#tab_16_3" data-toggle="tab">办结记录</a>
+													        </li>
+													    </ul>
+													</div>
+												</div>
+												<div class="part_zbjl_main">
+									            	<div class="pr100">
+									            		<div class="tabbable-line wh100">
+													    	<div class="tab-content wh100" style="padding:0px!important;border:none;">
+														        <div class="tab-pane active" id="tab_16_1">
+														        	<div class="scroller" style="padding:10px 20px">
+														        		<div class="zbrecord" id="zbrecord">
+																         </div>
+															        </div>
+														        </div>
+														        <div class="tab-pane" id="tab_16_2">
+														           <div class="scroller" style="padding:10px 20px">
+														           		<div class="cbrecord" id="cbrecord">
+																        </div>
+															        </div>
+														        </div>
+														        <div class="tab-pane" id="tab_16_3">
+														        	<div class="scroller" style="padding:10px 20px">
+															            <div class="jybjrecord" id="jybjrecord">
+																         </div>
+															        </div>
+														        </div>
+													        </div>
+													    </div>
+									            	</div>
+												</div>
+											</div>
+							            </div>
+							        </div>
+						        </div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade in newmodal cjDialog" id="viewcont" tabindex="-1" aria-hidden="true">
+	    <div class="modal-dialog" style="width:800px;">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <div class="newclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></div>
+	                <h4 class="modal-title">内容</h4>
+	            </div>
+	            <div class="modal-body" style="height:600px;">
+					<div style="height:100%;" class="scroller">
+						<div class="viewcontent">
+						</div>
+					</div>
+	            </div>
+	            <div class="modal-footer">
+					<button  class="btn btn-default"  id="closeviewcont"> 关闭</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+			<!-- 扫描设置开始 -->
+		<div style="width:750px;padding:10px;border:1px solid #ccc;background-color:#FAFAFA;position:absolute;left:33px;top:115px;display:none;" class="smczcont">
+			<div class="form-horizontal" role="form">
+			    <div class="form-body">
+			        <div class="form-group" style="margin:0;padding:0;margin-bottom:10px;">
+			            <label class="col-xs-1 control-label control-label2" style="width:70px;">扫描方式</label>
+			            <div class="col-xs-1" style="width:150px;">
+			                <select class="form-control" style="width:115px" name="sel_source" id="sel_source" onchange="ChangeSource(this.value)"></select>
+			                <!-- 纸张大小，设定为隐藏域 -->
+							<select class="form-control" name="sel_paper-size" id="sel_paper-size" style="display:none"></select>
+							<!-- 扫描模式，设定为隐藏域 -->
+							<select class="form-control" name="sel_mode" id="sel_mode" style="display:none"></select>
+			            </div>
+			            
+			            <label class="col-xs-1 control-label control-label2" style="width:50px;">分辨率</label>
+			            <div class="col-xs-1" style="width:150px;">
+			                <select class="form-control" style="width:80px" name="sel_resolution" id="sel_resolution"></select>
+			            </div>
+			            
+			            <label class="col-xs-1 control-label control-label2" style="width:40px;">亮度</label>
+			            <div class="col-xs-1" style="width:100px;">
+			                <input type="text" min="-100" max="100" value="-5"  id="range_brightness"  class="form-control"  />
+			            </div>
+			            
+			            <label class="col-xs-1 control-label control-label2" style="width:50px;">对比度</label>
+			            <div class="col-xs-1" style="width:100px;">
+			                <input type="text" min="-100" max="100" value="50" id="range_contrast"  class="form-control" />
+			            </div>
+			         </div>
+		         	<div class="form-group" style="margin:0;padding:0;">
+			            <label class="col-xs-1 control-label control-label2" style="width:70px;">画质</label>
+			            <div class="col-xs-1" style="width:100px;">
+			                <input type="text" min="1" max="100" value="75"  id="range_quality"  class="form-control"  />
+			            </div>
+			            
+			            <label class="col-xs-1 control-label control-label2" style="width:40px;">补边</label>
+			            <div class="col-xs-1" style="width:100px;">
+			                <input type="text" min="0" max="255" value="0"  id="range_borderfill"  class="form-control"  />
+			            </div>
+			            
+			            <div class="col-xs-1" style="width:250px;">
+			                <div class="checkbox-list">
+			                    <label class="checkbox-inline"><input type="checkbox" name="chk_swcrop" checked="checked"  id="chk_swcrop" value="ckn"/>自动裁切</label>
+				        		<label class="checkbox-inline"><input type="checkbox" name="chk_swdeskew" checked="checked" id="chk_swdeskew" value="ckn"/>自动框正</label>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+		
+		<!-- 扫描续传功能上传页面开始-->
+		<div class="modal fade bs-modal-lg" id="showScanUpload" tabindex="-1" role="dialog" aria-hidden="true" >
+		    <div class="modal-dialog modal-lg" style="width:800px;">
+		        <div class="modal-content" >
+		        	<div id="scanDialogzz" style="width:100%;height:100%;position:absolute;left:0;top:0;z-index:9999;background:rgba(0,0,0,.2);text-align:center;line-height: 563px;display:none">
+			   			<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:60px;text-align:center;color:#1273AA"></i>
+			   		</div>
+		        	<div class="modal-header">
+						<div class="newclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></div>
+						<h4 class="modal-title" id="modaltitle">上传文件</h4>
+					</div>
+		            <div class="modal-body" style="padding:0px;height:500px;"> 
+		          		<h3 style="color: #3c763d;text-align:center;">请上传PDF或OFD格式的文件！</h3>
+			        	<form class="form-horizontal" id="scanform" target="iframe7" role="form" style="padding-left:100px;padding-right:100px;" method="post" enctype="multipart/form-data" action="/filefj/savePDF">
+				           <input type="hidden"  id="idscanpdf" name="idscanpdf"/>
+				            <div class="form-body" style="padding-top:10px;padding-bottom:10px;border:1px solid #cccccc">
+				                <div class="form-group new_success">
+				                    <div class="col-xs-12">
+				                         <div class="fileinput fileinput-new" data-provides="fileinput">
+				                            <span style="padding-left:10px;">
+				                             	<button type="button" id="scanUploadFile" class="btn btn-primary"><i class="fa fa-download  uploadPdf"></i> 选择文件</button>
+				                            	<input type="file" name="scanpdf" id="scanpdf" style="display:none" />
+				                            </span>
+				                            <span class="fileinput-filename" style="padding-left:10px;line-height:30px;"></span>
+				                        </div> 
+				                    </div>
+				                </div>
+				            </div>
+						    <div class="form-actions" style="text-align:center;padding:10px;">
+						        <button type="button" class="btn btn-primary" id="scanUpload">上传</button>
+						        <button type="button" class="btn default" id="scanClose">取消</button>
+						    </div>
+				        </form>
+		            </div> 
+		            <iframe name="iframe7" style="display: none;"></iframe>
+		        </div>
+		    </div>
+		</div> 
+		<!-- 扫描续传功能上传页面结束 -->
+	</div>
+	<!-- 数科插件打开内容存放区域 -->
+	<div id="cloneDiv" style="width: 1px; height: 1px; background-color: #3f3f3f; position: absolute; top: 10px; left: 10px;"></div>
+<script src="../../../../../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<!-- <script src="../../../../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script> -->
+<script src="../../../../../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+<script src="../../../../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery-validation/js/additional-methods.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/jquery-validation/js/localization/messages_zh.js" type="text/javascript"></script>
+
+<script src="../../../../../assets/global/plugins/easyui2/jquery.easyui.min.js" type="text/javascript" ></script>
+<script src="../../../../../assets/global/plugins/easyui2/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>	
+<script src="../../../../../assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="../../../../../assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="../../../../../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="../../../../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="../../../../../assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
+<script src="../../../../../templates/admin/commons/js/jquery.form.js" type="text/javascript" ></script>
+<script src="../../../common/js/commons.js" type="text/javascript"></script>
+<script src="../js/view.js" type="text/javascript"></script>
+<script src="../../../common/js/writeTool.js" type="text/javascript"></script>
+
+<!-- 数科插件JS -->
+<script src="../../../common/suwell/suwell.js" type="text/javascript"></script>
+<script src="../../../common/suwell/suwell_ofdReader.js" type="text/javascript"></script>
+<script src="../../../css/js/office/csseOfficeplugin.js" type="text/javascript"></script>  
+<!-- 扫描仪JS -->
+<script type="text/javascript" src="../../../common/js/scan/Scan.js"></script>
+<script type="text/javascript" src="../../../common/js/scan/ScanData.js"></script>
+<script type="text/javascript" src="../../../common/js/scan/readWriteSmj.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		pageModule.initControl();
+	});
+	function tryScan(){
+		if($("#id").val() == "" || $("#id").val() == null || typeof($("#id").val()) == undefined){
+			newbootbox.alertInfo("请先保存要素信息再开始扫描！"); 
+			return  false;
+		} 
+		Scan();
+	}
+	//对本页面的可以输入的控件进行焦点重定向，此类控件包括textarea和input
+	var textareaS=document.getElementsByTagName("textarea");
+	for(var i=0;i<textareaS.length;i++)
+	{
+		$(textareaS[i]).click(function(){fixForcesBug();});
+	}
+	var inputS=document.getElementsByTagName("input");
+	for(var i=0;i<inputS.length;i++)
+	{
+		$(inputS[i]).click(function(){fixForcesBug();});
+	}
+</script>
+</body>
+</html>

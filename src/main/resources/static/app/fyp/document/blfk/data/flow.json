@@ -1,0 +1,85 @@
+[
+	{
+		"juzhangInfo":null,
+		"createdTime":null,
+		"child":[
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"李秘书",
+				"receiverDeptName":"秘书一处",
+				"statusName":"已读",
+				"text":"批示并将公文返回至",
+				"senderName":"张领导",
+				"senderDeptName":"信息局",
+				"view":"批示"
+			}
+		]
+	},
+	{
+		"juzhangInfo":"某局长退回修改",
+		"createdTime":"2015-06-15 25:23:20",
+		"child":[
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"李秘书",
+				"receiverDeptName":"秘书一处",
+				"statusName":"已读",
+				"text":"批示并将公文返回至",
+				"senderName":"张领导",
+				"senderDeptName":"信息局",
+				"view":"批示"
+			},
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"张领导",
+				"receiverDeptName":"信息局",
+				"statusName":"未读",
+				"text":"将公文送审至",
+				"senderName":"李秘书",
+				"senderDeptName":"秘书一处"
+			},
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"李秘书",
+				"receiverDeptName":"秘书一处",
+				"text":"将公文送审至",
+				"senderName":"路参谋",
+				"senderDeptName":"秘书处"
+			}
+		]
+	},
+	{
+		"juzhangInfo":"某局长退回修改",
+		"createdTime":"2015-06-15 25:23:20",
+		"child":[
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"李秘书",
+				"receiverDeptName":"秘书一处",
+				"statusName":"已读",
+				"text":"批示并将公文返回至",
+				"senderName":"张领导",
+				"senderDeptName":"信息局",
+				"view":"批示"
+			},
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"张领导",
+				"receiverDeptName":"信息局",
+				"statusName":"未读",
+				"text":"将公文送审至",
+				"senderName":"李秘书",
+				"senderDeptName":"秘书一处"
+			},
+			{
+				"createdTime":"2015-06-15 25:23:20",
+				"receiverName":"李秘书",
+				"receiverDeptName":"秘书一处",
+				"text":"将公文送审至",
+				"senderName":"路参谋",
+				"senderDeptName":"秘书处"
+			}
+		]
+	}
+	
+]

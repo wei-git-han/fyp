@@ -1,0 +1,76 @@
+	[
+		{
+			"id":"01",
+			"text": "1111",
+			"state": {"opened": true},
+			"children": [
+							{
+								"id":"02",
+    							"text": "22222",
+								"children": [
+												{
+													"id":"03",
+					    							"text": "3333",
+					    							"children": [
+																	{
+																		"id":"033",
+										    							"text": "4444",
+										    							"type":1	
+																	},
+																	{
+																		"id":"034",
+										    							"text": "5555",
+										    							"type":1	
+																	}
+																]	
+												},
+												{
+													"id":"04",
+					    							"text": "666",
+										    		"type":1	
+												}
+											]
+							}
+						]
+			
+		},
+		{
+			"id":"05",
+			"text": "777",
+			"state": {"opened": true},
+			"children": [
+							{
+								"id":"06",
+    							"text": "3556",
+								"children": [
+												{
+													"id":"07",
+					    							"text": "cfsdf",
+										    		"type":1	
+												},
+												{
+													"id":"08",
+					    							"text": "aaaa",
+										    		"type":1	
+												}
+											]
+							}
+						]
+			
+		}
+	]
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

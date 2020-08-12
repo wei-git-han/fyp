@@ -1,0 +1,72 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+	font-family: "Microsoft Yahei";
+}
+
+* {
+	box-sizing: border-box;
+}
+.titleleft{
+	float:left;
+}
+.active{
+	background-color: #B7E8FF;
+	text-decoration: none;
+}
+.headbox{
+	position:absolute;top:0px;width:100%;height:62px;
+}
+.mainbox{
+	width:100%;height:100%;padding-top:62px;
+}
+.right_content{
+	position:absolute;left:0;right:0px;height:100%;padding:0px 30px;
+}
+.filterBox{
+	position:absolute;top:15px;width:100%;height:42px;
+}
+.gridBox{
+	width:100%;height:100%;padding-top:62px;
+}
+.searchAll{
+	margin-left:10px;
+	font-size:15px;
+}
+.searchwrap{
+	display:none;
+	padding:20px 10px;width:470px;
+	position:absolute;top:64px;right:20px;
+	border:1px solid #C9C9C9;
+	background:#fff;
+	z-index:9999;
+}
+.searchwrap .control-label{
+	width:64px;
+	display:inline-block;
+	text-align:right;
+	float: left;
+	margin-right:10px;
+}
+.caozuo{
+	width:100%;
+	overflow:hidden;
+	text-align:center;
+}
+.caozuo .btn1 {
+	padding:5px 0px;
+    width: 80px;
+    background: #6699FF;
+    border: none;
+    color: #fff;
+    border-radius:4px!important;
+}
+
+.table-advance tbody tr {
+	height:70px;
+	overflow:hidden;
+} 

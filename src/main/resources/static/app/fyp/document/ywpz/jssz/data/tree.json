@@ -1,0 +1,221 @@
+{
+    "children": [
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "children": [
+                                {
+                                    "id": "13c5b411-7a6b-43ec-a100-9b28d2e75eaa",
+                                    "text": "李主任",
+                                    "type": "1"
+                                },
+                                {
+                                    "id": "130a8056-9727-409a-b7ab-6a6c9241a6a8",
+                                    "text": "王科员",
+                                    "type": "1"
+                                }
+                            ],
+                            "id": "62633cda-82fa-4441-b37b-1ca1cf4b9ba6",
+                            "text": "XX一室",
+                            "type": "0"
+                        },
+                        {
+                            "children": [
+                                {
+                                    "id": "07d63067-0a91-414c-adc5-f8669a10294b",
+                                    "text": "赵主任",
+                                    "type": "1"
+                                },
+                                {
+                                    "id": "bf14f7c6-d04b-4459-b626-6c52ce0a01c9",
+                                    "text": "常科员",
+                                    "type": "1"
+                                }
+                            ],
+                            "id": "490c0e72-06ac-4b14-9849-67ab2e1bb1aa",
+                            "text": "XX二室",
+                            "type": "0"
+                        },
+                        {
+                            "children": [
+                                {
+                                    "id": "1ee4ec48-cc71-4ec2-94b1-e34f3fb470e8",
+                                    "text": "孟主任",
+                                    "type": "1"
+                                },
+                                {
+                                    "id": "694edb27-1d1a-4d14-9b8e-8037e95ad0fb",
+                                    "text": "商科员",
+                                    "type": "1"
+                                }
+                            ],
+                            "id": "b6d0969d-4722-4073-abfb-e6ddb4ccd4c0",
+                            "text": "XX三室",
+                            "type": "0"
+                        },
+                        {
+                            "id": "df7da345-2799-49b1-9208-541fe28a34d9",
+                            "text": "张处长",
+                            "type": "1"
+                        },
+                        {
+                            "id": "77a676e8-cdec-41fc-a2a5-ce718f86d792",
+                            "text": "任处长",
+                            "type": "1"
+                        }
+                    ],
+                    "id": "b8aadafb-4a1a-4753-8049-fe7c07ffc7ad",
+                    "text": "XX一处",
+                    "type": "0"
+                },
+                {
+                    "children": [
+                        {
+                            "id": "5b933469-3e32-422d-ac3c-7c3ffd60a3ea",
+                            "text": "习处长",
+                            "type": "1"
+                        },
+                        {
+                            "id": "6096d187-09ea-49ad-b64f-46fc7264a007",
+                            "text": "迟处长",
+                            "type": "1"
+                        }
+                    ],
+                    "id": "231ac070-0884-46c0-975e-5d213f0eb630",
+                    "text": "XX二处",
+                    "type": "0"
+                },
+                {
+                    "id": "8768986a-cb40-4040-bfbf-f01be8ae0996",
+                    "text": "XX三处",
+                    "type": "0"
+                },
+                {
+                    "id": "404ce0cb-3a55-4fbd-8d3f-19334bac03d0",
+                    "text": "方局长",
+                    "type": "1"
+                },
+                {
+                    "id": "3c88f676-8699-4c40-a436-3d220453e5a4",
+                    "text": "鲁局长",
+                    "type": "1"
+                }
+            ],
+            "id": "a29211c1-211f-4c2a-8747-1905055ec6d0",
+            "text": "XX一局",
+            "type": "0"
+        },
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "children": [
+                                {
+                                    "id": "b1c21491-690d-4092-a4ed-f204b1ec2e1f",
+                                    "text": "文室长",
+                                    "type": "1"
+                                }
+                            ],
+                            "id": "be38256a-a5d0-450f-baef-f40650b653e7",
+                            "text": "XXX一室",
+                            "type": "0"
+                        },
+                        {
+                            "children": [
+                                {
+                                    "id": "0f32704a-3d39-43ce-b89f-c79e4ba07e78",
+                                    "text": "向室长",
+                                    "type": "1"
+                                }
+                            ],
+                            "id": "af0a9d76-7ccc-4aa7-900e-2f95ad648162",
+                            "text": "XXX二室",
+                            "type": "0"
+                        },
+                        {
+                            "children": [
+                                {
+                                    "id": "15c79225-38d7-495b-a589-57d5f1265ab9",
+                                    "text": "温室长",
+                                    "type": "1"
+                                }
+                            ],
+                            "id": "90a9349c-a22f-4edb-9773-551debd2b8ec",
+                            "text": "XXX三室",
+                            "type": "0"
+                        },
+                        {
+                            "id": "301b8357-db5c-44d8-aee4-9a6f7dd980e0",
+                            "text": "龙处长",
+                            "type": "1"
+                        }
+                    ],
+                    "id": "5911aa20-2b8c-46f6-a903-0765945a7d6d",
+                    "text": "XXX一处",
+                    "type": "0"
+                },
+                {
+                    "children": [
+                        {
+                            "id": "5d3044b4-a4e5-4611-ade5-28945b1323b1",
+                            "text": "叶处长",
+                            "type": "1"
+                        }
+                    ],
+                    "id": "5f814aac-3f4d-493f-b2d4-2ed022321d66",
+                    "text": "XXX二处",
+                    "type": "0"
+                },
+                {
+                    "children": [
+                        {
+                            "id": "ff5a2e12-d968-4a4c-9a01-84279de71617",
+                            "text": "台处长",
+                            "type": "1"
+                        }
+                    ],
+                    "id": "2d17c3b0-ad51-4d05-aaa2-e9623cfe9569",
+                    "text": "XXX三处",
+                    "type": "0"
+                },
+                {
+                    "id": "81dfe42d-798e-4c5a-aa99-0876b2a75a77",
+                    "text": "高局长",
+                    "type": "1"
+                }
+            ],
+            "id": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "text": "XX二局",
+            "type": "0"
+        },
+        {
+            "id": "1",
+            "text": "管理员",
+            "type": "1"
+        },
+        {
+            "id": "342189d5-d5ea-458b-9928-fb91588dfe81",
+            "text": "系统管理员",
+            "type": "1"
+        },
+        {
+            "id": "6b673e2c-6cb4-4ca3-b3f3-a174b4ab3e0a",
+            "text": "安全管理员",
+            "type": "1"
+        },
+        {
+            "id": "d7abdc88-5204-40ef-860c-b1df2d4e75c9",
+            "text": "安全审计员",
+            "type": "1"
+        }
+    ],
+    "id": "root",
+    "state": {
+        "opened": true
+    },
+    "text": "XX部",
+    "type": "0"
+}

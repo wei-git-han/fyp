@@ -1,0 +1,557 @@
+html,body{
+	width:100%;
+	height:100%;
+	background-color:#F1F4FA;
+	margin:0;
+	padding:0;
+	font-family:"΢���ź�";
+}
+*{
+	box-sizing:border-box;
+}
+ul,p{
+	padding: 0;
+}
+.newpage13{
+	margin-bottom:5px;
+}
+.opinionContent{
+	border:none;
+	width:100%;
+	height:90px;
+	resize:none;
+	padding:8px;
+	font-size: 16px;
+}
+.newbtn{
+	border: 1px solid #4182D2;
+	background: none;
+	color: #4182D2;
+	padding: 3px 20px;
+	margin: 0px 3px;
+	font-size: 15px;
+	border-radius: 4px !important;
+}
+.line{
+	width: 100%;
+	font-weight: 700;
+	font-size: 14px;
+	height: 1px;
+	border-bottom: 1px solid #bcbcbc;
+}
+#jybj_history .p1{
+	margin-bottm:10px!important;
+	color:#5498EB;
+}
+#jybj_history .p2{
+	color:#666;
+	margin:0;
+}
+.jy_date{
+	margin-left:55px;
+	color:#aaa;
+}
+.relativediv{
+	width:100%;
+	height:100%;
+	position: relative;
+}
+.timelines{
+	height:auto;
+	min-height:100%;
+	position: relative;
+	padding-top:6px;
+	background:url(../images/u12.png) no-repeat left top;
+}
+.timelines>li{
+	position: relative;
+	padding-bottom:20px;
+	margin-top:-10px;
+}
+.timelines>li::before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background: #a4a4a4;
+    left: 16px;
+    margin-left: -10px;
+}
+.timelines>li:last-child::before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background: transparent;
+    left: 16px;
+    margin-left: -10px;
+}
+.timelines>li:first-child:last-child::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    height:10px;
+    width: 1px;
+    background: #a4a4a4;
+    left: 16px;
+    margin-left: -10px;
+}
+.timelines > li .timeline-user {
+    display: block;
+	margin:0 0 0 20px;
+}
+.timelines > li .timeline-user span.user {
+	display: block;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 14px;
+	color: #999;
+	line-height: 27px;
+	margin: 10px 0 0 0;
+}
+.timelines > li .timeline-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background:url(../images/u13.png) #FAFAFA no-repeat center center;
+    left: 19px;
+    top: 0;
+    margin: 5px 0 0 -22px;
+}
+.timelines > li .timeline-list {
+    margin: 0 10px 0 20px;
+    padding: 10px;
+    position: relative;
+    background:#fff;
+    border-radius: 10px!important;
+    color:#333;
+}
+.timelines > li h6{
+    margin: 0px;
+    padding: 5px 0 5px 0;
+}
+.timelines > li h6 span {
+	color:#999;
+	font-weight: 400;
+	font-size: 12px;
+}
+.timelines > li h6 span.H6Span {
+	font-size: 14px;
+	margin-right:10px;
+}
+.timelines > li h6 span.H6Span i{
+	font-size: 16px;
+}
+.timelines > li h6 span.H6Span.blue{
+    color:#5498eb
+}
+.timelines > li h6 span.H6Span.orange{
+    color:#ffab00
+}
+.timelines > li h6 span.H6Span.blue i.fa{
+    color:#5498eb
+}
+.timelines > li h6 span.H6Span.orange i.fa{
+    color:#ffab00
+}
+.timelines > li .timeline-flow p{
+	background:url(../images/u22.png) no-repeat left center;
+	padding:0 0 0 20px;
+    font-size: 14px;
+	line-height: 28px;
+	word-break: break-all;
+	word-wrap: break-word;
+	color:#90A8C5
+}
+.timelines > li .timeline-body {
+	
+    margin: 10px 10px 0 20px;
+    padding: 10px;
+    position: relative;
+    background:#fffef0;
+    border-radius: 10px!important;
+    color:#333;
+}
+.timelines > li .timeline-content {
+    font-size: 13px;
+	line-height: 20px;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.timelinesview>.timelinesheys{
+	position: relative;
+	padding-bottom:10px;
+}
+.timelinesview>.timelinesheys::before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background: #0099FF;
+    left: 20px;
+    margin-left: -10px;
+}
+.timelinesview>.timelinesheys:last-child::before{
+   background: none;
+}
+
+.timelinesview > .timelinesheys .timeline-user {
+    display: block;
+	margin:0 0 0 30px;
+}
+.timelines > .timelinesheys .timeline-user span.user {
+	display: block;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 14px;
+	color: #999;
+	line-height: 27px;
+	margin: 10px 0 0 0;
+}
+.timelinesview > .timelinesheys .timeline-icon {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    background:url(../images/1.png) #fff no-repeat center center;
+    left: 24px;
+    top: 0;
+    margin: 0px 0 0 -22px;
+}
+
+.timelinesview > .timelinesheys .timeline-icon1 {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    background:url(../images/2.png) #fff no-repeat center center;
+    left: 24px;
+    top: 0;
+    margin: 0px 0 0 -22px;
+}
+.timelinesview > .timelinesheys h6{
+    margin: 0px;
+    padding: 5px 0 12px 0;
+}
+.timelinesview > .timelinesheys h6 span {
+	color:#999;
+	font-weight: 400;
+	font-size: 13px;
+}
+.timelinesview > .timelinesheys h6 font{
+	font-size: 16px;
+}
+.timelinesview > .timelinesheys h6 span.H6Span {
+	font-size: 14px;
+	margin-right:10px;
+}
+.timelinesview > .timelinesheys h6 span.H6Span i{
+	font-size: 16px;
+	font-style: normal;
+}
+.timelinesview > .timelinesheys h6 span.H6Span.blue{
+    color:#5498eb
+}
+.timelinesview > .timelinesheys h6 span.H6Span.blue i.fa{
+	color:#5498eb
+}
+.timelinesview > .timelinesheys h6 span.H6Span.orange{
+    color:#ffab00
+}
+.timelinesview > .timelinesheys h6 span.H6Span.orange i.fa{
+	color:#ffab00
+}
+.timelinesview > .timelinesheys .timeline-body {
+    margin: 10px 0px 0 30px;
+    padding: 10px;
+    position: relative;
+    background-color: #EFEFEF;
+    border-radius: 10px!important;
+    color:#333;
+    cursor:pointer
+}
+.timelinesview > .timelinesheys .timeline-content {
+    font-size: 13px;
+	line-height: 25px;
+	word-break: break-all;
+	word-wrap: break-word;
+	padding-left: 10px;
+}
+.user{
+	color:#0099FF;
+	font-weight:700;
+}
+.zbTime{
+	float: right;
+	margin-right: 8px;
+	color: rgb(119, 119, 119);
+}
+.zbFlag{
+	margin-left:12px;
+	color:#555;
+}
+
+.foot_btns{
+	width: 110px;
+	height: 35px;
+	border-radius:6px!important;
+	background:#1273AA;
+	border:0;
+	color:#fff;
+	font-size:15px;
+}
+.userNametree1, .trees{
+	max-height:600px;
+	height:600px;
+	border:none!important;
+}
+
+
+.footer{
+	width:100%;
+	height:60px;
+	position:absolute;
+	left:0;bottom:0;
+	text-align:center;
+	padding-top: 12px;
+	border-top:1px solid #CDDDFB;
+}
+.xbUserLine{
+	height:30px;
+	line-height:30px;
+	font-size:15px;
+	color:#6699FF;
+	margin-bottom:5px;
+}
+.relativediv{
+	width:100%;
+	height:100%;
+	position: relative;
+}
+.timelines{
+	height:auto;
+	min-height:100%;
+	position: relative;
+	padding-top:6px;
+	background:url(../images/u12.png) no-repeat left top;
+}
+.timelines>li{
+	position: relative;
+	padding-bottom:20px;
+	margin-top:-10px;
+}
+.timelines>li::before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background: #a4a4a4;
+    left: 16px;
+    margin-left: -10px;
+}
+.timelines>li:last-child::before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background: transparent;
+    left: 16px;
+    margin-left: -10px;
+}
+.timelines>li:first-child:last-child::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    height:10px;
+    width: 1px;
+    background: #a4a4a4;
+    left: 16px;
+    margin-left: -10px;
+}
+.timelines > li .timeline-user {
+    display: block;
+	margin:0 0 0 20px;
+}
+.timelines > li .timeline-user span.user {
+	display: block;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 14px;
+	color: #999;
+	line-height: 27px;
+	margin: 10px 0 0 0;
+}
+.timelines > li .timeline-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background:url(../images/u13.png) #FAFAFA no-repeat center center;
+    left: 19px;
+    top: 0;
+    margin: 5px 0 0 -22px;
+}
+.timelines > li .timeline-list {
+    margin: 0 10px 0 20px;
+    padding: 10px;
+    position: relative;
+    background:#fff;
+    border-radius: 10px!important;
+    color:#333;
+}
+.timelines > li h6{
+    margin: 0px;
+    padding: 5px 0 5px 0;
+}
+.timelines > li h6 span {
+	color:#999;
+	font-weight: 400;
+	font-size: 12px;
+}
+.timelines > li h6 span.H6Span {
+	font-size: 14px;
+	margin-right:10px;
+}
+.timelines > li h6 span.H6Span i{
+	font-size: 16px;
+}
+.timelines > li h6 span.H6Span.blue{
+    color:#5498eb
+}
+.timelines > li h6 span.H6Span.orange{
+    color:#ffab00
+}
+.timelines > li h6 span.H6Span.blue i.fa{
+    color:#5498eb
+}
+.timelines > li h6 span.H6Span.orange i.fa{
+    color:#ffab00
+}
+.timelines > li .timeline-flow p{
+	background:url(../images/u22.png) no-repeat left center;
+	padding:0 0 0 20px;
+    font-size: 14px;
+	line-height: 28px;
+	word-break: break-all;
+	word-wrap: break-word;
+	color:#90A8C5
+}
+.timelines > li .timeline-body {
+	
+    margin: 10px 10px 0 20px;
+    padding: 10px;
+    position: relative;
+    background:#fffef0;
+    border-radius: 10px!important;
+    color:#333;
+}
+.timelines > li .timeline-content {
+    font-size: 13px;
+	line-height: 20px;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.timelinesview>.timelinesheys{
+	position: relative;
+	padding-bottom:10px;
+}
+.timelinesview>.timelinesheys::before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 1px;
+    background: #0099FF;
+    left: 20px;
+    margin-left: -10px;
+}
+.timelinesview>.timelinesheys:last-child::before{
+   background: none;
+}
+
+.timelinesview > .timelinesheys .timeline-user {
+    display: block;
+	margin:0 0 0 30px;
+}
+.timelines > .timelinesheys .timeline-user span.user {
+	display: block;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 14px;
+	color: #999;
+	line-height: 27px;
+	margin: 10px 0 0 0;
+}
+.timelinesview > .timelinesheys .timeline-icon {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    background:url(../images/1.png) #EFEFEF no-repeat center center;
+    left: 24px;
+    top: 0;
+    margin: 0px 0 0 -22px;
+}
+
+.timelinesview > .timelinesheys .timeline-icon1 {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    background:url(../images/2.png) #fff no-repeat center center;
+    left: 24px;
+    top: 0;
+    margin: 0px 0 0 -22px;
+}
+.timelinesview > .timelinesheys .timeline-body {
+    margin: 10px 0px 0 30px;
+    padding: 10px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px!important;
+    color:#333;
+    cursor:pointer
+}
+.timelinesview > .timelinesheys .timeline-content {
+    font-size: 13px;
+	line-height: 25px;
+	word-break: break-all;
+	word-wrap: break-word;
+	padding-left: 10px;
+}
+.user{
+	color:#0099FF;
+	font-weight:700;
+}
+.createTime{
+	margin-right: 8px;
+	color: rgb(119, 119, 119);
+}
+
+.foot_btns{
+	width: 110px;
+	height: 35px;
+	border-radius:3px!important;
+	background:#6699FF;
+	border:0;
+	color:#fff;
+	font-size:15px;
+}
+.userName{
+	font-weight:700;
+	color:#6699FF;
+	font-size:15px;
+}
+
+.userName i{
+	color:#6699FF;
+}
+.content{
+	color:#555;
+	font-size:15px;
+}
+.addbg{
+	background:url("../images/bg.png")  center  200px no-repeat!important;
+}

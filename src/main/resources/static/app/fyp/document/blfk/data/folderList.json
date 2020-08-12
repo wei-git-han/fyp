@@ -1,0 +1,73 @@
+/****************
+ 进度：已完成
+	
+response
+	id 数据id
+	total 总条数
+	page 当前页
+	rows 当前页数据
+	
+	
+	folderName 文件夹名称
+	 文件数
+	createdTime 创建日期
+	do  操作
+	
+	
+******************/
+
+{
+    "rows": [
+        {
+            "createdTime": "2017-10-06 00:00:00",
+            "do": "000",
+            "fileNum": 3,
+            "folderName": "默认文件夹",
+            "filenumber": "123",
+            "id": "1",
+            "images": [
+                {
+                    "image": "../images/wenjianj1.png"
+                },
+                {
+                    "image": "../images/wenjianj1.png"
+                },
+                {
+                    "image": "../images/wenjianj1.png"
+                }
+            ]
+        },
+        {
+            "createdTime": "2017-10-06 00:00:00",
+            "do": "000",
+            "fileNum": 1,
+            "folderName": "技术文件夹",
+            "filenumber": "123",
+            "id": "2",
+            "images": [
+                {
+                    "image": "../images/wenjianj1.png"
+                }
+            ]
+        },
+        {
+            "createdTime": "2017-10-06 00:00:00",
+            "do": "000",
+            "fileNum": 0,
+            "folderName": "财务文件夹",
+            "filenumber": "123",
+            "id": "3",
+            "images": []
+        },
+        {
+            "createdTime": "2017-10-06 00:00:00",
+            "do": "000",
+            "fileNum": 0,
+            "folderName": "科学文件夹",
+            "filenumber": "123",
+            "id": "4",
+            "images": []
+        }
+    ],
+    "total": 4
+}

@@ -1,0 +1,240 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>督查催办</title>
+<script type="text/javascript" src="../../assets/global/plugins/ion.rangeslider/js/vendor/jquery-1.11.0.min.js"></script>  
+<script type="text/javascript">
+function login()
+{
+$.ajax({
+        url: $("#urlPath").val() + "/api/sso/authen/",
+        data: {username: $("#usename").val(), password: $("#password").val(), loginMode:"100",service:$("#servicePath").val()},
+        type: 'POST',
+        dataType: "JSON",
+        success: function(data){
+            // get access_token
+			//alert(data.access_token);
+			$('#token').text(data.access_token);
+        },
+        error: function(error){
+            // show error
+            var a = error;
+            
+        }
+    });
+}
+
+function loginApplication(){
+$.ajax({
+        url: $("#urlPath").val() + "/api/sso/authen/",
+        data: {username: $("#usename").val(), password: $("#password").val(), loginMode:"100",service:$("#servicePath").val()},
+        type: 'POST',
+        dataType: "JSON",
+        success: function(data){
+            window.location.href = $("#servicePath").val() + "?access_token=" +data.access_token;
+        },
+        error: function(error){
+            // show error
+            var a = error;
+            
+        }
+    });
+}
+
+function validate(){
+    	var url1 = $("#urlPath").val() + "/api/sso/valtoken/"+$('#token').text();
+    $.ajax({
+        url: url1,
+                type: 'POST',
+        dataType: "JSON",
+        success: function(data){
+            // get access_token
+            $('#valtxt').text(JSON.stringify( data ));
+        },
+        error: function(error){
+            // show error
+            var a = error;
+            
+        }
+    });
+   }
+
+   
+function getUser(){
+    $.ajax({
+        url: $("#urlPath").val() + "/api/sso/user/",
+        data: {access_token: $('#token').text()},
+        type: 'POST',
+        dataType: "JSON",
+        success: function(data){
+            // get access_token
+            $('#usertxt').text(JSON.stringify( data ));
+        },
+        error: function(error){
+            // show error
+            var a = error;
+            
+        }
+    });
+   }
+
+function logout(){
+    	var url1 = $("#urlPath").val() + "/api/sso/logout/"+$('#token').text();
+    $.ajax({
+        url: url1,
+                type: 'POST',
+        dataType: "JSON",
+        success: function(data){
+            // get access_token
+            $('#valtxt').text(JSON.stringify( data ));
+        },
+        error: function(error){
+            // show error
+            var a = error;
+        }
+    });
+   }
+   
+function authen(){
+    	var url1 = $("#urlPath").val() + "/api/sso/authen/"+$('#token').text();
+    $.ajax({
+        url: url1,
+        type: 'POST',
+        dataType: "JSON",
+        success: function(data){
+            // get access_token
+            $('#valtxt').text(JSON.stringify( data ));
+			alert(data);
+        },
+        error: function(error){
+            // show error
+            var a = error;
+            
+        }
+    });
+   }
+function deleteOrgan() {
+	$.ajax({
+		url : "/app/org/delete.htm",
+		type : 'GET',
+		success : function(data) {
+			$('#orgText').text(JSON.stringify(data));
+		},
+		error : function(error) {}
+	});
+}
+
+function importOrgan() {
+	$.ajax({
+		url : "/app/org/import.htm",
+		type : 'GET',
+		success : function(data) {
+			$('#orgText').text(JSON.stringify(data));
+		},
+		error : function(error) {}
+	});
+}
+function startTimer() {
+	$.ajax({
+		url : "/app/timer/start.htm",
+		type : 'GET',
+		success : function(data) {
+			$("#startTimer").attr("style","display:none");
+			$("#cancelTimer").attr("style","display:blank");
+			$('#orgText').text("定时同步已启动");
+		},
+		error : function(error) {}
+	});
+}
+function cancelTimer() {
+	$.ajax({
+		url : "/app/timer/cancel.htm",
+		type : 'GET',
+		success : function(data) {
+			$("#startTimer").attr("style","display:blank");
+			$("#cancelTimer").attr("style","display:none");
+			$('#orgText').text("定时同步已停止");
+		},
+		error : function(error) {}
+	});
+}
+function startNoteMsgTimer() {
+	$.ajax({
+		url : "/app/timer/noteMsg/start.htm",
+		type : 'GET',
+		success : function(data) {
+			$("#startNoteMsgTimer").attr("style","display:none");
+			$("#cancelNoteMsgTimer").attr("style","display:blank");
+			$('#orgText').text("定时短信发送已启动");
+		},
+		error : function(error) {}
+	});
+}
+function cancelNoteMsgTimer() {
+	$.ajax({
+		url : "/app/timer/noteMsg/cancel.htm",
+		type : 'GET',
+		success : function(data) {
+			$("#startNoteMsgTimer").attr("style","display:blank");
+			$("#cancelNoteMsgTimer").attr("style","display:none");
+			$('#orgText').text("定时短信发送已停止");
+		},
+		error : function(error) {}
+	});
+}
+$(function () {
+	$.ajax({
+		url : "/app/timer/status.htm",
+		type : 'GET',
+		success : function(data) {
+			if (data.status == true) {
+				$("#startTimer").attr("style","display:none");
+				$("#cancelTimer").attr("style","display:blank");
+			} else {
+				$("#startTimer").attr("style","display:blank");
+				$("#cancelTimer").attr("style","display:none");
+			}
+		},
+		error : function(error) {}
+	});
+	$.ajax({
+		url : "/app/timer/noteMsg/status.htm",
+		type : 'GET',
+		success : function(data) {
+			if (data.status == true) {
+				$("#startNoteMsgTimer").attr("style","display:none");
+				$("#cancelNoteMsgTimer").attr("style","display:blank");
+			} else {
+				$("#startNoteMsgTimer").attr("style","display:blank");
+				$("#cancelNoteMsgTimer").attr("style","display:none");
+			}
+		},
+		error : function(error) {}
+	});
+});
+</script>
+</head>
+<body>
+用户名:<input type="text" value="admin" id="usename"/>
+密码:<input type="password" value="password02!" id="password"/><br/>
+网关地址:<input type="text" value="http://172.16.201.140:10005" id="urlPath" style="width:325px;"/><span style="border:1px solid blue;cursor:pointer;" onclick="javascript:$('#urlPath').val($(this).text());">http://10.2.104.1:10005</span><br/>
+应用主页:<input type="text" value="index.html" id="servicePath" style="width:325px;"/>
+<div><label>Token: </label><label id="token"></label></div>
+<div><label>返回结果: </label><label id="valtxt"></label></div>
+<div><label>用户信息: </label><label id="usertxt"></label></div>
+<button type="button" onclick="login()">获取Token</button>
+<button type="button" onclick="validate()">验证Token</button>
+<button type="button" onclick="getUser()">获取用户信息</button>
+<button type="button" onclick="logout()">注销Token</button>
+<button type="button" onclick="loginApplication()">登录应用</button>
+<br/><br/>
+<button type="button" onclick="deleteOrgan()">清空组织机构</button>
+<button type="button" onclick="importOrgan()">更新组织机构</button>
+<button type="button" onclick="startTimer()" style="display:none" id="startTimer">启动定时同步</button>
+<button type="button" onclick="cancelTimer()" style="display:none" id="cancelTimer">停止定时同步</button>
+<button type="button" onclick="startNoteMsgTimer()" style="display:none" id="startNoteMsgTimer">启动定时短信发送</button>
+<button type="button" onclick="cancelNoteMsgTimer()" style="display:none" id="cancelNoteMsgTimer">停止定时短信发送</button>
+<div><label>返回结果: </label><label id="orgText"></label></div>
+
+</body>
+</html>

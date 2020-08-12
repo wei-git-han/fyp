@@ -1,0 +1,42 @@
+html,body{
+	min-width:1366px;
+	min-height:768px;
+	width:100%;
+	height:100%;
+	background-color:#fff;
+	margin:0;
+	padding:0;
+	font-family:"楷体";
+}
+*{
+	box-sizing:border-box;
+}
+.newpage1{
+	width:100%;
+	height:100%;
+}
+.newpage2{
+	width:550px;
+	height:231px;
+	overflow:hidden;
+	margin:200px auto;
+	position:relative
+}
+.ImgBox{
+	width:105px;
+	height:128px;
+}
+.ImgBox img{
+	width:100%;
+	height:100%;
+}
+.TxtBox{
+	position:absolute;
+	left:120px;
+	top:0px;
+}
+.TxtBox p{
+	color:#5498eb;
+	font-size:42px;
+	font-family:"楷体"!important;
+}
