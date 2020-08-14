@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.css.app.fyp.utils.ResponseValueUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ import com.css.app.fyp.work.service.FypGuaranteeTackingService;
  * @date 2020-08-13 17:30:50
  */
 @Controller
-@RequestMapping("/fypguaranteetacking")
+@RequestMapping("/fyp/guaranteetacking")
 public class FypGuaranteeTackingController {
 	@Autowired
 	private FypGuaranteeTackingService fypGuaranteeTackingService;
@@ -50,7 +49,7 @@ public class FypGuaranteeTackingController {
 		List<FypGuaranteeTacking> fypGuaranteeTackingList = fypGuaranteeTackingService.queryList(map);
 		
 		PageUtils pageUtil = new PageUtils(fypGuaranteeTackingList);
-		Response.json("page",pageUtil);
+        Response.json(new ResponseValueUtils().success(pageUtil));
 	}
 	
 	
@@ -61,7 +60,7 @@ public class FypGuaranteeTackingController {
 	@RequestMapping("/info/{id}")
 	public void info(@PathVariable("id") String id){
 		FypGuaranteeTacking fypGuaranteeTacking = fypGuaranteeTackingService.queryObject(id);
-		Response.json("fypGuaranteeTacking", fypGuaranteeTacking);
+		Response.json(new ResponseValueUtils().success(fypGuaranteeTacking));
 	}
 	
 	/**
@@ -69,11 +68,11 @@ public class FypGuaranteeTackingController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public void save(@RequestBody FypGuaranteeTacking fypGuaranteeTacking){
+	public void save(FypGuaranteeTacking fypGuaranteeTacking){
 		fypGuaranteeTacking.setId(UUIDUtils.random());
 		fypGuaranteeTackingService.save(fypGuaranteeTacking);
-		
-		Response.ok();
+
+		Response.json(new ResponseValueUtils().success());
 	}
 	
 	/**
@@ -81,10 +80,10 @@ public class FypGuaranteeTackingController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public void update(@RequestBody FypGuaranteeTacking fypGuaranteeTacking){
+	public void update(FypGuaranteeTacking fypGuaranteeTacking){
 		fypGuaranteeTackingService.update(fypGuaranteeTacking);
-		
-		Response.ok();
+
+		Response.json(new ResponseValueUtils().success());
 	}
 	
 	/**
@@ -92,10 +91,10 @@ public class FypGuaranteeTackingController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public void delete(@RequestBody String[] ids){
+	public void delete(String[] ids){
 		fypGuaranteeTackingService.deleteBatch(ids);
 
-		Response.ok();
+		Response.json(new ResponseValueUtils().success());
 	}
 	
 }

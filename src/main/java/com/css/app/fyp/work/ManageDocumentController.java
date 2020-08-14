@@ -1,6 +1,5 @@
 package com.css.app.fyp.work;
 
-import com.css.app.db.business.controller.DocumentAddXbController;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import java.util.*;
 @RequestMapping("/app/fyp/manageDocument")
 public class ManageDocumentController {
 
-    private final Logger logger = LoggerFactory.getLogger(DocumentAddXbController.class);
+    private final Logger logger = LoggerFactory.getLogger(ManageDocumentController.class);
 
     /**
      * 办文总量

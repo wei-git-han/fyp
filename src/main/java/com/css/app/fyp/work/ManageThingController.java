@@ -1,13 +1,7 @@
 package com.css.app.fyp.work;
 
-import com.alibaba.fastjson.JSONObject;
-import com.css.app.db.business.controller.DocumentAddXbController;
-import com.css.app.db.business.entity.SubDocInfo;
-import com.css.app.db.business.entity.SubDocTracking;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.CurrentUser;
 import com.css.base.utils.Response;
-import com.css.base.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +18,7 @@ import java.util.*;
 @RequestMapping("/app/fyp/manageThing")
 public class ManageThingController {
 
-    private final Logger logger = LoggerFactory.getLogger(DocumentAddXbController.class);
+    private final Logger logger = LoggerFactory.getLogger(ManageThingController.class);
 
     /**
      * 督查催办

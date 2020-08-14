@@ -1,6 +1,5 @@
 package com.css.app.fyp.work;
 
-import com.css.app.db.business.controller.DocumentAddXbController;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import java.util.*;
 @RequestMapping("/app/fyp/orderOfBirth")
 public class OrderOfBirthController {
 
-    private final Logger logger = LoggerFactory.getLogger(DocumentAddXbController.class);
+    private final Logger logger = LoggerFactory.getLogger(OrderOfBirthController.class);
 
     /**
      * 在线率排行

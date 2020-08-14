@@ -1,9 +1,7 @@
 package com.css.app.fyp.work;
 
-import com.css.app.db.business.controller.DocumentAddXbController;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
-import org.apache.shiro.crypto.hash.Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +18,7 @@ import java.util.*;
 @RequestMapping("/app/fyp/manageMeeting")
 public class ManageMeetingController {
 
-    private final Logger logger = LoggerFactory.getLogger(DocumentAddXbController.class);
+    private final Logger logger = LoggerFactory.getLogger(ManageMeetingController.class);
 
     /**
      * 日常会议

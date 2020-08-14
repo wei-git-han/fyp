@@ -1,6 +1,5 @@
 package com.css.app.fyp.work;
 
-import com.css.app.db.business.controller.DocumentAddXbController;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
@@ -21,15 +20,14 @@ import java.util.Map;
 @RequestMapping("/app/fyp/ensure")
 public class EnsureController {
 
-    private final Logger logger = LoggerFactory.getLogger(DocumentAddXbController.class);
+    private final Logger logger = LoggerFactory.getLogger(EnsureController.class);
 
     /**
      * 保障问题跟踪
-     * @param subId
      */
     @ResponseBody
     @RequestMapping("/problem")
-    public void problem(String subId) {
+    public void problem() {
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("todayCount","今日受理总数");
         dataMap.put("completed","已完成总数");
@@ -50,11 +48,10 @@ public class EnsureController {
 
     /**
      * 用户反馈受理情况
-     * @param subId
      */
     @ResponseBody
     @RequestMapping("/feedback")
-    public void feedback(String subId) {
+    public void feedback() {
         List<Map<String,String>> objects = new ArrayList<>();
         HashMap<String, String> dataMap = new HashMap<>();
         dataMap.put("status","状态");
