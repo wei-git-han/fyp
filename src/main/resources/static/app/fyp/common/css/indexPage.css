@@ -281,6 +281,7 @@ body {
 .statistics a {
   float: right;
 	text-decoration: underline;
+	cursor: pointer;
 }
 .statistics-wrap .statistics:nth-child(1) p,.statistics:nth-child(1) a {
   color: #007AFF;
