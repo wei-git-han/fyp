@@ -1,0 +1,86 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+   background-color: transparent;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.bgimg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+/* tab2 */
+.gzbb{
+	overflow: hidden;
+	text-align: center;
+}
+.gzbb>div{
+	position: relative;
+	text-align: center;
+	/* float: left; */
+	display: inline-block;
+	margin:15px;
+}
+.gzbb>div>span{
+	background:url('../images/gzzb.png') no-repeat top center;
+	width:98px;height:75px;
+	line-height: 68px;
+	display: inline-block;
+	text-align: center;
+	font-size:22px;
+	font-weight:700;
+	color:#00E4F7;
+} 
+.gzbb>div>font{
+	text-align: center;
+	width: 100%;
+	color:#818CEF;
+	display: block;
+	padding-top: 5px;
+} 
+.filterDate{
+	float:right;
+}
+select{
+	color:#EFF1F5;
+	border:1px solid #4C52E6;
+	background:transparent;
+}
+.tab2_title{
+	position: absolute;
+	left:0;top:0;
+	height:45px;
+	line-height:45px;
+	color:#DBDEF7;
+	font-weight:700;
+	font-size:16px;
+	width:100%;
+}
+.tab2_main{
+	width:100%;
+	height:100%;
+	padding-top:45px;
+}

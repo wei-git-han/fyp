@@ -1,0 +1,160 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+  background-color: transparent;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.bgimg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.tab1_title,.tab3_title{
+	text-align:center;
+	width:100%;
+	height:45px;
+	line-height:45px;
+}
+.tab1_main{
+	overflow: hidden;
+}
+.tab1_card{
+	overflow: hidden;
+	margin-bottom:20px;
+}
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+.tab1_main>div{
+	width:33.3%;
+	float:left;
+}
+.tab1_main>div>span{
+	font-size:42px;
+	margin-left:8px;
+	padding:3px 5px;
+}
+.card{
+	width:250px;
+	height:264px;
+	float:left;
+	border:1px solid #09BCE8;
+	margin-right:15px;
+	margin-bottom:15px;
+	
+}
+.card_top{
+	width:100%;
+	height:80px;
+	background:#0593F5;
+	padding:20px 18px;
+}
+.card_top img{
+	float:left;
+}
+.card_top>div{
+	padding-left:50px;
+}
+.userName{
+	font-weight:700;
+	margin-right:10px;
+	font-size:16px;
+}
+.dept{
+	margin-right:10px;
+}
+.status{
+	color:#28E848
+}
+.card_main{
+	padding:15px
+}
+.card_main p {
+	line-height:24px;
+	color:#00D3EA;
+	font-size:15px;
+}
+.describe{
+	float:left;
+}
+.card_desContent {
+    padding-left: 75px;
+    padding-top: 2px;
+    color: #00D3EA;
+}
+
+/* tab2 */
+.tab2_title{
+	height:60px;
+	line-height:60px;
+	color:#DBDEF7;
+	font-weight:700;
+	font-size:16px;
+}
+.filterDate{
+	float:right;
+}
+select{
+	color:#EFF1F5;
+	border:1px solid #4C52E6;
+	background:transparent;
+}
+
+/* tab3 */
+.user_card{
+	width:180px;
+	height:80px;
+	border:1px solid #f00;
+	padding:18px 15px;
+	margin:20px;
+	float: left;
+}
+.user_card img{
+	float:left;
+	vertical-align: middle;
+}
+.user_card>div{
+	padding-left:50px;
+}
+.user_card .userName{
+	font-weight:700;
+	margin-right:3px;
+	font-size:16px;
+}
+.user_card .status{
+	color:#28E848
+}
+.user_card .more{
+	color:#4FC9EC;
+	cursor: pointer;
+}
+.tab3_main{
+	overflow: hidden;
+}

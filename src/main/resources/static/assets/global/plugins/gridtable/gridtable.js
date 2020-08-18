@@ -5,17 +5,7 @@ jQuery.fn.extend({
 		return gridobj;
 	}
 });
-
-var remeberTableTermGrid = {};
-
-try{window.top.document}catch(e){
-	var str = e.message;
-	if(str.indexOf("Permission denied to")!=-1){
-		remeberTableTermGrid = window.parent.remeberTableTerm;
-	}else{
-		remeberTableTermGrid = window.top.remeberTableTerm;
-	}
-}
+var remeberTableTermGrid = window.top.remeberTableTerm;
 var checkedarr = [];
 //创建表格
 function createtable(obj){
@@ -284,7 +274,11 @@ function createtable(obj){
 				};
 				$.each(rowsdata,function(i){
 					var data = rowsdata[i];
-					var trobj = $('<tr style="box-sizing:border-box"></tr>');
+					var topClass = ""
+					if(data.placeTopDisplay=='1'){
+						topClass = "topClass";
+					};
+					var trobj = $('<tr style="box-sizing:border-box" class="'+topClass+'"></tr>');
 					if(getvalue(obj.checkbox,"checkbox") == true){
 						var checktd = $('<td><input type="checkbox" class="checkboxes" style="cursor:pointer;" id="'+obj.target+"_checkbox"+(i+1)+'" name="'+obj.target+'_checktd" /></td>');
 						checktd.css({

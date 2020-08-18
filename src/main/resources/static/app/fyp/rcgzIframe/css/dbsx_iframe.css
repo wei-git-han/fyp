@@ -1,0 +1,92 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+	min-width: 800px;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.tab_title{
+	position: absolute;
+	left:0;top:0;
+	height:45px;
+	line-height:45px;
+	color:#DBDEF7;
+	font-weight:700;
+	font-size:16px;
+	width:100%;
+}
+.tab_main{
+	width:100%;
+	height:100%;
+	padding-top:45px;
+}
+.bgimg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+.filterDate{
+	float:right;
+}
+select{
+	color:#EFF1F5;
+	border:1px solid #4C52E6;
+	background:transparent;
+}
+
+.table-advance thead tr th {
+	background-color: #2E85E0;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
+}
+.table-advance thead tr th {
+	background-color: #2E85E0;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+}
+#gridcont_content{
+	background: transparent!important;
+}
+.table > tbody > tr {
+    background-color: transparent!important;
+}
+.table-bordered > thead > tr > th{
+	border: none;
+}
+.table > tbody > tr > td{
+	border: none;
+}
+.table-bordered {
+    border: none;
+}

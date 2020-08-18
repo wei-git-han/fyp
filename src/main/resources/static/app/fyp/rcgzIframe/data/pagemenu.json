@@ -1,0 +1,69 @@
+{
+	"id": "01",
+	"text": "网信所",
+	"flag": "1",
+	"dwnumber_zx": "100",
+	"dwnumber_lx": "32",
+	"type":"0",
+	"children": [{
+			"id": "02",
+			"text": "综合办科技组",
+			"flag": "1",
+			"dwnumber_zx": "11",
+			"dwnumber_lx": "56",
+			"type":"0",
+			"children": [{
+				"id": "03",
+				"text": "办公平台",
+				"flag": "1",
+				"dwnumber_zx": "66",
+				"dwnumber_lx": "12",
+				"type":"0",
+				"children": [{
+						"id": "07",
+						"text": "王金勇",
+						"flag": "0",
+						"status": "1",
+						"type":"1"
+					}, {
+						"id": "08",
+						"text": "刘树刚",
+						"flag": "0",
+						"status": "0",
+						"type":"1"
+					},
+					{
+						"id": "11",
+						"text": "夏玉洁",
+						"flag": "0",
+						"status": "1",
+						"type":"1"
+					}
+				]
+			}]
+		},
+		{
+			"id": "022",
+			"text": "研发中心",
+			"flag": "1",
+			"dwnumber_zx": "98",
+			"dwnumber_lx": "45",
+			"type":"0",
+			"children": [{
+				"id": "0222",
+				"text": "吕石林",
+				"flag": "0",
+				"status": "0",
+				"type":"1"
+			}]
+		},
+		{
+			"id": "032",
+			"text": "王继峰",
+			"flag": "0",
+			"status": "0",
+			"type":"1"
+		}
+
+	]
+}

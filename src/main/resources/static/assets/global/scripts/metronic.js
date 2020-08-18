@@ -336,11 +336,6 @@ var Metronic = function() {
 
     // Handles Bootstrap Tabs.
     var handleTabs = function() {
-    	if(typeof(tabn)!="undefined"&&tabn!=null){
-	    	if(tabn==0){
-	    		return;
-	    	}
-    	}
         //activate tab if tab id provided in the URL
         if (location.hash) {
             var tabid = encodeURI(location.hash.substr(1));
@@ -352,7 +347,6 @@ var Metronic = function() {
         }
 
         if ($().tabdrop) {
-        	
             $('.tabbable-tabdrop .nav-pills, .tabbable-tabdrop .nav-tabs').tabdrop({
                 text: '<i class="fa fa-ellipsis-v"></i>&nbsp;<i class="fa fa-angle-down"></i>'
             });
@@ -611,9 +605,7 @@ var Metronic = function() {
             // Hacks
             handleFixInputPlaceholderForIE(); //IE8 & IE9 input placeholder issue fix
         },
-        refreshtabs:function(){
-        	handleTabs();
-        },
+
         //main function to initiate core javascript after ajax complete
         initAjax: function() {
             handleUniform(); // handles custom radio & checkboxes     
@@ -670,7 +662,7 @@ var Metronic = function() {
             }, 'slow');
         },
 
-        initSlimScroll: function(el,n) {
+        initSlimScroll: function(el) {
             $(el).each(function() {
                 if ($(this).attr("data-initialized")) {
                     return; // exit

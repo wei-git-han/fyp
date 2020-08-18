@@ -1,0 +1,62 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+   background-color: transparent;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.bgimg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.tab1_title,.tab2_title{
+	position: absolute;
+	left:0;top:0;
+	height:45px;
+	line-height:45px;
+	color:#DBDEF7;
+	font-weight:700;
+	font-size:16px;
+	text-align: center;
+	width:100%;
+}
+.tab1_main,.tab2_main{
+	width:100%;
+	height:100%;
+	padding-top:45px;
+}
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+.filterDate{
+	float:right;
+}
+.tab2_main{
+	overflow: hidden;
+}
