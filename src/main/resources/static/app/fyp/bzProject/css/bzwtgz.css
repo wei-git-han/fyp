@@ -66,7 +66,7 @@ html, body {
 	color: #fff;
 	margin:0 8px;
 }
-.btn-group button.close{
+.btn-group button.closeBtn{
 	background: #F1F1F1;
 	border:1px solid #F1F1F1;
 	color: #999;
@@ -112,6 +112,12 @@ html, body {
 	height: 100%;
 	padding:45px 20px 20px;
 }
+
+
+
+
+
+
 .table-advance thead tr th {
 	background-color: #1C67E3;
 	font-size: 14px;
@@ -119,3 +125,29 @@ html, body {
 	color: #fff;
 	text-align: center!important;
 }
+#gridcont_content{
+	background: #fff;
+}
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: #F1F1F1;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: transparent;
+}
+.table > tbody > tr:hover,.table > tbody > tr td:hover{
+	box-shadow: inset 0px 0px 2px transparent; 
+	color: #333;
+} 
+.table > thead > tr > th{
+	vertical-align: middle!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #DDDDDD;
+} 
+.table > tbody > tr > td{
+	border-color: #DDDDDD;
+}
+.table-bordered {
+    border-color: #DDDDDD;
+}
+

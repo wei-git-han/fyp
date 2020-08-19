@@ -787,3 +787,37 @@ div, a, input, p, h1, h2, h3, h4, h5, h6 {
 	background-size: 100%;
 }
 
+
+/* 新表格 */
+.table-advance thead tr th {
+	background-color: #2E85E0;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
+}
+#gridcont_content{
+	background: transparent!important;
+}
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: #052A61;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: transparent;
+}
+.table > tbody > tr:hover,.table > tbody > tr td:hover{
+	box-shadow: inset 0px 0px 2px #2B5C97; 
+	color: #F7B707;
+} 
+.table > thead > tr > th{
+	vertical-align: middle!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #204E97;
+} 
+.table > tbody > tr > td{
+	border-color: #204E97;
+}
+.table-bordered {
+    border-color: #204E97;
+} 

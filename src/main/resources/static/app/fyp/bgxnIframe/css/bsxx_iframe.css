@@ -66,33 +66,6 @@ select{
 	height:100%;
 	padding-top:45px;
 } 
-.table-advance thead tr th {
-	background-color: #4C52E6;
-	font-size: 14px;
-	font-weight: 400;
-	color: #fff;
-	text-align: center!important;
-}
-#gridcont_content{
-	background: transparent!important;
-}
-.table > tbody > tr {
-    background-color: transparent!important;
-}
- .table-bordered > thead > tr > th{
-	border-color: #4C52E6;
-}
-.table > tbody > tr > td{
-	border-color: #4C52E6;
-	color:#5092C1
-}
-.table-bordered {
-    border-color: #4C52E6;
-} 
-#gridcont_content{
-	height:100%;
-	width:100%;
-}
 
 /* tab1ÑשÊ½ */
 .main-l{
