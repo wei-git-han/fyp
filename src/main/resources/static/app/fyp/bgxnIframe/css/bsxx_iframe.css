@@ -134,9 +134,9 @@ select{
 	font-size:50px;
 }
 .main-l .pr100>div,.main-r .pr100>div{
-	height: 28.3%;
-	width:100%;
-	margin-bottom:4%;
+	height: 30.3%;
+	width: 100%;
+	margin-bottom: 20px;
 }
 .main-l .pr100>div p,.main-r .pr100>div p{
 	height:100%;
