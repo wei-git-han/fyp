@@ -1,5 +1,4 @@
 var listurl = {"url":"../data/grid.json","dataType":"text"};
-
 var grid = null;
 var pageModule = function () {
 	var initgrid = function(){

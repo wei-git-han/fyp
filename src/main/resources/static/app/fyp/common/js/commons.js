@@ -1071,7 +1071,7 @@ var newbootbox = {
 		};
 		$(window.top.document.body).append(
 			'<div class="modal  fade in newmodal '+classed+'" id="'+obj.id+'" tabindex="-1" aria-hidden="true">'+
-			'    <div class="modal-dialog" style="width:'+width+'">'+
+			'    <div class="modal-dialog" style="width:'+width+';background:#fff;">'+
 			'        <div class="modal-content">'+
 			'            <div class="modal-header"'+html+'  style="'+headerStyleHtml+'">'+
 			'                <div class="newclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></div>'+
@@ -1281,3 +1281,10 @@ var hide = function(obj){
 //     "padding-top":"20px"
 //   })
 // }
+
+$(".nav>li").click(function(){
+	$(this).addClass('active').siblings().removeClass('active');
+	var index = $(this).index();
+	$(".tab-content>div").eq(index).show().siblings().hide();
+});
+

@@ -132,7 +132,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
         	getBarChartData();
-          initother();
+        	initother();
         }
     }
 }();

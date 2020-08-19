@@ -47,7 +47,7 @@ function createtable(obj){
 						loadafter:function(){},
 						paramobj:{},
 						rememberStatue:false,
-						headheight:"36px",
+						headheight:"40px",
 						datarowheight:"30px",
 						datatablebackgroundcolor:"transparent",
 						headborder:"1px solid #ff0000",//n

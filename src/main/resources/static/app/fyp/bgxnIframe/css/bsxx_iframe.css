@@ -32,44 +32,26 @@ html, body {
 	height:100%;
 	padding-top:0px;
 }
-/* tab2 */
-.gzbb{
-	overflow: hidden;
-	text-align: center;
-}
-.gzbb>div{
-	position: relative;
-	text-align: center;
-	/* float: left; */
-	display: inline-block;
-	margin:15px;
-}
-.gzbb>div>span{
-	background:url('../images/gzzb.png') no-repeat top center;
-	width:98px;height:75px;
-	line-height: 68px;
-	display: inline-block;
-	text-align: center;
-	font-size:22px;
-	font-weight:700;
-	color:#00E4F7;
-} 
-.gzbb>div>font{
-	text-align: center;
-	width: 100%;
-	color:#818CEF;
-	display: block;
-	padding-top: 5px;
-} 
 .filterDate{
 	float:right;
+}
+.filterUnit{
+	float:left;
 }
 select{
 	color:#EFF1F5;
 	border:1px solid #4C52E6;
 	background:transparent;
 }
-.tab2_title{
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+
+.tab2_title,.tab1_title{
 	position: absolute;
 	left:0;top:0;
 	height:45px;
@@ -79,8 +61,111 @@ select{
 	font-size:16px;
 	width:100%;
 }
-.tab2_main{
+.tab2_main,.tab1_main{
 	width:100%;
 	height:100%;
 	padding-top:45px;
+} 
+.table-advance thead tr th {
+	background-color: #4C52E6;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
+}
+#gridcont_content{
+	background: transparent!important;
+}
+.table > tbody > tr {
+    background-color: transparent!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #4C52E6;
+}
+.table > tbody > tr > td{
+	border-color: #4C52E6;
+	color:#5092C1
+}
+.table-bordered {
+    border-color: #4C52E6;
+} 
+#gridcont_content{
+	height:100%;
+	width:100%;
+}
+
+/* tab1ÑשÊ½ */
+.main-l{
+	position:absolute;
+	left:0;
+	top:0;
+	height:385px;
+	text-align: right;
+}
+.main-c{
+	width:368px;
+	height:385px;
+	margin:0 auto;
+	text-align: center;
+	background:url('../images/centerImg.png') no-repeat top center;
+}
+.main-r{
+	position:absolute;
+	right:0;
+	top:0;
+	height:385px;
+	text-align: left;
+}
+.main-c-absolute{
+	position:absolute;
+	top:40%;
+	text-align: center;
+	width: 100%;
+    height: 40px;
+}
+.main-c-absolute p{
+	font-size:20px;
+	font-weight: 700;
+}
+.main-c-absolute span{
+	font-family:"PIXEL LCD-7";
+	src: url("../font/PIXEL LCD-7.TTF");
+	color:#157FE8;
+	font-size:50px;
+}
+.main-l .pr100>div,.main-r .pr100>div{
+	height: 28.3%;
+	width:100%;
+	margin-bottom:4%;
+}
+.main-l .pr100>div p,.main-r .pr100>div p{
+	height:100%;
+	width:200px;
+	text-align: left;
+	padding:10px;
+}
+.main-l .pr100>div p{
+	float: right;
+	border-left:3px solid #2A92E3;
+	background: -moz-linear-gradient(#071F56, #144A8B);
+	background: -webkit-linear-gradient(#071F56, #09275E);
+}
+.main-r .pr100>div p{
+	float: left;
+	border-right:3px solid #2A92E3;
+	background: -moz-linear-gradient(#144A8B, #071F56);
+	background: -webkit-linear-gradient(#144A8B, #09275E);
+}
+
+.main .pr100>div p label{
+	font-size: 20px;
+}
+.main .pr100>div p span{
+	display: block;
+	width:100%;
+	font-size: 42px;
+	font-family:"PIXEL LCD-7";
+	src: url("../font/PIXEL LCD-7.TTF");
+	text-align: center;
+	
 }
