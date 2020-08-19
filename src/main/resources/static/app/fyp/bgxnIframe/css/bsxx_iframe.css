@@ -134,9 +134,9 @@ select{
 	font-size:50px;
 }
 .main-l .pr100>div,.main-r .pr100>div{
-	height: 28.3%;
-	width:100%;
-	margin-bottom:4%;
+	height: 30.3%;
+	width: 100%;
+	margin-bottom: 20px;
 }
 .main-l .pr100>div p,.main-r .pr100>div p{
 	height:100%;
@@ -168,4 +168,24 @@ select{
 	src: url("../font/PIXEL LCD-7.TTF");
 	text-align: center;
 	
+}
+
+.main-l .pr100>div:nth-child(1) p span{
+	color:#6AB232;
+}
+.main-l .pr100>div:nth-child(2) p span{
+	color:#FA8C30;
+}
+.main-l .pr100>div:nth-child(3) p span{
+	color:#CF3031;
+}
+
+.main-r .pr100>div:nth-child(1) p span{
+	color:#8614FE;
+}
+.main-r .pr100>div:nth-child(2) p span{
+	color:#1EDBEB;
+}
+.main-r .pr100>div:nth-child(3) p span{
+	color:#F5C52B;
 }

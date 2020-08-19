@@ -806,7 +806,7 @@ function createtable(obj){
 
 	//获取列宽度值
 	var getcolwidth = function(colwidth){
-		var contwidth = $("#"+obj.target).width()-1;
+		var contwidth = $("#"+obj.target).width()-2;
 		if(getvalue(obj.checkbox,"checkbox") == true){
 			contwidth=contwidth-checkwidth;
 		}
