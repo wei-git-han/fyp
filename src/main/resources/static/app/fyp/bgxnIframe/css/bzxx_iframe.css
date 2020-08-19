@@ -36,8 +36,7 @@ body {
   padding-top: 0px;
 }
 
-.tab1_title,
-.tab3_title {
+.tab1_title {
   text-align: center;
   width: 100%;
   height: 45px;
@@ -156,7 +155,11 @@ body {
   font-size: 16px;
   width: 100%;
 }
-
+.tab2_main{
+	width:100%;
+	height:100%;
+	padding-top:45px;
+}
 .filterDate {
   float: right;
 }
@@ -212,4 +215,32 @@ select {
 }
 .card_green{
 	background: url(../../common/images/cardGreen.png) no-repeat center;
+}
+
+.table-advance thead tr th {
+	background-color: #4C52E6;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
+}
+.table > tbody > tr {
+    background-color: transparent!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #4C52E6;
+}
+.table > tbody > tr > td{
+	border-color: #4C52E6;
+	color:#5092C1
+}
+.table-bordered {
+    border-color: #4C52E6;
+} 
+#gridcont_content{
+	height:100%;
+	width:100%;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: transparent!important;
 }

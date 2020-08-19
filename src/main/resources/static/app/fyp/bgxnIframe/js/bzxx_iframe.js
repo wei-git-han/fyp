@@ -106,13 +106,15 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
+		$("#slqk").click(function(){
+			initgrid();
+		});
 	}
 	
     return {
         //加载页面处理程序
         initControl: function () {
 			getNum();
-			initgrid();
 			initProblem();
 			initother();
         }
