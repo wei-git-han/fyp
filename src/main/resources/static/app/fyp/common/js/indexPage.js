@@ -217,10 +217,12 @@ var pageModule = function() {
 		$("#set").click(function(){
 			newbootbox.newdialog({
 				id:"addModal",
-				width:880,
+				width:1020,
 				height:600,
-				header:false,
+				header:true,
+				title:"业务配置信息",
 				url:"set.html",
+				style:{"background":"#04182C"}
 			})
 		});
 	}
