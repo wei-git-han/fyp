@@ -298,7 +298,7 @@ var pageModule = function() {
         title: "业务配置信息",
         url: "set.html",
         style: {
-          "background": "#04182C"
+          "background": "#fff"
         }
       })
     });

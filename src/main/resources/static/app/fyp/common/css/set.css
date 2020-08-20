@@ -1,7 +1,8 @@
 html,
 body {
-  background-color: #04182C;
+  background-color: #fff;
   height: 100%;
+  color:#333;
 }
 
 body {
@@ -40,23 +41,22 @@ body {
 	border-radius: 6px!important;
 	outline: none;
 	border: none;
-	border: 1px solid #4C52E6;
+	border: 1px solid #2A92E3;
 	padding: 5px 15px;
-	color: #4C52E6;
+	color: #2A92E3;
 	font-size: 14px;
 	padding-right:40px;
-	background: #122450;
 }
 .newlayout-search .search{
 	position: absolute;
-	color: #4C52E6;
+	color: #2A92E3;
 	right: 12px;
 	top: 6px;	
 	cursor: pointer;
 	font-size: 20px;
 }
 .importBtn{
-	background: #4C52E6;
+	background: #2A92E3;
 	border: none;
 	color: #fff;
 	padding: 5px 20px;
@@ -66,9 +66,9 @@ body {
 }
 select{
 	background: transparent;
-	color:#fff;
+	color:#2A92E3;
 	width:200px;
-	border: 1px solid #4C52E6;
+	border: 1px solid #2A92E3;
 	border-radius: 6px!important;
 	padding: 5px 15px;
 }
@@ -82,17 +82,16 @@ select{
 .table > tbody > tr {
     background-color: transparent!important;
 }
-.table > tbody > tr:hover{
-    background-color: #0C243E!important;
-		box-shadow: inset 0px 0px 2px #0C243E;
-		border:1px solid #214E75;
+.table > tbody > tr:hover,.table > tbody > tr > td:hover{
+	box-shadow:none;
+	color: #F7B707;
 }
-.table-bordered > thead > tr > th{
-	border: none;
-}
+.table > tbody > tr:hover,.table > tbody > tr td:hover{
+	color: #F7B707;
+} 
 .table > tbody > tr > td{
 	border: none;
-	color:#fff;
+	color:#333;
 }
 .table-bordered {
     border: none;
