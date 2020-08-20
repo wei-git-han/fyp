@@ -570,13 +570,21 @@ public class AppInterfaceConstant {
 	 * 公文处理我的收藏中调用
 	 */
 	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_OBJ = "/app/gwcl/doc/api/getDocumentFlowObj";
+
+	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW = "/app/gwcl/fypPersonalTodoController/numsList";
+	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/wshList";
+	public final static String WEB_INTERFACE_YFB_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/yfbList";
+	public final static String WEB_INTERFACE_GWYZ_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/gwyzList";
+	public final static String WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/lwyjList";
+	public final static String WEB_INTERFACE_ZWQK_GETDOCUMENT_FLOW_LIST = "/api/online";
+	public final static String WEB_INTERFACE_LEAVE_GETDOCUMENT_FLOW_LIST = "/app/qxjgl/api/getQjUserIds";
 	/**
      * @author mashuwen
 	 * @date 2018年3月30日
 	 * 公文处理应用调用：我的阅件，查看收藏数据列表接口
      */
     public final static String WEB_INTERFACE_DZBMS_TO_GWCL_WDYJ_CKSC = "/wdyjfavorite/favoriteList";
-    
+
     /**
      * @author mashuwen
 	 * @date 2018年3月30日

@@ -1,15 +1,15 @@
 package com.css.app.fyp.routine.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.css.app.fyp.routine.service.ReignCaseService;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName 在位情况
@@ -19,6 +19,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("app/fyp/reignCaseController")
 public class ReignCaseController {
+    private final Logger logger = LoggerFactory.getLogger(ReignCaseController.class);
+    @Autowired
+    private ReignCaseService reignCaseService;
 
    /**
     * @Description 在位情况列表
@@ -30,12 +33,8 @@ public class ReignCaseController {
     @ResponseBody
     @RequestMapping("/reignCaseList")
     public void reignCaseList(String afficheType) {
-        List<Map<String,String>> objects = new ArrayList<>();
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put("reignName","在位人");
-        dataMap.put("reignStatus","在线状态");
-        objects.add(dataMap);
-        Response.json(new ResponseValueUtils().success(objects));
+        JSONArray maps = reignCaseService.reignCaseList(afficheType);
+        Response.json(new ResponseValueUtils().success(maps));
     }
 
     /**
@@ -48,6 +47,7 @@ public class ReignCaseController {
     @ResponseBody
     @RequestMapping("/reignCaseSave")
     public void reignCaseSave(String trendType) {
+        reignCaseService.reignCaseSave(trendType);
         Response.json("result", "success");
     }
 

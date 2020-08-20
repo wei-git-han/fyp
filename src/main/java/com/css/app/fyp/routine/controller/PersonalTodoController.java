@@ -1,8 +1,13 @@
 package com.css.app.fyp.routine.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.css.app.fyp.routine.service.PersonalTodoService;
 import com.css.app.fyp.routine.vo.PersonalTodoVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +23,9 @@ import java.util.*;
 @Controller
 @RequestMapping("app/fyp/personalTodo")
 public class PersonalTodoController {
+    private final Logger logger = LoggerFactory.getLogger(PersonalTodoController.class);
+    @Autowired
+    private PersonalTodoService personalTodoService;
 
     /**
      * @Description 待批公文统计
@@ -29,13 +37,8 @@ public class PersonalTodoController {
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsHeader")
     public void backlogFlowStatisticsHeader(@DateTimeFormat(pattern = "yyyy") Date applyDate) {
-        List<Map<String,String>> objects = new ArrayList<>();
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put("flowCount","待办公文数量");
-        dataMap.put("applyType","应用类型");
-        dataMap.put("applyId","明细ID");
-        objects.add(dataMap);
-        Response.json(new ResponseValueUtils().success(objects));
+        JSONArray maps = personalTodoService.backlogFlowStatisticsHeader(applyDate);
+        Response.json(new ResponseValueUtils().success(maps));
     }
 
     /**
@@ -47,16 +50,9 @@ public class PersonalTodoController {
      */
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsDetail")
-    public void backlogFlowStatisticsDetail(String applyType, @DateTimeFormat(pattern = "yyyy") Date applyDate) {
-        List<Map<String,String>> objects = new ArrayList<>();
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put("detailId","列表ID");
-        dataMap.put("applyName","应用名称");
-        dataMap.put("applyContent","应用内容");
-        dataMap.put("sendUserName","发起人");
-        dataMap.put("createdTime","时间");
-        objects.add(dataMap);
-        Response.json(new ResponseValueUtils().success(objects));
+    public void backlogFlowStatisticsDetail(String applyType, @DateTimeFormat(pattern = "yyyy") Date applyDate, String page, String pagesize) {
+        JSONArray maps = personalTodoService.backlogFlowStatisticsDetail(applyType, applyDate, page, pagesize);
+        Response.json(new ResponseValueUtils().success(maps));
     }
 
     /**
@@ -69,6 +65,7 @@ public class PersonalTodoController {
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsDetailUpdate")
     public void backlogFlowStatisticsDetailUpdate (PersonalTodoVo personalTodoVo) {
+        personalTodoService.backlogFlowStatisticsDetailUpdate(personalTodoVo);
         Response.json("result", "success");
     }
 
