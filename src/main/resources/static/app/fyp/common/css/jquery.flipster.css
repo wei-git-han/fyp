@@ -51,7 +51,7 @@
   width: 100%;
 }
 .flip-future,.flip-past{
-  display: none;
+  /* display: none; */
 }
 /* @end */
 /* @group Coverflow Style */
