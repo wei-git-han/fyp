@@ -341,16 +341,16 @@ var pageModule = function() {
       setPage(activeType);
       $(".iframe-wrap").flipster({
         style: 'carousel',
-        start: 0
+        start: 0,
+        onItemSwitch:function(data){
+          var id = data[0].id
+          $('.btn-wrap>.btn').removeClass('active').each(function(){
+            if(this.dataset['target']==id){
+              $(this).addClass('active')
+            }
+          })
+        }
       });
-      $('.iframe-wrap>li').click(function() {
-        var id = this.id
-        $('.btn-wrap>.btn').removeClass('active').each(function() {
-          if (this.dataset['target'] == this.id) {
-            $(this).addClass('active')
-          }
-        })
-      })
     }
   }
 }();

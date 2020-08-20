@@ -260,7 +260,7 @@ $.fn.flipster = function(options) {
 
             resize();
             updateNav();
-            settings.onItemSwitch.call(this);
+            settings.onItemSwitch(currentItem);
         }
         
         function jump(to) {
@@ -333,12 +333,6 @@ $.fn.flipster = function(options) {
 
             // Navigate directly to an item by clicking
             _flipItems.on("click", function(e) {
-                var id = this.id
-                $('.btn-wrap>.btn').removeClass('active').each(function(){
-                  if(this.dataset['target']==id){
-                    $(this).addClass('active')
-                  }
-                })
                 if ( !$(this).hasClass("flip-current") ) { e.preventDefault(); }
                 jump(_flipItems.index(this));
             });
