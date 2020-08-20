@@ -12,7 +12,7 @@ var pageModule = function () {
 						class1 = "top3";
 					} 
 					arryHtml+=  '<dl class="'+class1+'">'+
-								'	<dt><span>'+i+1+'</span>'+o.content+'</dt>'+
+								'	<dt><span>'+parseInt(i+1)+'</span>'+o.content+'</dt>'+
 								'	<dd>'+o.date+'</dd>'+
 								'</dl>'
 				});
