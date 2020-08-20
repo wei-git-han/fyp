@@ -31,14 +31,14 @@
 					<tr>
 						<td class="t_label">姓名</td>
 						<td class="t_inpt" >
-							<input type="text" class="form-control" id="" name="" />
+							<input type="text" class="form-control" id="name" name="name" required="required" />
 						</td>
 						<td class="t_label">单位名称</td>
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="unitId" name="unitId"  />
-									<input type="text" class="form-control"  id="unit" name="unit"  onfocus="blur()"  />
+									<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
+									<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()" required="required"  />
 								</div>
 							</div>
 						</td>
@@ -46,23 +46,23 @@
 					<tr>
 						<td class="t_label">联系电话</td>
 						<td class="t_inpt">
-							<input type="text" class="form-control" id="" name="" />
+							<input type="text" class="form-control" id="phone" name="phone" required="required"  />
 						</td>
 						<td class="t_label">报修时间</td>
 						<td class="t_inpt" >
-							<input class="form-control form-control-inline date-picker" size="16" type="text" name="" id="" />
+							<input class="form-control form-control-inline date-picker" size="16" type="text" name="warrantyTime" id="warrantyTime" required="required" />
 						</td>
 					</tr>
 					<tr>
 						<td class="t_label">问题来源</td>
 						<td class="t_inpt" >
-							<select class="form-control"></select>
+							<select class="form-control" id="source" name="source" required="required" ></select>
 			            </td>
 					</tr>
 					<tr>
 						<td class="t_label">问题描述：</td>
 						<td class="t_inpt" colspan="3">
-						   <textarea class="form-control"></textarea>
+						   <textarea class="form-control" id="remark" name="remark" required="required" ></textarea>
 						</td>
 					</tr>
 				</table>

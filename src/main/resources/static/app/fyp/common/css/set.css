@@ -79,25 +79,9 @@ select{
 	color: #fff;
 	text-align: center!important;
 }
-.table > tbody > tr {
-    background-color: transparent!important;
-}
-.table > tbody > tr:hover,.table > tbody > tr > td:hover{
-	box-shadow:none;
-	color: #F7B707;
-}
-.table > tbody > tr:hover,.table > tbody > tr td:hover{
-	color: #F7B707;
-} 
 .table > tbody > tr > td{
-	border: none;
+	border-color: #2A92E3;
 	color:#333;
-}
-.table-bordered {
-    border: none;
-}
-.table.table-bordered thead > tr > th {
-    border: none!important;
 }
 .smallBtn{
 	cursor:pointer;

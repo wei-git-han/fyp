@@ -27,19 +27,19 @@ var pageModule = function () {
 						{display:"姓名",name:"unit",width:"10%",align:"center",render:function(rowdata,n){
 							return rowdata.unit;                                         
 						}},
-						{display:"单位名称",name:"weeks",width:"25%",align:"left",render:function(rowdata){
+						{display:"单位名称",name:"weeks",width:"20%",align:"left",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"联系电话",name:"weeks",width:"10%",align:"center",render:function(rowdata){
+						{display:"联系电话",name:"weeks",width:"15%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"报修时间",name:"weeks",width:"10%",align:"center",render:function(rowdata){
+						{display:"报修时间",name:"weeks",width:"15%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
 						{display:"应用名称",name:"weeks",width:"15%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"需求描述",name:"weeks",width:"20%",align:"left",render:function(rowdata){
+						{display:"需求描述",name:"weeks",width:"15%",align:"left",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}}
 					 ],
