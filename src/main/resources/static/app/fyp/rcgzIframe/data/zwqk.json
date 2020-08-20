@@ -1,42 +1,48 @@
 [{
 	"id": "01",
-	"text": "部首长/办公室系统管理员",
+	"text": "局领导",
 	"children": [
 		{
 			"id": "02",
 			"text": "周建国",
-			"status": "1"  
+			"status": "1",
+			"rose":"局长"
 		},
 		{
 			"id": "02fsdf",
 			"text": "周建国",
-			"status": "0" 
+			"status": "0" ,
+			"rose":"局长"
 		},
 		{
 			"id": "02rewr",
 			"text": "周建国",
-			"status": "1"
+			"status": "1",
+			"rose":"局长"
 		}
 	]
 },
 {
 	"id": "0111",
-	"text": "本局在位情况11111",
+	"text": "处领导",
 	"children": [
 		{
 			"id": "0dsa2",
 			"text": "豆豆",
-			"status": "1" 
+			"status": "1",
+			"rose":"处长"
 		},
 		{
 			"id": "02fdddsdf",
 			"text": "豆豆2",
-			"status": "0"  
+			"status": "0",
+			"rose":"首长"
 		},
 		{
 			"id": "02rewererr",
 			"text": "豆豆3",
-			"status": "0"
+			"status": "0",
+			"rose":"小弟"
 		}
 	]
 }]

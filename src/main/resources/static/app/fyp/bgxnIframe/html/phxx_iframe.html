@@ -23,6 +23,7 @@
 </head>
 <body>
 <div class="pr100">
+	<img src="../../common/images/bg.png" class="bgimg" /> 
 	<div class="newlayout-main">
 		<div class="pr100">
 			<div class="tabbable">
@@ -35,9 +36,6 @@
 			        </li>
 					<li id="fzqs">
 			            <a href="#tab_3" data-toggle="tab">未开机数据</a>
-			        </li>
-			        <li>
-			            <a href="#tab_4" data-toggle="tab">领导在线情况</a>
 			        </li>
 			    </ul>
 			    <div style="padding-top:35px;width: 100%;height: 100%;">
@@ -63,21 +61,55 @@
 				            </div> 
 				        </div>
 				        <div class="tab-pane" id="tab_2">
-				            <div class="pr100">
+				            <div class="pr100 scroller">
 								<div class="tab2_title layout_tab_title">访问量</div>
 								<div class="tab2_main">
-									
+									<div class="tab2_main_title">
+										<span class="line"></span>&nbsp;&nbsp;各局软件访问量TOP10
+										<div class="filterDate">
+											<select>
+												<option>部门</option>
+											</select>
+										</div>
+									</div>
+									<div class="tab2_main_content" id="topPh">
+										<!-- <div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div>
+										<div><img src="../images/ph.png" ></div> -->
+									</div>
+								</div>
+								<div class="tab2_title layout_tab_title">安装量</div>
+								<div class="tab2_main">
+									<div class="tab2_main_title">
+										<select name="">
+											<option value="">请选择</option>
+										</select>
+										<div class="filterDate">
+											<select>
+												<option>2020</option>
+											</select>
+											<select>
+												<option>08</option>
+											</select>
+										</div>
+									</div>
+									<div class="tab2_main_content_ph">
+										<div class="ph-l"></div>
+										<div class="ph-r" style="margin-left:2%"></div>
+									</div>
 								</div>
 				            </div> 
 				        </div>
 						<div class="tab-pane" id="tab_3">
 						    <div class="pr100">
 						    	 <div id="main3" class="pr100"></div>
-						    </div> 
-						</div>
-						<div class="tab-pane" id="tab_4">
-						    <div class="pr100">
-						    	 <div id="main4" class="pr100"></div>
 						    </div> 
 						</div>
 				    </div>
@@ -110,6 +142,7 @@
 <script>
     jQuery(document).ready(function () {
         pageModule.initControl();
+		Metronic.init(); // init metronic core componets */
     });
 </script>
 </body>

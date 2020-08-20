@@ -131,11 +131,46 @@ var pageModule = function () {
 		});
 	}
 	
+	//安装量
+	var initPh = function(){
+		$.ajax({
+			url: "../data/phdata.json",
+			data:{},
+			success: function(data) {
+				var arryHtml_l = '';
+				var arryHtml_r = '';
+				var arryHtml_ph = '';
+				$.each(data.list, function(i, o) {
+					if(i<5){
+						arryHtml_l+='<div>'+
+									'	<span class="topVS3">TOP'+parseInt(i+1)+'</span>'+
+									'	<span>'+o.loadname+'</span>'+
+									'	<span>'+o.loadnum+'</span>'+
+									'</div>'
+					}else{
+						arryHtml_r+='<div>'+
+									'	<span>TOP'+parseInt(i+5+1)+'</span>'+
+									'	<span>'+o.loadname+'</span>'+
+									'	<span>'+o.loadnum+'</span>'+
+									'</div>'
+					}
+					
+					arryHtml_ph+='<div><img src="'+o.loadimg+'" ></div>';
+					
+				});
+				$(".ph-l").html(arryHtml_l);
+				$(".ph-r").html(arryHtml_r);
+				$("#topPh").html(arryHtml_ph);
+				
+			}
+		})
+	}
 	
     return {
         //加载页面处理程序
         initControl: function () {
         	getBarChartData();
+			initPh();
 			initother();
         }
     }
