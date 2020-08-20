@@ -61,6 +61,7 @@ html, body {
 .tab2_main{
 	overflow: hidden;
 	padding: 15px;
+	padding-top: 0;
 }
 .tab2_main_title{
 	height:45px;
@@ -70,7 +71,6 @@ html, body {
 	font-size:16px;
 }
 .tab2_title{
-	margin-top:15px;
 }
 .tab2_main_content>div{
 	float:left;

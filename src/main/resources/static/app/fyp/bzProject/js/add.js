@@ -1,4 +1,4 @@
-var saveUrl= {"url":"","dataType":"text"};  //save
+var saveUrl= {"url":"/fyp/guaranteetacking/save","dataType":"text"};  //save
 var dicturl = {"url":"","dataType":"text"}; //下拉框字典值
 var UserTreeUrl = {"url":"","dataType":"text"}; //单位树
 
@@ -18,13 +18,13 @@ var pageModule = function(){
 	
 	//单位树
 	var initUnitTree = function(){
-		$("#unit").createSelecttree({
+		$("#deptName").createSelecttree({
 			url :UserTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
-				$("#unit").val(data.node.text);
-				$("#unitId").val(data.node.id);
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
 			}
 		});
 	}
@@ -42,7 +42,7 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = [""];
+			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark"];
 				var paramdata = getformdata(elementarry);
 				/* paramdata.id = $("#id").val(); */
 				$ajax({
@@ -70,7 +70,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			
+			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark"]);
 		});
 		
 		//取消

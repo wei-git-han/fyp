@@ -114,10 +114,6 @@ html, body {
 }
 
 
-
-
-
-
 .table-advance thead tr th {
 	background-color: #1C67E3;
 	font-size: 14px;
@@ -135,7 +131,6 @@ html, body {
     background-color: transparent;
 }
 .table > tbody > tr:hover,.table > tbody > tr td:hover{
-	box-shadow: inset 0px 0px 2px transparent; 
 	color: #333;
 } 
 .table > thead > tr > th{
