@@ -1048,7 +1048,6 @@ var newbootbox = {
 		var style = obj.style;
 		var url = obj.url;
 		var classed = obj.classed;
-		//$(window.top.document.body).find(".modal").remove();
 		$(window.top.document.body).find("#"+obj.id).remove();
 		var html="";
 		var styleHtml="";

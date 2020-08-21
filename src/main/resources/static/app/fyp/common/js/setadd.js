@@ -1,15 +1,16 @@
 var saveUrl;
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
-var returnDataUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
+var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
 var dataId=getUrlParam("id")||"";//编辑数据id
 if(!!dataId){
-	saveUrl = {"url":"/fyp/guaranteetacking/save","dataType":"text"};  //save
+	saveUrl = {"url":"","dataType":"text"};  //save
 }else{
-	saveUrl = {"url":"/fyp/guaranteetacking/update","dataType":"text"};  //edit
+	saveUrl = {"url":"","dataType":"text"};  //edit
 }
 var pageModule = function(){
 	//单位树
 	var initUnitTree = function(){
+		//单位
 		$("#deptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
@@ -19,6 +20,17 @@ var pageModule = function(){
 				$("#deptId").val(data.node.id);
 			}
 		});
+		
+		//配置人
+		/* $("#deptName").createSelecttree({
+			url :deptTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+			}
+		}); */
 	}
 	
 	var initdatafn = function(){
@@ -84,7 +96,7 @@ var pageModule = function(){
 		
 		//取消
 		$("#close").click(function(){
-			newbootbox.newdialogClose("addModal");
+			window.location.href = "set.html";
 		});
 	}
 
