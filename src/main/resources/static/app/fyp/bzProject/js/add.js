@@ -1,25 +1,17 @@
-var saveUrl= {"url":"/fyp/guaranteetacking/save","dataType":"text"};  //save
-var dicturl = {"url":"","dataType":"text"}; //下拉框字典值
-var UserTreeUrl = {"url":"","dataType":"text"}; //单位树
-
+var saveUrl;
+var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
+var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
+var dataId=getUrlParam("id")||"";//编辑数据id
+if(!!dataId){
+	saveUrl = {"url":"/fyp/guaranteetacking/save","dataType":"text"};  //save
+}else{
+	saveUrl = {"url":"/fyp/guaranteetacking/update","dataType":"text"};  //edit
+}
 var pageModule = function(){
-	/* 问题来源字典值 */
-	var initdictionary = function(){
-		$ajax({
-			url:dicturl,
-			success:function(data){
-				if(data.code!=500){
-					initselect("a",data.a);
-				}
-				
-			}
-		});
-	}
-	
 	//单位树
 	var initUnitTree = function(){
 		$("#deptName").createSelecttree({
-			url :UserTreeUrl,
+			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
@@ -29,14 +21,25 @@ var pageModule = function(){
 		});
 	}
 	
+	var initdatafn = function(){
+		$ajax({
+			url:returnDataUrl,
+			data:{id:id},
+			success:function(data){
+				setformdata(data);
+			}
+		})
+	}
+	
 	var initother = function(){
-		$(".date-picker").datepicker({
-		    language:"zh-CN",
-		    rtl: Metronic.isRTL(),
-		    orientation: "right",
-		    format: "yyyy-mm-dd",
-		    autoclose: true,
-		    startDate:new Date()
+		$(".form_datetime").datetimepicker({
+			language:"zh-CN",
+			autoclose: true,
+			isRTL: Metronic.isRTL(),
+			orientation: "right",
+			format: "yyyy-mm-dd hh:ii",
+			autoclose: true,
+			startDate:new Date()
 		});
 		
 		$("#commentForm").validate({
@@ -44,13 +47,19 @@ var pageModule = function(){
 		    submitHandler: function() {
 			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark"];
 				var paramdata = getformdata(elementarry);
-				/* paramdata.id = $("#id").val(); */
+				paramdata.id = id;
 				$ajax({
 					url:saveUrl,
 					data:paramdata,
 					type:'post',
 					success:function(data){
-						
+						if(data.result=="success"){
+							newbootbox.alertInfo('保存成功！').done(function(){
+								window.top.pageModule.initgrid();
+							});
+						}else{
+							newbootbox.alertInfo('保存失败！');
+						}
 					}
 				})
 		    },
@@ -82,11 +91,11 @@ var pageModule = function(){
 	return{
 		//加载页面处理程序
 		initControl:function(){
+			initUnitTree();
+			/*initdatafn(); */
 			initother();
-			initdictionary();
 		}
 	};
-	
 }();
 
 

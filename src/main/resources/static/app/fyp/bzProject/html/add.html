@@ -50,13 +50,17 @@
 						</td>
 						<td class="t_label">报修时间</td>
 						<td class="t_inpt" >
-							<input class="form-control form-control-inline date-picker" size="16" type="text" name="warrantyTime" id="warrantyTime" required="required" />
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="warrantyTime" id="warrantyTime" required="required" />
 						</td>
 					</tr>
 					<tr>
 						<td class="t_label">问题来源</td>
 						<td class="t_inpt" >
-							<select class="form-control" id="source" name="source" required="required" ></select>
+							<select class="form-control" id="source" name="source" required="required" >
+								<option value="0">处理中</option>
+								<option value="1">延后处理</option>
+								<option value="2">已完成</option>
+							</select>
 			            </td>
 					</tr>
 					<tr>

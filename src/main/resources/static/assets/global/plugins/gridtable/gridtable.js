@@ -10,9 +10,11 @@ var checkedarr = [];
 //创建表格
 function createtable(obj){
 	//当前页号
-	var newpage = obj.newpage||1;
+	/* var newpage = obj.newpage||1; */
+	var newpage = obj.currPage||1;
 	//每页条数
-	var pagesize = obj.pagesize;
+	/* var pagesize = obj.pagesize; */
+	var pagesize = obj.pageSize || 15;
 	//总条数
 	var total = 0;
 	//总页数
@@ -199,6 +201,7 @@ function createtable(obj){
 			tablepage.css({
 				height:getvalue(obj.pageheight,"pageheight"),
 				"overflow":"hidden",
+				"margin-top":"10px",
 				"background-color":getvalue(obj.pagebackgroundcolor,"pagebackgroundcolor")
 			});
 			content.css({
@@ -266,7 +269,8 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				rowsdata = data.rows;
+				rowsdata = data.data.list;
+				/*  rowsdata = data.rows;*/
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+8)+"px");
 				}else{
@@ -338,7 +342,7 @@ function createtable(obj){
 					conttable.append(trobj);
 				});
 				
-				total = data.total;
+				total = data.data.totalCount;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
@@ -522,7 +526,8 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				rowsdata = data.rows;
+				/* rowsdata = data.rows; */
+				rowsdata = data.data.list;
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+3)+"px");
 				}else{
@@ -555,7 +560,8 @@ function createtable(obj){
 						}
 					})
 				});
-				total = data.total;
+				/* total = data.total; */
+				total = data.data.totalCount;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
