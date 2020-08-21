@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.work.dao.FypGuaranteeTackingDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.work.entity.FypGuaranteeTacking">
+		select * from FYP_GUARANTEE_TACKING where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.work.entity.FypGuaranteeTacking">
+		select * from FYP_GUARANTEE_TACKING
+		where
+			1=1
+			<!--姓名-->
+			<if test="userId!=null and userId!=''">
+				and USER_ID = #{userId}
+			</if>
+			<!--单位-->
+			<if test="deptId!=null and deptId!=''">
+				and DEPT_ID = #{deptId}
+			</if>
+			<!--保修时间-->
+			<if test="warrantyTimeBegin!=null and warrantyTimeEnd!=null">
+				and WARRANTY_TIME &gt;=#{warrantyTimeBegin}
+				and WARRANTY_TIME &lt;=#{warrantyTimeEnd}
+			</if>
+			<!--问题来源-->
+			<if test="source!=null and source!=''">
+				and SOURCE = #{source}
+			</if>
+			<!--问题描述-->
+			<if test="remark!=null and remark!=''">
+				and REMARK = #{remark}
+			</if>
+			<!--状态-->
+			<if test="status!=null and status!=''">
+				and STATUS = #{status}
+			</if>
+			<if test="offset != null and limit != null">
+				limit #{offset}, #{limit}
+			</if>
+
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from FYP_GUARANTEE_TACKING 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.work.entity.FypGuaranteeTacking">
+		insert into FYP_GUARANTEE_TACKING
+		(
+			"ID", 
+			"NAME", 
+			"DEPT_NAME", 
+			"DEPT_ID", 
+			"PHONE", 
+			"WARRANTY_TIME", 
+			"SOURCE", 
+			"REMARK", 
+			"STATUS", 
+			"STATUS_TIME", 
+			"MEASURES",
+			"USER_ID"
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{deptName}, 
+			#{deptId}, 
+			#{phone}, 
+			#{warrantyTime}, 
+			#{source}, 
+			#{remark}, 
+			#{status}, 
+			#{statusTime}, 
+			#{measures},
+			#{userId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.work.entity.FypGuaranteeTacking">
+		update FYP_GUARANTEE_TACKING 
+		<set>
+			<if test="name != null">"NAME" = #{name}, </if>
+			<if test="deptName != null">"DEPT_NAME" = #{deptName}, </if>
+			<if test="deptId != null">"DEPT_ID" = #{deptId}, </if>
+			<if test="phone != null">"PHONE" = #{phone}, </if>
+			<if test="warrantyTime != null">"WARRANTY_TIME" = #{warrantyTime}, </if>
+			<if test="source != null">"SOURCE" = #{source}, </if>
+			<if test="remark != null">"REMARK" = #{remark}, </if>
+			<if test="status != null">"STATUS" = #{status}, </if>
+			<if test="statusTime != null">"STATUS_TIME" = #{statusTime}, </if>
+			<if test="measures != null">"MEASURES" = #{measures}</if>
+			<if test="userId != null">"USER_ID" = #{userId}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from FYP_GUARANTEE_TACKING where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from FYP_GUARANTEE_TACKING where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

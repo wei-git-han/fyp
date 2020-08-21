@@ -31,57 +31,72 @@ public class ResponseValueUtils {
     }
 
     /**
+     * 成功
+     * @return
+     */
+    public JSONObject success(){
+        this.status = Value.SUCCESS.code;
+        this.result = Value.SUCCESS.result;
+        return this.putJson();
+    }
+
+    /**
+     * 成功
      * @param data 返回值
      * @return
      */
     public JSONObject success(Object data){
         this.data = data;
-        this.putValue(200);
+        this.status = Value.SUCCESS.code;
+        this.result = Value.SUCCESS.result;
         return this.putJson();
     }
 
     /**
+     * 成功
      * @param data 返回值
      * @param message 提示消息
      * @return
      */
-    public JSONObject success(T data,String message){
+    public JSONObject success(Object data,String message){
+        this.status = Value.SUCCESS.code;
+        this.result = Value.SUCCESS.result;
         this.data = data;
         this.message = message;
-        this.putValue(200);
         return this.putJson();
     }
 
     /**
      * 失败
-     * @param status 200 500 404 400
+     * 500
      * @return
      */
-    public JSONObject error(int status){
-        this.putValue(status);
+    public JSONObject error(){
+        this.status = Value.ERROR.code;
+        this.result = Value.ERROR.result;
         return this.putJson();
     }
 
     /**
-     * 状态值
-     * @param status
+     * 失败
+     * 404
+     * @return
      */
-    private void putValue(int status){
-        this.status = status;
-        switch (status){
-            case 200:
-                this.result = "成功";
-                break;
-            case 500:
-                this.result = "后台错误，请联系管理员";
-                break;
-            case 404:
-                this.result = "数据丢失";
-                break;
-            case 400:
-                this.result = "未登录，token过期";
-                break;
-        }
+    public JSONObject errorPath(){
+        this.status = Value.ERROR_PATH.code;
+        this.result = Value.ERROR_PATH.result;
+        return this.putJson();
+    }
+
+    /**
+     * 失败
+     * 400
+     * @return
+     */
+    public JSONObject errorToken(){
+        this.status = Value.ERROR_TOKEN.code;
+        this.result = Value.ERROR_TOKEN.result;
+        return this.putJson();
     }
 
     /**
@@ -95,5 +110,23 @@ public class ResponseValueUtils {
         rjson.put("data",data);
         rjson.put("message",message);
         return rjson;
+    }
+
+    public enum Value{
+        //成功
+        SUCCESS(200,"成功"),
+        //系统错误
+        ERROR(500,"后台错误，请联系管理员"),
+        //路径错误
+        ERROR_PATH(404,"数据丢失"),
+        //TOKEN失效
+        ERROR_TOKEN(400,"未登录，TOKEN过期");
+        private int code;
+        private String result;
+
+        Value(int code, String result) {
+            this.code = code;
+            this.result = result;
+        }
     }
 }
