@@ -31,7 +31,7 @@ import com.css.base.utils.CurrentUser;
  */
 @Service
 public class MsgTipUtil {
-	
+	/*
 	@Autowired
 	private MsgConfig msgConfig;
 	
@@ -51,13 +51,13 @@ public class MsgTipUtil {
 	private PcSendUtil pcSendUtil;
 	// 日志记录
     private static Logger logger = LoggerFactory.getLogger(MsgTipUtil.class);
-	/**
+	*//**
 	 * 给消息服务推送消息，进行消息提醒；
 	 * @param title
 	 * @param content
 	 * @param userIds
 	 * @return
-	 */
+	 *//*
 	public String sendMsg(String title, String content, String url, String userIds, String appId, String appSecret){
 		System.out.println("sendMsg_userIds==================: "+userIds);
 		if (StringUtils.isBlank(userIds) || StringUtils.equals(userIds, ",")) {// 没有消息接收人，就不用提醒了
@@ -107,13 +107,13 @@ public class MsgTipUtil {
 		
 	}
 	
-	/**
+	*//**
 	 * 给消息服务推送消息，进行消息提醒；新版接口，带有分组的消息接口
 	 * @param title
 	 * @param content
 	 * @param userIds
 	 * @return
-	 */
+	 *//*
 	public String sendMsg(String title, String content, String url, String userIds, String appId, String appSecret, String groupName, String groupRedirect, String smsg,String value){
 		if (StringUtils.isBlank(userIds) || StringUtils.equals(userIds, ",")) {// 没有消息接收人，就不用提醒了
 			return "fail";
@@ -143,7 +143,7 @@ public class MsgTipUtil {
 			//pcSendUtil.sendPC(msgUrl,accessToken,formEntity,String.class,appId,appSecret);
 		String[] ids = StringUtils.split(userIds,",");
 		String phone="";
-	/*	for(String id : ids){
+	*//*	for(String id : ids){
 			//判断短信开关表中是否有该人信息    判断开关是否打开 判断短信内容是否为空
 			if(getSet(id).equals("1") && smsg!=""){
 				System.out.println("==================个人短信开关已打开==========================");
@@ -156,18 +156,18 @@ public class MsgTipUtil {
 			}else {
 				System.out.println("====================个人短信开关已关闭=========================");
 			}
-		}*/
+		}*//*
 		return "success";
 	}
 
-	/**
+	*//**
 	 * 给消息服务推送消息，进行消息提醒；新版接口，带有分组的消息接口
 	 * 以下是发送消息提醒，但桌面不显示，就是为了触发角标更新。
 	 * @param title
 	 * @param content
 	 * @param userIds
 	 * @return
-	 */
+	 *//*
 	public String sendMsgUnvisible(String title, String content, String url, String userIds, String appId, String appSecret, String groupName, String groupRedirect, String smsg,String value){
 		if (StringUtils.isBlank(userIds) || StringUtils.equals(userIds, ",")) {// 没有消息接收人，就不用提醒了
 			return "fail";
@@ -197,7 +197,7 @@ public class MsgTipUtil {
 		//pcSendUtil.sendPC(msgUrl,accessToken,formEntity,String.class,appId,appSecret);
 		String[] ids = StringUtils.split(userIds,",");
 		String phone="";
-	/*	for(String id : ids){
+	*//*	for(String id : ids){
 			//判断短信开关表中是否有该人信息    判断开关是否打开 判断短信内容是否为空
 			if(getSet(id).equals("1") && smsg!=""){
 				System.out.println("==================个人短信开关已打开==========================");
@@ -210,14 +210,14 @@ public class MsgTipUtil {
 			}else {
 				System.out.println("====================个人短信开关已关闭=========================");
 			}
-		}*/
+		}*//*
 		return "success";
 	}
-	/**
+	*//**
 	 * 查询单个人员的开关
 	 * @param id
 	 * @return
-	 */
+	 *//*
 	public String getSet(String id){
 		String elecPath = baseAppOrgMappedService.getWebUrl(AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_DZBMS_TO_GWCL_SET);
 		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String,Object>();
@@ -231,13 +231,13 @@ public class MsgTipUtil {
 		return jsonData;
 		
 	}
-	/**
+	*//**
 	 * 发送消息
 	 * @param path 发送路径
 	 * @param title 消息标题
 	 * @param content 消息内容
 	 * @return
-	 */
+	 *//*
 //	public  String sengMsg(String path,String msgId) {
 //		MsgTip msg = msgService.queryObject(msgId);
 //		if (msg == null) {
@@ -282,12 +282,12 @@ public class MsgTipUtil {
 //		}
 //		return "success";
 //	}
-	/**
+	*//**
 	 * 发送消息封装
 	 * @param msgId
 	 * @param userId
 	 * @param appType
-	 */
+	 *//*
 	public void sendMsg(String msgId, String userId, String appType) {
 		String appId = "";
 		String appSecret = "";
@@ -303,12 +303,12 @@ public class MsgTipUtil {
 		}
 	}
 	
-	/**
+	*//**
 	 * 发送消息封装：新版消息服务接口，带有分组的接口；
 	 * @param msgId
 	 * @param userId
 	 * @param appType
-	 */
+	 *//*
 	public void sendMsg(String msgId, String userId, String appType, String groupName, String groupRedirect) {
 		String appId = "";
 		String appSecret = "";
@@ -325,12 +325,12 @@ public class MsgTipUtil {
 		}
 	}
 	
-	/**
+	*//**
 	 * 发送消息封装
 	 * @param msgId
 	 * @param userId
 	 * @param appType
-	 */
+	 *//*
 	public void sendMsgToMany(String msgId, String userId, String appType) {
 		String appId = "";
 		String appSecret = "";
@@ -346,12 +346,12 @@ public class MsgTipUtil {
 		}
 	}
 	
-	/**
+	*//**
 	 * 发送消息封装(部级)
 	 * @param msgId
 	 * @param userId
 	 * @param appType
-	 */
+	 *//*
 	public void sendMsgToManyBj(String msgId, String userId, String appType) {
 		String appId = "";
 		String appSecret = "";
@@ -366,5 +366,5 @@ public class MsgTipUtil {
 			sendMsg(msg.getMsgTitle(), msg.getMsgContent(), msg.getMsgRedirect(), userId, appId, appSecret);
 		}
 	}
-
+*/
 }
