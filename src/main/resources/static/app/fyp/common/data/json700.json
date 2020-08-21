@@ -1,0 +1,37 @@
+{
+	"wdgw":{
+		"wjzs":100,
+		"legend":["审批中","在办","办结","退回修改"],
+		"valdata":[
+		    {"value":10, "name":"审批中"},
+		    {"value":20, "name":"在办"},
+		    {"value":30, "name":"办结"},
+		    {"value":20, "name":"退回修改"}
+		]
+	},
+	"gwyz":{
+		"wjzs":100,
+		"legend":["已读","未读"],
+		"valdata":[
+		    {"value":10, "name":"已读"},
+		    {"value":20, "name":"未读"}
+		]
+	},
+	"wdbj":{
+		"wjzs":100,
+		"legend":["审批中","在办","办结"],
+		"valdata":[
+		    {"value":10, "name":"审批中"},
+		    {"value":20, "name":"在办"},
+		    {"value":30, "name":"办结"}
+		]
+	},
+	"lwyj":{
+		"wjzs":100,
+		"legend":["已读","未读"],
+		"valdata":[
+		    {"value":10, "name":"已读"},
+		    {"value":20, "name":"未读"}
+		]
+	}
+}

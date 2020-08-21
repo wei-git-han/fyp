@@ -1,0 +1,6 @@
+[
+	{"type":"team1","name":"一周工作安排/人员在位","show":true},
+	{"type":"team2","name":"各局统计数据","show":true},
+	{"type":"team3","name":"局内统计数据","show":true},
+	{"type":"team4","name":"个人公文数据","show":true}
+]

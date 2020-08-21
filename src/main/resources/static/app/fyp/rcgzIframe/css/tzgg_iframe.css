@@ -1,0 +1,65 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.bgimg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+dl dt{
+	float: left;
+	line-height:40px;
+}
+dl dt span{
+	margin-right:10px;
+}
+dl dd{
+	float: right;
+	line-height:40px;
+}
+dl{
+	width:100%;
+	height:40px;
+	margin-bottom:10px;
+	border:1px solid #2992E3;
+	margin-top:20px;
+	padding:0px 10px;
+	font-size: 16px;
+	color:#6190D0;
+	box-shadow: inset 0px 0px 2px #68A9D8;
+}
+dl.top3{
+	color: #F96610;
+}

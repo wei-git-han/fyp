@@ -28,7 +28,7 @@ function createtable(obj){
 	//多选框列宽度
 	var checkwidth = 50;
 	//行号列宽度
-	var numberwidth = 40;
+	var numberwidth = 80;
 	var c1 = {};
 	$(window).resize(function(){
 		clearTimeout(c1);
@@ -57,7 +57,7 @@ function createtable(obj){
 						datatableborder:"1px solid blue",//n
 						datefont:{},//n
 						pageyno:true,
-						pageheight:"43px",
+						pageheight:"38px",
 						pagebackgroundcolor:"transparent",
 						checkbox:false,
 						rownumberyon:false,
@@ -133,7 +133,7 @@ function createtable(obj){
 			});
 			if(thdata.paixu==true){
 				thobj.css({"position":"relative"})
-				thobj.append('<span style="position:absolute;right:5px;cursor:pointer;" class="paixuname" id="'+thdata.name+'_col"><i style="position:absolute;right:0px;top:7px;" class="fa fa-sort-asc"></i><i  style="position:absolute;right:0px;top:6px;" class="fa  fa-sort-desc"></i></span>')
+				thobj.append('<span style="position:absolute;right:5px;cursor:pointer;" class="paixuname" id="'+thdata.name+'_col"><i style="position:absolute;right:0px;top:2px;" class="fa fa-sort-asc"></i><i  style="position:absolute;right:0px;top:2px;" class="fa  fa-sort-desc"></i></span>')
 				var sorttext = "asc";
 				thobj.find("span").click(function(){
 					if(loadfg!=0){
@@ -142,10 +142,10 @@ function createtable(obj){
 							sorttype = sorttext;
 							$(".paixuname").html('<i style="position:absolute;right:0px;top:2px;" class="fa fa-sort-asc"></i><i  style="position:absolute;right:0px;top:2px;" class="fa  fa-sort-desc"></i>')
 							if(sorttext == "asc"){
-								$("#"+thdata.name+"_col").html('<i style="position:absolute;right:0px;top:7px;" class="fa fa-sort-asc"></i>');
+								$("#"+thdata.name+"_col").html('<i style="position:absolute;right:0px;top:2px;" class="fa fa-sort-asc"></i>');
 								sorttext = "desc";
 							}else{
-								$("#"+thdata.name+"_col").html('<i  style="position:absolute;right:0px;top:6px;" class="fa  fa-sort-desc"></i>')
+								$("#"+thdata.name+"_col").html('<i  style="position:absolute;right:0px;top:2px;" class="fa  fa-sort-desc"></i>')
 								sorttext = "asc";
 							}
 							
@@ -289,9 +289,14 @@ function createtable(obj){
 				};
 				$.each(rowsdata,function(i){
 					var data = rowsdata[i];
-					var trobj = $('<tr style="box-sizing:border-box"></tr>');
+					//新增置顶样式
+					var topClass = "";
+					if(data.placeTopDisplay=='1'){
+						topClass = "topClass";
+					};
+					var trobj = $('<tr style="box-sizing:border-box" class="'+topClass+'"></tr>');
 					if(getvalue(obj.checkbox,"checkbox") == true){
-						var checktd = $('<td><input type="checkbox" class="checkboxes" style="cursor:pointer;" id="'+obj.target+"_checkbox"+(i+1)+'" name="'+obj.target+'_checktd" /></td>');
+						var checktd = $('<td><input type="checkbox" data="'+data.taskId+'"  class="checkboxes" style="cursor:pointer;" id="'+obj.target+"_checkbox"+(i+1)+'" name="'+obj.target+'_checktd" /></td>');
 						checktd.css({
 							"text-align":"center",
 							width:checkwidth+"px",
@@ -328,7 +333,11 @@ function createtable(obj){
 						tdobj.css({
 							"text-align":tddata.align,
 							width:getcolwidth(tddata.width),
-							"box-sizing":"border-box"
+							"box-sizing":"border-box",
+							"text-overflow":"ellipsis",
+							"overflow":"hidden",
+							"white-space":"nowrap"
+							
 						});
 						if(title==true){
 							tdobj.attr({
@@ -338,7 +347,7 @@ function createtable(obj){
 						
 						trobj.append(tdobj)
 					})
-					trobj.append('<td style="box-sizing:border-box;"></td>');
+					trobj.append('<td style="box-sizing:border-box;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;"></td>');
 					conttable.append(trobj);
 				});
 				
@@ -600,12 +609,9 @@ function createtable(obj){
 		if(getvalue(obj.checkbox,"checkbox") == true){
 			contwidth=contwidth-checkwidth;
 		}
-
 		if(getvalue(obj.rownumberyon,"rownumberyon")==true){
 			if(obj.rownumberwidth==null||typeof(obj.rownumberwidth)=="undefined"){
 				contwidth = contwidth-numberwidth;
-			}else{
-			    contwidth = contwidth-50;
 			}
 		}
 

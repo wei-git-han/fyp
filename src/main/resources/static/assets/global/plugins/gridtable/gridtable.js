@@ -5,24 +5,16 @@ jQuery.fn.extend({
 		return gridobj;
 	}
 });
-
-var remeberTableTermGrid = {};
-
-try{window.top.document}catch(e){
-	var str = e.message;
-	if(str.indexOf("Permission denied to")!=-1){
-		remeberTableTermGrid = window.parent.remeberTableTerm;
-	}else{
-		remeberTableTermGrid = window.top.remeberTableTerm;
-	}
-}
+var remeberTableTermGrid = window.top.remeberTableTerm;
 var checkedarr = [];
 //创建表格
 function createtable(obj){
 	//当前页号
-	var newpage = obj.newpage||1;
+	/* var newpage = obj.newpage||1; */
+	var newpage = obj.currPage||1;
 	//每页条数
-	var pagesize = obj.pagesize;
+	/* var pagesize = obj.pagesize; */
+	var pagesize = obj.pageSize || 15;
 	//总条数
 	var total = 0;
 	//总页数
@@ -57,7 +49,7 @@ function createtable(obj){
 						loadafter:function(){},
 						paramobj:{},
 						rememberStatue:false,
-						headheight:"36px",
+						headheight:"40px",
 						datarowheight:"30px",
 						datatablebackgroundcolor:"transparent",
 						headborder:"1px solid #ff0000",//n
@@ -209,6 +201,7 @@ function createtable(obj){
 			tablepage.css({
 				height:getvalue(obj.pageheight,"pageheight"),
 				"overflow":"hidden",
+				"margin-top":"10px",
 				"background-color":getvalue(obj.pagebackgroundcolor,"pagebackgroundcolor")
 			});
 			content.css({
@@ -276,7 +269,8 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				rowsdata = data.rows;
+				rowsdata = data.data.list;
+				/*  rowsdata = data.rows;*/
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+8)+"px");
 				}else{
@@ -284,7 +278,11 @@ function createtable(obj){
 				};
 				$.each(rowsdata,function(i){
 					var data = rowsdata[i];
-					var trobj = $('<tr style="box-sizing:border-box"></tr>');
+					var topClass = ""
+					if(data.placeTopDisplay=='1'){
+						topClass = "topClass";
+					};
+					var trobj = $('<tr style="box-sizing:border-box" class="'+topClass+'"></tr>');
 					if(getvalue(obj.checkbox,"checkbox") == true){
 						var checktd = $('<td><input type="checkbox" class="checkboxes" style="cursor:pointer;" id="'+obj.target+"_checkbox"+(i+1)+'" name="'+obj.target+'_checktd" /></td>');
 						checktd.css({
@@ -344,7 +342,7 @@ function createtable(obj){
 					conttable.append(trobj);
 				});
 				
-				total = data.total;
+				total = data.data.totalCount;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
@@ -528,7 +526,8 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				rowsdata = data.rows;
+				/* rowsdata = data.rows; */
+				rowsdata = data.data.list;
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+3)+"px");
 				}else{
@@ -561,7 +560,8 @@ function createtable(obj){
 						}
 					})
 				});
-				total = data.total;
+				/* total = data.total; */
+				total = data.data.totalCount;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
@@ -812,7 +812,7 @@ function createtable(obj){
 
 	//获取列宽度值
 	var getcolwidth = function(colwidth){
-		var contwidth = $("#"+obj.target).width()-1;
+		var contwidth = $("#"+obj.target).width()-2;
 		if(getvalue(obj.checkbox,"checkbox") == true){
 			contwidth=contwidth-checkwidth;
 		}

@@ -1,0 +1,24 @@
+{
+  "title": "《中华人民共和国万岁,繁荣昌盛》",
+  "content": "王金勇参谋信息王金勇参谋息王金勇参谋息王谋信息王金勇参谋信息",
+  "children": [
+    {
+      "orderNum": "0",
+      "href": "common/images/1.jpg"
+    },
+    {
+      "orderNum": "1",
+      "href": "common/images/2.jpg"
+    },
+    {
+      "orderNum": "2",
+      "href": "common/images/3.jpg"
+    },
+    {
+      "orderNum": "3",
+      "href": "common/images/4.jpg"
+    }
+  ],
+  "time": "3000",      //时间
+  "isShow":"true"      //是否显示设置按钮
+}

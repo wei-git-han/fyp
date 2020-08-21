@@ -1,0 +1,48 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+	/*min-width: 700px;*/
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.tab_main{
+	width:100%;
+	height:100%;
+	padding-top:15px;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+.filterDate{
+	float:right;
+}
+select{
+	color:#EFF1F5;
+	border:1px solid #4C52E6;
+	background:transparent;
+}
+

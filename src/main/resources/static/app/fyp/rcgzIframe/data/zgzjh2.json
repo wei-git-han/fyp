@@ -1,0 +1,143 @@
+[
+    {
+        "itemList": [
+            {
+                "amCounts": 1,
+                "day": 28,
+                "isBacklog": false,
+                "month": 9,
+                "pmCounts": 0,
+                "pmItem": [],
+                "week": "一",
+                "amItem": [
+                    {
+                        "attendMemorIds": "7db1d8e0b8db4711b1961c7641160943",
+                        "attendMemory": "一组",
+                        "attendNames": "首长，一组",
+                        "attendUtil": "一组",
+                        "backlog": 0,
+                        "beginTime": "09:00",
+                        "content": "周例会111",
+                        "createdTime": "2019-01-24 20:54:39",
+                        "creatorId": "9739c70c8e384bbcbc8228f44f77089a",
+                        "id": "d5af83ed0ff54fa4a09289e13e84efa4",
+                        "isEdit": false,
+                        "isPm": false,
+                        "modifiedTime": "2019-01-24 20:54:39",
+                        "place": "大会议室01",
+                        "receiverIds": "6a0adb6859d94861b1447eab8a684d2d",
+                        "receiverMemory": "一组",
+                        "receiverMemoryIds": "f37dd6b2388f4ed4b9220cdf57c43980",
+                        "receiverNames": "总局长",
+                        "receiverUtil": "一组",
+                        "sequence": 900,
+                        "week": 1,
+                        "weekType": 0
+                    }
+                ]
+            },
+            {
+                "amCounts": 0,
+                "amItem": [],
+                "day": 30,
+                "isBacklog": false,
+                "month": 9,
+                "pmCounts": 1,
+                "pmItem": [
+                    {
+                        "attendMemory": "",
+                        "attendNames": "首长，全单位",
+                        "attendUtil": "全单位",
+                        "backlog": 0,
+                        "beginTime": "15:00",
+                        "content": "交办会22222222222",
+                        "createdTime": "2019-01-24 20:55:08",
+                        "creatorId": "9739c70c8e384bbcbc8228f44f77089a",
+                        "id": "93301ab2b6854dff91f4a3cb93ca0274",
+                        "isEdit": false,
+                        "isPm": true,
+                        "modifiedTime": "2019-01-24 20:55:08",
+                        "place": "大会议室02",
+                        "receiverIds": "6a0adb6859d94861b1447eab8a684d2d",
+                        "receiverMemory": "一组",
+                        "receiverMemoryIds": "f37dd6b2388f4ed4b9220cdf57c43980",
+                        "receiverNames": "总局长",
+                        "receiverUtil": "一组",
+                        "sequence": 1500,
+                        "week": 3,
+                        "weekType": 0
+                    }
+                ],
+                "week": "三"
+            }
+        ],
+        "month": 10,
+        "weekArrange": {
+            "description": "以上活动如有变动,不再另行通知.活动安排可在系统工作周表中查询"
+        }
+    },
+    {
+        "itemList": [
+            {
+                "amCounts": 1,
+                "amItem": [
+                    {
+                        "attendMemorIds": "7db1d8e0b8db4711b1961c7641160943",
+                        "attendMemory": "一组",
+                        "attendNames": "首长，一组",
+                        "attendUtil": "一组",
+                        "backlog": 0,
+                        "beginTime": "09:00",
+                        "content": "周例会333333333333333",
+                        "createdTime": "2019-01-24 20:54:39",
+                        "creatorId": "9739c70c8e384bbcbc8228f44f77089a",
+                        "id": "da2520dd803a49149c454b0448c729b3",
+                        "isEdit": false,
+                        "isPm": false,
+                        "modifiedTime": "2019-01-24 20:54:39",
+                        "place": "大会议室01",
+                        "receiverIds": "6a0adb6859d94861b1447eab8a684d2d",
+                        "receiverMemory": "一组",
+                        "receiverMemoryIds": "f37dd6b2388f4ed4b9220cdf57c43980",
+                        "receiverNames": "总局长",
+                        "receiverUtil": "一组",
+                        "sequence": 900,
+                        "week": 5,
+                        "weekType": 0
+                    },
+                    {
+                        "attendMemorIds": "7db1dfdf8e0b8db434711b1961c7641160943",
+                        "attendMemory": "一222组",
+                        "attendNames": "首长，一组",
+                        "attendUtil": "一组",
+                        "backlog": 0,
+                        "beginTime": "09:00",
+                        "content": "周例会33333344444444444444433",
+                        "createdTime": "2019-01-24 20:54:39",
+                        "creatorId": "9739c70c8e384bbcbc8228f44f77089a",
+                        "id": "da2520dd803a49149c454b044232448c729b3",
+                        "isEdit": false,
+                        "isPm": false,
+                        "modifiedTime": "2019-01-24 20:54:39",
+                        "place": "大会议室01",
+                        "receiverIds": "6a0adb6859565667d94861b1447eab8a684d2d",
+                        "receiverMemory": "一组",
+                        "receiverMemoryIds": "f37dd6b2388f4ed4b922665550cdf57c43980",
+                        "receiverNames": "总局长",
+                        "receiverUtil": "100组",
+                        "sequence": 900,
+                        "week": 5,
+                        "weekType": 0
+                    }
+                ],
+                "day": 1,
+                "isBacklog": false,
+                "month": 10,
+                "pmCounts": 0,
+                "pmItem": [],
+                "week": "五"
+            }
+        ],
+        "month": 11
+    }
+]

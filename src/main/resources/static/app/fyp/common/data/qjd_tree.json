@@ -1,0 +1,34 @@
+[
+	{
+		"id":"00",
+		"text": "网信所 ",
+		"type":"0",
+		"children": [
+						{
+							"id":"01",
+							"text": "综合办科技组",
+							"type":"0",
+							"children":[
+								{
+									"id":"02",
+									"text":"豆豆<a class='positionCss' data='01'>(请假单)</a>",
+									"type":"1"
+								},
+								{
+									"id":"031",
+									"text":"李雪",
+									"type":"1"
+								},
+								{
+									"id":"032",
+									"text":"海芳",
+									"type":"1"
+								}
+							]
+						}
+					],
+		"state": {
+					"opened": true
+				}
+	}
+]

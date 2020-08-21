@@ -11459,22 +11459,9 @@ Red Pink
 Red Sunglo
 ***/
 /* Button */
-.blue-sunglo.btn {
-  color: #FFFFFF;
-  background-color: #308FE3;
-}
-.black-sunglo.btn {
-  color: #FFFFFF;
-  background-color: #4B4848;
-}
-.green-sunglo.btn {
-  color: #FFFFFF;
-  background-color: #0A9228;
-}
 .red-sunglo.btn {
   color: #FFFFFF;
-  background-color: #dc4c4c;
-  /* background-color: #E26A6A; */
+  background-color: #E26A6A;
 }
 .red-sunglo.btn:hover, .red-sunglo.btn:focus, .red-sunglo.btn:active, .red-sunglo.btn.active {
   color: #FFFFFF;
