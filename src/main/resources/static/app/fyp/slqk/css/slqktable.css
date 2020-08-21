@@ -1,0 +1,155 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#333;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.newlayout-head{
+	position:absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height:100px;
+	line-height:100px;
+	font-size:22px;
+	font-weight: 700;
+	padding-left:25px;
+	color:#1C67E3;
+	border-bottom:1px solid #eee;
+	box-shadow: inset 0px 0px 2px #eee;
+}
+.newlayout-search{
+	position:absolute;
+	top:100px;
+	left:0;
+	width: 100%;
+	height:200px;
+	padding:20px;
+	
+}
+.newlayout-search-main{
+	border:1px dashed #8FB9F4;
+	width:100%;
+	height:100%;
+	border-radius: 2px!important;
+	padding:20px;
+	background: #DCEFFF;
+	font-size: 16px;
+}
+.form-group{
+	float: left;
+	width:16.6%;
+}
+.form-group input{
+	background: #fff;
+	font-size:15px;
+	border:1px solid #fff;
+	border-radius: 4px!important;
+	padding:5px 8px;
+}
+.btn-group{
+	width:100%;
+	text-align: center;
+	margin-top:10px;
+}
+.btn-group button{
+	padding:5px 25px;
+	background: #1C67E3;
+	border:1px solid #1C67E3;
+	border-radius: 4px!important;
+	color: #fff;
+	margin:0 8px;
+}
+.btn-group button.closeBtn{
+	background: #F1F1F1;
+	border:1px solid #F1F1F1;
+	color: #999;
+}
+.newlayout-content{
+	width:100%;
+	height:100%;
+	padding-top:310px;
+}
+.newlayout-content-title{
+	position:absolute;
+	top:0px;
+	left:0;
+	width: 100%;
+	height:45px;
+	padding-left:20px;
+}
+.newlayout-content-title>div{
+	border-left:4px solid #1C67E3;
+	padding-left:5px;
+}
+.newlayout-content-title button{
+	padding:3px 15px;
+	background: #1C67E3;
+	border:1px solid #1C67E3;
+	border-radius: 4px!important;
+	color: #fff;
+	margin:0 4px;
+}
+.newlayout-content-title button.del{
+	background: #DCEFFF;
+	color: #1C67E3;
+	border-color: #1C67E3;
+}
+.newlayout-content-title span{
+	font-size: 18px;
+	font-weight: 700;
+	margin-right:10px;
+}
+
+.newlayout-grid {
+	width: 100%;
+	height: 100%;
+	padding:45px 20px 20px;
+}
+
+
+.table-advance thead tr th {
+	background-color: #1C67E3;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
+}
+#gridcont_content{
+	background: #fff;
+}
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: #F1F1F1;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: transparent;
+}
+.table > tbody > tr:hover,.table > tbody > tr td:hover{
+	color: #333;
+} 
+.table > thead > tr > th{
+	vertical-align: middle!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #DDDDDD;
+} 
+.table > tbody > tr > td{
+	border-color: #DDDDDD;
+}
+.table-bordered {
+    border-color: #DDDDDD;
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1C67E3;
+    border-color: #1C67E3;
+}

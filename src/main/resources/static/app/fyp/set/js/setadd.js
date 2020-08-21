@@ -1,5 +1,6 @@
 var saveUrl;
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //配置人树
 var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
 var dataId=getUrlParam("id")||"";//编辑数据id
 if(!!dataId){
@@ -22,15 +23,15 @@ var pageModule = function(){
 		});
 		
 		//配置人
-		/* $("#deptName").createSelecttree({
-			url :deptTreeUrl,
+		$("#userName").createSelecttree({
+			url :userTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
+				$("#userName").val(data.node.text);
+				$("#userId").val(data.node.id);
 			}
-		}); */
+		}); 
 	}
 	
 	var initdatafn = function(){
@@ -96,7 +97,7 @@ var pageModule = function(){
 		
 		//取消
 		$("#close").click(function(){
-			window.location.href = "set.html";
+			newbootbox.newdialogClose("addModal");
 		});
 	}
 
