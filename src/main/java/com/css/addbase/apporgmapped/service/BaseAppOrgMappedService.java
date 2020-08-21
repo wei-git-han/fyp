@@ -164,7 +164,10 @@ public interface BaseAppOrgMappedService {
 	
 
 	String getDetilOrgByUserId(String userId);
-	
-	
-	
+
+	/**
+	 *	获取所有单位不为空的appid deptid
+	 * @return
+	 */
+    List<Map<String,Object>> findAppIdAndDeptIdNameAll();
 }

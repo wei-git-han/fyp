@@ -136,9 +136,12 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 		return "";
 	}
 
+	@Override
+	public List<Map<String, Object>> findAppIdAndDeptIdNameAll() {
+		return baseAppOrgMappedDao.findAppIdAndDeptIdNameAll();
+	}
 
-	
-	
+
 	@Override
 	public String getUrlByType(String userId, String type) {
 		BaseAppOrgMapped bm = (BaseAppOrgMapped) this.orgMapped("", userId, type);

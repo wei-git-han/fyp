@@ -3,6 +3,7 @@ package com.css.app.fyp.work.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,5 +47,14 @@ public class FypGuaranteeTackingServiceImpl implements FypGuaranteeTackingServic
 	public void deleteBatch(String[] ids){
 		fypGuaranteeTackingDao.deleteBatch(ids);
 	}
-	
+
+	@Override
+	public Map<String, Object> findCount() {
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("todayCount",fypGuaranteeTackingDao.toDayAccept().get("count"));
+		dataMap.put("completed",fypGuaranteeTackingDao.toDayComplete().get("count"));
+		dataMap.put("count",fypGuaranteeTackingDao.countAccept().get("count"));
+		return dataMap;
+	}
+
 }
