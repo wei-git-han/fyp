@@ -1,45 +1,34 @@
-var listUrl = {"url":"../data/grid.json","dataType":"text"};//表格数据
-var numberUrl = {"url":"/app/fyp/common/data/number.json","dataType":"text"};//保障数据统计
+var listUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/feedbackhear/list","dataType":"text"};//表格数据
+var yhfkUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/ensure/problem","dataType":"text"};//保障问题跟踪
 var grid = null;
 
 var pageModule = function () {
-	//保障数据统计
-	var getNum = function(){
-		$.ajax({
-			url: numberUrl.url,
-			data:{},
-			type:'get',
-			success: function(data) {
-				$(".allsl").html(data.allsl);
-				$(".todaysl").html(data.todaysl);
-				$(".finishsl").html(data.finishsl);
-			}
-		})
-	}
-	
 	//表格数据
 	var initgrid = function(){
 		  grid = $("#gridcont").createGrid({
 			columns:[
-						{display:"状态",name:"unit",width:"10%",align:"center",render:function(rowdata,n){
+						{display:"硬件/软件名称",name:"unit",width:"16%",align:"center",render:function(rowdata,n){
 							return rowdata.unit;                                         
 						}},
-						{display:"姓名",name:"unit",width:"10%",align:"center",render:function(rowdata,n){
+						{display:"问题描述",name:"unit",width:"14%",align:"center",render:function(rowdata,n){
 							return rowdata.unit;                                         
 						}},
-						{display:"单位名称",name:"weeks",width:"20%",align:"left",render:function(rowdata){
+						{display:"提出时间",name:"weeks",width:"12%",align:"left",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"联系电话",name:"weeks",width:"15%",align:"center",render:function(rowdata){
+						{display:"提出人",name:"weeks",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"报修时间",name:"weeks",width:"15%",align:"center",render:function(rowdata){
+						{display:"解决时限",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"应用名称",name:"weeks",width:"15%",align:"center",render:function(rowdata){
+						{display:"工作进展",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"需求描述",name:"weeks",width:"15%",align:"left",render:function(rowdata){
+						{display:"状态",name:"weeks",width:"10%",align:"left",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}},
+						{display:"问题分类",name:"weeks",width:"14%",align:"left",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}}
 					 ],
@@ -54,21 +43,24 @@ var pageModule = function () {
 	   });
 	}
 	
-	//问题跟踪
+	//问题跟踪//保障数据统计
 	var initProblem = function(){
-		$.ajax({
-			url: "../data/problem.json",
+		$ajax({
+			url: yhfkUrl,
 			data:{},
 			success: function(data) {
+				$(".allsl").html(data.data.count);
+				$(".todaysl").html(data.data.todayCount);
+				$(".finishsl").html(data.data.completed);
 				var arryHtml = '';
-				$.each(data.list, function(i, o) {
+				$.each(data.data.users, function(i, o) {
 					var id = o.id;
 					var status = o.status;
 					var userName = o.name;
-					var dept = o.dept;
-					var tel = o.tel;
-					var problemFrom = o.problemFrom;
-					var problemDeration = o.problemDeration;
+					var deptName = o.deptName;
+					var tel = o.phone;
+					var problemFrom = o.source;
+					var problemDeration = o.remark;
 					var problemClass = "";
 					var problemName = "";
 					switch (status){
@@ -90,7 +82,7 @@ var pageModule = function () {
 			            		'			<img src="../../common/images/user.png" />'+
 			            		'			<div>'+
 			            		'				<span class="userName">'+userName+'</span><span class="status">'+problemName+'</span><br/>'+
-			            		'				<span class="dept">'+dept+'</span><span class="dept2">某某处</span>'+
+			            		'				<span class="dept">'+deptName+'</span>'+   /* <span class="dept2">某某处</span> */
 			            		'			</div>'+
 			            		'		</div>'+
 			            		'		<div class="card_main">'+
@@ -114,7 +106,6 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-			getNum();
 			initProblem();
 			initother();
         }

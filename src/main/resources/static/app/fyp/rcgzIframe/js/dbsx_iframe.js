@@ -22,10 +22,10 @@ var pageModule = function () {
 						{display:"文件名称",name:"app",width:"30%",align:"center",render:function(rowdata,n){
 							return rowdata.app;                                         
 						}},
-						{display:"呈报单位",name:"app",width:"60%",align:"center",render:function(rowdata,n){
+						{display:"呈报单位",name:"app",width:"55%",align:"center",render:function(rowdata,n){
 							return rowdata.app;                                         
 						}},
-						{display:"承办人",name:"app",width:"10%",align:"center",render:function(rowdata,n){
+						{display:"承办人",name:"app",width:"15%",align:"center",render:function(rowdata,n){
 							return rowdata.app;                                         
 						}},
 					 ],

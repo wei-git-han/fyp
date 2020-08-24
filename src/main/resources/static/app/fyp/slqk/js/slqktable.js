@@ -6,27 +6,30 @@ var pageModule = function () {
 	var initgrid = function(){
 		grid = $("#gridcont").createGrid({
 				columns:[
-					{display:"状态",name:"unit",width:"10%",align:"center",render:function(rowdata,n){
-						return rowdata.unit;                                         
-					}},
-					{display:"姓名",name:"unit",width:"10%",align:"center",render:function(rowdata,n){
-						return rowdata.unit;                                         
-					}},
-					{display:"单位名称",name:"weeks",width:"20%",align:"left",render:function(rowdata){
-						return rowdata.weeks;                                         
-					}},
-					{display:"联系电话",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-						return rowdata.weeks;                                         
-					}},
-					{display:"报修时间",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-						return rowdata.weeks;                                         
-					}},
-					{display:"应用名称",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-						return rowdata.weeks;                                         
-					}},
-					{display:"需求描述",name:"weeks",width:"15%",align:"left",render:function(rowdata){
-						return rowdata.weeks;                                         
-					}}
+					{display:"硬件/软件名称",name:"unit",width:"16%",align:"center",render:function(rowdata,n){
+							return rowdata.unit;                                         
+						}},
+						{display:"问题描述",name:"unit",width:"14%",align:"center",render:function(rowdata,n){
+							return rowdata.unit;                                         
+						}},
+						{display:"提出时间",name:"weeks",width:"12%",align:"left",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}},
+						{display:"提出人",name:"weeks",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}},
+						{display:"解决时限",name:"weeks",width:"12%",align:"center",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}},
+						{display:"工作进展",name:"weeks",width:"12%",align:"center",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}},
+						{display:"状态",name:"weeks",width:"10%",align:"left",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}},
+						{display:"问题分类",name:"weeks",width:"14%",align:"left",render:function(rowdata){
+							return rowdata.weeks;                                         
+						}}
 				 ],
 		width:'100%',
 		height:'100%',

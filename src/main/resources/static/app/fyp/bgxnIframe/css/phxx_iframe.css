@@ -39,7 +39,7 @@ html, body {
 	color:#DBDEF7;
 	font-weight:700;
 	font-size:16px;
-	text-align: center;
+	text-align: left;
 	width:100%;
 }
 .tab1_main{
@@ -74,13 +74,17 @@ html, body {
 }
 .tab2_main_content>div{
 	float:left;
-	width:62px;
-	height:62px;
+	/* width:62px;
+	height:62px; */
 	margin:0 5px;
 }
 .tab2_main_content>div img{
-	width:100%;
-	height:100%;
+/* 	width:100%;
+	height:100%; */
+}
+.tab2_main_content>div span{
+	margin-top:10px;
+	display:block;
 }
 .tab2_main_content_ph{
 	overflow: hidden;

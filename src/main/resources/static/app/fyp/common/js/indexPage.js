@@ -3,7 +3,7 @@ var url1 = {
   "dataType": "text"
 };
 var activeType = "start_page1";
-var pageList = {
+/*var pageList = {
   "grdb": {
     "left": {
       "title": "在位情况",
@@ -184,13 +184,13 @@ var pageList = {
       "url": "/app/fyp/bgxnIframe/html/bhxx_iframe.html"
     }
   }
-}
-pageList = {
+}*/
+var pageList = {
   rcgz: [{
       "title": "个人待办",
       "head": "个人待办",
       "english": "GIVE NOTICE",
-      "url": "/app/fyp/rcgzIframe/html/dbsx_iframe.html"
+      "url": "/app/fyp/rcgzIframe/html/dbsx_card_iframe.html"
     }, {
       "title": "工作周表",
       "head": "工作周表",
