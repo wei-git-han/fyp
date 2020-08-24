@@ -354,3 +354,96 @@ var pageModule = function() {
     }
   }
 }();
+
+/*  调用打开app的字段fyp专用 */
+var appdata = [];
+
+function __onGetAppInfoList__(appInfoList) {
+  appdata = appInfoList;
+  $('#app_list').html('');
+  $.each(appdata, function(i, v) {
+    img = v.icon64;
+    img = "data:image/png;base64," + img;
+    $('#app_list').append(
+        ` <li><a onclick="openfn1('${v.id}','','')"><img src="${img}" alt=""><span>${v.name}</span></a></li>`);
+  })
+}
+var service_ = {
+  _openApp_: function(appId, href, domain) {
+    if (href.startWith("/") == false) {
+      href = "/" + href;
+    }
+    var url = domain + href;
+    window.open(url, appId, null);
+  }
+};
+var pageappIds = "";
+// 通用打开方法，页面中所有跳转必须使用该方法
+function openfn1(appId, href, domain, n) {
+  if (n == 0) {
+    if ($.trim(href) == "") {
+      return;
+    }
+  }
+  if (typeof(_service_) != "undefined" && _service_ != null) {
+    if ($.trim(href) != '' && href.indexOf("?") == -1) {
+      href += "?";
+    }
+    _service_._openApp_(appId, href);
+  } else {
+
+    var url = getFormatUrl(href, access_token);
+    //service_._openApp_(appId,href);
+    service_._openApp_(appId, url, domain);
+  }
+}
+function getFormatUrl(url, token_value) {
+  var token_key = getUrlParam("access_token");
+  if (url.indexOf("access_token") == -1) {
+    if (url.indexOf("?") == -1) {
+      url += "?";
+    } else {
+      url += "&";
+    }
+    url += "access_token=" + token_value;
+  }
+  return url;
+}
+
+function replaceParam(url, paramName, paramValue) {
+  var regex = eval('/(' + paramName + '=)[^&]*/gi');
+  url = url.replace(regex, paramName + '=' + paramValue);
+
+  return url;
+}
+
+/**
+ * url ="http://localhost:12000/app/fyp/index.htm";
+ * 返回”http://localhost:12000“
+ * @param url
+ * @returns
+ */
+function getDomainUrl(url) {
+  if (!url) {
+    url = ""
+  }
+  var sep = "//";
+  //url ="http://localhost:12000/app/fyp/index.htm";
+  if (url.indexOf(sep) != -1) {
+    var arr = url.split(sep);
+    var http = arr[0] + sep;
+    var start = arr[1].indexOf("/");
+    var relUrl = http + arr[1].substring(0, start);
+    return relUrl;
+  }
+  return url;
+}
+
+String.prototype.startWith = function(str) {
+  var reg = new RegExp("^" + str);
+  return reg.test(this);
+};
+String.prototype.endWith = function(str) {
+  var reg = new RegExp(str + "$");
+  return reg.test(this);
+};
