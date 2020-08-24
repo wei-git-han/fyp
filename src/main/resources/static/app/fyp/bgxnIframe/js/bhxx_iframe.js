@@ -1,14 +1,56 @@
+var activeType = 0;
+var url  = [
+	'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common',
+	'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/video'
+]
+var title = [
+	"各局日常会议预定场次及统计时长","各局视频会议预定场次及统计时长"
+]
 var pageModule = function () {
 	var initother = function(){
 	}
 	var getBarChartData = function(){
     $.ajax({
-      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/bhxxLineChart",
+      url:url[activeType],
       data:{},
       dataType:"json",
       success:function(res){
+		  var tableData = {
+			  "title":title[activeType],
+			  "legend":[
+				  "总时长",
+				  "场次"
+			  ],
+			  "xdata":[
+			  ],
+			  "ydata":[
+				  {
+					  "title":"总时长",
+					  "data":[
+
+					  ]
+				  },
+				  {
+					  "title":"场次",
+					  "data":[
+
+					  ]
+				  }
+			  ]
+		  }
         if(res.result=="success"){
-          initBarChart(res.data)
+        	res.data.forEach((e,index)=>{
+        		if(activeType==0){
+					tableData.xdata.push(e.deptName);
+					tableData.ydata[0].data.push(e.count*2+index)
+					tableData.ydata[1].data.push(e.count/2-index)
+				}else{
+					tableData.xdata.push(e.deptName);
+					tableData.ydata[0].data.push(e.meetingTimeCount*2+index)
+					tableData.ydata[1].data.push(e.meetingCount/2-index)
+				}
+			})
+          initBarChart(tableData)
         }
       }
     })
@@ -26,11 +68,16 @@ var pageModule = function () {
     //     "data":[220,182,66,10,120]
     //   }]
     // }
-		var chart = echarts.init(document.getElementById('main'));
+		var chart = null;
+		if(activeType!=0){
+			chart =  echarts.init(document.getElementById('main1'))
+		}else{
+			chart = echarts.init(document.getElementById('main'))
+		}
 		chart.setOption({
 			title: {
 			  show: true,
-			  subtext: '各局视频会议预定场次及统计时长',
+			  subtext: data.title,
 			  subtextStyle: {
 				color: '#DBDDF7',
 			  },
@@ -110,18 +157,22 @@ var pageModule = function () {
 				{
 					name: data.ydata[0].title,
 					type: 'bar',
-					barGap: 0,
-					barWidth:10,
+					barGap: 5,
+					barWidth:5,
 					barCategoryGap:'300',
 					data: data.ydata[0].data
 				},
 				{
 					name: data.ydata[1].title,
 					type: 'bar',
-					barGap: 0,
-					barWidth:10,
+					barGap: 5,
+					barWidth:5,
+					borderRadius: 30,
 					barCategoryGap:'300',
-					data: data.ydata[1].data
+					data: data.ydata[1].data,
+					itemStyle:{
+						borderRadius: 30
+					}
 				}
 			]
 		});
@@ -133,9 +184,15 @@ var pageModule = function () {
         initControl: function () {
         	getBarChartData();
         	initother();
-        }
+        },
+		getBarChartData:function () {
+			getBarChartData()
+		}
     }
 }();
 
-
+var changeType = function (type){
+	activeType = type;
+	pageModule.getBarChartData()
+}
 

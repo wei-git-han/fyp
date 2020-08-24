@@ -18,7 +18,7 @@ var pageModule = function () {
 	}
 	
 	var initBarChart = function(data){
-		 var data = {
+	/*	 var data = {
 		   "title":"",
 		   "legend":[],
 		   "xdata":['1级部首长办公室数据', '2级部首长办公室数据', '3级部首长办公室数据', '4级部首长办公室数据', '5级部首长办公室数据'],
@@ -26,7 +26,7 @@ var pageModule = function () {
 		     "title":"",
 		     "data":[320,332,200,300,450]
 		   }]
-		} 
+		} */
 		
 		var chart = echarts.init(document.getElementById('main'));
 		chart.setOption({
