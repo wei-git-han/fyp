@@ -2,6 +2,7 @@ package com.css.app.fyp.routine.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.css.app.fyp.routine.service.ReignCaseService;
+import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @ClassName 在位情况
@@ -33,7 +36,7 @@ public class ReignCaseController {
     @ResponseBody
     @RequestMapping("/reignCaseList")
     public void reignCaseList(String afficheType) {
-        JSONArray maps = reignCaseService.reignCaseList(afficheType);
+        List<ReignCaseVo> maps = reignCaseService.reignCaseList(afficheType);
         Response.json(new ResponseValueUtils().success(maps));
     }
 

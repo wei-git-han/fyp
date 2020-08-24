@@ -1,6 +1,7 @@
 package com.css.app.fyp.routine.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.vo.PersonalTodoVo;
 
 import java.util.Date;
@@ -14,9 +15,9 @@ import java.util.Date;
  */
 public interface PersonalTodoService {
 
-	JSONArray backlogFlowStatisticsHeader(Date applyDate);
+	JSONObject backlogFlowStatisticsHeader(Date applyDate);
 
-	JSONArray backlogFlowStatisticsDetail(String applyType, Date applyDate, String page, String pagesize);
+	JSONObject backlogFlowStatisticsDetail(String applyType, Date applyDate, String page, String pagesize);
 
 	void backlogFlowStatisticsDetailUpdate(PersonalTodoVo personalTodoVo);
 

@@ -1,9 +1,11 @@
 package com.css.app.fyp.routine.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.service.PersonalTodoService;
 import com.css.app.fyp.routine.vo.PersonalTodoVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.base.utils.PageUtils;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +39,7 @@ public class PersonalTodoController {
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsHeader")
     public void backlogFlowStatisticsHeader(@DateTimeFormat(pattern = "yyyy") Date applyDate) {
-        JSONArray maps = personalTodoService.backlogFlowStatisticsHeader(applyDate);
+        JSONObject maps = personalTodoService.backlogFlowStatisticsHeader(applyDate);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
@@ -51,7 +53,7 @@ public class PersonalTodoController {
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsDetail")
     public void backlogFlowStatisticsDetail(String applyType, @DateTimeFormat(pattern = "yyyy") Date applyDate, String page, String pagesize) {
-        JSONArray maps = personalTodoService.backlogFlowStatisticsDetail(applyType, applyDate, page, pagesize);
+        JSONObject maps = personalTodoService.backlogFlowStatisticsDetail(applyType, applyDate, page, pagesize);
         Response.json(new ResponseValueUtils().success(maps));
     }
 

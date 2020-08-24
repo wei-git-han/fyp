@@ -1,6 +1,6 @@
 package com.css.app.fyp.routine.controller;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.service.WorkTrendService;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +28,7 @@ public class WorkTrendController {
     private WorkTrendService workTrendService;
 
     /**
-     * @Description 今日动态/历史动态
+     * @Description 工作动态
      * @Author gongan
      * @Date 2020/8/14
      * @Param [trendType]
@@ -36,7 +37,21 @@ public class WorkTrendController {
     @ResponseBody
     @RequestMapping("/workTrendList")
     public void workTrendList(String trendType) {
-        JSONArray maps = workTrendService.workTrendList(trendType);
+        JSONObject maps = workTrendService.workTrendList(trendType);
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * @Description 工作动态详情
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @ResponseBody
+    @RequestMapping("/workTrendDetail")
+    public void workTrendDetail(String channelid) {
+        JSONObject maps = workTrendService.workTrendDetail(channelid);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
@@ -63,8 +78,8 @@ public class WorkTrendController {
      */
     @ResponseBody
     @RequestMapping("/workTrendSave")
-    public void workTrendSave(String trendType) {
-        workTrendService.workTrendSave(trendType);
+    public void workTrendSave(@RequestBody String requestBody) {
+        workTrendService.workTrendSave(requestBody);
         Response.json("result", "success");
     }
 
@@ -78,7 +93,7 @@ public class WorkTrendController {
     @ResponseBody
     @RequestMapping("/workTrendPreview")
     public void workTrendPreview(String trendType) {
-        List<Map<String, Object>> maps = workTrendService.workTrendPreview(trendType);
+        JSONObject maps = workTrendService.workTrendPreview(trendType);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
@@ -105,8 +120,8 @@ public class WorkTrendController {
      */
     @ResponseBody
     @RequestMapping("/workTrendPhoneDelete")
-    public void workTrendPhoneDelete(String trendType) {
-        workTrendService.workTrendPhoneDelete(trendType);
+    public void workTrendPhoneDelete(String channelid) {
+        workTrendService.workTrendPhoneDelete(channelid);
         Response.json("result", "success");
     }
 

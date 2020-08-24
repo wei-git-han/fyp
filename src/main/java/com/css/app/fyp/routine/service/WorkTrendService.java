@@ -1,6 +1,7 @@
 package com.css.app.fyp.routine.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 import java.util.Map;
@@ -14,17 +15,19 @@ import java.util.Map;
  */
 public interface WorkTrendService {
 
-	JSONArray workTrendList(String trendType);
+	JSONObject workTrendList(String trendType);
+
+	JSONObject workTrendDetail(String channelid);
 
 	List<Map<String, Object>> workTrendPublish(String trendType);
 
-	void workTrendSave(String trendType);
+	void workTrendSave(String requestBody);
 
-	List<Map<String, Object>> workTrendPreview(String trendType);
+	JSONObject workTrendPreview(String trendType);
 
 	List<Map<String, Object>> workTrendPhoneList(String trendType);
 
-	void workTrendPhoneDelete(String trendType);
+	void workTrendPhoneDelete(String channelid);
 
 	void workTrendPhoneSort(String trendType);
 

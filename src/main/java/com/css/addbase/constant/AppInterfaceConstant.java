@@ -578,6 +578,13 @@ public class AppInterfaceConstant {
 	public final static String WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/lwyjList";
 	public final static String WEB_INTERFACE_ZWQK_GETDOCUMENT_FLOW_LIST = "/api/online";
 	public final static String WEB_INTERFACE_LEAVE_GETDOCUMENT_FLOW_LIST = "/app/qxjgl/api/getQjUserIds";
+	public final static String WEB_INFORM_AFFICHE_LIST = "/affiche/list";
+	public final static String WEB_INFORM_AFFICHE_VIEWINFO_FYP = "/affiche/viewInfo_fyp";
+	public final static String WEB_WORK_TREND_VIEWINFO_FYP = "/xxfw/api/orgdynamics";
+	public final static String WEB_WORK_TREND_DETAIL_VIEWINFO_FYP = "/channelNews/newsInit";
+	public final static String WEB_WORK_TREND_YL_VIEWINFO_FYP = "/channelNews/subscribe";
+	public final static String WEB_WORK_TREND_DELETE_VIEWINFO_FYP = "/deletesubscribe";
+	public final static String WEB_WORK_TREND_SAVE_VIEWINFO_FYP = "/deletesubscribe";
 	/**
      * @author mashuwen
 	 * @date 2018年3月30日

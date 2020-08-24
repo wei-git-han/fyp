@@ -32,35 +32,32 @@ public class InformAfficheServiceImpl implements InformAfficheService {
      * @Return void
      */
     @Override
-    public JSONArray informAfficheList(String afficheType) {
-        JSONArray jsonData = new JSONArray();
+    public JSONObject informAfficheList(String afficheType) {
+        JSONObject jsonData = new JSONObject();
         JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
         //当前用户是否为部首长
-        jsonData = this.getJsonArrayData("", "","","",null, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        jsonData = this.getJsonArrayData("", "","","", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
         if (jsonData != null) {
             //部首长
             JSONObject jsonObject = (JSONObject) jsonObj.get("data");
             jsonObject.get("flowCount");
         } else {
             //局用户
-            jsonData = this.getJsonArrayData("","","", "", null, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
+            jsonData = this.getJsonArrayData("","", afficheType, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_LIST);
         }
         return jsonData;
     }
 
-    private JSONArray getJsonArrayData (String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
-        JSONArray jsonData =new JSONArray();
+    private JSONObject getJsonArrayData (String page, String pagesize, String afficheType, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (applyType != null) {
-            infoMap.add("type", applyType);
+        if (afficheType != null) {
+            infoMap.add("ggType", afficheType);
         }
-        if (listType != null) {
-            infoMap.add("documentTopStatus", listType);
-        }
-        if (applyDate != null) {
-            infoMap.add("applyDate", applyDate);
+        if (type != null) {
+            infoMap.add("documentTopStatus", type);
         }
         if (page != null) {
             infoMap.add("page", page);
@@ -68,10 +65,53 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         if (pagesize != null) {
             infoMap.add("pagesize", pagesize);
         }
-        String mapperUrl = "http://172.16.201.140:10040";
+        String mapperUrl = "http://172.16.201.140:8080";
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
+    /**
+     * @Description 局公告/部公告/系统公告详情
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [afficheType]
+     * @Return void
+     */
+    @Override
+    public JSONObject informAfficheDetailList(String contentid) {
+        JSONObject jsonData = new JSONObject();
+        JSONObject jsonObj = new JSONObject();
+        String userId = CurrentUser.getUserId();
+        //当前用户是否为部首长
+        jsonData = this.getJsonDetailData(contentid,"", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        if (jsonData != null) {
+            //部首长
+            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
+            jsonObject.get("flowCount");
+        } else {
+            //局用户
+            jsonData = this.getJsonDetailData(contentid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_VIEWINFO_FYP);
+        }
+        return jsonData;
+    }
+
+    private JSONObject getJsonDetailData (String contentid, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        infoMap.add("userId", userId);
+        if (contentid != null) {
+            infoMap.add("contentid", contentid);
+        }
+        String mapperUrl = "http://172.16.201.140:8080";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
         } else {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;

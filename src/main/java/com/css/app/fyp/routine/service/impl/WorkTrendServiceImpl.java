@@ -1,6 +1,5 @@
 package com.css.app.fyp.routine.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -24,47 +23,82 @@ import java.util.*;
 public class WorkTrendServiceImpl implements WorkTrendService {
     private final Logger logger = LoggerFactory.getLogger(WorkTrendServiceImpl.class);
 
+    /*
+     * @Description 列表
+     * @Author gongan
+     * @Date 2020/8/21
+     * @Param [trendType]
+     * @Return com.alibaba.fastjson.JSONArray
+     */
     @Override
-    public JSONArray workTrendList(String trendType) {
-        JSONArray jsonData = new JSONArray();
+    public JSONObject workTrendList(String trendType) {
+        JSONObject jsonData = new JSONObject();
         JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
         //当前用户是否为部首长
-        jsonData = this.getJsonArrayData("", "","","",null, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        jsonData = this.getJsonData(userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
         if (jsonData != null) {
             //部首长
             JSONObject jsonObject = (JSONObject) jsonObj.get("data");
             jsonObject.get("flowCount");
         } else {
             //局用户
-            jsonData = this.getJsonArrayData("","","", "", null, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
+            jsonData = this.getJsonData(userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_VIEWINFO_FYP);
         }
         return jsonData;
     }
 
-    private JSONArray getJsonArrayData (String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
-        JSONArray jsonData =new JSONArray();
+    private JSONObject getJsonData (String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (applyType != null) {
-            infoMap.add("type", applyType);
-        }
-        if (listType != null) {
-            infoMap.add("documentTopStatus", listType);
-        }
-        if (applyDate != null) {
-            infoMap.add("applyDate", applyDate);
-        }
-        if (page != null) {
-            infoMap.add("page", page);
-        }
-        if (pagesize != null) {
-            infoMap.add("pagesize", pagesize);
-        }
-        String mapperUrl = "http://172.16.201.140:10040";
+        String mapperUrl = "http://172.16.201.140:8080";
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
+    /**
+     * @Description 工作动态详情
+     * @Author gongan
+     * @Date 2020/8/21
+     * @Param [trendType]
+     * @Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     */
+    @Override
+    public JSONObject workTrendDetail(String channelid) {
+        JSONObject jsonData = new JSONObject();
+        JSONObject jsonObj = new JSONObject();
+        String userId = CurrentUser.getUserId();
+        //当前用户是否为部首长
+        jsonData = this.getWorkTrendDetail(channelid, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        if (jsonData != null) {
+            //部首长
+            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
+            jsonObject.get("flowCount");
+        } else {
+            //局用户
+            jsonData = this.getWorkTrendDetail(channelid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_DETAIL_VIEWINFO_FYP);
+        }
+        return jsonData;
+    }
+
+    private JSONObject getWorkTrendDetail (String channelid, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        infoMap.add("userId", userId);
+        if (channelid != null) {
+            infoMap.add("channelid", channelid);
+        }
+        String mapperUrl = "http://172.16.201.140:8080";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url+channelid+userId;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
         } else {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;
@@ -86,21 +120,63 @@ public class WorkTrendServiceImpl implements WorkTrendService {
     }
 
     @Override
-    public void workTrendSave(String trendType) {
-
+    public void workTrendSave(String requestBody) {
+        JSONObject jsonData = new JSONObject();
+        JSONObject jsonObj = new JSONObject();
+        String userId = CurrentUser.getUserId();
+        //当前用户是否为部首长
+        jsonData = this.getWorkTrendDetail(requestBody, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        if (jsonData != null) {
+            //部首长
+            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
+            jsonObject.get("flowCount");
+        } else {
+            //局用户
+            jsonData = this.getWorkTrendDetail(requestBody, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_SAVE_VIEWINFO_FYP);
+        }
     }
 
+    /**
+     * @Description 动态预览
+     * @Author gongan
+     * @Date 2020/8/21
+     * @Param [trendType]
+     * @Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     */
     @Override
-    public List<Map<String, Object>> workTrendPreview(String trendType) {
-        List<Map<String,Object>> objects = new ArrayList<>();
-        Map<String,Object> dataMap = new HashMap<>();
-        dataMap.put("phoneUrl","图片");
-        dataMap.put("contentHead","内容头");
-        dataMap.put("contentDetail","内容详情");
-        dataMap.put("contentDetail","时间");
-        dataMap.put("contentDetail","阅读量");
-        objects.add(dataMap);
-        return objects;
+    public JSONObject workTrendPreview(String channelid) {
+        JSONObject jsonData = new JSONObject();
+        JSONObject jsonObj = new JSONObject();
+        String userId = CurrentUser.getUserId();
+        //当前用户是否为部首长
+        jsonData = this.getWorkTrendPreview(channelid, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        if (jsonData != null) {
+            //部首长
+            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
+            jsonObject.get("flowCount");
+        } else {
+            //局用户
+            jsonData = this.getWorkTrendPreview(channelid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_YL_VIEWINFO_FYP);
+        }
+        return jsonData;
+    }
+
+    private JSONObject getWorkTrendPreview (String channelid, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        infoMap.add("userId", userId);
+        if (channelid != null) {
+            infoMap.add("channelid", channelid);
+        }
+        String mapperUrl = "http://172.16.201.140:10040";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
     }
 
     @Override
@@ -117,8 +193,20 @@ public class WorkTrendServiceImpl implements WorkTrendService {
     }
 
     @Override
-    public void workTrendPhoneDelete(String trendType) {
-
+    public void workTrendPhoneDelete(String channelid) {
+        JSONObject jsonData = new JSONObject();
+        JSONObject jsonObj = new JSONObject();
+        String userId = CurrentUser.getUserId();
+        //当前用户是否为部首长
+        jsonData = this.getWorkTrendDetail(channelid, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        if (jsonData != null) {
+            //部首长
+            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
+            jsonObject.get("flowCount");
+        } else {
+            //局用户
+            this.getWorkTrendDetail(channelid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_DELETE_VIEWINFO_FYP);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.css.app.fyp.routine.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 公文审核记录表
@@ -11,6 +12,8 @@ import com.alibaba.fastjson.JSONArray;
  */
 public interface InformAfficheService {
 
-	JSONArray informAfficheList(String afficheType);
+	JSONObject informAfficheList(String afficheType);
+
+	JSONObject informAfficheDetailList(String contentid);
 
 }

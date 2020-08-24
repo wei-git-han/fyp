@@ -1,6 +1,9 @@
 package com.css.app.fyp.routine.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.css.app.fyp.routine.vo.ReignCaseVo;
+
+import java.util.List;
 
 /**
  * 在位情况
@@ -11,7 +14,7 @@ import com.alibaba.fastjson.JSONArray;
  */
 public interface ReignCaseService {
 
-	JSONArray reignCaseList(String afficheType);
+	List<ReignCaseVo> reignCaseList(String afficheType);
 
 	void reignCaseSave(String trendType) ;
 

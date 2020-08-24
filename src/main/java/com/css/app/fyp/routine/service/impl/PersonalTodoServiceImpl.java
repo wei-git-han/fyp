@@ -30,8 +30,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     private BaseAppOrgMappedService baseAppOrgMappedService;
 
     @Override
-    public JSONArray backlogFlowStatisticsHeader(Date applyDate) {
-        JSONArray jsonData = new JSONArray();
+    public JSONObject backlogFlowStatisticsHeader(Date applyDate) {
+        JSONObject jsonData = new JSONObject();
         JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
         //当前用户是否为部首长
@@ -62,8 +62,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return jsonData;
     }
 
-    private JSONArray getJsonArrayData (String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
-        JSONArray jsonData =new JSONArray();
+    private JSONObject getJsonArrayData (String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
         if (applyType != null) {
@@ -84,7 +84,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
         } else {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;
@@ -93,11 +93,11 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     }
 
     @Override
-    public JSONArray backlogFlowStatisticsDetail(String applyType, Date applyDate, String page, String pagesize) {
+    public JSONObject backlogFlowStatisticsDetail(String applyType, Date applyDate, String page, String pagesize) {
         String userId = CurrentUser.getUserId();
         String documentTopStatus = "daiChuLi";
         String type = null;
-        JSONArray jsonData = new JSONArray();
+        JSONObject jsonData = new JSONObject();
         if (StringUtils.equals(applyType, "1")) {
             type = "wsh";
             jsonData = this.getJsonArrayData(page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST);

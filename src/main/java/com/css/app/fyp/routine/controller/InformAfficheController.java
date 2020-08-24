@@ -1,6 +1,6 @@
 package com.css.app.fyp.routine.controller;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.service.InformAfficheService;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
@@ -33,7 +33,21 @@ public class InformAfficheController {
     @ResponseBody
     @RequestMapping("/informAfficheList")
     public void informAfficheList(String afficheType) {
-        JSONArray maps = informAfficheService.informAfficheList(afficheType);
+        JSONObject maps = informAfficheService.informAfficheList(afficheType);
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * @Description 局公告/部公告/系统公告详情
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [afficheType]
+     * @Return void
+     */
+    @ResponseBody
+    @RequestMapping("/informAfficheDetailList")
+    public void informAfficheDetailList(String contentid) {
+        JSONObject maps = informAfficheService.informAfficheDetailList(contentid);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
