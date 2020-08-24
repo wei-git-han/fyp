@@ -269,7 +269,11 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				rowsdata = data.data.list;
+				if(data.data.list){
+					rowsdata = data.data.list;
+				}else{
+					rowsdata = data.data
+				}
 				/*  rowsdata = data.rows;*/
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+8)+"px");
