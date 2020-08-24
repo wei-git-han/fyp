@@ -54,6 +54,7 @@ public class OrderOfBirthController {
         Map<String, String> accessMap = new HashMap<>();
         accessMap.put("appName","应用名称");
         accessMap.put("appCount","应用访问总数");
+        accessMap.put("appImg","应用图片路径");
         accessList.add(accessMap);
         objects.put("access",accessList);
         //安装量

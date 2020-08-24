@@ -34,10 +34,11 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/total")
-    public void total(String type,@DateTimeFormat(pattern = "yyyy") Date time) {
+    public void total(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办文总量");
         paramMap.add("type",type);
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -49,10 +50,11 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/overview")
-    public void overview(String type,@DateTimeFormat(pattern = "yyyy") Date time) {
+    public void overview(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
         paramMap.add("type",type);
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -64,10 +66,11 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/trend")
-    public void trend(String type,@DateTimeFormat(pattern = "yyyy") Date time) {
+    public void trend(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -79,10 +82,11 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/submitEfficiency")
-    public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
+    public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -94,10 +98,11 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/handleEfficiency")
-    public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
+    public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -109,10 +114,11 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/readEfficiency")
-    public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
+    public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
