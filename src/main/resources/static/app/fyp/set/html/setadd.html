@@ -31,9 +31,14 @@
 					<tr>
 						<td class="t_label">姓名</td>
 						<td class="t_inpt" >
-							<input type="text" class="form-control" id="name" name="name" required="required" />
+							<div class="form-control" style="padding:0;width:195px;">
+								<div class="selecttree">
+									<input type="hidden" class="form-control"  id="userId" name="userId"  />
+									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" placeholder="" required="required" />
+								</div>
+							</div>
 						</td>
-						<td class="t_label">单位</td>
+						<td class="t_label">单位名称</td>
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
@@ -57,8 +62,8 @@
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="userId" name="userId"  />
-									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" required="required"  />
+									<input type="hidden" class="form-control"  id="editUserId" name="editUserId"  />
+									<input type="text" class="form-control"  id="editUserName" name="editUserName"  onfocus="blur()" required="required"  />
 								</div>
 							</div>
 						</td>
@@ -66,7 +71,7 @@
 					<tr>
 						<td class="t_label">配置时间</td>
 						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="" id="" required="required" />
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="editTime" id="editTime" required="required" />
 						</td>
 					</tr>
 				</table>

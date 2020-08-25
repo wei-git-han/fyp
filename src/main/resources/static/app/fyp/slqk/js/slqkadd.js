@@ -9,27 +9,27 @@ if(!!dataId){
 	saveUrl = {"url":"","dataType":"text"};  //edit
 }
 var pageModule = function(){
-	//单位树
+	//树
 	var initUnitTree = function(){
 		//单位
-		$("#deptName").createSelecttree({
+		$("#submitDeptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
+				$("#submitDeptName").val(data.node.text);
+				$("#submitDeptId").val(data.node.id);
 			}
 		});
 		
-		//配置人
-		$("#userName").createSelecttree({
+		//提出人
+		$("#submitUserName").createSelecttree({
 			url :userTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
-				$("#userName").val(data.node.text);
-				$("#userId").val(data.node.id);
+				$("#submitUserName").val(data.node.text);
+				$("#submitUserId").val(data.node.id);
 			}
 		}); 
 	}
@@ -58,7 +58,7 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark"];
+			    var elementarry = ["name","submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
 				var paramdata = getformdata(elementarry);
 				paramdata.id = id;
 				$ajax({
@@ -92,7 +92,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark"]);
+			removeInputData(["name","submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"]);
 		});
 		
 		//取消
