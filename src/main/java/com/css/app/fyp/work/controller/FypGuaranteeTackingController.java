@@ -57,8 +57,8 @@ public class FypGuaranteeTackingController {
 	 * 信息
 	 */
 	@ResponseBody
-	@RequestMapping("/info/{id}")
-	public void info(@PathVariable("id") String id){
+	@RequestMapping("/info")
+	public void info(String id){
 		FypGuaranteeTacking fypGuaranteeTacking = fypGuaranteeTackingService.queryObject(id);
 		Response.json(new ResponseValueUtils().success(fypGuaranteeTacking));
 	}

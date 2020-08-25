@@ -1,0 +1,116 @@
+[
+	{
+		"id":"00",
+		"text": "网信所 ",
+		"type":"0",
+		"children": [
+						{
+							"id":"01",
+							"text": "综合办科技组",
+							"type":"0",
+							"children":[
+								{
+									"id":"02",
+									"text":"豆豆<font class='positionCss'>(部管理员)</font>",
+									"type":"1"
+								},
+								{
+									"id":"031",
+									"text":"李雪<font class='positionCss'>(我是首长)</font>",
+									"type":"1"
+								},
+								{
+									"id":"032",
+									"text":"李雪<font class='positionCss'>(哈哈，太搞笑了)</font>",
+									"type":"1"
+								},
+								{
+									"id":"033",
+									"text":"李雪3",
+									"type":"1"
+								},
+								{
+									"id":"034",
+									"text":"李雪3",
+									"type":"1"
+								},
+								{
+									"id":"035",
+									"text":"李雪4",
+									"type":"1"
+								}
+							]
+						}, 
+						{
+							"id":"04",
+							"text": "综合办管理保障组",
+							"type":"0",
+							"children":[
+								{
+									"id":"05",
+									"text":"王继峰",
+									"type":"1"
+								},
+								{
+									"id":"06",
+									"text":"郭婷婷",
+									"type":"1"
+								},
+								{
+									"id":"061",
+									"text":"海芳",
+									"type":"1"
+								},
+								{
+									"id":"062",
+									"text":"宝贝",
+									"type":"1"
+								},
+								{
+									"id":"063",
+									"text":"娇娇",
+									"type":"1"
+								},
+								{
+									"id":"064",
+									"text":"宋慧乔",
+									"type":"1"
+								},
+								{
+									"id":"065",
+									"text":"李丽君",
+									"type":"1"
+								}
+							]
+						},
+						{
+							"id":"07",
+							"text": "夏玉洁<font class='positionCss'>(局管理员)</font>",
+							"type":"1"
+						},
+						{
+							"id":"071",
+							"text": "毛萍萍<font class='positionCss'>(局管理员)</font>",
+							"type":"1"
+						},
+						{
+							"id":"072",
+							"text": "成莹莹<font class='positionCss'>(局管理员)</font>",
+							"type":"1"
+						},
+						{
+							"id":"073",
+							"text": "王玉<font class='positionCss'>(局管理员)</font>",
+							"type":"1"
+						},
+						{
+							"id":"074",
+							"text": "刘杨<font class='positionCss'>(局管理员)</font>",
+							"type":"1"
+						}
+					],
+		"state": {
+					"opened": true
+				}
+	}
+]

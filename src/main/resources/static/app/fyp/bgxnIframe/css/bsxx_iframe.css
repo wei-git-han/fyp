@@ -1,0 +1,164 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+   background-color: transparent;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.bgimg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.filterDate{
+	float:right;
+}
+.filterUnit{
+	float:left;
+}
+select{
+	color:#EFF1F5;
+	border:1px solid #4C52E6;
+	background:transparent;
+}
+.line{
+	display:inline-block;
+	width:4px;
+	height:14px;
+	background:#007AFF;
+	margin-top:2px;
+}
+
+.tab2_title,.tab1_title{
+	position: absolute;
+	left:0;top:0;
+	height:45px;
+	line-height:45px;
+	color:#DBDEF7;
+	font-weight:700;
+	font-size:16px;
+	width:100%;
+}
+.tab2_main,.tab1_main{
+	width:100%;
+	height:100%;
+	padding-top:45px;
+} 
+
+/* tab1ÑשÊ½ */
+.main-l{
+	position:absolute;
+	left:0;
+	top:0;
+	height:385px;
+	text-align: right;
+}
+.main-c{
+	width:368px;
+	height:385px;
+	margin:0 auto;
+	text-align: center;
+	background:url('../images/centerImg.png') no-repeat top center;
+}
+.main-r{
+	position:absolute;
+	right:0;
+	top:0;
+	height:385px;
+	text-align: left;
+}
+.main-c-absolute{
+	position:absolute;
+	top:40%;
+	text-align: center;
+	width: 100%;
+    height: 40px;
+}
+.main-c-absolute p{
+	font-size:20px;
+	font-weight: 700;
+}
+.main-c-absolute span{
+	font-family:"PIXEL LCD-7";
+	src: url("../font/PIXEL LCD-7.TTF");
+	color:#157FE8;
+	font-size:50px;
+}
+.main-l .pr100>div,.main-r .pr100>div{
+	height: 30.3%;
+	width: 100%;
+	margin-bottom: 20px;
+}
+.main-l .pr100>div p,.main-r .pr100>div p{
+	height:100%;
+	width:200px;
+	text-align: left;
+	padding:10px;
+}
+.main-l .pr100>div p{
+	float: right;
+	border-left:3px solid #2A92E3;
+	background: -moz-linear-gradient(#071F56, #144A8B);
+	background: -webkit-linear-gradient(#071F56, #09275E);
+}
+.main-r .pr100>div p{
+	float: left;
+	border-right:3px solid #2A92E3;
+	background: -moz-linear-gradient(#144A8B, #071F56);
+	background: -webkit-linear-gradient(#144A8B, #09275E);
+}
+
+.main .pr100>div p label{
+	font-size: 20px;
+}
+.main .pr100>div p span{
+	display: block;
+	width:100%;
+	font-size: 42px;
+	font-family:"PIXEL LCD-7";
+	src: url("../font/PIXEL LCD-7.TTF");
+	text-align: center;
+	
+}
+
+.main-l .pr100>div:nth-child(1) p span{
+	color:#6AB232;
+}
+.main-l .pr100>div:nth-child(2) p span{
+	color:#FA8C30;
+}
+.main-l .pr100>div:nth-child(3) p span{
+	color:#CF3031;
+}
+
+.main-r .pr100>div:nth-child(1) p span{
+	color:#8614FE;
+}
+.main-r .pr100>div:nth-child(2) p span{
+	color:#1EDBEB;
+}
+.main-r .pr100>div:nth-child(3) p span{
+	color:#F5C52B;
+}

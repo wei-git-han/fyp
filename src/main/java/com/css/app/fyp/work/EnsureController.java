@@ -1,9 +1,11 @@
 package com.css.app.fyp.work;
 
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.app.fyp.work.service.FypGuaranteeTackingService;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +24,8 @@ public class EnsureController {
 
     private final Logger logger = LoggerFactory.getLogger(EnsureController.class);
 
+    @Autowired
+    private FypGuaranteeTackingService fypGuaranteeTackingService;
     /**
      * 保障问题跟踪
      */
@@ -43,7 +47,7 @@ public class EnsureController {
         paramMap.put("deptName","单位名称");
         objects.add(paramMap);
         dataMap.put("users",objects);
-        Response.json(new ResponseValueUtils().success(dataMap));
+        Response.json(new ResponseValueUtils().success(fypGuaranteeTackingService.findCount()));
     }
 
     /**
@@ -64,6 +68,4 @@ public class EnsureController {
         objects.add(dataMap);
         Response.json(new ResponseValueUtils().success(dataMap));
     }
-
-
 }

@@ -1,0 +1,64 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#fff;
+	/*min-width: 700px;*/
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.tab_main{
+	width:100%;
+	height:100%;
+	padding-top:15px;
+}
+.newlayout-title{
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	line-height:60px;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:0px;
+}
+.dbsx_wrap{
+	text-align: center;
+	overflow: hidden;
+}
+.dbsx_wrap>div{
+	width:168px;
+	height:168px;
+	display: inline-block;
+	margin: 10px 5px;
+	background: #062368;
+	text-align: center;
+}
+.dbsx_wrap div p{
+	font-size: 58px;
+	font-weight: 700;
+	font-family:"YOUSHEBIAOTIHEI-2_0";
+	src: url("../font/YOUSHEBIAOTIHEI-2_0.TTF");
+	color: #3176FC;
+	padding-top: 30px;
+}
+.dbsx_wrap div span{
+	color: #fff;
+	font-size: 18px;
+	border-bottom: 1px solid #3176FC;
+	padding-bottom:5px;
+}
+.dbsx_wrap div:hover p{
+	color: #F70A4A;
+}
+.dbsx_wrap div:hover span{
+	border-color:#F70A4A;
+}

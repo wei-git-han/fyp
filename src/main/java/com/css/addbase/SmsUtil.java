@@ -35,7 +35,7 @@ import com.css.taskqueue.Consumer;
  */
 @Configuration
 public class SmsUtil {
-	
+	/*
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
@@ -52,9 +52,9 @@ public class SmsUtil {
 		consumer.start();
 	}
 
-	/**
+	*//**
 	 * 发送短信放入任务队列
-	 */
+	 *//*
 	public void send(String content, String tels) {
 		if(baseAppConfigService.queryObject("sms_flag").getValue().equals("1")){
 			System.out.println("=============未打开短信总开关=================");
@@ -80,15 +80,15 @@ public class SmsUtil {
 			 }
 		 }
 	}
-	/**
+	*//**
 	 * 发送短信
 	 * @param content
 	 * @param tels
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("finally")
 	public String sendSms(String content, String tels ,String smsUrl){
-			/*try {
+			*//*try {
 				HttpHeaders headers = new HttpHeaders();
 				MediaType type = MediaType.parseMediaType("multipart/form-data");
 				headers.setContentType(type);
@@ -109,7 +109,7 @@ public class SmsUtil {
 				System.out.println(e.getMessage());
 				System.out.println(e);
 				return "fail";
-			}*/
+			}*//*
 			String[] telss=tels.split(",");
 			for(int i=0;i<telss.length;i++) {
 				if(!telss[i].startsWith("86")) {
@@ -195,6 +195,6 @@ public class SmsUtil {
 		return jsonData;
 		
 	}
-
+*/
 
 }

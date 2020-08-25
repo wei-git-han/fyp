@@ -666,4 +666,14 @@ public class AppInterfaceConstant {
      * 
      */
     public final static String WEB_INTERFACE_DZBMS_TO_GWCL_QUERY_YJ = "/api/myRead/queryYJ";
+
+    /**
+     * 公文处理、负一屏办文接口
+     */
+    public final static String WEB_INERFACE_GWCL_DO_DOCUMENT = "/app/gwcl/fyp/doDocument";
+
+    /**
+     * 中宏利达、负一屏会议接口
+     */
+    public final static String WEB_INERFACE_GWCL_MEETING = "/api/v3/conference/query4ub";
 }

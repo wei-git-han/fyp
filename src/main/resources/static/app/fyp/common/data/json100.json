@@ -1,0 +1,23 @@
+{
+	"gwzs":100,
+	"wbgw":200,
+	"legend":["A局","B局","C局","D局","E局","F局","G局"],
+	"valdata1":[
+	    {"value":10, "name":"A局"},
+	    {"value":20, "name":"B局"},
+	    {"value":30, "name":"C局"},
+	    {"value":20, "name":"D局"},
+	    {"value":10, "name":"E局"},
+	    {"value":10, "name":"F局"},
+	    {"value":20, "name":"G局"}
+	],
+	"valdata2":[
+	    {"value":10, "name":"A局"},
+	    {"value":20, "name":"B局"},
+	    {"value":30, "name":"C局"},
+	    {"value":20, "name":"D局"},
+	    {"value":10, "name":"E局"},
+	    {"value":10, "name":"F局"},
+	    {"value":20, "name":"G局"}
+	]
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <title>负一屏</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="common/css/jquery.flipster.css" />
+    <link rel="stylesheet" type="text/css" href="common/css/flipsternavtabs.css" />
+    <link rel="stylesheet" type="text/css" href="common/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="common/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="common/css/indexPage.css" />
+  </head>
+  <body>
+    <div class="newlayout pr100">
+      <img src="common/images/newbg.png" class="bgimg" />
+      <div class="pr100">
+        <div class="newlayout-top">
+          <div class="pr100">
+            <img src="common/images/head.png" class="headimg" />
+            <div class="datelayout">2020-08-10 16:14 星期一</div>
+            <span class="set" id="set"><img src="common/images/set.png">业务配置</span>
+          </div>
+        </div>
+        <div class="newlayout-top2">
+          <div class="pr100">
+            <div class="newlayout-switch">
+              <div class="pr100 newlayout-switch-btn active">
+                <span id="rcgz">日常工作</span>
+                <span id="bgxn">办公效能</span>
+              </div>
+            </div>
+            <div class="newlayout-statistics">
+              <div class="statistics-wrap">
+                <div class="statistics">
+                  <label><span class="line"></span>&nbsp;&nbsp;在编人数：</label><a>查看</a>
+                  <p class="zbrs"></p>
+                </div>
+                <div class="statistics">
+                  <label><span class="line"></span>&nbsp;&nbsp;在线人数：</label><a>查看</a>
+                  <p class="zxrs"></p>
+                </div>
+                <div class="statistics">
+                  <label><span class="line"></span>&nbsp;&nbsp;在线率：</label><a>查看</a>
+                  <p class="zxl"></p>
+                </div>
+                <div class="statistics">
+                  <label><span class="line"></span>&nbsp;&nbsp;本日峰值：</label><a>查看</a>
+                  <p class="brfz"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<!--        <div class="line-box">
+          <div class="line-div left">
+            <div class="left-title">
+              <span class="b-title">在位情况</span>
+              <br>
+              <span class="c-title">efdsfsfsfd</span>
+            </div>
+            <img src="common/images/line.png" alt="" class="line-image" style="float: right;margin-right:30px;">
+          </div>
+           <div class="line-div right">
+            <div class="right-title">
+              <span class="b-title">在位情况</span>
+              <br>
+              <span class="c-title">efdsfsfsfd</span>
+            </div>
+            <img src="common/images/line.png" alt="" class="line-image" style="float: right;margin-right:30px;">
+          </div>
+        </div> -->
+        <div class="newlayout-center" style="overflow: visible;">
+          <div class="pr100 iframe-wrap" style="height: 860px;margin-left: -20px;overflow: visible;">
+            <ul>
+              <li id="start_page1">
+                <div class="line-div">
+                  <div class="left-title">
+                    <span class="b-title">个人待办</span>
+                    <br>
+                    <span class="c-title"></span>
+                  </div>
+                  <img src="common/images/line.png" alt="" class="line-image" >
+                </div>
+                <iframe style="width:760px;height:540px;" name="start_page1" frameborder="no" src="/app/fyp/rcgzIframe/html/dbsx_card_iframe.html"></iframe>
+              </li>
+              <li id="start_page2">
+                <div class="line-div">
+                  <div class="left-title">
+                    <span class="b-title">工作周表</span>
+                    <br>
+                    <span class="c-title"></span>
+                  </div>
+                  <img src="common/images/line.png" alt="" class="line-image" >
+                </div>
+                <iframe style="width:760px;height:540px;" name="start_page2" frameborder="no" src="/app/fyp/rcgzIframe/html/gzzb_iframe.html"></iframe>
+              </li>
+              <li id="start_page3">
+                <div class="line-div" >
+                  <div class="left-title">
+                    <span class="b-title">通知公告</span>
+                    <br>
+                    <span class="c-title">efdsfsfsfd</span>
+                  </div>
+                  <img src="common/images/line.png" alt="" class="line-image" >
+                </div>
+                <iframe style="width:760px;height:540px;" name="start_page3" frameborder="no" src="/app/fyp/rcgzIframe/html/tzgg_iframe.html"></iframe>
+              </li>
+              <li id="start_page4">
+                <div class="line-div" >
+                  <div class="left-title">
+                    <span class="b-title">工作动态</span>
+                    <br>
+                    <span class="c-title">efdsfsfsfd</span>
+                  </div>
+                  <img src="common/images/line.png" alt="" class="line-image" >
+                </div>
+                <iframe style="width:760px;height:540px;" name="start_page4" frameborder="no" src="/app/fyp/rcgzIframe/html/gzdt_iframe.html"></iframe>
+              </li>
+              <li id="start_page5">
+                <div class="line-div">
+                  <div class="left-title">
+                    <span class="b-title">在位情况</span>
+                    <br>
+                    <span class="c-title">efdsfsfsfd</span>
+                  </div>
+                  <img src="common/images/line.png" alt="" class="line-image" >
+                </div>
+                <iframe style="width:760px;height:540px;" name="start_page5" frameborder="no" src="/app/fyp/rcgzIframe/html/zwry_iframe.html"></iframe>
+              </li>
+              <!--            <div class="newlayout-l">-->
+              <!--              <img src="common/images/left.png" alt="" class="contain-image">-->
+              <!--              <div class="line-div">-->
+              <!--                  <div class="left-title">-->
+              <!--                    <span class="b-title">在位情况</span>-->
+              <!--                    <br>-->
+              <!--                    <span class="c-title">efdsfsfsfd</span>-->
+              <!--                  </div>-->
+              <!--                  <img src="common/images/line.png" alt="" class="line-image" style="float: right;margin-right:30px;">-->
+              <!--              </div>-->
+              <!--              <div class="pr100">-->
+              <!--                <iframe id="iframeLeft" name="iframeLeft" style="width:100%;height:100%;" frameborder="no" marginheight="0px"-->
+              <!--                  scrolling="no" marginwidth="0px"></iframe>-->
+              <!--              </div>-->
+              <!--            </div>-->
+              <!--            <div class="newlayout-c">-->
+              <!--              <img src="common/images/center.png" alt="">-->
+              <!--              <div class="pr100">-->
+              <!--                <iframe id="iframeCenter" name="iframeCenter" style="width:100%;height:100%;" frameborder="no"-->
+              <!--                  marginheight="0px" scrolling="no" marginwidth="0px"></iframe>-->
+              <!--              </div>-->
+              <!--            </div>-->
+              <!--            <div class="newlayout-r">-->
+              <!--              <img src="common/images/right.png" alt="" class="contain-image">-->
+              <!--              <div class="line-div">-->
+              <!--                <div class="right-title" style="float: right;">-->
+              <!--                  <span class="b-title">个人待办</span>-->
+              <!--                  <br>-->
+              <!--                  <span class="c-title">efdsfsfsfd</span>-->
+              <!--                </div>-->
+              <!--                <img src="common/images/line.png" alt="" class="line-image" >-->
+              <!--              </div>-->
+
+              <!--              <div class="pr100">-->
+              <!--                <iframe id="iframeRight" name="iframeRight" style="width:100%;height:100%;" frameborder="no"-->
+              <!--                  marginheight="0px" scrolling="no" marginwidth="0px"></iframe>-->
+              <!--              </div>-->
+              <!--            </div>-->
+          </div>
+        </div>
+        <div class="newlayout-footer">
+          <div class="pr100 btn-wrap" id="grgzGroup">
+            <div type="button" class="btn active" data-target="start_page1"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>个人待办</span></div>
+            <div type="button" class="btn" data-target="start_page2"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>工作周表</span></div>
+            <div type="button" class="btn" data-target="start_page3"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>通知公告</span></div>
+            <div type="button" class="btn" data-target="start_page4"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>工作动态</span></div>
+            <div type="button" class="btn" data-target="start_page5"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>在位情况</span></div>
+          </div>
+         <div class="pr100 btn-wrap" style="display:none" id="bgxnGroup">
+            <div type="button" class="btn" data-target="start_page1"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>办会</span></div>
+            <div type="button" class="btn" data-target="start_page2"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>办事</span></div>
+            <div type="button" class="btn" data-target="start_page3"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>办文</span></div>
+            <div type="button" class="btn" data-target="start_page4"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>排行</span></div>
+            <div type="button" class="btn" data-target="start_page5"><img src="common/images/un-select.png" alt="" class="un-selectImage"><img
+                src="common/images/select-active.png" class="selectImage" alt=""><span>保障</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="../../assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="../../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+    <script src="../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+    <script src="../../assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
+    <script src="common/js/commons.js" type="text/javascript"></script>
+    <script src="common/js/jquery.flipster.js" type="text/javascript"></script>
+    <script src="common/js/indexPage.js" type="text/javascript"></script>
+    <script>
+      jQuery(document).ready(function() {
+        pageModule.initControl();
+      });
+    </script>
+  </body>
+</html>

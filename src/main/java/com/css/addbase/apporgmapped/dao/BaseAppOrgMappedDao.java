@@ -4,6 +4,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.base.dao.BaseDao;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 部门表
@@ -14,5 +18,7 @@ import com.css.base.dao.BaseDao;
  */
 @Mapper
 public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
-	
+
+    @Select("select * from zf_new_fyp_db.base_app_org_mapped where org_id is not null and org_id!='' and org_name is not null and org_name !=''")
+    List<Map<String,Object>> findAppIdAndDeptIdNameAll();
 }

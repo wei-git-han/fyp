@@ -50,7 +50,11 @@ public class AppConstant {
 	 * 公文处理应用的标识
 	 */
 	public final static String APP_GWCL = "gwcl";
-	
+
+	/**
+	 * 中宏利达视频
+	 */
+	public final static String ZHLD = "zhld";
 	
 	/**
 	 * @author mashuwen

@@ -25,4 +25,6 @@ public interface FypGuaranteeTackingService {
 	void delete(String id);
 	
 	void deleteBatch(String[] ids);
+
+    Map<String, Object> findCount();
 }

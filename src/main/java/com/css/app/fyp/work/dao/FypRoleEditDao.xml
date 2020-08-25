@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.work.dao.FypRoleEditDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.work.entity.FypRoleEdit">
+		select * from FYP_ROLE_EDIT where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.work.entity.FypRoleEdit">
+		select * from FYP_ROLE_EDIT
+		where
+			1=1
+			<!--用户id-->
+			<if test="userId!=null and userId!=''">
+				and USER_ID = #{userId}
+			</if>
+			<!--用户名称-->
+			<if test="userName!=null and userName!=''">
+				and USER_NAME = #{userName}
+			</if>
+			<!--单位id-->
+			<if test="deptId!=null and deptId!=''">
+				and DEPT_ID = #{deptId}
+			</if>
+			<!--单位名称-->
+			<if test="deptName!=null and deptName!=''">
+				and DEPT_NAME = #{deptName}
+			</if>
+			<!--角色-->
+			<if test="roleType!=null and roleType!=''">
+				and ROLE_TYPE = #{roleType}
+			</if>
+			<if test="offset != null and limit != null">
+				limit #{offset}, #{limit}
+			</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from FYP_ROLE_EDIT 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.work.entity.FypRoleEdit">
+		insert into FYP_ROLE_EDIT
+		(
+			"ID", 
+			"USER_ID", 
+			"DEPT_NAME", 
+			"DEPT_ID", 
+			"USER_NAME", 
+			"CREATE_TIME", 
+			"ROLE_TYPE", 
+			"EDIT_USER_ID", 
+			"EDIT_TIME"
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{deptName}, 
+			#{deptId}, 
+			#{userName}, 
+			#{createTime}, 
+			#{roleType}, 
+			#{editUserId}, 
+			#{editTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.work.entity.FypRoleEdit">
+		update FYP_ROLE_EDIT 
+		<set>
+			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="deptName != null">"DEPT_NAME" = #{deptName}, </if>
+			<if test="deptId != null">"DEPT_ID" = #{deptId}, </if>
+			<if test="userName != null">"USER_NAME" = #{userName}, </if>
+			<if test="createTime != null">"CREATE_TIME" = #{createTime}, </if>
+			<if test="roleType != null">"ROLE_TYPE" = #{roleType}, </if>
+			<if test="editUserId != null">"EDIT_USER_ID" = #{editUserId}, </if>
+			<if test="editTime != null">"EDIT_TIME" = #{editTime}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from FYP_ROLE_EDIT where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from FYP_ROLE_EDIT where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

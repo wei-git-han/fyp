@@ -1,0 +1,55 @@
+/****************
+
+功能:
+状态：
+request
+response
+******************/
+
+	{
+		"total":100,
+		"page":1,
+		"rows":[
+					{
+						"id":"01",
+						"danwei":"a1",
+						"renyuan":"b1",
+						"team1state":1,
+						"team2state":0,
+						"team3state":1,
+						"team4state":0
+					},{
+						"id":"02",
+						"danwei":"a1",
+						"renyuan":"b1",
+						"team1state":1,
+						"team2state":0,
+						"team3state":1,
+						"team4state":0
+					},{
+						"id":"03",
+						"danwei":"a1",
+						"renyuan":"b1",
+						"team1state":1,
+						"team2state":0,
+						"team3state":1,
+						"team4state":0
+					},{
+						"id":"04",
+						"danwei":"a1",
+						"renyuan":"b1",
+						"team1state":1,
+						"team2state":0,
+						"team3state":1,
+						"team4state":0
+					},{
+						"id":"05",
+						"danwei":"a1",
+						"renyuan":"b1",
+						"team1state":1,
+						"team2state":0,
+						"team3state":1,
+						"team4state":0
+					}
+				]
+	}				
