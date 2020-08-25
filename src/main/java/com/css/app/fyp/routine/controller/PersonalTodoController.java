@@ -1,11 +1,9 @@
 package com.css.app.fyp.routine.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.service.PersonalTodoService;
 import com.css.app.fyp.routine.vo.PersonalTodoVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.PageUtils;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
