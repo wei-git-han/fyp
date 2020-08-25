@@ -1,4 +1,4 @@
-var listurl = {"url":"","dataType":"text"};//表格数据
+var listUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/feedbackhear/list","dataType":"text"};//表格数据
 var delUrl = {"url":"","dataType":"text"};//删除
 var grid = null;
 
@@ -6,13 +6,13 @@ var pageModule = function () {
 	var initgrid = function(){
 		grid = $("#gridcont").createGrid({
 				columns:[
-					{display:"硬件/软件名称",name:"unit",width:"16%",align:"center",render:function(rowdata,n){
+						{display:"硬件/软件名称",name:"unit",width:"16%",align:"center",render:function(rowdata,n){
 							return rowdata.unit;                                         
 						}},
 						{display:"问题描述",name:"unit",width:"14%",align:"center",render:function(rowdata,n){
 							return rowdata.unit;                                         
 						}},
-						{display:"提出时间",name:"weeks",width:"12%",align:"left",render:function(rowdata){
+						{display:"提出时间",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
 						{display:"提出人",name:"weeks",width:"10%",align:"center",render:function(rowdata){
@@ -24,10 +24,10 @@ var pageModule = function () {
 						{display:"工作进展",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"状态",name:"weeks",width:"10%",align:"left",render:function(rowdata){
+						{display:"状态",name:"weeks",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"问题分类",name:"weeks",width:"14%",align:"left",render:function(rowdata){
+						{display:"问题分类",name:"weeks",width:"14%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}}
 				 ],

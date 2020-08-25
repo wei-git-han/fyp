@@ -13,7 +13,7 @@ var pageModule = function () {
 						{display:"问题描述",name:"unit",width:"14%",align:"center",render:function(rowdata,n){
 							return rowdata.unit;                                         
 						}},
-						{display:"提出时间",name:"weeks",width:"12%",align:"left",render:function(rowdata){
+						{display:"提出时间",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
 						{display:"提出人",name:"weeks",width:"10%",align:"center",render:function(rowdata){
@@ -25,10 +25,10 @@ var pageModule = function () {
 						{display:"工作进展",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"状态",name:"weeks",width:"10%",align:"left",render:function(rowdata){
+						{display:"状态",name:"weeks",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"问题分类",name:"weeks",width:"14%",align:"left",render:function(rowdata){
+						{display:"问题分类",name:"weeks",width:"14%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}}
 					 ],

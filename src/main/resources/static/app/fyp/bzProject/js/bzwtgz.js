@@ -9,7 +9,7 @@ var pageModule = function () {
 						{display:"姓名",name:"name",width:"10%",align:"center",render:function(rowdata,n){
 							return rowdata.name;                                         
 						}},
-						{display:"单位",name:"deptName",width:"15%",align:"left",render:function(rowdata){
+						{display:"单位名称",name:"deptName",width:"15%",align:"left",render:function(rowdata){
 							return rowdata.deptName;                                         
 						}},
 						{display:"联系电话",name:"phone",width:"10%",align:"center",render:function(rowdata){
@@ -48,7 +48,7 @@ var pageModule = function () {
 	//单位树
 	var initUnitTree = function(){
 		$("#deptName").createSelecttree({
-			url :UserTreeUrl,
+			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
