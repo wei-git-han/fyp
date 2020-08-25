@@ -6,17 +6,17 @@ var pageModule = function () {
 	var initgrid = function(){
 		grid = $("#gridcont").createGrid({
 				columns:[
-						{display:"硬件/软件名称",name:"unit",width:"16%",align:"center",render:function(rowdata,n){
-							return rowdata.unit;                                         
+						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
+							return rowdata.name;                                         
 						}},
-						{display:"问题描述",name:"unit",width:"14%",align:"center",render:function(rowdata,n){
-							return rowdata.unit;                                         
+						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
+							return rowdata.desc;                                         
 						}},
-						{display:"提出时间",name:"weeks",width:"12%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
+							return rowdata.submitTime;                                         
 						}},
-						{display:"提出人",name:"weeks",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.submitUserName;                                         
 						}},
 						{display:"解决时限",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
@@ -24,8 +24,8 @@ var pageModule = function () {
 						{display:"工作进展",name:"weeks",width:"12%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         
 						}},
-						{display:"状态",name:"weeks",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
+							return rowdata. status;                                         
 						}},
 						{display:"问题分类",name:"weeks",width:"14%",align:"center",render:function(rowdata){
 							return rowdata.weeks;                                         

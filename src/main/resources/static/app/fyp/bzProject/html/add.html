@@ -64,7 +64,7 @@
 			            </td>
 						<td class="t_label">状态</td>
 						<td class="t_inpt" >
-							<select class="form-control" id="" name="" required="required" >
+							<select class="form-control" id="status" name="status" required="required" >
 								<option value="0">处理中</option>
 								<option value="1">延后处理</option>
 								<option value="2">已完成</option>
@@ -74,7 +74,11 @@
 					<tr>
 						<td class="t_label">更新时间</td>
 						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="" id="" required="required" />
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="statusTime" id="statusTime" required="required" />
+						</td>
+						<td class="t_label">处理措施</td>
+						<td class="t_inpt" >
+							<input type="text" class="form-control" id="measures" name="measures" required="required" />
 						</td>
 					</tr>
 					<tr>

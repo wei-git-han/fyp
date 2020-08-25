@@ -37,14 +37,14 @@
 					<tr>
 						<td class="t_label">提出时间</td>
 						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="" id="" required="required" />
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="submitTime" id="submitTime" required="required" />
 						</td>
 						<td class="t_label">提出人</td>
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
-									<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()" required="required"  />
+									<input type="hidden" class="form-control"  id="submitUserId" name="submitUserId"  />
+									<input type="text" class="form-control"  id="submitUserName" name="submitUserName"  onfocus="blur()" required="required"  />
 								</div>
 							</div>
 						</td>
@@ -62,7 +62,7 @@
 					<tr>
 						<td class="t_label">状态</td>
 						<td class="t_inpt">
-							<select class="form-control" id="" name="" required="required" >
+							<select class="form-control" id="status" name="status" required="required" >
 								<option value="1">需求论证</option>
 								<option value="2">需求细化</option>
 								<option value="3">解决中</option>
@@ -81,7 +81,7 @@
 					<tr>
 						<td class="t_label">问题描述</td>
 						<td class="t_inpt" colspan="3">
-							<textarea rows="" cols="" class="form-control">
+							<textarea rows="" cols="" id="desc" name="desc" class="form-control">
 								
 							</textarea>
 						</td>

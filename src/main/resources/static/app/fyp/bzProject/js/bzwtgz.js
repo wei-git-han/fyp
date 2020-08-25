@@ -30,8 +30,8 @@ var pageModule = function () {
 						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.statusTime;                                         
 						}},
-						{display:"处理措施",name:"",width:"10%",align:"center",render:function(rowdata){
-							return '';                                         
+						{display:"处理措施",name:"measures",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.measures;                                         
 						}}
 					 ],
 			width:'100%',
