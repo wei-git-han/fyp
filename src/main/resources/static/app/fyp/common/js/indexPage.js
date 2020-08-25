@@ -212,7 +212,7 @@ var pageList = {
       "title": "在位情况",
       "head": "在位情况",
       "english": "REIGN CONDITION",
-      "url": "/app/fyp/rcgzIframe/html/zwqk_iframe.html"
+      "url": "/app/fyp/rcgzIframe/html/zwry_iframe.html"
     }
   ],
   bgxn: [{
