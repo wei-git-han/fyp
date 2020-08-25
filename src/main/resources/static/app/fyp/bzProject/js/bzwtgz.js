@@ -9,7 +9,7 @@ var pageModule = function () {
 						{display:"姓名",name:"name",width:"10%",align:"center",render:function(rowdata,n){
 							return rowdata.name;                                         
 						}},
-						{display:"单位",name:"deptName",width:"15%",align:"left",render:function(rowdata){
+						{display:"单位名称",name:"deptName",width:"15%",align:"left",render:function(rowdata){
 							return rowdata.deptName;                                         
 						}},
 						{display:"联系电话",name:"phone",width:"10%",align:"center",render:function(rowdata){
@@ -27,11 +27,11 @@ var pageModule = function () {
 						{display:"状态",name:"status",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.status;                                         
 						}},
-						{display:"状态时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
+						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.statusTime;                                         
 						}},
-						{display:"处理措施",name:"",width:"10%",align:"center",render:function(rowdata){
-							return '';                                         
+						{display:"处理措施",name:"measures",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.measures;                                         
 						}}
 					 ],
 			width:'100%',
@@ -48,7 +48,7 @@ var pageModule = function () {
 	//单位树
 	var initUnitTree = function(){
 		$("#deptName").createSelecttree({
-			url :UserTreeUrl,
+			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
@@ -150,7 +150,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			initUnitTree();
+			//initUnitTree();
 			initother();
         },
 		initgrid:function(){

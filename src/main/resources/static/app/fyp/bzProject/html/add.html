@@ -57,11 +57,29 @@
 						<td class="t_label">问题来源</td>
 						<td class="t_inpt" >
 							<select class="form-control" id="source" name="source" required="required" >
+								<option value="0">热线电话</option>
+								<option value="1">手机电话</option>
+								<option value="2">现场反馈</option>
+							</select>
+			            </td>
+						<td class="t_label">状态</td>
+						<td class="t_inpt" >
+							<select class="form-control" id="status" name="status" required="required" >
 								<option value="0">处理中</option>
 								<option value="1">延后处理</option>
 								<option value="2">已完成</option>
 							</select>
-			            </td>
+						</td>
+					</tr>
+					<tr>
+						<td class="t_label">更新时间</td>
+						<td class="t_inpt" >
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="statusTime" id="statusTime" required="required" />
+						</td>
+						<td class="t_label">处理措施</td>
+						<td class="t_inpt" >
+							<input type="text" class="form-control" id="measures" name="measures" required="required" />
+						</td>
 					</tr>
 					<tr>
 						<td class="t_label">问题描述：</td>

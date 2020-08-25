@@ -1,5 +1,7 @@
 var listurl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/roleedit/list","dataType":"text"};//表格数据
 var delUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/guaranteetacking/delete","dataType":"text"};//删除
+var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var grid = null;
 
 var pageModule = function () {
@@ -9,7 +11,7 @@ var pageModule = function () {
 						{display:"姓名",name:"userName",width:"15%",align:"center",render:function(rowdata,n){
 							return rowdata.userName;                                         
 						}},
-						{display:"单位",name:"deptName",width:"40%",align:"center",render:function(rowdata){
+						{display:"单位名称",name:"deptName",width:"40%",align:"center",render:function(rowdata){
 							return rowdata.deptName;                                         
 						}},
 						{display:"角色配置",name:" roleType",width:"15%",align:"center",render:function(rowdata){
@@ -45,17 +47,42 @@ var pageModule = function () {
 			url: listurl
 	   });
 	}
+	
+	//树
+	var initUnitTree = function(){
+		//姓名
+		$("#userName").createSelecttree({
+			url :userTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
+				$("#userName").val(data.node.text);
+				$("#userId").val(data.node.id);
+			}
+		}); 
+		//单位
+		$("#deptName").createSelecttree({
+			url :deptTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+			}
+		});
+	}
+	
 	var initother = function(){
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark","status"];
+			var elementarry = ["userId","userName","deptId","deptName","roleType"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
-		
+		    
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark","status"]);
+			removeInputData(["userId","userName","deptId","deptName","roleType"]);
 		});
 		
 		/* 新增add */
@@ -126,8 +153,9 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-        	initother();
 			initgrid();
+			initUnitTree();
+			initother();
         }
     }
 }();

@@ -1,4 +1,6 @@
-var listurl = {"url":"","dataType":"text"};//表格数据
+var listUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/feedbackhear/list","dataType":"text"};//表格数据
+var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //配置人树
 var delUrl = {"url":"","dataType":"text"};//删除
 var grid = null;
 
@@ -6,29 +8,29 @@ var pageModule = function () {
 	var initgrid = function(){
 		grid = $("#gridcont").createGrid({
 				columns:[
-					{display:"硬件/软件名称",name:"unit",width:"16%",align:"center",render:function(rowdata,n){
-							return rowdata.unit;                                         
+						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
+							return rowdata.name;                                         
 						}},
-						{display:"问题描述",name:"unit",width:"14%",align:"center",render:function(rowdata,n){
-							return rowdata.unit;                                         
+						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
+							return rowdata.desc;                                         
 						}},
-						{display:"提出时间",name:"weeks",width:"12%",align:"left",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
+							return rowdata.submitTime;                                         
 						}},
-						{display:"提出人",name:"weeks",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.submitUserName;                                         
 						}},
-						{display:"解决时限",name:"weeks",width:"12%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
+							return rowdata.solveTime;                                         
 						}},
-						{display:"工作进展",name:"weeks",width:"12%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"工作进展",name:"march",width:"12%",align:"center",render:function(rowdata){
+							return rowdata.march;                                         
 						}},
-						{display:"状态",name:"weeks",width:"10%",align:"left",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.status;                                         
 						}},
-						{display:"问题分类",name:"weeks",width:"14%",align:"left",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
+							return rowdata.type;                                         
 						}}
 				 ],
 		width:'100%',
@@ -42,19 +44,43 @@ var pageModule = function () {
 	  });
 	}
 	
+	//树
+	var initUnitTree = function(){
+		//单位
+		$("#submitDeptName").createSelecttree({
+			url :deptTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
+				$("#submitDeptName").val(data.node.text);
+				$("#submitDeptId").val(data.node.id);
+			}
+		});
+		
+		//提出人
+		$("#submitUserName").createSelecttree({
+			url :userTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
+				$("#submitUserName").val(data.node.text);
+				$("#submitUserId").val(data.node.id);
+			}
+		}); 
+	}
+	
 	var initother = function(){
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark","status"];
+			var elementarry = ["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTime","desc"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark","status"]);
+			removeInputData(["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTime","desc"]);
 		});
-		
 		
 		/* 新增add */
 		$("#add").click(function(){
@@ -124,8 +150,9 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-        	initother();
 			initgrid();
+			initUnitTree();
+			initother();
         }
     }
 }();

@@ -45,7 +45,7 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark"];
+			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"];
 				var paramdata = getformdata(elementarry);
 				paramdata.id = id;
 				$ajax({
@@ -79,7 +79,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark"]);
+			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"]);
 		});
 		
 		//取消

@@ -29,44 +29,60 @@
 			<form id="commentForm" class="pr100">
 				<table class="table">
 					<tr>
-						<td class="t_label">姓名</td>
-						<td class="t_inpt" >
+						<td class="t_label">硬件/软件名称</td>
+						<td class="t_inpt" colspan="3">
 							<input type="text" class="form-control" id="name" name="name" required="required" />
 						</td>
-						<td class="t_label">单位</td>
+					</tr>
+					<tr>
+						<td class="t_label">提出时间</td>
+						<td class="t_inpt" >
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="submitTime" id="submitTime" required="required" />
+						</td>
+						<td class="t_label">提出人</td>
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
-									<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()" required="required"  />
+									<input type="hidden" class="form-control"  id="submitUserId" name="submitUserId"  />
+									<input type="text" class="form-control"  id="submitUserName" name="submitUserName"  onfocus="blur()" required="required"  />
 								</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">角色配置</td>
+						<td class="t_label">解决时限</td>
+						<td class="t_inpt" >
+							<input class="form-control input-group date form_datetime" size="16" type="text" name="solveTime" id="solveTime" required="required" />
+						</td>
+						<td class="t_label">工作进展</td>
+						<td class="t_inpt" >
+							<input type="text" class="form-control" id="march" name="march" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td class="t_label">状态</td>
 						<td class="t_inpt">
-							<select class="form-control" id="roleType" name="roleType" required="required" >
-								<option value="0">超级管理员</option>
-								<option value="1">系统管理员</option>
-								<option value="2">局管理员</option>
-								<option value="3">在编人员</option>
+							<select class="form-control" id="status" name="status" required="required" >
+								<option value="1">需求论证</option>
+								<option value="2">需求细化</option>
+								<option value="3">解决中</option>
+								<option value="4">已解决待升级</option>
+								<option value="5">已关闭</option>
 							</select>
 						</td>
-						<td class="t_label">配置人</td>
+						<td class="t_label">问题分类</td>
 						<td class="t_inpt">
-							<div class="form-control" style="padding:0;">
-								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="userId" name="userId"  />
-									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" required="required"  />
-								</div>
-							</div>
+							<select class="form-control" id="type" name="type" required="required" >
+								<option value="0">系统问题</option>
+								<option value="1">完善建议</option>
+							</select>
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">配置时间</td>
-						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="" id="" required="required" />
+						<td class="t_label">问题描述</td>
+						<td class="t_inpt" colspan="3">
+							<textarea rows="" cols="" id="desc" name="desc" class="form-control">
+							</textarea>
 						</td>
 					</tr>
 				</table>

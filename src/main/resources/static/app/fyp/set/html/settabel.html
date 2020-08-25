@@ -32,11 +32,16 @@
 		<div class="newlayout-search-main">
 			<form>
 				<div class="form-group">
-					<label>用户</label><br/>
-					<input type="text" name="name" id="name" value="" placeholder="请输入用户信息" />
+					<label>姓名</label><br/>
+					<div class="form-control" style="padding:0;width:195px;">
+						<div class="selecttree">
+							<input type="hidden" class="form-control"  id="userId" name="userId"  />
+							<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" placeholder=""  />
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
-					<label>提出单位</label><br/>
+					<label>单位</label><br/>
 					<div class="form-control" style="padding:0;width:195px;">
 						<div class="selecttree">
 							<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
@@ -45,27 +50,12 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label>报修时间</label><br/>
-					<input style="width:195px;" class="form-control form-control-inline date-picker" size="16" type="text" name="warrantyTime" id="warrantyTime"  />
-				</div>
-				<div class="form-group">
-					<label>问题来源</label><br/>
-					<select name="source" id="source" class="form-control" style="width:195px;">
-						<option value="0">处理中</option>
-						<option value="1">延后处理</option>
-						<option value="2">已完成</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>问题描述</label><br/>
-					<input type="text" name="remark" id="remark" value="" placeholder="请输入问题描述关键词" />
-				</div>
-				<div class="form-group">
-					<label>状态</label><br/>
-					<select name="status" id="status" class="form-control" style="width:195px;">
-						<option value="0">热线电话</option>
-						<option value="1">手机电话</option>
-						<option value="2">现场反馈</option>
+					<label>角色类型</label><br/>
+					<select class="form-control" id="roleType" name="roleType" required="required" >
+						<option value="0">超级管理员</option>
+						<option value="1">系统管理员</option>
+						<option value="2">局管理员</option>
+						<option value="3">在编人员</option>
 					</select>
 				</div>
 				<div class="btn-group">

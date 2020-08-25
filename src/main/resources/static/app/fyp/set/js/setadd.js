@@ -1,6 +1,6 @@
 var saveUrl;
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
-var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //配置人树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
 var dataId=getUrlParam("id")||"";//编辑数据id
 if(!!dataId){
@@ -9,7 +9,7 @@ if(!!dataId){
 	saveUrl = {"url":"","dataType":"text"};  //edit
 }
 var pageModule = function(){
-	//单位树
+	//树
 	var initUnitTree = function(){
 		//单位
 		$("#deptName").createSelecttree({
@@ -22,7 +22,7 @@ var pageModule = function(){
 			}
 		});
 		
-		//配置人
+		//人
 		$("#userName").createSelecttree({
 			url :userTreeUrl,
 			width : '100%',
@@ -58,7 +58,7 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark"];
+			    var elementarry = ["userId","userName","deptId","deptName","roleType","editUserId","editUserName","editTime"];
 				var paramdata = getformdata(elementarry);
 				paramdata.id = id;
 				$ajax({
@@ -92,7 +92,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark"]);
+			removeInputData(["userId","userName","deptId","deptName","roleType","editUserId","editUserName","editTime"]);
 		});
 		
 		//取消
