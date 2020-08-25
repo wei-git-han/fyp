@@ -27,7 +27,7 @@ var pageModule = function () {
 						{display:"状态",name:"status",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.status;                                         
 						}},
-						{display:"状态时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
+						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.statusTime;                                         
 						}},
 						{display:"处理措施",name:"",width:"10%",align:"center",render:function(rowdata){
@@ -150,7 +150,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			initUnitTree();
+			//initUnitTree();
 			initother();
         },
 		initgrid:function(){
