@@ -2,33 +2,72 @@ var phUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&
 var pageModule = function () {
 	
 	var initother = function(){
+		$("#wkjsj").click(function(){
+			getBarChartData2();
+		});
 	}
 	
+	//在线率排行
 	var getBarChartData = function(){
 		$.ajax({
-		  url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/bhxxLineChart",
+		  url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/onLine",
 		  data:{},
 		  dataType:"json",
 		  success:function(res){
 			if(res.result=="success"){
-			  initBarChart(res.data)
+			    initBarChart(res.data,'main');
 			}
 		  }
 		})
 	}
 	
-	var initBarChart = function(data){
-	/*	 var data = {
-		   "title":"",
-		   "legend":[],
-		   "xdata":['1级部首长办公室数据', '2级部首长办公室数据', '3级部首长办公室数据', '4级部首长办公室数据', '5级部首长办公室数据'],
-		   "ydata":[{
-		     "title":"",
-		     "data":[320,332,200,300,450]
-		   }]
-		} */
+	//未开机数据
+	var getBarChartData2 = function(){
+		$.ajax({
+		  url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/computer",
+		  data:{},
+		  dataType:"json",
+		  success:function(res){
+			if(res.result=="success"){
+			    initBarChart(res.data,'main3');
+			}
+		  }
+		})
+	}
+	
+	var initBarChart = function(data,id){
+		/*var data ={
+		    "data":[
+		        {
+		            "deptName":"来文办理总件数",
+		            "leaveCount":"请假",
+		            "onLineCount":"在线",
+		            "percentage":"12",
+		            "count":"呈批公文总件数",
+		            "otherCount":"其他",
+		            "permanentStaffCount":"在编"
+		        },
+		        {
+		            "deptName":"来文办理总件数1",
+		            "leaveCount":"请假",
+		            "onLineCount":"在线",
+		            "percentage":"50",
+		            "count":"呈批公文总件数",
+		            "otherCount":"其他",
+		            "permanentStaffCount":"在编"
+		        }
+		    ]
+		}*/
 		
-		var chart = echarts.init(document.getElementById('main'));
+		//解析后端数据
+		var xdata =[];
+		var ydata =[];
+		$.each(data.data, function(i, o) {
+			xdata.push(o.deptName);
+			ydata.push(o.percentage);
+		});
+		
+		var chart = echarts.init(document.getElementById(id));
 		chart.setOption({
 			title: {
 			  show: true,
@@ -36,11 +75,7 @@ var pageModule = function () {
 			  subtextStyle: {
 				color: '#DBDDF7',
 			  },
-			  /* padding:[100,100,100,100]  设置title位置，是具体固定的位置*/  
 			},
-			/* grid:{
-				height:100   //柱状图高度
-			}, */
 			color: ['#509DF7', '#99DA48'],
 			tooltip: {
 				trigger: 'axis',
@@ -50,7 +85,7 @@ var pageModule = function () {
 				color:'red'
 			},
 			legend: {
-				data:data.legend,
+				data:[],
 				textStyle:{
 					color:'#fff'
 				}
@@ -82,7 +117,7 @@ var pageModule = function () {
 					    fontSize: 12
 					  }
 					},
-					data: data.xdata
+					data: xdata
 				}
 			],
 			yAxis: [
@@ -107,27 +142,12 @@ var pageModule = function () {
 			],
 			series: [
 				{
-					name: data.ydata[0].title,
+					name:'',
 					type: 'bar',
 					barGap: 0,
 					barWidth:10,
 					barCategoryGap:'300',
-					data: data.ydata[0].data,
-					itemStyle: {
-			            normal: {
-			             /* color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-			                offset: 1,
-			                color: '#2C76EC'
-			              }, {
-			                offset: 0,
-			                color: '#58B4FD'
-			              }]),*/
-			              barBorderRadius: [30, 30, 0, 0],
-			              label: {
-			                show: false
-			              }
-			          }
-		          }
+					data:ydata
 				}
 			]
 		});
@@ -172,7 +192,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
         	getBarChartData();
-			initPh();
+        	initPh();
 			initother();
         }
     }

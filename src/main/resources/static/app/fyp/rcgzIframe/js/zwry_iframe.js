@@ -50,10 +50,12 @@ var pageModule = function () {
 						if (n > 0) {
 							if (children != "" && children != null && children != "undefined") {
 								if (children.length > 0) {
-									icon = '<i class="faa fa fa-caret-right" style="font-size:18px!important"></i>'
+									icon = '<i class="faa fa fa-caret-right" style="font-size:24px!important"></i>'
 								} else {
 									icon = '<i class="fa"></i>'
 								}
+							}else{
+								icon = '<i class="fa fa-plus" style="color:transparent;width:30px;"></i>'
 							}
 						};
 						//单位在线人数&离线人数
@@ -64,21 +66,12 @@ var pageModule = function () {
 							allnumber = "(" + zxnumberhtml + "&nbsp;" + qjnumberhtml + "&nbsp;" + lxnumberhtml + ")";
 						} */
 
-						//判断是否在线，1在线，0离线 2请假
-						if (status != "" && status != null && status != "undefined") {
-							if (status == "1") {
-								statushtml = '<i class="fa fa-circle fa1"></i>'; //在线
-							} else if(status == '2'){
-                                statushtml = '<i class="leave"></i>'; //请假
-							}else {
-                                	statushtml = '<i class="fa fa-circle fa0"></i>'; //离线
-							}
-						}
 
 						var li = $('<li class="l' + n + ' ' + (n == 1 ? "open active" : "") + ' lis" >' +
-							'	<a style="padding-left:' + (n * pl) + 'px;" id="' + id + '" data="' + text + '" >' + icon + img +
-							text +
-							allnumber + statushtml + '</a>' +
+							'	<a style="padding-left:' + (n * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
+							'		<span class="newstatusL">'+img+text+'</span>'+
+							'		<span class="newstatusR"><font>在线12人</font>'+icon+'</span>'+
+							'	</a>'+
 							'</li>');
 						el.append(li);
 						var children = o.children;

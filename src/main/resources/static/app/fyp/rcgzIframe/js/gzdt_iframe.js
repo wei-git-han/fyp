@@ -1,19 +1,19 @@
+var gzdtUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workTrendController/workTrendList","dataType":"text"};
 var pageModule = function () {
 	
 	var initgzdt = function(){
-		$.ajax({
-			url: "../data/gzdtContent.json",
+		$ajax({
+			url: gzdtUrl,
 			data:{},
 			success: function(data) {
 				var arryHtml = '';
-				$.each(data.list, function(i, o) {
-					console.log(data.list)
+				$.each(data.data, function(i, o) {
 					arryHtml+=`<dl>
-									<dt><img src="../images/lqbz.png" ></dt>
+									<dt><img src="${o.phoneUrl}" ></dt>
 									<dd>
-										<p class="title">${o.title}</p>
-										<p class="content">${o.content}</p>
-										<p class="btns"><span class="date">${o.date}</span>阅读<span class="num">${o.number}</span><a id="${o.id}">查看详情</a></p>
+										<p class="title">${o.contentHead}</p>
+										<p class="content">${o.contentDetail}</p>
+										<p class="btns"><span class="date">${o.contentDate}</span>阅读<span class="num">${o.contentCount}</span><a id="${o.id}">查看详情</a></p>
 									</dd>
 								</dl>`
 				});
