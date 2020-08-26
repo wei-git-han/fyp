@@ -246,3 +246,35 @@ select{
 	background: #006550;
 	padding: 0 5px;
 }
+
+.tab_title11{
+	position: absolute;
+	left:0;top:0;
+	height:45px;
+	line-height:45px;
+	color:#DBDEF7;
+	font-weight:700;
+	font-size:16px;
+	width:100%;
+}
+.aas{
+	width:100%;
+	height:100%;
+	padding-top:45px;
+}
+
+.li.active,.newtab li.active{
+	display:block;
+}
+.newtab li{
+	float:left;
+}
+.aas>div{
+	display:none;
+}
+.li.active,.newtab li.active{
+	display:block;
+}
+.aas>div.active{
+	display:block;
+}
