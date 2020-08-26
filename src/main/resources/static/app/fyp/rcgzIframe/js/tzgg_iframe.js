@@ -6,20 +6,21 @@ var pageModule = function () {
 			data:{afficheType:id},
 			success: function(data) {
 				var arryHtml = '';
-				$.each(data.data, function(i, o) {
+				$.each(data.data.list, function(i, o) {
 					var class1 = "";
 					if(i<3){
 						class1 = "top3";
 					} 
 					arryHtml+=  '<dl class="'+class1+'">'+
-								'	<dt><span>'+parseInt(i+1)+'</span>'+o.content+'</dt>'+
-								'	<dd>'+o.date+'</dd>'+
+								'	<dt><span>'+parseInt(i+1)+'</span>'+o. informAfficheContent+'</dt>'+
+								'	<dd>'+o.informAfficheTime+'</dd>'+
 								'</dl>'
 				});
 				$("#"+id).html(arryHtml);
 			}
 		})
 	}
+	
 	var initother = function(){
 		//点击事件
 		$(".nav li").click(function() {

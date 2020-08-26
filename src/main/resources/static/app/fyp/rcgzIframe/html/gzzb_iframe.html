@@ -28,14 +28,14 @@
 		<div class="pr100">
 			<div class="tabbable">
 			    <ul class="nav nav-tabs nav-tabs-lg">
-			        <li class="active">
-			            <a href="#tab_1" data-toggle="tab">本局周表</a>
+			        <li class="active week" data="bjzb">
+			            <a href="#tab_1" >本局周表</a>
 			        </li>
-			        <li>
-			            <a href="#tab_2" data-toggle="tab">个人周表</a>
+			        <li id="grzb">
+			            <a href="#tab_2" >个人周表</a>
 			        </li>
-					<li>
-					    <a href="#tab_3" data-toggle="tab">各局周表</a>
+					<li class="week" data="gjzb"> 
+					    <a href="#tab_3">各局周表</a>
 					</li>
 			    </ul>
 			    <div style="padding-top:35px;width: 100%;height: 100%;">
@@ -57,7 +57,7 @@
 				            		</div>
 				            	</div>
 			            		<div class="tab_main">
-									<div class="pr100" id="newpage113">
+									<div class="pr100 newpage113">
 										<div style="position:absolute;top:0px;width:100%;height:34px;">
 											<div class="newpage119" style="height:100%">
 												<div class="newpage16">
@@ -73,9 +73,9 @@
 												</div>
 											</div>
 										</div>
-										<div style="width:100%;height:100%;padding-top:42px;border: 1px solid #2E85E0;">
+										<div style="width:100%;height:100%;padding-top:35px;border: 1px solid #2E85E0;">
 											<div class="pr100">
-												<div class="newpage119" id="anpaiID">
+												<div class="newpage119" id="bjzb">
 													
 												</div>
 											</div>
@@ -91,7 +91,37 @@
 				        </div>
 						<div class="tab-pane" id="tab_3">
 						    <div class="pr100 scroller">
-								
+								<div class="tab_title">
+				            		<select>
+			            				<option>某某局</option>
+			            			</select>
+				            	</div>
+			            		<div class="tab_main">
+									<div class="pr100 newpage113" >
+										<div style="position:absolute;top:0px;width:100%;height:34px;">
+											<div class="newpage119" style="height:100%">
+												<div class="newpage16">
+													<div class="newpage17 sameColor">
+														<div class="newpage22">日 期</div>
+													</div>
+													<div class="newpage18 sameColor" style="border-right: 1px dashed #2E85E0 !important;">
+														<div class="newpage22">上 午</div>
+													</div>
+													<div class="newpage18 sameColor"  style="left:56%;">
+														<div class="newpage22">下 午</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="width:100%;height:100%;padding-top:35px;border: 1px solid #2E85E0;">
+											<div class="pr100">
+												<div class="newpage119" id="gjzb">
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 						    </div> 
 						</div>
 				    </div>
@@ -121,6 +151,7 @@
 <script>
     jQuery(document).ready(function () {
         pageModule.initControl();
+        Metronic.init(); // init metronic core componets
     });
 </script>
 </body>
