@@ -43,9 +43,38 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         } else {
             //局用户
             jsonData = this.getJsonArrayData("","","", "", applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
+
+            JSONArray jsonArray = (JSONArray)jsonData.get("returnJsonArr");
+            //JSONObject qxjJson = this.getQxjJson();
+            //即时通讯数量
+            JSONObject jstxJsonObj = new JSONObject();
+            jstxJsonObj.put("flowCount", "5");
+            jstxJsonObj.put("typeName", "即时通讯");
+            jstxJsonObj.put("applyType", "5");
+            jsonArray.add(jstxJsonObj);
         }
         return jsonData;
     }
+
+//    public JSONObject getQxjJson() {
+//        String userId = CurrentUser.getUserId();
+//        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+//        map.add("userId", userId);
+//        //TODO 待修改为实际的地址
+//        //String url = baseAppOrgMappedService.getWebUrlByType(AppConstant.APP_QXJ,AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP);
+//        String url = baseAppOrgMappedService.getUrlByType(userId, AppConstant.APP_QXJ);
+//        if(com.css.base.utils.StringUtils.isNotBlank(url)) {
+//            url+=AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP;
+//        }
+//        System.out.println("请销假请求路径："+url);
+//        //排除的人ID
+//        List<String> idList = getFilterIds();
+//        map.add("leaveIds", com.css.base.utils.StringUtils.join(idList,","));
+//
+//        JSONObject obj = CrossDomainUtil.getJsonData(url, map);
+//
+//        return obj;
+//    }
 
     private JSONObject getJsonData (String userId, String appLevel, String orgId, String type, String url) {
         JSONObject jsonData =new JSONObject();

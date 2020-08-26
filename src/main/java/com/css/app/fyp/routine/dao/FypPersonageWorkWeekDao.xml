@@ -21,27 +21,34 @@
 		fpww.created_time as createdTime,
 		to_char(fpww.created_time,'MM-DD') as weekDate,
 		to_char(fpww.created_time,'hh-ss') as weekTime,
-		datepart(hh,fpww.created_time)/12 as flag
+		datepart(hh,fpww.created_time)/12 as hourFlag,
+		fpww.created_time as createdTime
 		from fyp_personage_work_week fpww
 		where 1=1
 		<if test="userId !=null">
 			and fpww.user_id = #{userId}
 		</if>
-		<if test="hourFlag !=null">
-			and datepart(hh,fpww.created_time)/12 = #{hourFlag}
+		<if test="weekDate !=null">
+			and to_char(fpww.created_time,'YYYY-MM-DD') = #{weekDate}
+		</if>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
 		</if>
 	</select>
 
 	<select id="getWeekWorkDateList" resultType="String">
 		select
-		to_char(fpww.created_time,'MM-DD')
+		to_char(fpww.created_time,'YYYY-MM-DD')
 		from fyp_personage_work_week fpww
 		WHERE 1=1
 		<if test="userId !=null">
 			and fpww.user_id = #{userId}
 		</if>
-		group by to_char(fpww.created_time,'MM-DD')
-		order by to_char(fpww.created_time,'MM-DD') asc
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+		group by to_char(fpww.created_time,'YYYY-MM-DD')
+		order by to_char(fpww.created_time,'YYYY-MM-DD') asc
 	</select>
 
  	<select id="queryTotal" resultType="int">

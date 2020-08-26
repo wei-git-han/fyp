@@ -1,6 +1,6 @@
 package com.css.app.fyp.routine.service;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
 
 import java.util.List;
@@ -17,5 +17,7 @@ public interface ReignCaseService {
 	List<ReignCaseVo> reignCaseList(String afficheType);
 
 	void reignCaseSave(String trendType) ;
+
+    JSONObject getUserTree() ;
 
 }

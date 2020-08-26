@@ -1,6 +1,7 @@
 package com.css.app.fyp.routine.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
 import com.css.app.fyp.routine.service.FypPersonageWorkWeekService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
@@ -22,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * 工作周表
@@ -61,13 +66,12 @@ public class WorkWeekTableController {
     @RequestMapping("/list")
     public void list(Integer page, Integer pagesize){
         Map<String, Object> map = new HashMap<>();
-        PageHelper.startPage(page, pagesize);
         String userId = CurrentUser.getUserId();
         //查询列表数据
-        List<FypPersonageWorkWeekVo> fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
-        PageUtils pageUtil = new PageUtils(fypPersonageWorkWeekList);
-        Response.json(new ResponseValueUtils().success(pageUtil));
+        JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
+        Response.json(new ResponseValueUtils().success(fypPersonageWorkWeekList));
     }
+
 
     /**
      * 信息
@@ -114,16 +118,16 @@ public class WorkWeekTableController {
         Response.ok();
     }
 
-    private String getWeekOfDate(long time) {
-        Date date = new Date();
-        String[] weekDays = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (w < 0) {
-            w = 0;
-        }
-        return weekDays[w];
-    }
+//    private String getWeekOfDate(long time) {
+//        Date date = new Date();
+//        String[] weekDays = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+//        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+//        if (w < 0) {
+//            w = 0;
+//        }
+//        return weekDays[w];
+//    }
 
 }

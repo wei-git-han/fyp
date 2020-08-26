@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONArray;
 import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
 import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -46,7 +47,7 @@ public class FypPersonageWorkWeekController {
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
 		//查询列表数据
-		List<FypPersonageWorkWeekVo> fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
+		JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
 		PageUtils pageUtil = new PageUtils(fypPersonageWorkWeekList);
 		Response.json("page",pageUtil);
 	}

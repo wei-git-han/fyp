@@ -7,15 +7,12 @@ import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
-import com.css.addbase.orgservice.UserInfo;
 import com.css.app.fyp.routine.service.ReignCaseService;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
-import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.RestTemplateUtil;
 import org.apache.commons.lang.StringUtils;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +161,56 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     @Override
     public void reignCaseSave(String trendType) {
 
+    }
+
+    /**
+     * 获取人员在位状态数据
+     * 加载人员树
+     * @return
+     */
+    public JSONObject getUserTree() {
+        JSONObject jsonData = new JSONObject();
+        JSONObject jsonObj = new JSONObject();
+        String userId = CurrentUser.getUserId();
+        //当前用户是否为部首长
+        jsonData = this.getDataUserTree("", "","","", userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
+        if (jsonData != null) {
+            //部首长
+            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
+            jsonObject.get("flowCount");
+        } else {
+            //局用户
+            jsonData = this.getDataUserTree("","","", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_GET_USER_TREE_FYP);
+        }
+        return jsonData;
+    }
+
+    private JSONObject getDataUserTree (String page, String pagesize, String applyType, String listType, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        infoMap.add("userId", userId);
+        if (applyType != null) {
+            infoMap.add("type", applyType);
+        }
+        if (listType != null) {
+            infoMap.add("documentTopStatus", listType);
+        }
+        if (page != null) {
+            infoMap.add("page", page);
+        }
+        if (pagesize != null) {
+            infoMap.add("pagesize", pagesize);
+        }
+        //String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        String mapperUrl = "http://172.16.1.19:64004";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
     }
 
 }

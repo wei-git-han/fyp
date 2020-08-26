@@ -1,18 +1,27 @@
 package com.css.app.fyp.routine.controller;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.service.BaseAppUserService;
+import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
+import com.css.addbase.constant.AppConstant;
+import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.service.ReignCaseService;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.CurrentUser;
 import com.css.base.utils.Response;
+import com.css.base.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * @ClassName 在位情况
@@ -25,6 +34,10 @@ public class ReignCaseController {
     private final Logger logger = LoggerFactory.getLogger(ReignCaseController.class);
     @Autowired
     private ReignCaseService reignCaseService;
+    @Autowired
+    private BaseAppOrgMappedService baseAppOrgMappedService;
+    @Autowired
+    private BaseAppUserService baseAppUserService;
 
    /**
     * @Description 在位情况列表
@@ -52,6 +65,54 @@ public class ReignCaseController {
     public void reignCaseSave(String trendType) {
         reignCaseService.reignCaseSave(trendType);
         Response.json("result", "success");
+    }
+
+
+    /**
+     * 获取人员在位状态数据
+     * 加载人员树
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/reignDataTree")
+    @ResponseBody
+    public void getUserTree(HttpServletRequest request) {
+        JSONObject maps = reignCaseService.getUserTree();
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * 获取人员在位状态数据
+     * 加载人员树
+     * @param fullName
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getTxlInfo")
+    public void txlInfo(String fullName) {
+        JSONObject fypJson = new JSONObject();
+        fypJson.put("txlJson", getTxlJson(fullName));
+        fypJson.put("ismain", "true");
+        Response.json(fypJson);
+    }
+
+    /**
+     * 获取txl数据
+     */
+    private Object getTxlJson(String fullName) {
+        // 查询列表数据
+        try {
+            LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+            map.add("fullName", fullName);
+            String url = baseAppOrgMappedService.getWebUrlByType(AppConstant.APP_TXL,
+                    AppInterfaceConstant.WEB_INTERFACE_TXL_TO_FYP);
+            JSONObject json = CrossDomainUtil.getJsonData(url, map);
+            Object str = json.get("info");
+            return str;
+        } catch (Exception e) {
+            System.err.println(e);
+            return "";
+        }
     }
 
 }
