@@ -1,4 +1,4 @@
-var listUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/feedbackhear/list","dataType":"text"};//表格数据
+var listUrl = {"url":"http://localhost:11208/fyp/feedbackhear/list","dataType":"text"};//表格数据
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //配置人树
 var delUrl = {"url":"","dataType":"text"};//删除

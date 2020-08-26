@@ -4,9 +4,9 @@ var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
 var dataId=getUrlParam("id")||"";//编辑数据id
 if(!!dataId){
-	saveUrl = {"url":"","dataType":"text"};  //save
+	saveUrl = {"url":"localhost:11208/fyp/roleedit/save","dataType":"text"};  //save
 }else{
-	saveUrl = {"url":"","dataType":"text"};  //edit
+	saveUrl = {"url":"localhost:11208/fyp/roleedit/update","dataType":"text"};  //edit
 }
 var pageModule = function(){
 	//树

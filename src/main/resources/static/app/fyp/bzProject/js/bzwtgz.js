@@ -1,5 +1,5 @@
-var listurl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/feedbackhear/list","dataType":"text"};//表格数据
-var delUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/guaranteetacking/delete","dataType":"text"};//删除
+var listurl = {"url":"http://localhost:11208/fyp/guaranteetacking/list","dataType":"text"};//表格数据
+var delUrl = {"url":"http://localhost:11208/fyp/guaranteetacking/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
 var grid = null;
 var pageModule = function () {
