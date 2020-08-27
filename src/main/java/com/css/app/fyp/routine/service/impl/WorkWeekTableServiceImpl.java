@@ -30,7 +30,6 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     @Override
     public JSONArray statementTablesList(String weekTableType, String weekTableDate, String page, String pagesize) {
         JSONArray jsonData = new JSONArray();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
         String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
         BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
