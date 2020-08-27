@@ -236,7 +236,7 @@ function createtable(obj){
 			};
 		};
 		if(getvalue(obj.pageyno,"pageyno")==true){
-			paramobj.pagesize = pagesize;
+			paramobj.limit = pagesize;
 			paramobj.page = newpage;
 		}else{
 			pagesize = 200;
@@ -504,7 +504,7 @@ function createtable(obj){
 			paramobj[key] = params[key];
 		}
 		if(getvalue(obj.pageyno,"pageyno")==true){
-			paramobj.pagesize = pagesize;
+			paramobj.limit = pagesize;
 			paramobj.page = newpage;
 		}else{
 			pagesize = 200;
