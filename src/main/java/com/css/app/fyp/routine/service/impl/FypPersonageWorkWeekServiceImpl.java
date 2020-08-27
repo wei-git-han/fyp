@@ -31,39 +31,6 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
 		return fypPersonageWorkWeekDao.queryList(map);
 	}
 
-//	@Override
-//	public List<FypPersonageWorkWeekVo> getPersonalWeekTableList(Map<String, Object> map, String userId){
-//		Map<String, Object> allMap = new HashMap<>();
-//		allMap.put("userId", userId);
-//		List<String> fypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getWeekWorkDateList(allMap);
-//
-//		Map<String, Object> amMap = new HashMap<>();
-//		amMap.put("userId", userId);
-//		amMap.put("hourFlag", 0);
-//		List<FypPersonageWorkWeekVo> amFypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getPersonalWeekTableList(amMap);
-//		Map<String, FypPersonageWorkWeekVo> amCollect = amFypPersonageWorkWeekVos.stream().collect(Collectors.toMap(FypPersonageWorkWeekVo::getWeekDate, amFypPersonageWorkWeekVo -> amFypPersonageWorkWeekVo));
-//
-//		Map<String, Object> pmMap = new HashMap<>();
-//		pmMap.put("userId", userId);
-//		pmMap.put("hourFlag", 1);
-//		List<FypPersonageWorkWeekVo> pmFypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getPersonalWeekTableList(pmMap);
-//		Map<String, FypPersonageWorkWeekVo> pmcollect = pmFypPersonageWorkWeekVos.stream().collect(Collectors.toMap(FypPersonageWorkWeekVo::getWeekDate, pmFypPersonageWorkWeekVo -> pmFypPersonageWorkWeekVo));
-//		List<FypPersonageWorkWeekVo> fypPersonageWorkWeekVoList = new ArrayList<FypPersonageWorkWeekVo>();
-//		for (String weekDate : fypPersonageWorkWeekVos) {
-//			FypPersonageWorkWeekVo fypPersonageWorkWeekVo = new FypPersonageWorkWeekVo();
-//			fypPersonageWorkWeekVo.setWeekDate(weekDate);
-//			long amTime = amCollect.get(weekDate).getCreatedTime().getTime();
-//			fypPersonageWorkWeekVo.setAmWeekTime(amTime+"");
-//			fypPersonageWorkWeekVo.setAmWeekTableContent(amCollect.get(weekDate).getWeekTableContent());
-//			long pmTime = pmcollect.get(weekDate).getCreatedTime().getTime();
-//			fypPersonageWorkWeekVo.setPmWeekTime(pmTime+"");
-//			fypPersonageWorkWeekVo.setPmWeekTableContent(pmcollect.get(weekDate).getWeekTableContent());
-//			fypPersonageWorkWeekVoList.add(fypPersonageWorkWeekVo);
-//		}
-//
-//		return fypPersonageWorkWeekVoList;
-//	}
-
     @Override
     public JSONArray getPersonalWeekTableList(Map<String, Object> map, String userId){
         Map<String, Object> allMap = new HashMap<>();
