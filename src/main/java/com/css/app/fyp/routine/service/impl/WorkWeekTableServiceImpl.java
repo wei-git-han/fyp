@@ -1,6 +1,8 @@
 package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
 import com.css.base.utils.CrossDomainUtil;
@@ -28,29 +30,29 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     @Override
     public JSONArray statementTablesList(String weekTableType, String weekTableDate, String page, String pagesize) {
         JSONArray jsonData = new JSONArray();
+        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
+        String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
+        BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
+        String name = baseAppOrgan.getName();
         //当前用户是否为部首长
-//        jsonData = this.getWorkWeekData("", "","","",null, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-//        if (jsonData != null) {
-//            //部首长
-//            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-//            jsonObject.get("flowCount");
-//        } else {
-//            //局用户
-//            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
-//            String zoneId = "";
-//            if (StringUtils.equals(weekTableType, "2")) {
-//                zoneId = CurrentUser.getUserId();
-//            }
-//            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
-//        }
-        //局用户
-        String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
-        String zoneId = "";
-        if (StringUtils.equals(weekTableType, "2")) {
-            zoneId = CurrentUser.getUserId();
+        if (StringUtils.equals("部首长",name)) {
+            //部首长
+            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
+            String zoneId = "";
+            if (StringUtils.equals(weekTableType, "2")) {
+                zoneId = CurrentUser.getUserId();
+            }
+            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
+        } else {
+            //局用户
+            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
+            String zoneId = "";
+            if (StringUtils.equals(weekTableType, "2")) {
+                zoneId = CurrentUser.getUserId();
+            }
+            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         }
-        jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         return jsonData;
     }
 

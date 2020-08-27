@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -32,18 +34,68 @@ public class WorkTrendServiceImpl implements WorkTrendService {
      */
     @Override
     public JSONObject workTrendList(String trendType) {
-        JSONObject jsonData = new JSONObject();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
-        //当前用户是否为部首长
-        jsonData = this.getJsonData(userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
-            //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
+        //局用户
+        JSONObject jsonData = this.getJsonData(userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_VIEWINFO_FYP);
+        return jsonData;
+    }
+
+    /**
+     * @Description 轮播图展示
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @Override
+    public JSONObject displayRotationPicture() {
+        JSONObject jsonData = this.getDisplayRotationPicture(AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_GET_DISPLAY_ROTATION_PICTURE_TREE_FYP);
+        return jsonData;
+    }
+
+    private JSONObject getDisplayRotationPicture (String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        String mapperUrl = "http://172.16.1.19:64004";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
         } else {
-            //局用户
-            jsonData = this.getJsonData(userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_VIEWINFO_FYP);
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
+    /**
+     * @Description 轮播图展示
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @Override
+    public JSONObject uploadPictures(MultipartFile[] pictureFiles, String groupId) {
+        JSONObject jsonData = this.getUploadPictures(pictureFiles, groupId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_GET_UPLOAD_PICTURES_TREE_FYP);
+        return jsonData;
+    }
+
+    private JSONObject getUploadPictures (MultipartFile[] pictureFiles, String groupId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        if (pictureFiles != null) {
+            infoMap.add("pictureFiles", pictureFiles);
+        }
+        if (StringUtils.isNotEmpty(groupId)) {
+            infoMap.add("groupId", groupId);
+        }
+        String mapperUrl = "http://172.16.1.19:64004";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
         }
         return jsonData;
     }
@@ -64,6 +116,78 @@ public class WorkTrendServiceImpl implements WorkTrendService {
     }
 
     /**
+     * @Description 删除图片
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @Override
+    public JSONObject deletePicture(String pictureId) {
+        JSONObject jsonData = this.getPicture(pictureId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_GET_UPLOAD_PICTURES_TREE_FYP);
+        return jsonData;
+    }
+
+    private JSONObject getPicture (String pictureId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        if (pictureId != null) {
+            infoMap.add("pictureId", pictureId);
+        }
+        String mapperUrl = "http://172.16.1.19:64004";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
+    /**
+     * @Description 保存主题信息
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @Override
+    public JSONObject saveThemeInfo(String groupId, String theme, String themeDesc, Integer timeInterval){
+        String userId = CurrentUser.getUserId();
+        //局用户
+        JSONObject jsonData = this.getThemeInfo(groupId, theme, themeDesc, timeInterval, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_DETAIL_VIEWINFO_FYP);
+        return jsonData;
+    }
+
+    private JSONObject getThemeInfo (String groupId, String theme, String themeDesc, Integer timeInterval, String userId, String type, String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        infoMap.add("userId", userId);
+        if (StringUtils.isNotEmpty(groupId)) {
+            infoMap.add("groupId", groupId);
+        }
+        if (StringUtils.isNotEmpty(theme)) {
+            infoMap.add("theme", theme);
+        }
+        if (StringUtils.isNotEmpty(themeDesc)) {
+            infoMap.add("themeDesc", themeDesc);
+        }
+        if (timeInterval != null) {
+            infoMap.add("timeInterval", timeInterval);
+        }
+        String mapperUrl = "http://172.16.201.140:8080";
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
+    /**
      * @Description 工作动态详情
      * @Author gongan
      * @Date 2020/8/21
@@ -72,19 +196,9 @@ public class WorkTrendServiceImpl implements WorkTrendService {
      */
     @Override
     public JSONObject workTrendDetail(String channelid) {
-        JSONObject jsonData = new JSONObject();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
-        //当前用户是否为部首长
-        jsonData = this.getWorkTrendDetail(channelid, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
-            //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
-        } else {
-            //局用户
-            jsonData = this.getWorkTrendDetail(channelid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_DETAIL_VIEWINFO_FYP);
-        }
+        //局用户
+        JSONObject jsonData = this.getWorkTrendDetail(channelid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_DETAIL_VIEWINFO_FYP);
         return jsonData;
     }
 
@@ -121,19 +235,9 @@ public class WorkTrendServiceImpl implements WorkTrendService {
 
     @Override
     public void workTrendSave(String requestBody) {
-        JSONObject jsonData = new JSONObject();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
-        //当前用户是否为部首长
-        jsonData = this.getWorkTrendDetail(requestBody, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
-            //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
-        } else {
-            //局用户
-            jsonData = this.getWorkTrendDetail(requestBody, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_SAVE_VIEWINFO_FYP);
-        }
+        //局用户
+        this.getWorkTrendDetail(requestBody, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_SAVE_VIEWINFO_FYP);
     }
 
     /**

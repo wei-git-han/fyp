@@ -2,6 +2,7 @@ package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -32,20 +33,26 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     @Override
     public JSONObject backlogFlowStatisticsHeader(Date applyDate) {
         JSONObject jsonData = new JSONObject();
-        JSONObject jsonObj = new JSONObject();
+        JSONObject jsonObjectResult = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
+        JSONArray chairmanJsonArray = new JSONArray();
         String userId = CurrentUser.getUserId();
+        String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
+        BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
+        String name = baseAppOrgan.getName();
         //当前用户是否为部首长
-        jsonData = this.getJsonArrayData("", "","","",null, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
+        if (StringUtils.equals("部首长",name)) {
             //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
+            jsonObjectResult = this.getJsonData( "","1","1", "", "", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP);
+            jsonObject.put("flowCount", jsonObjectResult.get("rows"));
+            jsonObject.put("typeName", "待批公文");
+            jsonObject.put("applyType", "1");
+            chairmanJsonArray.add(jsonObject);
+            jsonData.put("chairmanJsonArray", chairmanJsonArray);
         } else {
             //局用户
-            jsonData = this.getJsonArrayData("","","", "", applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
-
+            jsonData = this.getJsonArrayData("","","","", "", applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
             JSONArray jsonArray = (JSONArray)jsonData.get("returnJsonArr");
-            //JSONObject qxjJson = this.getQxjJson();
             //即时通讯数量
             JSONObject jstxJsonObj = new JSONObject();
             jstxJsonObj.put("flowCount", "5");
@@ -56,31 +63,17 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return jsonData;
     }
 
-//    public JSONObject getQxjJson() {
-//        String userId = CurrentUser.getUserId();
-//        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-//        map.add("userId", userId);
-//        //TODO 待修改为实际的地址
-//        //String url = baseAppOrgMappedService.getWebUrlByType(AppConstant.APP_QXJ,AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP);
-//        String url = baseAppOrgMappedService.getUrlByType(userId, AppConstant.APP_QXJ);
-//        if(com.css.base.utils.StringUtils.isNotBlank(url)) {
-//            url+=AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP;
-//        }
-//        System.out.println("请销假请求路径："+url);
-//        //排除的人ID
-//        List<String> idList = getFilterIds();
-//        map.add("leaveIds", com.css.base.utils.StringUtils.join(idList,","));
-//
-//        JSONObject obj = CrossDomainUtil.getJsonData(url, map);
-//
-//        return obj;
-//    }
-
-    private JSONObject getJsonData (String userId, String appLevel, String orgId, String type, String url) {
+    private JSONObject getJsonData (String userId, String page, String pagesize, String appLevel, String orgId, String type, String url) {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        if (page != null) {
+            infoMap.add("page", page);
+        }
+        if (pagesize != null) {
+            infoMap.add("pagesize", pagesize);
+        }
+        String mapperUrl = "172.16.1.19:11004";
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
@@ -91,14 +84,14 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return jsonData;
     }
 
-    private JSONObject getJsonArrayData (String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
+    private JSONObject getJsonArrayData (String organId, String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (applyType != null) {
+        if (StringUtils.isNotEmpty(applyType)) {
             infoMap.add("type", applyType);
         }
-        if (listType != null) {
+        if (StringUtils.isNotEmpty(listType)) {
             infoMap.add("documentTopStatus", listType);
         }
         if (applyDate != null) {
@@ -109,6 +102,9 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         }
         if (pagesize != null) {
             infoMap.add("pagesize", pagesize);
+        }
+        if (pagesize != null) {
+            infoMap.add("organId", organId);
         }
         String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
         if (StringUtils.isNotEmpty(mapperUrl)) {
@@ -129,16 +125,16 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         JSONObject jsonData = new JSONObject();
         if (StringUtils.equals(applyType, "1")) {
             type = "wsh";
-            jsonData = this.getJsonArrayData(page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST);
         } else if (StringUtils.equals(applyType, "2")) {
             type = "pbwj";
-            jsonData = this.getJsonArrayData(page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_YFB_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_YFB_GETDOCUMENT_FLOW_LIST);
         } else if (StringUtils.equals(applyType, "3")) {
             type = "gwyz";
-            jsonData = this.getJsonArrayData(page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWYZ_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWYZ_GETDOCUMENT_FLOW_LIST);
         } else if (StringUtils.equals(applyType, "4")) {
             type = "lwyj";
-            jsonData = this.getJsonArrayData(page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST);
         }
         return jsonData;
     }

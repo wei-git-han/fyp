@@ -2,6 +2,7 @@ package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
@@ -172,12 +173,13 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         JSONObject jsonData = new JSONObject();
         JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
+        String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
+        BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
+        String name = baseAppOrgan.getName();
         //当前用户是否为部首长
-        jsonData = this.getDataUserTree("", "","","", userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
+        if (StringUtils.equals("部首长",name)) {
             //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
+            jsonData = this.getDataUserTree("","","", "", userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_WORK_GET_USER_TREE_FYP);
         } else {
             //局用户
             jsonData = this.getDataUserTree("","","", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_GET_USER_TREE_FYP);

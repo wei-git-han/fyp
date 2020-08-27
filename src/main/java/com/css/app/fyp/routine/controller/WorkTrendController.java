@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,55 @@ public class WorkTrendController {
     @RequestMapping("/workTrendList")
     public void workTrendList(String trendType) {
         JSONObject maps = workTrendService.workTrendList(trendType);
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * @Description 轮播图展示
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @RequestMapping("/displayRotationPicture")
+    public void displayRotationPicture(){
+        JSONObject maps = workTrendService.displayRotationPicture();
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * @Description 上传图片集合
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @RequestMapping("/displayRotationPicture")
+    public void uploadPictures(@RequestParam(value = "pictureFiles", required = false) MultipartFile[] pictureFiles, String groupId){
+        JSONObject maps = workTrendService.uploadPictures(pictureFiles, groupId);
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     *  删除图片
+     * @param pictureId  图片ID
+     */
+    @RequestMapping("/deletePicture")
+    public void deletePicture(String pictureId){
+        JSONObject maps = workTrendService.deletePicture(pictureId);
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * @Description 保存主题信息
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
+    @RequestMapping("/saveThemeInfo")
+    public void saveThemeInfo(String groupId, String theme, String themeDesc, Integer timeInterval){
+        JSONObject maps = workTrendService.saveThemeInfo(groupId, theme, themeDesc, timeInterval);
         Response.json(new ResponseValueUtils().success(maps));
     }
 

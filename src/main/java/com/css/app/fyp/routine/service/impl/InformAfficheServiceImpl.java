@@ -1,6 +1,5 @@
 package com.css.app.fyp.routine.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -34,18 +33,9 @@ public class InformAfficheServiceImpl implements InformAfficheService {
     @Override
     public JSONObject informAfficheList(String afficheType) {
         JSONObject jsonData = new JSONObject();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
-        //当前用户是否为部首长
-        jsonData = this.getJsonArrayData("", "","","", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
-            //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
-        } else {
-            //局用户
-            jsonData = this.getJsonArrayData("","", afficheType, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_LIST);
-        }
+        //局用户
+        jsonData = this.getJsonArrayData("","", afficheType, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_LIST);
         return jsonData;
     }
 
@@ -86,18 +76,9 @@ public class InformAfficheServiceImpl implements InformAfficheService {
     @Override
     public JSONObject informAfficheDetailList(String contentid) {
         JSONObject jsonData = new JSONObject();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
-        //当前用户是否为部首长
-        jsonData = this.getJsonDetailData(contentid,"", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
-            //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
-        } else {
-            //局用户
-            jsonData = this.getJsonDetailData(contentid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_VIEWINFO_FYP);
-        }
+        //局用户
+        jsonData = this.getJsonDetailData(contentid, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_VIEWINFO_FYP);
         return jsonData;
     }
 

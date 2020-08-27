@@ -584,6 +584,10 @@ public class AppInterfaceConstant {
 	public final static String WEB_WORK_TREND_DELETE_VIEWINFO_FYP = "/deletesubscribe";
 	public final static String WEB_WORK_TREND_SAVE_VIEWINFO_FYP = "/deletesubscribe";
 	public final static String WEB_WORK_GET_USER_TREE_FYP = "app/fyp/ryzwDataTree";
+	public final static String WEB_WORK_GET_ADMIN_USER_TREE_FYP = "/zrsso51/user/web/users.zr";
+	public final static String WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP = "/chairman/api/list";
+	public final static String WEB_WORK_GET_DISPLAY_ROTATION_PICTURE_TREE_FYP = "/app/fyp/rotationNewPicture/displayRotationPicture";
+	public final static String WEB_WORK_GET_UPLOAD_PICTURES_TREE_FYP = "/app/fyp/rotationNewPicture/displayRotationPicture/uploadPictures";
 	/**
      * @author mashuwen
 	 * @date 2018年3月30日
