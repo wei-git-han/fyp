@@ -1,17 +1,13 @@
 package com.css.app.fyp.routine.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
 import com.css.app.fyp.routine.service.FypPersonageWorkWeekService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
-import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CurrentUser;
-import com.css.base.utils.PageUtils;
 import com.css.base.utils.Response;
 import com.css.base.utils.UUIDUtils;
-import com.github.pagehelper.PageHelper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

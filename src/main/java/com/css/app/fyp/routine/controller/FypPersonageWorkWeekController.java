@@ -1,11 +1,9 @@
 package com.css.app.fyp.routine.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONArray;
-import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
 import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,14 +3,12 @@ package com.css.app.fyp.routine.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
-import com.css.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import com.css.app.fyp.routine.dao.FypPersonageWorkWeekDao;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
