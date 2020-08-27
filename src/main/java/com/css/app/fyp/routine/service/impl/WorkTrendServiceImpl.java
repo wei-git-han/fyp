@@ -295,6 +295,13 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         return objects;
     }
 
+    /**
+     * @Description 动态图片删除
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [trendType]
+     * @Return void
+     */
     @Override
     public void workTrendPhoneDelete(String channelid) {
         JSONObject jsonData = new JSONObject();

@@ -30,6 +30,13 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     @Autowired
     private BaseAppOrgMappedService baseAppOrgMappedService;
 
+    /**
+     * @Description 待批公文统计
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [applyDate]
+     * @Return void
+     */
     @Override
     public JSONObject backlogFlowStatisticsHeader(Date applyDate) {
         JSONObject jsonData = new JSONObject();
@@ -117,6 +124,13 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return jsonData;
     }
 
+    /**
+     * @Description 待批公文统计明细
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [applyType, applyDate]
+     * @Return void
+     */
     @Override
     public JSONObject backlogFlowStatisticsDetail(String applyType, Date applyDate, String page, String pagesize) {
         String userId = CurrentUser.getUserId();

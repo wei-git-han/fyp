@@ -571,24 +571,90 @@ public class AppInterfaceConstant {
 	 */
 	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_OBJ = "/app/gwcl/doc/api/getDocumentFlowObj";
 
+
+    /********************************************************FYP(日常工作)start****************************************************************/
+
+    /**
+     * @Description 待批公文统计头--局用户
+     * @Author gongan
+     */
 	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW = "/app/gwcl/fypPersonalTodoController/numsList";
+	/**
+	 * @Description 待批公文统计明细--审批公文
+	 * @Author gongan
+	 */
 	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/wshList";
+    /**
+     * @Description 待批公文统计明细--批办公文
+     * @Author gongan
+     */
 	public final static String WEB_INTERFACE_YFB_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/yfbList";
+    /**
+     * @Description 待批公文统计明细--公文阅知
+     * @Author gongan
+     */
 	public final static String WEB_INTERFACE_GWYZ_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/gwyzList";
+    /**
+     * @Description 待批公文统计明细--来文阅件
+     * @Author gongan
+     */
 	public final static String WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/lwyjList";
+	/**
+	 * @Description 局公告/部公告/系统公告列表
+	 * @Author gongan
+	 */
 	public final static String WEB_INFORM_AFFICHE_LIST = "/affiche/list";
+	/**
+	 * @Description 局公告/部公告/系统公告详情列表
+	 * @Author gongan
+	 */
 	public final static String WEB_INFORM_AFFICHE_VIEWINFO_FYP = "/affiche/viewInfo_fyp";
+	/**
+	 * @Description 工作动态--列表
+	 * @Author gongan
+	 */
 	public final static String WEB_WORK_TREND_VIEWINFO_FYP = "/xxfw/api/orgdynamics";
+	/**
+	 * @Description 工作动态--保存主题信息
+	 * @Author gongan
+	 */
 	public final static String WEB_WORK_TREND_DETAIL_VIEWINFO_FYP = "/channelNews/newsInit";
+	/**
+	 * @Description 工作动态--动态预览--局用户
+	 * @Author gongan
+	 */
 	public final static String WEB_WORK_TREND_YL_VIEWINFO_FYP = "/channelNews/subscribe";
+	/**
+	 * @Description 工作动态--动态图片删除--局用户
+	 * @Author gongan
+	 */
 	public final static String WEB_WORK_TREND_DELETE_VIEWINFO_FYP = "/deletesubscribe";
 	public final static String WEB_WORK_TREND_SAVE_VIEWINFO_FYP = "/deletesubscribe";
-	public final static String WEB_WORK_GET_USER_TREE_FYP = "app/fyp/ryzwDataTree";
-	public final static String WEB_WORK_GET_ADMIN_USER_TREE_FYP = "/zrsso51/user/web/users.zr";
-	public final static String WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP = "/chairman/api/list";
-	public final static String WEB_WORK_GET_DISPLAY_ROTATION_PICTURE_TREE_FYP = "/app/fyp/rotationNewPicture/displayRotationPicture";
-	public final static String WEB_WORK_GET_UPLOAD_PICTURES_TREE_FYP = "/app/fyp/rotationNewPicture/displayRotationPicture/uploadPictures";
 	/**
+	 * @Description 获取人员在位状态数据--加载人员树
+	 * @Author gongan
+	 */
+	public final static String WEB_WORK_GET_USER_TREE_FYP = "app/fyp/ryzwDataTree";
+	/**
+	 * @Description 待批公文统计头--部首长
+	 * @Author gongan
+	 */
+	public final static String WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP = "/chairman/api/list";
+	/**
+	 * @Description 工作动态--轮播图展示
+	 * @Author gongan
+	 */
+	public final static String WEB_WORK_GET_DISPLAY_ROTATION_PICTURE_TREE_FYP = "/app/fyp/rotationNewPicture/displayRotationPicture";
+	/**
+	 * @Description 工作动态--轮播图展示
+	 * @Author gongan
+	 */
+	public final static String WEB_WORK_GET_UPLOAD_PICTURES_TREE_FYP = "/app/fyp/rotationNewPicture/displayRotationPicture/uploadPictures";
+
+    /********************************************************************FYP(日常工作)end*****************************************************/
+
+
+    /**
      * @author mashuwen
 	 * @date 2018年3月30日
 	 * 公文处理应用调用：我的阅件，查看收藏数据列表接口
