@@ -74,10 +74,10 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (page != null) {
+        if (StringUtils.isNotEmpty(page)) {
             infoMap.add("page", page);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
         String mapperUrl = "172.16.1.19:11004";
@@ -104,13 +104,13 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         if (applyDate != null) {
             infoMap.add("applyDate", applyDate);
         }
-        if (page != null) {
+        if (StringUtils.isNotEmpty(page)) {
             infoMap.add("page", page);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(organId)) {
             infoMap.add("organId", organId);
         }
         String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);

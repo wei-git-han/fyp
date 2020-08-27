@@ -60,19 +60,19 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
         JSONArray jsonData =new JSONArray();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (applyType != null) {
+        if (StringUtils.isNotEmpty(applyType)) {
             infoMap.add("type", applyType);
         }
-        if (listType != null) {
+        if (StringUtils.isNotEmpty(listType)) {
             infoMap.add("documentTopStatus", listType);
         }
         if (applyDate != null) {
             infoMap.add("applyDate", applyDate);
         }
-        if (page != null) {
+        if (StringUtils.isNotEmpty(page)) {
             infoMap.add("page", page);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
         String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
@@ -89,19 +89,19 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     private JSONArray getJsonArrayData (String page, String pagesize, String userId, String year, String week, String zoneId, String url) {
         JSONArray jsonData =new JSONArray();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        if (page != null) {
+        if (StringUtils.isNotEmpty(page)) {
             infoMap.add("page", page);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
-        if (zoneId != null) {
+        if (StringUtils.isNotEmpty(zoneId)) {
             infoMap.add("zoneId", zoneId);
         }
-        if (year != null) {
+        if (StringUtils.isNotEmpty(year)) {
             infoMap.add("year", year);
         }
-        if (week != null) {
+        if (StringUtils.isNotEmpty(week)) {
             infoMap.add("week", week);
         }
         String mapperUrl = "http://servers:port";

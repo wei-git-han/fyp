@@ -191,16 +191,16 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (applyType != null) {
+        if (StringUtils.isNotEmpty(applyType)) {
             infoMap.add("type", applyType);
         }
-        if (listType != null) {
+        if (StringUtils.isNotEmpty(listType)) {
             infoMap.add("documentTopStatus", listType);
         }
-        if (page != null) {
+        if (StringUtils.isNotEmpty(page)) {
             infoMap.add("page", page);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
         //String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);

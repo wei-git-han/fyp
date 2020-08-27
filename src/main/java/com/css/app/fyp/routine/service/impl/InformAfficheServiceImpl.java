@@ -85,7 +85,7 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (contentid != null) {
+        if (StringUtils.isNotEmpty(contentid)) {
             infoMap.add("contentid", contentid);
         }
         String mapperUrl = "http://172.16.201.140:8080";

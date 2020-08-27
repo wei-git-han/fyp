@@ -205,7 +205,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (channelid != null) {
+        if (StringUtils.isNotEmpty(channelid)) {
             infoMap.add("channelid", channelid);
         }
         String mapperUrl = "http://172.16.201.140:8080";
@@ -268,7 +268,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (channelid != null) {
+        if (StringUtils.isNotEmpty(channelid)) {
             infoMap.add("channelid", channelid);
         }
         String mapperUrl = "http://172.16.201.140:10040";
