@@ -42,16 +42,16 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        if (afficheType != null) {
+        if (StringUtils.isNotEmpty(afficheType)) {
             infoMap.add("ggType", afficheType);
         }
-        if (type != null) {
+        if (StringUtils.isNotEmpty(type)) {
             infoMap.add("documentTopStatus", type);
         }
-        if (page != null) {
+        if (StringUtils.isNotEmpty(page)) {
             infoMap.add("page", page);
         }
-        if (pagesize != null) {
+        if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
         String mapperUrl = "http://172.16.201.140:8080";
