@@ -1,6 +1,6 @@
-var listurl = {"url":"http://localhost:11208/fyp/roleedit/list","dataType":"text"};//表格数据
-var delUrl = {"url":"http://localhost:11208/fyp/roleedit/delete","dataType":"text"};//删除
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
+var listurl = {"url":"http://127.0.0.1:11208/fyp/roleedit/list","dataType":"text"};//表格数据
+var delUrl = {"url":"http://127.0.0.1:11208/fyp/roleedit/delete","dataType":"text"};//删除
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var grid = null;
 
@@ -154,7 +154,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			initUnitTree();
+			//initUnitTree();
 			initother();
         }
     }

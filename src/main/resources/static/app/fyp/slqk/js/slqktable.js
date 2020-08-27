@@ -1,7 +1,7 @@
-var listUrl = {"url":"http://localhost:11208/fyp/feedbackhear/list","dataType":"text"};//表格数据
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
-var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //配置人树
-var delUrl = {"url":"","dataType":"text"};//删除
+var listUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/list","dataType":"text"};//表格数据
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树（调用方法暂时被注释）
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树（调用方法暂时被注释）
+var delUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/delete","dataType":"text"};//删除
 var grid = null;
 
 var pageModule = function () {
@@ -151,7 +151,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			initUnitTree();
+			//initUnitTree();
 			initother();
         }
     }
