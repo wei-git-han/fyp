@@ -49,8 +49,7 @@ public class FypPersonageWorkWeekController {
 		PageUtils pageUtil = new PageUtils(fypPersonageWorkWeekList);
 		Response.json("page",pageUtil);
 	}
-	
-	
+
 	/**
 	 * 信息
 	 */
@@ -71,7 +70,6 @@ public class FypPersonageWorkWeekController {
 	public void save(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
 		fypPersonageWorkWeek.setId(UUIDUtils.random());
 		fypPersonageWorkWeekService.save(fypPersonageWorkWeek);
-		
 		Response.ok();
 	}
 	
@@ -83,7 +81,6 @@ public class FypPersonageWorkWeekController {
 	@RequiresPermissions("fyppersonageworkweek:update")
 	public void update(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
 		fypPersonageWorkWeekService.update(fypPersonageWorkWeek);
-		
 		Response.ok();
 	}
 	
@@ -95,7 +92,6 @@ public class FypPersonageWorkWeekController {
 	@RequiresPermissions("fyppersonageworkweek:delete")
 	public void delete(@RequestBody String[] ids){
 		fypPersonageWorkWeekService.deleteBatch(ids);
-		
 		Response.ok();
 	}
 	

@@ -65,7 +65,6 @@ public class ReignCaseController {
         Response.json("result", "success");
     }
 
-
     /**
      * 获取人员在位状态数据
      * 加载人员树
