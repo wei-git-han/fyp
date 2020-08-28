@@ -88,7 +88,7 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
 
 	private String getWeekOfDate(String dateTime) {
         SimpleDateFormat f = new SimpleDateFormat("yyy-MM-dd");
-        String[] weekDays = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+        String[] weekDays = {"日","一","二","三","四","五","六"};
         Calendar cal = Calendar.getInstance();
         Date datet = null;
         try {

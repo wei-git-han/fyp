@@ -3,6 +3,8 @@ package com.css.app.fyp.routine.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
+import com.css.addbase.apporgan.entity.BaseAppUser;
+import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -29,6 +31,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     private final Logger logger = LoggerFactory.getLogger(PersonalTodoServiceImpl.class);
     @Autowired
     private BaseAppOrgMappedService baseAppOrgMappedService;
+    @Autowired
+    private BaseAppUserService baseAppUserService;
 
     /**
      * @Description 待批公文统计
@@ -50,7 +54,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         //当前用户是否为部首长
         if (StringUtils.equals("部首长",name)) {
             //部首长
-            jsonObjectResult = this.getJsonData( "","1","1", "", "", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP);
+            String mapperUrl = "http://10.150.110.19";
+            jsonObjectResult = this.getJsonData( "", "","", mapperUrl, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP);
             jsonObject.put("flowCount", jsonObjectResult.get("rows"));
             jsonObject.put("typeName", "待批公文");
             jsonObject.put("applyType", "1");
@@ -61,8 +66,11 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             jsonData = this.getJsonArrayData("","","","", "", applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
             JSONArray jsonArray = (JSONArray)jsonData.get("returnJsonArr");
             //即时通讯数量
+            BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
+            String mapperUrl = "http://10.150.110.19";
+            jsonData = this.getJsonData("", "", "no", mapperUrl, AppInterfaceConstant.WEB_INTERFACE_JSTX_GETDOCUMENT_FLOW_LIST);
             JSONObject jstxJsonObj = new JSONObject();
-            jstxJsonObj.put("flowCount", "5");
+            jstxJsonObj.put("flowCount", jsonData);
             jstxJsonObj.put("typeName", "即时通讯");
             jstxJsonObj.put("applyType", "5");
             jsonArray.add(jstxJsonObj);
@@ -70,22 +78,23 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return jsonData;
     }
 
-    private JSONObject getJsonData (String userId, String page, String pagesize, String appLevel, String orgId, String type, String url) {
+    private JSONObject getJsonData (String user, String passkey, String onlyinbox, String mapperUrl, String url) {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        infoMap.add("userId", userId);
-        if (StringUtils.isNotEmpty(page)) {
-            infoMap.add("page", page);
+        if (StringUtils.isNotEmpty(user)) {
+            infoMap.add("user", user);
         }
-        if (StringUtils.isNotEmpty(pagesize)) {
-            infoMap.add("pagesize", pagesize);
+        if (StringUtils.isNotEmpty(passkey)) {
+            infoMap.add("passkey", passkey);
         }
-        String mapperUrl = "172.16.1.19:11004";
+        if (StringUtils.isNotEmpty(onlyinbox)) {
+            infoMap.add("onlyinbox", onlyinbox);
+        }
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
         } else {
-            logger.info("orgId为{}的局的电子保密室的配置数据错误",orgId);
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;
         }
         return jsonData;

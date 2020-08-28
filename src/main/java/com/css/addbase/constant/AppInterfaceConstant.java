@@ -599,6 +599,11 @@ public class AppInterfaceConstant {
      * @Author gongan
      */
 	public final static String WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST = "/app/gwcl/fypPersonalTodoController/lwyjList";
+    /**
+     * @Description 待批公文统计明细--即时通讯
+     * @Author gongan
+     */
+	public final static String WEB_INTERFACE_JSTX_GETDOCUMENT_FLOW_LIST = "/restful/newuser.php/g7_boxinfo";
 	/**
 	 * @Description 局公告/部公告/系统公告列表
 	 * @Author gongan
