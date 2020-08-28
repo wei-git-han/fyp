@@ -15,7 +15,7 @@ var pageModule = function () {
 		  dataType:"json",
 		  success:function(res){
 			if(res.result=="success"){
-			    initBarChart(res.data,'main');
+				initChart(res.data,'main');
 			}
 		  }
 		})
@@ -152,7 +152,144 @@ var pageModule = function () {
 			]
 		});
 	}
-	
+	var initChart = function(data){
+
+		/*
+        * 在线率统计表数据
+        * */
+		var xData = [],
+			yData = [];
+		// $.ajax({
+		// 	url:'../personManagement/getOnlineRateByPage',
+		// 	dataType:'json',
+		// 	success:function(data){
+				$(data).each(function(i,obj){
+					xData.push(obj.deptName);
+					yData.push({
+						name:obj.deptName,
+						value:obj.percentage,
+						type:1,
+						id:i,
+						zb:obj.permanentStaffCount,
+						zx:obj.onLineCount,
+						qj:obj.leaveCount,
+						qt:obj.otherCount
+					});
+				})
+				var jzxl = echarts.init(document.getElementById('main'));
+				var option = {
+					title: {
+						show:false,
+						subtext: '单位（人）',
+						subtextStyle: {
+							color: '#2f8fdc',
+						}
+					},
+					dataZoom:[
+						{
+							type:'inside',
+							start:0,
+							throttle:50,
+							minValueSpan:4,
+							end:100
+						}
+					],
+					tooltip: {
+						trigger: 'axis',
+						formatter:function(parmas){
+//                	console.log(parmas)
+							var data = parmas[0].data;
+							var html = '<div style="text-align: left;">'+
+								'<p>'+(data.name?data.name:"")+'<p>'+
+								'<p>在编：'+(data.zb?data.zb:0)+'</p>'+
+								'<p>在线：'+(data.zx?data.zx:0)+'</p>'+
+								'<p>请假：'+(data.qj?data.qj:0)+'</p>'+
+								'<p>其他：'+(data.qt?data.qt:0)+'</p>'+
+								//                    '<p><a href="index.html" target="_blank" style="color:#fff;">点击查看&nbsp;&gt;&nbsp; </a></p>'+
+								'</div>';
+							return html;
+						}
+					},
+					xAxis: [{
+						clickable: true,
+						type: 'category',
+						data: xData,
+						axisLabel: {
+//                    margin: 'auto',
+							show: true,
+							interval: 0,
+							rotate:25,
+							textStyle: {
+								color: '#ACACAC',
+								fontSize: 12,
+							}
+						}
+					},],
+					yAxis: [{
+						type: 'value',
+						min:0,
+						max:100,
+						splitNumber:5,
+						axisLabel: {
+							textStyle: {
+								color: '#ACACAC',
+								fontSize: 12,
+							},
+							formatter:function(value){
+								return value+"%";
+							}
+						},
+						splitLine: {
+							lineStyle: {
+								type: "dotted",
+								color: "#ACACAC"
+							}
+						},
+					}],
+					series: [{
+						name: '各局在线率统计',
+						type: 'bar',
+						data: yData,
+						barWidth:20,
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(0,0,0,1,[{
+									offset:1,
+									color:'#2C76EC'
+								},{
+									offset:0,
+									color:'#58B4FD'
+								}]),
+//                       color:function(param){
+//                           return {
+//                               colorStops:[{
+//                                   offset:0,
+//                                   color:'#2C76EC'
+//                               },{
+//                                   offset:1,
+//                                   color:'#58B4FD'
+//                               }]
+//                           }
+//                       },
+								barBorderRadius:30,
+								label: {
+									show: false,
+								}
+							}
+						},
+					},
+					]
+				};
+				jzxl.setOption(option);
+				jzxl.on('click', function (params) {
+					if(params.data.type==1){
+						T.msg('您无权限查看该数据，请联系管理员！')
+						return;
+					}
+				})
+		// 	}
+		// })
+	};
 	//安装量
 	var initPh = function(){
 		$ajax({
