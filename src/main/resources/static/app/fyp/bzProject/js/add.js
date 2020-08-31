@@ -1,11 +1,11 @@
 var saveUrl;
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
-var returnDataUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
+var returnDataUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
 var dataId=getUrlParam("id")||"";//编辑数据id
 if(!!dataId){
-	saveUrl = {"url":"/fyp/guaranteetacking/save","dataType":"text"};  //save
+	saveUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/save","dataType":"text"};  //save
 }else{
-	saveUrl = {"url":"/fyp/guaranteetacking/update","dataType":"text"};  //edit
+	saveUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/update","dataType":"text"};  //edit
 }
 var pageModule = function(){
 	//单位树
@@ -91,8 +91,8 @@ var pageModule = function(){
 	return{
 		//加载页面处理程序
 		initControl:function(){
-			initUnitTree();
-			/*initdatafn(); */
+			//initUnitTree();
+			initdatafn(); 
 			initother();
 		}
 	};
