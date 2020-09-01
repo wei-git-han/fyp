@@ -1,5 +1,6 @@
 package com.css.app.fyp.routine.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
@@ -45,6 +46,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     public JSONObject backlogFlowStatisticsHeader(Date applyDate) {
         JSONObject jsonData = new JSONObject();
         JSONObject jsonObjectResult = new JSONObject();
+        JSONObject result = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         JSONArray chairmanJsonArray = new JSONArray();
         String userId = CurrentUser.getUserId();
@@ -64,18 +66,35 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         } else {
             //局用户
             jsonData = this.getJsonArrayData("","","","", "", applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
-            JSONArray jsonArray = (JSONArray)jsonData.get("returnJsonArr");
+            Object objectResult = jsonData.get("returnJsonArr");
+            JSONArray returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
             //即时通讯数量
-            BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
-            String mapperUrl = "http://10.150.110.19";
-            jsonData = this.getJsonData("", "", "no", mapperUrl, AppInterfaceConstant.WEB_INTERFACE_JSTX_GETDOCUMENT_FLOW_LIST);
             JSONObject jstxJsonObj = new JSONObject();
-            jstxJsonObj.put("flowCount", jsonData);
+            jstxJsonObj.put("flowCount", "5");
             jstxJsonObj.put("typeName", "即时通讯");
             jstxJsonObj.put("applyType", "5");
-            jsonArray.add(jstxJsonObj);
+            returnJsonArr.add(jstxJsonObj);
+            //电子邮件数量
+            JSONObject emailJsonObj = new JSONObject();
+            emailJsonObj.put("flowCount", "6");
+            emailJsonObj.put("typeName", "电子邮件");
+            emailJsonObj.put("applyType", "6");
+            returnJsonArr.add(emailJsonObj);
+            //请销假数量
+            JSONObject qxjJsonObj = new JSONObject();
+            qxjJsonObj.put("flowCount", "7");
+            qxjJsonObj.put("typeName", "请销假");
+            qxjJsonObj.put("applyType", "7");
+            returnJsonArr.add(qxjJsonObj);
+            //督查催办数量
+            JSONObject dccbJsonObj = new JSONObject();
+            dccbJsonObj.put("flowCount", "8");
+            dccbJsonObj.put("typeName", "督查催办");
+            dccbJsonObj.put("applyType", "8");
+            returnJsonArr.add(dccbJsonObj);
+            result.put("returnJsonArr", returnJsonArr);
         }
-        return jsonData;
+        return result;
     }
 
     private JSONObject getJsonData (String user, String passkey, String onlyinbox, String mapperUrl, String url) {

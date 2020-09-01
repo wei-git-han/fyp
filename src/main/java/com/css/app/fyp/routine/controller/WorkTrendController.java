@@ -63,11 +63,11 @@ public class WorkTrendController {
      * @Param [trendType]
      * @Return void
      */
-    @RequestMapping("/displayRotationPicture")
-    public void uploadPictures(@RequestParam(value = "pictureFiles", required = false) MultipartFile[] pictureFiles, String groupId){
-        JSONObject maps = workTrendService.uploadPictures(pictureFiles, groupId);
-        Response.json(new ResponseValueUtils().success(maps));
-    }
+//    @RequestMapping("/displayRotationPicture")
+//    public void uploadPictures(@RequestParam(value = "pictureFiles", required = false) MultipartFile[] pictureFiles, String groupId){
+//        JSONObject maps = workTrendService.uploadPictures(pictureFiles, groupId);
+//        Response.json(new ResponseValueUtils().success(maps));
+//    }
 
     /**
      *  删除图片
