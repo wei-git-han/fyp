@@ -1,5 +1,5 @@
-var listurl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/roleedit/list","dataType":"text"};//表格数据
-var delUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/fyp/guaranteetacking/delete","dataType":"text"};//删除
+var listurl = {"url":"/fyp/roleedit/list","dataType":"text"};//表格数据
+var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
 var grid = null;
 
 var pageModule = function () {
@@ -28,11 +28,11 @@ var pageModule = function () {
 							}
 							return roleType;                                       
 						}},
-						{display:"配置人",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"配置人",name:"editUserId",width:"15%",align:"center",render:function(rowdata){
+							return rowdata.editUserId;                                         
 						}},
-						{display:"配置时间",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"配置时间",name:"editTime",width:"15%",align:"center",render:function(rowdata){
+							return rowdata.editTime;                                         
 						}}
 					 ],
 			width:'100%',

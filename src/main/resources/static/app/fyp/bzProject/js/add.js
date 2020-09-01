@@ -1,11 +1,11 @@
 var saveUrl;
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
-var returnDataUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
-var dataId=getUrlParam("id")||"";//编辑数据id
-if(!!dataId){
-	saveUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/save","dataType":"text"};  //save
+var returnDataUrl = {"url":"/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
+var id=getUrlParam("id")||"";//编辑数据id
+if(!!id){
+	saveUrl = {"url":"/fyp/guaranteetacking/update","dataType":"text"};  //edit
 }else{
-	saveUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/update","dataType":"text"};  //edit
+	saveUrl = {"url":"/fyp/guaranteetacking/save","dataType":"text"};  //save
 }
 var pageModule = function(){
 	//单位树
@@ -91,7 +91,7 @@ var pageModule = function(){
 	return{
 		//加载页面处理程序
 		initControl:function(){
-			//initUnitTree();
+			initUnitTree();
 			initdatafn(); 
 			initother();
 		}

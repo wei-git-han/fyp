@@ -1,5 +1,5 @@
-var listurl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/list","dataType":"text"};//表格数据
-var delUrl = {"url":"http://127.0.0.1:11208/fyp/guaranteetacking/delete","dataType":"text"};//删除
+var listurl = {"url":"/fyp/guaranteetacking/list","dataType":"text"};//表格数据
+var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var grid = null;
 var pageModule = function () {
@@ -150,7 +150,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			//initUnitTree();
+			initUnitTree();
 			initother();
         },
 		initgrid:function(){

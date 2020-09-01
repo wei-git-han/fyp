@@ -26,6 +26,28 @@ var pageModule = function () {
 			getBarChartData();
 		});
 	}
+	//日常会议
+	var getBar3dChartData = function(){
+		 $.ajax({
+		      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common",
+		      data:{},
+		      dataType:"json",
+		      success:function(res){
+		        if(res.result=="success"){
+		        	$.each(res.data,function(i, o){
+						data.xdata.push(o.deptName);
+						data.ydata.push([i,0,o.count]);
+					})
+                    init3dBarChart('main',data);
+		        }
+		      }
+		 })
+	});
+	
+	var init3dBarChart = function(){
+		
+	}
+	
 	
 	//视频会议
 	var getBarChartData = function(){
