@@ -1,4 +1,4 @@
-var gzdtUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workTrendController/workTrendList","dataType":"text"};
+var gzdtUrl = {"url":"/app/fyp/workTrendController/workTrendList","dataType":"text"};
 var pageModule = function () {
 	
 	var initgzdt = function(){

@@ -1,5 +1,5 @@
-var searchUrl = {url:'../data/search.json',dataType:'text'};
-var pagemenu = {url:'../data/pagemenu.json',dataType:'text'};
+var searchUrl = {url:'/app/fyp/reignCaseController/getTxlInfo',dataType:'text'};
+var pagemenu = {url:'/app/fyp/reignCaseController/reignDataTree',dataType:'text'};
 var fullName="";
 var loginUserId="";
 var pageModule = function () {

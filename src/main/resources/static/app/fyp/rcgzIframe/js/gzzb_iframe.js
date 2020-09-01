@@ -3,10 +3,10 @@ var pageModule = function () {
 	var object1 = {};
 	var initPlan = function(type){
 		if(type=="bjzb"){
-			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
-			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/workWeekTable/list","dataType":"text"};
+			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
 		}
 		$ajax({
 			url: gzzbUrl,

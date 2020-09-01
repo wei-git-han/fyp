@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.FypPersonageWorkWeekDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.FypPersonageWorkWeek">
+		select * from FYP_PERSONAGE_WORK_WEEK where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.FypPersonageWorkWeek">
+		select * from FYP_PERSONAGE_WORK_WEEK 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="getPersonalWeekTableList" resultType="com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo">
+		select
+		fpww.user_id as userId,
+		fpww.week_table_content as weekTableContent,
+		fpww.created_time as createdTime,
+		to_char(fpww.created_time,'MM-DD') as weekDate,
+		to_char(fpww.created_time,'hh-ss') as weekTime,
+		datepart(hh,fpww.created_time)/12 as hourFlag,
+		fpww.created_time as createdTime
+		from fyp_personage_work_week fpww
+		where 1=1
+		<if test="userId !=null">
+			and fpww.user_id = #{userId}
+		</if>
+		<if test="weekDate !=null">
+			and to_char(fpww.created_time,'YYYY-MM-DD') = #{weekDate}
+		</if>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="getWeekWorkDateList" resultType="String">
+		select
+		to_char(fpww.created_time,'YYYY-MM-DD')
+		from fyp_personage_work_week fpww
+		WHERE 1=1
+		<if test="userId !=null">
+			and fpww.user_id = #{userId}
+		</if>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+		group by to_char(fpww.created_time,'YYYY-MM-DD')
+		order by to_char(fpww.created_time,'YYYY-MM-DD') asc
+	</select>
+
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from FYP_PERSONAGE_WORK_WEEK 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.FypPersonageWorkWeek">
+		insert into FYP_PERSONAGE_WORK_WEEK
+		(
+			"ID", 
+			"WEEK_TABLE_CONTENT", 
+			"USER_ID", 
+			"CREATED_TIME", 
+			"UPDATED_TIME"
+		)
+		values
+		(
+			#{id}, 
+			#{weekTableContent}, 
+			#{userId}, 
+			#{createdTime}, 
+			#{updatedTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.FypPersonageWorkWeek">
+		update FYP_PERSONAGE_WORK_WEEK 
+		<set>
+			<if test="weekTableContent != null">"WEEK_TABLE_CONTENT" = #{weekTableContent}, </if>
+			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="createdTime != null">"CREATED_TIME" = #{createdTime}, </if>
+			<if test="updatedTime != null">"UPDATED_TIME" = #{updatedTime}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from FYP_PERSONAGE_WORK_WEEK where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from FYP_PERSONAGE_WORK_WEEK where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
