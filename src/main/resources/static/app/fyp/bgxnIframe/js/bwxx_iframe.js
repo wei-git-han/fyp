@@ -56,7 +56,7 @@ var pageModule = function () {
 	
     var getBanwenAll= function(){
         $.ajax({
-            url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/total",
+            url:"/app/fyp/manageDocument/total",
             data:{
                 type:1,
 				time:$("#searchDate").val()
@@ -80,7 +80,7 @@ var pageModule = function () {
     }
     var getFawenAll= function(){
         $.ajax({
-            url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/overview",
+            url:"/app/fyp/manageDocument/overview",
             data:{
                 type:1,
                 time:$("#searchDate2").val()
@@ -215,7 +215,7 @@ var pageModule = function () {
 	
 	var getLineChartData = function () {
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/trend',
+			url:'/app/fyp/manageDocument/trend',
 			dataType:'json',
 			success:function(res){
 				if(res.result=='success'){

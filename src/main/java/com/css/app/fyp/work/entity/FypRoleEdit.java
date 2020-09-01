@@ -1,5 +1,7 @@
 package com.css.app.fyp.work.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +34,7 @@ public class FypRoleEdit implements Serializable {
 	//配置人
 	private String editUserId;
 	//配置时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
 	private Date editTime;
 
 	/**
