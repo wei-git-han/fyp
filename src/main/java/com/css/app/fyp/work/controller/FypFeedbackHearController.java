@@ -2,13 +2,16 @@ package com.css.app.fyp.work.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.app.fyp.utils.PoiUtils;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +41,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class FypFeedbackHearController {
 	@Autowired
 	private FypFeedbackHearService fypFeedbackHearService;
+
+	@Autowired
+	private BaseAppUserService baseAppUserService;
 	
 	/**
 	 * 列表
@@ -72,7 +78,9 @@ public class FypFeedbackHearController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public void save(FypFeedbackHear fypFeedbackHear){
+		String orgName = CurrentUser.getOrgName();
 		fypFeedbackHear.setId(UUIDUtils.random());
+		fypFeedbackHear.setSubmitTime(new Date());
 		fypFeedbackHearService.save(fypFeedbackHear);
 		Response.json(new ResponseValueUtils().success());
 	}
@@ -83,6 +91,7 @@ public class FypFeedbackHearController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public void update(FypFeedbackHear fypFeedbackHear){
+		fypFeedbackHear.setSubmitTime(new Date());
 		fypFeedbackHearService.update(fypFeedbackHear);
 		Response.json(new ResponseValueUtils().success());
 	}

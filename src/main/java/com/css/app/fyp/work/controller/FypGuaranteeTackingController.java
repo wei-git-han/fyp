@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,8 @@ public class FypGuaranteeTackingController {
 	@RequestMapping("/save")
 	public void save(FypGuaranteeTacking fypGuaranteeTacking){
 		fypGuaranteeTacking.setId(UUIDUtils.random());
+		fypGuaranteeTacking.setWarrantyTime(new Date());
+		fypGuaranteeTacking.setStatusTime(new Date());
 		fypGuaranteeTackingService.save(fypGuaranteeTacking);
 
 		Response.json(new ResponseValueUtils().success());
@@ -81,6 +84,7 @@ public class FypGuaranteeTackingController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public void update(FypGuaranteeTacking fypGuaranteeTacking){
+		fypGuaranteeTacking.setStatusTime(new Date());
 		fypGuaranteeTackingService.update(fypGuaranteeTacking);
 
 		Response.json(new ResponseValueUtils().success());
