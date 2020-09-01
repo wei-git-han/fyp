@@ -1,4 +1,4 @@
-var tzggUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/informAfficheController/informAfficheList","dataType":"text"};
+var tzggUrl = {"url":"/app/fyp/informAfficheController/informAfficheList","dataType":"text"};
 var pageModule = function () {
 	var inittzgg = function(type){
 		$ajax({
