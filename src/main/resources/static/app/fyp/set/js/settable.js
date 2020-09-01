@@ -1,5 +1,5 @@
-var listurl = {"url":"http://127.0.0.1:11208/fyp/roleedit/list","dataType":"text"};//表格数据
-var delUrl = {"url":"http://127.0.0.1:11208/fyp/roleedit/delete","dataType":"text"};//删除
+var listurl = {"url":"/fyp/roleedit/list","dataType":"text"};//表格数据
+var delUrl = {"url":"/fyp/roleedit/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var grid = null;
@@ -30,11 +30,11 @@ var pageModule = function () {
 							}
 							return roleType;                                       
 						}},
-						{display:"配置人",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"配置人",name:"editUserId",width:"15%",align:"center",render:function(rowdata){
+							return rowdata.editUserId;                                         
 						}},
-						{display:"配置时间",name:"weeks",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.weeks;                                         
+						{display:"配置时间",name:"editTime",width:"15%",align:"center",render:function(rowdata){
+							return rowdata.editTime;                                         
 						}}
 					 ],
 			width:'100%',
@@ -43,7 +43,7 @@ var pageModule = function () {
 			rownumberyon:true,
 			paramobj:{},
 			overflowx:false,
-			pageyno:false,
+			pageyno:true,
 			url: listurl
 	   });
 	}
@@ -154,7 +154,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			//initUnitTree();
+			initUnitTree();
 			initother();
         }
     }

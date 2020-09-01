@@ -824,3 +824,16 @@ div, a, input, p, h1, h2, h3, h4, h5, h6 {
 label.error{
 	color:#f00;
 }
+
+
+
+.filterDate .date-picker>input{
+	background: transparent;
+	color:#fff;
+	border-color:#4C52E6;
+}
+
+.filterDate .btn.default {
+    color: #fff;
+    background-color: #4C52E6;
+}

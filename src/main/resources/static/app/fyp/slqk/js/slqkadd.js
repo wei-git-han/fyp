@@ -1,27 +1,15 @@
 var saveUrl;
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树---待测试（调用方法暂时被注释）
-var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
-var returnDataUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
-var dataId=getUrlParam("id")||"";//编辑数据id
-if(!!dataId){
-	saveUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/save","dataType":"text"};  //save
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
+var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
+var id=getUrlParam("id")||"";//编辑数据id
+if(!!id){
+	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"text"};  //edit
 }else{
-	saveUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/update","dataType":"text"};  //edit
+	saveUrl = {"url":"/fyp/feedbackhear/save","dataType":"text"};  //save
 }
 var pageModule = function(){
 	//树
 	var initUnitTree = function(){
-		//单位
-		$("#submitDeptName").createSelecttree({
-			url :deptTreeUrl,
-			width : '100%',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#submitDeptName").val(data.node.text);
-				$("#submitDeptId").val(data.node.id);
-			}
-		});
-		
 		//提出人
 		$("#submitUserName").createSelecttree({
 			url :userTreeUrl,
@@ -104,7 +92,7 @@ var pageModule = function(){
 	return{
 		//加载页面处理程序
 		initControl:function(){
-			//initUnitTree();
+			initUnitTree();
 			initdatafn(); 
 			initother();
 		}

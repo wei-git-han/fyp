@@ -1,79 +1,97 @@
-var activeType = 0;
-var url  = [
-	'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common',
-	'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/video'
-]
-var title = [
-	"各局日常会议预定场次及统计时长","各局视频会议预定场次及统计时长"
-]
 var pageModule = function () {
 	var initother = function(){
+		$("#sphy").click(function(){
+			getBarChartData();
+		});
+		
+		$(".date-picker1").datepicker({
+			language:"zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			format: "yyyy-mm",
+			minViewMode: 1,
+			autoclose: true
+		}).on("changeDate",function(){
+			
+		});
+		
+		$(".date-picker2").datepicker({
+			language:"zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			format: "yyyy-mm",
+			minViewMode: 1,
+			autoclose: true
+		}).on("changeDate",function(){
+			getBarChartData();
+		});
 	}
+	//日常会议
+	var getBar3dChartData = function(){
+		 $.ajax({
+		      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common",
+		      data:{},
+		      dataType:"json",
+		      success:function(res){
+		        if(res.result=="success"){
+		        	$.each(res.data,function(i, o){
+						data.xdata.push(o.deptName);
+						data.ydata.push([i,0,o.count]);
+					})
+                    init3dBarChart('main',data);
+		        }
+		      }
+		 })
+	});
+	
+	var init3dBarChart = function(){
+		
+	}
+	
+	
+	//视频会议
 	var getBarChartData = function(){
-    $.ajax({
-      url:url[activeType],
-      data:{},
-      dataType:"json",
-      success:function(res){
-		  var tableData = {
-			  "title":title[activeType],
-			  "legend":[
-				  "总时长",
-				  "场次"
-			  ],
-			  "xdata":[
-			  ],
-			  "ydata":[
-				  {
-					  "title":"总时长",
-					  "data":[
-
-					  ]
-				  },
-				  {
-					  "title":"场次",
-					  "data":[
-
-					  ]
-				  }
-			  ]
-		  }
-        if(res.result=="success"){
-        	res.data.forEach((e,index)=>{
-        		if(activeType==0){
+	  $.ajax({
+	      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/video",
+	      data:{},
+	      dataType:"json",
+	      success:function(res){
+			  var tableData = {
+				  "title":'',
+				  "legend":[
+					  "总时长",
+					  "场次"
+				  ],
+				  "xdata":[
+				  ],
+				  "ydata":[
+					  {
+						  "title":"总时长",
+						  "data":[
+	
+						  ]
+					  },
+					  {
+						  "title":"场次",
+						  "data":[
+	
+						  ]
+					  }
+				  ]
+			  }
+	        if(res.result=="success"){
+	        	res.data.forEach((e,index)=>{
 					tableData.xdata.push(e.deptName);
 					tableData.ydata[0].data.push(e.count*2+index)
 					tableData.ydata[1].data.push(e.count/2-index)
-				}else{
-					tableData.xdata.push(e.deptName);
-					tableData.ydata[0].data.push(e.meetingTimeCount*2+index)
-					tableData.ydata[1].data.push(e.meetingCount/2-index)
-				}
-			})
-          initBarChart(tableData)
-        }
-      }
-    })
-  }
+				})
+	          initBarChart(tableData)
+	        }
+	      }
+	   })
+	}
 	var initBarChart = function(data){
-    // var data = {
-    //   "title":"各局视频会议预定场次及统计时长",
-    //   "legend":["总时长","场次"],
-    //   "xdata":['1级部首长办公室数据', '2级部首长办公室数据', '3级部首长办公室数据', '4级部首长办公室数据', '5级部首长办公室数据'],
-    //   "ydata":[{
-    //     "title":"总时长",
-    //     "data":[320,332,200,300,450]
-    //   },{
-    //     "title":"场次",
-    //     "data":[220,182,66,10,120]
-    //   }]
-    // }
-		var chart = null;
-		if(activeType!=0){
-			chart =  echarts.init(document.getElementById('main1'))
-		}else{
-			chart = echarts.init(document.getElementById('main'))
-		}
+		var chart = echarts.init(document.getElementById('main1'))
 		chart.setOption({
 			title: {
 			  show: true,
@@ -182,17 +200,9 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-        	getBarChartData();
         	initother();
-        },
-		getBarChartData:function () {
-			getBarChartData()
-		}
+        }
     }
 }();
 
-var changeType = function (type){
-	activeType = type;
-	pageModule.getBarChartData()
-}
 

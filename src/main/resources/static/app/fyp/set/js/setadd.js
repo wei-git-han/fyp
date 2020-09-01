@@ -1,12 +1,12 @@
 var saveUrl;
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树---待测试（调用方法暂时被注释）
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
-var returnDataUrl = {"url":"http://127.0.0.1:11208/fyp/roleedit/info","dataType":"text"}; //返回数据url
-var dataId=getUrlParam("id")||"";//编辑数据id
-if(!!dataId){
-	saveUrl = {"url":"http://127.0.0.1:11208/fyp/roleedit/save","dataType":"text"};  //save
+var returnDataUrl = {"url":"/fyp/roleedit/info","dataType":"text"}; //返回数据url
+var id=getUrlParam("id")||"";//编辑数据id
+if(!!id){
+	saveUrl = {"url":"/fyp/roleedit/update","dataType":"text"};  //edit
 }else{
-	saveUrl = {"url":"http://127.0.0.1:11208/fyp/roleedit/update","dataType":"text"};  //edit
+	saveUrl = {"url":"/fyp/roleedit/save","dataType":"text"};  //save
 }
 var pageModule = function(){
 	//树
@@ -104,7 +104,7 @@ var pageModule = function(){
 	return{
 		//加载页面处理程序
 		initControl:function(){
-			//initUnitTree();
+			initUnitTree();
 			initdatafn(); 
 			initother();
 		}

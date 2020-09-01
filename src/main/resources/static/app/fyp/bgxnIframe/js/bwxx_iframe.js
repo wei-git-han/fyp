@@ -122,6 +122,11 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
+			    axisLabel: {
+				  textStyle: {
+				    color: '#fff',
+				  }
+				}
 			},
 			yAxis3D: {
 			    type: 'category',
@@ -132,6 +137,11 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
+			    axisLabel: {
+				  textStyle: {
+				    color: '#fff',
+				  }
+				}
 			},
 			zAxis3D: {
 			    type: 'value',
@@ -141,9 +151,14 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
+			    axisLabel: {
+				  textStyle: {
+				    color: '#fff',
+				  }
+				}
 			},
 			grid3D: {
-			    boxWidth: 200,
+			    boxWidth: 220,
 			    boxDepth: 20,
 			    axisPointer: {
 			        show: false
@@ -157,18 +172,18 @@ var pageModule = function () {
 			        }
 			    },
 			    viewControl: {
-			        alpha: 10, //控制场景平移旋转
+			        alpha: 0, //控制场景平移旋转
 			        beta: 20,
 			        minAlpha: 10,
 			        maxAlpha: 10,
-			        minBeta: 20,
-			        maxBeta: 20
+			        minBeta: 10,
+			        maxBeta: 10
 			    }
 			},
 			series: [{
 			    type: 'bar3D',
 			    name:'1',
-			    barSize: 15,
+			    barSize: 10,
 			    data:data.ydata,
 			    stack: 'stack',
 			    shading: 'lambert'
@@ -193,10 +208,10 @@ var pageModule = function () {
 								normal: {
 									color: new echarts.graphic.LinearGradient(0,0,0,1,[{
 										offset:1,
-										color:'rgba(19,127,185,0.5)'
+										color:'rgba(39,221,225,0.8)'
 									},{
 										offset:0,
-										color:'rgba(19,127,185,0.1)'
+										color:'rgba(39,221,225,0.1)'
 									}])
 								}
 							},
@@ -215,10 +230,10 @@ var pageModule = function () {
 								normal: {
 									color: new echarts.graphic.LinearGradient(0,0,0,1,[{
 										offset:1,
-										color:'rgba(21,60,174,0.5)'
+										color:'rgba(36,127,246,0.8)'
 									},{
 										offset:0,
-										color:'rgba(21,60,174,0.1)'
+										color:'rgba(36,127,246,0.1)'
 									}])
 								}
 							},
@@ -247,34 +262,50 @@ var pageModule = function () {
 				axisPointer: {
 					type: 'cross',
 					label: {
-						backgroundColor: '#6a7985'
+						/*backgroundColor: '#6a7985'*/
 					}
 				}
 			},
 			legend: {
-				data: ['呈批公文', '来文办理']
+				data: ['呈批公文', '来文办理'],
+				textStyle:{
+					color:'#fff'
+				}
 			},
 			toolbox: {
-				/* feature: {
-					saveAsImage: {}
-				} */
 			},
-			/* grid: {
-				left: '3%',
-				right: '4%',
-				bottom: '3%',
-				containLabel: true
-			}, */
 			xAxis: [
 				{
 					type: 'category',
 					boundaryGap: false,
-					data: data.xdata
+					data: data.xdata,
+					splitLine:{
+						lineStyle:{
+							color:'#5092C1'
+						}
+					},
+					axisLabel: {
+					  textStyle: {
+					    color: '#fff',
+					   // fontSize: 12
+					  }
+					},
 				}
 			],
 			yAxis: [
 				{
-					type: 'value'
+					type: 'value',
+					splitLine:{
+						lineStyle:{
+							color:'#5092C1'
+						}
+					},
+					axisLabel: {
+					  textStyle: {
+					    color: '#fff',
+					   // fontSize: 12
+					  }
+					},
 				}
 			],
 			series: data.ydata

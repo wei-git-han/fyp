@@ -248,6 +248,23 @@ var pageList = {
 var activeDoType = "rcgz"
 var pageModule = function() {
   var initother = function() {
+		
+		$("#setbtn").click(function(){
+				window.location.href ="/app/fyp/set/html/settabel.html"
+		});
+		
+		$("#slqkbtn").click(function(){
+				window.location.href ="/app/fyp/slqk/html/slqktabel.html"
+		});
+		
+		$("#bzbtn").click(function(){
+				window.location.href ="/app/fyp/bzProject/html/bzwtgz.html"
+		});
+		
+		
+		
+		
+		
     //     $("#iframeLeft").attr("src", "/app/fyp/bgxnIframe/html/bzxx_iframe.html"); //办公效能--保障信息
     //     $("#iframeCenter").attr("src", "/app/fyp/bgxnIframe/html/bhxx_iframe.html"); //办公效能--办会信息
     //     $("#iframeRight").attr("src", "/app/fyp/bgxnIframe/html/bsxx_iframe.html"); //办公效能--办事信息 
