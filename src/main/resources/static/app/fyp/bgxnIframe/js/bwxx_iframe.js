@@ -123,8 +123,15 @@ var pageModule = function () {
 			        }
 			    },
 			    axisLabel: {
-				  textStyle: {
-				    color: '#fff',
+			    	rotate:30,
+			    	textStyle: {
+					    color: '#fff',
+					  }
+				},
+			    splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
 				  }
 				}
 			},
@@ -137,10 +144,17 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
-			    axisLabel: {
-				  textStyle: {
-				    color: '#fff',
+			    splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
 				  }
+				},
+			    axisLabel: {
+			    	rotate:30,
+			    	textStyle: {
+					    color: '#fff',
+					  }
 				}
 			},
 			zAxis3D: {
@@ -151,14 +165,21 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
-			    axisLabel: {
-				  textStyle: {
-				    color: '#fff',
+			    splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
 				  }
+				},
+			    axisLabel: {
+			    	rotate:30,
+					textStyle: {
+					    color: '#fff',
+					}
 				}
 			},
 			grid3D: {
-			    boxWidth: 220,
+			    boxWidth: 260,
 			    boxDepth: 20,
 			    axisPointer: {
 			        show: false
@@ -172,7 +193,7 @@ var pageModule = function () {
 			        }
 			    },
 			    viewControl: {
-			        alpha: 0, //控制场景平移旋转
+			        alpha: 80, //控制场景平移旋转
 			        beta: 20,
 			        minAlpha: 10,
 			        maxAlpha: 10,
@@ -279,10 +300,11 @@ var pageModule = function () {
 					type: 'category',
 					boundaryGap: false,
 					data: data.xdata,
-					splitLine:{
-						lineStyle:{
-							color:'#5092C1'
-						}
+					splitLine: {
+					  lineStyle: {
+					    type: 'dotted',
+					    color: '#13296D' //刻度线颜色
+					  }
 					},
 					axisLabel: {
 					  textStyle: {
@@ -295,11 +317,12 @@ var pageModule = function () {
 			yAxis: [
 				{
 					type: 'value',
-					splitLine:{
-						lineStyle:{
-							color:'#5092C1'
-						}
-					},
+					splitLine: {
+						  lineStyle: {
+						    type: 'dotted',
+						    color: '#13296D' //刻度线颜色
+						  }
+						},
 					axisLabel: {
 					  textStyle: {
 					    color: '#fff',

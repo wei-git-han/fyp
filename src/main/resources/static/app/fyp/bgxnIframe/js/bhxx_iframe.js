@@ -12,7 +12,7 @@ var pageModule = function () {
 			minViewMode: 1,
 			autoclose: true
 		}).on("changeDate",function(){
-			
+			getBar3dChartData();
 		});
 		
 		$(".date-picker2").datepicker({
@@ -26,34 +26,111 @@ var pageModule = function () {
 			getBarChartData();
 		});
 	}
+	
 	//日常会议
 	var getBar3dChartData = function(){
 		 $.ajax({
-		      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common",
-		      data:{},
+		      url:"/app/fyp/manageMeeting/common",
+		      data:{time:$("#searchDate1").val()},
 		      dataType:"json",
 		      success:function(res){
 		        if(res.result=="success"){
+		        	var data = {
+                        "xdata":[],
+                        "ydata":[]
+                    }
 		        	$.each(res.data,function(i, o){
 						data.xdata.push(o.deptName);
-						data.ydata.push([i,0,o.count]);
+						data.ydata.push(o.count);
 					})
                     init3dBarChart('main',data);
 		        }
 		      }
 		 })
-	});
+	};
 	
-	var init3dBarChart = function(){
-		
+
+	var init3dBarChart = function(id,data){
+		var charts = echarts.init(document.getElementById(id));
+		charts.setOption({
+			xAxis: {
+		        data: data.xdata,
+		        axisLabel: {
+		          rotate:30,
+				  textStyle: {
+				    color: '#7783DE',
+				  }
+				},
+		    },
+		    yAxis: {
+		    	splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
+				  }
+				},
+				axisLabel: {
+				  textStyle: {
+				    color: '#7783DE',
+				  }
+				},
+		    },
+		    series: [{
+		        type: 'bar',
+		        barWidth:15,
+		        itemStyle:{
+		            normal: {
+		                borderWidth:1,
+		                borderColor:'#1B397C',
+		                barBorderRadius: 15,
+		                color: new echarts.graphic.LinearGradient(
+		                    0, 0, 1, 0,
+		                    [
+		                        {offset: 0, color: '#2dc3db'},
+		                        {offset: 1, color: '#0f88c0'}
+		                    ]
+		                )
+		            },
+		            emphasis: {
+		                barBorderRadius: 15,
+		                shadowBlur: 15,
+		                shadowColor: 'rgba(218,170, 58, 0.7)'
+		            }
+		        },
+		        data:data.ydata
+		    },{
+		            name:'a',
+		            tooltip:{
+		               show:false 
+		            },
+		            type: 'pictorialBar',
+		            itemStyle: {
+		                 normal: {
+		                    color: new echarts.graphic.LinearGradient(
+		                        0, 0, 1, 0,
+		                        [
+		                            {offset: 0, color: '#2bc6dd'},
+		                            {offset: 1, color: '#18cde1'}
+		                        ]
+		                    ), 
+		                    borderWidth:1,
+		                    borderColor:'#1B397C'
+		                }
+		            },
+		            symbol: 'circle',
+		            symbolSize: ['15', '10'],
+		            symbolPosition: 'end',
+		            data: data.ydata,
+		            z:3
+		        }]
+		});
 	}
-	
 	
 	//视频会议
 	var getBarChartData = function(){
 	  $.ajax({
-	      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/video",
-	      data:{},
+	      url:"/app/fyp/manageMeeting/video",
+	      data:{time:$("#searchDate2").val()},
 	      dataType:"json",
 	      success:function(res){
 			  var tableData = {
@@ -82,8 +159,8 @@ var pageModule = function () {
 	        if(res.result=="success"){
 	        	res.data.forEach((e,index)=>{
 					tableData.xdata.push(e.deptName);
-					tableData.ydata[0].data.push(e.count*2+index)
-					tableData.ydata[1].data.push(e.count/2-index)
+					tableData.ydata[0].data.push(e.meetingTimeCount)
+					tableData.ydata[1].data.push(e.meetingCount)
 				})
 	          initBarChart(tableData)
 	        }
@@ -176,7 +253,7 @@ var pageModule = function () {
 					name: data.ydata[0].title,
 					type: 'bar',
 					barGap: 5,
-					barWidth:5,
+					barWidth:15,
 					barCategoryGap:'300',
 					data: data.ydata[0].data
 				},
@@ -184,7 +261,7 @@ var pageModule = function () {
 					name: data.ydata[1].title,
 					type: 'bar',
 					barGap: 5,
-					barWidth:5,
+					barWidth:15,
 					borderRadius: 30,
 					barCategoryGap:'300',
 					data: data.ydata[1].data,
@@ -200,6 +277,7 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
+        	getBar3dChartData();
         	initother();
         }
     }
