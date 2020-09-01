@@ -24,6 +24,7 @@
 </head>
 <body>
 <div class="pr100">
+	 <img src="../../common/images/newbg.png" class="bgimg" />
 	<div class="newlayout-main">
 		<div class="pr100">
 			<div class="tabbable">
@@ -31,6 +32,7 @@
 			        <li class="active">
 			            <a href="#tab_1" data-toggle="tab">在位情况</a>
 			        </li>
+			        <span class="editbtn"><i class="fa fa-cog"></i>&nbsp;编辑</span>
 			    </ul>
 			    <div style="padding-top:35px;width: 100%;height: 100%;">
 			    	<div class="tab-content">
@@ -42,11 +44,27 @@
 											<div class="pr100 scroller">
 												<div class="pr100">
 													<div class="newpage01">
-														<div class="pr100" >
+														<div class="wh100" >
 															<div class="newtitle">通讯录</div>
 															<div class="newfilter">
-																<input type="text" id="filterVal" placeholder="编辑输入筛选信息" />
-																<i class="fa fa-search search_ryzw"  id="search_ryzw" title="筛选"></i>
+																<!-- <input type="text" id="filterVal" name="filterVal" placeholder="编辑输入筛选信息" /> -->
+																<span class="dropdown-toggle filterbtn" data-toggle="dropdown" ><img src="../images/filter.png" />&nbsp;筛选</span><span id="filter_show"></span>
+																<ul class="dropdown-menu pull-right" role="menu" style="border-radius:4px!important;">
+															        <li>
+															            <div style="padding:10px;">
+																			<form role="form">
+																			    <div class="form-body">
+																			        <div class="form-group" id="filter">
+																			            <label style="padding-left:10px;" class="label1" data="1">在线</label>
+																			            <label style="padding-left:10px;" class="label1" data="0">离线</label>
+																			            <label style="padding-left:10px;" class="label2" data="0">临时安排</label>
+																			            <label style="padding-left:10px;" class="label2" data="1">请假</label>
+																			        </div>
+																			    </div>
+																		    </form>
+															           </div>
+															       </li>
+															   </ul>
 															</div>
 														</div>
 													</div>
@@ -59,10 +77,14 @@
 														</div>
 													</div>
 													<div class="newpage02">
-														<div class="pr100">
+														<div class="wh100">
+															<div class="searchBox" style="display:none">
+																<div class="scroller" id="searchResult">
+																</div>
+															</div>
 															<div class="filter-main">
-																<input type="text" id="searchVal" placeholder="请输入姓名、电话、房间号查询" />
-																<i class="fa fa-search search_ryzw"  id="search_ryzw" title="筛选"></i>
+																<input type="text" class="searchInput" id="searchInput" placeholder="请输入姓名、电话、房间号查询" />
+																<i class="fa fa-search searchButton" id="searchButton"  title="筛选"></i>
 															</div>
 														</div>
 													</div>
@@ -71,13 +93,13 @@
 										</div>
 										<div class="newlayout_footer">
 											<div class="">
-												在线&nbsp;<span>120</span>
+												在线&nbsp;<span id="zxNum"></span>
 											</div>
 											<div class="">
-												离线&nbsp;<span>120</span>
+												离线&nbsp;<span id="lxNum"></span>
 											</div>
 											<div class="">
-												请假&nbsp;<span>120</span>
+												请假&nbsp;<span id="qjNum"></span>
 											</div>
 										</div>
 									</div>
@@ -111,6 +133,7 @@
 <script>
     jQuery(document).ready(function () {
         pageModule.initControl();
+        Metronic.init(); // init metronic core componets
     });
 </script>
 </body>

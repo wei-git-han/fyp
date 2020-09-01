@@ -1,10 +1,16 @@
-var gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+var gzzbUrl;
 var pageModule = function () {
 	var object1 = {};
-	var initPlan = function(){
-		 $ajax({
+	var initPlan = function(type){
+		if(type=="bjzb"){
+			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+		}
+		if(type=="grzb"){
+			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/workWeekTable/list","dataType":"text"};
+		}
+		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:$(".nav>li.active").attr("data")},
+			data:{weekTableType:type},
 			success: function(res) {
 				if (res.data.length<1) {
 					return;
@@ -117,13 +123,13 @@ var pageModule = function () {
 		//各局周表&本局周表 点击事件
 		$(".nav>li").click(function() {
 			$(this).addClass('active').siblings().removeClass('active');
-			initPlan();
+			initPlan($(".nav>li.active").attr("data"));
 		});
 	}
     return {
         //加载页面处理程序
         initControl: function () {
-          initPlan();
+          initPlan('bjzb');
 		  initother();
         }
     }

@@ -1,6 +1,6 @@
+var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
 	var initother = function(){
-		getBanwenAll()
 		//发文情况
 		$("#fwqk").click(function(){
             getFawenAll();
@@ -9,13 +9,57 @@ var pageModule = function () {
 		$("#fzqs").click(function(){
 			getLineChartData();
 		});
+		
+		
+		$(".date-picker1").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true
+		}).on("changeDate",function(){
+			getBanwenAll();//办文总量
+		});
+		
+		$(".date-picker2").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true
+		}).on("changeDate",function(){
+			getFawenAll();//发文情况
+		});
+		
+		$(".date-picker4").datepicker({
+			language:"zh-CN",
+		    rtl: Metronic.isRTL(),
+		    orientation: "",
+		    format: "yyyy-mm",
+			minViewMode: 1,
+		    autoclose: true
+		}).on("changeDate",function(){
+			//办公效率
+		});
+		
 	}
+	
+	var initUnitTree = function() {
+		$("#deptName").createSelecttree({
+			url: deptTreeUrl,
+			width: '100%',
+			success: function(data, treeobj) {},
+			selectnode: function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+			}
+		});
+	}
+	
     var getBanwenAll= function(){
         $.ajax({
             url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/total",
             data:{
                 type:1,
-                year:2020
+				time:$("#searchDate").val()
             },
             dataType:"json",
             success:function(res){
@@ -25,11 +69,11 @@ var pageModule = function () {
                         "xdata":[],
                         "ydata":[]
                     }
-                    res.data.forEach(e=>{
-                        data.xdata.push(e.deptName);
-                        data.ydata.push(e.count)
-                    })
-                    init3dBarChart('container',data)
+					$.each(res.data,function(i, o){
+						data.xdata.push(o.deptName);
+						data.ydata.push([i,0,o.count]);
+					})
+                    init3dBarChart('container',data);
                 }
             }
         })
@@ -39,7 +83,7 @@ var pageModule = function () {
             url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/overview",
             data:{
                 type:1,
-                year:2020
+                time:$("#searchDate2").val()
             },
             dataType:"json",
             success:function(res){
@@ -49,107 +93,90 @@ var pageModule = function () {
                         "xdata":[],
                         "ydata":[]
                     }
-                    res.data.forEach(e=>{
-                        data.xdata.push(e.deptName);
-                        data.ydata.push(e.count)
-                    })
-                    init3dBarChart('container2',data)
+					$.each(res.data,function(i, o){
+						data.xdata.push(o.deptName);
+						data.ydata.push([i,0,o.count]);
+					})
+					init3dBarChart('container2',data);
                 }
             }
         })
     }
-	var init3dBarChart = function(id,data){
-		$('#'+id).highcharts({
-			chart: {
-				renderTo:id,
-				backgroundColor:'rgba(0,0,0,0)',
-				/* showAxes:true, */
-				alignTicks:false,
-				type: 'column',
-				margin: 125,
-				options3d: {
-					enabled: true,
-					alpha: 2,
-					beta: 25,
-					depth: 1000
-				},
-				borderWidth:2,
-			},
-			exporting:{  
-				enabled:false
-			},
-			credits : {
-				href : "",
-				text : "",
-				enabled:false
-			},//去掉水印的方法，在highchart下一级
+	
+	
+	var init3dBarChart = function(id,data){ //echart
+		var charts = echarts.init(document.getElementById(id));
+		charts.setOption({
+			color: ['#1A54F7'], 
 			title: {
-				text: ''
+			    text: '',
+			    x: 'center'
 			},
-			subtitle: {
-				text: ''
+			tooltip: {},
+			xAxis3D: {
+			    type: 'category',
+			    data: data.xdata,
+			    axisLine:{
+			        lineStyle:{
+			            color:'#1F3F81',
+			            width:1
+			        }
+			    },
 			},
-			plotOptions: {
-				column: {
-					pointWidth:15,
-					groupPadding:0,
-					borderWidth:10,
-					depth:12, /* 柱状图倾斜度 */
-					borderRadius:5
-				}
+			yAxis3D: {
+			    type: 'category',
+			    data: [''],
+			    axisLine:{
+			        lineStyle:{
+			            color:'#1F3F81',
+			            width:1
+			        }
+			    },
 			},
-			legend:{
-				enabled:false /* 是否允许有图注 */
-				/* align:'left',
-				layout:'vertical',
-				verticalAlign:'middle' */
+			zAxis3D: {
+			    type: 'value',
+			    axisLine:{
+			        lineStyle:{
+			            color:'#1F3F81',
+			            width:1
+			        }
+			    },
 			},
-			tooltip:{
-				backgroundColor:'rgba(31,132,28,0)',
-				style:{
-					color:'#fff'
-				},
-				shared:true,
-				useHTML:true,
-				formatter:function(){
-				   return this.x+'来文办理：<br/><span style="font-size:28px;font-weight:700">'+this.y +'</span><br/>'+ '<span style="cursor:pointer;text-decoration:underline">点击查看</span>';
+			grid3D: {
+			    boxWidth: 200,
+			    boxDepth: 20,
+			    axisPointer: {
+			        show: false
+			    },
+			    light: {
+			        main: {
+			            intensity: 1.2
+			        },
+			        ambient: {
+			            intensity: 0.3
+			        }
+			    },
+			    viewControl: {
+			        alpha: 10, //控制场景平移旋转
+			        beta: 20,
+			        minAlpha: 10,
+			        maxAlpha: 10,
+			        minBeta: 20,
+			        maxBeta: 20
 			    }
 			},
-			xAxis: {
-				categories:data.xdata,
-				labels: {
-				    style: {
-				        color: '#406EB6'//设置y轴文字的颜色,
-						
-				    },
-					rotation:-45
-				},
-				gridLineColor:'#152C70',   //设置刻度线的颜色
-				
-			},
-			yAxis: {
-				opposite: true,
-				min: 0,
-				max: 700,
-                title: {
-                    text: ''
-                },
-                labels: {
-                    style: {
-                        color: '#406EB6'//设置y轴文字的颜色
-                    },
-					formatter:function(){
-					   return this.value + '件';
-				   }
-                },
-                gridLineColor:'#152C70',   //设置刻度线的颜色
-			},
 			series: [{
-				name: '',
-				data: data.ydata
+			    type: 'bar3D',
+			    name:'1',
+			    barSize: 15,
+			    data:data.ydata,
+			    stack: 'stack',
+			    shading: 'lambert'
 			}]
 		});
 	}
+	
+	
 	var getLineChartData = function () {
 		$.ajax({
 			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/trend',
@@ -157,14 +184,44 @@ var pageModule = function () {
 			success:function(res){
 				if(res.result=='success'){
 					var data = {
-						title:'发展趋势',
-						legend: ['呈批公文总件数','来文办理总件数'],
 						xdata:[],
 						ydata:[{
-							name:'呈批公文总件数',
+							name: '呈批公文',
+							type: 'line',
+							stack: '总量',
+							areaStyle: {
+								normal: {
+									color: new echarts.graphic.LinearGradient(0,0,0,1,[{
+										offset:1,
+										color:'rgba(19,127,185,0.5)'
+									},{
+										offset:0,
+										color:'rgba(19,127,185,0.1)'
+									}])
+								}
+							},
 							data:[]
 						},{
-							name:'来文办理总件数',
+							name: '来文办理',
+							type: 'line',
+							stack: '总量',
+							label: {
+								normal: {
+									show: true,
+									position: 'top'
+								}
+							},
+							areaStyle: {
+								normal: {
+									color: new echarts.graphic.LinearGradient(0,0,0,1,[{
+										offset:1,
+										color:'rgba(21,60,174,0.5)'
+									},{
+										offset:0,
+										color:'rgba(21,60,174,0.1)'
+									}])
+								}
+							},
 							data:[]
 						}]
 					}
@@ -178,81 +235,70 @@ var pageModule = function () {
 			}
 		})
 	}
+	
 	var initAreaChart = function(data){
-		 $('#container3').highcharts({
-            chart: {
-                type: 'area'
-            },
-            title: {
-                text: ''
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                allowDecimals: false,
-                labels: {
-                    formatter: function() {
-                        return this.value; // clean, unformatted number for year
-                    }
-                }
-            },
-            yAxis: {
-                title: {
-                    text: data.title
-                },
-				categories:data.xdata,
-                labels: {
-                    formatter: function() {
-                        return this.value / 1000 +'k';
-                    }
-                }
-            },
-            tooltip: {
-                pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-            },
-            plotOptions: {
-                area: {
-                    // pointStart: 1940,
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle',
-                        radius: 2,
-                        states: {
-                            hover: {
-                                enabled: true
-                            }
-                        }
-                    }
-                }
-            },
-            // series: data.ydata,
-		    series:[{
-				 name: 'USA',
-				 data: [null, null, null, null, null, 6 , 11, 32, 110, 235, 369, 640,
-					 1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
-					 27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
-					 26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
-					 24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
-					 22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
-					 10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104 ]
-			 }, {
-			name: 'USSR/Russia',
-				data: [null, null, null, null, null, null, null , null , null ,null,
-				5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
-				4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
-				15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
-				33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
-				35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
-				21000, 20000, 19000, 18000, 18000, 17000, 16000]
-			}]
-        });
+		var charts = echarts.init(document.getElementById("container3"));
+		charts.setOption({
+			title: {
+				text: ''
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'cross',
+					label: {
+						backgroundColor: '#6a7985'
+					}
+				}
+			},
+			legend: {
+				data: ['呈批公文', '来文办理']
+			},
+			toolbox: {
+				/* feature: {
+					saveAsImage: {}
+				} */
+			},
+			/* grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			}, */
+			xAxis: [
+				{
+					type: 'category',
+					boundaryGap: false,
+					data: data.xdata
+				}
+			],
+			yAxis: [
+				{
+					type: 'value'
+				}
+			],
+			series: data.ydata
+		});
 	}
 
-
+	//办公效率
+	/* var getCircleChartData = function () {
+		$.ajax({
+			url:'',
+			dataType:'json',
+			success:function(res){
+				if(res.result=='success'){
+					
+				}
+			}
+		})
+	}
+ */
     return {
         //加载页面处理程序
         initControl: function () {
+			getBanwenAll();//默认加载办文
+			//initUnitTree();
             initother();
         }
     }
