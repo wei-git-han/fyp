@@ -33,10 +33,10 @@ public class InformAfficheController {
     @ResponseBody
     @RequestMapping("/informAfficheList")
     public void informAfficheList(String afficheType) {
-        //JSONObject maps = informAfficheService.informAfficheList(afficheType);
-        JSONObject maps = new JSONObject();
-        maps.put("informAfficheContent", "习近平希腊巴西之行");
-        maps.put("informAfficheTime", "2020-08-25");
+        JSONObject maps = informAfficheService.informAfficheList(afficheType);
+        //JSONObject maps = new JSONObject();
+        //maps.put("informAfficheContent", "习近平希腊巴西之行");
+        //maps.put("informAfficheTime", "2020-08-25");
         Response.json(new ResponseValueUtils().success(maps));
     }
 
