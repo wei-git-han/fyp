@@ -1,6 +1,6 @@
 package com.css.app.fyp.utils;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.poi.ss.formula.functions.T;
 
 /**
@@ -114,7 +114,7 @@ public class ResponseValueUtils {
 
     public enum Value{
         //成功
-        SUCCESS(200,"成功"),
+        SUCCESS(200,"success"),
         //系统错误
         ERROR(500,"后台错误，请联系管理员"),
         //路径错误

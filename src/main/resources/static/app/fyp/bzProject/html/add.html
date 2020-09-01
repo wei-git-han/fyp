@@ -31,7 +31,12 @@
 					<tr>
 						<td class="t_label">姓名</td>
 						<td class="t_inpt" >
-							<input type="text" class="form-control" id="name" name="name" required="required" />
+							<div class="form-control" style="padding:0;width:195px;">
+								<div class="selecttree">
+									<input type="hidden" class="form-control"  id="userId" name="userId"  />
+									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" placeholder=""  />
+								</div>
+							</div>
 						</td>
 						<td class="t_label">单位名称</td>
 						<td class="t_inpt">
@@ -45,18 +50,15 @@
 					</tr>
 					<tr>
 						<td class="t_label">联系电话</td>
-						<td class="t_inpt">
-							<input type="text" class="form-control" id="phone" name="phone" required="required"  />
+						<td class="t_inpt" colspan="3">
+							<input type="text" class="form-control" id="phone" name="phone"  />
 						</td>
-						<td class="t_label">报修时间</td>
-						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="warrantyTime" id="warrantyTime" />
-						</td>
+
 					</tr>
 					<tr>
 						<td class="t_label">问题来源</td>
 						<td class="t_inpt" >
-							<select class="form-control" id="source" name="source" required="required" >
+							<select class="form-control" id="source" name="source" >
 								<option value="0">热线电话</option>
 								<option value="1">手机电话</option>
 								<option value="2">现场反馈</option>
@@ -64,7 +66,7 @@
 			            </td>
 						<td class="t_label">状态</td>
 						<td class="t_inpt" >
-							<select class="form-control" id="status" name="status" required="required" >
+							<select class="form-control" id="status" name="status" >
 								<option value="0">处理中</option>
 								<option value="1">延后处理</option>
 								<option value="2">已完成</option>
@@ -72,19 +74,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">更新时间</td>
-						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="statusTime" id="statusTime"  />
-						</td>
 						<td class="t_label">处理措施</td>
-						<td class="t_inpt" >
-							<input type="text" class="form-control" id="measures" name="measures" required="required" />
+						<td class="t_inpt" colspan="3">
+							<input type="text" class="form-control" id="measures" name="measures" />
 						</td>
 					</tr>
 					<tr>
 						<td class="t_label">问题描述：</td>
 						<td class="t_inpt" colspan="3">
-						   <textarea class="form-control" id="remark" name="remark" required="required" ></textarea>
+						   <textarea class="form-control" id="remark" name="remark" ></textarea>
 						</td>
 					</tr>
 				</table>

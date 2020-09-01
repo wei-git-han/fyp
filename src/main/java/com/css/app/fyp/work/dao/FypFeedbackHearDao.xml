@@ -29,7 +29,7 @@
 			</if>
 			<!--问题描述-->
 			<if test="desc!=null and desc!=''">
-				and DESC like '%'||#{desc}||'%'
+				and "DESC" like '%'||#{desc}||'%'
 			</if>
 			<if test="offset != null and limit != null">
 				limit #{offset}, #{limit}

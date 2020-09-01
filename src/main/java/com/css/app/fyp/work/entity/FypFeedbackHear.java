@@ -1,5 +1,7 @@
 package com.css.app.fyp.work.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,10 +26,12 @@ public class FypFeedbackHear implements Serializable {
 	//提出的单位id
 	private String submitDeptId;
 	//提出时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date submitTime;
 	//问题分类
 	private String type;
 	//解决时限
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date solveTime;
 	//问题描述
 	private String desc;
