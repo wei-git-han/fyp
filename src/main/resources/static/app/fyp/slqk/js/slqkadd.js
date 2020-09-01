@@ -1,12 +1,12 @@
 var saveUrl;
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
-var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //配置人树
-var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
+var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树---待测试（调用方法暂时被注释）
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
+var returnDataUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
 var dataId=getUrlParam("id")||"";//编辑数据id
 if(!!dataId){
-	saveUrl = {"url":"","dataType":"text"};  //save
+	saveUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/save","dataType":"text"};  //save
 }else{
-	saveUrl = {"url":"","dataType":"text"};  //edit
+	saveUrl = {"url":"http://127.0.0.1:11208/fyp/feedbackhear/update","dataType":"text"};  //edit
 }
 var pageModule = function(){
 	//树
@@ -104,8 +104,8 @@ var pageModule = function(){
 	return{
 		//加载页面处理程序
 		initControl:function(){
-			initUnitTree();
-			/*initdatafn(); */
+			//initUnitTree();
+			initdatafn(); 
 			initother();
 		}
 	};

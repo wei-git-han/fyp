@@ -1,9 +1,63 @@
-var phUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/app","dataType":"text"};//排行数据
+var fwUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/appAccess","dataType":"text"};//访问量
+var azUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/appInstall","dataType":"text"};//安装量
+var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
 	
 	var initother = function(){
 		$("#wkjsj").click(function(){
 			getBarChartData2();
+		});
+		
+		$(".date-picker1").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true
+		}).on("changeDate",function(){
+			getBarChartData();
+		});
+		
+		$(".date-picker2").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true
+		}).on("changeDate",function(){
+			initanz();
+		});
+		
+		$(".date-picker3").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true
+		}).on("changeDate",function(){
+			getBarChartData2();
+		});
+		
+	}
+	
+	var initUnitTree = function() {
+		$("#deptName").createSelecttree({
+			url: deptTreeUrl,
+			width: '100%',
+			success: function(data, treeobj) {},
+			selectnode: function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+				initfw(); //访问量
+			}
+		});
+		
+		$("#deptName2").createSelecttree({
+			url: deptTreeUrl,
+			width: '100%',
+			success: function(data, treeobj) {},
+			selectnode: function(e, data) {
+				$("#deptName2").val(data.node.text);
+				$("#deptId2").val(data.node.id);
+				initanz(); //安装量
+			}
 		});
 	}
 	
@@ -15,7 +69,7 @@ var pageModule = function () {
 		  dataType:"json",
 		  success:function(res){
 			if(res.result=="success"){
-			    initBarChart(res.data,'main');
+				initChart(res.data,'main');
 			}
 		  }
 		})
@@ -25,46 +79,25 @@ var pageModule = function () {
 	var getBarChartData2 = function(){
 		$.ajax({
 		  url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/computer",
-		  data:{},
+		  data:{
+			  time:$("#searchDate3").val()
+		  },
 		  dataType:"json",
 		  success:function(res){
 			if(res.result=="success"){
 			    initBarChart(res.data,'main3');
-			}
+			} 
 		  }
 		})
 	}
 	
 	var initBarChart = function(data,id){
-		/*var data ={
-		    "data":[
-		        {
-		            "deptName":"来文办理总件数",
-		            "leaveCount":"请假",
-		            "onLineCount":"在线",
-		            "percentage":"12",
-		            "count":"呈批公文总件数",
-		            "otherCount":"其他",
-		            "permanentStaffCount":"在编"
-		        },
-		        {
-		            "deptName":"来文办理总件数1",
-		            "leaveCount":"请假",
-		            "onLineCount":"在线",
-		            "percentage":"50",
-		            "count":"呈批公文总件数",
-		            "otherCount":"其他",
-		            "permanentStaffCount":"在编"
-		        }
-		    ]
-		}*/
-		
 		//解析后端数据
 		var xdata =[];
 		var ydata =[];
-		$.each(data.data, function(i, o) {
+		$.each(data, function(i, o) {
 			xdata.push(o.deptName);
-			ydata.push(o.percentage);
+			ydata.push(o.count);
 		});
 		
 		var chart = echarts.init(document.getElementById(id));
@@ -76,6 +109,7 @@ var pageModule = function () {
 				color: '#DBDDF7',
 			  },
 			},
+			backgroundColor:'#051A50',
 			color: ['#509DF7', '#99DA48'],
 			tooltip: {
 				trigger: 'axis',
@@ -144,28 +178,194 @@ var pageModule = function () {
 				{
 					name:'',
 					type: 'bar',
+					barWidth:20,
+					itemStyle:{
+						normal:{
+							color:'#0086FF'
+						}
+					},
+					data:ydata,
+					z:1
+				},
+				{
+					type: "pictorialBar",
+					symbol:'rect',
+					symbolOffset:[0,-1],
+					symbolSize:[21,3],
 					barGap: 0,
-					barWidth:10,
+					symbolRepeat:'fixed',
+					symbolMargin:3,
+					symbolClip:true,
+					barWidth:20,
 					barCategoryGap:'300',
-					data:ydata
+					itemStyle:{
+						normal:{
+							color:'#051A50'
+						}
+					},
+					data: ydata,
+					z:2
 				}
 			]
 		});
 	}
-	
-	//安装量
-	var initPh = function(){
+	var initChart = function(data){
+		/*
+        * 在线率统计表数据
+        * */
+		var xData = [],
+			yData = [];
+		$(data).each(function(i,obj){
+			xData.push(obj.deptName);
+			yData.push({
+				name:obj.deptName,
+				value:obj.percentage,
+				type:1,
+				id:i,
+				zb:obj.permanentStaffCount,
+				zx:obj.onLineCount,
+				qj:obj.leaveCount,
+				qt:obj.otherCount
+			});
+		})
+		var jzxl = echarts.init(document.getElementById('main'));
+		var option = {
+			title: {
+				show:false,
+				subtext: '单位（人）',
+				subtextStyle: {
+					color: '#2f8fdc',
+				}
+			},
+			dataZoom:[
+				{
+					type:'inside',
+					start:0,
+					throttle:50,
+					minValueSpan:4,
+					end:100
+				}
+			],
+			tooltip: {
+				trigger: 'axis',
+				formatter:function(parmas){
+//                	console.log(parmas)
+					var data = parmas[0].data;
+					var html = '<div style="text-align: left;">'+
+						'<p>'+(data.name?data.name:"")+'<p>'+
+						'<p>在编：'+(data.zb?data.zb:0)+'</p>'+
+						'<p>在线：'+(data.zx?data.zx:0)+'</p>'+
+						'<p>请假：'+(data.qj?data.qj:0)+'</p>'+
+						'<p>其他：'+(data.qt?data.qt:0)+'</p>'+
+						//                    '<p><a href="index.html" target="_blank" style="color:#fff;">点击查看&nbsp;&gt;&nbsp; </a></p>'+
+						'</div>';
+					return html;
+				}
+			},
+			xAxis: [{
+				clickable: true,
+				type: 'category',
+				data: xData,
+				axisLabel: {
+//                    margin: 'auto',
+					show: true,
+					interval: 0,
+					rotate:25,
+					textStyle: {
+						color: '#ACACAC',
+						fontSize: 12,
+					}
+				}
+			},],
+			yAxis: [{
+				type: 'value',
+				min:0,
+				max:100,
+				splitNumber:5,
+				axisLabel: {
+					textStyle: {
+						color: '#ACACAC',
+						fontSize: 12,
+					},
+					formatter:function(value){
+						return value+"%";
+					}
+				},
+				splitLine: {
+					lineStyle: {
+						type: "dotted",
+						color: "#ACACAC"
+					}
+				},
+			}],
+			series: [{
+				name: '各局在线率统计',
+				type: 'bar',
+				data: yData,
+				barWidth:20,
+				itemStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0,0,0,1,[{
+							offset:1,
+							color:'#58B4FD'
+						},{
+							offset:0,
+							color:'#2C76EC'
+						}]),
+//                       color:function(param){
+//                           return {
+//                               colorStops:[{
+//                                   offset:0,
+//                                   color:'#2C76EC'
+//                               },{
+//                                   offset:1,
+//                                   color:'#58B4FD'
+//                               }]
+//                           }
+//                       },
+						barBorderRadius:30,
+						label: {
+							show: false,
+						}
+					}
+				},
+			},
+			]
+		};
+		jzxl.setOption(option);
+		jzxl.on('click', function (params) {
+			if(params.data.type==1){
+				T.msg('您无权限查看该数据，请联系管理员！')
+				return;
+			}
+		})
+
+	};
+	//访问量
+	var initfw = function(){
 		$ajax({
-			url: phUrl,
-			data:{},
+			url: fwUrl,
+			data:{deptid:$("#deptId").val()},
 			success: function(data) {
-				var arryHtml_l = '';
-				var arryHtml_r = '';
 				var arryHtml_ph = '';
 				$.each(data.data.access, function(i, o) {
 					arryHtml_ph+='<div><img src="'+o.appImg+'" ><span>'+o.appName+'</span></div>';
 				});
-				$.each(data.data.install, function(i, o) {
+				$("#topPh").html(arryHtml_ph);
+			}
+		})
+	}
+	
+	
+	//安装量
+	var initanz = function(){
+		$ajax({
+			url: azUrl,
+			data:{deptid:$("#deptId2").val(),time:$("#searchDate2").val()},
+			success: function(data) {
+				var arryHtml_l = '';
+				var arryHtml_r = '';
+				$.each(data.data.access, function(i, o) {
 					if(i<5){
 						arryHtml_l+='<div>'+
 									'	<span class="topVS3">TOP'+parseInt(i+1)+'</span>'+
@@ -182,17 +382,15 @@ var pageModule = function () {
 				});
 				$(".ph-l").html(arryHtml_l);
 				$(".ph-r").html(arryHtml_r);
-				$("#topPh").html(arryHtml_ph);
-				
 			}
 		})
 	}
-	
     return {
         //加载页面处理程序
         initControl: function () {
         	getBarChartData();
-        	initPh();
+        	initfw();
+			initanz();
 			initother();
         }
     }

@@ -1,19 +1,26 @@
+var gzzbUrl;
 var pageModule = function () {
 	var object1 = {};
-	// 工作计划
-	var initPlan = function(){
-		 $.ajax({
-			url: "../data/zgzjh2.json",
-			data:{zoneId:$("#zgzjh span.active").attr("data")},
+	var initPlan = function(type){
+		if(type=="bjzb"){
+			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+		}
+		if(type=="grzb"){
+			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/workWeekTable/list","dataType":"text"};
+		}
+		$ajax({
+			url: gzzbUrl,
+			data:{weekTableType:type},
 			success: function(res) {
-				if (res.length<1) {
+				if (res.data.length<1) {
 					return;
 				}
-				var divHeight = $("#newpage113").height();
+				var divHeight = $(".newpage113").height();
 				var headHeight = 42;
 				var contentHeight = (divHeight - headHeight) / 7;
 				var planHtml = ""; //周工作安排
-				$("#anpaiID").html("");
+				$("#mainContent").html("");
+				var res = res.data;
 				for(key in res){
 					if(res[key]!=null&&typeof(res[key])!="undefined"&&res[key]!=""){
 						$.each(res[key].itemList, function(i, item) {
@@ -28,7 +35,7 @@ var pageModule = function () {
 							var dates = month + "月" + day + "日";
 							var today = new Date().format("M月d日");
 							
-							htmlDate += '	<div class="newpage17" style="background:transparent;!important">' +
+							htmlDate += '	<div class="newpage17" style="background:transparent!important">' +
 										'		<div class="newpage21" >' +
 										'			<p>' + month+'月'+day+'日' + '</p><p>' + '星期'+ week + '</p>' +
 										'		</div>' +
@@ -107,22 +114,22 @@ var pageModule = function () {
 						});
 					}
 				}
-				$("#anpaiID").append(planHtml);
+				$("#mainContent").append(planHtml);
 			}
 		})
 	}
 	
 	var initother = function(){
-		//工作安排点击事件
-		$("#zgzjh span").click(function() {
+		//各局周表&本局周表 点击事件
+		$(".nav>li").click(function() {
 			$(this).addClass('active').siblings().removeClass('active');
-			initPlan();
+			initPlan($(".nav>li.active").attr("data"));
 		});
 	}
     return {
         //加载页面处理程序
         initControl: function () {
-          initPlan();
+          initPlan('bjzb');
 		  initother();
         }
     }

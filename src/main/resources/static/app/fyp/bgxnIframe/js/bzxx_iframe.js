@@ -77,7 +77,8 @@ var pageModule = function () {
 							problemName="请假中";
 						break;
 					}
-					arryHtml+=  '<div class="card '+problemClass+'">'+
+					arryHtml+=  '<div class="card-parent">' +
+								'	<div class="card '+problemClass+'">'+
 			            		'		<div class="card_top">'+
 			            		'			<img src="../../common/images/user.png" />'+
 			            		'			<div>'+
@@ -90,7 +91,8 @@ var pageModule = function () {
 			            		'			<p>问题来源：<span>'+problemFrom+'</span></p>'+
 			            		'			<p><span class="describe">问题描述：</span><div class="card_desContent">'+problemDeration+'</div></p>'+
 			            		'		</div>'+
-			            		'	</div>'
+			            		'	</div>' +
+								'</div>'
 				});
 				$("#bzProblem").html(arryHtml);
 			}

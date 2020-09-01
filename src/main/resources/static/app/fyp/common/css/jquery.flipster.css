@@ -131,9 +131,9 @@
 }
 .flipster-coverflow .flip-hidden {
   visibility: hidden;
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
+  /*-webkit-opacity: 0;*/
+  /*-moz-opacity: 0;*/
+  /*opacity: 0;*/
 }
 /* @end */
 /* @group Flip Items */
@@ -279,9 +279,9 @@
 }
 .flipster-carousel .flip-past,
 .flipster-carousel .flip-future {
-  -webkit-opacity: 0.6;
-  -moz-opacity: 0.6;
-  opacity: 0.6;
+  /*-webkit-opacity: 0.6;*/
+  /*-moz-opacity: 0.6;*/
+  /*opacity: 0.6;*/
   z-index: 1;
   -webkit-transition-delay: 87.5ms;
   -moz-transition-delay: 87.5ms;
@@ -290,9 +290,9 @@
 }
 .flipster-carousel .flip-prev,
 .flipster-carousel .flip-next {
-  -webkit-opacity: 0.8;
-  -moz-opacity: 0.8;
-  opacity: 0.8;
+  /*-webkit-opacity: 0.8;*/
+  /*-moz-opacity: 0.8;*/
+  /*opacity: 0.8;*/
   z-index: 2;
   -webkit-transition-delay: 58.333333333333336ms;
   -moz-transition-delay: 58.333333333333336ms;
@@ -320,9 +320,9 @@
 }
 .flipster-carousel .flip-hidden {
   visibility: hidden;
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
+  /*-webkit-opacity: 0;*/
+  /*-moz-opacity: 0;*/
+  /*opacity: 0;*/
   -webkit-transform: rotateY(0deg) translateX(0) scale(0.5);
   -moz-transform: rotateY(0deg) translateX(0) scale(0.5);
   -o-transform: rotateY(0deg) translateX(0) scale(0.5);
