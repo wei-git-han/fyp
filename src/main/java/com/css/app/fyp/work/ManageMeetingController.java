@@ -51,7 +51,7 @@ public class ManageMeetingController {
                     }
                 }
             }
-            dataMap.put("deptName",data.get("deptname"));
+            dataMap.put("deptName",data.get("deptName"));
             dataMap.put("count",min);
             objects.add(dataMap);
         }
@@ -86,7 +86,7 @@ public class ManageMeetingController {
                     }
                 }
             }
-            dataMap.put("deptName",data.get("deptname"));
+            dataMap.put("deptName",data.get("deptName"));
             dataMap.put("meetingTimeCount",min);
             dataMap.put("meetingCount",count);
             objects.add(dataMap);
