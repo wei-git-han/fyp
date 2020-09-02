@@ -9,7 +9,9 @@ var pageModule = function () {
 		$("#fzqs").click(function(){
 			getAreaChartData();
 		});
-		
+		$('#bgxl').click(function(){
+			initCircleChart()
+		})
 		
 		$(".date-picker1").datepicker({
 			language: "zh-CN",
@@ -372,7 +374,7 @@ var pageModule = function () {
 				labelLine:{
 					show:false
 				},
-				color:'#052982',
+				color:'#000',
 				borderWidth:10
 			},
 			emphasis:{
@@ -400,7 +402,7 @@ var pageModule = function () {
 			backgroundColor:'',
 			title:[{
 				text:'正面平了',
-				left:'10%',
+				left:'5%',
 				top:'60%',
 				textAlign:'center',
 				textStyle:{
@@ -412,7 +414,7 @@ var pageModule = function () {
 			},
 			{
 				text:'fu面平了',
-				left:'100%',
+				left:'35%',
 				top:'60%',
 				textAlign:'center',
 				textStyle:{
@@ -421,12 +423,52 @@ var pageModule = function () {
 					color:'#fff',
 					textAlign:'center'
 				}
-			}],
+			},{
+					text:'fu面平了1',
+					left:'70%',
+					top:'60%',
+					textAlign:'center',
+					textStyle:{
+						fontSize:'16',
+						fontWeight:'normal',
+						color:'#fff',
+						textAlign:'center'
+					}
+				}],
 			series:[
+
+
+				// {
+				// 	type:'pie',
+				// 	radius:['25%','30%'],
+				// 	center:['5%','50%'],
+				// 	startAngle:225,
+				// 	labelLine:{
+				// 		normal:{
+				// 			show:false
+				// 		},
+				// 	},
+				// 	label:{
+				// 		normal:{
+				// 			position:'center'
+				// 		}
+				// 	},
+				// 	data:[{
+				// 		value:75,
+				// 		itemStyle:{
+				// 			normal:{
+				// 				color:'#000'
+				// 			}
+				// 		}
+				// 	},{
+				// 		value:35,
+				// 		itemStyle:placeHolderStyle
+				// 	}],
+				// },
 				{
 					type:'pie',
 					radius:['25%','30%'],
-					center:['30%','50%'],
+					center:['5%','50%'],
 					startAngle:225,
 					labelLine:{
 						normal:{
@@ -442,19 +484,50 @@ var pageModule = function () {
 						value:100,
 						itemStyle:{
 							normal:{
-								color:'#0CB1F2'
+								color:'#6f78cc'
 							}
-						}
+						},
+						label:dataStyle
 					},{
 						value:35,
 						itemStyle:placeHolderStyle
 					}],
 				},
-				/*{
+				/*
+				* 第二个
+				* d*/
+				// {
+				// 	type:'pie',
+				// 	radius:['25%','30%'],
+				// 	center:['35%','50%'],
+				// 	startAngle:225,
+				// 	labelLine:{
+				// 		normal:{
+				// 			show:false
+				// 		},
+				// 	},
+				// 	label:{
+				// 		normal:{
+				// 			position:'center'
+				// 		}
+				// 	},
+				// 	data:[{
+				// 		value:100,
+				// 		itemStyle:{
+				// 			normal:{
+				// 				color:'#0CB1F2'
+				// 			}
+				// 		}
+				// 	},{
+				// 		value:35,
+				// 		itemStyle:placeHolderStyle
+				// 	}],
+				// },
+				{
 					type:'pie',
-					radius:['65%','60%'],
-					center:['50%','60%'],
-					startAngle:525,
+					radius:['25%','30%'],
+					center:['35%','50%'],
+					startAngle:225,
 					labelLine:{
 						normal:{
 							show:false
@@ -466,17 +539,74 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:70,
+						value:30,
 						itemStyle:{
 							normal:{
-								color:'#0CB1F2'
+								color:'#6f78cc'
 							}
-						}
+						},
+						label:dataStyle
 					},{
-						value:95,
+						value:105,
 						itemStyle:placeHolderStyle
 					}],
-				}*/
+				},
+			/*	第三个*/
+				// {
+				// 	type:'pie',
+				// 	radius:['25%','30%'],
+				// 	center:['70%','50%'],
+				// 	startAngle:225,
+				// 	labelLine:{
+				// 		normal:{
+				// 			show:false
+				// 		},
+				// 	},
+				// 	label:{
+				// 		normal:{
+				// 			position:'center'
+				// 		}
+				// 	},
+				// 	data:[{
+				// 		value:100,
+				// 		itemStyle:{
+				// 			normal:{
+				// 				color:'#0CB1F2'
+				// 			}
+				// 		}
+				// 	},{
+				// 		value:35,
+				// 		itemStyle:placeHolderStyle
+				// 	}],
+				// },
+				{
+					type:'pie',
+					radius:['25%','30%'],
+					center:['70%','50%'],
+					startAngle:225,
+					labelLine:{
+						normal:{
+							show:false
+						},
+					},
+					label:{
+						normal:{
+							position:'center'
+						}
+					},
+					data:[{
+						value:0,
+						itemStyle:{
+							normal:{
+								color:'#6f78cc'
+							}
+						},
+						label:dataStyle
+					},{
+						value:135,
+						itemStyle:placeHolderStyle
+					}],
+				}
 			]
 		});
 	}
@@ -487,7 +617,6 @@ var pageModule = function () {
 			getBanwenAll();//默认加载办文
 			initUnitTree();
             initother();
-            initCircleChart();
         }
     }
 }();
