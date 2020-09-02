@@ -42,7 +42,10 @@ var pageModule = function(){
             orientation: "",
             autoclose: true
         });
-
+		$(".input-group-btn").click(function(){
+			$(this).prev().focus();
+		});
+		
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {

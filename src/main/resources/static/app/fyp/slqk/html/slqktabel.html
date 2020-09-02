@@ -60,13 +60,23 @@
 						<option value="4">已关闭</option>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="width:25%;">
 					<label>提出时间</label><br/>
-					<input style="width:195px;" class="form-control form-control-inline date-picker" size="16" type="text" name="submitTime" id="submitTime"  />
+					<div style="width:360px;" class="input-group input-large date-picker input-daterange"  data-date-format="yyyy-mm-dd">
+						<input type="text" class="form-control"  onfocus=""   id="submitTimeBegin"  name="submitTimeBegin" />
+						<span class="input-group-btn">
+					    	<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+					    </span>
+						<span class="input-group-addon" style="border: none;background: transparent;">至</span>
+						<input type="text" class="form-control" onfocus="blur()"  id="submitTimeEnd"  name="submitTimeEnd"  />
+						<span class="input-group-btn">
+					    	<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+					    </span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>问题描述</label><br/>
-					<input type="text" name="desc" id="desc" value="" placeholder="请输入问题描述关键词" />
+					<input type="text" name="desc" id="desc" class="form-control"  value="" placeholder="请输入问题描述关键词" />
 				</div>
 				
 				<div class="btn-group">

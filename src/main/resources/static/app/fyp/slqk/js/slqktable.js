@@ -88,16 +88,26 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
+		$(".date-picker").datepicker({
+		    language:"zh-CN",
+		    rtl: Metronic.isRTL(),
+		    orientation: "",
+		    autoclose: true
+		});
+		$(".input-group-btn").click(function(){
+			$(this).prev().focus();
+		});
+		
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTime","desc"];
+			var elementarry = ["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTimeBegin","submitTimeEnd","desc"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTime","desc"]);
+			removeInputData(["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTimeBegin","submitTimeEnd","desc"]);
 		    initgrid();
 		});
 		

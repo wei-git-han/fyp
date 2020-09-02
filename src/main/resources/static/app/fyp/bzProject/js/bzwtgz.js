@@ -89,10 +89,11 @@ var pageModule = function () {
 		$(".date-picker").datepicker({
 		    language:"zh-CN",
 		    rtl: Metronic.isRTL(),
-		    orientation: "right",
-		    format: "yyyy-mm-dd hh:ii",
-		    autoclose: true,
-		    startDate:new Date()
+		    orientation: "",
+		    autoclose: true
+		});
+		$(".input-group-btn").click(function(){
+			$(this).prev().focus();
 		});
 		
 		/* 新增add */
@@ -161,14 +162,14 @@ var pageModule = function () {
 		
 		//确定
 		$("#sure").click(function(){
-			var elementarry = ["userId","deptId","deptName","phone","warrantyTime","source","remark","status"];
+			var elementarry = ["userId","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","remark","status"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark","status"]);
+			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","remark","status"]);
 			initgrid();
 		});
 	}

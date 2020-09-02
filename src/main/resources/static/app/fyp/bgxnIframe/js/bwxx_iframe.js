@@ -348,7 +348,7 @@ var pageModule = function () {
 	}
 
 	//办公效率
-	/* var getCircleChartData = function () {
+	/*var getCircleChartData = function () {
 		$.ajax({
 			url:'',
 			dataType:'json',
@@ -358,17 +358,142 @@ var pageModule = function () {
 				}
 			}
 		})
+	}*/
+ 
+	var initCircleChart = function(){
+		var charts = echarts.init(document.getElementById("container4"));
+		
+		
+		var placeHolderStyle= {
+			normal:{
+				label:{
+					show:false
+				},
+				labelLine:{
+					show:false
+				},
+				color:'#052982',
+				borderWidth:10
+			},
+			emphasis:{
+				color:'#052982',
+				borderWidth:10
+			}
+				
+		}
+
+		var dataStyle = {
+			normal:{
+				formatter:'{c}%',
+				position:'center',
+				show:true,
+				textStyle:{
+					fontSize:'40',
+					fontWeight:'bold',
+					color:'#0CB3F2'
+				}
+			},	
+		}
+
+		
+		charts.setOption({
+			backgroundColor:'',
+			title:[{
+				text:'正面平了',
+				left:'10%',
+				top:'60%',
+				textAlign:'center',
+				textStyle:{
+					fontSize:'16',
+					fontWeight:'bold',
+					color:'#fff',
+					textAlign:'center'
+				}
+			},
+			{
+				text:'fu面平了',
+				left:'100%',
+				top:'60%',
+				textAlign:'center',
+				textStyle:{
+					fontSize:'16',
+					fontWeight:'normal',
+					color:'#fff',
+					textAlign:'center'
+				}
+			}],
+			series:[
+				{
+					type:'pie',
+					radius:['25%','30%'],
+					center:['30%','50%'],
+					startAngle:225,
+					labelLine:{
+						normal:{
+							show:false
+						},
+					},
+					label:{
+						normal:{
+							position:'center'
+						}
+					},
+					data:[{
+						value:100,
+						itemStyle:{
+							normal:{
+								color:'#0CB1F2'
+							}
+						}
+					},{
+						value:35,
+						itemStyle:placeHolderStyle
+					}],
+				},
+				/*{
+					type:'pie',
+					radius:['65%','60%'],
+					center:['50%','60%'],
+					startAngle:525,
+					labelLine:{
+						normal:{
+							show:false
+						},
+					},
+					label:{
+						normal:{
+							position:'center'
+						}
+					},
+					data:[{
+						value:70,
+						itemStyle:{
+							normal:{
+								color:'#0CB1F2'
+							}
+						}
+					},{
+						value:95,
+						itemStyle:placeHolderStyle
+					}],
+				}*/
+			]
+		});
 	}
- */
+	
     return {
         //加载页面处理程序
         initControl: function () {
 			getBanwenAll();//默认加载办文
 			initUnitTree();
             initother();
+            initCircleChart();
         }
     }
 }();
+
+
+
 
 
 
