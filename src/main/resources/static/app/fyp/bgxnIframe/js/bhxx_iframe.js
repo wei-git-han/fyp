@@ -30,7 +30,7 @@ var pageModule = function () {
 	//日常会议
 	var getBar3dChartData = function(){
 		 $.ajax({
-		      url:"/app/fyp/manageMeeting/common",
+		      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common",
 		      data:{time:$("#searchDate1").val()},
 		      dataType:"json",
 		      success:function(res){
@@ -41,7 +41,7 @@ var pageModule = function () {
                     }
 		        	$.each(res.data,function(i, o){
 						data.xdata.push(o.deptName);
-						data.ydata.push(o.count);
+						data.ydata.push(o.count||null);
 					})
                     init3dBarChart('main',data);
 		        }
