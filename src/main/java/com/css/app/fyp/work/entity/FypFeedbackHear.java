@@ -28,6 +28,12 @@ public class FypFeedbackHear implements Serializable {
 	//提出时间
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date submitTime;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date submitTimeBegin;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date submitTimeEnd;
 	//问题分类
 	private String type;
 	//解决时限
@@ -43,6 +49,26 @@ public class FypFeedbackHear implements Serializable {
 	private String submitUserName;
 	//工作进展
 	private String march;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Date getSubmitTimeBegin() {
+		return submitTimeBegin;
+	}
+
+	public void setSubmitTimeBegin(Date submitTimeBegin) {
+		this.submitTimeBegin = submitTimeBegin;
+	}
+
+	public Date getSubmitTimeEnd() {
+		return submitTimeEnd;
+	}
+
+	public void setSubmitTimeEnd(Date submitTimeEnd) {
+		this.submitTimeEnd = submitTimeEnd;
+	}
 
 	/**
 	 * 设置：

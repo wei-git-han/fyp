@@ -71,8 +71,15 @@ public class ManageDocumentController {
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
         paramMap.add("deptid",deptid);
-        paramMap.add("time",this.getJsonData.getStringDate(time));
-        Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
+        paramMap.add("time",null);
+        List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
+        Object data;
+        if(null!=dataList){
+            data = dataList.get(0).get("list");
+        }else{
+            data = null;
+        }
+        Response.json(new ResponseValueUtils().success(data));
     }
 
     /**
