@@ -1,9 +1,6 @@
 package com.css.app.fyp.work.controller;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import com.css.app.fyp.utils.ResponseValueUtils;
@@ -46,6 +43,13 @@ public class FypGuaranteeTackingController {
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
         map.putAll(paramMap);
+		if(null!=tacking.getWarrantyTimeBegin()&&null!=tacking.getWarrantyTimeEnd()) {
+			map.put("warrantyTimeBegin", tacking.getWarrantyTimeBegin());
+			Calendar warrantyTimeEndinstance = Calendar.getInstance();
+			warrantyTimeEndinstance.setTime(tacking.getWarrantyTimeEnd());
+			warrantyTimeEndinstance.add(Calendar.DAY_OF_MONTH, 1);
+			map.put("warrantyTimeEnd", warrantyTimeEndinstance.getTime());
+		}
 		//查询列表数据
 		List<FypGuaranteeTacking> fypGuaranteeTackingList = fypGuaranteeTackingService.queryList(map);
 		
