@@ -30,8 +30,8 @@ var pageModule = function () {
 							}
 							return roleType;                                       
 						}},
-						{display:"配置人",name:"editUserId",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.editUserId;                                         
+						{display:"配置人",name:"editUserName",width:"15%",align:"center",render:function(rowdata){
+							return rowdata.editUserName;
 						}},
 						{display:"配置时间",name:"editTime",width:"15%",align:"center",render:function(rowdata){
 							return rowdata.editTime;                                         
@@ -156,6 +156,9 @@ var pageModule = function () {
 			initgrid();
 			initUnitTree();
 			initother();
+        },
+        initgrid:function(){
+            initgrid();
         }
     }
 }();

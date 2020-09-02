@@ -8,28 +8,29 @@
 	</select>
 
 	<select id="queryList" resultType="com.css.app.fyp.work.entity.FypRoleEdit">
-		select * from FYP_ROLE_EDIT
+		select a.*,b.truename as editUserName from FYP_ROLE_EDIT as a
+		left join base_app_user as b on a.edit_user_id = b.user_id
 		where
 			1=1
 			<!--用户id-->
 			<if test="userId!=null and userId!=''">
-				and USER_ID = #{userId}
+				and a.USER_ID = #{userId}
 			</if>
 			<!--用户名称-->
 			<if test="userName!=null and userName!=''">
-				and USER_NAME = #{userName}
+				and a.USER_NAME = #{userName}
 			</if>
 			<!--单位id-->
 			<if test="deptId!=null and deptId!=''">
-				and DEPT_ID = #{deptId}
+				and a.DEPT_ID = #{deptId}
 			</if>
 			<!--单位名称-->
 			<if test="deptName!=null and deptName!=''">
-				and DEPT_NAME = #{deptName}
+				and a.DEPT_NAME = #{deptName}
 			</if>
 			<!--角色-->
 			<if test="roleType!=null and roleType!=''">
-				and ROLE_TYPE = #{roleType}
+				and a.ROLE_TYPE = #{roleType}
 			</if>
 			<if test="offset != null and limit != null">
 				limit #{offset}, #{limit}
