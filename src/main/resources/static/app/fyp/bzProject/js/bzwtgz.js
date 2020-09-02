@@ -92,9 +92,19 @@ var pageModule = function () {
 		    orientation: "",
 		    autoclose: true
 		});
-		$(".input-group-btn").click(function(){
+		/*$(".input-group-btn").click(function(){
 			$(this).prev().focus();
+		});*/
+		
+		
+		$(".form_datetime").datetimepicker({
+		    language:"zh-CN",
+		    autoclose: true,
+		    isRTL: Metronic.isRTL(),
+		    format: "yyyy-mm-dd hh:ii",
+		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
+		
 		
 		/* 新增add */
 		$("#add").click(function(){

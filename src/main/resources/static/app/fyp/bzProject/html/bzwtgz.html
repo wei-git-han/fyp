@@ -51,17 +51,21 @@
 					</div>
 				</div>
 				<div class="form-group" style="width:25%;">
-					<label>提出时间</label><br/>
-					<div style="width:360px;" class="input-group input-large date-picker input-daterange"  data-date-format="yyyy-mm-dd">
-						<input type="text" class="form-control"  onfocus=""   id="warrantyTimeBegin"  name="warrantyTimeBegin" />
-						<span class="input-group-btn">
-					    	<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-					    </span>
-						<span class="input-group-addon" style="border: none;background: transparent;">至</span>
-						<input type="text" class="form-control" onfocus="blur()"  id="warrantyTimeEnd"  name="warrantyTimeEnd"  />
-						<span class="input-group-btn">
-					    	<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-					    </span>
+					<label>报修时间</label><br/>
+					<div style="width:420px;">
+						<div class="input-group date form_datetime" style="width:220px;float:left;">
+						    <input type="text" size="16" readonly class="form-control" id="warrantyTimeBegin"  name="warrantyTimeBegin" >
+						    <span class="input-group-btn">
+						    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+						    </span>
+						    <span class="input-group-addon" style="border: none;background: transparent;">至</span>
+						</div>
+						<div class="input-group date form_datetime" style="width:200px;float:left;">
+						    <input type="text" size="16" readonly class="form-control" id="warrantyTimeEnd"  name="warrantyTimeEnd" >
+						    <span class="input-group-btn">
+						    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+						    </span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
