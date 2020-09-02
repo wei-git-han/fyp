@@ -83,6 +83,7 @@ jQuery(document).ready(function() {
 	}
 	var year = pagedate.getFullYear();
 	$(".datee").val(year+"-"+month+"-"+day);
+	$(".yearAndmonth").val(year+"-"+month);
 });    
 
 /*start设置bootstrap滚动条自适应浏览器高度*/

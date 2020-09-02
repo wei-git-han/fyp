@@ -837,3 +837,13 @@ label.error{
     color: #fff;
     background-color: #4C52E6;
 }
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 150px!important;
+}
+
+.bootstrap-select .btn {
+    border-color: #4C52E6;
+    color: #fff;
+    background-color: transparent;
+}

@@ -7,7 +7,7 @@ var pageModule = function () {
 		});
 		//发展趋势
 		$("#fzqs").click(function(){
-			getLineChartData();
+			getAreaChartData();
 		});
 		
 		
@@ -15,7 +15,8 @@ var pageModule = function () {
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
 			orientation: "",
-			autoclose: true
+			autoclose: true,
+			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
 			getBanwenAll();//办文总量
 		});
@@ -24,7 +25,8 @@ var pageModule = function () {
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
 			orientation: "",
-			autoclose: true
+			autoclose: true,
+			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
 			getFawenAll();//发文情况
 		});
@@ -40,14 +42,21 @@ var pageModule = function () {
 			//办公效率
 		});
 		
+		
+		$("#lineTypeBw").change(function(){
+			getBanwenAll();
+		});
+		$("#lineTypeFw").change(function(){
+			getFawenAll();
+		});
 	}
 	
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
-			url: deptTreeUrl,
-			width: '100%',
-			success: function(data, treeobj) {},
-			selectnode: function(e, data) {
+			url :deptTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
 				$("#deptName").val(data.node.text);
 				$("#deptId").val(data.node.id);
 			}
@@ -58,7 +67,7 @@ var pageModule = function () {
         $.ajax({
             url:"/app/fyp/manageDocument/total",
             data:{
-                type:1,
+                type:$("#lineTypeBw option:selected").val(),
 				time:$("#searchDate").val()
             },
             dataType:"json",
@@ -82,7 +91,7 @@ var pageModule = function () {
         $.ajax({
             url:"/app/fyp/manageDocument/overview",
             data:{
-                type:1,
+            	type:$("#lineTypeFw option:selected").val(),
                 time:$("#searchDate2").val()
             },
             dataType:"json",
@@ -213,10 +222,13 @@ var pageModule = function () {
 	}
 	
 	
-	var getLineChartData = function () {
+	var getAreaChartData = function () {
 		$.ajax({
 			url:'/app/fyp/manageDocument/trend',
 			dataType:'json',
+			data:{
+                deptid:$("#deptId").val()
+            },
 			success:function(res){
 				if(res.result=='success'){
 					var data = {
@@ -352,7 +364,7 @@ var pageModule = function () {
         //加载页面处理程序
         initControl: function () {
 			getBanwenAll();//默认加载办文
-			//initUnitTree();
+			initUnitTree();
             initother();
         }
     }
