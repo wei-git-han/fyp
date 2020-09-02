@@ -44,12 +44,14 @@ public class ManageMeetingController {
             List<Map<String,Object>> list = (ArrayList)data.get("list");
             dataMap = new HashMap<>();
             int min = 0;
-            for (Map<String,Object> map:list) {
-                if("0".equals(map.get("videoEnable"))){//未开启视频
-                    min+= Integer.parseInt(this.getMin((Date) map.get("endTime"),(Date)map.get("startTime")));
+            if(null!=list) {
+                for (Map<String, Object> map : list) {
+                    if ("0".equals(map.get("videoEnable"))) {//未开启视频
+                        min += Integer.parseInt(this.getMin((Date) map.get("endTime"), (Date) map.get("startTime")));
+                    }
                 }
             }
-            dataMap.put("deptName","单位名称");
+            dataMap.put("deptName",data.get("deptname"));
             dataMap.put("count",min);
             objects.add(dataMap);
         }
@@ -76,13 +78,15 @@ public class ManageMeetingController {
             dataMap = new HashMap<>();
             int min = 0;
             int count = 0;
-            for (Map<String,Object> map:list) {
-                if("1".equals(map.get("videoEnable"))){//开启视频
-                    min+= Integer.parseInt(this.getMin((Date) map.get("endTime"),(Date)map.get("startTime")));
-                    count ++;
+            if(null!=list) {
+                for (Map<String, Object> map : list) {
+                    if ("1".equals(map.get("videoEnable"))) {//开启视频
+                        min += Integer.parseInt(this.getMin((Date) map.get("endTime"), (Date) map.get("startTime")));
+                        count++;
+                    }
                 }
             }
-            dataMap.put("deptName","单位名称");
+            dataMap.put("deptName",data.get("deptname"));
             dataMap.put("meetingTimeCount",min);
             dataMap.put("meetingCount",count);
             objects.add(dataMap);
