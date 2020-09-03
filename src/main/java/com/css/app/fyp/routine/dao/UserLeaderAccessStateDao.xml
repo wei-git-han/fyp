@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.UserLeaderAccessStateDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
+		select * from com.css.app.fyp.routine where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
+		select * from com.css.app.fyp.routine where 1=1 
+		<if test="leaderId!=null and leaderId!=''">
+			and leader_id =#{leaderId}
+		</if>
+		<if test="userId!=null and userId!=''">
+			and user_id =#{userId}
+		</if>
+		<if test="state!=null">
+			and state =#{state}
+		</if>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+	<select id="querySingleObject" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
+		select * from com.css.app.fyp.routine where 1=1 and leader_id =#{leaderId} and user_id =#{userId}
+	</select>
+	
+	<select id="queryNotlOOKList" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
+		select LEADER_ID from  com.css.app.fyp.routine  where state=1 and LEADER_ID not in (
+		select LEADER_ID from  com.css.app.fyp.routine  
+		where state=1  and user_id =#{userid} 
+		)
+		and LEADER_ID!=#{userid}
+	</select>
+	
+	<select id="queryMapData" resultType="map">
+		select t.user_id as "userId",t.user_name as "userName" from "com.css.app.fyp.routine" t
+		where t.state =1
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from com.css.app.fyp.routine 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
+		insert into com.css.app.fyp.routine
+		(
+			"ID", 
+			"LEADER_ID", 
+			"LEADER_NAME", 
+			"USER_ID", 
+			"USER_NAME", 
+			"STATE"
+		)
+		values
+		(
+			#{id}, 
+			#{leaderId}, 
+			#{leaderName}, 
+			#{userId}, 
+			#{userName}, 
+			#{state}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
+		update com.css.app.fyp.routine 
+		<set>
+			<if test="leaderId != null">"LEADER_ID" = #{leaderId}, </if>
+			<if test="leaderName != null">"LEADER_NAME" = #{leaderName}, </if>
+			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="userName != null">"USER_NAME" = #{userName}, </if>
+			<if test="state != null">"STATE" = #{state}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from com.css.app.fyp.routine where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from com.css.app.fyp.routine where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

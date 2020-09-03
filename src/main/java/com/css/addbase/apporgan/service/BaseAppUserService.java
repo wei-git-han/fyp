@@ -32,13 +32,27 @@ public interface BaseAppUserService {
 	 * @date 2017年6月17日
 	 */
 	List<BaseAppUser> findByUserId(String userId);
+
+	/**
+	 * 根据用户ID获取人员信息
+	 * @param userIds
+	 * @return
+	 */
+	List<BaseAppUser> queryObjectByAccounts(String[] accounts);
 	
 	/**
 	 * 根据用户ID删除人员信息
 	 * @author gengds
 	 */
 	List<BaseAppUser> deleteByUserId(String userId);
-	
+
+	/**
+	 * 获取某个部门下的总人数  排除不能查看的查看的用户
+	 * @param deptId
+	 * @return
+	 */
+	int getUserCountByOrgIdExclude(String deptId,String user_id);
+
 	/**
 	 * 根据部门ID获取人员信息
 	 * @author gengds
@@ -99,4 +113,6 @@ public interface BaseAppUserService {
 	 * @Version v1.0
 	 */
 	List<BaseAppUser> selectUserByNameAndUnitId(String name,String unitId);
+
+	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
 }

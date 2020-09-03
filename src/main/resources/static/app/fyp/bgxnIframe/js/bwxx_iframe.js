@@ -44,7 +44,7 @@ var pageModule = function () {
 			minViewMode: 1,
 		    autoclose: true
 		}).on("changeDate",function(){
-			//办公效率
+			getCircleChartData();//办公效率
 		});
 		
 		
@@ -56,17 +56,33 @@ var pageModule = function () {
 		});
 	}
 	
+	//组织机构树
 	var initUnitTree = function() {
-		$("#deptName").createSelecttree({
-			url :deptTreeUrl,
-			width : '100%',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
+		$ajax({
+			url:deptTreeUrl,
+			success:function(data){
+				$("#deptName").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName").val(data.node.text);
+						$("#deptId").val(data.node.id);
+					}
+				});
+				$("#deptName4").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName4").val(data.node.text);
+						$("#deptId4").val(data.node.id);
+					}
+				});
 			}
-		});
+		})
 	}
+	
 	
     var getBanwenAll= function(){
         $.ajax({
@@ -358,7 +374,7 @@ var pageModule = function () {
 		var second= {};
 		var three= {};
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/submitEfficiency',
+			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
 			data:{
 				 deptid:'',
@@ -374,7 +390,7 @@ var pageModule = function () {
 			}
 		});
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/handleEfficiency',
+			url:'/app/fyp/manageDocument/handleEfficiency',
 			dataType:'json',
 			data:{
 				 deptid:'',
@@ -390,7 +406,7 @@ var pageModule = function () {
 			}
 		});
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/readEfficiency',
+			url:'/app/fyp/manageDocument/readEfficiency',
 			dataType:'json',
 			async:false,
 			data:{
@@ -418,11 +434,11 @@ var pageModule = function () {
 				labelLine:{
 					show:false
 				},
-				color:'#103091',
+				color:'#04194D',
 				borderWidth:10
 			},
 			emphasis:{
-				color:'#103091',
+				color:'#04194D',
 				borderWidth:10
 			}
 				

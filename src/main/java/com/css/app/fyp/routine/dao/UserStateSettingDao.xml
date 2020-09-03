@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.UserStateSettingDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.UserStateSetting">
+		select * from USER_STATE_SETTING where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.UserStateSetting">
+		select * from USER_STATE_SETTING where 1=1 
+		<if test="userId!=null and userId!=''">
+			and userid = #{userId}
+		</if>
+		<if test="time!=null and time!=''">
+			and 
+			( to_date(BEGINTIME,'yyyy-mm-dd HH24:mi:ss') &gt;=to_date(#{time},'yyyy-mm-dd HH24:mi:ss')
+				and to_date(ENDTIME,'yyyy-mm-dd HH24:mi:ss') &lt;=to_date(#{time},'yyyy-mm-dd HH24:mi:ss')
+			)
+		</if>
+		<if test="begintime!=null and begintime!='' and endtime!=null and endtime!='' ">
+			and 
+			( to_date(BEGINTIME,'yyyy-mm-dd HH24:mi:ss') =to_date(#{begintime},'yyyy-mm-dd HH24:mi:ss')
+				and to_date(ENDTIME,'yyyy-mm-dd HH24:mi:ss') =to_date(#{endtime},'yyyy-mm-dd HH24:mi:ss')
+			)
+		</if>
+		
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from USER_STATE_SETTING where 1=1
+		<if test="state!=null and state!=''">
+			and state = #{state}
+		</if>
+		<if test="stateList!=null">
+			and state in
+			<foreach item="var" collection="stateList" open="(" separator="," close=")">
+			#{var}
+			</foreach>
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.UserStateSetting">
+		insert into USER_STATE_SETTING
+		(
+			"ID", 
+			"USERID", 
+			"USERNAME", 
+			"BEGINTIME", 
+			"ENDTIME", 
+			"STATE", 
+			"MEMO", 
+			"CREATEDTIME", 
+			"UPDTIME"
+		)
+		values
+		(
+			#{id}, 
+			#{userid}, 
+			#{username}, 
+			#{begintime}, 
+			#{endtime}, 
+			#{state}, 
+			#{memo}, 
+			#{createdtime}, 
+			#{updtime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.UserStateSetting">
+		update USER_STATE_SETTING 
+		<set>
+			<if test="userid != null">"USERID" = #{userid}, </if>
+			<if test="username != null">"USERNAME" = #{username}, </if>
+			<if test="begintime != null">"BEGINTIME" = #{begintime}, </if>
+			<if test="endtime != null">"ENDTIME" = #{endtime}, </if>
+			<if test="state != null">"STATE" = #{state}, </if>
+			<if test="memo != null">"MEMO" = #{memo}, </if>
+			<if test="createdtime != null">"CREATEDTIME" = #{createdtime}, </if>
+			<if test="updtime != null">"UPDTIME" = #{updtime}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from USER_STATE_SETTING where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from USER_STATE_SETTING where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="getUserStateDataMap" resultType="map">
+		select A.USERID as "userId",A.USERNAME as "userName",B.DICT_NAME AS "state",B.ID AS "dictId",BEGINTIME as "begintime",ENDTIME as "endtime"  from "USER_STATE_SETTING" A
+		LEFT JOIN "DICT" B ON A.STATE= B.ID
+		WHERE 1=1 
+		<if test="time!=null and time!=''">
+			and 
+			( to_date(BEGINTIME,'yyyy-mm-dd HH24:mi:ss') &lt;=to_date(#{time},'yyyy-mm-dd HH24:mi:ss')
+				and to_date(ENDTIME,'yyyy-mm-dd HH24:mi:ss') &gt;=to_date(#{time},'yyyy-mm-dd HH24:mi:ss')
+			)
+		</if>
+		<if test="dictId!=null and dictId!='' ">
+			and b.id=#{dictId}
+		</if>
+	</select>
+
+</mapper>

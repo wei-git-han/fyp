@@ -1,5 +1,9 @@
 var pageModule = function () {
 	var initother = function(){
+		$("#rchy").click(function(){
+			getBar3dChartData();
+		});
+		
 		$("#sphy").click(function(){
 			getBarChartData();
 		});
@@ -30,7 +34,7 @@ var pageModule = function () {
 	//日常会议
 	var getBar3dChartData = function(){
 		 $.ajax({
-		      url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageMeeting/common",
+		      url:"/app/fyp/manageMeeting/common",
 		      data:{time:$("#searchDate1").val()},
 		      dataType:"json",
 		      success:function(res){

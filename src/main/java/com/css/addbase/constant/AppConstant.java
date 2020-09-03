@@ -170,6 +170,9 @@ public class AppConstant {
 	 * @date 2017年12月03日 车辆管理应用的标识
 	 */
 	public final static String APP_CLGL = "clgl";
+
+	public final static String APP_QXJ = "qxjgl";
+
 	/**
 	 * 出差申请
 	 */
