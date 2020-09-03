@@ -1,5 +1,5 @@
-var fwUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/appAccess","dataType":"text"};//访问量
-var azUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/appInstall","dataType":"text"};//安装量
+var fwUrl = {"url":"/app/fyp/orderOfBirth/appAccess","dataType":"text"};//访问量
+var azUrl = {"url":"/app/fyp/orderOfBirth/appInstall","dataType":"text"};//安装量
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
 	
@@ -37,34 +37,39 @@ var pageModule = function () {
 		
 	}
 	
+	//组织机构树
 	var initUnitTree = function() {
-		$("#deptName").createSelecttree({
-			url: deptTreeUrl,
-			width: '100%',
-			success: function(data, treeobj) {},
-			selectnode: function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
-				initfw(); //访问量
+		$ajax({
+			url:deptTreeUrl,
+			success:function(data){
+				$("#deptName").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName").val(data.node.text);
+						$("#deptId").val(data.node.id);
+						initfw(); //访问量
+					}
+				});
+				$("#deptName2").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName2").val(data.node.text);
+						$("#deptId2").val(data.node.id);
+						initanz(); //安装量
+					}
+				});
 			}
-		});
-		
-		$("#deptName2").createSelecttree({
-			url: deptTreeUrl,
-			width: '100%',
-			success: function(data, treeobj) {},
-			selectnode: function(e, data) {
-				$("#deptName2").val(data.node.text);
-				$("#deptId2").val(data.node.id);
-				initanz(); //安装量
-			}
-		});
+		})
 	}
 	
 	//在线率排行
 	var getBarChartData = function(){
 		$.ajax({
-		  url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/onLine",
+		  url:"/app/fyp/orderOfBirth/onLine",
 		  data:{},
 		  dataType:"json",
 		  success:function(res){
@@ -78,7 +83,7 @@ var pageModule = function () {
 	//未开机数据
 	var getBarChartData2 = function(){
 		$.ajax({
-		  url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/orderOfBirth/computer",
+		  url:"/app/fyp/orderOfBirth/computer",
 		  data:{
 			  time:$("#searchDate3").val()
 		  },

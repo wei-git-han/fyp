@@ -77,6 +77,7 @@ var pageModule = function () {
 					var userName = o.name;
 					var deptName = o.deptName;
 					var tel = o.phone;
+					var warrantyTime = o.warrantyTime;
 					var problemFrom = o.source;
 					var problemDeration = o.remark;
 					var problemClass = "";
@@ -84,15 +85,15 @@ var pageModule = function () {
 					switch (status){
 						case '0':
 							problemClass="card_yellow";
-							problemName="离线中";
+							problemName="处理中";
 						break;
 						case '1':
-							problemClass="card_green";
-							problemName="在线中";
+							problemClass="card_red";
+							problemName="延后中";
 						break;
 						case '2':
-							problemClass="card_red";
-							problemName="请假中";
+							problemClass="card_green";
+							problemName="已完成";
 						break;
 					}
 					arryHtml+=  '<div class="card-parent">' +
@@ -106,6 +107,7 @@ var pageModule = function () {
 			            		'		</div>'+
 			            		'		<div class="card_main">'+
 			            		'			<p>联系方式：<span>'+tel+'</span></p>'+
+			            		'			<p>联系方式：<span>'+warrantyTime+'</span></p>'+
 			            		'			<p>问题来源：<span>'+problemFrom+'</span></p>'+
 			            		'			<p><span class="describe">问题描述：</span><div class="card_desContent">'+problemDeration+'</div></p>'+
 			            		'		</div>'+
