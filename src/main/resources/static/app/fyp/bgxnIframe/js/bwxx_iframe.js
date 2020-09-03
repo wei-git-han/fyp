@@ -1,6 +1,9 @@
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
 	var initother = function(){
+		$("#bwzl").click(function(){
+			getBanwenAll();
+		});
 		//发文情况
 		$("#fwqk").click(function(){
             getFawenAll();
@@ -10,7 +13,7 @@ var pageModule = function () {
 			getAreaChartData();
 		});
 		$('#bgxl').click(function(){
-			initCircleChart()
+			getCircleChartData()
 		})
 		
 		$(".date-picker1").datepicker({
@@ -41,7 +44,7 @@ var pageModule = function () {
 			minViewMode: 1,
 		    autoclose: true
 		}).on("changeDate",function(){
-			//办公效率
+			getCircleChartData();//办公效率
 		});
 		
 		
@@ -61,6 +64,7 @@ var pageModule = function () {
 			selectnode : function(e, data) {
 				$("#deptName").val(data.node.text);
 				$("#deptId").val(data.node.id);
+				getAreaChartData();
 			}
 		});
 	}
@@ -350,22 +354,63 @@ var pageModule = function () {
 	}
 
 	//办公效率
-	/*var getCircleChartData = function () {
+	var getCircleChartData = function () {
+		var first = {};
+		var second= {};
+		var three= {};
 		$.ajax({
-			url:'',
+			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
+			data:{
+				 deptid:'',
+				 time:$("#searchDate4").val()
+			},
+			async:false,
 			success:function(res){
 				if(res.result=='success'){
-					
+					first.percentage = res.data[0].percentage;
+					$("#firstCq").html(res.data[0].notEnd);
+					$("#firstPjsc").html(res.data[0].timeCount);
+				}
+			}
+		});
+		$.ajax({
+			url:'/app/fyp/manageDocument/handleEfficiency',
+			dataType:'json',
+			data:{
+				 deptid:'',
+				 time:$("#searchDate4").val()
+			},
+			async:false,
+			success:function(res){
+				if(res.result=='success'){
+					second.percentage = res.data[0].percentage;
+					$("#secondCq").html(res.data[0].notEnd);
+					$("#secondPjsc").html(res.data[0].timeCount);
+				}
+			}
+		});
+		$.ajax({
+			url:'/app/fyp/manageDocument/readEfficiency',
+			dataType:'json',
+			async:false,
+			data:{
+				 deptid:'',
+				 time:$("#searchDate4").val()
+			},
+			success:function(res){
+				if(res.result=='success'){
+					three.percentage = res.data[0].percentage;
+					$("#threePjsc").html(res.data[0].timeCount);
+					$("#threeWd").html(res.data[0].notRead);
 				}
 			}
 		})
-	}*/
+		initCircleChart(first,second,three);
+	}
  
-	var initCircleChart = function(){
+	var initCircleChart = function(obj1,obj2,obj3){
 		var charts = echarts.init(document.getElementById("container4"));
-		
-		
 		var placeHolderStyle= {
 			normal:{
 				label:{
@@ -374,11 +419,11 @@ var pageModule = function () {
 				labelLine:{
 					show:false
 				},
-				color:'#000',
+				color:'#04194D',
 				borderWidth:10
 			},
 			emphasis:{
-				color:'#052982',
+				color:'#04194D',
 				borderWidth:10
 			}
 				
@@ -390,32 +435,34 @@ var pageModule = function () {
 				position:'center',
 				show:true,
 				textStyle:{
-					fontSize:'40',
+					fontSize:'32',
 					fontWeight:'bold',
 					color:'#0CB3F2'
 				}
 			},	
 		}
-
-		
 		charts.setOption({
 			backgroundColor:'',
 			title:[{
-				text:'正面平了',
-				left:'5%',
-				top:'60%',
+				text:'办结率',
+				left:'17%',
+				top:'75%',
 				textAlign:'center',
 				textStyle:{
 					fontSize:'16',
 					fontWeight:'bold',
 					color:'#fff',
-					textAlign:'center'
+					textAlign:'center',
+					/*borderColor:'#f00',
+					borderWidth:4,
+					borderRadius:10,
+					padding:10*/
 				}
 			},
 			{
-				text:'fu面平了',
-				left:'35%',
-				top:'60%',
+				text:'延期',
+				left:'50%',
+				top:'75%',
 				textAlign:'center',
 				textStyle:{
 					fontSize:'16',
@@ -424,9 +471,9 @@ var pageModule = function () {
 					textAlign:'center'
 				}
 			},{
-					text:'fu面平了1',
-					left:'70%',
-					top:'60%',
+					text:'阅件完成率',
+					left:'82%',
+					top:'75%',
 					textAlign:'center',
 					textStyle:{
 						fontSize:'16',
@@ -436,39 +483,11 @@ var pageModule = function () {
 					}
 				}],
 			series:[
-
-
-				// {
-				// 	type:'pie',
-				// 	radius:['25%','30%'],
-				// 	center:['5%','50%'],
-				// 	startAngle:225,
-				// 	labelLine:{
-				// 		normal:{
-				// 			show:false
-				// 		},
-				// 	},
-				// 	label:{
-				// 		normal:{
-				// 			position:'center'
-				// 		}
-				// 	},
-				// 	data:[{
-				// 		value:75,
-				// 		itemStyle:{
-				// 			normal:{
-				// 				color:'#000'
-				// 			}
-				// 		}
-				// 	},{
-				// 		value:35,
-				// 		itemStyle:placeHolderStyle
-				// 	}],
-				// },
 				{
 					type:'pie',
-					radius:['25%','30%'],
-					center:['5%','50%'],
+					hoverAnimation:false,
+					radius:['60%','80%'],
+					center:['17%','50%'],
 					startAngle:225,
 					labelLine:{
 						normal:{
@@ -481,52 +500,26 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:100,
+						value:obj1.percentage,
 						itemStyle:{
 							normal:{
-								color:'#6f78cc'
+								color:'#0CB1F2'
 							}
 						},
 						label:dataStyle
 					},{
-						value:35,
+						value:parseInt(135-obj1.percentage),
 						itemStyle:placeHolderStyle
 					}],
 				},
 				/*
 				* 第二个
 				* d*/
-				// {
-				// 	type:'pie',
-				// 	radius:['25%','30%'],
-				// 	center:['35%','50%'],
-				// 	startAngle:225,
-				// 	labelLine:{
-				// 		normal:{
-				// 			show:false
-				// 		},
-				// 	},
-				// 	label:{
-				// 		normal:{
-				// 			position:'center'
-				// 		}
-				// 	},
-				// 	data:[{
-				// 		value:100,
-				// 		itemStyle:{
-				// 			normal:{
-				// 				color:'#0CB1F2'
-				// 			}
-				// 		}
-				// 	},{
-				// 		value:35,
-				// 		itemStyle:placeHolderStyle
-				// 	}],
-				// },
 				{
 					type:'pie',
-					radius:['25%','30%'],
-					center:['35%','50%'],
+					hoverAnimation:false,
+					radius:['60%','80%'],
+					center:['50%','50%'],
 					startAngle:225,
 					labelLine:{
 						normal:{
@@ -539,50 +532,24 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:30,
+						value:obj2.percentage,
 						itemStyle:{
 							normal:{
-								color:'#6f78cc'
+								color:'#0CB1F2'
 							}
 						},
 						label:dataStyle
 					},{
-						value:105,
+						value:parseInt(135-obj2.percentage),
 						itemStyle:placeHolderStyle
 					}],
 				},
 			/*	第三个*/
-				// {
-				// 	type:'pie',
-				// 	radius:['25%','30%'],
-				// 	center:['70%','50%'],
-				// 	startAngle:225,
-				// 	labelLine:{
-				// 		normal:{
-				// 			show:false
-				// 		},
-				// 	},
-				// 	label:{
-				// 		normal:{
-				// 			position:'center'
-				// 		}
-				// 	},
-				// 	data:[{
-				// 		value:100,
-				// 		itemStyle:{
-				// 			normal:{
-				// 				color:'#0CB1F2'
-				// 			}
-				// 		}
-				// 	},{
-				// 		value:35,
-				// 		itemStyle:placeHolderStyle
-				// 	}],
-				// },
 				{
 					type:'pie',
-					radius:['25%','30%'],
-					center:['70%','50%'],
+					hoverAnimation:false,
+					radius:['60%','80%'],
+					center:['82%','50%'],
 					startAngle:225,
 					labelLine:{
 						normal:{
@@ -595,15 +562,15 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:0,
+						value:obj3.percentage,
 						itemStyle:{
 							normal:{
-								color:'#6f78cc'
+								color:'#0CB1F2'
 							}
 						},
 						label:dataStyle
 					},{
-						value:135,
+						value:parseInt(135-obj3.percentage),
 						itemStyle:placeHolderStyle
 					}],
 				}

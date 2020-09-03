@@ -86,22 +86,11 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
-		$(".date-picker").datepicker({
-		    language:"zh-CN",
-		    rtl: Metronic.isRTL(),
-		    orientation: "",
-		    autoclose: true
-		});
-		/*$(".input-group-btn").click(function(){
-			$(this).prev().focus();
-		});*/
-		
-		
 		$(".form_datetime").datetimepicker({
 		    language:"zh-CN",
 		    autoclose: true,
 		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd hh:ii",
+		    format: "yyyy-mm-dd HH:ii",
 		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
 		

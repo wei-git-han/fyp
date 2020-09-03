@@ -57,3 +57,51 @@ html, body {
 .filterDate{
 	float:right;
 }
+.main4>div{
+	width:33.3%;
+	height:100%;
+	float:left;
+	text-align:center
+}
+.main4>div>div{
+	height:40%;
+	margin-top:10px;
+	width:140px;
+	display: inline-block;
+	padding-top: 10px;
+}
+.main4>div>div:nth-child(1){
+	border:1px solid #F84C78;
+}
+.main4>div>div:nth-child(2){
+	border:1px solid #00EDFD;
+}
+.main4>div>div p:nth-child(1){
+	font-size:16px;
+}
+.main4>div>div p:nth-child(2){
+	font-size:30px;
+	font-weight:700;
+	font-family:impact;
+  	src: url("../font/impact.ttf");
+}
+.main4>div>div p:nth-child(2){
+	font-size:30px;
+	font-weight:700;
+	font-family:impact;
+  	src: url("../font/impact.ttf");
+}
+.topWord{
+	color:#F84C78;
+}
+.bottomWord{
+	color:#00EDFD;
+}
+.main4>div>div:nth-child(1){
+	background: -moz-linear-gradient(#723068, #20235F);
+	background: -webkit-linear-gradient(#723068, #20235F);
+}
+.main4>div>div:nth-child(2){
+	background: -moz-linear-gradient(#053770, #038BB1);
+	background: -webkit-linear-gradient(#053770, #038BB1);
+}
