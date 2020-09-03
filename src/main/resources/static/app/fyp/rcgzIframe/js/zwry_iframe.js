@@ -1,22 +1,24 @@
-var searchUrl = {url:'/app/fyp/reignCaseController/reignCaseJsonObject',dataType:'text'};
+var searchUrl = {url:'/app/fyp/reignCaseController/getTxlInfo',dataType:'text'};
 var pagemenu = {url:'/app/fyp/reignCaseController/reignCaseJsonObject',dataType:'text'};
 var fullName="";
 var loginUserId="";
 var pageModule = function () {
-	alert("gsdfg21sfd");
 	var os = {};
     var oodata = [];
-	
 	var initUserStatus = function() {
 		$ajax({
 			url:pagemenu,
 			success:function(data){
+
 				var data1 = [];
-				data1.push(data);
+				data1.push(data.data);
 				data = data1;
+				console.log(data);
 				var array = data;
+
 				oodata = array;
 				initfn1(array);
+
 				$("#zxNum").html(data[0].zx);
 				$("#lxNum").html(data[0].lx);
 				$("#qjNum").html(data[0].qj);
@@ -101,16 +103,16 @@ var pageModule = function () {
 
 				}
 				
-				/* //判断是否在线，1在线，0离线
+				//判断是否在线，1在线，0离线
 				if(status!="" && status!=null && status!="undefined"){
 					if(status == "1"){
-						statushtml = '<i class="fa fa-circle fa1"></i>';
+						statushtml = '在线';
 						strlength += (pid+";"+o.id)+";";
 					}else{
-						statushtml = '<i class="fa fa-circle fa0"></i>';
+						statushtml = '离线';
 					}
 				}
-				 */
+
 				var typehtml = "";
 				var typename = o.statename;
 				var typetime1 = getdateformtfn(o.begintime);
@@ -143,7 +145,7 @@ var pageModule = function () {
 				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:' + (n * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
 							'		<span class="newstatusL">'+img+text+'</span>'+
-							'		<span class="newstatusR"><font>'+numberhtml+zxhtml+typehtml+'</font>'+icon+'</span>'+
+							'		<span class="newstatusR"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
 							'	</a>'+
 							'</li>'); 	
 							
@@ -333,7 +335,6 @@ var pageModule = function () {
 	//通讯录搜索
 	var o;
     var fn = function(obj,fullName){
-    alert(1231);
         clearTimeout(o);
         o = setTimeout(function(){
             $ajax({

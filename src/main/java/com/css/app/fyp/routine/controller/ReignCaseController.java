@@ -102,8 +102,7 @@ public class ReignCaseController {
      */
     @ResponseBody
     @RequestMapping("/getTxlInfo")
-    public void txlInfo(String fullName) {
-        JSONObject fypJson = new JSONObject();
+    public void txlInfo(String fullName) { JSONObject fypJson = new JSONObject();
         fypJson.put("txlJson", getTxlJson(fullName));
         fypJson.put("ismain", "true");
         Response.json(fypJson);
