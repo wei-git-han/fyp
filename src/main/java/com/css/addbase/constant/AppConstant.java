@@ -55,14 +55,20 @@ public class AppConstant {
 	 * 中宏利达视频
 	 */
 	public final static String ZHLD = "zhld";
-	
+
+	/**
+	 * 督查催办统计
+	 */
+	public final static String DCCB = "dccb";
+
 	/**
 	 * @author mashuwen
 	 * @date 2017年12月03日
 	 * 电子保密室应用的标识
 	 */
 	public final static String APP_DZBMS = "dzbms";
-	
+
+
 	/**
 	 * @author mashuwen
 	 * @date 2017年12月03日
