@@ -68,6 +68,7 @@ var pageModule = function () {
 					selectnode : function(e, data) {
 						$("#deptName").val(data.node.text);
 						$("#deptId").val(data.node.id);
+						getAreaChartData();
 					}
 				});
 				$("#deptName4").createSelecttree({
@@ -77,6 +78,7 @@ var pageModule = function () {
 					selectnode : function(e, data) {
 						$("#deptName4").val(data.node.text);
 						$("#deptId4").val(data.node.id);
+						getCircleChartData();
 					}
 				});
 			}
@@ -100,8 +102,10 @@ var pageModule = function () {
                         "ydata":[]
                     }
 					$.each(res.data,function(i, o){
-						data.xdata.push(o.deptName);
-						data.ydata.push([i,0,o.count]);
+					    if(o!=null){
+					        data.xdata.push(o.deptName);
+                            data.ydata.push([i,0,o.count]);
+					    }
 					})
                     init3dBarChart('container',data);
                 }
@@ -124,8 +128,10 @@ var pageModule = function () {
                         "ydata":[]
                     }
 					$.each(res.data,function(i, o){
-						data.xdata.push(o.deptName);
-						data.ydata.push([i,0,o.count]);
+						if(o!=null){
+                            data.xdata.push(o.deptName);
+                            data.ydata.push([i,0,o.count]);
+                        }
 					})
 					init3dBarChart('container2',data);
                 }
@@ -135,6 +141,7 @@ var pageModule = function () {
 	
 	
 	var init3dBarChart = function(id,data){ //echart
+	    console.log(data)
 		var charts = echarts.init(document.getElementById(id));
 		charts.setOption({
 			color: ['#1A54F7'], 

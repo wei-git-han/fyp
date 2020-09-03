@@ -54,7 +54,7 @@ var pageModule = function () {
 			height:'100%',
 			checkbox: false,
 			rownumberyon:true,
-			paramobj:{},
+			paramobj:{limit:1000,page:1},
 			overflowx:false,
 			pageyno:false,
 			url: listUrl

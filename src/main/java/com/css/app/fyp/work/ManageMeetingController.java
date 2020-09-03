@@ -57,9 +57,8 @@ public class ManageMeetingController {
         }*/
         HashMap<String, Object> map = new HashMap<>();
         map.put("deptName","办公厅");
-        map.put("meetingTimeCount",46);
-        map.put("meetingCount",4646);
-        objects.add(dataMap);
+        map.put("count",4646);
+        objects.add(map);
 
         Response.json(new ResponseValueUtils().success(objects));
     }
@@ -100,7 +99,7 @@ public class ManageMeetingController {
         map.put("deptName","办公厅");
         map.put("meetingTimeCount",36);
         map.put("meetingCount",3636);
-        objects.add(dataMap);
+        objects.add(map);
         Response.json(new ResponseValueUtils().success(objects));
     }
 
