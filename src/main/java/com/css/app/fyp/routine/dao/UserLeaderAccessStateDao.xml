@@ -4,11 +4,11 @@
 <mapper namespace="com.css.app.fyp.routine.dao.UserLeaderAccessStateDao">
 
 	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
-		select * from com.css.app.fyp.routine where ID = #{value}
+		select * from USER_LEADER_ACCESS_STATE where ID = #{value}
 	</select>
 
 	<select id="queryList" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
-		select * from com.css.app.fyp.routine where 1=1 
+		select * from USER_LEADER_ACCESS_STATE where 1=1
 		<if test="leaderId!=null and leaderId!=''">
 			and leader_id =#{leaderId}
 		</if>
@@ -24,28 +24,28 @@
 	</select>
 	
 	<select id="querySingleObject" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
-		select * from com.css.app.fyp.routine where 1=1 and leader_id =#{leaderId} and user_id =#{userId}
+		select * from USER_LEADER_ACCESS_STATE where 1=1 and leader_id =#{leaderId} and user_id =#{userId}
 	</select>
 	
 	<select id="queryNotlOOKList" resultType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
-		select LEADER_ID from  com.css.app.fyp.routine  where state=1 and LEADER_ID not in (
-		select LEADER_ID from  com.css.app.fyp.routine  
+		select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1 and LEADER_ID not in (
+		select LEADER_ID from  USER_LEADER_ACCESS_STATE
 		where state=1  and user_id =#{userid} 
 		)
 		and LEADER_ID!=#{userid}
 	</select>
 	
 	<select id="queryMapData" resultType="map">
-		select t.user_id as "userId",t.user_name as "userName" from "com.css.app.fyp.routine" t
+		select t.user_id as "userId",t.user_name as "userName" from "USER_LEADER_ACCESS_STATE" t
 		where t.state =1
 	</select>
 	
  	<select id="queryTotal" resultType="int">
-		select count(*) from com.css.app.fyp.routine 
+		select count(*) from USER_LEADER_ACCESS_STATE
 	</select>
 	 
 	<insert id="save" parameterType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
-		insert into com.css.app.fyp.routine
+		insert into USER_LEADER_ACCESS_STATE
 		(
 			"ID", 
 			"LEADER_ID", 
@@ -66,7 +66,7 @@
 	</insert>
 	 
 	<update id="update" parameterType="com.css.app.fyp.routine.entity.UserLeaderAccessState">
-		update com.css.app.fyp.routine 
+		update USER_LEADER_ACCESS_STATE
 		<set>
 			<if test="leaderId != null">"LEADER_ID" = #{leaderId}, </if>
 			<if test="leaderName != null">"LEADER_NAME" = #{leaderName}, </if>
@@ -78,11 +78,11 @@
 	</update>
 	
 	<delete id="delete">
-		delete from com.css.app.fyp.routine where ID = #{value}
+		delete from USER_LEADER_ACCESS_STATE where ID = #{value}
 	</delete>
 	
 	<delete id="deleteBatch">
-		delete from com.css.app.fyp.routine where ID in 
+		delete from USER_LEADER_ACCESS_STATE where ID in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

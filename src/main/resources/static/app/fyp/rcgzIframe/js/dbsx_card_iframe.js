@@ -1,4 +1,4 @@
-var dbsxUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/personalTodo/backlogFlowStatisticsHeader","dataType":"text"};
+var dbsxUrl = {"url":"/app/fyp/personalTodo/backlogFlowStatisticsHeader","dataType":"text"};
 var pageModule = function () {
 	var initdbsx = function(){
 		$ajax({
