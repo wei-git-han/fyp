@@ -169,5 +169,5 @@ public interface BaseAppOrgMappedService {
 	 *	获取所有单位不为空的appid deptid
 	 * @return
 	 */
-    List<Map<String,Object>> findAppIdAndDeptIdNameAll();
+    List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
 }

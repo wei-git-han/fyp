@@ -19,6 +19,6 @@ import java.util.Map;
 @Mapper
 public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
 
-    @Select("select * from zf_new_fyp_db.base_app_org_mapped where org_id is not null and org_id!='' and org_name is not null and org_name !=''")
-    List<Map<String,Object>> findAppIdAndDeptIdNameAll();
+    @Select("select * from zf_new_fyp_db.base_app_org_mapped where org_id is not null and org_id!='' and org_name is not null and org_name !='' and type = #{0}")
+    List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
 }

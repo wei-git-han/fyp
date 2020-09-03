@@ -17,10 +17,10 @@ import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.RestTemplateUtil;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.NameValuePair;
+//import org.apache.commons.httpclient.HttpClient;
+//import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.httpclient.methods.PostMethod;
+//import org.apache.commons.httpclient.methods.PostMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -248,7 +248,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         //获取在线人对象集合
         long time1 =System.currentTimeMillis();
         logger.info("============time1:"+time1);
-        onlineUsers = getOnlineUsers();
+//        onlineUsers = getOnlineUsers();
         long time2 =System.currentTimeMillis();
         logger.info("============time2:"+time2);
         logger.info("============time2-time1:"+(time2-time1)+"ms");
@@ -497,7 +497,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
      * 获取在线人对象集合
      * @return
      */
-    private List<BaseAppUser> getOnlineUsers() {
+    /*private List<BaseAppUser> getOnlineUsers() {
         List<BaseAppUser> userList =new ArrayList<BaseAppUser>();
         String type = "desktop_online_api";
         Object obj = baseAppOrgMappedService.orgMappedByOrgId("", "", type);
@@ -541,7 +541,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             post.releaseConnection();
         }
         return userList;
-    }
+    }*/
 
     private JSONArray getOnlineUsersObject (String url) {
         JSONArray jsonData =new JSONArray();

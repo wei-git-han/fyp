@@ -45,7 +45,8 @@ public class GetJsonData {
      */
     public List<JSONObject> getJson(LinkedMultiValueMap<String, Object> map,String type){
         jsons = new ArrayList<>();
-        List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll();
+        String prefix = this.getPrefix(type);
+        List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
         String token = SSOAuthFilter.getToken();
         for (Map<String, Object> data:appIdAndDeptIdNameAll) {
             cacheThread.execute(new Runnable() {
@@ -55,17 +56,17 @@ public class GetJsonData {
                     switch (type){
                         case "办文":
                             //公文处理
-                            BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",AppConstant.APP_GWCL);
+                            BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                             url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
                             break;
                         case "办会":
                             //中宏利达会议
-                            BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",AppConstant.ZHLD);
+                            BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                             url = meeting.getUrl()+AppInterfaceConstant.WEB_INERFACE_ZHLD_MEETING;
                             break;
                         case "督查催办":
                             //督查催办
-                            BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",AppConstant.DCCB);
+                            BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                             url = manageThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_DCCB_MANAGETHING;
                             break;
                     }
@@ -76,6 +77,27 @@ public class GetJsonData {
         return this.getDataAll(appIdAndDeptIdNameAll.size());
     }
 
+    /**
+     * 获取传入值前缀
+     */
+    private String getPrefix(String type){
+        String data = "";
+        switch (type){
+            case "办文":
+                //公文处理
+                data = AppConstant.APP_GWCL;
+                break;
+            case "办会":
+                //中宏利达会议
+                data = AppConstant.ZHLD;
+                break;
+            case "督查催办":
+                //督查催办
+                data = AppConstant.DCCB;
+                break;
+        }
+        return data;
+    }
 
     /**
      * 获取外部应用返回数据
@@ -119,8 +141,8 @@ public class GetJsonData {
      * 获取所有单位不为空的mapped信息
      * @return
      */
-    private List<Map<String,Object>> getAppIdAndDeptIdNameAll(){
-        return baseAppOrgMappedService.findAppIdAndDeptIdNameAll();
+    private List<Map<String,Object>> getAppIdAndDeptIdNameAll(String type){
+        return baseAppOrgMappedService.findAppIdAndDeptIdNameAll(type);
     }
 
     /**

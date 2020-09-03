@@ -38,19 +38,18 @@ public class ManageThingController {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("year",calendar.get(Calendar.YEAR));//年
-        paramMap.add("month",calendar.get(calendar.MONTH));//月
+        paramMap.add("year",String.valueOf(calendar.get(Calendar.YEAR)));//年
+        paramMap.add("month",String.valueOf(calendar.get(calendar.MONTH)));//月
         paramMap.add("organId",deptid);//单位id
         List<JSONObject> dataList = getJsonData.getJson(paramMap, "督查催办");
-
-        Map<String,String> dataMap = new HashMap<>();
-        /*dataMap.put("onTime","按时办结");
-        dataMap.put("timeOutEnd","超时办结");
-        dataMap.put("timeOutNotEnd","超时未结");
-        dataMap.put("working","时限内在办");
-        dataMap.put("dayNumber","平均办理天数");
-        dataMap.put("percentage","办结率-90%");
-        dataMap.put("total","督办总量");*/
+        Map<String,Object> dataMap = new HashMap<>();
+        dataMap.put("onTime",dataList.get(0).get("onTimebj"));//按时办结
+        dataMap.put("timeOutEnd",dataList.get(0).get("overTimebj"));//超时办结
+        dataMap.put("timeOutNotEnd",dataList.get(0).get("overTimewbj"));//超时未结
+        dataMap.put("working",dataList.get(0).get("onTimeblz"));//时限内在办
+        dataMap.put("dayNumber",dataList.get(0).get("aveDays"));//平均办理天数
+        dataMap.put("percentage",dataList.get(0).get("wcl"));//办结率
+        dataMap.put("total",dataList.get(0).get("zsl"));//督办总量
         Response.json(new ResponseValueUtils().success(dataMap));
     }
 
