@@ -137,8 +137,8 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 	}
 
 	@Override
-	public List<Map<String, Object>> findAppIdAndDeptIdNameAll() {
-		return baseAppOrgMappedDao.findAppIdAndDeptIdNameAll();
+	public List<Map<String, Object>> findAppIdAndDeptIdNameAll(String type) {
+		return baseAppOrgMappedDao.findAppIdAndDeptIdNameAll(type);
 	}
 
 
