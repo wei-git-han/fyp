@@ -60,6 +60,12 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 	}
 
 	@Override
+	public List<BaseAppUser> queryObjectByAccounts(String[] accounts) {
+		// TODO Auto-generated method stub
+		return baseAppUserDao.queryObjectByAccounts(accounts);
+	}
+
+	@Override
 	public List<BaseAppUser> findByOrganid(String organid) {
 		return baseAppUserDao.findByOrganid(organid);
 	}
@@ -82,6 +88,11 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 	@Override
 	public List<BaseAppUser> deleteByUserId(String userId) {
 		return baseAppUserDao.deleteByUserId(userId);
+	}
+
+	@Override
+	public int getUserCountByOrgIdExclude(String deptId,String user_id) {
+		return baseAppUserDao.getUserCountByOrgIdExclude(deptId,user_id);
 	}
 
 	@Override
@@ -130,6 +141,12 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 	@Override
 	public List<BaseAppUser> selectUserByNameAndUnitId(String name, String unitId) {
 		return baseAppUserDao.selectUserByNameAndUnitId(name, unitId);
+	}
+
+	@Override
+	public List<BaseAppUser> findByOrganidExclude(String organid,String user_id) {
+		// TODO Auto-generated method stub
+		return baseAppUserDao.findByOrganidExclude(organid,user_id);
 	}
 	
 }

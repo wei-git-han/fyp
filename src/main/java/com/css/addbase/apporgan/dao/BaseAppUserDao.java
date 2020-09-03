@@ -29,6 +29,12 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 	 */
 	@Select("select * from BASE_APP_USER where USER_ID = #{userId}")
 	List<BaseAppUser> findByUserId(String userId);
+
+	/**
+	 * 根据用户ID获取人员信息
+	 * @return
+	 */
+	List<BaseAppUser> queryObjectByAccounts(String[] accounts);
 	
 	/**
 	 * 根据部门ID获取人员信息
@@ -44,6 +50,18 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 	 */
 	@Delete("delete from BASE_APP_USER where USER_ID = #{userId}")
 	List<BaseAppUser> deleteByUserId(String userId);
+
+	/**
+	 * 获取某个部门下的总人数  排除不能查看的查看的用户
+	 * @param deptId
+	 * @return
+	 */
+	@Select("select count(id) from BASE_APP_USER where account not in('admin','sysadmin','secadmin','audadmin') and organId in (select id from BASE_APP_ORGAN start with id= #{0} connect by prior id = parent_id)  and ("
+			+ "user_id not in (select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1 ) "
+			+ "or user_id = #{1}"
+			+ "or user_id in (select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1  and user_id =#{1})  "
+			+ " ) ")
+	int getUserCountByOrgIdExclude(String deptId,String user_id);
 	
 	/**
 	 * 根据部门ID获取人员信息
@@ -92,6 +110,18 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 	 * @Version v1.0
 	 */
 	List<BaseAppUser> selectUserByNameAndUnitId(String name,String unitId);
+
+	/**
+	 * 根据部门ID获取人员信息  排除一些人员
+	 * @author
+	 * @date
+	 */
+	@Select("select a.*,b.name as organid from BASE_APP_USER a,BASE_APP_ORGAN b where a.account not in('admin','sysadmin','secadmin','audadmin') and a.ORGANID = #{0} and b.ID=a.ORGANID and ("
+			+ "user_id not in (select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1 ) "
+			+ "or user_id = #{1}"
+			+ "or user_id in (select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1  and user_id =#{1})  "
+			+ " ) order by a.SORT")
+	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
 
 	
 }

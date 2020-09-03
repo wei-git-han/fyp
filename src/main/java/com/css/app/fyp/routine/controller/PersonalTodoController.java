@@ -36,8 +36,8 @@ public class PersonalTodoController {
      */
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsHeader")
-    public void backlogFlowStatisticsHeader(@DateTimeFormat(pattern = "yyyy") Date applyDate) {
-        JSONObject maps = personalTodoService.backlogFlowStatisticsHeader(applyDate);
+    public void backlogFlowStatisticsHeader(@DateTimeFormat(pattern = "yyyy") Date applyDate, String page, String pagesize) {
+        JSONObject maps = personalTodoService.backlogFlowStatisticsHeader(applyDate, page, pagesize);
         Response.json(new ResponseValueUtils().success(maps));
     }
 

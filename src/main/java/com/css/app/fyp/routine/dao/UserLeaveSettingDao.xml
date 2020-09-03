@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.UserLeaveSettingDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.UserLeaveSetting">
+		select * from USER_LEAVE_SETTING where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.UserLeaveSetting">
+		select * from USER_LEAVE_SETTING WHERE 1=1
+		<if test="state!=null">
+			and state=#{state}
+		</if>
+		<if test="orgId!=null and orgId!=''">
+			and ORG_id = #{orgId}
+		</if>
+		<if test="userId!=null and userId!=''">
+			and user_id = #{userId}
+		</if>
+		<if test="time!=null and time!=''">
+			and (start_time &gt;=#{time} and end_time &lt;=#{time} )
+		</if>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="queryLeaveList" resultType="com.css.app.fyp.routine.entity.UserLeaveSetting">
+		select * from USER_LEAVE_SETTING WHERE 1=1 and state =1 
+		and org_id in (select id from BASE_APP_ORGAN start with id= #{orgId} connect by prior id = parent_id)
+		and user_id not in 
+		(
+		
+				select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1 and LEADER_ID not in (
+					select LEADER_ID from  USER_LEADER_ACCESS_STATE  
+					where state=1  and user_id =#{userId}
+				)
+				and LEADER_ID!=#{userId}
+		)
+		and to_date(start_time,'yyyy-mm-dd')&lt;=#{currentDate}
+		and to_date(end_time,'yyyy-mm-dd')>=#{currentDate}
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="queryLeaveListCount" resultType="int">
+		select count(*) from USER_LEAVE_SETTING WHERE 1=1 and state =1 
+		and org_id in (select id from BASE_APP_ORGAN start with id= #{orgId} connect by prior id = parent_id)
+		and user_id not in 
+		(
+		
+				select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1 and LEADER_ID not in (
+					select LEADER_ID from  USER_LEADER_ACCESS_STATE  
+					where state=1  and user_id =#{userId}
+				)
+				and LEADER_ID!=#{userId}
+		)
+		and to_date(start_time,'yyyy-mm-dd')&lt;=#{currentDate}
+		and to_date(end_time,'yyyy-mm-dd')>=#{currentDate}
+	</select>
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from USER_LEAVE_SETTING 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.UserLeaveSetting">
+		insert into USER_LEAVE_SETTING
+		(
+			"ID", 
+			"USER_ID", 
+			"USER_NAME", 
+			"ORG_ID", 
+			"ORG_NAME", 
+			"START_TIME", 
+			"END_TIME", 
+			"CREATOR", 
+			"CREATOR_ID", 
+			"CREATE_TIME", 
+			"MEMO", 
+			"STATE", 
+			"PLACE", 
+			"VEHICLE", 
+			"LXR", 
+			"LXDH", 
+			"REASON"
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{userName}, 
+			#{orgId}, 
+			#{orgName}, 
+			#{startTime}, 
+			#{endTime}, 
+			#{creator}, 
+			#{creatorId}, 
+			#{createTime}, 
+			#{memo}, 
+			#{state}, 
+			#{place}, 
+			#{vehicle}, 
+			#{lxr}, 
+			#{lxdh}, 
+			#{reason}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.UserLeaveSetting">
+		update USER_LEAVE_SETTING 
+		<set>
+			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="userName != null">"USER_NAME" = #{userName}, </if>
+			<if test="orgId != null">"ORG_ID" = #{orgId}, </if>
+			<if test="orgName != null">"ORG_NAME" = #{orgName}, </if>
+			<if test="startTime != null">"START_TIME" = #{startTime}, </if>
+			<if test="endTime != null">"END_TIME" = #{endTime}, </if>
+			<if test="creator != null">"CREATOR" = #{creator}, </if>
+			<if test="creatorId != null">"CREATOR_ID" = #{creatorId}, </if>
+			<if test="createTime != null">"CREATE_TIME" = #{createTime}, </if>
+			<if test="memo != null">"MEMO" = #{memo}, </if>
+			<if test="state != null">"STATE" = #{state}, </if>
+			<if test="place != null">"PLACE" = #{place}, </if>
+			<if test="vehicle != null">"VEHICLE" = #{vehicle}, </if>
+			<if test="lxr != null">"LXR" = #{lxr}, </if>
+			<if test="lxdh != null">"LXDH" = #{lxdh}, </if>
+			<if test="reason != null">"REASON" = #{reason}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from USER_LEAVE_SETTING where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from USER_LEAVE_SETTING where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

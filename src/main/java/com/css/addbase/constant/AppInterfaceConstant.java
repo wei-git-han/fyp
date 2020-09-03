@@ -574,6 +574,10 @@ public class AppInterfaceConstant {
 
     /********************************************************FYP(日常工作)start****************************************************************/
 
+    public final static String WEB_INTERFACE_QXJ_TO_FYP = "/app/qxjgl/leaveorback/qjCompletedUserCount";
+
+    public final static String WEB_INTERFACE_QXJ_DATA_TO_FYP = "/app/qxjgl/leaveorback/qjCompletedUser";
+
     /**
      * @Description 待批公文统计头--局用户
      * @Author gongan
