@@ -1,4 +1,4 @@
-var listurl = {"url": "http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageThing/weeklyTable","dataType": "text"};
+var listurl = {"url": "/app/fyp/manageThing/weeklyTable","dataType": "text"};
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树--待定
 var grid = null;
 
@@ -29,7 +29,7 @@ var pageModule = function() {
 
 	var initNum = function() {
 		$.ajax({
-			url: 'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageThing/dbCount',
+			url: '/app/fyp/manageThing/dbCount',
 			data: {
 				deptid: $("#deptId").val(),
 				deptname: $("#deptName").val(),
@@ -50,9 +50,10 @@ var pageModule = function() {
 		})
 	}
 	var initother = function() {
+		
 		var allWidth = $("body").width();
-		$(".main-l").css("right", ((allWidth + 368) / 2) + 20 + "px");
-		$(".main-r").css("left", ((allWidth + 368) / 2) + 20 + "px");
+		$(".main-l").css("right", ((allWidth + 310) / 2) + 20 + "px");
+		$(".main-r").css("left", ((allWidth + 310) / 2) + 20 + "px");
 
 		$("#gzbbLi").click(function() {
 			initZhoubiao();
@@ -97,7 +98,7 @@ var pageModule = function() {
 		//加载页面处理程序
 		initControl: function() {
 			initNum();
-			//initUnitTree();
+			initUnitTree();
 			initother();
 		}
 	}
