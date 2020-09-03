@@ -59,9 +59,14 @@ public class GetJsonData {
                             url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
                             break;
                         case "办会":
-                            //中宏利达
+                            //中宏利达会议
                             BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",AppConstant.ZHLD);
-                            url = meeting.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_MEETING;
+                            url = meeting.getUrl()+AppInterfaceConstant.WEB_INERFACE_ZHLD_MEETING;
+                            break;
+                        case "督查催办":
+                            //督查催办
+                            BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",AppConstant.DCCB);
+                            url = manageThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_DCCB_MANAGETHING;
                             break;
                     }
                     setData(data,url,map,token);

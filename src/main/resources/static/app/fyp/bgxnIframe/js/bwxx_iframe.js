@@ -56,17 +56,33 @@ var pageModule = function () {
 		});
 	}
 	
+	//组织机构树
 	var initUnitTree = function() {
-		$("#deptName").createSelecttree({
-			url :deptTreeUrl,
-			width : '100%',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
+		$ajax({
+			url:deptTreeUrl,
+			success:function(data){
+				$("#deptName").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName").val(data.node.text);
+						$("#deptId").val(data.node.id);
+					}
+				});
+				$("#deptName4").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName4").val(data.node.text);
+						$("#deptId4").val(data.node.id);
+					}
+				});
 			}
-		});
+		})
 	}
+	
 	
     var getBanwenAll= function(){
         $.ajax({

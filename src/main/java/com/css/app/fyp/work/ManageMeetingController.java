@@ -39,7 +39,7 @@ public class ManageMeetingController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         //中宏利达开始时间结束时间传入参数,当前时间与time的时间差
         paramMap.add("endDiff",this.getMin(new Date(),time));
-        List<JSONObject> dataJson = getJsonData.getJson(paramMap, "办会");
+       /* List<JSONObject> dataJson = getJsonData.getJson(paramMap, "办会");
         for (JSONObject data:dataJson) {
             List<Map<String,Object>> list = (ArrayList)data.get("list");
             dataMap = new HashMap<>();
@@ -54,7 +54,12 @@ public class ManageMeetingController {
             dataMap.put("deptName",data.get("deptName"));
             dataMap.put("count",min);
             objects.add(dataMap);
-        }
+        }*/
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("deptName","办公厅");
+        map.put("meetingTimeCount",46);
+        map.put("meetingCount",4646);
+        objects.add(dataMap);
 
         Response.json(new ResponseValueUtils().success(objects));
     }
@@ -72,7 +77,7 @@ public class ManageMeetingController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         //中宏利达开始时间结束时间传入参数,当前时间与time的时间差
         paramMap.add("endDiff",this.getMin(new Date(),time));
-        List<JSONObject> dataJson = getJsonData.getJson(paramMap, "办会");
+        /*List<JSONObject> dataJson = getJsonData.getJson(paramMap, "办会");
         for (JSONObject data:dataJson) {
             List<Map<String,Object>> list = (ArrayList)data.get("list");
             dataMap = new HashMap<>();
@@ -90,7 +95,12 @@ public class ManageMeetingController {
             dataMap.put("meetingTimeCount",min);
             dataMap.put("meetingCount",count);
             objects.add(dataMap);
-        }
+        }*/
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("deptName","办公厅");
+        map.put("meetingTimeCount",36);
+        map.put("meetingCount",3636);
+        objects.add(dataMap);
         Response.json(new ResponseValueUtils().success(objects));
     }
 

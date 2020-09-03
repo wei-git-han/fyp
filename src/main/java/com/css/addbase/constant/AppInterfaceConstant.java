@@ -753,5 +753,9 @@ public class AppInterfaceConstant {
     /**
      * 中宏利达、负一屏会议接口
      */
-    public final static String WEB_INERFACE_GWCL_MEETING = "/api/v3/conference/query4ub";
+    public final static String WEB_INERFACE_ZHLD_MEETING = "/api/v3/conference/query4ub";
+    /**
+     * 督查催办、负一屏统计接口
+     */
+    public final static String WEB_INERFACE_DCCB_MANAGETHING = "/app/db/documentjcdb/count";
 }
