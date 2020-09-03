@@ -20,4 +20,6 @@ public interface ReignCaseService {
 
     JSONObject getUserTree() ;
 
+    JSONObject reignCaseJsonObject() ;
+
 }

@@ -43,7 +43,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
      * @Return void
      */
     @Override
-    public JSONObject backlogFlowStatisticsHeader(Date applyDate) {
+    public JSONObject backlogFlowStatisticsHeader(Date applyDate, String page, String pagesize) {
         JSONObject jsonData = new JSONObject();
         JSONObject jsonObjectResult = new JSONObject();
         JSONObject result = new JSONObject();
@@ -56,8 +56,10 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         //当前用户是否为部首长
         if (StringUtils.equals("部首长",name)) {
             //部首长
-            String mapperUrl = "http://10.150.110.19";
-            jsonObjectResult = this.getJsonData( "", "","", mapperUrl, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP);
+            String mapperUrl = "http://172.16.1.19:11004";
+            jsonObjectResult = this.getJsonData(page, pagesize, "", "","", mapperUrl, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP);
+            JSONObject rows = (JSONObject)jsonObjectResult.get("rows");
+            Object children = rows.get("children");
             jsonObject.put("flowCount", jsonObjectResult.get("rows"));
             jsonObject.put("typeName", "待批公文");
             jsonObject.put("applyType", "1");
@@ -97,9 +99,15 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return result;
     }
 
-    private JSONObject getJsonData (String user, String passkey, String onlyinbox, String mapperUrl, String url) {
+    private JSONObject getJsonData (String page, String pagesize, String user, String passkey, String onlyinbox, String mapperUrl, String url) {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        if (StringUtils.isNotEmpty(page)) {
+            infoMap.add("page", page);
+        }
+        if (StringUtils.isNotEmpty(pagesize)) {
+            infoMap.add("pagesize", pagesize);
+        }
         if (StringUtils.isNotEmpty(user)) {
             infoMap.add("user", user);
         }

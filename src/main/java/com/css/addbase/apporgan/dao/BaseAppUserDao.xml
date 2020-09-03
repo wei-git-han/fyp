@@ -180,5 +180,12 @@
 		</foreach>
 	</delete>
 
+	<select id="queryObjectByAccounts" resultType="com.css.addbase.apporgan.entity.BaseAppUser" >
+		select  *  from BASE_APP_USER where account in
+		<foreach item="account" collection="array" open="(" separator="," close=")">
+			#{account}
+		</foreach>
+
+	</select>
 
 </mapper>
