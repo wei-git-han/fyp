@@ -1,5 +1,5 @@
 var listurl = {"url": "http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageThing/weeklyTable","dataType": "text"};
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树--待定
 var grid = null;
 
 var pageModule = function() {

@@ -82,10 +82,10 @@ public class GetJsonData {
         JSONObject jsonData = null;
         if(CrossDomainUtil.getTokenByJsonData(url,map,token)!=null){
             jsonData = CrossDomainUtil.getTokenByJsonData(url,map,token);
-            jsonData.put("appid",datamap.get("APP_ID"));
-            jsonData.put("appsecret",datamap.get("APP_SECRET"));
-            jsonData.put("deptid",datamap.get("ORG_ID"));
-            jsonData.put("deptname",datamap.get("ORG_NAME"));
+            jsonData.put("appId",datamap.get("APP_ID"));
+            jsonData.put("appSecret",datamap.get("APP_SECRET"));
+            jsonData.put("deptId",datamap.get("ORG_ID"));
+            jsonData.put("deptName",datamap.get("ORG_NAME"));
             jsons.add(jsonData);
         }
     }

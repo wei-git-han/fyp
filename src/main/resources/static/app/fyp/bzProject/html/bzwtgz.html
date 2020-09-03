@@ -33,7 +33,12 @@
 			<form>
 				<div class="form-group">
 					<label>姓名</label><br/>
-					<input type="text" name="name" id="name" value="" placeholder="请输入用户信息" />
+					<div class="form-control" style="padding:0;width:195px;">
+						<div class="selecttree">
+							<input type="hidden" class="form-control"  id="userId" name="userId"  />
+							<input type="text" class="form-control"  id="name" name="name"  onfocus="blur()" placeholder="请选择要查找的单位"  />
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>单位名称</label><br/>
@@ -45,13 +50,28 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="width:25%;">
 					<label>报修时间</label><br/>
-					<input style="width:195px;" class="form-control form-control-inline date-picker" size="16" type="text" name="warrantyTime" id="warrantyTime"  />
+					<div style="width:420px;">
+						<div class="input-group date form_datetime" style="width:220px;float:left;">
+						    <input type="text" size="16" readonly class="form-control" id="warrantyTimeBegin"  name="warrantyTimeBegin" >
+						    <span class="input-group-btn">
+						    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+						    </span>
+						    <span class="input-group-addon" style="border: none;background: transparent;">至</span>
+						</div>
+						<div class="input-group date form_datetime" style="width:200px;float:left;">
+						    <input type="text" size="16" readonly class="form-control" id="warrantyTimeEnd"  name="warrantyTimeEnd" >
+						    <span class="input-group-btn">
+						    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+						    </span>
+						</div>
+					</div>
 				</div>
 				<div class="form-group">
 					<label>问题来源</label><br/>
 					<select name="source" id="source" class="form-control" style="width:195px;">
+						<option value=""></option>
 						<option value="0">热线电话</option>
 						<option value="1">手机电话</option>
 						<option value="2">现场反馈</option>
@@ -59,11 +79,12 @@
 				</div>
 				<div class="form-group">
 					<label>问题描述</label><br/>
-					<input type="text" name="remark" id="remark" value="" placeholder="请输入问题描述关键词" />
+					<input type="text" name="remark" class="form-control"  id="remark" value="" placeholder="请输入问题描述关键词" style="width:180px;" />
 				</div>
 				<div class="form-group">
 					<label>状态</label><br/>
 					<select name="status" id="status" class="form-control" style="width:195px;">
+						<option value=""></option>
 						<option value="0">处理中</option>
 						<option value="1">延后处理</option>
 						<option value="2">已完成</option>

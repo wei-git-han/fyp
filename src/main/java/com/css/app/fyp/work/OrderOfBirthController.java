@@ -42,12 +42,12 @@ public class OrderOfBirthController {
     }
 
     /**
-     * 软件排行
+     * 软件排行 -访问量
      * @param deptid
      */
     @ResponseBody
-    @RequestMapping("/app")
-    public void app(String deptid) {
+    @RequestMapping("/appAccess")
+    public void appAccess(String deptid) {
         Map<String, List<Map<String,String>>> objects = new HashMap<>();
         //访问量
         ArrayList<Map<String, String>> accessList = new ArrayList<>();
@@ -57,6 +57,17 @@ public class OrderOfBirthController {
         accessMap.put("appImg","应用图片路径");
         accessList.add(accessMap);
         objects.put("access",accessList);
+        Response.json(new ResponseValueUtils().success(objects));
+    }
+
+    /**
+     * 软件排行 -安装量
+     * @param deptid
+     */
+    @ResponseBody
+    @RequestMapping("/appInstall")
+    public void appInstall(String deptid,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
+        Map<String, List<Map<String,String>>> objects = new HashMap<>();
         //安装量
         ArrayList<Map<String, String>> installList = new ArrayList<>();
         Map<String, String> installMap = new HashMap<>();

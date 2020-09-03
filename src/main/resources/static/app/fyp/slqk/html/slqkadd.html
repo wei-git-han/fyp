@@ -31,20 +31,16 @@
 					<tr>
 						<td class="t_label">硬件/软件名称</td>
 						<td class="t_inpt" colspan="3">
-							<input type="text" class="form-control" id="name" name="name" required="required" />
+							<input type="text" class="form-control" id="name" name="name"  required/>
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">提出时间</td>
-						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="submitTime" id="submitTime" required="required" />
-						</td>
 						<td class="t_label">提出人</td>
-						<td class="t_inpt">
+						<td class="t_inpt" colspan="3">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
 									<input type="hidden" class="form-control"  id="submitUserId" name="submitUserId"  />
-									<input type="text" class="form-control"  id="submitUserName" name="submitUserName"  onfocus="blur()" required="required"  />
+									<input type="text" class="form-control"  id="submitUserName" name="submitUserName"  onfocus="blur()" required />
 								</div>
 							</div>
 						</td>
@@ -52,27 +48,32 @@
 					<tr>
 						<td class="t_label">解决时限</td>
 						<td class="t_inpt" >
-							<input class="form-control input-group date form_datetime" size="16" type="text" name="solveTime" id="solveTime" required="required" />
+							<div style="float: right;" class="input-group input-large date-picker input-daterange"  data-date-format="yyyy-mm-dd">
+								<input type="text" class="form-control"  onfocus=""  readonly="readonly"  id="solveTime"  name="solveTime" required />
+								<span class="input-group-btn">
+									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
 						</td>
 						<td class="t_label">工作进展</td>
 						<td class="t_inpt" >
-							<input type="text" class="form-control" id="march" name="march" required="required" />
+							<input type="text" class="form-control" id="march" name="march" />
 						</td>
 					</tr>
 					<tr>
 						<td class="t_label">状态</td>
 						<td class="t_inpt">
-							<select class="form-control" id="status" name="status" required="required" >
-								<option value="1">需求论证</option>
-								<option value="2">需求细化</option>
-								<option value="3">解决中</option>
-								<option value="4">已解决待升级</option>
-								<option value="5">已关闭</option>
+							<select class="form-control" id="status" name="status" >
+								<option value="0">需求论证</option>
+								<option value="1">需求细化</option>
+								<option value="2">解决中</option>
+								<option value="3">已解决待升级</option>
+								<option value="4">已关闭</option>
 							</select>
 						</td>
 						<td class="t_label">问题分类</td>
 						<td class="t_inpt">
-							<select class="form-control" id="type" name="type" required="required" >
+							<select class="form-control" id="type" name="type" >
 								<option value="0">系统问题</option>
 								<option value="1">完善建议</option>
 							</select>
@@ -81,8 +82,7 @@
 					<tr>
 						<td class="t_label">问题描述</td>
 						<td class="t_inpt" colspan="3">
-							<textarea rows="" cols="" id="desc" name="desc" class="form-control">
-							</textarea>
+							<textarea rows="" cols="" id="desc" name="desc" class="form-control"></textarea>
 						</td>
 					</tr>
 				</table>

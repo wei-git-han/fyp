@@ -1,6 +1,7 @@
 var listurl = {"url":"/fyp/guaranteetacking/list","dataType":"text"};//表格数据
 var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树--待定
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var grid = null;
 var pageModule = function () {
 	var initgrid = function(){
@@ -19,13 +20,29 @@ var pageModule = function () {
 							return rowdata.warrantyTime;                                         
 						}},
 						{display:"问题来源",name:"source",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.source;                                         
+						    if(rowdata.source == "0"){
+                            	return "热线电话";
+						    }else if(rowdata.source == "1"){
+						        return "手机电话";
+						    }else if(rowdata.source == "2"){
+                                return "现场反馈";
+                            }else{
+                                return "";
+                            }
 						}},
 						{display:"问题描述",name:"remark",width:"15%",align:"left",render:function(rowdata){
 							return rowdata.remark;                                         
 						}},
 						{display:"状态",name:"status",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.status;                                         
+							if(rowdata.status == "0"){
+                                return "处理中";
+                            }else if(rowdata.status == "1"){
+                                return "延后处理";
+                            }else if(rowdata.status == "2"){
+                                return "已完成";
+                            }else{
+                                return "";
+                            }
 						}},
 						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.statusTime;                                         
@@ -47,6 +64,16 @@ var pageModule = function () {
 	
 	//单位树
 	var initUnitTree = function(){
+	    //姓名
+        $("#name").createSelecttree({
+            url :userTreeUrl,
+            width : '100%',
+            success : function(data, treeobj) {},
+            selectnode : function(e, data) {
+                $("#name").val(data.node.text);
+                $("#userId").val(data.node.id);
+            }
+        });
 		$("#deptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
@@ -59,14 +86,14 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
-		$(".date-picker").datepicker({
+		$(".form_datetime").datetimepicker({
 		    language:"zh-CN",
-		    rtl: Metronic.isRTL(),
-		    orientation: "right",
-		    format: "yyyy-mm-dd",
 		    autoclose: true,
-		    startDate:new Date()
+		    isRTL: Metronic.isRTL(),
+		    format: "yyyy-mm-dd HH:ii",
+		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
+		
 		
 		/* 新增add */
 		$("#add").click(function(){
@@ -134,14 +161,15 @@ var pageModule = function () {
 		
 		//确定
 		$("#sure").click(function(){
-			var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark","status"];
+			var elementarry = ["userId","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","remark","status"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark","status"]);
+			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","remark","status"]);
+			initgrid();
 		});
 	}
 	

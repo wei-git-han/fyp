@@ -30,10 +30,13 @@ public class FypGuaranteeTacking implements Serializable {
 	//联系电话
 	private String phone;
 	//报修时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
 	private Date warrantyTime;
 	//报修时间 - 开始
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
 	private Date warrantyTimeBegin;
 	//报修时间 - 结束
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
 	private Date warrantyTimeEnd;
 	//问题来源
 	private String source;
@@ -46,6 +49,11 @@ public class FypGuaranteeTacking implements Serializable {
 	//处理措施
 	private String measures;
 
+	private String userName;
+
+	public void setUserName(String userName) {
+		this.name = userName;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

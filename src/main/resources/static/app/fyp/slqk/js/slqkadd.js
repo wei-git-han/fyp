@@ -27,20 +27,23 @@ var pageModule = function(){
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
-				setformdata(data);
+				setformdata(data.data);
+				if(!!data.data.solveTime){
+                    $("#solveTime").val((data.data.solveTime).substring(0,10));
+                }
 			}
 		})
 	}
 	
 	var initother = function(){
-		$(".form_datetime").datetimepicker({
-			language:"zh-CN",
-			autoclose: true,
-			isRTL: Metronic.isRTL(),
-			orientation: "right",
-			format: "yyyy-mm-dd hh:ii",
-			autoclose: true,
-			startDate:new Date()
+		$(".date-picker").datepicker({
+            language:"zh-CN",
+            rtl: Metronic.isRTL(),
+            orientation: "",
+            autoclose: true
+        });
+		$(".input-group-btn").click(function(){
+			$(this).prev().focus();
 		});
 		
 		$("#commentForm").validate({
@@ -55,6 +58,7 @@ var pageModule = function(){
 					type:'post',
 					success:function(data){
 						if(data.result=="success"){
+						    newbootbox.newdialogClose("addModal");
 							newbootbox.alertInfo('保存成功！').done(function(){
 								window.top.pageModule.initgrid();
 							});

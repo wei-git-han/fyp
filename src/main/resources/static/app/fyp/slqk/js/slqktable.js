@@ -27,15 +27,33 @@ var pageModule = function () {
 							return rowdata.march;                                         
 						}},
 						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.status;                                         
+							if(rowdata.status == "0"){
+                                return "需求论证";
+                            }else if(rowdata.status == "1"){
+                                return "需求细化";
+                            }else if(rowdata.status == "2"){
+                                return "解决中";
+                            }else if(rowdata.status == "3"){
+                                return "已解决待升级";
+                            }else if(rowdata.status == "4"){
+                                return "已关闭";
+                            }else{
+                                return "";
+                            }
 						}},
 						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
-							return rowdata.type;                                         
+							if(rowdata.type == "0"){
+                                return "系统问题";
+                            }else if(rowdata.type == "1"){
+                                return "完善建议";
+                            }else{
+                                return "";
+                            }
 						}}
 				 ],
 		width:'100%',
 		height:'100%',
-		checkbox: false,
+		checkbox: true,
 		rownumberyon:true,
 		paramobj:{},
 		overflowx:false,
@@ -46,7 +64,7 @@ var pageModule = function () {
 	
 	//树
 	var initUnitTree = function(){
-		//单位
+		/*//单位
 		$("#submitDeptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
@@ -55,7 +73,7 @@ var pageModule = function () {
 				$("#submitDeptName").val(data.node.text);
 				$("#submitDeptId").val(data.node.id);
 			}
-		});
+		});*/
 		
 		//提出人
 		$("#submitUserName").createSelecttree({
@@ -70,16 +88,27 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
+		$(".date-picker").datepicker({
+		    language:"zh-CN",
+		    rtl: Metronic.isRTL(),
+		    orientation: "",
+		    autoclose: true
+		});
+		$(".input-group-btn").click(function(){
+			$(this).prev().focus();
+		});
+		
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTime","desc"];
+			var elementarry = ["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTimeBegin","submitTimeEnd","desc"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTime","desc"]);
+			removeInputData(["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTimeBegin","submitTimeEnd","desc"]);
+		    initgrid();
 		});
 		
 		/* 新增add */
@@ -153,6 +182,9 @@ var pageModule = function () {
 			initgrid();
 			initUnitTree();
 			initother();
+        },
+        initgrid:function(){
+            initgrid();
         }
     }
 }();

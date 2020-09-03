@@ -18,6 +18,8 @@ html, body {
 }
 .table{
 	padding:20px;
+	table-layout:fixed;
+	word-wrap:break-word;
 }
 .table > tbody > tr > td{
 	border:0px;

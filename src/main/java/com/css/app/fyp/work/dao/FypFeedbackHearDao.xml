@@ -24,12 +24,13 @@
 				and STATUS =#{status}
 			</if>
 			<!--提出时间-->
-			<if test="submitTime!=null">
-				and SUBMIT_TIME &lt;= #{submitTime}
+			<if test="submitTimeBegin!=null and submitTimeEnd!=null">
+				and SUBMIT_TIME &lt;= #{submitTimeEnd}
+				and SUBMIT_TIME &gt;= #{submitTimeBegin}
 			</if>
 			<!--问题描述-->
 			<if test="desc!=null and desc!=''">
-				and DESC like '%'||#{desc}||'%'
+				and "DESC" like '%'||#{desc}||'%'
 			</if>
 			<if test="offset != null and limit != null">
 				limit #{offset}, #{limit}

@@ -1,5 +1,6 @@
 var saveUrl;
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
 var returnDataUrl = {"url":"/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
@@ -10,6 +11,16 @@ if(!!id){
 var pageModule = function(){
 	//单位树
 	var initUnitTree = function(){
+	    $("#userName").createSelecttree({
+            url :userTreeUrl,
+            width : '100%',
+            success : function(data, treeobj) {},
+            selectnode : function(e, data) {
+                $("#userName").val(data.node.text);
+                $("#userId").val(data.node.id);
+            }
+        });
+
 		$("#deptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
@@ -26,7 +37,8 @@ var pageModule = function(){
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
-				setformdata(data);
+				setformdata(data.data);
+				$("#userName").val(data.data.name)
 			}
 		})
 	}
@@ -45,7 +57,7 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["name","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"];
+			    var elementarry = ["userName","userId","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"];
 				var paramdata = getformdata(elementarry);
 				paramdata.id = id;
 				$ajax({
@@ -54,6 +66,7 @@ var pageModule = function(){
 					type:'post',
 					success:function(data){
 						if(data.result=="success"){
+						    newbootbox.newdialogClose("addModal");
 							newbootbox.alertInfo('保存成功！').done(function(){
 								window.top.pageModule.initgrid();
 							});
@@ -79,7 +92,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"]);
+			removeInputData(["userName","userId","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"]);
 		});
 		
 		//取消

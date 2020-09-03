@@ -22,16 +22,27 @@ var pageModule = function(){
 			}
 		});
 		
-		//人
-		$("#userName").createSelecttree({
+		//配置人
+		$("#editUserName").createSelecttree({
 			url :userTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
-				$("#userName").val(data.node.text);
-				$("#userId").val(data.node.id);
+				$("#editUserName").val(data.node.text);
+				$("#editUserId").val(data.node.id);
 			}
-		}); 
+		});
+
+		//姓名
+        $("#userName").createSelecttree({
+            url :userTreeUrl,
+            width : '100%',
+            success : function(data, treeobj) {},
+            selectnode : function(e, data) {
+                $("#userName").val(data.node.text);
+                $("#userId").val(data.node.id);
+            }
+        });
 	}
 	
 	var initdatafn = function(){
@@ -39,7 +50,7 @@ var pageModule = function(){
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
-				setformdata(data);
+				setformdata(data.data);
 			}
 		})
 	}
@@ -67,6 +78,7 @@ var pageModule = function(){
 					type:'post',
 					success:function(data){
 						if(data.result=="success"){
+						    newbootbox.newdialogClose("addModal");
 							newbootbox.alertInfo('保存成功！').done(function(){
 								window.top.pageModule.initgrid();
 							});

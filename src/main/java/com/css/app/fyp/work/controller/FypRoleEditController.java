@@ -41,10 +41,10 @@ public class FypRoleEditController {
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public void list(Integer page, Integer limit, FypGuaranteeTacking FypGuaranteeTacking){
+	public void list(Integer page, Integer limit, FypRoleEdit FypRoleEdit){
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
-		Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(FypGuaranteeTacking), Map.class);
+		Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(FypRoleEdit), Map.class);
 		map.putAll(paramMap);
 		//查询列表数据
 		List<FypRoleEdit> fypRoleEditList = fypRoleEditService.queryList(map);

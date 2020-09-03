@@ -2,13 +2,13 @@ package com.css.app.fyp.work.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.alibaba.fastjson.JSON;
+import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.app.fyp.utils.PoiUtils;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +38,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class FypFeedbackHearController {
 	@Autowired
 	private FypFeedbackHearService fypFeedbackHearService;
+
+	@Autowired
+	private BaseAppUserService baseAppUserService;
 	
 	/**
 	 * 列表
@@ -49,6 +52,13 @@ public class FypFeedbackHearController {
 		PageHelper.startPage(page, limit);
 		Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(fypFeedbackHear), Map.class);
 		map.putAll(paramMap);
+		if(null!=fypFeedbackHear.getSubmitTimeBegin()&&null!=fypFeedbackHear.getSubmitTimeEnd()) {
+			map.put("submitTimeBegin", fypFeedbackHear.getSubmitTimeBegin());
+			Calendar submitTimeEndinstance = Calendar.getInstance();
+			submitTimeEndinstance.setTime(fypFeedbackHear.getSubmitTimeEnd());
+			submitTimeEndinstance.add(Calendar.DAY_OF_MONTH, 1);
+			map.put("submitTimeEnd", submitTimeEndinstance.getTime());
+		}
 		//查询列表数据
 		List<FypFeedbackHear> fypFeedbackHearList = fypFeedbackHearService.queryList(map);
 		PageUtils pageUtil = new PageUtils(fypFeedbackHearList);
@@ -72,7 +82,9 @@ public class FypFeedbackHearController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public void save(FypFeedbackHear fypFeedbackHear){
+		String orgName = CurrentUser.getOrgName();
 		fypFeedbackHear.setId(UUIDUtils.random());
+		fypFeedbackHear.setSubmitTime(new Date());
 		fypFeedbackHearService.save(fypFeedbackHear);
 		Response.json(new ResponseValueUtils().success());
 	}
@@ -83,6 +95,7 @@ public class FypFeedbackHearController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public void update(FypFeedbackHear fypFeedbackHear){
+		fypFeedbackHear.setSubmitTime(new Date());
 		fypFeedbackHearService.update(fypFeedbackHear);
 		Response.json(new ResponseValueUtils().success());
 	}
@@ -127,7 +140,7 @@ public class FypFeedbackHearController {
 			}
 			fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人
 			fypFeedbackHear.setStatus(this.getStatus(objects.get(4).toString()));//状态
-			fypFeedbackHear.setType(objects.get(5).toString());//问题分类：完善建议、系统问题
+			fypFeedbackHear.setType(this.getType(objects.get(5).toString()));//问题分类：完善建议、系统问题
 			fypFeedbackHearService.save(fypFeedbackHear);
 		}
 	}
@@ -159,5 +172,17 @@ public class FypFeedbackHearController {
 		}
 		return i;
 	}
-	
+
+	private String getType(String type){
+		int i = 0;
+		switch (type){
+			case "完善建议":
+				i = 0;
+				break;
+			case "系统问题":
+				i = 1;
+				break;
+		}
+		return String.valueOf(i);
+	}
 }

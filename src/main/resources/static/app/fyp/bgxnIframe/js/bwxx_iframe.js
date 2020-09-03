@@ -1,21 +1,27 @@
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
 	var initother = function(){
+		$("#bwzl").click(function(){
+			getBanwenAll();
+		});
 		//发文情况
 		$("#fwqk").click(function(){
             getFawenAll();
 		});
 		//发展趋势
 		$("#fzqs").click(function(){
-			getLineChartData();
+			getAreaChartData();
 		});
-		
+		$('#bgxl').click(function(){
+			getCircleChartData()
+		})
 		
 		$(".date-picker1").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
 			orientation: "",
-			autoclose: true
+			autoclose: true,
+			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
 			getBanwenAll();//办文总量
 		});
@@ -24,7 +30,8 @@ var pageModule = function () {
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
 			orientation: "",
-			autoclose: true
+			autoclose: true,
+			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
 			getFawenAll();//发文情况
 		});
@@ -37,17 +44,24 @@ var pageModule = function () {
 			minViewMode: 1,
 		    autoclose: true
 		}).on("changeDate",function(){
-			//办公效率
+			getCircleChartData();//办公效率
 		});
 		
+		
+		$("#lineTypeBw").change(function(){
+			getBanwenAll();
+		});
+		$("#lineTypeFw").change(function(){
+			getFawenAll();
+		});
 	}
 	
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
-			url: deptTreeUrl,
-			width: '100%',
-			success: function(data, treeobj) {},
-			selectnode: function(e, data) {
+			url :deptTreeUrl,
+			width : '100%',
+			success : function(data, treeobj) {},
+			selectnode : function(e, data) {
 				$("#deptName").val(data.node.text);
 				$("#deptId").val(data.node.id);
 			}
@@ -56,9 +70,9 @@ var pageModule = function () {
 	
     var getBanwenAll= function(){
         $.ajax({
-            url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/total",
+            url:"/app/fyp/manageDocument/total",
             data:{
-                type:1,
+                type:$("#lineTypeBw option:selected").val(),
 				time:$("#searchDate").val()
             },
             dataType:"json",
@@ -80,9 +94,9 @@ var pageModule = function () {
     }
     var getFawenAll= function(){
         $.ajax({
-            url:"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/overview",
+            url:"/app/fyp/manageDocument/overview",
             data:{
-                type:1,
+            	type:$("#lineTypeFw option:selected").val(),
                 time:$("#searchDate2").val()
             },
             dataType:"json",
@@ -123,8 +137,15 @@ var pageModule = function () {
 			        }
 			    },
 			    axisLabel: {
-				  textStyle: {
-				    color: '#fff',
+			    	rotate:30,
+			    	textStyle: {
+					    color: '#fff',
+					  }
+				},
+			    splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
 				  }
 				}
 			},
@@ -137,10 +158,17 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
-			    axisLabel: {
-				  textStyle: {
-				    color: '#fff',
+			    splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
 				  }
+				},
+			    axisLabel: {
+			    	rotate:30,
+			    	textStyle: {
+					    color: '#fff',
+					  }
 				}
 			},
 			zAxis3D: {
@@ -151,14 +179,21 @@ var pageModule = function () {
 			            width:1
 			        }
 			    },
-			    axisLabel: {
-				  textStyle: {
-				    color: '#fff',
+			    splitLine: {
+				  lineStyle: {
+				    type: 'dotted',
+				    color: '#13296D' //刻度线颜色
 				  }
+				},
+			    axisLabel: {
+			    	rotate:30,
+					textStyle: {
+					    color: '#fff',
+					}
 				}
 			},
 			grid3D: {
-			    boxWidth: 220,
+			    boxWidth: 260,
 			    boxDepth: 20,
 			    axisPointer: {
 			        show: false
@@ -172,7 +207,7 @@ var pageModule = function () {
 			        }
 			    },
 			    viewControl: {
-			        alpha: 0, //控制场景平移旋转
+			        alpha: 80, //控制场景平移旋转
 			        beta: 20,
 			        minAlpha: 10,
 			        maxAlpha: 10,
@@ -192,10 +227,13 @@ var pageModule = function () {
 	}
 	
 	
-	var getLineChartData = function () {
+	var getAreaChartData = function () {
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/trend',
+			url:'/app/fyp/manageDocument/trend',
 			dataType:'json',
+			data:{
+                deptid:$("#deptId").val()
+            },
 			success:function(res){
 				if(res.result=='success'){
 					var data = {
@@ -279,10 +317,11 @@ var pageModule = function () {
 					type: 'category',
 					boundaryGap: false,
 					data: data.xdata,
-					splitLine:{
-						lineStyle:{
-							color:'#5092C1'
-						}
+					splitLine: {
+					  lineStyle: {
+					    type: 'dotted',
+					    color: '#13296D' //刻度线颜色
+					  }
 					},
 					axisLabel: {
 					  textStyle: {
@@ -295,11 +334,12 @@ var pageModule = function () {
 			yAxis: [
 				{
 					type: 'value',
-					splitLine:{
-						lineStyle:{
-							color:'#5092C1'
-						}
-					},
+					splitLine: {
+						  lineStyle: {
+						    type: 'dotted',
+						    color: '#13296D' //刻度线颜色
+						  }
+						},
 					axisLabel: {
 					  textStyle: {
 					    color: '#fff',
@@ -313,27 +353,242 @@ var pageModule = function () {
 	}
 
 	//办公效率
-	/* var getCircleChartData = function () {
+	var getCircleChartData = function () {
+		var first = {};
+		var second= {};
+		var three= {};
 		$.ajax({
-			url:'',
+			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
+			data:{
+				 deptid:'',
+				 time:$("#searchDate4").val()
+			},
+			async:false,
 			success:function(res){
 				if(res.result=='success'){
-					
+					first.percentage = res.data[0].percentage;
+					$("#firstCq").html(res.data[0].notEnd);
+					$("#firstPjsc").html(res.data[0].timeCount);
+				}
+			}
+		});
+		$.ajax({
+			url:'/app/fyp/manageDocument/handleEfficiency',
+			dataType:'json',
+			data:{
+				 deptid:'',
+				 time:$("#searchDate4").val()
+			},
+			async:false,
+			success:function(res){
+				if(res.result=='success'){
+					second.percentage = res.data[0].percentage;
+					$("#secondCq").html(res.data[0].notEnd);
+					$("#secondPjsc").html(res.data[0].timeCount);
+				}
+			}
+		});
+		$.ajax({
+			url:'/app/fyp/manageDocument/readEfficiency',
+			dataType:'json',
+			async:false,
+			data:{
+				 deptid:'',
+				 time:$("#searchDate4").val()
+			},
+			success:function(res){
+				if(res.result=='success'){
+					three.percentage = res.data[0].percentage;
+					$("#threePjsc").html(res.data[0].timeCount);
+					$("#threeWd").html(res.data[0].notRead);
 				}
 			}
 		})
+		initCircleChart(first,second,three);
 	}
- */
+ 
+	var initCircleChart = function(obj1,obj2,obj3){
+		var charts = echarts.init(document.getElementById("container4"));
+		var placeHolderStyle= {
+			normal:{
+				label:{
+					show:false
+				},
+				labelLine:{
+					show:false
+				},
+				color:'#04194D',
+				borderWidth:10
+			},
+			emphasis:{
+				color:'#04194D',
+				borderWidth:10
+			}
+				
+		}
+
+		var dataStyle = {
+			normal:{
+				formatter:'{c}%',
+				position:'center',
+				show:true,
+				textStyle:{
+					fontSize:'32',
+					fontWeight:'bold',
+					color:'#0CB3F2'
+				}
+			},	
+		}
+		charts.setOption({
+			backgroundColor:'',
+			title:[{
+				text:'办结率',
+				left:'17%',
+				top:'75%',
+				textAlign:'center',
+				textStyle:{
+					fontSize:'16',
+					fontWeight:'bold',
+					color:'#fff',
+					textAlign:'center',
+					/*borderColor:'#f00',
+					borderWidth:4,
+					borderRadius:10,
+					padding:10*/
+				}
+			},
+			{
+				text:'延期',
+				left:'50%',
+				top:'75%',
+				textAlign:'center',
+				textStyle:{
+					fontSize:'16',
+					fontWeight:'normal',
+					color:'#fff',
+					textAlign:'center'
+				}
+			},{
+					text:'阅件完成率',
+					left:'82%',
+					top:'75%',
+					textAlign:'center',
+					textStyle:{
+						fontSize:'16',
+						fontWeight:'normal',
+						color:'#fff',
+						textAlign:'center'
+					}
+				}],
+			series:[
+				{
+					type:'pie',
+					hoverAnimation:false,
+					radius:['60%','80%'],
+					center:['17%','50%'],
+					startAngle:225,
+					labelLine:{
+						normal:{
+							show:false
+						},
+					},
+					label:{
+						normal:{
+							position:'center'
+						}
+					},
+					data:[{
+						value:obj1.percentage,
+						itemStyle:{
+							normal:{
+								color:'#0CB1F2'
+							}
+						},
+						label:dataStyle
+					},{
+						value:parseInt(135-obj1.percentage),
+						itemStyle:placeHolderStyle
+					}],
+				},
+				/*
+				* 第二个
+				* d*/
+				{
+					type:'pie',
+					hoverAnimation:false,
+					radius:['60%','80%'],
+					center:['50%','50%'],
+					startAngle:225,
+					labelLine:{
+						normal:{
+							show:false
+						},
+					},
+					label:{
+						normal:{
+							position:'center'
+						}
+					},
+					data:[{
+						value:obj2.percentage,
+						itemStyle:{
+							normal:{
+								color:'#0CB1F2'
+							}
+						},
+						label:dataStyle
+					},{
+						value:parseInt(135-obj2.percentage),
+						itemStyle:placeHolderStyle
+					}],
+				},
+			/*	第三个*/
+				{
+					type:'pie',
+					hoverAnimation:false,
+					radius:['60%','80%'],
+					center:['82%','50%'],
+					startAngle:225,
+					labelLine:{
+						normal:{
+							show:false
+						},
+					},
+					label:{
+						normal:{
+							position:'center'
+						}
+					},
+					data:[{
+						value:obj3.percentage,
+						itemStyle:{
+							normal:{
+								color:'#0CB1F2'
+							}
+						},
+						label:dataStyle
+					},{
+						value:parseInt(135-obj3.percentage),
+						itemStyle:placeHolderStyle
+					}],
+				}
+			]
+		});
+	}
+	
     return {
         //加载页面处理程序
         initControl: function () {
 			getBanwenAll();//默认加载办文
-			//initUnitTree();
+			initUnitTree();
             initother();
         }
     }
 }();
+
+
+
 
 
 
