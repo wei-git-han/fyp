@@ -358,7 +358,7 @@ var pageModule = function () {
 		var second= {};
 		var three= {};
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/submitEfficiency',
+			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
 			data:{
 				 deptid:'',
@@ -374,7 +374,7 @@ var pageModule = function () {
 			}
 		});
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/handleEfficiency',
+			url:'/app/fyp/manageDocument/handleEfficiency',
 			dataType:'json',
 			data:{
 				 deptid:'',
@@ -390,7 +390,7 @@ var pageModule = function () {
 			}
 		});
 		$.ajax({
-			url:'http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/manageDocument/readEfficiency',
+			url:'/app/fyp/manageDocument/readEfficiency',
 			dataType:'json',
 			async:false,
 			data:{
