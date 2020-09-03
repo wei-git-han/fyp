@@ -1,9 +1,9 @@
-var searchUrl = {url:'/app/fyp/reignCaseController/getTxlInfo',dataType:'text'};
-var pagemenu = {url:'/app/fyp/reignCaseController/reignDataTree',dataType:'text'};
+var searchUrl = {url:'/app/fyp/reignCaseController/reignCaseJsonObject',dataType:'text'};
+var pagemenu = {url:'/app/fyp/reignCaseController/reignCaseJsonObject',dataType:'text'};
 var fullName="";
 var loginUserId="";
 var pageModule = function () {
-	
+	alert("gsdfg21sfd");
 	var os = {};
     var oodata = [];
 	
@@ -333,6 +333,7 @@ var pageModule = function () {
 	//通讯录搜索
 	var o;
     var fn = function(obj,fullName){
+    alert(1231);
         clearTimeout(o);
         o = setTimeout(function(){
             $ajax({

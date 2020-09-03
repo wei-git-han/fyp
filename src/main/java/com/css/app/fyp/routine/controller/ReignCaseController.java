@@ -76,8 +76,8 @@ public class ReignCaseController {
     @ResponseBody
     @RequestMapping("/reignCaseJsonObject")
     public void reignCaseJsonObject(String afficheType) {
-        JSONObject maps = reignCaseService.reignCaseJsonObject();
-        Response.json(new ResponseValueUtils().success(maps));
+        JSONObject list = reignCaseService.reignCaseJsonObject();
+        Response.json(new ResponseValueUtils().success(list));
     }
 
     /**
