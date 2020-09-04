@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.service.impl;
 
+import com.css.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,9 +52,9 @@ public class FypGuaranteeTackingServiceImpl implements FypGuaranteeTackingServic
 	@Override
 	public Map<String, Object> findCount() {
 		Map<String, Object> dataMap = new HashMap<>();
-		dataMap.put("todayCount",fypGuaranteeTackingDao.toDayAccept().get("count"));
-		dataMap.put("completed",fypGuaranteeTackingDao.toDayComplete().get("count"));
-		dataMap.put("count",fypGuaranteeTackingDao.countAccept().get("count"));
+		dataMap.put("todayCount", fypGuaranteeTackingDao.toDayAccept().get("count") == null?0:fypGuaranteeTackingDao.toDayAccept().get("count"));
+		dataMap.put("completed",fypGuaranteeTackingDao.toDayComplete().get("count") == null?0:fypGuaranteeTackingDao.toDayComplete().get("count"));
+		dataMap.put("count",fypGuaranteeTackingDao.countAccept().get("count") == null?0:fypGuaranteeTackingDao.countAccept().get("count"));
 		return dataMap;
 	}
 

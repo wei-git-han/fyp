@@ -1,8 +1,10 @@
 package com.css.app.fyp.work;
 
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.app.fyp.work.entity.FypGuaranteeTacking;
 import com.css.app.fyp.work.service.FypGuaranteeTackingService;
 import com.css.base.utils.Response;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,21 +35,10 @@ public class EnsureController {
     @RequestMapping("/problem")
     public void problem() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("todayCount","今日受理总数");
-        dataMap.put("completed","已完成总数");
-        dataMap.put("count","累计受理总数");
-        List<Map<String,String>> objects = new ArrayList<>();
-        Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("name","用户名称");
-        paramMap.put("status","在线状态");
-        paramMap.put("phone","联系方式");
-        paramMap.put("outTime","反馈时间");
-        paramMap.put("source","问题来源");
-        paramMap.put("remark","问题描述");
-        paramMap.put("deptName","单位名称");
-        objects.add(paramMap);
-        dataMap.put("users",objects);
-        Response.json(new ResponseValueUtils().success(fypGuaranteeTackingService.findCount()));
+        dataMap.putAll(fypGuaranteeTackingService.findCount());//统计
+        PageHelper.startPage(1, 3);
+        dataMap.put("users",fypGuaranteeTackingService.queryList(new HashMap<>()));//列表
+        Response.json(new ResponseValueUtils().success(dataMap));
     }
 
     /**
