@@ -30,11 +30,11 @@ public class InformAfficheServiceImpl implements InformAfficheService {
      * @Return void
      */
     @Override
-    public JSONObject informAfficheList(String afficheType) {
+    public JSONObject informAfficheList(String pageSize, String curentPage, String afficheType) {
         JSONObject jsonData = new JSONObject();
         String userId = CurrentUser.getUserId();
         //局用户
-        jsonData = this.getJsonArrayData("","", afficheType, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INFORM_AFFICHE_LIST);
+        jsonData = this.getJsonArrayData(curentPage,pageSize, afficheType, userId, "", AppInterfaceConstant.WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC);
         return jsonData;
     }
 
@@ -54,7 +54,7 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
-        String mapperUrl = "http://172.16.201.140:8080";
+        String mapperUrl = "http://172.16.1.19:8080";
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
