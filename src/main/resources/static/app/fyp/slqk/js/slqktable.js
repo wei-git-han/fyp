@@ -112,10 +112,10 @@ var pageModule = function () {
 		
 		/*导入 */
 		$("#uploadFile").click(function(){
-			$("#pdf").unbind("click");
-			$("#pdf").unbind("change");
-			$("#pdf").click();
-			$("#pdf").change(function(){
+			$("#file").unbind("click");
+			$("#file").unbind("change");
+			$("#file").click();
+			$("#file").change(function(){
 				$("#form3").submit();
 			});
 		});
