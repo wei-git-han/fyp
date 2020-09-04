@@ -153,3 +153,22 @@ html, body {
     background-color: #1C67E3;
     border-color: #1C67E3;
 }
+.importBtn{
+	border: none;
+	color: #fff;
+	padding: 6px 20px;
+	border-radius: 4px !important;
+}
+.importBtn:hover,.newbuttoncont .btn:hover,.importBtn:active,.newbuttoncont .btn:active{
+	color:#fff!important;
+}
+.newbuttoncont{
+	color: #fff;
+	display: inline-block;
+}
+.newbuttoncont .btn{
+	border: none;
+	color: #fff;
+	border-radius: 4px !important;
+	outline:none;
+}

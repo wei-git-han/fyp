@@ -1,5 +1,6 @@
 var listurl = {"url":"/fyp/roleedit/list","dataType":"text"};//表格数据
 var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var grid = null;
 
 var pageModule = function () {
@@ -39,22 +40,34 @@ var pageModule = function () {
 			height:'100%',
 			checkbox: true,
 			rownumberyon:true,
-			paramobj:{},
+			paramobj: {
+				limit:1000,page:1,
+				deptName:$("#deptName").val(),
+				deptId:$("#deptId").val()
+				/*searchVal:$("#searchVal").val()*/
+			},
 			overflowx:false,
 			pageyno:false,
 			url: listurl
 	   });
 	}
 	var initother = function(){
-		/*导入 */
-		$("#importBtn").click(function(){
-			
-		});
-		
 		/*搜索 */
-		$("#search").click(function(){
-			grid.setparams({searchVal:$("#searchVal").val()});
-			grid.refresh();
+		/*$("#search").click(function(){
+			initgrid();
+		});*/
+	}
+	
+	var initUnitTree = function() {
+		$("#deptName").createSelecttree({
+			url: deptTreeUrl,
+			width: '100%',
+			success: function(data, treeobj) {},
+			selectnode: function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+				initgrid();
+			}
 		});
 	}
 	
@@ -63,6 +76,7 @@ var pageModule = function () {
         initControl: function () {
         	initother();
 			initgrid();
+			initUnitTree();
         }
     }
 }();

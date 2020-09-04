@@ -107,7 +107,7 @@ var pageModule = function () {
 			            		'		</div>'+
 			            		'		<div class="card_main">'+
 			            		'			<p>联系方式：<span>'+tel+'</span></p>'+
-			            		'			<p>联系方式：<span>'+warrantyTime+'</span></p>'+
+			            		'			<p>反馈时间：<span>'+warrantyTime+'</span></p>'+
 			            		'			<p>问题来源：<span>'+problemFrom+'</span></p>'+
 			            		'			<p><span class="describe">问题描述：</span><div class="card_desContent">'+problemDeration+'</div></p>'+
 			            		'		</div>'+

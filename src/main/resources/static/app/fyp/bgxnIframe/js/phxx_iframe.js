@@ -70,7 +70,9 @@ var pageModule = function () {
 	var getBarChartData = function(){
 		$.ajax({
 		  url:"/app/fyp/orderOfBirth/onLine",
-		  data:{},
+		  data:{
+			  time:$("#searchDate1").val()
+		  },
 		  dataType:"json",
 		  success:function(res){
 			if(res.result=="success"){
@@ -393,7 +395,7 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-        	//initUnitTree();
+        	initUnitTree();
         	getBarChartData();
         	initfw();
 			initanz();

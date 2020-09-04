@@ -56,15 +56,6 @@ body {
 	cursor: pointer;
 	font-size: 20px;
 }
-.importBtn{
-	background: #2A92E3;
-	border: none;
-	color: #fff;
-	padding: 5px 20px;
-	float: right;
-	margin-left: 20px;
-	border-radius: 4px !important;
-}
 select{
 	background: transparent;
 	color:#2A92E3;
