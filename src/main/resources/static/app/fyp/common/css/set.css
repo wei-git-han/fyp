@@ -56,34 +56,6 @@ body {
 	cursor: pointer;
 	font-size: 20px;
 }
-.importBtn{
-	background: #2A92E3;
-	border: none;
-	color: #fff;
-	padding: 6px 20px;
-	float: right;
-	margin-left: 10px;
-	border-radius: 4px !important;
-}
-.importBtn:hover,.newbuttoncont .btn:hover,.importBtn:active,.newbuttoncont .btn:active{
-	color:#fff!important;
-}
-.newbuttoncont{
-	color: #fff;
-	float: right;
-	margin-left: 10px;
-}
-.newbuttoncont .btn{
-	background: #2A92E3;
-	border: none;
-	color: #fff;
-	float: right;
-	border-radius: 4px !important;
-	outline:none;
-}
-.newbuttoncont{
-	border: none!important;
-}
 select{
 	background: transparent;
 	color:#2A92E3;

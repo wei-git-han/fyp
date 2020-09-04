@@ -88,6 +88,43 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
+		$("#form3").validate({
+		    submitHandler: function() {
+		    	$("#dialogzz").show();
+		    	$("#dialogzz").css("display","table");
+				var ajax_option ={
+					type: "post",
+					url:"/fyp/feedbackhear/import",
+					success:function(data){
+						$("#dialogzz").hide();
+						if(data.result == "success"){
+							newbootbox.alert('上传成功！');
+						}else{
+							newbootbox.alert("上传失败！"); 
+						}
+					}
+				}
+				$('#form3').ajaxSubmit(ajax_option);
+		   }
+		});
+		
+		/*导入 */
+		$("#uploadFile").click(function(){
+			$("#pdf").unbind("click");
+			$("#pdf").unbind("change");
+			$("#pdf").click();
+			$("#pdf").change(function(){
+				$("#form3").submit();
+			});
+		});
+		
+
+		/*下载 */
+		$("#downloadBtn").click(function(){
+			window.location.href = "/app/fyp/common/downLoadFile.xlsx";
+		});
+		
+		
 		$(".date-picker").datepicker({
 		    language:"zh-CN",
 		    rtl: Metronic.isRTL(),
