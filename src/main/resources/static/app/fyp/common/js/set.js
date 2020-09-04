@@ -43,8 +43,8 @@ var pageModule = function () {
 			paramobj: {
 				limit:1000,page:1,
 				deptName:$("#deptName").val(),
-				deptId:$("#deptId").val(),
-				searchVal:$("#searchVal").val()
+				deptId:$("#deptId").val()
+				/*searchVal:$("#searchVal").val()*/
 			},
 			overflowx:false,
 			pageyno:false,
@@ -53,9 +53,9 @@ var pageModule = function () {
 	}
 	var initother = function(){
 		/*搜索 */
-		$("#search").click(function(){
+		/*$("#search").click(function(){
 			initgrid();
-		});
+		});*/
 	}
 	
 	var initUnitTree = function() {
