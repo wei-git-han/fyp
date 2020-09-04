@@ -19,7 +19,8 @@ var pageModule = function() {
 			checkbox: false,
 			rownumberyon: false,
 			paramobj: {
-				time: $("#searchDate2").val()
+				time: $("#searchDate2").val(),
+				limit:1000,page:1
 			},
 			overflowx: false,
 			pageyno: false,

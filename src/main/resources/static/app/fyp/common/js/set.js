@@ -1,5 +1,6 @@
 var listurl = {"url":"/fyp/roleedit/list","dataType":"text"};//表格数据
 var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var grid = null;
 
 var pageModule = function () {
@@ -39,30 +40,80 @@ var pageModule = function () {
 			height:'100%',
 			checkbox: true,
 			rownumberyon:true,
-			paramobj:{},
+			paramobj: {
+				limit:1000,page:1,
+				deptName:$("#deptName").val(),
+				deptId:$("#deptId").val(),
+				searchVal:$("#searchVal").val()
+			},
 			overflowx:false,
 			pageyno:false,
 			url: listurl
 	   });
 	}
 	var initother = function(){
-		/*导入 */
-		$("#importBtn").click(function(){
-			
+		$("#form3").validate({
+		    submitHandler: function() {
+		    	$("#dialogzz").show();
+		    	$("#dialogzz").css("display","table");
+				var ajax_option ={
+					type: "post",
+					url:"/fyp/feedbackhear/import",
+					success:function(data){
+						$("#dialogzz").hide();
+						if(data.result == "success"){
+							newbootbox.alert('上传成功！');
+						}else{
+							newbootbox.alert("上传失败！"); 
+						}
+					}
+				}
+				$('#form3').ajaxSubmit(ajax_option);
+		   }
 		});
+		
+		/*导入 */
+		$("#uploadFile").click(function(){
+			$("#pdf").unbind("click");
+			$("#pdf").unbind("change");
+			$("#pdf").click();
+			$("#pdf").change(function(){
+				$("#form3").submit();
+			});
+		})
+		
 		
 		/*搜索 */
 		$("#search").click(function(){
 			grid.setparams({searchVal:$("#searchVal").val()});
 			grid.refresh();
 		});
+		
+		
+		/*下载 */
+		$("#downloadBtn").click(function(){
+			window.location.href = "/app/fyp/common/downLoadFile.xlsx";
+		});
+		
 	}
 	
+	var initUnitTree = function() {
+		$("#deptName").createSelecttree({
+			url: deptTreeUrl,
+			width: '100%',
+			success: function(data, treeobj) {},
+			selectnode: function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+			}
+		});
+	}
     return {
         //加载页面处理程序
         initControl: function () {
         	initother();
 			initgrid();
+			initUnitTree();
         }
     }
 }();
