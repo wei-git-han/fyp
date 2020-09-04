@@ -287,7 +287,7 @@
   -moz-transition-delay: 87.5ms;
   -o-transition-delay: 87.5ms;
   transition-delay: 87.5ms;
-  display:none
+ /*  display:none */
 }
 .flipster-carousel .flip-prev,
 .flipster-carousel .flip-next {

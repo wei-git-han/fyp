@@ -98,7 +98,9 @@ var pageModule = function () {
 					success:function(data){
 						$("#dialogzz").hide();
 						if(data.result == "success"){
-							newbootbox.alert('上传成功！');
+							newbootbox.alert('上传成功！').done(function(){
+								initgrid();
+							});
 						}else{
 							newbootbox.alert("上传失败！"); 
 						}

@@ -1,61 +1,5 @@
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
-	var initother = function(){
-		$("#bwzl").click(function(){
-			getBanwenAll();
-		});
-		//发文情况
-		$("#fwqk").click(function(){
-            getFawenAll();
-		});
-		//发展趋势
-		$("#fzqs").click(function(){
-			getAreaChartData();
-		});
-		$('#bgxl').click(function(){
-			getCircleChartData()
-		})
-		
-		$(".date-picker1").datepicker({
-			language: "zh-CN",
-			rtl: Metronic.isRTL(),
-			orientation: "",
-			autoclose: true,
-			format: "yyyy-mm-dd"
-		}).on("changeDate",function(){
-			getBanwenAll();//办文总量
-		});
-		
-		$(".date-picker2").datepicker({
-			language: "zh-CN",
-			rtl: Metronic.isRTL(),
-			orientation: "",
-			autoclose: true,
-			format: "yyyy-mm-dd"
-		}).on("changeDate",function(){
-			getFawenAll();//发文情况
-		});
-		
-		$(".date-picker4").datepicker({
-			language:"zh-CN",
-		    rtl: Metronic.isRTL(),
-		    orientation: "",
-		    format: "yyyy-mm",
-			minViewMode: 1,
-		    autoclose: true
-		}).on("changeDate",function(){
-			getCircleChartData();//办公效率
-		});
-		
-		
-		$("#lineTypeBw").change(function(){
-			getBanwenAll();
-		});
-		$("#lineTypeFw").change(function(){
-			getFawenAll();
-		});
-	}
-	
 	//组织机构树
 	var initUnitTree = function() {
 		$ajax({
@@ -141,7 +85,6 @@ var pageModule = function () {
 	
 	
 	var init3dBarChart = function(id,data){ //echart
-	    console.log(data)
 		var charts = echarts.init(document.getElementById(id));
 		charts.setOption({
 			color: ['#1A54F7'], 
@@ -600,11 +543,70 @@ var pageModule = function () {
 		});
 	}
 	
+	
+	var initother = function(){
+		//办文总量
+		$("#bwzl").click(function(){
+			getBanwenAll();
+		});
+		//发文情况
+		$("#fwqk").click(function(){
+            getFawenAll();
+		});
+		//发展趋势
+		$("#fzqs").click(function(){
+			getAreaChartData();
+		});
+		//办公效率
+		$('#bgxl').click(function(){
+			getCircleChartData()
+		})
+		
+		$(".date-picker1").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			format: "yyyy-mm-dd"
+		}).on("changeDate",function(){
+			getBanwenAll();//办文总量
+		});
+		
+		$(".date-picker2").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			format: "yyyy-mm-dd"
+		}).on("changeDate",function(){
+			getFawenAll();//发文情况
+		});
+		
+		$(".date-picker4").datepicker({
+			language:"zh-CN",
+		    rtl: Metronic.isRTL(),
+		    orientation: "",
+		    format: "yyyy-mm",
+			minViewMode: 1,
+		    autoclose: true
+		}).on("changeDate",function(){
+			getCircleChartData();//办公效率
+		});
+		
+		
+		$("#lineTypeBw").change(function(){
+			getBanwenAll();
+		});
+		$("#lineTypeFw").change(function(){
+			getFawenAll();
+		});
+	}
+	
     return {
         //加载页面处理程序
         initControl: function () {
-			getBanwenAll();//默认加载办文
-			initUnitTree();
+        	initUnitTree();
+        	getBanwenAll();//默认加载办文
             initother();
         }
     }
