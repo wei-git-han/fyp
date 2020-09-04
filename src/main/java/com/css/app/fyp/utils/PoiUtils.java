@@ -69,7 +69,9 @@ public class PoiUtils {
                 }
                 for(int j =0;j < cell;j++){
                     //列内容
-                    valueList.add(row.getCell(j).getStringCellValue());
+                    if(null!=row.getCell(j)) {
+                        valueList.add(row.getCell(j).getStringCellValue());
+                    }
                 }
                 valueMap.put(i+1,valueList);
             }
