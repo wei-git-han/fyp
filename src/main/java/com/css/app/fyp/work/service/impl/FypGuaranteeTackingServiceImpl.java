@@ -52,9 +52,12 @@ public class FypGuaranteeTackingServiceImpl implements FypGuaranteeTackingServic
 	@Override
 	public Map<String, Object> findCount() {
 		Map<String, Object> dataMap = new HashMap<>();
-		dataMap.put("todayCount", fypGuaranteeTackingDao.toDayAccept().get("count") == null?0:fypGuaranteeTackingDao.toDayAccept().get("count"));
-		dataMap.put("completed",fypGuaranteeTackingDao.toDayComplete().get("count") == null?0:fypGuaranteeTackingDao.toDayComplete().get("count"));
-		dataMap.put("count",fypGuaranteeTackingDao.countAccept().get("count") == null?0:fypGuaranteeTackingDao.countAccept().get("count"));
+		Object todayCount = fypGuaranteeTackingDao.toDayAccept().get("COUNT");
+		Object completed = fypGuaranteeTackingDao.toDayComplete().get("COUNT");
+		Object count = fypGuaranteeTackingDao.countAccept().get("COUNT");
+		dataMap.put("todayCount",  todayCount== null?0:todayCount);
+		dataMap.put("completed", completed== null?0:completed);
+		dataMap.put("count", count== null?0:count);
 		return dataMap;
 	}
 

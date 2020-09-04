@@ -129,19 +129,21 @@ public class FypFeedbackHearController {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		for (Object key:dataMap.keySet()) {
 			List<Object> objects = dataMap.get(key);
-			try {
-				fypFeedbackHear = new FypFeedbackHear();
-				fypFeedbackHear.setId(UUIDUtils.random());
-				fypFeedbackHear.setName(objects.get(0).toString());//软件/硬件名称
-				fypFeedbackHear.setDesc(objects.get(1).toString());//问题描述
-				fypFeedbackHear.setSubmitTime(simpleDateFormat.parse(objects.get(2).toString()));//提出时间
-				fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人
-				fypFeedbackHear.setStatus(this.getStatus(objects.get(4).toString()));//状态
-				fypFeedbackHear.setType(this.getType(objects.get(5).toString()));//问题分类：完善建议、系统问题
-				fypFeedbackHear.setSolveTime(simpleDateFormat.parse(objects.get(6).toString()));//解决时限
-				fypFeedbackHearService.save(fypFeedbackHear);
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if(null!=objects&&0<objects.size()){
+				try {
+					fypFeedbackHear = new FypFeedbackHear();
+					fypFeedbackHear.setId(UUIDUtils.random());
+					fypFeedbackHear.setName(objects.get(0).toString());//软件/硬件名称
+					fypFeedbackHear.setDesc(objects.get(1).toString());//问题描述
+					fypFeedbackHear.setSubmitTime(simpleDateFormat.parse(objects.get(2).toString()));//提出时间
+					fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人
+					fypFeedbackHear.setStatus(this.getStatus(objects.get(4).toString()));//状态
+					fypFeedbackHear.setType(this.getType(objects.get(5).toString()));//问题分类：完善建议、系统问题
+					fypFeedbackHear.setSolveTime(simpleDateFormat.parse(objects.get(6).toString()));//解决时限
+					fypFeedbackHearService.save(fypFeedbackHear);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
