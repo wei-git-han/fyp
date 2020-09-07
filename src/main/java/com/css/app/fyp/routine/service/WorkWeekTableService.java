@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public interface WorkWeekTableService {
 
-	JSONArray statementTablesList(String weekTableType, String weekTableDate, String page, String pagesize);
+	JSONArray statementTablesList(String orgId, String weekTableType, String weekTableDate, String page, String pagesize);
 
 	void statementTablesInsert (Date weekTableDate, String weekTableContent, String orgName);
 
