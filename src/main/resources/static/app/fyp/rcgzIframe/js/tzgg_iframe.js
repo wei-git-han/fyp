@@ -6,14 +6,14 @@ var pageModule = function () {
 			data:{afficheType:type},
 			success: function(data) {
 				var arryHtml = '';
-				$.each(data.data.list, function(i, o) {
+				$.each(data.data.resList, function(i, o) {
 					var class1 = "";
 					if(i<3){
 						class1 = "top3";
 					} 
 					arryHtml+=  '<dl class="'+class1+'">'+
-								'	<dt><span>'+parseInt(i+1)+'</span>'+o. informAfficheContent+'</dt>'+
-								'	<dd>'+o.informAfficheTime+'</dd>'+
+								'	<dt><span>'+parseInt(i+1)+'</span>'+o.title+'</dt>'+
+								'	<dd>'+o.releaseTime+'</dd>'+
 								'</dl>'
 				});
 				$("#mainContent").html(arryHtml);
