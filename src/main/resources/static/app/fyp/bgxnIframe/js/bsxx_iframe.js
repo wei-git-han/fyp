@@ -1,5 +1,5 @@
 var listurl = {"url": "/app/fyp/manageThing/weeklyTable","dataType": "text"};
-var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树--待定
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var grid = null;
 
 var pageModule = function() {
