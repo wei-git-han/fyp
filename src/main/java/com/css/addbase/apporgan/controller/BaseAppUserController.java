@@ -314,7 +314,7 @@ public class BaseAppUserController {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * 加载当前人及当前人的部门
 	 */
@@ -338,4 +338,22 @@ public class BaseAppUserController {
         }
 		Response.json(json);
 	}
+
+	@ResponseBody
+	@RequestMapping("/getBSZ")
+	public void getBSZ(){
+		Boolean flag = false;
+		String userId = CurrentUser.getUserId();
+		String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
+		BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
+		String name = baseAppOrgan.getName();
+		//当前用户是否为部首长
+		if (StringUtils.equals("部首长",name)) {
+			flag = true;
+		}
+		Response.json(flag);
+	}
+
+
+
 }

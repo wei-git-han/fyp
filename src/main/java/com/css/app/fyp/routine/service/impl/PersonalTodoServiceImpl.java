@@ -87,6 +87,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             qxjJsonObj.put("appId", "");
             if (null != qxjJsonDataUrl) {
                 qxjJsonObj.put("flowCount", qxjJsonDataUrl.get("qxjsp"));
+            }else {
+                qxjJsonObj.put("flowCount", "0");
             }
             qxjJsonObj.put("typeName", "请销假");
             qxjJsonObj.put("applyType", "7");
@@ -98,6 +100,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             qxjJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {
                 dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("total"));
+            }else {
+                dccbJsonObj.put("flowCount", "0");
             }
             dccbJsonObj.put("typeName", "督查催办");
             dccbJsonObj.put("applyType", "8");

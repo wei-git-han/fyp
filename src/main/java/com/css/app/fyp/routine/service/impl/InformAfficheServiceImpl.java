@@ -34,6 +34,7 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         JSONObject jsonData = new JSONObject();
         String userId = CurrentUser.getUserId();
         //局用户
+        afficheType = "1";
         jsonData = this.getJsonArrayData(curentPage,pageSize, afficheType, userId, "", AppInterfaceConstant.WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC);
         return jsonData;
     }
