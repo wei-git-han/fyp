@@ -60,7 +60,7 @@ html, body {
 	float:right;
 }
 .tab2_main{
-	overflow: hidden;
+	/* overflow: hidden; */
 	padding: 15px;
 	padding-top: 0;
 }
@@ -73,6 +73,9 @@ html, body {
 	font-size:16px;
 }
 .tab2_title{
+}
+.tab2_main_content{
+	overflow: hidden;
 }
 .tab2_main_content>div{
 	float:left;
