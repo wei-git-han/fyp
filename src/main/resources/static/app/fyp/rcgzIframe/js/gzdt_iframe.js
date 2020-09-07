@@ -13,7 +13,7 @@ var pageModule = function () {
 									<dd>
 										<div class="title">${o.title}</div>
 										<div class="content">${o.content}</div>
-										<div class="btns"><span class="date">${o.createDate}</span>阅读<span class="num">${o.contentCount}</span><a id="${o.id}">查看详情</a></div>
+										<div class="btns"><span class="date">${o.createDate}</span>阅读<span class="num">${o.hits}</span><a id="${o.id}">查看详情</a></div>
 									</dd>
 								</dl>`
 				});
