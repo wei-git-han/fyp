@@ -28,7 +28,7 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     private BaseAppOrgMappedService baseAppOrgMappedService;
 
     @Override
-    public JSONArray statementTablesList(String weekTableType, String weekTableDate, String page, String pagesize) {
+    public JSONArray statementTablesList(String orgId, String weekTableType, String weekTableDate, String page, String pagesize) {
         JSONArray jsonData = new JSONArray();
         String userId = CurrentUser.getUserId();
         String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
@@ -38,18 +38,12 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
         if (StringUtils.equals("部首长",name)) {
             //部首长
             String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
-            String zoneId = "";
-            if (StringUtils.equals(weekTableType, "2")) {
-                zoneId = CurrentUser.getUserId();
-            }
+            String zoneId = orgId;
             jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         } else {
             //局用户
             String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
-            String zoneId = "";
-            if (StringUtils.equals(weekTableType, "2")) {
-                zoneId = CurrentUser.getUserId();
-            }
+            String zoneId = orgId;
             jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         }
         return jsonData;

@@ -4,6 +4,13 @@ var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--
 var pageModule = function () {
 	
 	var initother = function(){
+		//软件数据
+		$("#rjsj").click(function(){
+			initfw();
+			initanz();
+		});
+		
+		//未开机数据
 		$("#wkjsj").click(function(){
 			getBarChartData2();
 		});
@@ -402,8 +409,6 @@ var pageModule = function () {
         initControl: function () {
         	initUnitTree();
         	getBarChartData();
-        	initfw();
-			initanz();
 			initother();
         }
     }

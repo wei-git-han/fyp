@@ -8,18 +8,14 @@ import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.Response;
 import com.css.base.utils.UUIDUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,17 +37,20 @@ public class WorkWeekTableController {
      */
     @ResponseBody
     @RequestMapping("/statementTablesList")
-    public void statementTablesList(String weekTableType, String weekTableDate, String page, String pagesize) {
-        JSONArray maps = workWeekTableService.statementTablesList(weekTableType, weekTableDate, page, pagesize);
+    public void statementTablesList(String orgId, String weekTableType, String weekTableDate, String page, String pagesize) {
+        JSONArray maps = workWeekTableService.statementTablesList(orgId, weekTableType, weekTableDate, page, pagesize);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
     /**
      * 本周周表/个人周表-新增
      */
-    public void statementTablesInsert (@DateTimeFormat(pattern = "yyyy") Date weekTableDate, String weekTableContent, String orgName) {
-        workWeekTableService.statementTablesInsert(weekTableDate, weekTableContent, orgName);
-        Response.json("result", "success");
+    @ResponseBody
+    @RequestMapping("/statementTablesInsert")
+    public void statementTablesInsert (@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek) {
+        fypPersonageWorkWeek.setId(UUIDUtils.random());
+        fypPersonageWorkWeekService.save(fypPersonageWorkWeek);
+        Response.ok();
     }
 
     /**
@@ -65,51 +64,6 @@ public class WorkWeekTableController {
         //查询列表数据
         JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
         Response.json(new ResponseValueUtils().success(fypPersonageWorkWeekList));
-    }
-
-    /**
-     * 信息
-     */
-    @ResponseBody
-    @RequestMapping("/info/{id}")
-    @RequiresPermissions("fyppersonageworkweek:info")
-    public void info(@PathVariable("id") String id){
-        FypPersonageWorkWeek fypPersonageWorkWeek = fypPersonageWorkWeekService.queryObject(id);
-        Response.json("fypPersonageWorkWeek", fypPersonageWorkWeek);
-    }
-
-    /**
-     * 保存
-     */
-    @ResponseBody
-    @RequestMapping("/save")
-    @RequiresPermissions("fyppersonageworkweek:save")
-    public void save(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
-        fypPersonageWorkWeek.setId(UUIDUtils.random());
-        fypPersonageWorkWeekService.save(fypPersonageWorkWeek);
-        Response.ok();
-    }
-
-    /**
-     * 修改
-     */
-    @ResponseBody
-    @RequestMapping("/update")
-    @RequiresPermissions("fyppersonageworkweek:update")
-    public void update(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
-        fypPersonageWorkWeekService.update(fypPersonageWorkWeek);
-        Response.ok();
-    }
-
-    /**
-     * 删除
-     */
-    @ResponseBody
-    @RequestMapping("/delete")
-    @RequiresPermissions("fyppersonageworkweek:delete")
-    public void delete(@RequestBody String[] ids){
-        fypPersonageWorkWeekService.deleteBatch(ids);
-        Response.ok();
     }
 
 }

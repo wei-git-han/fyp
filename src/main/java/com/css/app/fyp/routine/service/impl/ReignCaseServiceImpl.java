@@ -424,8 +424,6 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         result.put("qj", qjSum);
         //办公数量   总数-请假的数 =办公的数
         //（目前和 暂时和在线离线 一样，  当前无出差APP 统计的情况 ）
-        //2019年1月22日11:02:04
-        //int bgSum=sumCount-qjSum;
         int bgSum=zxCount-qjSum;
         if(bgSum<0) {bgSum=0;}
         result.put("bg", bgSum);
