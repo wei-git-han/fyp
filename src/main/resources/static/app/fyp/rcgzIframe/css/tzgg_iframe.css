@@ -39,27 +39,36 @@ html, body {
 	margin-top:2px;
 }
 dl dt{
-	float: left;
+	width:100%;
 	line-height:40px;
+	font-weight:100;
+	padding-right:150px;
 }
 dl dt span{
 	margin-right:10px;
 }
 dl dd{
-	float: right;
+	position:absolute;
+	right:10px;
+	top: 0;
 	line-height:40px;
+	font-size:14px;
 }
 dl{
 	width:100%;
 	height:40px;
+	position:relative;
 	margin-bottom:10px;
-	border:1px solid #2992E3;
-	margin-top:20px;
+	margin-top:10px;
 	padding:0px 10px;
 	font-size: 16px;
-	color:#6190D0;
-	box-shadow: inset 0px 0px 2px #68A9D8;
+	color:#3BA9FF;
+	box-shadow: inset 0px 0px 1px #68A9D8;
 }
 dl.top3{
-	color: #F96610;
+	color: #E2A848;
+}
+dl:hover{
+	color: #E2A848;
+	box-shadow: inset 0px 0px 3px #386DDE;
 }

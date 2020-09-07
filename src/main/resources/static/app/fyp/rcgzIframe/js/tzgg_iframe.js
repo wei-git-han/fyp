@@ -7,11 +7,13 @@ var pageModule = function () {
 			success: function(data) {
 				var arryHtml = '';
 				$.each(data.data.resList, function(i, o) {
-					var class1 = "";
+					/*var class1 = "";
 					if(i<3){
 						class1 = "top3";
 					} 
-					arryHtml+=  '<dl class="'+class1+'">'+
+					class="'+class1+'"
+					*/
+					arryHtml+=  '<dl>'+
 								'	<dt><span>'+parseInt(i+1)+'</span>'+o.title+'</dt>'+
 								'	<dd>'+o.releaseTime+'</dd>'+
 								'</dl>'

@@ -299,3 +299,28 @@ select{
 	cursor:pointer;
 	font-size:22px !important;
 }
+.nav>li{
+	display:none
+}
+
+.nav-tabs li:last-child{
+	margin-left: -43px;
+}
+.nav-tabs li:last-child a {
+    padding-left: 26px;
+}
+.nav-tabs li:last-child::before {
+    border-left-color: transparent;
+}
+.nav-tabs li:last-child::after {
+    position: absolute;
+    content: ' ';
+    left: 13px;
+    border: 1px solid #68A9D8;
+    border-top: 0px;
+    border-right: 0px;
+    width: 26px;
+    top: 0;
+    height: 100%;
+    box-sizing: border-box;
+}

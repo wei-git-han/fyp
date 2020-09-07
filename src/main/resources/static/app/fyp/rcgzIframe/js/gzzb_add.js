@@ -34,8 +34,9 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = [""];
+			    var elementarry = ["currentDate"];
 				var paramdata = getformdata(elementarry);
+				
 				$ajax({
 					url:saveUrl,
 					data:paramdata,
@@ -67,7 +68,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData([""]);
+			removeInputData(["currentDate"]);
 		});
 		
 		//取消

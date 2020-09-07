@@ -29,13 +29,13 @@
 		<div class="pr100">
 			<div class="tabbable">
 			    <ul class="nav nav-tabs nav-tabs-lg">
-			        <li class="active" data="bjzb">
+			        <li class="active" data="bjzb" id="bjzb">
 			            <a href="#tab_1">本局周表</a>
 			        </li>
-			        <li data="grzb">
+			        <li data="grzb" id="grzb">
 			            <a href="#tab_2">个人周表</a>
 			        </li>
-					<li data="gjzb">
+					<li data="gjzb" id="gjzb">
 					    <a href="#tab_3">各局周表</a>
 					</li>
 			    </ul>
@@ -44,7 +44,7 @@
 						<div class="tab_title">
 		            		<span class="line"></span>&nbsp;&nbsp;周表详情
 		            		<div class="filterDate">
-		            			<div class="form-control" style="padding:0;width:195px;">
+		            			<div class="form-control" style="padding:0;width:195px;display:none;" id="deptFilter">
 									<div class="selecttree">
 										<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
 										<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()" placeholder=""  />

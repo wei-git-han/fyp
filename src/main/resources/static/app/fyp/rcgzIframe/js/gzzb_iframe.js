@@ -1,6 +1,26 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var getRoleUrl = {"url":"/app/base/user/getBSZ","dataType":"text"}; //区分局内用户||部首长
 var gzzbUrl;
 var pageModule = function () {
+	
+	
+	//区分局内用户||部首长
+	var getRole = function(){
+		$ajax({
+			url: getRoleUrl,
+			data:{},
+			success: function(res) {
+				if(res){//true是部首长
+					$("#deptFilter,#gjzb").show();
+					initPlan('gjzb');
+				}else{
+					$("#bjzb,#grzb").show();
+					initPlan('bjzb');
+				}
+			}
+		})
+	}
+	
 	var object1 = {};
 	var initPlan = function(type){
 		if(type=="bjzb"){
@@ -145,6 +165,9 @@ var pageModule = function () {
 		$(".nav>li").click(function() {
 			$(this).addClass('active').siblings().removeClass('active');
 			initPlan($(".nav>li.active").attr("data"));
+			if($(".nav>li.active").attr("data") == "gjzb"){
+				$("#deptFilter").show();
+			}
 		});
 	}
 	
@@ -164,8 +187,8 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
+          getRole();
           initUnitTree();
-          initPlan('bjzb');
 		  initother();
         }
     }
