@@ -94,140 +94,6 @@ var pageModule = function () {
 		})
 	}
 	
-	//未开机数据
-	var getBarChartData2 = function(){
-		$.ajax({
-		  url:"/app/fyp/orderOfBirth/computer",
-		  data:{
-			  time:$("#searchDate3").val()
-		  },
-		  dataType:"json",
-		  success:function(res){
-			if(res.result=="success"){
-			    initBarChart(res.data,'main3');
-			} 
-		  }
-		})
-	}
-	
-	var initBarChart = function(data,id){
-		//解析后端数据
-		var xdata =[];
-		var ydata =[];
-		$.each(data, function(i, o) {
-			xdata.push(o.deptName);
-			ydata.push(o.count);
-		});
-		
-		var chart = echarts.init(document.getElementById(id));
-		chart.setOption({
-			title: {
-			  show: true,
-			  subtext: '',
-			  subtextStyle: {
-				color: '#DBDDF7',
-			  },
-			},
-			backgroundColor:'#051A50',
-			color: ['#509DF7', '#99DA48'],
-			tooltip: {
-				trigger: 'axis',
-				axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-					type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-				},
-				color:'red'
-			},
-			legend: {
-				data:[],
-				textStyle:{
-					color:'#fff'
-				}
-			},
-			toolbox: {
-				show: false,
-				orient: 'vertical',
-				left: 'right',
-				top: 'center',
-				feature: {
-					mark: {show: true},
-					dataView: {show: true, readOnly: false},
-					magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-					restore: {show: true},
-					saveAsImage: {show: true}
-				}
-			},
-			calculable: true,
-			xAxis: [
-				{
-					type: 'category',
-					axisTick: {show: false},
-					splitLine: {show: false},
-					interval: 0,
-					axisLabel: {
-					  rotate:30,
-					  textStyle: {
-					    color: '#7783DE',
-					    fontSize: 12
-					  }
-					},
-					data: xdata
-				}
-			],
-			yAxis: [
-				{
-					type: 'value',
-					min: 0,
-					max: 500,
-					splitNumber: 5,
-					axisLabel: {
-					  textStyle: {
-					    color: '#7783DE',
-					    fontSize: 12
-					  }
-					},
-					splitLine: {
-					  lineStyle: {
-					    type: 'dotted',
-					    color: '#13296D' //刻度线颜色
-					  }
-					}
-				}
-			],
-			series: [
-				{
-					name:'',
-					type: 'bar',
-					barWidth:20,
-					itemStyle:{
-						normal:{
-							color:'#0086FF'
-						}
-					},
-					data:ydata,
-					z:1
-				},
-				{
-					type: "pictorialBar",
-					symbol:'rect',
-					symbolOffset:[0,-1],
-					symbolSize:[21,3],
-					barGap: 0,
-					symbolRepeat:'fixed',
-					symbolMargin:3,
-					symbolClip:true,
-					barWidth:20,
-					barCategoryGap:'300',
-					itemStyle:{
-						normal:{
-							color:'#051A50'
-						}
-					},
-					data: ydata,
-					z:2
-				}
-			]
-		});
-	}
 	var initChart = function(data){
 		/*
         * 在线率统计表数据
@@ -244,7 +110,8 @@ var pageModule = function () {
 				zb:obj.permanentStaffCount,
 				zx:obj.onLineCount,
 				qj:obj.leaveCount,
-				qt:obj.otherCount
+				qt:obj.otherCount,
+				zwl:obj.percentage
 			});
 		})
 		var jzxl = echarts.init(document.getElementById('main'));
@@ -276,6 +143,7 @@ var pageModule = function () {
 						'<p>在线：'+(data.zx?data.zx:0)+'</p>'+
 						'<p>请假：'+(data.qj?data.qj:0)+'</p>'+
 						'<p>其他：'+(data.qt?data.qt:0)+'</p>'+
+						'<p>在位率：'+(data.zwl?data.zwl:0)+'</p>'+
 						//                    '<p><a href="index.html" target="_blank" style="color:#fff;">点击查看&nbsp;&gt;&nbsp; </a></p>'+
 						'</div>';
 					return html;
@@ -358,8 +226,144 @@ var pageModule = function () {
 				return;
 			}
 		})
-
 	};
+	
+	
+	//未开机数据
+	var getBarChartData2 = function(){
+		$.ajax({
+		  url:"/app/fyp/orderOfBirth/computer",
+		  data:{
+			  time:$("#searchDate3").val()
+		  },
+		  dataType:"json",
+		  success:function(res){
+			if(res.result=="success"){
+			    initBarChart(res.data,'main3');
+			} 
+		  }
+		})
+	}
+	
+	var initBarChart = function(data,id){
+		//解析后端数据
+		var xdata =[];
+		var ydata =[];
+		$.each(data, function(i, o) {
+			xdata.push(o.deptName);
+			ydata.push(o.count);
+		});
+		
+		var chart = echarts.init(document.getElementById(id));
+		chart.setOption({
+			title: {
+			  show: true,
+			  subtext: '',
+			  subtextStyle: {
+				color: '#DBDDF7',
+			  },
+			},
+			backgroundColor:'#051A50',
+			color: ['#509DF7', '#99DA48'],
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+					type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				},
+				color:'red'
+			},
+			legend: {
+				data:[],
+				textStyle:{
+					color:'#fff'
+				}
+			},
+			toolbox: {
+				show: false,
+				orient: 'vertical',
+				left: 'right',
+				top: 'center',
+				feature: {
+					mark: {show: true},
+					dataView: {show: true, readOnly: false},
+					magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+					restore: {show: true},
+					saveAsImage: {show: true}
+				}
+			},
+			calculable: true,
+			xAxis: [
+				{
+					type: 'category',
+					axisTick: {show: false},
+					splitLine: {show: false},
+					interval: 0,
+					axisLabel: {
+					  rotate:30,
+					  textStyle: {
+					    color: '#7783DE',
+					    fontSize: 12
+					  }
+					},
+					data: xdata
+				}
+			],
+			yAxis: [
+				{
+					type: 'value',
+					/*min: 0,
+					max: 500,*/
+					splitNumber: 5,
+					axisLabel: {
+					  textStyle: {
+					    color: '#7783DE',
+					    fontSize: 12
+					  }
+					},
+					splitLine: {
+					  lineStyle: {
+					    type: 'dotted',
+					    color: '#13296D' //刻度线颜色
+					  }
+					}
+				}
+			],
+			series: [
+				{
+					name:'',
+					type: 'bar',
+					barWidth:20,
+					itemStyle:{
+						normal:{
+							color:'#0086FF'
+						}
+					},
+					data:ydata,
+					z:1
+				},
+				{
+					type: "pictorialBar",
+					symbol:'rect',
+					symbolOffset:[0,-1],
+					symbolSize:[21,3],
+					barGap: 0,
+					symbolRepeat:'fixed',
+					symbolMargin:3,
+					symbolClip:true,
+					barWidth:20,
+					barCategoryGap:'300',
+					itemStyle:{
+						normal:{
+							color:'#051A50'
+						}
+					},
+					data: ydata,
+					z:2
+				}
+			]
+		});
+	}
+
 	//访问量
 	var initfw = function(){
 		$ajax({
@@ -384,7 +388,7 @@ var pageModule = function () {
 			success: function(data) {
 				var arryHtml_l = '';
 				var arryHtml_r = '';
-				$.each(data.data.access, function(i, o) {
+				$.each(data.data.install, function(i, o) {
 					if(i<5){
 						arryHtml_l+='<div>'+
 									'	<span class="topVS3">TOP'+parseInt(i+1)+'</span>'+

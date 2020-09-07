@@ -30,7 +30,7 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-			inittzgg('jugg');
+			inittzgg($(".nav>li.active").attr("data"));
 			initother();
         }
     }
