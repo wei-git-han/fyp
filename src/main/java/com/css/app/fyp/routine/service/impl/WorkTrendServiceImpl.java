@@ -103,7 +103,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        String mapperUrl = "http://172.16.201.140:8080";
+        String mapperUrl = "http://172.16.1.19:8080";
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);

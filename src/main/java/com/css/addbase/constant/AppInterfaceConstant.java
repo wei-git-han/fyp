@@ -622,7 +622,7 @@ public class AppInterfaceConstant {
 	 * @Description 工作动态--列表
 	 * @Author gongan
 	 */
-	public final static String WEB_WORK_TREND_VIEWINFO_FYP = "/xxfw/api/orgdynamics";
+	public final static String WEB_WORK_TREND_VIEWINFO_FYP = "/jbybfyp";
 	/**
 	 * @Description 工作动态--保存主题信息
 	 * @Author gongan
