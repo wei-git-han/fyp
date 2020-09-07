@@ -35,6 +35,10 @@ var pageModule = function () {
 			getBarChartData2();
 		});
 		
+		$("#zxphType").change(function(){
+			getBarChartData();
+		});
+		
 	}
 	
 	//组织机构树
@@ -71,6 +75,7 @@ var pageModule = function () {
 		$.ajax({
 		  url:"/app/fyp/orderOfBirth/onLine",
 		  data:{
+			  type:$("#zxphType option:selected").val(),
 			  time:$("#searchDate1").val()
 		  },
 		  dataType:"json",

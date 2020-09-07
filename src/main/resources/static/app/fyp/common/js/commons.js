@@ -74,16 +74,19 @@ jQuery(document).ready(function() {
     
     var pagedate = new Date();
 	var month = pagedate.getMonth()+1;
+	var month1 = month;
 	if(month<10){
 		month = "0"+month;
 	}
 	var day = pagedate.getDate();
+	var day1 = day;
 	if(day<10){
 		day = "0"+day;
 	}
 	var year = pagedate.getFullYear();
 	$(".datee").val(year+"-"+month+"-"+day);
 	$(".yearAndmonth").val(year+"-"+month);
+	$(".monthAndday").val(month1+"-"+day1);
 });    
 
 /*start设置bootstrap滚动条自适应浏览器高度*/

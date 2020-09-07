@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
  */
 public interface InformAfficheService {
 
-	JSONObject informAfficheList(String afficheType);
+	JSONObject informAfficheList(String pageSize, String curentPage, String afficheType);
 
 	JSONObject informAfficheDetailList(String contentid);
 

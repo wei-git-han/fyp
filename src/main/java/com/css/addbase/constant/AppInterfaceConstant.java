@@ -662,11 +662,12 @@ public class AppInterfaceConstant {
 
     /********************************************************************FYP(日常工作)end*****************************************************/
 
+    public final static String WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC = "/affiche/listFyp";
 
     /**
      * @author mashuwen
-	 * @date 2018年3月30日
-	 * 公文处理应用调用：我的阅件，查看收藏数据列表接口
+     * @date 2018年3月30日
+     * 公文处理应用调用：我的阅件，查看收藏数据列表接口
      */
     public final static String WEB_INTERFACE_DZBMS_TO_GWCL_WDYJ_CKSC = "/wdyjfavorite/favoriteList";
 

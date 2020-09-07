@@ -1,16 +1,17 @@
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var gzzbUrl;
 var pageModule = function () {
 	var object1 = {};
 	var initPlan = function(type){
 		if(type=="bjzb"){
-			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
-			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
+			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/workWeekTable/list","dataType":"text"};
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type},
+			data:{weekTableType:type,userId:$("#deptId").val()},
 			success: function(res) {
 				if (res.data.length<1) {
 					return;
@@ -33,6 +34,8 @@ var pageModule = function () {
 							var day = item.day;
 							var week = item.week;
 							var dates = month + "月" + day + "日";
+							var comparedates = month + "-" + day;
+							var comparedates2 = $("#monthAndday").val();
 							var today = new Date().format("M月d日");
 							
 							htmlDate += '	<div class="newpage17" style="background:transparent!important">' +
@@ -71,6 +74,16 @@ var pageModule = function () {
 								'</dl>';
 								html2 += '<div class="newpage19" >' + html5 + '</div>'
 							});
+							
+							
+							
+							if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
+								html2 = "<div class='wtj'>（未添加）</div>"
+							}
+							if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)== $.trim(comparedates2))){
+								html2 = "<div class='addBtn'  onclick='add(\""+dates+"\",\"am\")'><i class='fa fa-plus'></i></div>"
+							}
+							
 							var html1 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 							html2 +
 							'</div></div>';
@@ -103,11 +116,19 @@ var pageModule = function () {
 								'</dl>';
 								html4 += '<div class="newpage19">' + html7 + '</div>'
 							});
+							
+							if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
+								html4 = "<div class='wtj'>（未添加）</div>"
+							}
+							if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)== $.trim(comparedates2))){
+								html4 = "<div class='addBtn' onclick='add(\""+dates+"\",\"pm\")'><i class='fa fa-plus'></i></div>"
+							}
+							
 							var html3 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 								html4 +
 								'</div></div>';
 							
-							planHtml += '<div class="newpage20 ' + (today == dates ? "active" : "") + '" id="show_' + (i + 1) +
+							planHtml += '<div class="newpage20 ' + (today == dates ? "active" : "") + '" data="show_' + (i + 1) +
 								'" name="show_' + (i + 1) + '">' +
 								 htmlDate + html1 + html3 +
 								'</div>';
@@ -126,9 +147,24 @@ var pageModule = function () {
 			initPlan($(".nav>li.active").attr("data"));
 		});
 	}
+	
+	var initUnitTree = function() {
+		$("#deptName").createSelecttree({
+			url: deptTreeUrl,
+			width: '100%',
+			success: function(data, treeobj) {},
+			selectnode: function(e, data) {
+				$("#deptName").val(data.node.text);
+				$("#deptId").val(data.node.id);
+				initPlan($(".nav>li.active").attr("data"));
+			}
+		});
+	}
+	
     return {
         //加载页面处理程序
         initControl: function () {
+          initUnitTree();
           initPlan('bjzb');
 		  initother();
         }
@@ -136,4 +172,16 @@ var pageModule = function () {
 }();
 
 
-
+function add(date,flag){
+	newbootbox.newdialog({
+	    id: "addModal",
+	    width: 600,
+	    height: 400,
+	    header: true,
+	    title: "新增",
+	    url: "/app/fyp/rcgzIframe/html/gzzb_add.html?flag="+flag,
+	    style: {
+	      /*"background": "#fff"*/
+	    }
+	})
+}

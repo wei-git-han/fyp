@@ -22,6 +22,7 @@
 	<link href="../../../../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 	<link href="../../../../assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
    	<link href="../../../../assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../../../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../common/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/phxx_iframe.css"/>
 </head>
@@ -32,7 +33,7 @@
 			<div class="tabbable">
 			    <ul class="nav nav-tabs nav-tabs-lg">
 			        <li class="active">
-			            <a href="#tab_1" data-toggle="tab">在线率排行</a>
+			            <a href="#tab_1" data-toggle="tab">在线排行</a>
 			        </li>
 			        <li id="fwqk">
 			            <a href="#tab_2" data-toggle="tab">软件数据</a>
@@ -48,7 +49,14 @@
 								<div class="tab1_title">
 									<span class="line"></span>&nbsp;&nbsp;各局在位率统计(本周)
 									<div class="filterDate">
-										<div class="input-group input-small date date-picker date-picker1"  data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+										<select class="selectpicker" id="zxphType" name="zxphType" style="width:120px;">
+											<option value="0">注册人数</option>
+											<option value="1">在线人数</option>
+											<option value="2">本日峰值</option>
+											<option value="3">实时在线率</option>
+										</select>
+									
+										<div class="input-group input-small date date-picker date-picker1"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" style="float: right;margin-left: 10px;">
 											<input type="text" class="form-control datee" id="searchDate1" name="searchDate1" readonly>
 											<span class="input-group-btn">
 											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
@@ -156,6 +164,7 @@
 <script src="../../../../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="../../../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="../../../../assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
+<script src="../../../../../assets/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript" ></script>
 <script src="../../common/js/commons.js" type="text/javascript"></script>
 <script src="../js/phxx_iframe.js" type="text/javascript"></script>
 <script>

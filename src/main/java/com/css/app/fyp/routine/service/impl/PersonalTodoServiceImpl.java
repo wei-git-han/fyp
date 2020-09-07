@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
-import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
@@ -56,8 +55,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         //当前用户是否为部首长
         if (StringUtils.equals("部首长",name)) {
             //部首长
-            String mapperUrl = "http://172.16.1.19:11004";
-            jsonObjectResult = this.getJsonData(page, pagesize, "", "","", mapperUrl, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP);
+            jsonObjectResult = this.getJsonData ("","", "", userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_WORK_GET_CHAIRMAN_USER_TREE_FYP, "", applyDate);
             JSONObject rows = (JSONObject)jsonObjectResult.get("rows");
             Object children = rows.get("children");
             jsonObject.put("flowCount", jsonObjectResult.get("rows"));
@@ -67,7 +65,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             jsonData.put("chairmanJsonArray", chairmanJsonArray);
         } else {
             //局用户
-            jsonData = this.getJsonArrayData("","","","", "", applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW);
+            jsonData = this.getJsonData ("","", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
             Object objectResult = jsonData.get("returnJsonArr");
             JSONArray returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
             //即时通讯数量
@@ -84,80 +82,29 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(emailJsonObj);
             //请销假数量
             JSONObject qxjJsonObj = new JSONObject();
-            qxjJsonObj.put("flowCount", "7");
+            String qxjUrl = "http://172.16.1.19:11013/leave/apply/bubbleCountStatistics";
+            JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
+            qxjJsonObj.put("appId", "");
+            if (null != qxjJsonDataUrl) {
+                qxjJsonObj.put("flowCount", qxjJsonDataUrl.get("qxjsp"));
+            }
             qxjJsonObj.put("typeName", "请销假");
             qxjJsonObj.put("applyType", "7");
             returnJsonArr.add(qxjJsonObj);
             //督查催办数量
             JSONObject dccbJsonObj = new JSONObject();
-            dccbJsonObj.put("flowCount", "8");
+            String dccbUrl = "http://172.16.1.19:11008/app/db/documentjcdb/list";
+            JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
+            qxjJsonObj.put("appId", "");
+            if (null != dccbJsonDataUrl) {
+                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("total"));
+            }
             dccbJsonObj.put("typeName", "督查催办");
             dccbJsonObj.put("applyType", "8");
             returnJsonArr.add(dccbJsonObj);
             result.put("returnJsonArr", returnJsonArr);
         }
         return result;
-    }
-
-    private JSONObject getJsonData (String page, String pagesize, String user, String passkey, String onlyinbox, String mapperUrl, String url) {
-        JSONObject jsonData =new JSONObject();
-        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        if (StringUtils.isNotEmpty(page)) {
-            infoMap.add("page", page);
-        }
-        if (StringUtils.isNotEmpty(pagesize)) {
-            infoMap.add("pagesize", pagesize);
-        }
-        if (StringUtils.isNotEmpty(user)) {
-            infoMap.add("user", user);
-        }
-        if (StringUtils.isNotEmpty(passkey)) {
-            infoMap.add("passkey", passkey);
-        }
-        if (StringUtils.isNotEmpty(onlyinbox)) {
-            infoMap.add("onlyinbox", onlyinbox);
-        }
-        if (StringUtils.isNotEmpty(mapperUrl)) {
-            String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
-        } else {
-            logger.info("orgId为{}的局的电子保密室的配置数据错误");
-            return null;
-        }
-        return jsonData;
-    }
-
-    private JSONObject getJsonArrayData (String organId, String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
-        JSONObject jsonData =new JSONObject();
-        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        infoMap.add("userId", userId);
-        if (StringUtils.isNotEmpty(applyType)) {
-            infoMap.add("type", applyType);
-        }
-        if (StringUtils.isNotEmpty(listType)) {
-            infoMap.add("documentTopStatus", listType);
-        }
-        if (applyDate != null) {
-            infoMap.add("applyDate", applyDate);
-        }
-        if (StringUtils.isNotEmpty(page)) {
-            infoMap.add("page", page);
-        }
-        if (StringUtils.isNotEmpty(pagesize)) {
-            infoMap.add("pagesize", pagesize);
-        }
-        if (StringUtils.isNotEmpty(organId)) {
-            infoMap.add("organId", organId);
-        }
-        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
-        if (StringUtils.isNotEmpty(mapperUrl)) {
-            String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
-        } else {
-            logger.info("orgId为{}的局的电子保密室的配置数据错误");
-            return null;
-        }
-        return jsonData;
     }
 
     /**
@@ -175,16 +122,72 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         JSONObject jsonData = new JSONObject();
         if (StringUtils.equals(applyType, "1")) {
             type = "wsh";
-            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonData (type, page, pagesize, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_LIST, documentTopStatus, applyDate);
         } else if (StringUtils.equals(applyType, "2")) {
             type = "pbwj";
-            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_YFB_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonData (type, page, pagesize, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_YFB_GETDOCUMENT_FLOW_LIST, documentTopStatus, applyDate);
         } else if (StringUtils.equals(applyType, "3")) {
             type = "gwyz";
-            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWYZ_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonData (type, page, pagesize, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWYZ_GETDOCUMENT_FLOW_LIST, documentTopStatus, applyDate);
         } else if (StringUtils.equals(applyType, "4")) {
             type = "lwyj";
-            jsonData = this.getJsonArrayData("", page, pagesize, type, documentTopStatus, applyDate, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonData (type, page, pagesize, userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_LWYJ_GETDOCUMENT_FLOW_LIST, documentTopStatus, applyDate);
+        }
+        return jsonData;
+    }
+
+    public JSONObject getJsonData (String applyType, String page, String pagesize, String userId, String type, String url, String documentTopStatus, Date applyDate) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        if (StringUtils.isNotEmpty(applyType)) {
+            infoMap.add("applyType", applyType);
+        }
+        if (StringUtils.isNotEmpty(page)) {
+            infoMap.add("page", page);
+        }
+        if (StringUtils.isNotEmpty(pagesize)) {
+            infoMap.add("pagesize", pagesize);
+        }
+        if (StringUtils.isNotEmpty(documentTopStatus)) {
+            infoMap.add("documentTopStatus", documentTopStatus);
+        }
+        if (applyDate != null) {
+            infoMap.add("applyDate", applyDate);
+        }
+        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
+    public JSONObject getJsonDataUrl (String applyType, String page, String pagesize, String userId, String type, String url, String documentTopStatus, Date applyDate) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        if (StringUtils.isNotEmpty(applyType)) {
+            infoMap.add("applyType", applyType);
+        }
+        if (StringUtils.isNotEmpty(page)) {
+            infoMap.add("page", page);
+        }
+        if (StringUtils.isNotEmpty(pagesize)) {
+            infoMap.add("pagesize", pagesize);
+        }
+        if (StringUtils.isNotEmpty(documentTopStatus)) {
+            infoMap.add("documentTopStatus", documentTopStatus);
+        }
+        if (applyDate != null) {
+            infoMap.add("year", applyDate);
+        }
+        if (StringUtils.isNotEmpty(url)) {
+            jsonData = CrossDomainUtil.getJsonData(url, infoMap);
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
         }
         return jsonData;
     }

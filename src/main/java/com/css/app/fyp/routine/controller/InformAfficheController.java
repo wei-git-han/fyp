@@ -32,11 +32,8 @@ public class InformAfficheController {
      */
     @ResponseBody
     @RequestMapping("/informAfficheList")
-    public void informAfficheList(String afficheType) {
-        JSONObject maps = informAfficheService.informAfficheList(afficheType);
-        //JSONObject maps = new JSONObject();
-        //maps.put("informAfficheContent", "习近平希腊巴西之行");
-        //maps.put("informAfficheTime", "2020-08-25");
+    public void informAfficheList(String pageSize, String curentPage, String afficheType) {
+        JSONObject maps = informAfficheService.informAfficheList(pageSize, curentPage, afficheType);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
