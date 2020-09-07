@@ -1,6 +1,7 @@
 package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.service.WorkTrendService;
@@ -9,6 +10,7 @@ import com.css.base.utils.CurrentUser;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +26,9 @@ import java.util.*;
 public class WorkTrendServiceImpl implements WorkTrendService {
     private final Logger logger = LoggerFactory.getLogger(WorkTrendServiceImpl.class);
 
+    @Autowired
+    private BaseAppOrgMappedService baseAppOrgMappedService;
+
     /*
      * @Description 列表
      * @Author gongan
@@ -34,6 +39,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
     @Override
     public JSONObject workTrendList(String trendType) {
         String userId = CurrentUser.getUserId();
+        String gwcl_appId = baseAppOrgMappedService.getAppIdByUserId("gwcl");
         //局用户
         JSONObject jsonData = this.getJsonData(userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_VIEWINFO_FYP);
         return jsonData;

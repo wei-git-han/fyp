@@ -76,6 +76,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(jstxJsonObj);
             //电子邮件数量
             JSONObject emailJsonObj = new JSONObject();
+            String emailUrl = "http://10.150.110.19/restful/newuser.php/g7_boxinfo?user=test@jskxy.com＆passkey=admin.1554262311.cc73fc8a417b5218f3553b0fda25ad6f＆onlyinbox=no";
+            JSONObject emailJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", emailUrl, "", applyDate);
             emailJsonObj.put("flowCount", "6");
             emailJsonObj.put("typeName", "电子邮件");
             emailJsonObj.put("applyType", "6");

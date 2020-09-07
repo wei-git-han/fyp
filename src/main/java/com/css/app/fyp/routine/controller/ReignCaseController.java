@@ -62,7 +62,7 @@ public class ReignCaseController {
     @ResponseBody
     @RequestMapping("/reignCaseList")
     public void reignCaseList(String afficheType) {
-        List<ReignCaseVo> maps = reignCaseService.reignCaseList(afficheType);
+        ReignCaseVo maps = reignCaseService.reignCaseList(afficheType);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
