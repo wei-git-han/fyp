@@ -41,6 +41,14 @@ var pageModule = function(){
 		});
 		
 		
+		$(".date-picker").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			format: "yyyy-mm-dd",
+		});
+		
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {

@@ -6,7 +6,6 @@ import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
-import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -17,17 +16,14 @@ import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.RestTemplateUtil;
-//import org.apache.commons.httpclient.HttpClient;
-//import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang.StringUtils;
-//import org.apache.commons.httpclient.methods.PostMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 
-import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -74,7 +70,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             return;
         }
         String onlineHref = "http://172.16.2.100:10040/api/online/";
-        String leaveHref = "http://172.16.2.100:10040/api/online/";
+        String leaveHref = "http://172.16.1.29:11013/app/qxjgl/api/getQjUserIds";
         this.userIdList = this.getOnlineSituationApi(onlineHref);
         this.leaveUserIdList = this.getOnlineSituationApi(leaveHref);
         this.executeTime = System.currentTimeMillis();
@@ -103,53 +99,38 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     }
 
     @Override
-    public List<ReignCaseVo> reignCaseList(String afficheType) {
+    public ReignCaseVo reignCaseList(String afficheType) {
         this.analyseData(System.currentTimeMillis());
-        JSONArray jsonData = new JSONArray();
-        JSONObject jsonObj = new JSONObject();
         String userId = CurrentUser.getUserId();
         BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
         String organid = baseAppUser.getOrganid();
-        //当前用户是否为部首长
-        jsonData = this.getJsonArrayData("","", "","","",null, userId, AppConstant.APP_SZBG, AppInterfaceConstant.WEB_INTERFACE_SZBG_HDAP_TO_FYP);
-        if (jsonData != null) {
-            //部首长
-            JSONObject jsonObject = (JSONObject) jsonObj.get("data");
-            jsonObject.get("flowCount");
-        } else {
-            //局用户
-            //请假人
-            String[] leaveUserIdArr = (String[]) leaveUserIdList.toArray();
-            Map<String, Object> leaveMap = new HashMap<String, Object>();
-            leaveMap.put("organid", organid);
-            leaveMap.put("userIds", leaveUserIdArr);
-            List<BaseAppUser> leaveUserIdList = baseAppUserService.queryList(leaveMap);
-            List<ReignCaseVo> baseAppUserList = new ArrayList<ReignCaseVo>();
-            for (BaseAppUser leaveUser : leaveUserIdList) {
-                ReignCaseVo reignCaseVo = new ReignCaseVo();
-                reignCaseVo.setReignCaseId(leaveUser.getUserId());
-                reignCaseVo.setReignCaseName(leaveUser.getTruename());
-                reignCaseVo.setReignCaseType("leave");
-                baseAppUserList.add(reignCaseVo);
-            }
-            //在线数
-            String[] userIdArr = (String[]) userIdList.toArray();
-            Map<String, Object> onlineMap = new HashMap<String, Object>();
-            onlineMap.put("organid", organid);
-            onlineMap.put("userIds", userIdArr);
-            List<BaseAppUser> userIdList = baseAppUserService.queryList(onlineMap);
-            for (BaseAppUser user : userIdList) {
-                if (!baseAppUserList.contains(user.getId())) {
-                    ReignCaseVo reignCaseVo = new ReignCaseVo();
-                    reignCaseVo.setReignCaseId(user.getUserId());
-                    reignCaseVo.setReignCaseName(user.getTruename());
-                    reignCaseVo.setReignCaseType("online");
-                    baseAppUserList.add(reignCaseVo);
-                }
-            }
-            return baseAppUserList;
+        ReignCaseVo reignCaseVo = new ReignCaseVo();
+        this.analyseData(System.currentTimeMillis());
+        try {
+            //在编人数
+            Map<String,Object> filter = new HashMap<>();
+            filter.put("departmentId", organid);
+            int userCount = baseAppUserService.queryTotal(filter);
+            reignCaseVo.setUserCount(userCount);
+            //在线人数
+            Integer peopleOnlineCount =  userIdList.size();
+            reignCaseVo.setPeopleOnlineCount(peopleOnlineCount);
+            //在线率
+            String onlineRate = this.txfloat(userCount, peopleOnlineCount);
+            reignCaseVo.setOnlineRate(onlineRate);
+            //本日峰值
+            Integer leaveCount =  leaveUserIdList.size();
+            reignCaseVo.setToDayCount(leaveCount);
+        } catch (Exception e) {
+            logger.info("PersonManagementController在线情况获取失败");
+            e.printStackTrace();
         }
-        return null;
+        return reignCaseVo;
+    }
+
+    public static String txfloat(int a, Integer b) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format((float) a/b);
     }
 
     private JSONArray getJsonArrayData (String mapperUrl, String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
