@@ -80,7 +80,7 @@ var pageModule = function () {
 								html5 += '	<dd>';
 								if (items.content != null && typeof(items.content) != "undefined" && items.content !=
 									"") {
-									html9 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>，';
+									html9 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>';
 								};
 								if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
 									"") {
@@ -118,7 +118,7 @@ var pageModule = function () {
 								};
 								html7 += '	<dd>';
 								if (items.content != null && typeof(items.content) != "undefined" && items.content !="") {
-									html10 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>，';
+									html10 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>';
 								};
 								/*if (items.title != null && typeof(items.title) != "undefined" && items.title != "") {
 									html10 += '<span class="span3" title="' + items.title + '">' + items.title + '</span>';
