@@ -8,6 +8,7 @@ import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.Response;
 import com.css.base.utils.UUIDUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,29 @@ public class WorkWeekTableController {
         //查询列表数据
         JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
         Response.json(new ResponseValueUtils().success(fypPersonageWorkWeekList));
+    }
+
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @RequestMapping("/save")
+    @RequiresPermissions("fyppersonageworkweek:save")
+    public void save(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
+        fypPersonageWorkWeek.setId(UUIDUtils.random());
+        fypPersonageWorkWeekService.save(fypPersonageWorkWeek);
+        Response.ok();
+    }
+
+    /**
+     * 修改
+     */
+    @ResponseBody
+    @RequestMapping("/update")
+    @RequiresPermissions("fyppersonageworkweek:update")
+    public void update(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
+        fypPersonageWorkWeekService.update(fypPersonageWorkWeek);
+        Response.ok();
     }
 
 }

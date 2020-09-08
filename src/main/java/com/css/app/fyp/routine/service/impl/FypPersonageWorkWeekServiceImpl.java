@@ -52,7 +52,13 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
             List<FypPersonageWorkWeekVo> amFypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getPersonalWeekTableList(amMap);
             JSONArray amItem = new JSONArray();
             JSONArray pmItem = new JSONArray();
+            Date mondayStartTime = getMondayStartTime();
+            Date sondayEndTime = getSundayEndTime();
             for (FypPersonageWorkWeekVo fypPersonageWorkWeekVo : amFypPersonageWorkWeekVos) {
+                Date createdTime = fypPersonageWorkWeekVo.getCreatedTime();
+                if(mondayStartTime.getTime() > createdTime.getTime() || sondayEndTime.getTime() < createdTime.getTime()) {
+                    continue;
+                }
                 String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
                 String hourFlag = fypPersonageWorkWeekVo.getHourFlag();
                 switch (hourFlag) {
@@ -102,6 +108,85 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
             w = 0;
         return weekDays[w];
 	}
+
+	// 获取本周的开始时间
+	public Date getBeginDayOfWeek() {
+	    Date date = new Date();
+	    if (date == null) {
+	        return null;
+        }
+        Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+	    if (dayOfWeek == 1) {
+	        dayOfWeek += 7;
+        }
+        cal.add(Calendar.DATE, 2 - dayOfWeek);
+	    return getDayStartTime(cal.getTime());
+    }
+
+    //获取本周的结束时间
+    public Date getEndDayOfWeek() {
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(getBeginDayOfWeek());
+	    cal.add(Calendar.DAY_OF_WEEK, 6);
+	    Date weekEndSta = cal.getTime();
+	    return getDayEndTime(weekEndSta);
+    }
+
+    public Date getDayEndTime(Date date) {
+	    Calendar todayEnd = new GregorianCalendar();
+	    todayEnd.setTime(date);
+	    todayEnd.set(Calendar.HOUR_OF_DAY, 23);
+	    todayEnd.set(Calendar.MINUTE, 59);
+	    todayEnd.set(Calendar.SECOND, 59);
+	    todayEnd.set(Calendar.MILLISECOND, 999);
+	    return todayEnd.getTime();
+    }
+
+    public Date getDayStartTime(Date date) {
+	    Calendar todayStart = new GregorianCalendar();
+        todayStart.setTime(date);
+        todayStart.set(Calendar.HOUR_OF_DAY, 0);
+        todayStart.set(Calendar.MINUTE, 0);
+        todayStart.set(Calendar.SECOND, 0);
+        todayStart.set(Calendar.MILLISECOND, 0);
+	    return todayStart.getTime();
+    }
+
+    public Date getMondayStartTime() {
+	    return getDayStartTime(getCurrentMonday());
+    }
+
+    public Date getCurrentMonday() {
+        return getCalendar().getTime();
+    }
+
+    public Date getSundayEndTime() {
+	    return getDayEndTime(getCurrentSunday());
+    }
+
+    public Date getCurrentSunday () {
+	    Calendar cal = getCalendar();
+	    cal.add(Calendar.DATE, 6);
+	    return cal.getTime();
+    }
+
+    private Calendar getCalendar() {
+	    Calendar cal = Calendar.getInstance();
+	    cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+	    return cal;
+    }
+
+    //判断选择的日期是否是本周
+    public boolean isThisWeek(Date time) {
+	    Date mondayStartTime = getMondayStartTime();
+	    Date sondayEndTime = getSundayEndTime();
+	    if(mondayStartTime.getTime() <= time.getTime() && sondayEndTime.getTime() >= time.getTime()) {
+	        return true;
+        }
+        return false;
+    }
 
 	private Date stringToDate(String dateTime) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

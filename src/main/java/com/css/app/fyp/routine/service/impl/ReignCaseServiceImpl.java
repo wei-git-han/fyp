@@ -122,7 +122,6 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             Integer leaveCount =  leaveUserIdList.size();
             reignCaseVo.setToDayCount(leaveCount);
         } catch (Exception e) {
-            logger.info("PersonManagementController在线情况获取失败");
             e.printStackTrace();
         }
         return reignCaseVo;
