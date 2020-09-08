@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,6 +45,16 @@ public class WorkWeekTableController {
     }
 
     /**
+     * 信息
+     */
+    @ResponseBody
+    @RequestMapping("/getFypPersonageWorkWeek")
+    public void getFypPersonageWorkWeek(String id){
+        FypPersonageWorkWeek fypPersonageWorkWeek = fypPersonageWorkWeekService.queryObject(id);
+        Response.json("fypPersonageWorkWeek", fypPersonageWorkWeek);
+    }
+
+    /**
      * 本周周表/个人周表-新增
      */
     @ResponseBody
@@ -65,18 +76,6 @@ public class WorkWeekTableController {
         //查询列表数据
         JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
         Response.json(new ResponseValueUtils().success(fypPersonageWorkWeekList));
-    }
-
-    /**
-     * 保存
-     */
-    @ResponseBody
-    @RequestMapping("/save")
-    @RequiresPermissions("fyppersonageworkweek:save")
-    public void save(@RequestBody FypPersonageWorkWeek fypPersonageWorkWeek){
-        fypPersonageWorkWeek.setId(UUIDUtils.random());
-        fypPersonageWorkWeekService.save(fypPersonageWorkWeek);
-        Response.ok();
     }
 
     /**
