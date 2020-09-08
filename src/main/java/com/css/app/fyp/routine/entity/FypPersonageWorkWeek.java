@@ -29,6 +29,8 @@ public class FypPersonageWorkWeek implements Serializable {
 	//修改时间
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updatedTime;
+	//周表状态
+	private String weekFlag;
 
 	/**
 	 * 设置：
@@ -89,5 +91,13 @@ public class FypPersonageWorkWeek implements Serializable {
 	 */
 	public Date getUpdatedTime() {
 		return updatedTime;
+	}
+
+	public String getWeekFlag() {
+		return weekFlag;
+	}
+
+	public void setWeekFlag(String weekFlag) {
+		this.weekFlag = weekFlag;
 	}
 }

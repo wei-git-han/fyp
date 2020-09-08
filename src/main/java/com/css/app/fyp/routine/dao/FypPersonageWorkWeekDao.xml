@@ -16,6 +16,7 @@
 
 	<select id="getPersonalWeekTableList" resultType="com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo">
 		select
+		fpww.id,
 		fpww.user_id as userId,
 		fpww.week_table_content as weekTableContent,
 		fpww.created_time as createdTime,
@@ -60,7 +61,8 @@
 		(
 			"ID", 
 			"WEEK_TABLE_CONTENT", 
-			"USER_ID", 
+			"USER_ID",
+			"WEEK_FLAG",
 			"CREATED_TIME", 
 			"UPDATED_TIME"
 		)
@@ -68,7 +70,8 @@
 		(
 			#{id}, 
 			#{weekTableContent}, 
-			#{userId}, 
+			#{userId},
+			#{weekFlag},
 			#{createdTime}, 
 			#{updatedTime}
 		)
@@ -79,6 +82,7 @@
 		<set>
 			<if test="weekTableContent != null">"WEEK_TABLE_CONTENT" = #{weekTableContent}, </if>
 			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="weekFlag != null">"WEEK_FLAG" = #{weekFlag}, </if>
 			<if test="createdTime != null">"CREATED_TIME" = #{createdTime}, </if>
 			<if test="updatedTime != null">"UPDATED_TIME" = #{updatedTime}</if>
 		</set>

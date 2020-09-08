@@ -67,6 +67,7 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
                         JSONObject amJsonObject = new JSONObject();
                         amJsonObject.put("content", fypPersonageWorkWeekVo.getWeekTableContent());
                         amJsonObject.put("createdTime",time);
+                        amJsonObject.put("id",fypPersonageWorkWeekVo.getId());
                         amItem.add(amJsonObject);
                         break;
                     //PM
@@ -74,6 +75,7 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
                         JSONObject pmJsonObject = new JSONObject();
                         pmJsonObject.put("content",fypPersonageWorkWeekVo.getWeekTableContent());
                         pmJsonObject.put("createdTime",time);
+                        pmJsonObject.put("id",fypPersonageWorkWeekVo.getId());
                         pmItem.add(pmJsonObject);
                         break;
                 }

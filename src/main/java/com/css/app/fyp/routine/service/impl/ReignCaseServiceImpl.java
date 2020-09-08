@@ -69,8 +69,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         if(executeTime != 0L && wantExecuteTime - executeTime <= 60000 * 5L) {
             return;
         }
-        String onlineHref = "http://172.16.2.100:10040/api/online/";
-        String leaveHref = "http://172.16.1.29:11013/app/qxjgl/api/getQjUserIds";
+        String onlineHref = "http://172.16.201.140:10040/api/online/";
+        String leaveHref = "http://172.16.201.140:11013/app/qxjgl/api/getQjUserIds";
         this.userIdList = this.getOnlineSituationApi(onlineHref);
         this.leaveUserIdList = this.getOnlineSituationApi(leaveHref);
         this.executeTime = System.currentTimeMillis();
