@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ReignCaseService {
 
-	List<ReignCaseVo> reignCaseList(String afficheType);
+    ReignCaseVo reignCaseList(String afficheType);
 
 	void reignCaseSave(String trendType) ;
 
