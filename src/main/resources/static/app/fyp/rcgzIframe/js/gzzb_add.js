@@ -1,7 +1,15 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
-var saveUrl = {"url":"/app/fyp/common/data/other2.json","dataType":"text"};
-var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
+var returnDataUrl = {"url":"/app/fyp/workWeekTable/getFypPersonageWorkWeek","dataType":"text"}; //返回数据url
+
+var saveUrl;
 var id=getUrlParam("id")||"";//编辑数据id
+if(!!id){
+	saveUrl = {"url":"/app/fyp/workWeekTable/update","dataType":"text"};  //edit
+}else{
+	saveUrl = {"url":"/app/fyp/workWeekTable/statementTablesInsert","dataType":"text"};  //save
+}
+
+
 var pageModule = function(){
 	//单位树
 	var initUnitTree = function(){
