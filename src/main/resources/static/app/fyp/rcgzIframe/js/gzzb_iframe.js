@@ -92,17 +92,17 @@ var pageModule = function () {
 								};
 								html5 += '	</dd>';
 								'</dl>';
-								html2 += '<div class="newpage19" >' + html5 + '</div>'
+								html2 += '<div class="newpage19"  onclick="editfn(\''+items.id+'\')" >' + html5 + '</div>'
 							});
 							
 							
 							
-							if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
+							/*if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
 								html2 = "<div class='wtj'>（未添加）</div>"
 							}
 							if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)== $.trim(comparedates2))){
 								html2 = "<div class='addBtn'  onclick='add(\""+dates+"\",\"am\")'><i class='fa fa-plus'></i></div>"
-							}
+							}*/
 							
 							var html1 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 							html2 +
@@ -134,15 +134,15 @@ var pageModule = function () {
 								};
 								html7 += '	</dd>';
 								'</dl>';
-								html4 += '<div class="newpage19">' + html7 + '</div>'
+								html4 += '<div class="newpage19" onclick="editfn(\''+items.id+'\')" >' + html7 + '</div>'
 							});
 							
-							if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
+							/*if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
 								html4 = "<div class='wtj'>（未添加）</div>"
 							}
 							if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)== $.trim(comparedates2))){
 								html4 = "<div class='addBtn' onclick='add(\""+dates+"\",\"pm\")'><i class='fa fa-plus'></i></div>"
-							}
+							}*/
 							
 							var html3 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 								html4 +
@@ -168,9 +168,35 @@ var pageModule = function () {
 			if($(".nav>li.active").attr("data") == "gjzb"){
 				$("#deptFilter").show();
 			}
+			if($(".nav>li.active").attr("data") == "grzb"){
+				$("#caozuoBtn").show();
+			}else{
+				$("#caozuoBtn").hide();
+			}
+		});
+		
+		//新增
+		$("#add").click(function(){
+			newbootbox.newdialog({
+			    id: "addModal",
+			    width: 650,
+			    height: 450,
+			    header: true,
+			    title: "新增",
+			    url: "/app/fyp/rcgzIframe/html/gzzb_add.html",
+			    style: {
+			      /*"background": "#fff"*/
+			    }
+			})
+		});
+		
+		//编辑
+		$("#edit").click(function(){
+			newbootbox.alertInfo('请点击要修改的内容！');
 		});
 	}
 	
+
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
 			url: deptTreeUrl,
@@ -184,6 +210,7 @@ var pageModule = function () {
 		});
 	}
 	
+	
     return {
         //加载页面处理程序
         initControl: function () {
@@ -194,17 +221,16 @@ var pageModule = function () {
     }
 }();
 
-
-function add(date,flag){
+function editfn(id){
 	newbootbox.newdialog({
 	    id: "addModal",
-	    width: 600,
-	    height: 400,
+	    width: 650,
+	    height: 450,
 	    header: true,
-	    title: "新增",
-	    url: "/app/fyp/rcgzIframe/html/gzzb_add.html?flag="+flag,
+	    title: "编辑",
+	    url: "/app/fyp/rcgzIframe/html/gzzb_add.html?id="+id,
 	    style: {
-	      /*"background": "#fff"*/
+	      "background": "#fff"
 	    }
 	})
 }

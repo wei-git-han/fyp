@@ -29,13 +29,19 @@
 	<div class="pr100">
 		<div class="top">
 			<form id="commentForm" class="pr100">
-				<input type="hidden" id="currentDate" name="currentDate" />
+				
 				<table class="table">
+					<tr>
+						<td class="t_label">创建日期</td>
+						<td class="t_inpt" >
+							<input type="text" class="form-control datee" id="createdDate" name="createdDate" readonly/>
+						</td>
+					</tr>
 					<tr>
 						<td class="t_label">创建时间</td>
 						<td class="t_inpt" >
 							<div class="input-group">
-							    <input type="text" class="form-control timepicker timepicker-24">
+							    <input type="text" class="form-control timepicker timepicker-24" id="createdTime" name="createdTime" />
 							    <span class="input-group-btn">
 							    <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
 							    </span>
@@ -47,16 +53,16 @@
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
-									<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()"  />
+									<input type="hidden" class="form-control"  id="userId" name="userId"  />
+									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()"  style="background:#fff"/>
 								</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">内容描述：</td>
+						<td class="t_label">内容描述</td>
 						<td class="t_inpt">
-						   <textarea class="form-control" id="content" name="content"  style="height:160px;"></textarea>
+						   <textarea class="form-control" id="weekTableContent" name="weekTableContent"  style="height:160px;"></textarea>
 						</td>
 					</tr>
 				</table>

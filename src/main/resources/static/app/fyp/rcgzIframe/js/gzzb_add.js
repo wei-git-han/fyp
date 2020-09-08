@@ -1,20 +1,30 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
-var saveUrl = "";
-var flag=getUrlParam("flag")||"";//上午下午区分
+var saveUrl = {"url":"/app/fyp/common/data/other2.json","dataType":"text"};
+var returnDataUrl = {"url":"","dataType":"text"}; //返回数据url
+var id=getUrlParam("id")||"";//编辑数据id
 var pageModule = function(){
 	//单位树
 	var initUnitTree = function(){
-		$("#deptName").createSelecttree({
+		$("#userName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
+				$("#userName").val(data.node.text);
+				$("#userId").val(data.node.id);
 			}
 		});
 	}
 	
+	var initdatafn = function(){
+		$ajax({
+			url:returnDataUrl,
+			data:{id:id},
+			success:function(data){
+				setformdata(data.data);
+			}
+		})
+	}
 	
 	var initother = function(){
 		$(".timepicker-24").timepicker({
@@ -34,9 +44,10 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["currentDate"];
+			    var elementarry = ["userId","userName","weekTableContent"];
 				var paramdata = getformdata(elementarry);
-				
+				paramdata.createdTime = $("#createdDate").val()+" "+$("#createdTime").val();
+				paramdata.id=id;
 				$ajax({
 					url:saveUrl,
 					data:paramdata,
@@ -68,7 +79,7 @@ var pageModule = function(){
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["currentDate"]);
+			removeInputData(["userId","userName","weekTableContent","createdTime"]);
 		});
 		
 		//取消
@@ -81,6 +92,9 @@ var pageModule = function(){
 		//加载页面处理程序
 		initControl:function(){
 			initUnitTree();
+			if(!!id){
+				initdatafn();
+			}
 			initother();
 		}
 	};

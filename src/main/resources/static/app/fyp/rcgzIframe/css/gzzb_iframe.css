@@ -141,6 +141,10 @@ select{
 	font-size: 14px;
 	font-family: "Microsoft Yahei";
 	margin: 5px 0px;
+	cursor:pointer;
+}
+.newpage19:hover,.newpage19:active{
+	color:#fff;
 }
 
 
@@ -323,4 +327,15 @@ select{
     top: 0;
     height: 100%;
     box-sizing: border-box;
+}
+.caozuoBtn button{
+	border:1px solid #4C52E6;
+	background:#12246C;
+	color:#fff;
+	font-size:14px;
+	padding:2px 10px;
+	border-radius:4px!important;
+}
+.caozuoBtn button:hover{
+	border:1px solid #252985;
 }
