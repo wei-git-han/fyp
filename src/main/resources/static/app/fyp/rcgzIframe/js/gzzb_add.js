@@ -35,34 +35,22 @@ var pageModule = function(){
 	}
 	
 	var initother = function(){
-		$(".timepicker-24").timepicker({
-		    language:"zh-CN",
-		    autoclose: true,
-		    minuteStep: 5,
-		    showSeconds: false,
-		    showMeridian: false
-		});
-
-		$(".timepicker").parent(".input-group").on("click", ".input-group-btn", function(e){
-		    e.preventDefault();
-		    $(this).parent(".input-group").find(".timepicker").timepicker("showWidget");
-		});
-		
-		
-		$(".date-picker").datepicker({
-			language: "zh-CN",
-			rtl: Metronic.isRTL(),
-			orientation: "",
+		$(".form_datetime").datetimepicker({
+			language:"zh-CN",
 			autoclose: true,
-			format: "yyyy-mm-dd",
+			isRTL: Metronic.isRTL(),
+			orientation: "right",
+			format: "yyyy-mm-dd hh:ii",
+			autoclose: true,
+			startDate:new Date()
 		});
+		
 		
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["userId","userName","weekTableContent"];
+			    var elementarry = ["userId","userName","weekTableContent","createdTime"];
 				var paramdata = getformdata(elementarry);
-				paramdata.createdTime = $("#createdDate").val()+" "+$("#createdTime").val();
 				paramdata.id=id;
 				$ajax({
 					url:saveUrl,

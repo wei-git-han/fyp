@@ -192,7 +192,7 @@ var pageModule = function () {
 		
 		//编辑
 		$("#edit").click(function(){
-			newbootbox.alertInfo('请点击要修改的内容！');
+			newbootbox.alertInfo('请点击要修改的数据！');
 		});
 	}
 	
@@ -224,8 +224,8 @@ var pageModule = function () {
 function editfn(id){
 	newbootbox.newdialog({
 	    id: "addModal",
-	    width: 650,
-	    height: 450,
+	    width: 600,
+	    height: 400,
 	    header: true,
 	    title: "编辑",
 	    url: "/app/fyp/rcgzIframe/html/gzzb_add.html?id="+id,
