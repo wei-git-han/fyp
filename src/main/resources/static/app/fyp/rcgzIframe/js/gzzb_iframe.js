@@ -2,8 +2,6 @@ var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var getRoleUrl = {"url":"/app/base/user/getBSZ","dataType":"text"}; //区分局内用户||部首长
 var gzzbUrl;
 var pageModule = function () {
-	
-	
 	//区分局内用户||部首长
 	var getRole = function(){
 		$ajax({
@@ -24,10 +22,10 @@ var pageModule = function () {
 	var object1 = {};
 	var initPlan = function(type){
 		if(type=="bjzb"){
-			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
-			gzzbUrl = {"url":"http://172.16.1.36:9999/eolinker_os/Mock/simple?projectID=1&uri=/app/fyp/workWeekTable/list","dataType":"text"};
+			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
 		}
 		$ajax({
 			url: gzzbUrl,
@@ -50,7 +48,7 @@ var pageModule = function () {
 							var html4 = "";
 							var htmlDate = "";
 							var height101 = "";
-							var month = item.month + 1;
+							var month = item.month;
 							var day = item.day;
 							var week = item.week;
 							var dates = month + "月" + day + "日";
@@ -217,6 +215,9 @@ var pageModule = function () {
           getRole();
           initUnitTree();
 		  initother();
+        },
+        refresh:function(){
+        	getRole();
         }
     }
 }();
