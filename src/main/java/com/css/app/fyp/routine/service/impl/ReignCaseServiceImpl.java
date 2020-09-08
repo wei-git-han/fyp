@@ -26,6 +26,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName 在位情况
@@ -104,6 +105,10 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         String userId = CurrentUser.getUserId();
         BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
         String organid = baseAppUser.getOrganid();
+        Map<String,Object> userFilter = new HashMap<>();
+        userFilter.put("organid", organid);
+        List<BaseAppUser> baseAppUserList = baseAppUserService.queryList(userFilter);
+        List<String> userCollect = baseAppUserList.stream().map(BaseAppUser::getAccount).collect(Collectors.toList());
         ReignCaseVo reignCaseVo = new ReignCaseVo();
         this.analyseData(System.currentTimeMillis());
         try {
@@ -113,7 +118,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             int userCount = baseAppUserService.queryTotal(filter);
             reignCaseVo.setUserCount(userCount);
             //在线人数
-            Integer peopleOnlineCount =  userIdList.size();
+            List<String> collect = userIdList.stream().filter(item -> userCollect.contains(item)).collect(Collectors.toList());
+            Integer peopleOnlineCount =  collect.size();
             reignCaseVo.setPeopleOnlineCount(peopleOnlineCount);
             //在线率
             String onlineRate = this.txfloat(userCount, peopleOnlineCount);
