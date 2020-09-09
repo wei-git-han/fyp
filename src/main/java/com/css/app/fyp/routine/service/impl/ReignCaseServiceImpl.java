@@ -64,6 +64,11 @@ public class ReignCaseServiceImpl implements ReignCaseService {
      */
     private static List<String> leaveUserIdList = null;
 
+    /**
+     * 本日峰值
+     */
+    private static Integer toDayCount = 0;
+
     private static long executeTime = 0L;
 
     public void analyseData(long wantExecuteTime) {
@@ -125,8 +130,10 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             String onlineRate = this.txfloat(userCount, peopleOnlineCount);
             reignCaseVo.setOnlineRate(onlineRate);
             //本日峰值
-            Integer leaveCount =  leaveUserIdList.size();
-            reignCaseVo.setToDayCount(leaveCount);
+            if (peopleOnlineCount > toDayCount) {
+                toDayCount = peopleOnlineCount;
+            }
+            reignCaseVo.setToDayCount(toDayCount);
         } catch (Exception e) {
             e.printStackTrace();
         }
