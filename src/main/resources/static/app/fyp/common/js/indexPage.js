@@ -140,10 +140,10 @@ var pageModule = function() {
       url: "/app/fyp/reignCaseController/reignCaseList",
       type: 'get',
       success: function(data) {
-        $(".zbrs").html(data.data.userCount);
-        $(".zxrs").html(data.data.peopleOnlineCount);
-        $(".zxl").html(data.data.onlineRate);
-        $(".brfz").html(data.data.toDayCount);
+        $(".zbrs").html(data.data.userCount>0?data.data.userCount:0);
+        $(".zxrs").html(data.data.peopleOnlineCount>0?data.data.peopleOnlineCount:0);
+        $(".zxl").html(data.data.onlineRate>0?data.data.onlineRate+"%":0);
+        $(".brfz").html(data.data.toDayCount>0?data.data.toDayCount:0);
       }
     })
   }

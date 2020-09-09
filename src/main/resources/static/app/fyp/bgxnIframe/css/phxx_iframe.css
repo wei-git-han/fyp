@@ -81,19 +81,20 @@ html, body {
 	float:left;
 	/* width:62px;
 	height:62px; */
-	margin:0 5px;
+	/* margin:0 5px; */
 }
 .tab2_main_content>div img{
 /* 	width:100%;
 	height:100%; */
 }
 .tab2_main_content>div span{
-	margin-top:10px;
+	/* margin-top:10px; */
 	display:block;
 }
 .tab2_main_content_ph{
 	overflow: hidden;
 }
+
 .ph-l,.ph-r{
 	float:left;
 	width:48%;
@@ -119,5 +120,34 @@ html, body {
 	color: #FFA809;
 }
 .ph-l div:nth-child(3) .topVS3{
+	color: #7C5CE8;
+}
+
+/* ÐÂÔö */
+.topPh-l,.topPh-r{
+	float:left;
+	width:48%;
+}
+.topPh-l div,.topPh-r div{
+	border-top:1px solid #1845C5;
+	border-bottom:1px solid #1845C5;
+	box-shadow: inset 0px 0px 4px #1845C5;
+	margin:10px 0;
+	padding:8px 15px;
+	overflow: hidden;
+}
+.topPh-l div span,.topPh-r div span{
+	display: inline-block;
+	width:33.3%;
+	float: left;
+	color: #3BA9FF;
+}
+.topPh-l div:nth-child(1) .topVS3{
+	color: #EE5642;
+}
+.topPh-l div:nth-child(2) .topVS3{
+	color: #FFA809;
+}
+.topPh-l div:nth-child(3) .topVS3{
 	color: #7C5CE8;
 }

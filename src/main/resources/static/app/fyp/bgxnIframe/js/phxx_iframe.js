@@ -370,18 +370,33 @@ var pageModule = function () {
 			url: fwUrl,
 			data:{deptid:$("#deptId").val()},
 			success: function(data) {
-				var arryHtml_ph = '';
+				var arryHtml_l = '';
+				var arryHtml_r = '';
 				$.each(data.data.access, function(i, o) {
-					arryHtml_ph+='<div><img src="'+o.appImg+'" ><span>'+o.appName+'</span></div>';
+					/*arryHtml_ph+='<div><img src="'+o.appImg+'" ><span>'+o.appName+'</span></div>';*/
+					if(i<5){
+						arryHtml_l+='<div>'+
+									'	<span class="topVS3">TOP'+parseInt(i+1)+'</span>'+
+									'	<span>'+o.appName+'</span>'+
+									'	<span>'+o.appCount+'</span>'+
+									'</div>'
+					}else{
+						arryHtml_r+='<div>'+
+									'	<span>TOP'+parseInt(i+5+1)+'</span>'+
+									'	<span>'+o.appName+'</span>'+
+									'	<span>'+o.appCount+'</span>'+
+									'</div>'
+					}
 				});
-				$("#topPh").html(arryHtml_ph);
+				$(".topPh-l").html(arryHtml_l);
+				$(".topPh-r").html(arryHtml_r);
 			}
 		})
 	}
 	
 	
 	//安装量
-	var initanz = function(){
+	var initanz = function(){   
 		$ajax({
 			url: azUrl,
 			data:{deptid:$("#deptId2").val(),time:$("#searchDate2").val()},
@@ -411,7 +426,7 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-        	initUnitTree();
+        	//initUnitTree();
         	getBarChartData();
 			initother();
         }
