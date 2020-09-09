@@ -50,6 +50,7 @@ var pageModule = function () {
 				for(key in res){
 					if(res[key]!=null&&typeof(res[key])!="undefined"&&res[key]!=""){
 						$.each(res[key].itemList, function(i, item) {
+							console.log(item)
 							var anpaihtml = "";
 							var html2 = "";
 							var html4 = "";
