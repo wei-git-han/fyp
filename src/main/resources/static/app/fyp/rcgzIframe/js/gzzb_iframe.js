@@ -3,7 +3,7 @@ var getRoleUrl = {"url":"/app/base/user/getBSZ","dataType":"text"}; //区分局�
 var gzzbUrl;
 var pageModule = function () {
 	//区分局内用户||部首长
-	var getRole = function(){
+	var getRole = function(flag){
 		$ajax({
 			url: getRoleUrl,
 			data:{},
@@ -12,8 +12,15 @@ var pageModule = function () {
 					$("#deptFilter,#gjzb").show();
 					initPlan('gjzb');
 				}else{
-					$("#bjzb,#grzb").show();
-					initPlan('bjzb');
+					if(flag == 'grzb'){
+						$("#bjzb,#grzb").show();
+						$("#grzb").addClass('active').siblings().removeClass("active");
+						initPlan('grzb');
+					}else{
+						$("#bjzb,#grzb").show();
+						$("#bjzb").addClass('active').siblings().removeClass("active");
+						initPlan('bjzb');
+					}
 				}
 			}
 		})
@@ -212,15 +219,20 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-          getRole();
+          getRole('');
           initUnitTree();
 		  initother();
         },
         refresh:function(){
-        	getRole();
+        	getRole('grzb');
         }
     }
 }();
+
+
+function refreshfn(){
+	pageModule.refresh();
+}
 
 function editfn(id){
 	newbootbox.newdialog({

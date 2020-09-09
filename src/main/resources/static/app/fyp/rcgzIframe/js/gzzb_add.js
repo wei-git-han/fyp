@@ -15,7 +15,7 @@ var pageModule = function(){
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
-				setformdata(data.data);
+				setformdata(data.fypPersonageWorkWeek);
 			}
 		})
 	}
