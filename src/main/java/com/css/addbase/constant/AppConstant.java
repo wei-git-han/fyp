@@ -62,6 +62,27 @@ public class AppConstant {
 	public final static String DCCB = "dccb";
 
 	/**
+	 * 在线人数
+	 */
+	public final static String ONLINE = "desktop_online_api";
+
+	/**
+	 * 请假
+	 */
+	public final static String LEAVE = "qj";
+
+	/**
+	 * 访问量、安装量
+	 */
+	public final static String SOFTWARE = "software";
+
+	/**
+	 * 应用详情
+	 */
+	public final static String INFO = "info";
+
+
+	/**
 	 * @author mashuwen
 	 * @date 2017年12月03日
 	 * 电子保密室应用的标识

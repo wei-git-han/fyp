@@ -115,4 +115,6 @@ public interface BaseAppUserService {
 	List<BaseAppUser> selectUserByNameAndUnitId(String name,String unitId);
 
 	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
+
+	List<BaseAppUser> queryListByRole(String organid);
 }

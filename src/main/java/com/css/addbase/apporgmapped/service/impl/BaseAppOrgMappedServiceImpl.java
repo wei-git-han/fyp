@@ -141,6 +141,11 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 		return baseAppOrgMappedDao.findAppIdAndDeptIdNameAll(type);
 	}
 
+	@Override
+	public List<String> findUsersByDeptidAndRoleType(String dpetid) {
+		return baseAppOrgMappedDao.findUsersByDeptidAndRoleType(dpetid);
+	}
+
 
 	@Override
 	public String getUrlByType(String userId, String type) {

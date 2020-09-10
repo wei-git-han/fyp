@@ -170,4 +170,11 @@ public interface BaseAppOrgMappedService {
 	 * @return
 	 */
     List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
+
+	/**
+	 *  获取单位下且在编的人员
+	 * @param dpetid
+	 * @return
+	 */
+	List<String> findUsersByDeptidAndRoleType(String dpetid);
 }
