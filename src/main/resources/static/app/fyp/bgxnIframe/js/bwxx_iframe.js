@@ -1,17 +1,18 @@
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {
 		$ajax({
 			url:deptTreeUrl,
 			success:function(data){
-				$("#deptName").createSelecttree({
+				$("#deptName3").createSelecttree({
 					data : data,
 					width : '100%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
-						$("#deptName").val(data.node.text);
-						$("#deptId").val(data.node.id);
+						$("#deptName3").val(data.node.text);
+						$("#deptId3").val(data.node.id);
 						getAreaChartData();
 					}
 				});
@@ -26,7 +27,33 @@ var pageModule = function () {
 					}
 				});
 			}
-		})
+		});
+		
+		$ajax({
+			url:userTreeUrl,
+			success:function(data){
+				$("#deptName1").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName1").val(data.node.text);
+						$("#deptId1").val(data.node.id);
+						getBanwenAll();
+					}
+				});
+				$("#deptName2").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName2").val(data.node.text);
+						$("#deptId2").val(data.node.id);
+						getFawenAll();
+					}
+				});
+			}
+		});
 	}
 	
 	
