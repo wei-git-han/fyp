@@ -1,17 +1,18 @@
-var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
+var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {
 		$ajax({
 			url:deptTreeUrl,
 			success:function(data){
-				$("#deptName").createSelecttree({
+				$("#deptName3").createSelecttree({
 					data : data,
 					width : '100%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
-						$("#deptName").val(data.node.text);
-						$("#deptId").val(data.node.id);
+						$("#deptName3").val(data.node.text);
+						$("#deptId3").val(data.node.id);
 						getAreaChartData();
 					}
 				});
@@ -26,7 +27,33 @@ var pageModule = function () {
 					}
 				});
 			}
-		})
+		});
+		
+		$ajax({
+			url:userTreeUrl,
+			success:function(data){
+				$("#deptName1").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName1").val(data.node.text);
+						$("#deptId1").val(data.node.id);
+						getBanwenAll();
+					}
+				});
+				$("#deptName2").createSelecttree({
+					data : data,
+					width : '100%',
+					success : function(data, treeobj) {},
+					selectnode : function(e, data) {
+						$("#deptName2").val(data.node.text);
+						$("#deptId2").val(data.node.id);
+						getFawenAll();
+					}
+				});
+			}
+		});
 	}
 	
 	
@@ -35,7 +62,8 @@ var pageModule = function () {
             url:"/app/fyp/manageDocument/total",
             data:{
                 type:$("#lineTypeBw option:selected").val(),
-				time:$("#searchDate").val()
+				time:$("#searchDate").val(),
+				deptid:$("#deptId1").val()
             },
             dataType:"json",
             success:function(res){
@@ -61,7 +89,8 @@ var pageModule = function () {
             url:"/app/fyp/manageDocument/overview",
             data:{
             	type:$("#lineTypeFw option:selected").val(),
-                time:$("#searchDate2").val()
+                time:$("#searchDate2").val(),
+				deptid:$("#deptId2").val()
             },
             dataType:"json",
             success:function(res){
@@ -198,7 +227,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/trend',
 			dataType:'json',
 			data:{
-                deptid:$("#deptId").val()
+                deptid:$("#deptId3").val()
             },
 			success:function(res){
 				if(res.result=='success'){

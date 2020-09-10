@@ -79,6 +79,16 @@ var pageModule = function () {
 					var tel = o.phone;
 					var warrantyTime = o.warrantyTime;
 					var problemFrom = o.source;
+					if(problemFrom == "0"){
+						problemFrom= "热线电话";
+				    }else if(problemFrom == "1"){
+				    	problemFrom= "手机电话";
+				    }else if(problemFrom == "2"){
+				    	problemFrom = "现场反馈";
+                    }else{
+                        return "";
+                    }
+					
 					var problemDeration = o.remark;
 					var problemClass = "";
 					var problemName = "";
@@ -107,7 +117,7 @@ var pageModule = function () {
 			            		'		</div>'+
 			            		'		<div class="card_main">'+
 			            		'			<p>联系方式：<span>'+tel+'</span></p>'+
-			            		'			<p>反馈时间：<span>'+warrantyTime+'</span></p>'+
+			            		'			<p>反馈时间：<span>'+warrantyTime.substring(0,16)+'</span></p>'+
 			            		'			<p>问题来源：<span>'+problemFrom+'</span></p>'+
 			            		'			<p><span class="describe">问题描述：</span><div class="card_desContent">'+problemDeration+'</div></p>'+
 			            		'		</div>'+
