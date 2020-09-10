@@ -62,7 +62,8 @@ var pageModule = function () {
             url:"/app/fyp/manageDocument/total",
             data:{
                 type:$("#lineTypeBw option:selected").val(),
-				time:$("#searchDate").val()
+				time:$("#searchDate").val(),
+				deptid:$("#deptId1").val()
             },
             dataType:"json",
             success:function(res){
@@ -88,7 +89,8 @@ var pageModule = function () {
             url:"/app/fyp/manageDocument/overview",
             data:{
             	type:$("#lineTypeFw option:selected").val(),
-                time:$("#searchDate2").val()
+                time:$("#searchDate2").val(),
+				deptid:$("#deptId2").val()
             },
             dataType:"json",
             success:function(res){
@@ -225,7 +227,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/trend',
 			dataType:'json',
 			data:{
-                deptid:$("#deptId").val()
+                deptid:$("#deptId3").val()
             },
 			success:function(res){
 				if(res.result=='success'){
