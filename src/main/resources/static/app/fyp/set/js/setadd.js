@@ -57,13 +57,11 @@ var pageModule = function(){
 	
 	var initother = function(){
 		$(".form_datetime").datetimepicker({
-			language:"zh-CN",
-			autoclose: true,
-			isRTL: Metronic.isRTL(),
-			orientation: "right",
-			format: "yyyy-mm-dd hh:ii",
-			autoclose: true,
-			startDate:new Date()
+		    language:"zh-CN",
+		    autoclose: true,
+		    isRTL: Metronic.isRTL(),
+		    format: "yyyy-mm-dd HH:ii",
+		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
 		
 		$("#commentForm").validate({

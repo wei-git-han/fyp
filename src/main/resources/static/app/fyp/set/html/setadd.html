@@ -34,7 +34,7 @@
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
 									<input type="hidden" class="form-control"  id="userId" name="userId"  />
-									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" placeholder="" required />
+									<input type="text" class="form-control"  id="userName" name="userName"  onfocus="blur()" placeholder="" style="background:#fff" required />
 								</div>
 							</div>
 						</td>
@@ -43,7 +43,7 @@
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
 									<input type="hidden" class="form-control"  id="deptId" name="deptId"  />
-									<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()" required />
+									<input type="text" class="form-control"  id="deptName" name="deptName"  onfocus="blur()" style="background:#fff" required />
 								</div>
 							</div>
 						</td>
@@ -63,7 +63,7 @@
 							<div class="form-control" style="padding:0;">
 								<div class="selecttree">
 									<input type="hidden" class="form-control"  id="editUserId" name="editUserId"  />
-									<input type="text" class="form-control"  id="editUserName" name="editUserName"  onfocus="blur()" required />
+									<input type="text" class="form-control"  id="editUserName" name="editUserName"  onfocus="blur()" style="background:#fff" required />
 								</div>
 							</div>
 						</td>
@@ -71,7 +71,12 @@
 					<tr>
 						<td class="t_label">配置时间</td>
 						<td class="t_inpt" >
-							<input class="form-control input-group form_datetime" size="16" type="text" name="editTime" id="editTime" />
+							<div class="input-group date form_datetime">
+						    <input type="text" size="16" readonly class="form-control" name="editTime" id="editTime"  style="background:#fff"  />
+						    <span class="input-group-btn">
+						    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+						    </span>
+						</div>
 						</td>
 					</tr>
 				</table>

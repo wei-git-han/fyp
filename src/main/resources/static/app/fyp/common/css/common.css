@@ -847,15 +847,15 @@ label.error{
     color: #fff;
     background-color: transparent;
 }
-.selecttree input::-webkit-input-placeholder{
+.filterDate .selecttree input::-webkit-input-placeholder,.filterUnit .selecttree input::-webkit-input-placeholder{
 	color:#fff!important;
 }
-.selecttree input::-moz-input-placeholder{
+.filterDate .selecttree input::-moz-input-placeholder,.filterDate .selecttree input::-moz-input-placeholder{
 	color:#fff!important;
 }
-.selecttree input:-moz-input-placeholder{
+.filterDate .selecttree input:-moz-input-placeholder,.filterUnit .selecttree input:-moz-input-placeholder{
 	color:#fff!important;
 }
-.selecttree input:-ms-input-placeholder{
+.filterDate .selecttree input:-ms-input-placeholder,.filterUnit .selecttree input:-ms-input-placeholder{
 	color:#fff!important;
 }
