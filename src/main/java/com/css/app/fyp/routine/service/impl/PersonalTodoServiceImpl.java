@@ -66,8 +66,11 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         } else {
             //局用户
             jsonData = this.getJsonData ("","", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
-            Object objectResult = jsonData.get("returnJsonArr");
-            JSONArray returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
+            JSONArray returnJsonArr = new JSONArray();
+            if(null != jsonData){
+                Object objectResult = jsonData.get("returnJsonArr");
+                returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
+            }
             //即时通讯数量
             JSONObject jstxJsonObj = new JSONObject();
             jstxJsonObj.put("flowCount", "5");

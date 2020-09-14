@@ -93,10 +93,12 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
         try {
             //请假人数远程服务地址(获取在线人数)
-            String reJson = RestTemplateUtil.postJSONString(href, map);
-            String accounts = reJson.substring(1,reJson.length()-1).replace("\"", "");
-            String [] accountArray = accounts.split("\\s*,\\s*");
-            accountList = new ArrayList<String>(Arrays.asList(accountArray));
+            String reJson = CrossDomainUtil.postJSONString(href, map);
+            if (StringUtils.isNotEmpty(reJson)) {
+                String accounts = reJson.substring(1,reJson.length()-1).replace("\"", "");
+                String [] accountArray = accounts.split("\\s*,\\s*");
+                accountList = new ArrayList<String>(Arrays.asList(accountArray));
+            }
         } catch (Exception e) {
             logger.info("PersonManagementController在线人员ID-LIST");
             e.printStackTrace();
@@ -370,7 +372,11 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     private JSONObject getUserTree(String id){
         String userId=CurrentUser.getUserId();
         //在线人员Id 集合
-        List<String> onlineUserIds=getOnlineUserIds(onlineUsers);
+        List<String> onlineUserIds = new ArrayList<>();
+        if (null != onlineUsers && onlineUsers.size() > 0) {
+            onlineUserIds=getOnlineUserIds(onlineUsers);
+        }
+
         JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
         JSONArray ja1=new JSONArray();
         JSONArray ja2=new JSONArray();
@@ -395,8 +401,10 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         //查询机构ID 下的总人数
         result.put("number", sumCount);
         //在线机构ID 对应的在线人总数
-        Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
-
+        Map<String,Object> dataMap = new HashMap<>();
+        if (null != onlineUsers && onlineUsers.size() > 0) {
+            dataMap =getOrgCountMap(onlineUsers);
+        }
         Integer zxCount = 0;
         if(!dataMap.isEmpty()) {
             Object value = dataMap.get(id);
