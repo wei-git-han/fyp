@@ -71,13 +71,15 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     private static long executeTime = 0L;
 
-    public void analyseData(long wantExecuteTime) {
+    public void analyseData(String userId, String type, long wantExecuteTime) {
         if(executeTime != 0L && wantExecuteTime - executeTime <= 60000 * 5L) {
             return;
         }
-        String onlineHref = "http://172.16.201.140:10040/api/online/";
+        String url = AppInterfaceConstant.WEB_INTERFACE_GWCL_ONLINE_SPGW;
+        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        String sendUrl = mapperUrl + url;
         String leaveHref = "http://172.16.201.140:11013/app/qxjgl/api/getQjUserIds";
-        this.userIdList = this.getOnlineSituationApi(onlineHref);
+        this.userIdList = this.getOnlineSituationApi(sendUrl);
         this.leaveUserIdList = this.getOnlineSituationApi(leaveHref);
         this.executeTime = System.currentTimeMillis();
     }
@@ -108,8 +110,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     @Override
     public ReignCaseVo reignCaseList(String afficheType) {
-        this.analyseData(System.currentTimeMillis());
         String userId = CurrentUser.getUserId();
+        this.analyseData(userId, "desktop_online_api", System.currentTimeMillis());
         BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
         String organid = baseAppUser.getOrganid();
         Map<String,Object> userFilter = new HashMap<>();
@@ -117,7 +119,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         List<BaseAppUser> baseAppUserList = baseAppUserService.queryList(userFilter);
         List<String> userCollect = baseAppUserList.stream().map(BaseAppUser::getAccount).collect(Collectors.toList());
         ReignCaseVo reignCaseVo = new ReignCaseVo();
-        this.analyseData(System.currentTimeMillis());
+        //this.analyseData(System.currentTimeMillis());
         try {
             //在编人数
             Map<String,Object> filter = new HashMap<>();

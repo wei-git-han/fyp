@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppUserService;
+import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -72,41 +73,88 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
                 returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
             }
             //即时通讯数量
+            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("jstx");
             JSONObject jstxJsonObj = new JSONObject();
             jstxJsonObj.put("flowCount", "5");
             jstxJsonObj.put("typeName", "即时通讯");
             jstxJsonObj.put("applyType", "5");
+            if (null != jstxBaseAppOrgMapped) {
+                jstxJsonObj.put("appId", jstxBaseAppOrgMapped.getAppId());
+                jstxJsonObj.put("appUrlPrefix", jstxBaseAppOrgMapped.getUrl());
+                jstxJsonObj.put("appUrlSuffix", jstxBaseAppOrgMapped.getWebUri());
+            } else {
+                jstxJsonObj.put("appId", "");
+                jstxJsonObj.put("appUrlPrefix", "");
+                jstxJsonObj.put("appUrlSuffix", "");
+            }
             returnJsonArr.add(jstxJsonObj);
             //电子邮件数量
+            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("dzyj");
             JSONObject emailJsonObj = new JSONObject();
             String emailUrl = "http://10.150.110.19/restful/newuser.php/g7_boxinfo?user=test@jskxy.com＆passkey=admin.1554262311.cc73fc8a417b5218f3553b0fda25ad6f＆onlyinbox=no";
-            JSONObject emailJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", emailUrl, "", applyDate);
-            emailJsonObj.put("flowCount", "6");
+
+            JSONObject emailJsonDataUrl = this.getJsonData("", "", "", userId, AppConstant.DZYJ, emailUrl, AppInterfaceConstant.WEB_INTERFACE_DZYJ_GETDOCUMENT_SPGW, applyDate);
+            if (null != emailJsonDataUrl) {
+                emailJsonObj.put("flowCount", emailJsonDataUrl.get("total"));
+            }else {
+                emailJsonObj.put("flowCount", "0");
+            }
+            if (null != dzyjBaseAppOrgMapped) {
+                emailJsonObj.put("appId", dzyjBaseAppOrgMapped.getAppId());
+                emailJsonObj.put("appUrlPrefix", dzyjBaseAppOrgMapped.getUrl());
+                emailJsonObj.put("appUrlSuffix", dzyjBaseAppOrgMapped.getWebUri());
+            }else {
+                emailJsonObj.put("appId", "");
+                emailJsonObj.put("appUrlPrefix", "");
+                emailJsonObj.put("appUrlSuffix", "");
+            }
             emailJsonObj.put("typeName", "电子邮件");
             emailJsonObj.put("applyType", "6");
             returnJsonArr.add(emailJsonObj);
             //请销假数量
+            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("qxj");
             JSONObject qxjJsonObj = new JSONObject();
             String qxjUrl = "http://127.0.0.1:11013/leave/apply/bubbleCountStatistics";
             JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
             qxjJsonObj.put("appId", "");
+            qxjJsonObj.put("appUrl", "url");
             if (null != qxjJsonDataUrl) {
                 qxjJsonObj.put("flowCount", qxjJsonDataUrl.get("qxjsp"));
             }else {
                 qxjJsonObj.put("flowCount", "0");
             }
+            if (null != qxjBaseAppOrgMapped) {
+                qxjJsonObj.put("appId", qxjBaseAppOrgMapped.getAppId());
+                qxjJsonObj.put("appUrlPrefix", qxjBaseAppOrgMapped.getUrl());
+                qxjJsonObj.put("appUrlSuffix", qxjBaseAppOrgMapped.getWebUri());
+            }else {
+                qxjJsonObj.put("appId", "");
+                qxjJsonObj.put("appUrlPrefix", "");
+                qxjJsonObj.put("appUrlSuffix", "");
+            }
             qxjJsonObj.put("typeName", "请销假");
             qxjJsonObj.put("applyType", "7");
+
             returnJsonArr.add(qxjJsonObj);
             //督查催办数量
+            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("dccb");
             JSONObject dccbJsonObj = new JSONObject();
             String dccbUrl = "http://127.0.0.1:11008/app/db/documentjcdb/list";
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
-            qxjJsonObj.put("appId", "");
+            dccbJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {
                 dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("total"));
             }else {
                 dccbJsonObj.put("flowCount", "0");
+            }
+            if (null != dccbBaseAppOrgMapped) {
+                dccbJsonObj.put("appId", dccbBaseAppOrgMapped.getAppId());
+                dccbJsonObj.put("appUrlPrefix", dccbBaseAppOrgMapped.getUrl());
+                dccbJsonObj.put("appUrlSuffix", dccbBaseAppOrgMapped.getWebUri());
+            }else {
+                dccbJsonObj.put("appId", "");
+                dccbJsonObj.put("appUrlPrefix", "");
+                dccbJsonObj.put("appUrlSuffix", "");
             }
             dccbJsonObj.put("typeName", "督查催办");
             dccbJsonObj.put("applyType", "8");

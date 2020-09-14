@@ -177,4 +177,7 @@ public interface BaseAppOrgMappedService {
 	 * @return
 	 */
 	List<String> findUsersByDeptidAndRoleType(String dpetid);
+
+	BaseAppOrgMapped getBaseAppOrgMapped(String type);
+
 }

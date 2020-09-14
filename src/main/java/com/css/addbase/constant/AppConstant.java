@@ -57,6 +57,11 @@ public class AppConstant {
 	public final static String ZHLD = "zhld";
 
 	/**
+	 * 中宏利达视频
+	 */
+	public final static String DZYJ = "dzyj";
+
+	/**
 	 * 督查催办统计
 	 */
 	public final static String DCCB = "dccb";

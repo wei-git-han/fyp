@@ -583,6 +583,16 @@ public class AppInterfaceConstant {
      * @Author gongan
      */
 	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW = "/app/gwcl/fypPersonalTodoController/numsList";
+    /**
+     * @Description 电子数量
+     * @Author gongan
+     */
+	public final static String WEB_INTERFACE_DZYJ_GETDOCUMENT_SPGW = "/restful/newuser.php/g7_boxinfo";
+    /**
+     * @Description 待批公文统计头--局用户
+     * @Author gongan
+     */
+	public final static String WEB_INTERFACE_GWCL_ONLINE_SPGW = "/api/online/";
 	/**
 	 * @Description 待批公文统计明细--审批公文
 	 * @Author gongan

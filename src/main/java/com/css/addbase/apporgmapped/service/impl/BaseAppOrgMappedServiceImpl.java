@@ -388,6 +388,10 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 		return baseAppOrgMappedDao.queryList(map);
 	}
 
-
+	@Override
+	public BaseAppOrgMapped getBaseAppOrgMapped(String type) {
+		BaseAppOrgMapped bm = (BaseAppOrgMapped) this.orgMapped("", CurrentUser.getUserId(), type);
+		return bm;
+	}
 	
 }
