@@ -71,6 +71,8 @@ var pageModule = function(){
 		    errorPlacement: function(error, element) {
 	    	 	if($(element).parent().hasClass("selecttree")){
 	    	 		error.appendTo(element.parent().parent().parent()); 
+	    	 	}if($(element).parent().hasClass("date-picker")){
+	    	 		error.appendTo(element.parent().parent()); 
 	    	 	}else{
 	    	 		error.appendTo(element.parent());  
 	    	 	}

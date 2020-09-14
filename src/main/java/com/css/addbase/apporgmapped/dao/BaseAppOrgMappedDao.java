@@ -21,4 +21,10 @@ public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
 
     @Select("select * from zf_new_fyp_db.base_app_org_mapped where org_id is not null and org_id!='' and org_name is not null and org_name !='' and type = #{0}")
     List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
+
+    @Select("select a.user_id from zf_new_fyp_db.base_app_user as a \n" +
+            "left join zf_new_fyp_db.base_app_organ as b on a.organid = b.id \n" +
+            "left join zf_new_fyp_db.fyp_role_edit as c on a.user_id = c.user_id\n" +
+            "where b.tree_path like '%'||#{0}||'%' and c.role_type = '3'")
+    List<String> findUsersByDeptidAndRoleType(String dpetid);
 }

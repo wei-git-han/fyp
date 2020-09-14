@@ -13,15 +13,14 @@ var pageModule = function () {
 				var data1 = [];
 				data1.push(data.data);
 				data = data1;
-				console.log(data);
 				var array = data;
 
 				oodata = array;
 				initfn1(array);
 
-				$("#zxNum").html(data[0].zx);
-				$("#lxNum").html(data[0].lx);
-				$("#qjNum").html(data[0].qj);
+				$("#zxNum").html(data[0].zx==null?data[0].zx:0);
+				$("#lxNum").html(data[0].lx==null?data[0].lx:0);
+				$("#qjNum").html(data[0].qj==null?data[0].qj:0);
 			}
 		})
 	};

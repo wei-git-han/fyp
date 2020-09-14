@@ -1,8 +1,11 @@
 package com.css.app.fyp.work;
 
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
+import com.css.addbase.constant.AppConstant;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.Response;
+import com.css.base.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class ManageDocumentController {
     @Autowired
     private GetJsonData getJsonData;
 
+    @Autowired
+    private BaseAppOrgMappedService baseAppOrgMappedService;
+
     /**
      * 办文总量
      * @param type
@@ -35,10 +41,15 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/total")
     public void total(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
+
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办文总量");
         paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
+        if(StringUtils.isNotBlank(deptid)){
+            paramMap.add("deptid",getUsers(deptid));
+        }else{
+            paramMap.add("deptid",deptid);
+        }
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -54,7 +65,11 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
         paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
+        if(StringUtils.isNotBlank(deptid)){
+            paramMap.add("deptid",getUsers(deptid));
+        }else{
+            paramMap.add("deptid",deptid);
+        }
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -70,7 +85,11 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
+        if(StringUtils.isNotBlank(deptid)){
+            paramMap.add("deptid",getUsers(deptid));
+        }else{
+            paramMap.add("deptid",deptid);
+        }
         paramMap.add("time",null);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
         Object data;
@@ -93,7 +112,11 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
+        if(StringUtils.isNotBlank(deptid)){
+            paramMap.add("deptid",getUsers(deptid));
+        }else{
+            paramMap.add("deptid",deptid);
+        }
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -109,7 +132,11 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
+        if(StringUtils.isNotBlank(deptid)){
+            paramMap.add("deptid",getUsers(deptid));
+        }else{
+            paramMap.add("deptid",deptid);
+        }
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -125,10 +152,28 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
+        if(StringUtils.isNotBlank(deptid)){
+            paramMap.add("deptid",getUsers(deptid));
+        }else{
+            paramMap.add("deptid",deptid);
+        }
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
 
 
+    /**
+     * 获取单位下的用户id
+     * @param dpetid
+     * @return
+     */
+    private String getUsers(String dpetid){
+        //获取单位下且在编的人员
+        List<String> userList = baseAppOrgMappedService.findUsersByDeptidAndRoleType(dpetid);
+        StringBuilder sb = new StringBuilder();
+        for (String userid: userList) {
+            sb.append(userid+",");
+        }
+        return sb.toString().substring(0,sb.length()-1);
+    }
 }

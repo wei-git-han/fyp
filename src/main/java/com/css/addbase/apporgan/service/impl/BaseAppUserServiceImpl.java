@@ -148,5 +148,10 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 		// TODO Auto-generated method stub
 		return baseAppUserDao.findByOrganidExclude(organid,user_id);
 	}
-	
+
+	@Override
+	public List<BaseAppUser> queryListByRole(String organid) {
+		return baseAppUserDao.queryListByRole(organid);
+	}
+
 }
