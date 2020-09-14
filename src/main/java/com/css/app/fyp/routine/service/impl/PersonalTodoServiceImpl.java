@@ -84,7 +84,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(emailJsonObj);
             //请销假数量
             JSONObject qxjJsonObj = new JSONObject();
-            String qxjUrl = "http://172.16.1.19:11013/leave/apply/bubbleCountStatistics";
+            String qxjUrl = "http://127.0.0.1:11013/leave/apply/bubbleCountStatistics";
             JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
             qxjJsonObj.put("appId", "");
             if (null != qxjJsonDataUrl) {
@@ -97,7 +97,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(qxjJsonObj);
             //督查催办数量
             JSONObject dccbJsonObj = new JSONObject();
-            String dccbUrl = "http://172.16.1.19:11008/app/db/documentjcdb/list";
+            String dccbUrl = "http://127.0.0.1:11008/app/db/documentjcdb/list";
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
             qxjJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {
