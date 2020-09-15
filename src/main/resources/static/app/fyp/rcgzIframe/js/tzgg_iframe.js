@@ -13,7 +13,7 @@ var pageModule = function () {
 					} 
 					class="'+class1+'"
 					*/
-					arryHtml+=  '<dl>'+
+					arryHtml+=  '<dl onclick="window.top.openfn1(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+i+'\')">'+
 								'	<dt><span>'+parseInt(i+1)+'</span>'+o.title+'</dt>'+
 								'	<dd>'+o.releaseTime+'</dd>'+
 								'</dl>'

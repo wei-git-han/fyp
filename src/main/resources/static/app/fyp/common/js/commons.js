@@ -1313,3 +1313,56 @@ $(".nav>li").click(function(){
 	$(".tab-content>div").eq(index).show().siblings().hide();
 });
 
+
+
+
+function getFormatUrl(url, token_value) {
+  var token_key = getUrlParam("access_token");
+  if (url.indexOf("access_token") == -1) {
+    if (url.indexOf("?") == -1) {
+      url += "?";
+    } else {
+      url += "&";
+    }
+    url += "access_token=" + token_value;
+  }
+  return url;
+}
+
+function replaceParam(url, paramName, paramValue) {
+  var regex = eval('/(' + paramName + '=)[^&]*/gi');
+  url = url.replace(regex, paramName + '=' + paramValue);
+
+  return url;
+}
+
+/**
+ * url ="http://localhost:12000/app/fyp/index.htm";
+ * 返回”http://localhost:12000“
+ * @param url
+ * @returns
+ */
+function getDomainUrl(url) {
+  if (!url) {
+    url = ""
+  }
+  var sep = "//";
+  //url ="http://localhost:12000/app/fyp/index.htm";
+  if (url.indexOf(sep) != -1) {
+    var arr = url.split(sep);
+    var http = arr[0] + sep;
+    var start = arr[1].indexOf("/");
+    var relUrl = http + arr[1].substring(0, start);
+    return relUrl;
+  }
+  return url;
+}
+
+String.prototype.startWith = function(str) {
+  var reg = new RegExp("^" + str);
+  return reg.test(this);
+};
+String.prototype.endWith = function(str) {
+  var reg = new RegExp(str + "$");
+  return reg.test(this);
+};

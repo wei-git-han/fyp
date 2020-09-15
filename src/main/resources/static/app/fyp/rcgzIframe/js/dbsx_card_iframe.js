@@ -7,13 +7,12 @@ var pageModule = function () {
 			success: function(data) {
 				var arryHtml = '';
 				$.each(data.data.returnJsonArr, function(i, o) {
-					arryHtml+=	'<div>'+
+					arryHtml+=	'<div onclick="window.top.openfn1(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+i+'\')">'+
 								'	<p>'+o.flowCount+'</p>'+
 								'	<span>'+o.typeName+'</span>'+
 								'</div>'
 				});
 				$("#dbsx").html(arryHtml);
-				
 			}
 		})
 	}

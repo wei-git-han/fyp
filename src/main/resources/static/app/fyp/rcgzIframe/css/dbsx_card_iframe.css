@@ -15,7 +15,7 @@ html, body {
 .tab_main{
 	width:100%;
 	height:100%;
-	padding-top:15px;
+	padding-top:30px;
 }
 .newlayout-title{
 	height:60px;
@@ -35,12 +35,14 @@ html, body {
 	overflow: hidden;
 }
 .dbsx_wrap>div{
-	width:168px;
+	width:160px;
 	height:168px;
 	display: inline-block;
 	margin: 10px 5px;
-	background: #062368;
 	text-align: center;
+	cursor:pointer;
+	border-radius: 4px !important;
+	background:url('../images/grdbbg.png') no-repeat,linear-gradient(0deg, #052162 0%, #08379C 100%);
 }
 .dbsx_wrap div p{
 	font-size: 58px;
@@ -48,17 +50,21 @@ html, body {
 	font-family:"YOUSHEBIAOTIHEI-2_0";
 	src: url("../font/YOUSHEBIAOTIHEI-2_0.TTF");
 	color: #3176FC;
-	padding-top: 30px;
+	padding-top: 16px;
 }
 .dbsx_wrap div span{
 	color: #fff;
 	font-size: 18px;
-	border-bottom: 1px solid #3176FC;
-	padding-bottom:5px;
+	/* border-bottom: 1px solid #3176FC; */
+	background: url('../images/bottomline.png') no-repeat 0 28px;
+	padding-bottom:10px;
 }
-.dbsx_wrap div:hover p{
+.dbsx_wrap div:hover,.dbsx_wrap div:active{
+	background:url('../images/grdbbg.png') no-repeat,linear-gradient(0deg, #111D57 0%, #2B1E5C 100%);
+}
+.dbsx_wrap div:hover p,.dbsx_wrap div:active p{
 	color: #F70A4A;
 }
-.dbsx_wrap div:hover span{
-	border-color:#F70A4A;
+.dbsx_wrap div:hover span,.dbsx_wrap div:active span{
+	background: url('../images/bottomline2.png') no-repeat 0 28px;
 }
