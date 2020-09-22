@@ -88,7 +88,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
      * 获取在线或请假人员ID-LIST
      * @return 返回人员ID
      * @author 龚安
-     * @date 2020-06-09
+     * @date 2020-08-14
      */
     private List<String> getOnlineSituationApi(String href) {
         List<String> accountList = new ArrayList<String>();

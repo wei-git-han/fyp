@@ -632,7 +632,7 @@ public class AppInterfaceConstant {
 	 * @Description 工作动态--列表
 	 * @Author gongan
 	 */
-	public final static String WEB_WORK_TREND_VIEWINFO_FYP = "/jbybfyp";
+	public final static String WEB_WORK_TREND_VIEWINFO_FYP = "/fypcontroller/jbybfyp";
 	/**
 	 * @Description 工作动态--保存主题信息
 	 * @Author gongan
@@ -672,7 +672,7 @@ public class AppInterfaceConstant {
 
     /********************************************************************FYP(日常工作)end*****************************************************/
 
-    public final static String WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC = "/affiche/listFyp";
+    public final static String WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC = "/fypcontroller/listFyp";
 
     /**
      * @author mashuwen
