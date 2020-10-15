@@ -5,7 +5,7 @@ var grid = null;
 var pageModule = function() {
 	var initZhoubiao = function() {
 		grid = $("#gridcont").createGrid({
-			columns: [{display: "单位",name: "deptName",width: "60%",align: "center",render: function(rowdata, n) {
+			/*columns: [{display: "单位",name: "deptName",width: "60%",align: "center",render: function(rowdata, n) {
 						return rowdata.deptName;
 					}
 				},
@@ -13,7 +13,16 @@ var pageModule = function() {
 						return rowdata.count;
 					}
 				},
-			],
+			],*/
+			columns: [{display: "单位",name: "zoneName",width: "60%",align: "center",render: function(rowdata, n) {
+            						return rowdata.zoneName;
+                    }
+                },
+                {display: "已发布周数",name: "count_",width: "40%",align: "center",render: function(rowdata) {
+                        return rowdata.count_;
+                    }
+                },
+            ],
 			width: '100%',
 			height: '100%',
 			checkbox: false,
