@@ -1,11 +1,14 @@
 package com.css.app.fyp.work;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -27,6 +30,9 @@ public class ManageThingController {
 
     @Autowired
     private GetJsonData getJsonData;
+
+    @Value("${csse.work.table}")
+    private  String url;
     /**
      * 督查催办
      * @param deptid
@@ -60,12 +66,10 @@ public class ManageThingController {
     @ResponseBody
     @RequestMapping("/weeklyTable")
     public void weeklyTable(@DateTimeFormat(pattern = "yyyy-MM") Date time) {
-        List<Map<String,String>> objects = new ArrayList<>();
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put("deptName","单位名称");
-        dataMap.put("count","周表数");
-        objects.add(dataMap);
-        Response.json(new ResponseValueUtils().success(objects));
+        JSONArray jsonArray = new JSONArray();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        jsonArray = CrossDomainUtil.getJsonArrayData(url, infoMap);
+        Response.json(jsonArray);
     }
 
 }
