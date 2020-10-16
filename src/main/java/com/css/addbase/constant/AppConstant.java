@@ -242,4 +242,6 @@ public class AppConstant {
 	 * @date 2018年11月12日 网关配置服务地址
 	 */
 	public final static String GATEWAY_URL = "gatewayUrl";
+
+	public final static String WORK_TABLE = "";
 }

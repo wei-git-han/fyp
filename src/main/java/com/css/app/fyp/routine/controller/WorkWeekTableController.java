@@ -1,10 +1,12 @@
 package com.css.app.fyp.routine.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
 import com.css.app.fyp.routine.service.FypPersonageWorkWeekService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.Response;
 import com.css.base.utils.UUIDUtils;
@@ -12,8 +14,10 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +40,9 @@ public class WorkWeekTableController {
     private WorkWeekTableService workWeekTableService;
     @Autowired
     private FypPersonageWorkWeekService fypPersonageWorkWeekService;
+
+    @Value("${csse.work.table}")
+    private  String url;
 
     /**
      * 本周周表/个人周表
@@ -98,6 +105,18 @@ public class WorkWeekTableController {
         fypPersonageWorkWeek.setCreatedTime(createdTime);
         fypPersonageWorkWeekService.update(fypPersonageWorkWeek);
         Response.json("result", "success");
+    }
+
+    /**
+     * 负一屏-办公效能-办事-工作报表
+     */
+    @ResponseBody
+    @RequestMapping("/getAllDeptInfo")
+    public void getAllDeptInfo(){
+        JSONArray jsonArray = new JSONArray();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        jsonArray = CrossDomainUtil.getJsonArrayData(url, infoMap);
+        Response.json(jsonArray);
     }
 
 }
