@@ -45,6 +45,7 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:18761/eureka/
+    eureka-server-connect-timeout-seconds:
   http:
     multipart:
       max-file-size: 256MB
@@ -146,3 +147,6 @@ csse.log.path: c:/temp/storetemp/zf_one_number_app.log
 csse.mircoservice.smsUrl: http://192.168.0.55:50005/v1.0/plan
 #语音预定会议室 
 voicePreMeetUrl: http://localhost:8768
+
+#中控利达获取各局工作周表的接口
+csse.work.table: http://localhost:8080/api/week/count/publish
