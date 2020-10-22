@@ -17,6 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 
@@ -34,6 +35,15 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     private BaseAppOrgMappedService baseAppOrgMappedService;
     @Autowired
     private BaseAppUserService baseAppUserService;
+
+    @Value("${dzyj.url}")
+    private String dzyjUrl;
+
+    @Value("${qxj.url}")
+    private String qxjglUrl;
+
+    @Value("${db.url}")
+    private String dbglUrl;
 
     /**
      * @Description 待批公文统计
@@ -91,7 +101,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             //电子邮件数量
             BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("dzyj");
             JSONObject emailJsonObj = new JSONObject();
-            String emailUrl = "http://10.150.110.19/restful/newuser.php/g7_boxinfo?user=test@jskxy.com＆passkey=admin.1554262311.cc73fc8a417b5218f3553b0fda25ad6f＆onlyinbox=no";
+            String emailUrl = dzyjUrl;
 
             JSONObject emailJsonDataUrl = this.getJsonData("", "", "", userId, AppConstant.DZYJ, emailUrl, AppInterfaceConstant.WEB_INTERFACE_DZYJ_GETDOCUMENT_SPGW, applyDate);
             if (null != emailJsonDataUrl) {
@@ -114,7 +124,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             //请销假数量
             BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("qxj");
             JSONObject qxjJsonObj = new JSONObject();
-            String qxjUrl = "http://127.0.0.1:11013/leave/apply/bubbleCountStatistics";
+            String qxjUrl = qxjglUrl;
             JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
             qxjJsonObj.put("appId", "");
             qxjJsonObj.put("appUrl", "url");
@@ -139,7 +149,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             //督查催办数量
             BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("dccb");
             JSONObject dccbJsonObj = new JSONObject();
-            String dccbUrl = "http://127.0.0.1:11008/app/db/documentjcdb/list";
+            String dccbUrl = dbglUrl;
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
             dccbJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {

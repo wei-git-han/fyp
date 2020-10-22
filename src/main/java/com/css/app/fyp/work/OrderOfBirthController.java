@@ -77,12 +77,14 @@ public class OrderOfBirthController {
                 continue;
             }
             int onlineCount = 0;
+            if(onLineList != null && onLineList.size() > 0){
             for(String username:onLineList){
                 for(BaseAppUser user:baseAppUsers){
                     if(username.equals(user.getTruename())){
                         onlineCount++;
                     }
                 }
+            }
             }
             dataMap.put("onLineCount",onlineCount);//在线
             int leaveCount = 0;

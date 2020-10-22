@@ -1,6 +1,8 @@
 package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.appconfig.entity.BaseAppConfig;
+import com.css.addbase.appconfig.service.BaseAppConfigService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.service.InformAfficheService;
@@ -9,6 +11,8 @@ import com.css.base.utils.CurrentUser;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 
@@ -22,6 +26,12 @@ import org.springframework.util.LinkedMultiValueMap;
 public class InformAfficheServiceImpl implements InformAfficheService {
     private final Logger logger = LoggerFactory.getLogger(InformAfficheServiceImpl.class);
 
+    @Autowired
+    private BaseAppConfigService baseAppConfigService;
+
+    @Value("${xxfw.url}")
+    private String xxfwUrl;
+
     /**
      * @Description 局公告/部公告/系统公告
      * @Author gongan
@@ -34,7 +44,7 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         JSONObject jsonData = new JSONObject();
         String userId = CurrentUser.getUserId();
         //局用户
-        afficheType = "1";
+        //afficheType = "1";
         jsonData = this.getJsonArrayData(curentPage,pageSize, afficheType, userId, "", AppInterfaceConstant.WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC);
         return jsonData;
     }
@@ -55,7 +65,8 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         if (StringUtils.isNotEmpty(pagesize)) {
             infoMap.add("pagesize", pagesize);
         }
-        String mapperUrl = "http://172.16.1.19:8080";
+        String mapperUrl = xxfwUrl;
+
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
@@ -89,7 +100,7 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         if (StringUtils.isNotEmpty(contentid)) {
             infoMap.add("contentid", contentid);
         }
-        String mapperUrl = "http://172.16.201.140:8080";
+        String mapperUrl = xxfwUrl;
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);

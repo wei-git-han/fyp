@@ -1,6 +1,8 @@
 package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.appconfig.entity.BaseAppConfig;
+import com.css.addbase.appconfig.service.BaseAppConfigService;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -11,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +31,11 @@ public class WorkTrendServiceImpl implements WorkTrendService {
 
     @Autowired
     private BaseAppOrgMappedService baseAppOrgMappedService;
+    @Autowired
+    private BaseAppConfigService baseAppConfigService;
+
+    @Value("${xxfw.url}")
+    private String xwdt;
 
     /*
      * @Description 列表
@@ -109,7 +117,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         infoMap.add("userId", userId);
-        String mapperUrl = "http://172.16.1.19:8080";
+        String mapperUrl = xwdt;
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
@@ -181,7 +189,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         if (timeInterval != null) {
             infoMap.add("timeInterval", timeInterval);
         }
-        String mapperUrl = "http://172.16.201.140:8080";
+        String mapperUrl = xwdt;
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
@@ -214,7 +222,7 @@ public class WorkTrendServiceImpl implements WorkTrendService {
         if (StringUtils.isNotEmpty(channelid)) {
             infoMap.add("channelid", channelid);
         }
-        String mapperUrl = "http://172.16.201.140:8080";
+        String mapperUrl = xwdt;
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url+channelid+userId;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);

@@ -123,8 +123,8 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 			+ " ) order by a.SORT")
 	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
 
-	@Select("select * from BASE_APP_USER a" +
-			"left join fyp_role_edit b" +
-			"WHERE 1 = 1 and a.ISDELETE = '0' and a.ORGANID = #{0} and a.user_id = b.userid and b.role_type = '3'")
+	@Select("select * from BASE_APP_USER a " +
+			"left join fyp_role_edit b " +
+			"on 1 = 1 and a.ISDELETE = '0' and a.ORGANID = #{0} and a.user_id = b.USER_ID and b.role_type = '3'")
     List<BaseAppUser> queryListByRole(String organid);
 }
