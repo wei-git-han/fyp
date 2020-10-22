@@ -20,6 +20,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 
@@ -54,6 +55,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     @Autowired
     private UserManagerSettingService userManagerSettingService;
 
+    @Value("${qxj.fz}")
+    private String qxjfzUrl;
+
     /**
      * 在线人
      */
@@ -78,7 +82,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         String url = AppInterfaceConstant.WEB_INTERFACE_GWCL_ONLINE_SPGW;
         String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
         String sendUrl = mapperUrl + url;
-        String leaveHref = "http://172.16.201.140:11013/app/qxjgl/api/getQjUserIds";
+        String leaveHref = qxjfzUrl;
         this.userIdList = this.getOnlineSituationApi(sendUrl);
         this.leaveUserIdList = this.getOnlineSituationApi(leaveHref);
         this.executeTime = System.currentTimeMillis();
@@ -183,7 +187,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     }
 
-    /**
+    /**该接口没调用
      * 获取人员在位状态数据
      * 加载人员树
      * @return
