@@ -827,6 +827,7 @@ label.error{
 
 .red{
 	color: #f00;
+	margin-left: 3px;
 }
 
 .filterDate .date-picker>input{

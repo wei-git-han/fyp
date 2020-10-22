@@ -69,15 +69,15 @@ var activeDoType = "rcgz"
 var pageModule = function() {
   var initother = function() {
 	$("#setbtn").click(function(){
-		window.location.href ="/app/fyp/set/html/settabel.html"
+        window.open("/app/fyp/set/html/settabel.html")
 	});
 	
 	$("#slqkbtn").click(function(){
-		window.location.href ="/app/fyp/slqk/html/slqktabel.html"
+		window.open("/app/fyp/slqk/html/slqktabel.html")
 	});
 	
 	$("#bzbtn").click(function(){
-		window.location.href ="/app/fyp/bzProject/html/bzwtgz.html"
+      window.open("/app/fyp/bzProject/html/bzwtgz.html")
 	});
 	
     $('.btn-wrap>.btn').click(function() {
