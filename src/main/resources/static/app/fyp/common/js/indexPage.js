@@ -68,6 +68,7 @@ var pageList = {
 var activeDoType = "rcgz"
 var pageModule = function() {
   var initother = function() {
+	returnDate();
 	$("#setbtn").click(function(){
 		window.location.href ="/app/fyp/set/html/settabel.html"
 	});
@@ -205,4 +206,18 @@ function openfn1(appId, href, domain, n) {
     //service_._openApp_(appId,href);
     service_._openApp_(appId, url, domain);
   }
+}
+
+
+function returnDate(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1<10? "0"+date.getMonth()+1:date.getMonth()+1;
+	var day = date.getDate()+1<10? "0"+date.getDate():date.getDate();
+	var hour = date.getHours()<10? "0"+date.getHours:date.getHours();
+	var minute = date.getMinutes()<10? "0"+date.getMinutes:date.getMinutes();
+	
+	var week = date.getDay();
+	var weekArray = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+	$(".datelayout").html(year+"-"+month+"-"+day+"&nbsp;"+hour+":"+minute+"&nbsp;&nbsp;"+weekArray[week]);
 }
