@@ -54,7 +54,7 @@ var pageModule = function() {
 					$('#dayNumber').html(res.data.dayNumber)
 					$('#timeOutEnd').html(res.data.timeOutEnd)
 					$('#working').html(res.data.working)
-					$('#percentage').html(res.data.percentage)
+					$('#percentage').html(res.data.percentage+'%')
 				}
 			}
 		})

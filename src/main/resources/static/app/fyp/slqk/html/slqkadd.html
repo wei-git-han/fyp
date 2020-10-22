@@ -29,13 +29,13 @@
 			<form id="commentForm" class="pr100">
 				<table class="table">
 					<tr>
-						<td class="t_label">硬件/软件<br/>名称</td>
+						<td class="t_label">硬件/软件<br/>名称<span class="red">*</span></td>
 						<td class="t_inpt" colspan="3">
 							<input type="text" class="form-control" id="name" name="name"  required/>
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">提出人</td>
+						<td class="t_label">提出人<span class="red">*</span></td>
 						<td class="t_inpt" colspan="3">
 							<div class="form-control" style="padding:0;background:#fff">
 								<div class="selecttree">
@@ -46,7 +46,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">解决时限</td>
+						<td class="t_label">解决时限<span class="red">*</span></td>
 						<td class="t_inpt" >
 							<div style="float: right;" class="input-group input-large date-picker input-daterange"  data-date-format="yyyy-mm-dd">
 								<input type="text" class="form-control"  onfocus=""  readonly="readonly"  id="solveTime"  name="solveTime" style="background:#fff" required />
@@ -82,7 +82,7 @@
 					<tr>
 						<td class="t_label">问题描述</td>
 						<td class="t_inpt" colspan="3">
-							<textarea rows="" cols="" id="desc" name="desc" class="form-control" style="height:200px;resize:none;"></textarea>
+							<textarea rows="" cols="" id="desc" name="desc" class="form-control" style="height:200px;resize:none;" maxlength="500"></textarea>
 						</td>
 					</tr>
 				</table>

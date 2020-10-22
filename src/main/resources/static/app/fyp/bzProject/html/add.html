@@ -29,7 +29,7 @@
 			<form id="commentForm" class="pr100">
 				<table class="table">
 					<tr>
-						<td class="t_label">姓名</td>
+						<td class="t_label">姓名<span class="red">*</span></td>
 						<td class="t_inpt" >
 							<div class="form-control" style="padding:0;background:#fff">
 								<div class="selecttree">
@@ -38,7 +38,7 @@
 								</div>
 							</div>
 						</td>
-						<td class="t_label">单位名称</td>
+						<td class="t_label">单位名称<span class="red">*</span></td>
 						<td class="t_inpt">
 							<div class="form-control" style="padding:0;background:#fff">
 								<div class="selecttree">
@@ -47,13 +47,6 @@
 								</div>
 							</div>
 						</td>
-					</tr>
-					<tr>
-						<td class="t_label">联系电话</td>
-						<td class="t_inpt" colspan="3">
-							<input type="text" class="form-control" id="phone" name="phone"  />
-						</td>
-
 					</tr>
 					<tr>
 						<td class="t_label">问题来源</td>
@@ -74,22 +67,29 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">处理措施</td>
+						<td class="t_label">联系电话</td>
 						<td class="t_inpt" colspan="3">
-							<input type="text" class="form-control" id="measures" name="measures" />
+							<input type="text" class="form-control" id="phone" name="phone"  />
 						</td>
+
 					</tr>
 					<tr>
 						<td class="t_label">问题描述：</td>
 						<td class="t_inpt" colspan="3">
-						   <textarea class="form-control" id="remark" name="remark" ></textarea>
+							<textarea class="form-control" id="remark" name="remark" maxlength="500" style="min-height: 100px"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="t_label">处理措施</td>
+						<td class="t_inpt" colspan="3">
+							<textarea type="text" class="form-control" id="measures" name="measures"  maxlength="500" style="min-height: 100px"></textarea>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div class="bottom">
-			<button class="btn" type="button" id="reset">重置</button>
+			<button class="btn" style="display: none" type="button" id="reset">重置</button>
 			<button class="btn" type="button" id="save">确定</button>
 			<button class="btn closebtn" type="button" id="close">取消</button>
 		</div>

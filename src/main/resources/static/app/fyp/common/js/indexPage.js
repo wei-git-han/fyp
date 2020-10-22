@@ -70,15 +70,15 @@ var pageModule = function() {
   var initother = function() {
 	returnDate();
 	$("#setbtn").click(function(){
-		window.location.href ="/app/fyp/set/html/settabel.html"
+        window.open("/app/fyp/set/html/settabel.html")
 	});
 	
 	$("#slqkbtn").click(function(){
-		window.location.href ="/app/fyp/slqk/html/slqktabel.html"
+		window.open("/app/fyp/slqk/html/slqktabel.html")
 	});
 	
 	$("#bzbtn").click(function(){
-		window.location.href ="/app/fyp/bzProject/html/bzwtgz.html"
+      window.open("/app/fyp/bzProject/html/bzwtgz.html")
 	});
 	
     $('.btn-wrap>.btn').click(function() {
@@ -220,4 +220,7 @@ function returnDate(){
 	var week = date.getDay();
 	var weekArray = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
 	$(".datelayout").html(year+"-"+month+"-"+day+"&nbsp;"+hour+":"+minute+"&nbsp;&nbsp;"+weekArray[week]);
+}
+function zanWeiKaiFang() {
+  newbootbox.alertInfo('暂不开放详情查看！')
 }

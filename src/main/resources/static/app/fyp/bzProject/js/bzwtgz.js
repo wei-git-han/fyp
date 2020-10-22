@@ -31,7 +31,7 @@ var pageModule = function () {
                             }
 						}},
 						{display:"问题描述",name:"remark",width:"15%",align:"left",render:function(rowdata){
-							return rowdata.remark;                                         
+							return `<span title="${rowdata.remark}">${rowdata.remark}</span>`;
 						}},
 						{display:"状态",name:"status",width:"10%",align:"center",render:function(rowdata){
 							if(rowdata.status == "0"){
@@ -48,7 +48,7 @@ var pageModule = function () {
 							return rowdata.statusTime;                                         
 						}},
 						{display:"处理措施",name:"measures",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.measures;                                         
+							return `<span title="${rowdata.measures}">${rowdata.measures}</span>`;
 						}}
 					 ],
 			width:'100%',

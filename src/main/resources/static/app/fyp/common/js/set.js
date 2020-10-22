@@ -56,6 +56,10 @@ var pageModule = function () {
 		/*$("#search").click(function(){
 			initgrid();
 		});*/
+		$("#setbtn").click(function(){
+			window.open("/app/fyp/set/html/settabel.html")
+		});
+
 	}
 	
 	var initUnitTree = function() {
