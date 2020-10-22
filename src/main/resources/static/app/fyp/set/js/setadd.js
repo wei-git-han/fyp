@@ -60,7 +60,7 @@ var pageModule = function(){
 		    language:"zh-CN",
 		    autoclose: true,
 		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd HH:ii",
+		    format: "yyyy-mm-dd hh:mm",
 		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
 		

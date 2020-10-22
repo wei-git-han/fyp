@@ -206,3 +206,7 @@ function openfn1(appId, href, domain, n) {
     service_._openApp_(appId, url, domain);
   }
 }
+
+function zanWeiKaiFang() {
+  newbootbox.alertInfo('暂不开放详情查看!')
+}
