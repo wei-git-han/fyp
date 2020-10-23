@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.app.fyp.work.entity.FypGuaranteeTacking;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -75,6 +76,7 @@ public class FypRoleEditController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", currentUserId);
 		List<FypRoleEdit> fypRoleEdit = fypRoleEditService.queryList(map);
+		JSONObject json = new JSONObject();
 		String flag = "1";
 		for(FypRoleEdit r : fypRoleEdit) {
 			if(r.getRoleType() == 0 || r.getRoleType() == 1) {
@@ -82,7 +84,8 @@ public class FypRoleEditController {
 				break;
 			}
 		}
-		Response.json(flag);
+		json.put("flag", flag);
+		Response.json(json);
 	}
 	
 	/**
