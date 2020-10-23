@@ -29,6 +29,7 @@ var pageModule = function(){
 			data:{id:id},
 			success:function(data){
 				setformdata(data.data);
+				$('#softname').val(data.data.name||'')
 				if(!!data.data.solveTime){
                     $("#solveTime").val((data.data.solveTime).substring(0,10));
                 }
@@ -56,8 +57,9 @@ var pageModule = function(){
 				}
 				saveLoading = true
 				$("#save").attr('disabled',true)
-			    var elementarry = ["name","submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
+			    var elementarry = ["submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
 				var paramdata = getformdata(elementarry);
+				paramdata.name= $('#softname').val()
 				paramdata.id = id;
 				$ajax({
 					url:saveUrl,

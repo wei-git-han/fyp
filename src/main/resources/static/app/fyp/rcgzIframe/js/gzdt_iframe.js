@@ -9,7 +9,7 @@ var pageModule = function () {
 				var arryHtml = '';
 				$.each(data.data.recentnews, function(i, o) {
 					arryHtml+=`<dl onclick="window.top.openfn1('${o.appId}','${o.appUrlSuffix}','${o.appUrlPrefix}','${i}')">
-									<dt><img src="${o.coverImg}" ></dt>
+									<dt style="display: ${o.coverImg?'inline-block':'none'}"><img src="${o.coverImg}"></dt>
 									<dd>
 										<div class="title">${o.title}</div>
 										<div class="content">${o.content}</div>
