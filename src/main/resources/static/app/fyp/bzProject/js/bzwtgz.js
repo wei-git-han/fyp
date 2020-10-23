@@ -2,15 +2,8 @@ var listurl = {"url":"/fyp/guaranteetacking/list","dataType":"text"};//表格数
 var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树--待定
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
+var isAdminUrl = {"url":"/fyp/roleedit/getRole","dataType":"text"}; //人员树
 var grid = null;
-var isAdmin = getUrlParam('isAdmin')||true;
-if(isAdmin==true){
-	$('.adminDiv').show()
-	$('.userDiv').hide()
-}else{
-	$('.adminDiv').hide()
-	$('.userDiv').show()
-}
 var pageModule = function () {
 	var initgrid = function(){
 		  grid = $("#gridcont").createGrid({
@@ -92,7 +85,21 @@ var pageModule = function () {
 			}
 		});
 	}
-	
+	function isAdmin() {
+		$ajax({
+			url: isAdminUrl,
+			type: "GET",
+			success: function(data) {
+				if(data.flag!='1') {
+					$('.adminDiv').show()
+					$('.userDiv').hide()
+				}else{
+					$('.adminDiv').hide()
+					$('.userDiv').show()
+				}
+			}
+		})
+	}
 	var initother = function(){
 		$(".form_datetime").datetimepicker({
 		    language:"zh-CN",
@@ -185,6 +192,7 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
+			isAdmin();
 			initgrid();
 			initUnitTree();
 			initother();

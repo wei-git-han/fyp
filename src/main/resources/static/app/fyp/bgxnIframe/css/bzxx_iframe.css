@@ -149,9 +149,11 @@ body {
 }
 
 .card_desContent {
-  padding-left: 75px;
+  /*padding-left: 75px;*/
   padding-top: 2px;
   color: #00D3EA;
+  max-height: 77px;
+  overflow: hidden;
 }
 
 /* tab2 */

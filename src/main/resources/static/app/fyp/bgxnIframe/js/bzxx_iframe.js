@@ -119,7 +119,7 @@ var pageModule = function () {
 			            		'			<p>联系方式：<span>'+tel+'</span></p>'+
 			            		'			<p>反馈时间：<span>'+warrantyTime.substring(0,16)+'</span></p>'+
 			            		'			<p>问题来源：<span>'+problemFrom+'</span></p>'+
-			            		'			<p><span class="describe">问题描述：</span><div class="card_desContent">'+problemDeration+'</div></p>'+
+			            		'			<p><span class="describe">问题描述：</span><div class="card_desContent" title="'+problemDeration+'">'+problemDeration+'</div></p>'+
 			            		'		</div>'+
 			            		'	</div>' +
 								'</div>'
@@ -144,7 +144,7 @@ var pageModule = function () {
     }
 }();
 function toBzInfo() {
-	window.open('/app/fyp/bzProject/html/bzwtgz.html?isAdmin=false')
+	window.open('/app/fyp/bzProject/html/bzwtgz.html')
 }
 
 
