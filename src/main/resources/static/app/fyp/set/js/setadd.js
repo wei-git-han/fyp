@@ -101,9 +101,9 @@ var pageModule = function(){
 		});
 		
 		//重置
-		$("#reset").click(function(){
+		/*$("#reset").click(function(){
 			removeInputData(["userId","userName","deptId","deptName","roleType","editUserId","editUserName","editTime"]);
-		});
+		});*/
 		
 		//取消
 		$("#close").click(function(){

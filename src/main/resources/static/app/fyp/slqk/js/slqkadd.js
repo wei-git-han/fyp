@@ -85,9 +85,9 @@ var pageModule = function(){
 		});
 		
 		//重置
-		$("#reset").click(function(){
+		/*$("#reset").click(function(){
 			removeInputData(["name","submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"]);
-		});
+		});*/
 		
 		//取消
 		$("#close").click(function(){
