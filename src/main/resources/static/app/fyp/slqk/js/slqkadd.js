@@ -3,10 +3,11 @@ var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树--
 var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
-	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"text"};  //edit
+	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"json"};  //edit
 }else{
-	saveUrl = {"url":"/fyp/feedbackhear/save","dataType":"text"};  //save
+	saveUrl = {"url":"/fyp/feedbackhear/save","dataType":"json"};  //save
 }
+var saveLoading = false
 var pageModule = function(){
 	//树
 	var initUnitTree = function(){
@@ -28,6 +29,7 @@ var pageModule = function(){
 			data:{id:id},
 			success:function(data){
 				setformdata(data.data);
+				$('#softname').val(data.data.name||'')
 				if(!!data.data.solveTime){
                     $("#solveTime").val((data.data.solveTime).substring(0,10));
                 }
@@ -49,8 +51,15 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
-			    var elementarry = ["name","submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
+				if(saveLoading){
+					newbootbox.alert('正在保存中，请稍候！')
+					return
+				}
+				saveLoading = true
+				$("#save").attr('disabled',true)
+			    var elementarry = ["submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
 				var paramdata = getformdata(elementarry);
+				paramdata.name= $('#softname').val()
 				paramdata.id = id;
 				$ajax({
 					url:saveUrl,
@@ -63,6 +72,8 @@ var pageModule = function(){
 								window.top.pageModule.initgrid();
 							});
 						}else{
+							saveLoading = false;
+							$("#save").attr('disabled',false)
 							newbootbox.alertInfo('保存失败！');
 						}
 					}
@@ -91,6 +102,8 @@ var pageModule = function(){
 		
 		//取消
 		$("#close").click(function(){
+			saveLoading = false;
+			$("#save").attr('disabled',false)
 			newbootbox.newdialogClose("addModal");
 		});
 	}

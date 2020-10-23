@@ -70,7 +70,7 @@ select{
 .tab2_main{
 	padding-top:50px;
 } 
-/* tab1ÑùÊ½ */
+/* tab1ï¿½ï¿½Ê½ */
 .main-l{
 	position:absolute;
 	left:0;
@@ -105,7 +105,6 @@ select{
 }
 .main-c-absolute span{
 	font-family:"PIXEL LCD-7";
-	src: url("../font/PIXEL LCD-7.TTF");
 	color:#157FE8;
 	font-size:50px;
 }
@@ -141,7 +140,6 @@ select{
 	width:100%;
 	font-size: 42px;
 	font-family:"PIXEL LCD-7";
-	src: url("../font/PIXEL LCD-7.TTF");
 	text-align: center;
 	
 }

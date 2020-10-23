@@ -1,6 +1,7 @@
 var listurl = {"url":"/fyp/roleedit/list","dataType":"text"};//表格数据
 var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var isAdminUrl = {"url":"/fyp/roleedit/getRole","dataType":"text"}; //人员树
 var grid = null;
 
 var pageModule = function () {
@@ -10,7 +11,7 @@ var pageModule = function () {
 						{display:"姓名",name:"userName",width:"15%",align:"center",render:function(rowdata,n){
 							return rowdata.userName;                                         
 						}},
-						{display:"单位",name:"deptName",width:"40%",align:"center",render:function(rowdata){
+						{display:"单位",name:"deptName",width:"35%",align:"center",render:function(rowdata){
 							return rowdata.deptName;                                         
 						}},
 						{display:"角色配置",name:" roleType",width:"15%",align:"center",render:function(rowdata){
@@ -30,10 +31,10 @@ var pageModule = function () {
 							return roleType;                                       
 						}},
 						{display:"配置人",name:"editUserId",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.editUserId;                                         
+							return rowdata.editUserName;
 						}},
-						{display:"配置时间",name:"editTime",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.editTime;                                         
+						{display:"配置时间",name:"editTime",width:"20%",align:"center",render:function(rowdata){
+							return rowdata.editTime||'';
 						}}
 					 ],
 			width:'100%',
@@ -68,7 +69,19 @@ var pageModule = function () {
 	      window.open("/app/fyp/bzProject/html/bzwtgz.html")
 		});
 	}
-	
+	function isAdmin() {
+		$ajax({
+			url: isAdminUrl,
+			type: "GET",
+			success: function(data) {
+				if(data.flag!='1') {
+					$('#setbtn').show();
+					$('#slqkbtn').show()
+					$('#bzbtn').show()
+				}
+			}
+		})
+	}
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
 			url: deptTreeUrl,
@@ -85,6 +98,7 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
+			isAdmin()
         	initother();
 			initgrid();
 			initUnitTree();

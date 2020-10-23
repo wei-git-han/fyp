@@ -1,5 +1,5 @@
 var access_token=getUrlParam("access_token");
-
+var isAdminUrl = {"url":"/fyp/roleedit/getRole","dataType":"text"}; //人员树
 var url1 = {
   "url": "",
   "dataType": "text"
@@ -67,6 +67,19 @@ var pageList = {
 }
 var activeDoType = "rcgz"
 var pageModule = function() {
+  function isAdmin() {
+    $ajax({
+      url: isAdminUrl,
+      type: "GET",
+      success: function(data) {
+        if(data.flag!='1') {
+          $('#set').show()
+        }else{
+          $('#set').hide()
+        }
+      }
+    })
+  }
   var initother = function() {
 	returnDate();
     $('.btn-wrap>.btn').click(function() {
@@ -143,6 +156,7 @@ var pageModule = function() {
   return {
     //加载页面处理程序
     initControl: function() {
+      isAdmin()
       getNum();
       initother();
       setPage(activeType);

@@ -25,15 +25,19 @@ p {
 }
 @font-face {
   font-family:impact;
-  src: url("../font/impact.ttf");
+  src: url("../font/impact.ttf") format('truetype');
 }
 @font-face {
   font-family:"PIXEL LCD-7";
-  src: url("../font/PIXEL LCD-7.TTF");
+  src: url("../font/PIXEL LCD-7.TTF") format('truetype');
+}
+@font-face {
+	font-family:"FX-LED";
+	src: url("../font/FX-LED.TTF") format('truetype');
 }
 @font-face {
   font-family:"YOUSHEBIAOTIHEI-2_0";
-  src: url("../font/YOUSHEBIAOTIHEI-2_0.TTF");
+  src: url("../font/YOUSHEBIAOTIHEI-2_0.TTF")  format('truetype');
 }
 .table_portlet .has-success .help-block, .table_portlet .has-success .help-inline,
 	.table_portlet .has-success .control-label, .table_portlet .has-success .radio,

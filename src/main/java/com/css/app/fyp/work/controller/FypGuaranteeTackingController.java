@@ -3,6 +3,9 @@ package com.css.app.fyp.work.controller;
 import java.util.*;
 
 import com.alibaba.fastjson.JSON;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
+import com.css.addbase.apporgan.service.BaseAppOrganService;
+import com.css.addbase.apporgan.util.OrgUtil;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +33,8 @@ import com.css.app.fyp.work.service.FypGuaranteeTackingService;
 public class FypGuaranteeTackingController {
 	@Autowired
 	private FypGuaranteeTackingService fypGuaranteeTackingService;
+	@Autowired
+	private BaseAppOrganService baseAppOrganService;
 	
 	/**
 	 * 列表
@@ -52,7 +57,13 @@ public class FypGuaranteeTackingController {
 		}
 		//查询列表数据
 		List<FypGuaranteeTacking> fypGuaranteeTackingList = fypGuaranteeTackingService.queryList(map);
-		
+		String organId = "";
+		for(FypGuaranteeTacking f : fypGuaranteeTackingList) {
+			organId = f.getDeptId();
+			List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
+			String orgName= OrgUtil.getParentOrg(organs, organId);
+			f.setDeptName(orgName);
+		}
 		PageUtils pageUtil = new PageUtils(fypGuaranteeTackingList);
         Response.json(new ResponseValueUtils().success(pageUtil));
 	}
