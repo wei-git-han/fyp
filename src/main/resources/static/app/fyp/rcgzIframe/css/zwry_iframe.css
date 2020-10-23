@@ -76,7 +76,6 @@ html, body {
 	font-size: 28px;
 	font-weight: 700;
 	font-family:"PIXEL LCD-7";
-  	src: url("../font/PIXEL LCD-7.TTF");
 }
 .newlayout_footer>div:nth-child(1) span{
 	color: #00FFFF;

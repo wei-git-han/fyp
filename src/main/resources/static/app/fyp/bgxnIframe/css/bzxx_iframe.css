@@ -60,7 +60,9 @@ body {
   background: #007AFF;
   margin-top: 2px;
 }
-
+.tab1_main>div>p{
+  /*margin-bottom: 10px;*/
+}
 .tab1_main>div {
   width: 33.3%;
   float: left;
@@ -68,12 +70,12 @@ body {
 }
 
 .tab1_main>div>span {
-  font-size: 56px;
+  font-size: 72px;
   margin-left: 8px;
   padding: 3px 5px;
-	font-family:"PIXEL LCD-7";
-  src: url("../font/PIXEL LCD-7.TTF");
-	color: #fff;
+  font-family:"FX-LED";
+  color: #fff;
+  line-height: 1.2em;
 }
 .tab1_main>div:nth-child(1) span{
   background:#D46C36;
