@@ -3,12 +3,12 @@ var returnDataUrl = {"url":"/app/fyp/workWeekTable/getFypPersonageWorkWeek","dat
 var saveUrl;
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
-	saveUrl = {"url":"/app/fyp/workWeekTable/update","dataType":"text"};  //edit
+	saveUrl = {"url":"/app/fyp/workWeekTable/update","dataType":"json"};  //edit
 }else{
-	saveUrl = {"url":"/app/fyp/workWeekTable/statementTablesInsert","dataType":"text"};  //save
+	saveUrl = {"url":"/app/fyp/workWeekTable/statementTablesInsert","dataType":"json"};  //save
 }
 
-
+var saveLoading = false
 var pageModule = function(){
 	var initdatafn = function(){
 		$ajax({
@@ -35,6 +35,12 @@ var pageModule = function(){
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
+				if(saveLoading){
+					newbootbox.alert('正在保存中，请稍候！')
+					return
+				}
+				saveLoading = true
+				$("#save").attr('disabled',true)
 			    var elementarry = ["weekTableContent","createdTime"];
 				var paramdata = getformdata(elementarry);
 				paramdata.id=id;
@@ -49,6 +55,8 @@ var pageModule = function(){
 								window.top.frames[name='start_page2'].pageModule.refresh();
 							});
 						}else{
+							saveLoading = false;
+							$("#save").attr('disabled',false)
 							newbootbox.alertInfo('保存失败！');
 						}
 					}
@@ -75,6 +83,8 @@ var pageModule = function(){
 		
 		//取消
 		$("#close").click(function(){
+			saveLoading = false;
+			$("#save").attr('disabled',false)
 			newbootbox.newdialogClose("addModal");
 		});
 	}
