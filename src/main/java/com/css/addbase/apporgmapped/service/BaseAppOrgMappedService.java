@@ -180,4 +180,6 @@ public interface BaseAppOrgMappedService {
 
 	BaseAppOrgMapped getBaseAppOrgMapped(String type);
 
+	BaseAppOrgMapped getUrlByAppId(String appId);
+
 }

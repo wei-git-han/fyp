@@ -27,4 +27,7 @@ public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
             "left join zf_new_fyp_db.fyp_role_edit as c on a.user_id = c.user_id\n" +
             "where b.tree_path like '%'||#{0}||'%' and c.role_type = '3'")
     List<String> findUsersByDeptidAndRoleType(String dpetid);
+
+    @Select("select * from BASE_APP_ORG_MAPPED where APP_ID = #{0}")
+    BaseAppOrgMapped getUrlByAppId(String appId);
 }
