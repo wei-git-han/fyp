@@ -38,6 +38,10 @@ var pageModule = function () {
 			url: gzzbUrl,
 			data:{weekTableType:type,userId:$("#deptId").val()},
 			success: function(res) {
+				if(!res.data){
+					$("#mainContent").html("");
+					return;
+				}
 				if (res.data.length<1) {
 					return;
 				}

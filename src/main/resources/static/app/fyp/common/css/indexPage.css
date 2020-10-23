@@ -308,6 +308,9 @@ body {
   float: right;
 	text-decoration: underline;
 	cursor: pointer;
+	font-family:"YOUSHEBIAOTIHEI-2_0";
+  src: url("../font/YOUSHEBIAOTIHEI-2_0.TTF");
+  font-size: 16px;
 }
 .statistics-wrap .statistics:nth-child(1) p,.statistics:nth-child(1) a {
   color: #007AFF;

@@ -69,18 +69,6 @@ var activeDoType = "rcgz"
 var pageModule = function() {
   var initother = function() {
 	returnDate();
-	$("#setbtn").click(function(){
-        window.open("/app/fyp/set/html/settabel.html")
-	});
-	
-	$("#slqkbtn").click(function(){
-		window.open("/app/fyp/slqk/html/slqktabel.html")
-	});
-	
-	$("#bzbtn").click(function(){
-      window.open("/app/fyp/bzProject/html/bzwtgz.html")
-	});
-	
     $('.btn-wrap>.btn').click(function() {
       setPage(this.dataset['target'])
     });
