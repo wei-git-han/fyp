@@ -12,6 +12,9 @@
 		<if test="organid != null">
 		    and ORGANID = #{organid}
 		</if>
+		<if test="mobile != null and mobile != ''">
+		    and mobile = #{mobile}
+		</if>
 		<if test="userId != null">
 		    and USER_ID = #{userId}
 		</if>

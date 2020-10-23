@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
+import com.css.base.utils.CurrentUser;
 import com.css.base.utils.PageUtils;
 import com.css.base.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
@@ -62,6 +63,26 @@ public class FypRoleEditController {
 	public void info(String id){
 		FypRoleEdit fypRoleEdit = fypRoleEditService.queryObject(id);
 		Response.json(new ResponseValueUtils().success(fypRoleEdit));
+	}
+	
+	/**
+	 * 用户角色信息
+	 */
+	@ResponseBody
+	@RequestMapping("/getRole")
+	public void getRole(){
+		String currentUserId = CurrentUser.getUserId();
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", currentUserId);
+		List<FypRoleEdit> fypRoleEdit = fypRoleEditService.queryList(map);
+		String flag = "1";
+		for(FypRoleEdit r : fypRoleEdit) {
+			if(r.getRoleType() == 0 || r.getRoleType() == 1) {
+				flag = "0";
+				break;
+			}
+		}
+		Response.json(flag);
 	}
 	
 	/**
