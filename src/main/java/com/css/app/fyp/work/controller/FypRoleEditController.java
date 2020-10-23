@@ -79,7 +79,7 @@ public class FypRoleEditController {
 		JSONObject json = new JSONObject();
 		String flag = "1";
 		for(FypRoleEdit r : fypRoleEdit) {
-			if(r.getRoleType() == 0 || r.getRoleType() == 1) {
+			if(r.getRoleType() == 0 || r.getRoleType() == 1 || r.getRoleType() == 2) {
 				flag = "0";
 				break;
 			}
