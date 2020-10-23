@@ -83,7 +83,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
                 returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
             }
             //即时通讯数量
-            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("jstx");
+            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx");
             JSONObject jstxJsonObj = new JSONObject();
             jstxJsonObj.put("flowCount", "5");
             jstxJsonObj.put("typeName", "即时通讯");
@@ -99,7 +99,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             }
             returnJsonArr.add(jstxJsonObj);
             //电子邮件数量
-            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("dzyj");
+            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj");
             JSONObject emailJsonObj = new JSONObject();
             String emailUrl = dzyjUrl;
 
@@ -122,7 +122,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             emailJsonObj.put("applyType", "6");
             returnJsonArr.add(emailJsonObj);
             //请销假数量
-            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("qxj");
+            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj");
             JSONObject qxjJsonObj = new JSONObject();
             String qxjUrl = qxjglUrl;
             JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
@@ -147,7 +147,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
 
             returnJsonArr.add(qxjJsonObj);
             //督查催办数量
-            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getBaseAppOrgMapped("dccb");
+            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb");
             JSONObject dccbJsonObj = new JSONObject();
             String dccbUrl = dbglUrl;
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
