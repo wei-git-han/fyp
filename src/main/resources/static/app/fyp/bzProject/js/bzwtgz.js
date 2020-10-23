@@ -65,9 +65,9 @@ var pageModule = function () {
 	//单位树
 	var initUnitTree = function(){
 	    //姓名
-        $("#name").createSelecttree({
+        $("#name").createUserTree({
             url :userTreeUrl,
-            width : '100%',
+            width : '193px',
             success : function(data, treeobj) {},
             selectnode : function(e, data) {
                 $("#name").val(data.node.text);

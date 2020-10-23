@@ -76,9 +76,9 @@ var pageModule = function () {
 		});*/
 		
 		//提出人
-		$("#submitUserName").createSelecttree({
+		$("#submitUserName").createUserTree({
 			url :userTreeUrl,
-			width : '100%',
+			width : '193px',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
 				$("#submitUserName").val(data.node.text);

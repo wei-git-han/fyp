@@ -88,6 +88,6 @@ select{
 	color: #FFF;
 	margin: 0px 4px;
 }
-.setbtn:hover{
-	color:#fff
+.setbtn:hover,.setbtn:active,.setbtn:focus{
+	color:#fff!important;
 }

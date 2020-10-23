@@ -11,17 +11,21 @@ if(!!id){
 var pageModule = function(){
 	//单位树
 	var initUnitTree = function(){
-	    $("#userName").createSelecttree({
+	    $("#userName").createUserTree({
             url :userTreeUrl,
-            width : '100%',
+            width : '307px',
             success : function(data, treeobj) {},
             selectnode : function(e, data) {
                 $("#userName").val(data.node.text);
                 $("#userId").val(data.node.id);
+                var paretId = data.node.parent;
+                var paretName =  $("#userNametree2").jstree("get_node",paretId).text;  //获取部门id
+                $("#deptName").val(paretName);
+				$("#deptId").val(paretId);
             }
         });
 
-		$("#deptName").createSelecttree({
+	/*	$("#deptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
@@ -29,7 +33,7 @@ var pageModule = function(){
 				$("#deptName").val(data.node.text);
 				$("#deptId").val(data.node.id);
 			}
-		});
+		});*/
 	}
 	
 	var initdatafn = function(){

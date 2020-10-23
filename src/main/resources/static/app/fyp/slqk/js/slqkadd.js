@@ -11,9 +11,9 @@ var pageModule = function(){
 	//树
 	var initUnitTree = function(){
 		//提出人
-		$("#submitUserName").createSelecttree({
+		$("#submitUserName").createUserTree({
 			url :userTreeUrl,
-			width : '100%',
+			width : 'auto',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
 				$("#submitUserName").val(data.node.text);

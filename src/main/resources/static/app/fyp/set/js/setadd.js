@@ -12,7 +12,7 @@ var pageModule = function(){
 	//树
 	var initUnitTree = function(){
 		//单位
-		$("#deptName").createSelecttree({
+		/*$("#deptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
@@ -21,11 +21,11 @@ var pageModule = function(){
 				$("#deptId").val(data.node.id);
 			}
 		});
-		
+		*/
 		//配置人
-		$("#editUserName").createSelecttree({
+		$("#editUserName").createUserTree({
 			url :userTreeUrl,
-			width : '100%',
+			width : '307px',
 			success : function(data, treeobj) {},
 			selectnode : function(e, data) {
 				$("#editUserName").val(data.node.text);
@@ -34,13 +34,17 @@ var pageModule = function(){
 		});
 
 		//姓名
-        $("#userName").createSelecttree({
+        $("#userName").createUserTree({
             url :userTreeUrl,
-            width : '100%',
+            width : '307px',
             success : function(data, treeobj) {},
             selectnode : function(e, data) {
-                $("#userName").val(data.node.text);
+        		$("#userName").val(data.node.text);
                 $("#userId").val(data.node.id);
+                var paretId = data.node.parent;
+                var paretName =  $("#userNametree2").jstree("get_node",paretId).text;  //获取部门id
+                $("#deptName").val(paretName);
+				$("#deptId").val(paretId);
             }
         });
 	}
@@ -60,7 +64,7 @@ var pageModule = function(){
 		    language:"zh-CN",
 		    autoclose: true,
 		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd hh:mm",
+		    format: "yyyy-mm-dd hh:ii",
 		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
 		
