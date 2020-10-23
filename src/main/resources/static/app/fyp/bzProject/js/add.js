@@ -91,9 +91,9 @@ var pageModule = function(){
 		});
 		
 		//重置
-		$("#reset").click(function(){
+		/*$("#reset").click(function(){
 			removeInputData(["userName","userId","deptId","deptName","phone","warrantyTime","source","remark","status","statusTime","measures"]);
-		});
+		});*/
 		
 		//取消
 		$("#close").click(function(){

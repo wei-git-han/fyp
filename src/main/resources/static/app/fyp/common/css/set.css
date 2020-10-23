@@ -80,3 +80,14 @@ select{
 	padding:4px 5px;
 	color:#FEB64D;
 }
+.setbtn{
+	padding: 5px 25px;
+	background: #1C67E3;
+	border: 1px solid #1C67E3;
+	border-radius: 4px !important;
+	color: #FFF;
+	margin: 0px 4px;
+}
+.setbtn:hover{
+	color:#fff
+}

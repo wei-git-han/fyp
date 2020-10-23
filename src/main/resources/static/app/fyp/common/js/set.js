@@ -57,9 +57,16 @@ var pageModule = function () {
 			initgrid();
 		});*/
 		$("#setbtn").click(function(){
-			window.open("/app/fyp/set/html/settabel.html")
+	        window.open("/app/fyp/set/html/settabel.html")
 		});
-
+		
+		$("#slqkbtn").click(function(){
+			window.open("/app/fyp/slqk/html/slqktabel.html")
+		});
+		
+		$("#bzbtn").click(function(){
+	      window.open("/app/fyp/bzProject/html/bzwtgz.html")
+		});
 	}
 	
 	var initUnitTree = function() {
