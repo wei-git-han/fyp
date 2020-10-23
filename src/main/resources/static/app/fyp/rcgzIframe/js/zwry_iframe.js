@@ -142,7 +142,7 @@ var pageModule = function () {
 							'</li>'); */
 							
 				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
-							'	<a style="padding-left:' + (n * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
+							'	<a style="padding-left:' + ((n-1) * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
 							'		<span class="newstatusL">'+img+text+'</span>'+
 							'		<span class="newstatusR"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
 							'	</a>'+

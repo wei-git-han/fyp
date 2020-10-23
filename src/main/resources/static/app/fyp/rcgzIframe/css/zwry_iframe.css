@@ -221,9 +221,12 @@ html, body {
 	width: 15px;
 	height: 15px;
 } */
-
+.pagemenu ul li a {
+	border:1px solid transparent;
+}
 .pagemenu ul li.active>a, .pagemenu ul li>a:hover {
-	background: #168BE5;
+	border:1px solid #00A5FE;
+	box-shadow: 0px 0px 10px #00A5FE inset;
 }
 
 .faimg {
@@ -290,13 +293,19 @@ html, body {
 }
 .newtitle{
 	float: left;
-	padding: 6px 15px;
+	/* padding: 6px 15px; */
+	height:34px;
+	line-height:29px;
+	text-align: center;
+	width:160px;
 	border: 1px solid #3184FF;
-	border-radius: 4px !important;
+	border-radius: 7px !important;
 	font-size: 14px;
+	box-shadow: 0px 0px 10px #3184FF inset;
 }
 .newfilter{
 	float:right;
+	
 }
 .newfilter input{
 	background: transparent;
@@ -314,13 +323,16 @@ html, body {
 }
 .newstatusR font{
 	border: 1px solid #0097FF;
-	padding: 0px 5px;
-	border-radius: 4px !important;
-	color: #0097FF;
-	font-size:14px;
-	vertical-align: top;
-	margin-top: 2px;
-	display: inline-block;
+    padding: 2px 5px;
+    border-radius: 7px !important;
+    color: #0097FF;
+    font-size: 14px;
+    vertical-align: top;
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    box-shadow: 0px 0px 5px #0097FF inset;
+    
 }
 .searchBox{
 	position: absolute;
@@ -371,11 +383,16 @@ html, body {
     border-radius: none !important;
 }
 .filterbtn{
-	padding: 6px 15px;
+	display:inline-block;
+	height:34px;
+	line-height:29px;
+	text-align: center;
+	width:72px;
 	border: 1px solid #03C7C1;
-	border-radius: 4px !important;
+	border-radius: 7px !important;
 	font-size: 14px;
 	cursor: pointer;
+	box-shadow: 0px 0px 10px #03C7C1 inset;
 }
 
 .form-group label{
