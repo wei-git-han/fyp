@@ -7,6 +7,7 @@ import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.LinkedMultiValueMap;
@@ -43,19 +44,21 @@ public class GetJsonData {
      * @return List<JSONObject>
      */
     public List<JSONObject> getJson(LinkedMultiValueMap<String, Object> map,String type){
+
         jsons = new ArrayList<>();
         String prefix = this.getPrefix(type);
         List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
         String token = SSOAuthFilter.getToken();
         for (Map<String, Object> data:appIdAndDeptIdNameAll) {
-            cacheThread.execute(new Runnable() {
-                @Override
-                public void run() {
+//            cacheThread.execute(new Runnable() {
+//                @Override
+//                public void run() {
+                    System.out.println("`!!");
                     String url = "";
                     switch (type){
                         case "办文":
                             //公文处理
-                            BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                            BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
                             url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
                             break;
                         case "办会":
@@ -69,9 +72,12 @@ public class GetJsonData {
                             url = manageThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_DCCB_MANAGETHING;
                             break;
                     }
+                    if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
+                        map.add("deptid", data.get("ORG_ID").toString());
+                    }
                     setData(data,url,map,token);
-                }
-            });
+//                }
+//            });
         }
         return this.getDataAll(appIdAndDeptIdNameAll.size());
     }
