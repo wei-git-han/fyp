@@ -3,6 +3,14 @@ var delUrl = {"url":"/fyp/guaranteetacking/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树--待定
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var grid = null;
+var isAdmin = getUrlParam('isAdmin')||true;
+if(isAdmin==true){
+	$('.adminDiv').show()
+	$('.userDiv').hide()
+}else{
+	$('.adminDiv').hide()
+	$('.userDiv').show()
+}
 var pageModule = function () {
 	var initgrid = function(){
 		  grid = $("#gridcont").createGrid({

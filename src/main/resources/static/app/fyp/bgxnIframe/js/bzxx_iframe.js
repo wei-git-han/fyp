@@ -106,7 +106,7 @@ var pageModule = function () {
 							problemName="已完成";
 						break;
 					}
-					arryHtml+=  '<div class="card-parent">' +
+					arryHtml+=  '<div class="card-parent" onclick="toBzInfo()" style="cursor: pointer">' +
 								'	<div class="card '+problemClass+'">'+
 			            		'		<div class="card_top">'+
 			            		'			<img src="../../common/images/user.png" />'+
@@ -143,6 +143,9 @@ var pageModule = function () {
         }
     }
 }();
+function toBzInfo() {
+	window.open('/app/fyp/bzProject/html/bzwtgz.html?isAdmin=false')
+}
 
 
 
