@@ -79,6 +79,14 @@ public class BaseAppOrganController {
 		return list;
 	}
 	
+	@RequestMapping(value = "/getParent")
+	@ResponseBody
+	public Object getParent(String organId) {
+		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
+		String orgName= OrgUtil.getParentOrg(organs, organId);
+		return orgName;
+	}
+	
 	/**
 	 * 只获取root节点下的叶子节点
 	 */

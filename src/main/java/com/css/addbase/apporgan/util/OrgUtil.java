@@ -635,6 +635,22 @@ public class OrgUtil {
 		}
 		return subOrgs;
 	}
+	
+	public static String getParentOrg(List<BaseAppOrgan> organs, String organId) {
+		Map<String, BaseAppOrgan> orgMap = orgListToMapByOrganId(organs);
+		BaseAppOrgan org = getBaseAppOrgan(orgMap, organId);
+		BaseAppOrgan parentOrg = getBaseAppOrgan(orgMap, org.getParentId());
+		String orgName = org.getName();
+		if(StringUtils.equals(org.getParentId(), "root")) {
+			return orgName;
+		}
+		if(!StringUtils.equals(parentOrg.getParentId(), "root")) {
+			orgName = getParentOrg(organs,parentOrg.getId()) + "," + orgName;
+		}else {
+			orgName = parentOrg.getName()+","+orgName;
+		}
+		return orgName;
+	}
 
 	/**
 	 * 根据部门Id获取部门用户信息
