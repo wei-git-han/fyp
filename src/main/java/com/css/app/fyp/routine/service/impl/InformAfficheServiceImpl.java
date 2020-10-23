@@ -8,6 +8,15 @@ import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.service.InformAfficheService;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,9 +83,26 @@ public class InformAfficheServiceImpl implements InformAfficheService {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;
         }
+        List<Map<String,String>> resList = (List) jsonData.get("resList");
+        JSONObject releaseTime = new JSONObject();
+        long date_temp = 0;
+        String date_String = "0";
+        for(Map<String,String> res : resList) {
+        	if(res.get("releaseTime")!=null) {
+        		date_temp = (long) net.sf.json.JSONObject.fromObject(res.get("releaseTime")).get("time");
+        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        		date_String = sdf.format(new Date(date_temp));
+        	}
+        	res.put("releaseTime", date_String);
+        }
         return jsonData;
     }
 
+    public static void main(String args[]) {
+    	String[] a = "{date=30, hours=10, seconds=53, month=8, timezoneOffset=-480, year=120, minutes=29, time=1601432993485, day=3}".split(",");
+    	System.out.print(a);
+    }
+    
     /**
      * @Description 局公告/部公告/系统公告详情
      * @Author gongan
