@@ -1,6 +1,8 @@
 package com.css.addbase.apporgan.controller;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,6 +78,27 @@ public class BaseAppUserController {
 		}
 		result.put("rows", jsons);
 		Response.json(result);
+	}
+	
+	/**
+	 * 获取指定部门下的人员列表
+	 * @param organId 组织机构Id
+	 */
+	@RequestMapping(value = "/getUser")
+	@ResponseBody
+	public void getUser(String userId,String mobile) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("mobile", mobile);
+		List<BaseAppUser> users = baseAppUserService.queryList(map);
+		
+		JSONObject json = new JSONObject();
+		if(users!=null && users.size()>0) {
+			json.put("id", users.get(0).getId());
+			json.put("orgId", users.get(0).getOrganid());
+			json.put("mobile", users.get(0).getMobile());
+		}
+		Response.json(json);
 	}
 	
 	/**
