@@ -8,6 +8,7 @@ import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.StringUtils;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.LinkedMultiValueMap;
@@ -33,7 +34,7 @@ public class GetJsonData {
 
     private ExecutorService cacheThread = Executors.newCachedThreadPool();
 
-    private List<JSONObject> jsons = null;
+//    private List<JSONObject> jsons = null;
 
     private List<String> strs = null;
 
@@ -45,7 +46,7 @@ public class GetJsonData {
      */
     public List<JSONObject> getJson(LinkedMultiValueMap<String, Object> map,String type){
 
-        jsons = new ArrayList<>();
+        List<JSONObject> jsons = new ArrayList<>();
         String prefix = this.getPrefix(type);
         List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
         String token = SSOAuthFilter.getToken();
@@ -73,13 +74,15 @@ public class GetJsonData {
                             break;
                     }
                     if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
-                        map.add("deptid", data.get("ORG_ID").toString());
+//                        map.remove("deptid");
+                        map.add("deptid",getUsers(data.get("ORG_ID").toString()));
                     }
-                    setData(data,url,map,token);
+                    setData(data,url,map,token,jsons);
 //                }
 //            });
         }
-        return this.getDataAll(appIdAndDeptIdNameAll.size());
+//        return this.getDataAll(appIdAndDeptIdNameAll.size(),jsons);
+        return jsons;
     }
 
     /**
@@ -88,13 +91,13 @@ public class GetJsonData {
      * @return List<String>
      */
     public List<String> getJson(String type){
-        jsons = new ArrayList<>();
+//        jsons = new ArrayList<>();
         String prefix = this.getPrefix(type);
         List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
         String token = SSOAuthFilter.getToken();
-        cacheThread.execute(new Runnable() {
-            @Override
-            public void run() {
+//        cacheThread.execute(new Runnable() {
+//            @Override
+//            public void run() {
                 String url = "";
                 switch (type){
                     case "在线":
@@ -109,8 +112,8 @@ public class GetJsonData {
                         break;
                 }
                 setData(url,new LinkedMultiValueMap(),token);
-            }
-        });
+//            }
+//        });
         return this.getDataAll();
     }
 
@@ -150,7 +153,7 @@ public class GetJsonData {
      * @param map
      * @return JSONObject
      */
-    private void setData(Map<String,Object> datamap,String url, LinkedMultiValueMap<String, Object> map,String token){
+    private void setData(Map<String,Object> datamap, String url, LinkedMultiValueMap<String, Object> map, String token, List<JSONObject> jsons){
         JSONObject jsonData = null;
         if(CrossDomainUtil.getTokenByJsonData(url,map,token)!=null){
             jsonData = CrossDomainUtil.getTokenByJsonData(url,map,token);
@@ -159,7 +162,10 @@ public class GetJsonData {
             jsonData.put("deptId",datamap.get("ORG_ID"));
             jsonData.put("deptName",datamap.get("ORG_NAME"));
             jsons.add(jsonData);
+        }else{
+            jsons.add(jsonData);
         }
+        map.remove("deptid");
     }
 
     /**
@@ -180,20 +186,24 @@ public class GetJsonData {
      * @param size
      * @return List<JSONObject>
      */
-    private List<JSONObject> getDataAll(int size){
-        while (true){
-            if(jsons.size()==size){
-                break;
-            }else{
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return jsons;
-    }
+//    private List<JSONObject> getDataAll(int size,List<JSONObject> jsons){
+//        List<JSONObject>  newJsons = null;
+////        while (true){
+//            if(jsons.size()==size){
+//                newJsons = new ArrayList<>();
+//                newJsons.addAll(jsons);
+//                jsons.clear();
+//                break;
+//            }else{
+//                try {
+//                    Thread.sleep(10);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+////        }
+//        return newJsons;
+//    }
 
     /**
      * 返回所有部数据
@@ -219,6 +229,19 @@ public class GetJsonData {
     public String getStringDate(Date time){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
         return simpleDateFormat.format(time);
+    }
+
+    private String getUsers(String dpetid){
+        //获取单位下且在编的人员
+        List<String> userList = baseAppOrgMappedService.findUsersByDeptidAndRoleType(dpetid);
+        StringBuilder sb = new StringBuilder();
+        for (String userid: userList) {
+            sb.append(userid+",");
+        }
+        if(StringUtils.isBlank(sb.toString())) {
+            return "";
+        }
+        return sb.toString().substring(0,sb.length()-1);
     }
 
 }
