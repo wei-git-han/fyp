@@ -98,10 +98,10 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         return jsonData;
     }
 
-    public static void main(String args[]) {
-    	String[] a = "{date=30, hours=10, seconds=53, month=8, timezoneOffset=-480, year=120, minutes=29, time=1601432993485, day=3}".split(",");
-    	System.out.print(a);
-    }
+//    public static void main(String args[]) {
+//    	String[] a = "{date=30, hours=10, seconds=53, month=8, timezoneOffset=-480, year=120, minutes=29, time=1601432993485, day=3}".split(",");
+//    	System.out.print(a);
+//    }
     
     /**
      * @Description 局公告/部公告/系统公告详情
