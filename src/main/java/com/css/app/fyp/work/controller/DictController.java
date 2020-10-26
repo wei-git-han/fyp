@@ -132,6 +132,7 @@ public class DictController {
 			for (Map<String,Object> map:list) {
 				if(dept.equals(map.get("DEPT_ID").toString())){
 					jo.put("dictType",map.get("TYPE"));
+					break;
 				}else{
 					jo.put("dictType","0");
 				}
