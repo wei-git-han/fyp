@@ -68,6 +68,9 @@ var pageModule = function () {
 		$("#bzbtn").click(function(){
 	      window.open("/app/fyp/bzProject/html/bzwtgz.html")
 		});
+		$('#zbManage').click(function(){
+			window.open("/app/fyp/set/html/departSetting.html")
+		})
 	}
 	function isAdmin() {
 		$ajax({
@@ -75,9 +78,7 @@ var pageModule = function () {
 			type: "GET",
 			success: function(data) {
 				if(data.flag!='1') {
-					$('#setbtn').show();
-					$('#slqkbtn').show()
-					$('#bzbtn').show()
+					$('.setbtn').show();
 				}
 			}
 		})
