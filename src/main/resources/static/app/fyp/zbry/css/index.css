@@ -8,6 +8,11 @@ body {
 	font-family: "Microsoft Yahei";
 	overflow: hidden;
 }
+.wh100{
+	width: 100%;
+	height: 100%;
+	position:relative
+}
 .newlayout-head{
 	position:absolute;
 	top:0;
