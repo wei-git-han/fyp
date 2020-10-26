@@ -14,16 +14,19 @@ var pageModule = function () {
 						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
 							return rowdata.desc;                                         
 						}},
-						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
+						{display:"提出时间",name:"submitTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.submitTime;                                         
 						}},
-						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+						{display:"提出单位",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.submitDeptName;
+						}},
+						{display:"提出人",name:"submitUserName",width:"6%",align:"center",render:function(rowdata){
 							return rowdata.submitUserName;                                         
 						}},
-						{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
+						{display:"解决时限",name:"solveTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.solveTime;                                         
 						}},
-						{display:"工作进展",name:"march",width:"12%",align:"center",render:function(rowdata){
+						{display:"工作进展",name:"march",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.march;                                         
 						}},
 						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
@@ -64,7 +67,7 @@ var pageModule = function () {
 	
 	//树
 	var initUnitTree = function(){
-		/*//单位
+		//单位
 		$("#submitDeptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
@@ -73,7 +76,7 @@ var pageModule = function () {
 				$("#submitDeptName").val(data.node.text);
 				$("#submitDeptId").val(data.node.id);
 			}
-		});*/
+		});
 		
 		//提出人
 		$("#submitUserName").createUserTree({

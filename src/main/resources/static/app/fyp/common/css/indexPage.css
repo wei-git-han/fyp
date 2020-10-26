@@ -335,7 +335,9 @@ body {
   color: #F7C517;
 }
 
-
+.modal-header{
+  /*background-color: #1C67E3;*/
+}
 .newlayout-l {
   transform: rotateX(0deg) rotateY(60deg) rotateZ(0deg) scaleX(0.8) scaleY(0.9);
   left: -4%;
