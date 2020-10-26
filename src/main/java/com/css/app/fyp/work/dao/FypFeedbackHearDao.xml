@@ -35,6 +35,7 @@
 			<if test="offset != null and limit != null">
 				limit #{offset}, #{limit}
 			</if>
+		order by SUBMIT_TIME desc
 	</select>
 	
  	<select id="queryTotal" resultType="int">

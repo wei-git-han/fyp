@@ -50,7 +50,11 @@ public class FypRoleEditController {
 		map.putAll(paramMap);
 		//查询列表数据
 		List<FypRoleEdit> fypRoleEditList = fypRoleEditService.queryList(map);
-		
+		if(fypRoleEditList != null && fypRoleEditList.size() > 0){
+			for(FypRoleEdit fypRoleEdit : fypRoleEditList){
+				String deptId = fypRoleEdit.getDeptId();
+			}
+		}
 		PageUtils pageUtil = new PageUtils(fypRoleEditList);
 		Response.json(new ResponseValueUtils().success(pageUtil));
 	}

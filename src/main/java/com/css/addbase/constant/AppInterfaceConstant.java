@@ -574,7 +574,7 @@ public class AppInterfaceConstant {
 
     /********************************************************FYP(日常工作)start****************************************************************/
 
-    public final static String WEB_INTERFACE_QXJ_TO_FYP = "/app/qxjgl/leaveorback/qjCompletedUserCount";
+    public final static String WEB_INTERFACE_QXJ_TO_FYP = "/app/qxjgl/api/getQjNum";
 
     public final static String WEB_INTERFACE_QXJ_DATA_TO_FYP = "/app/qxjgl/leaveorback/qjCompletedUser";
 
@@ -773,4 +773,8 @@ public class AppInterfaceConstant {
      * 通讯录，根据id获取详情接口
      */
     public final static String WEB_INERFACE_TXL_MANAGETHING = "/txlUser/listuser";
+
+    public final static String WEB_INTERFACE_QXJ_statistics = "/app/qxjgl/leaveOrBack/getXLGLNumber";
+
+    public final static String WEB_INTERFACE_XLGLZXR = "/api/online/";
 }

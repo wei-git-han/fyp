@@ -156,7 +156,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
             dccbJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {
-                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("total"));
+                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("count"));
             }else {
                 dccbJsonObj.put("flowCount", "0");
             }

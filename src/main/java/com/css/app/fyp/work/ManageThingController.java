@@ -2,8 +2,10 @@ package com.css.app.fyp.work;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.CurrentUser;
 import com.css.base.utils.Response;
 import com.css.base.utils.StringUtils;
 import org.slf4j.Logger;
@@ -31,6 +33,8 @@ public class ManageThingController {
 
     @Autowired
     private GetJsonData getJsonData;
+    @Autowired
+    private BaseAppUserService baseAppUserService;
 
     @Value("${csse.work.table}")
     private  String url;
@@ -42,6 +46,9 @@ public class ManageThingController {
     @ResponseBody
     @RequestMapping("/dbCount")
     public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
+        if(StringUtils.isBlank(deptid)){
+            deptid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();

@@ -57,6 +57,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     @Value("${qxj.fz}")
     private String qxjfzUrl;
+    @Value("${csse.mircoservice.zaiwei}")
+    private String urls;
 
     /**
      * 在线人
@@ -412,11 +414,15 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             dataMap =getOrgCountMap(onlineUsers);
         }
         Integer zxCount = 0;
-        if(!dataMap.isEmpty()) {
-            Object value = dataMap.get(id);
-            if(value!=null) {
-                zxCount= Integer.parseInt(value.toString());
-            }
+//        if(!dataMap.isEmpty()) {
+//            Object value = dataMap.get(id);
+//            if(value!=null) {
+//                zxCount= Integer.parseInt(value.toString());
+//            }
+//        }
+        List<String> listZxCout = getZxUser();
+        if(listZxCout != null && listZxCout.size() > 0){
+            zxCount = listZxCout.size();
         }
         //离线人数  总人数 - 在线人数
         int lxCount = sumCount-zxCount;
@@ -428,7 +434,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         result.put("zx", zxCount);
         result.put("lx", lxCount);
         int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
-        result.put("qj", qjSum);
+        int qj = (Integer) jsonObj.get("num");
+        result.put("qj", qj);
         //办公数量   总数-请假的数 =办公的数
         //（目前和 暂时和在线离线 一样，  当前无出差APP 统计的情况 ）
         int bgSum=zxCount-qjSum;
@@ -469,13 +476,127 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             jsons.add(jsonUser);
         }
         List<BaseAppOrgan> organs = baseAppOrganService.findByParentId(id);
-        for (BaseAppOrgan organ:organs) {
-            jsons.add(getUserTree(organ.getId()));
-        }
+//        for (BaseAppOrgan organ:organs) {
+//            jsons.add(getUserTree(organ.getId()));
+//        }
         if (jsons.size()>0) {
             result.put("child", jsons);
         }
         return result;
+    }
+
+    private List<String> getUserArray() {
+        List<String> accountList = new ArrayList<String>();
+        LinkedMultiValueMap<String, Object> infoMap = new LinkedMultiValueMap<String, Object>();
+        infoMap.add("_content_type", "application/x-www-form-urlencoded");
+        String url = urls + AppInterfaceConstant.WEB_INTERFACE_XLGLZXR;
+        try {
+            // 请假人数远程服务地址(获取在线人数)
+            String reJson = RestTemplateUtil.postJSONString(url, infoMap);
+            String accounts = reJson.substring(1, reJson.length() - 1).replace("\"", "");
+            String[] accountArray = accounts.split("\\s*,\\s*");
+            accountList = new ArrayList<String>(Arrays.asList(accountArray));
+        } catch (Exception e) {
+            // logger.info("PersonManagementController在线人员ID-LIST");
+            e.printStackTrace();
+        }
+        return accountList;
+
+    }
+
+    private JSONObject statistics(){
+        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+        List<String> list = getUserArray();
+        JSONObject jsonData = this.getNumber(map);
+        int userIdList = 0;
+        userIdList=this.userIdNumber(null, list);// 实际在位人数
+        Integer object = 0;
+        Integer num = 0;
+        if (jsonData != null) {
+            Object object2 = jsonData.get("yzwrs");
+            object = (Integer) object2;// 应在位人数
+            Object object3 = jsonData.get("qjrs");
+            num = (Integer) object3;
+        }
+        jsonData.put("sjzwrs", userIdList);
+        Integer sum = object - num;
+        if (userIdList == 0 && object == 0 && object != null) {
+            jsonData.put("zwlv", "0");
+        } else {
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+            if (userIdList > 0) {
+                if (sum > 0) {
+                    // float zwRate = (float) ((new BigDecimal((float) object /
+                    // userIdList).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()) * 100);
+                    float zwRate = ((float) userIdList / (float) sum) * 100;
+                    String format = decimalFormat.format(zwRate);
+                    if (zwRate > 0) {
+                        jsonData.put("zwlv", format);
+                    } else {
+                        jsonData.put("zwlv", "0");
+                    }
+                }else {
+                    jsonData.put("zwlv", "0");
+                }
+                // long zwr =((long)userIdList /(long)yzwrs);
+                // float zwRate = zwr*100; //人员在位率
+
+            } else {
+                jsonData.put("zwlv", "0");
+            }
+        }
+        return jsonData;
+    }
+
+    private int userIdNumber(String organId, List<String> list) {
+        int i = 0;
+        if (com.css.base.utils.StringUtils.isNotBlank(organId)) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("orgId", organId);
+            map.put("departmentId", organId);
+            List<BaseAppUser> queryListByOrganid = baseAppUserService.queryByOrganidTREEPATH(map);
+            for (int j = 0; j < list.size(); j++) {
+                for (BaseAppUser baseAppUser : queryListByOrganid) {
+                    if(baseAppUser.getAccount().equals(list.get(j))) {
+                        i++;
+                    }
+                }
+            }
+        } else {
+            if (list.size() > 0) {
+                i = list.size();
+            }
+        }
+
+        return i;
+    }
+
+    private JSONObject getNumber(LinkedMultiValueMap<String, Object> map) {
+        // 获取清销假app的接口
+        String elecPath = baseAppOrgMappedService.getWebUrl(AppConstant.APP_QXJGL,
+                AppInterfaceConstant.WEB_INTERFACE_QXJ_statistics);
+        JSONObject jsonData = CrossDomainUtil.getJsonData(elecPath, map);
+        return jsonData;
+    }
+
+    private List<String> getZxUser() {
+        List<String> accountList = new ArrayList<String>();
+        LinkedMultiValueMap<String, Object> infoMap = new LinkedMultiValueMap<String, Object>();
+        infoMap.add("_content_type", "application/x-www-form-urlencoded");
+        String url = urls + AppInterfaceConstant.WEB_INTERFACE_XLGLZXR;
+        try {
+            // 请假人数远程服务地址(获取在线人数)
+            String reJson = RestTemplateUtil.postJSONString(url, infoMap);
+            String accounts = reJson.substring(1, reJson.length() - 1).replace("\"", "");
+            String[] accountArray = accounts.split("\\s*,\\s*");
+            accountList = new ArrayList<String>(Arrays.asList(accountArray));
+        } catch (Exception e) {
+            // logger.info("PersonManagementController在线人员ID-LIST");
+            e.printStackTrace();
+        }
+        return accountList;
+
     }
 
     private List<Map<String,Object>> getUserStateMapList() {
