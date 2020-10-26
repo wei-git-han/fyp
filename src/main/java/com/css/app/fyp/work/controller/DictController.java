@@ -4,18 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
+import com.css.addbase.apporgan.service.BaseAppOrganService;
+import com.css.addbase.apporgan.service.BaseAppUserService;
+import com.css.addbase.apporgan.util.OrgUtil;
+import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.GwPageUtils;
+import com.css.base.utils.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
-import com.css.base.utils.PageUtils;
-import com.css.base.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
-import com.css.base.utils.Response;
 import com.css.app.fyp.work.entity.Dict;
 import com.css.app.fyp.work.service.DictService;
 
@@ -32,21 +35,26 @@ import com.css.app.fyp.work.service.DictService;
 public class DictController {
 	@Autowired
 	private DictService dictService;
+	@Autowired
+	private BaseAppOrganService baseAppOrganService;
+	@Autowired
+	private BaseAppOrgMappedService baseAppOrgMappedService;
 	
 	/**
 	 * 列表
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public void list(Integer page, Integer limit){
+	public void list(Integer page, Integer limit,String type){
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
+		map.put("type",type);
 		
 		//查询列表数据
 		List<Dict> dictList = dictService.queryList(map);
 		
 		GwPageUtils pageUtil = new GwPageUtils(dictList);
-		Response.json("page",pageUtil);
+		Response.json(new ResponseValueUtils().success(pageUtil));
 	}
 	
 	
@@ -112,6 +120,15 @@ public class DictController {
 	@RequestMapping(value = "/findConfigDept")
 	public void findConfigDept(){
 		List<Map<String,Object>> list = dictService.findDeptids();
+
+		String organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
+		JSONObject lists= OrgUtil.getOrganTree(organs, organId);
+		JSONArray children = (JSONArray)lists.get("children");
+		/*for (:
+			 ) {
+			
+		}*/
 		Response.json(new ResponseValueUtils().success(list));
 	}
 
