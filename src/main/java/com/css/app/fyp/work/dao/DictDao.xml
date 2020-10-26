@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.work.dao.DictDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.work.entity.Dict">
+		select * from DICT where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.work.entity.Dict">
+		select * from DICT 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from DICT 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.work.entity.Dict">
+		insert into DICT
+		(
+			"ID", 
+			"TYPE", 
+			"DICT_NAME", 
+			"ORDER_NUM", 
+			"DICT_TYPE", 
+			"MEMO", 
+			"DICT_VALUE"
+		)
+		values
+		(
+			#{id}, 
+			#{type}, 
+			#{dictName}, 
+			#{orderNum}, 
+			#{dictType}, 
+			#{memo}, 
+			#{dictValue}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.work.entity.Dict">
+		update DICT 
+		<set>
+			<if test="type != null">"TYPE" = #{type}, </if>
+			<if test="dictName != null">"DICT_NAME" = #{dictName}, </if>
+			<if test="orderNum != null">"ORDER_NUM" = #{orderNum}, </if>
+			<if test="dictType != null">"DICT_TYPE" = #{dictType}, </if>
+			<if test="memo != null">"MEMO" = #{memo}, </if>
+			<if test="dictValue != null">"DICT_VALUE" = #{dictValue}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from DICT where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from DICT where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="findDeptids" resultType="java.util.Map">
+		select a.*,b.name as NAME
+		from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" as a
+		left join "ZF_NEW_FYP_DB"."base_app_organ" as b on a.dept_id = b.ID
+		where a.DEPT_ID is not null and a.DEPT_ID != ''
+	</select>
+	<select id="findUserids" resultType="java.util.Map">
+		select a.*,b.truename as TRUENAME from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" as a
+		left join "ZF_NEW_FYP_DB"."base_app_user" as b on a.user_id = b.ID
+		where a.USER_ID is not null and a.USER_ID != ''
+	</select>
+
+	<insert id="insertConfigUser" parameterType="com.css.app.fyp.work.entity.Dict">
+		insert into "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT"
+		(
+		"ID",
+		"USER_ID",
+		"CREATE_TIME"
+		)
+		values
+		(
+		#{0},
+		#{1},
+		#{2}
+		)
+	</insert>
+	<insert id="insertConfigDept" parameterType="com.css.app.fyp.work.entity.Dict">
+		insert into "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT"
+		(
+		"ID",
+		"DEPT_ID",
+		"CREATE_TIME",
+		"TYPE"
+		)
+		values
+		(
+		#{0},
+		#{1},
+		#{2},
+		#{3}
+		)
+	</insert>
+</mapper>

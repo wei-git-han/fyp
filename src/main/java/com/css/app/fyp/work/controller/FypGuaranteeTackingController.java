@@ -153,6 +153,29 @@ public class FypGuaranteeTackingController {
 				try {
 					fypGuaranteeTacking = new FypGuaranteeTacking();
 					fypGuaranteeTacking.setId(UUIDUtils.random());
+
+					//单位名称
+					fypGuaranteeTacking.setDeptName("1");
+					//单位id
+					fypGuaranteeTacking.setDeptId("1");
+					//用户id
+					fypGuaranteeTacking.setUserId("1");
+					//用户名称
+					fypGuaranteeTacking.setUserName("1");
+					//联系电话
+					fypGuaranteeTacking.setPhone("1");
+					//报修时间
+					fypGuaranteeTacking.setWarrantyTime(new Date());
+					//问题来源
+					fypGuaranteeTacking.setSource("1");
+					//问题描述
+					fypGuaranteeTacking.setRemark("1");
+					//状态
+					fypGuaranteeTacking.setStatus("1");
+					//更新时间
+					fypGuaranteeTacking.setStatusTime(new Date());
+					//处理措施
+					fypGuaranteeTacking.setMeasures("1");
 					fypGuaranteeTackingService.save(fypGuaranteeTacking);
 				} catch (Exception e) {
 					e.printStackTrace();
