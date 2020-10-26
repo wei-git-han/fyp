@@ -28,17 +28,19 @@ var pageModule = function () {
 	
 	var object1 = {};
 	var initPlan = function(type){
-		var weekTableDate='';
+		var startDate='';
+		var endDate='';
 		if(type=="bjzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
-			weekTableDate = $("#searchDate").val();
+			startDate=$("#startDate").val();
+			endDate=$("#endDate").val();
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val(),weekTableDate:weekTableDate},
+			data:{weekTableType:type,userId:$("#deptId").val(),startDate:startDate,endDate:endDate},
 			success: function(res) {
 				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
@@ -170,12 +172,19 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
-		$(".date-picker").datepicker({
-			language: "zh-CN",
-			rtl: Metronic.isRTL(),
-			orientation: "",
-			autoclose: true,
-			format: "yyyy-mm-dd"
+		$(".form_datetime").datetimepicker({
+		    language:"zh-CN",
+		    autoclose: true,
+		    isRTL: Metronic.isRTL(),
+		    format: "yyyy-mm-dd HH:ii",
+		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
+		});
+		$(".form_datetime2").datetimepicker({
+		    language:"zh-CN",
+		    autoclose: true,
+		    isRTL: Metronic.isRTL(),
+		    format: "yyyy-mm-dd HH:ii",
+		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		}).on("changeDate",function(){
 			getRole('grzb');
 		});

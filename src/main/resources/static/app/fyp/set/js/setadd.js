@@ -12,43 +12,26 @@ var saveLoading = false
 var pageModule = function(){
 	//树
 	var initUnitTree = function(){
-		//单位
-		/*$("#deptName").createSelecttree({
-			url :deptTreeUrl,
-			width : '100%',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#deptName").val(data.node.text);
-				$("#deptId").val(data.node.id);
-			}
-		});
-		*/
-		//配置人
-		$("#editUserName").createUserTree({
-			url :userTreeUrl,
-			width : '307px',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#editUserName").val(data.node.text);
-				$("#editUserId").val(data.node.id);
-			}
-		});
-
 		//姓名
-        $("#userName").createUserTree({
+        $("#userName").createcheckboxtree({
             url :userTreeUrl,
             width : '307px',
-            success : function(data, treeobj) {},
-            selectnode : function(e, data) {
-        		$("#userName").val(data.node.text);
-                $("#userId").val(data.node.id);
-                var paretId = data.node.parent;
+            success : function(data, treeobj) {
+            	treeobj.jstree("check_node", $("#userId").val().split(","),true);  //回选
+            },
+            selectnode : function(e,data,treessname,treessid) {
+        		$("#userName").val(treessname);
+                $("#userId").val(treessid);
+               /* var paretId = data.node.parent;
                 var paretName =  $("#userNametree2").jstree("get_node",paretId).text;  //获取部门id
-                $("#deptName").val(paretName);
-				$("#deptId").val(paretId);
+*/            },
+            deselectnode : function(e,data,treessname,treessid){
+            	$("#userName").val(treessname);
+                $("#userId").val(treessid);
             }
         });
 	}
+	
 	
 	var initdatafn = function(){
 		$ajax({
@@ -61,14 +44,6 @@ var pageModule = function(){
 	}
 	
 	var initother = function(){
-		$(".form_datetime").datetimepicker({
-		    language:"zh-CN",
-		    autoclose: true,
-		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd hh:ii",
-		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
-		});
-		
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
@@ -78,7 +53,7 @@ var pageModule = function(){
 				}
 				saveLoading = true;
 				$("#save").attr('disabled',true)
-			    var elementarry = ["userId","userName","deptId","deptName","roleType","editUserId","editUserName","editTime"];
+			    var elementarry = ["userId","userName","deptId","deptName","roleType"];
 				var paramdata = getformdata(elementarry);
 				paramdata.id = id;
 				$ajax({
@@ -113,10 +88,6 @@ var pageModule = function(){
 			$("#commentForm").submit();
 		});
 		
-		//重置
-		/*$("#reset").click(function(){
-			removeInputData(["userId","userName","deptId","deptName","roleType","editUserId","editUserName","editTime"]);
-		});*/
 		
 		//取消
 		$("#close").click(function(){

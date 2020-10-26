@@ -48,8 +48,24 @@ html, body {
 	color: #fff;
 	margin:0 4px;
 }
+.bottom button{
+	padding: 5px 25px;
+	background: #1C67E3;
+	border:1px solid #1C67E3;
+	border-radius: 4px!important;
+	color: #fff;
+	margin:0 4px;
+}
+
 .bottom button.closebtn{
 	background: #DCEFFF;
 	color: #1C67E3;
 	border-color: #1C67E3;
+}
+span.required{
+	color:#f00;
+	ertical-align: middle;
+}
+button.save{
+	color:#fff!important;
 }
