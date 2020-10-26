@@ -115,9 +115,9 @@ function AddUser(nodes2){
 				'	<a href="javascript:;">'+
 				'		<span>'+obj.text+'</span>'+
 				'		<span style="float:right" class="do-icon">'+
-				'			<i class="del" onclick="deletefn(\''+obj.id+'\',this);"><img src="../../../../common/images/shanchu.svg" alt=""></i>'+
-				'			<i class="up" onclick="upfn(this);"><img src="../../../../common/images/shang01.svg" alt=""></i>'+
-				'			<i class="down" onclick="downfn(this)"><img src="../../../../common/images/xia01.svg" alt=""></i>'+
+				'			<i class="del" onclick="deletefn(\''+obj.id+'\',this);"><img src="../../common/images/shanchu.svg" alt=""></i>'+
+				// '			<i class="up" onclick="upfn(this);"><img src="../../../../common/images/shang01.svg" alt=""></i>'+
+				// '			<i class="down" onclick="downfn(this)"><img src="../../../../common/images/xia01.svg" alt=""></i>'+
 				'		</span>'+
 				'	</a>'+
 				'</li>'

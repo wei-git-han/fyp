@@ -1,5 +1,4 @@
 var saveUrl;
-var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
 var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
@@ -54,13 +53,7 @@ var pageModule = function(){
 				})
 		    },
 		    errorPlacement: function(error, element) {
-	    	 	if($(element).parent().hasClass("selecttree")){
-	    	 		error.appendTo(element.parent().parent().parent()); 
-	    	 	}if($(element).parent().hasClass("date-picker")){
-	    	 		error.appendTo(element.parent().parent()); 
-	    	 	}else{
-	    	 		error.appendTo(element.parent());  
-	    	 	}
+
 		     }
 		});
 		

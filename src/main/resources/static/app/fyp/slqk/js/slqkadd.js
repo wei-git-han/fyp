@@ -2,6 +2,7 @@ var saveUrl;
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
 var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
+var slqkUrl = {"url":"../data/ryjName.json","dataType":"text"};
 if(!!id){
 	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"json"};  //edit
 }else{
@@ -24,17 +25,19 @@ var pageModule = function(){
 	}
 	var initRyjName = function () {
 		$ajax({
-			url:'',
+			url:slqkUrl,
+			data:{type:1},
 			success:function (data) {
-
+				initselect('softname',data.rows)
 			}
 		})
 	}
 	var initWtfl = function () {
 		$ajax({
-			url:'',
+			url:slqkUrl,
+			data:{type:2},
 			success:function (data) {
-
+				initselect('type',data.rows)
 			}
 		})
 	}
@@ -126,6 +129,8 @@ var pageModule = function(){
 		//加载页面处理程序
 		initControl:function(){
 			initUnitTree();
+			initRyjName();
+			initWtfl();
 			initdatafn(); 
 			initother();
 		}
