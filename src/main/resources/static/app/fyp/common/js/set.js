@@ -68,6 +68,9 @@ var pageModule = function () {
 		$("#setzbbtn").click(function(){
 	      window.open("/app/fyp/zbry/html/index.html");
 		});
+		$('#zbManage').click(function(){
+			window.open("/app/fyp/set/html/departSetting.html")
+		})
 	}
 	function isAdmin() {
 		$ajax({
@@ -75,10 +78,7 @@ var pageModule = function () {
 			type: "GET",
 			success: function(data) {
 				if(data.flag!='1') {
-					$('#setbtn').show();
-					$('#slqkbtn').show();
-					$('#bzbtn').show();
-					$('#setzbbtn').show();
+					$('.setbtn').show();
 				}
 			}
 		})

@@ -31,7 +31,7 @@ var pageModule = function(){
 				}
 				saveLoading = true
 				$("#save").attr('disabled',true)
-			    var elementarry = ["status","productName"];
+			    var elementarry = ["status","productName","type"];
 				var paramdata = getformdata(elementarry);
 				paramdata.name= $('#softname').val()
 				paramdata.id = id;
