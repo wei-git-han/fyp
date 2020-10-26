@@ -41,7 +41,7 @@ var pageModule = function () {
 	var initother = function(){
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["productName","status"];
+			var elementarry = ["productName","status","type"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
@@ -49,8 +49,8 @@ var pageModule = function () {
 		$("#add").click(function(){
 			newbootbox.newdialog({
 				id:"addModal",
-				width:500,
-				height:300,
+				width:800,
+				height:500,
 				header:true,
 				title:"新增",
 				url:"issueClassifyAdd.html",
@@ -66,8 +66,8 @@ var pageModule = function () {
 				var id = datas[0].id;
 				newbootbox.newdialog({
 					id:"addModal",
-					width:500,
-					height:300,
+					width:800,
+					height:500,
 					header:true,
 					title:"编辑",
 					url:"issueClassifyAdd.html?id="+id
