@@ -35,12 +35,11 @@ var pageModule = function () {
 		}
 		if(type=="grzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
-			startDate=$("#startDate").val();
-			endDate=$("#endDate").val();
+			time=$("#time").val();
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val(),startDate:startDate,endDate:endDate},
+			data:{weekTableType:type,userId:$("#deptId").val(),time:time},
 			success: function(res) {
 				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
@@ -172,23 +171,15 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
-		$(".form_datetime").datetimepicker({
+		$("#time").datepicker({
 		    language:"zh-CN",
 		    autoclose: true,
 		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd HH:ii",
-		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
-		});
-		$(".form_datetime2").datetimepicker({
-		    language:"zh-CN",
-		    autoclose: true,
-		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd HH:ii",
+		    format: "yyyy-mm-dd",
 		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		}).on("changeDate",function(){
 			getRole('grzb');
 		});
-		
 		//各局周表&本局周表 点击事件
 		$(".nav>li").click(function() {
 			$("#mainContent").html("");

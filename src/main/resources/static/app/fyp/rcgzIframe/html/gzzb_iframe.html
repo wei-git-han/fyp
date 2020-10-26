@@ -57,20 +57,27 @@
 									</div>
 								</div>
 								<div id="caozuoBtn" style="display:none;" class="caozuoBtn">
-									<div style="width:420px;display:inline-block">
-										<div class="input-group date form_datetime" style="width:220px;float:left;">
-										    <input type="text" size="16" readonly class="form-control" id="startDate"  name="startDate" style="background:transparent;color:#fff;"  />
-										    <span class="input-group-btn">
-										    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
-										    </span>
-										    <span class="input-group-addon" style="border: none;background: transparent;color:#fff;">至</span>
+									<div style="width:160px;display:inline-block">
+<!--										<div class="input-group date form_datetime" style="width:220px;float:left;">-->
+<!--										    <input type="text" size="16" readonly class="form-control" id="startDate"  name="startDate" style="background:transparent;color:#fff;"  />-->
+<!--										    <span class="input-group-btn">-->
+<!--										    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>-->
+<!--										    </span>-->
+<!--										    <span class="input-group-addon" style="border: none;background: transparent;color:#fff;">至</span>-->
+<!--										</div>-->
+<!--										<div class="input-group date form_datetime form_datetime2" style="width:200px;float:left;">-->
+<!--										    <input type="text" size="16" readonly class="form-control" id="endDate"  name="endDate" style="background:transparent;color:#fff;"  />-->
+<!--										    <span class="input-group-btn">-->
+<!--										    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>-->
+<!--										    </span>-->
+<!--										</div>-->
+										<div  class="input-group date-picker input-daterange"  data-date-format="yyyy-mm-dd">
+											<input type="text" class="form-control"  onfocus=""  readonly="readonly"  id="time"  name="time" />
+											<span class="input-group-btn">
+												<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
 										</div>
-										<div class="input-group date form_datetime form_datetime2" style="width:200px;float:left;">
-										    <input type="text" size="16" readonly class="form-control" id="endDate"  name="endDate" style="background:transparent;color:#fff;"  />
-										    <span class="input-group-btn">
-										    	<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
-										    </span>
-										</div>
+
 									</div>
 									
 									<button type="button" id="add" class="add">新增</button>
