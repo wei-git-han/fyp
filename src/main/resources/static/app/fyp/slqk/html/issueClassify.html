@@ -36,15 +36,6 @@
 		<div class="newlayout-search-main">
 			<form>
 				<div class="form-group">
-					<label>提出单位</label><br/>
-					<div class="form-control" style="padding:0;width:195px;">
-						<div class="selecttree">
-							<input type="hidden" class="form-control"  id="submitDeptId" name="submitDeptId"  />
-							<input type="text" class="form-control"  id="submitDeptName" name="submitDeptName"  onfocus="blur()" placeholder="" style="background:#fff"  />
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
 					<label>提出人</label><br/>
 					<div class="form-control" style="padding:0;width:195px;background:#fff">
 						<div class="selecttree">
@@ -98,21 +89,6 @@
 					<button type="button" id="add">新增</button>
 					<button type="button" id="edit">编辑</button>
 					<button type="button" id="del" class="del">删除</button>
-					<div class="newbuttoncont">
-		        		<form class="form-horizontal" id="form3" target="iframe7" role="form" method="post" enctype="multipart/form-data" >
-							<input type="hidden"  id="idpdf" name="idpdf"/>
-							<div class="fileinput fileinput-new" data-provides="fileinput">
-		                        <span style="margin:0px!important">
-		                         	<button type="button" id="uploadFile" class="btn btn-newColor">上传文件</button>
-		                        	<input type="file" name="file" id="file" accept=".xls,.xlsx" style="display:none"/>
-		                        </span>
-		                    </div> 
-		                </form>
-		                <iframe name="iframe7" style="display: none;"></iframe>
-					</div>
-					<button type="button" class="importBtn" id="downloadBtn">下载</button>
-					<button type="button" class="importBtn" id="nameManageBtn">硬/软件名称管理</button>
-					<button type="button" class="importBtn" id="issueClassifyBtn">问题分类管理</button>
 				</div>
 			</div>
 			<div class="newlayout-grid">
@@ -142,7 +118,7 @@
 <script src="../../../../assets/global/plugins/gridtable/gridtable.js" type="text/javascript" ></script>
 <script src="../../common/js/jquery.form.js" type="text/javascript" ></script>
 <script src="../../common/js/commons.js" type="text/javascript"></script>
-<script src="../js/slqktable.js" type="text/javascript"></script>
+<script src="../js/issueClassify.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
         pageModule.initControl();
