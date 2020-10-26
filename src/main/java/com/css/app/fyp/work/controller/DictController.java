@@ -136,10 +136,8 @@ public class DictController {
 					jo.put("dictType","0");
 				}
 			}
-
-			System.out.println();
 		}
-		Response.json(new ResponseValueUtils().success(list));
+		Response.json(new ResponseValueUtils().success(lists));
 	}
 
 	/**
