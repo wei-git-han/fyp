@@ -18,9 +18,9 @@ var pageModule = function () {
 				oodata = array;
 				initfn1(array);
 
-				$("#zxNum").html(data[0].zx==null?data[0].zx:0);
-				$("#lxNum").html(data[0].lx==null?data[0].lx:0);
-				$("#qjNum").html(data[0].qj==null?data[0].qj:0);
+				$("#zxNum").html(data[0].zx!=null?data[0].zx:0);
+				$("#lxNum").html(data[0].lx!=null?data[0].lx:0);
+				$("#qjNum").html(data[0].qj!=null?data[0].qj:0);
 			}
 		})
 	};
