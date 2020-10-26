@@ -97,8 +97,8 @@ public class DictController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public void delete(String[] ids){
-		dictService.deleteBatch(ids);
+	public void delete(String id){
+		dictService.delete(id);
 		
 		Response.ok();
 	}
@@ -125,10 +125,13 @@ public class DictController {
 		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
 		JSONObject lists= OrgUtil.getOrganTree(organs, organId);
 		JSONArray children = (JSONArray)lists.get("children");
-		/*for (:
-			 ) {
-			
-		}*/
+
+		for (Object object :children) {
+			JSONObject jo = (JSONObject) object;
+			jo.get("id");
+
+			System.out.println();
+		}
 		Response.json(new ResponseValueUtils().success(list));
 	}
 
