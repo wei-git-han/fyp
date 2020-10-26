@@ -20,12 +20,30 @@ var pageModule = function(){
             	treeobj.jstree("check_node", $("#userId").val().split(","),true);  //回选
             },
             selectnode : function(e,data,treessname,treessid) {
-        		$("#userName").val(treessname);
-                $("#userId").val(treessid);
-               /* var paretId = data.node.parent;
-                var paretName =  $("#userNametree2").jstree("get_node",paretId).text;  //获取部门id
-*/            },
+                var parentId1 ="";
+                $.each(treessid,function(i,obj){
+                	var parentId =$("#userNametree2").jstree("get_node",obj).parent;
+                	if(parentId1!=""){
+                		if(parentId1 != parentId){
+                			newbootbox.alertInfo('只能勾选同一部门下人员！');
+                			$("#userNametree2").jstree("deselect_node",data.node.id);
+                		}
+                	}else{
+                		parentId1 = parentId;
+                		$("#userName").val(treessname);
+                        $("#userId").val(treessid);
+                        var paretName =  $("#userNametree2").jstree("get_node",parentId).text;  //获取部门id
+                    	$("#deptName").val(paretName);
+         				$("#deptId").val(parentId);
+                        
+                	}
+                });
+            },
             deselectnode : function(e,data,treessname,treessid){
+            	if(treessname==""){
+            		$("#deptName").val('');
+     				$("#deptId").val('');
+            	}
             	$("#userName").val(treessname);
                 $("#userId").val(treessid);
             }
