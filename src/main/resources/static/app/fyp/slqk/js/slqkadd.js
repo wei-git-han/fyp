@@ -22,7 +22,22 @@ var pageModule = function(){
 			}
 		}); 
 	}
-	
+	var initRyjName = function () {
+		$ajax({
+			url:'',
+			success:function (data) {
+
+			}
+		})
+	}
+	var initWtfl = function () {
+		$ajax({
+			url:'',
+			success:function (data) {
+
+			}
+		})
+	}
 	var initdatafn = function(){
 		$ajax({
 			url:returnDataUrl,
@@ -47,7 +62,6 @@ var pageModule = function(){
 		$(".input-group-btn").click(function(){
 			$(this).prev().focus();
 		});
-		
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
