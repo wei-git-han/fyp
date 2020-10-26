@@ -53,20 +53,20 @@ var pageModule = function () {
 	   });
 	}
 	var initother = function(){
-		/*搜索 */
-		/*$("#search").click(function(){
-			initgrid();
-		});*/
 		$("#setbtn").click(function(){
-	        window.open("/app/fyp/set/html/settabel.html")
+	        window.open("/app/fyp/set/html/settabel.html");
 		});
 		
 		$("#slqkbtn").click(function(){
-			window.open("/app/fyp/slqk/html/slqktabel.html")
+			window.open("/app/fyp/slqk/html/slqktabel.html");
 		});
 		
 		$("#bzbtn").click(function(){
-	      window.open("/app/fyp/bzProject/html/bzwtgz.html")
+	      window.open("/app/fyp/bzProject/html/bzwtgz.html");
+		});
+		
+		$("#setzbbtn").click(function(){
+	      window.open("/app/fyp/zbry/html/index.html");
 		});
 	}
 	function isAdmin() {
@@ -76,8 +76,9 @@ var pageModule = function () {
 			success: function(data) {
 				if(data.flag!='1') {
 					$('#setbtn').show();
-					$('#slqkbtn').show()
-					$('#bzbtn').show()
+					$('#slqkbtn').show();
+					$('#bzbtn').show();
+					$('#setzbbtn').show();
 				}
 			}
 		})
