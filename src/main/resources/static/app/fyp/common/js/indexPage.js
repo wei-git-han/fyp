@@ -75,7 +75,9 @@ var pageModule = function() {
         if(data.flag!='1') {
           $('#set').show()
         }else{
-          $('#set').hide()
+          //$('#set').hide()
+          $('#set').show()
+
         }
       }
     })

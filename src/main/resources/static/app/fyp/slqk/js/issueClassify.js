@@ -8,47 +8,23 @@ var pageModule = function () {
 	var initgrid = function(){
 		grid = $("#gridcont").createGrid({
 				columns:[
-						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
-							return rowdata.name;                                         
+				        {display:"种类",name:"type",width:"20%",align:"center",render:function(rowdata,n){
+				            if (rowdata.type == '0') {
+				                return '软件'
+				            } else if (rowdata.type == '1')  {
+				                return '硬件'
+				            } else {
+                                return rowdata.type;
+				            }
+                        }},
+						{display:"硬件/软件名称",name:"name",width:"40%",align:"center",render:function(rowdata,n){
+							return rowdata.name;
 						}},
-						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
-							return rowdata.desc;                                         
+						{display:"创建时间",name:"submitTime",width:"20%",align:"center",render:function(rowdata){
+							return rowdata.submitTime;
 						}},
-						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
-							return rowdata.submitTime;                                         
-						}},
-						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.submitUserName;                                         
-						}},
-						{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
-							return rowdata.solveTime;                                         
-						}},
-						{display:"工作进展",name:"march",width:"12%",align:"center",render:function(rowdata){
-							return rowdata.march;                                         
-						}},
-						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
-							if(rowdata.status == "0"){
-                                return "需求论证";
-                            }else if(rowdata.status == "1"){
-                                return "需求细化";
-                            }else if(rowdata.status == "2"){
-                                return "解决中";
-                            }else if(rowdata.status == "3"){
-                                return "已解决待升级";
-                            }else if(rowdata.status == "4"){
-                                return "已关闭";
-                            }else{
-                                return "";
-                            }
-						}},
-						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
-							if(rowdata.type == "0"){
-                                return "系统问题";
-                            }else if(rowdata.type == "1"){
-                                return "完善建议";
-                            }else{
-                                return "";
-                            }
+						{display:"创建人",name:"submitUserName",width:"20%",align:"center",render:function(rowdata){
+							return rowdata.submitUserName;
 						}}
 				 ],
 		width:'100%',
@@ -61,107 +37,26 @@ var pageModule = function () {
 		url: listUrl
 	  });
 	}
-	
-	//树
-	var initUnitTree = function(){
-		/*//单位
-		$("#submitDeptName").createSelecttree({
-			url :deptTreeUrl,
-			width : '100%',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#submitDeptName").val(data.node.text);
-				$("#submitDeptId").val(data.node.id);
-			}
-		});*/
-		
-		//提出人
-		$("#submitUserName").createUserTree({
-			url :userTreeUrl,
-			width : '193px',
-			success : function(data, treeobj) {},
-			selectnode : function(e, data) {
-				$("#submitUserName").val(data.node.text);
-				$("#submitUserId").val(data.node.id);
-			}
-		}); 
-	}
-	
-	var initother = function(){
-		$("#form3").validate({
-		    submitHandler: function() {
-		    	$("#dialogzz").show();
-		    	$("#dialogzz").css("display","table");
-				var ajax_option ={
-					type: "post",
-					url:"/fyp/feedbackhear/import",
-					success:function(data){
-						$("#dialogzz").hide();
-						if(data.result == "success"){
-							newbootbox.alert('上传成功！').done(function(){
-								initgrid();
-							});
-						}else{
-							newbootbox.alert("上传失败！"); 
-						}
-					}
-				}
-				$('#form3').ajaxSubmit(ajax_option);
-		   }
-		});
-		
-		/*导入 */
-		$("#uploadFile").click(function(){
-			$("#file").unbind("click");
-			$("#file").unbind("change");
-			$("#file").click();
-			$("#file").change(function(){
-				$("#form3").submit();
-			});
-		});
-		
 
-		/*下载 */
-		$("#downloadBtn").click(function(){
-			window.location.href = "/app/fyp/common/downLoadFile.xlsx";
-		});
-		
-		
-		$(".date-picker").datepicker({
-		    language:"zh-CN",
-		    rtl: Metronic.isRTL(),
-		    orientation: "",
-		    autoclose: true
-		});
-		$(".input-group-btn").click(function(){
-			$(this).prev().focus();
-		});
-		
+	var initother = function(){
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTimeBegin","submitTimeEnd","desc"];
+			var elementarry = ["productName","status"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
-		
-		//重置
-		$("#reset").click(function(){
-			removeInputData(["submitDeptId","submitDeptName","submitUserId","submitUserName","status","submitTimeBegin","submitTimeEnd","desc"]);
-		    initgrid();
-		});
-		
 		/* 新增add */
 		$("#add").click(function(){
 			newbootbox.newdialog({
 				id:"addModal",
-				width:880,
-				height:600,
+				width:500,
+				height:300,
 				header:true,
 				title:"新增",
-				url:"slqkadd.html",
+				url:"issueClassifyAdd.html",
             })
 		});
-		
+
 		//编辑edit
 		$("#edit").click(function(){
 			var datas = grid.getcheckrow();
@@ -171,16 +66,16 @@ var pageModule = function () {
 				var id = datas[0].id;
 				newbootbox.newdialog({
 					id:"addModal",
-					width:880,
-					height:600,
+					width:500,
+					height:300,
 					header:true,
-					title:"新增",
-					url:"slqkadd.html?id="+id
-				}) 
+					title:"编辑",
+					url:"issueClassifyAdd.html?id="+id
+				})
 			}
 		});
-		
-		
+
+
 		/* 删除del */
 		$("#del").click(function() {
 			var datas = grid.getcheckrow();
@@ -213,35 +108,12 @@ var pageModule = function () {
 				});
 			}
 		})
-		/* 硬软件名称管理 */
-        $("#nameManageBtn").click(function(){
-            newbootbox.newdialog({
-                id:"nameManageModal",
-                width:1000,
-                height:800,
-                header:true,
-                title:"硬软件名称管理",
-                url:"nameManage.html",
-            })
-        });
-        /* 问题分类管理 */
-        $("#issueClassifyBtn").click(function(){
-            newbootbox.newdialog({
-                id:"issueClassifyModal",
-                width:1000,
-                height:800,
-                header:true,
-                title:"问题分类管理",
-                url:"issueClassify.html",
-            })
-        });
 	}
-	
+
     return {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
-			initUnitTree();
 			initother();
         },
         initgrid:function(){
@@ -249,4 +121,3 @@ var pageModule = function () {
         }
     }
 }();
-
