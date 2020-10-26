@@ -216,6 +216,28 @@ var pageModule = function () {
 				});
 			}
 		})
+		/* 硬软件名称管理 */
+        $("#nameManageBtn").click(function(){
+            newbootbox.newdialog({
+                id:"nameManageModal",
+                width:1000,
+                height:800,
+                header:true,
+                title:"硬/软件名称管理",
+                url:"nameManage.html",
+            })
+        });
+        /* 问题分类管理 */
+        $("#issueClassifyBtn").click(function(){
+            newbootbox.newdialog({
+                id:"issueClassifyModal",
+                width:1000,
+                height:800,
+                header:true,
+                title:"问题分类管理",
+                url:"issueClassify.html",
+            })
+        });
 	}
 	
     return {
