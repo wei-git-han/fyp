@@ -11,7 +11,7 @@
 		select * from DICT
 		where
 		<if test="type!=null and type!=''">
-			type = #{type}
+			DICT_TYPE = #{type}
 		</if>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
