@@ -2,6 +2,7 @@ var saveUrl;
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树
 var returnDataUrl = {"url":"/fyp/guaranteetacking/info","dataType":"text"}; //返回数据url
+var getPhoneUrl = {"url":"/fyp/guaranteetacking/findUserInfoByUserId","dataType":"text"}
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
 	saveUrl = {"url":"/fyp/guaranteetacking/update","dataType":"json"};  //edit
@@ -23,6 +24,7 @@ var pageModule = function(){
                 var paretName =  $("#userNametree2").jstree("get_node",paretId).text;  //获取部门id
                 $("#deptName").val(paretName);
 				$("#deptId").val(paretId);
+				initData()
             }
         });
 
@@ -58,7 +60,9 @@ var pageModule = function(){
 			autoclose: true,
 			startDate:new Date()
 		});
-		
+		$('#source').change(function () {
+			initData()
+		})
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
@@ -126,5 +130,22 @@ var pageModule = function(){
 	};
 }();
 
+function initData() {
+	var userId = $("#userId").val()||'';
+	if(!userId){
+		return
+	}
+	$ajax({
+		url:getPhoneUrl,
+		data:{userid: userId},
+		success:function (data) {
+			if($('#source').val()=='1'){
+				$('#phone').val(data.phone)
+			}else{
+				$('#phone').val(data.telePhone)
+			}
+		}
+	})
+}
 
 
