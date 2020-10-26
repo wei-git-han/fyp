@@ -1,6 +1,6 @@
-var ComUserList = {"url":"/documentcontact/list","dataType":"text"};
+var ComUserList = {"url":"/dict/findConfigUser","dataType":"text"};
 var AllUserList = {"url":"/app/base/user/tree","dataType":"text"};
-var saveUrl = {"url":"/documentcontact/save","dataType":"json"};
+var saveUrl = {"url":"/dict/insertConfigUser","dataType":"json"};
 
 var checkArry=[];
 var pageModule = function(){
@@ -58,7 +58,7 @@ var pageModule = function(){
 			success:function(data){
 				if(data!=null){
 					$("#alreadyUser").html("");
-					loadUser(data);
+					loadUser(data.data);
 				}
 			}
 		});
@@ -76,10 +76,10 @@ var pageModule = function(){
 			console.log(nameArry);
 			$ajax({
 				url:saveUrl,
-				data:{idArr:idArry.toString(),nameArr:nameArry.toString()},
+				data:{userids:idArry.toString(),nameArr:nameArry.toString()},
 				type: "post",
 				success:function(data){
-					if(data.result == "success"){
+					if(data.msg == "success"){
 						newbootbox.alertInfo('保存成功！');
 					}else{
 						newbootbox.alertInfo('保存失败！');
@@ -149,7 +149,7 @@ function toRight() {
 }
 function loadUser(nodes2){
 	$.each(nodes2, function(i,obj) {
-		checkArry.push(obj.contacterId);
+		checkArry.push(obj.USER_ID);
 	});
 }
 

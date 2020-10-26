@@ -1,10 +1,10 @@
 var saveUrl;
-var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
+var returnDataUrl = {"url":"/dict/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
-	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"json"};  //edit
+	saveUrl = {"url":"/dict/update","dataType":"json"};  //edit
 }else{
-	saveUrl = {"url":"/fyp/feedbackhear/save","dataType":"json"};  //save
+	saveUrl = {"url":"/dict/save","dataType":"json"};  //save
 }
 var saveLoading = false
 var pageModule = function(){
@@ -14,7 +14,7 @@ var pageModule = function(){
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
-				setformdata(data.data);
+				setformdata(data.dict);
 			}
 		})
 	}
@@ -30,16 +30,18 @@ var pageModule = function(){
 				}
 				saveLoading = true
 				$("#save").attr('disabled',true)
-			    var elementarry = ["status","productName"];
+			    var elementarry = ["dictName"];
 				var paramdata = getformdata(elementarry);
-				paramdata.name= $('#softname').val()
+				// paramdata.name= $('#softname').val()
 				paramdata.id = id;
+				paramdata.dictType='0'
+				paramdata.dictValue = ""
 				$ajax({
 					url:saveUrl,
 					data:paramdata,
 					type:'post',
 					success:function(data){
-						if(data.result=="success"){
+						if(data.msg=="success"){
 						    newbootbox.newdialogClose("addModal");
 							newbootbox.alertInfo('保存成功！').done(function(){
 								window.top.pageModule.initgrid();

@@ -271,6 +271,10 @@ function createtable(obj){
 				}
 				if(data.data.list){
 					rowsdata = data.data.list;
+				}else if(data.data.rows){
+					rowsdata = data.data.rows
+				}else if(data.data.children){
+					rowsdata = data.data.children
 				}else{
 					rowsdata = data.data
 				}
@@ -346,7 +350,7 @@ function createtable(obj){
 					conttable.append(trobj);
 				});
 				
-				total = data.data.totalCount;
+				total = data.data.totalCount||data.data.total;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;

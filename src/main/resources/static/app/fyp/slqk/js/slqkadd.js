@@ -2,7 +2,7 @@ var saveUrl;
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
 var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
-var slqkUrl = {"url":"../data/ryjName.json","dataType":"text"};
+var slqkUrl = {url:'/dict/list',"dataType":"text"};
 if(!!id){
 	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"json"};  //edit
 }else{
@@ -26,18 +26,19 @@ var pageModule = function(){
 	var initRyjName = function () {
 		$ajax({
 			url:slqkUrl,
-			data:{type:1},
+			data:{type:0,limit:1,page:100},
 			success:function (data) {
-				initselect('softname',data.rows)
+				initselectByName('softname',data.data.rows)
 			}
 		})
 	}
 	var initWtfl = function () {
 		$ajax({
 			url:slqkUrl,
-			data:{type:2},
+			data:{type:1,limit:1,page:100},
 			success:function (data) {
-				initselect('type',data.rows)
+				console.log(data)
+				initselectByName('type',data.data.rows)
 			}
 		})
 	}

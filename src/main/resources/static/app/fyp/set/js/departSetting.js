@@ -1,18 +1,18 @@
-var listurl = {"url":"/fyp/roleedit/list","dataType":"text"};//表格数据
+var listurl = {"url":"/dict/findConfigDept","dataType":"text"};//表格数据
 var delUrl = {"url":"/fyp/roleedit/delete","dataType":"text"};//删除
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var grid = null;
-
+var hideUrl = {url:"/dict/insertConfigDept",type:'text'}
 var pageModule = function () {
 	var initgrid = function(){
 		  grid = $("#gridcont").createGrid({
 			columns:[
 						{display:"单位名称",name:"deptName",width:"70%",align:"center",render:function(rowdata){
-							return rowdata.deptName;                                         
+							return rowdata.text;
 						}},
 						{display:"是否列入统计范围",name:"do",width:"30%",align:"center",render:function(rowdata){
-							if(rowdata.statisticsType=='1'){
+							if(rowdata.dictType=='1'){
 								return '<input type="checkbox" name="doType" value="'+rowdata.id +'" id="'+rowdata.id+'" data-name="'+rowdata.text +'">'
 							}else{
 								return '<input type="checkbox" name="doType" checked value="'+rowdata.id +'" id="'+rowdata.id+'" data-name="'+rowdata.text +'">'
@@ -25,9 +25,9 @@ var pageModule = function () {
 			rownumberyon:true,
 			paramobj:{},
 			overflowx:false,
-			pageyno:true,
+			pageyno:false,
 			url: listurl,
-		   loadafter:function(data){
+		    loadafter:function(data){
 				  $('[name="doType"]').bootstrapSwitch({
 					  onText:'已统计',
 					  offText:'不统计',
@@ -38,14 +38,16 @@ var pageModule = function () {
 						  // console.log(this.value)
 						  // console.log(this.dataset.name)
 						  // console.log(state)
-						  var url = state?showUrl:hideUrl;
+						  // var url = state?showUrl:hideUrl;
 						  var type= state?'统计状态！':'不统计状态！';
-						  var data = {deptId:this.value,deptName:this.dataset.name};
+						  var typeNum = state?'0':'1'
+						  var data = {deptids:this.value,type:typeNum};
+						  var name = this.dataset.name
 						  $ajax({
-							  url:url,
+							  url:hideUrl,
 							  data:data,
 							  success:function (res) {
-								  newbootbox.alertInfo(data.deptName+'已修改为'+type).done(function () {
+								  newbootbox.alertInfo(name+'已修改为'+type).done(function () {
 									  grid.refresh();
 								  })
 							  }

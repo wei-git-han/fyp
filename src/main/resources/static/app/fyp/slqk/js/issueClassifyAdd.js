@@ -1,11 +1,11 @@
 var saveUrl;
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
-var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
+var returnDataUrl = {"url":"/dict/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
 if(!!id){
-	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"json"};  //edit
+	saveUrl = {"url":"/dict/update","dataType":"json"};  //edit
 }else{
-	saveUrl = {"url":"/fyp/feedbackhear/save","dataType":"json"};  //save
+	saveUrl = {"url":"/dict/save","dataType":"json"};  //save
 }
 var saveLoading = false
 var pageModule = function(){
@@ -15,7 +15,7 @@ var pageModule = function(){
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
-				setformdata(data.data);
+				setformdata(data.dict);
 			}
 		})
 	}
@@ -31,10 +31,10 @@ var pageModule = function(){
 				}
 				saveLoading = true
 				$("#save").attr('disabled',true)
-			    var elementarry = ["status","productName","type"];
+			    var elementarry = ["dictName","dictValue"];
 				var paramdata = getformdata(elementarry);
-				paramdata.name= $('#softname').val()
 				paramdata.id = id;
+				paramdata.dictType='1'
 				$ajax({
 					url:saveUrl,
 					data:paramdata,
@@ -54,13 +54,7 @@ var pageModule = function(){
 				})
 		    },
 		    errorPlacement: function(error, element) {
-	    	 	if($(element).parent().hasClass("selecttree")){
-	    	 		error.appendTo(element.parent().parent().parent()); 
-	    	 	}if($(element).parent().hasClass("date-picker")){
-	    	 		error.appendTo(element.parent().parent()); 
-	    	 	}else{
-	    	 		error.appendTo(element.parent());  
-	    	 	}
+
 		     }
 		});
 		
