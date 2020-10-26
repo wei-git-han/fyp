@@ -36,7 +36,7 @@ var pageModule = function () {
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val(),date:$("#searchDate").val()},
+			data:{weekTableType:type,userId:$("#deptId").val(),weekTableDate:$("#searchDate").val()},
 			success: function(res) {
 				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
