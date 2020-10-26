@@ -162,7 +162,7 @@ dzyj.url: http://10.150.110.19/restful/newuser.php/g7_boxinfo?user=test@jskxy.co
 qxj.url: http://127.0.0.1:11013/leave/apply/bubbleCountStatistics
 
 #督查催办对应的ip和端口
-db.url: http://127.0.0.1:11008/app/db/documentjcdb/list
+db.url: http://127.0.0.1:11008/api/db/todo
 
 #请销假对应的ip和端口
 qxj.fz: http://127.0.0.1:11013/app/qxjgl/api/getQjUserIds
