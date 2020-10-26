@@ -19,6 +19,7 @@ public class FypGuaranteeTacking implements Serializable {
 	
 	//
 	private String id;
+
 	//姓名
 	private String name;
 	//用户id

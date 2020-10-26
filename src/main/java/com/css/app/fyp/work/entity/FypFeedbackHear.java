@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class FypFeedbackHear implements Serializable {
 	//提出的单位id
 	private String submitDeptId;
 	//提出时间
+	@JSONField(format = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date submitTime;
 
@@ -37,6 +39,7 @@ public class FypFeedbackHear implements Serializable {
 	//问题分类
 	private String type;
 	//解决时限
+	@JSONField(format = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date solveTime;
 	//问题描述

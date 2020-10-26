@@ -769,4 +769,8 @@ public class AppInterfaceConstant {
      * 督查催办、负一屏统计接口
      */
     public final static String WEB_INERFACE_DCCB_MANAGETHING = "/app/db/documentjcdb/count";
+    /**
+     * 通讯录，根据id获取详情接口
+     */
+    public final static String WEB_INERFACE_TXL_MANAGETHING = "/txlUser/listuser";
 }

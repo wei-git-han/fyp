@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.Response;
+import com.css.base.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,9 @@ public class ManageThingController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("year",String.valueOf(calendar.get(Calendar.YEAR)));//年
         paramMap.add("month",String.valueOf(calendar.get(calendar.MONTH)));//月
-        paramMap.add("organId",deptid);//单位id
+        if(StringUtils.isNotBlank(deptid)) {
+            paramMap.add("organId", deptid);//单位id
+        }
         List<JSONObject> dataList = getJsonData.getJson(paramMap, "督查催办");
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("onTime",dataList.get(0).get("onTimebj"));//按时办结

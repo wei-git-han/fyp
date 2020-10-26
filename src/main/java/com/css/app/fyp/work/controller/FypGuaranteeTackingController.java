@@ -1,13 +1,24 @@
 package com.css.app.fyp.work.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.util.OrgUtil;
+import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
+import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
+import com.css.addbase.constant.AppInterfaceConstant;
+import com.css.app.fyp.utils.PoiUtils;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.app.fyp.work.entity.FypFeedbackHear;
+import com.css.base.filter.SSOAuthFilter;
+import com.css.base.utils.CrossDomainUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +30,7 @@ import com.github.pagehelper.PageHelper;
 import com.css.base.utils.Response;
 import com.css.app.fyp.work.entity.FypGuaranteeTacking;
 import com.css.app.fyp.work.service.FypGuaranteeTackingService;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -35,6 +47,8 @@ public class FypGuaranteeTackingController {
 	private FypGuaranteeTackingService fypGuaranteeTackingService;
 	@Autowired
 	private BaseAppOrganService baseAppOrganService;
+	@Autowired
+	private BaseAppOrgMappedService baseAppOrgMappedService;
 	
 	/**
 	 * 列表
@@ -115,5 +129,70 @@ public class FypGuaranteeTackingController {
 
 		Response.json(new ResponseValueUtils().success());
 	}
-	
+
+	/**
+	 * 导入
+	 */
+	@ResponseBody
+	@RequestMapping("/import")
+	public void importExcel(MultipartFile file){
+		this.insertImportData(PoiUtils.importExcel(file));
+		Response.json(new ResponseValueUtils().success());
+	}
+
+	/**
+	 * 插入导入数据
+	 * @param dataMap
+	 */
+	private void insertImportData(Map<Object, List<Object>> dataMap){
+		FypGuaranteeTacking fypGuaranteeTacking = null;
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		for (Object key:dataMap.keySet()) {
+			List<Object> objects = dataMap.get(key);
+			if(null!=objects&&0<objects.size()){
+				try {
+					fypGuaranteeTacking = new FypGuaranteeTacking();
+					fypGuaranteeTacking.setId(UUIDUtils.random());
+					fypGuaranteeTackingService.save(fypGuaranteeTacking);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 根据用户获取通讯录信息
+	 */
+	@RequestMapping(value = "/findUserInfoByUserId")
+	@ResponseBody
+	public void findUserInfoByUserId(String userid){
+		JSONObject jsonObject = new JSONObject();
+		try {
+			JSONObject txlInfo = this.getTxlInfo(userid);
+			jsonObject.put("result","success");
+			if(null!=txlInfo) {
+				List<Map<String,Object>> rows = (List<Map<String,Object>>)txlInfo.get("rows");
+				jsonObject.put("telePhone", rows.get(0).get("telephone"));
+				jsonObject.put("phone", rows.get(0).get("mobile"));
+			}
+			Response.json(jsonObject);
+		}catch (Exception e){
+			jsonObject.put("result","fail");
+			Response.json(jsonObject);
+		}
+	}
+
+	/**
+	 * 调用通讯录获取选中的电话信息
+	 */
+	private JSONObject getTxlInfo(String userid){
+		LinkedMultiValueMap<String, Object> objectObjectLinkedMultiValueMap = new LinkedMultiValueMap<>();
+		objectObjectLinkedMultiValueMap.add("userId",userid);
+		objectObjectLinkedMultiValueMap.add("page","1");
+		objectObjectLinkedMultiValueMap.add("rows","10");
+		BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","","txl");
+		JSONObject jsonData = CrossDomainUtil.getTokenByJsonData(document.getUrl() + AppInterfaceConstant.WEB_INERFACE_TXL_MANAGETHING, objectObjectLinkedMultiValueMap, SSOAuthFilter.getToken());
+		return jsonData;
+	}
 }

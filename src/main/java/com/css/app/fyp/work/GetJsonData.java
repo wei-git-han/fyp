@@ -61,23 +61,34 @@ public class GetJsonData {
                             //公文处理
                             BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
                             url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
+                            if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
+                                map.add("deptid", getUsers(data.get("ORG_ID").toString()));
+                            }
+                            setData(data,url,map,token,jsons);
                             break;
                         case "办会":
                             //中宏利达会议
                             BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                             url = meeting.getUrl()+AppInterfaceConstant.WEB_INERFACE_ZHLD_MEETING;
+                            setData(data,url,map,token,jsons);
                             break;
                         case "督查催办":
                             //督查催办
                             BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                             url = manageThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_DCCB_MANAGETHING;
+                            List<Object> organIds = map.get("organId");
+                            if(null==organIds && organIds.contains(data.get("ORG_ID").toString())){
+                                map.remove("organId");
+                                map.add("organId", getUsers(data.get("ORG_ID").toString()));
+                                setData(data,url,map,token,jsons);
+                            }
+                            //默认查配置的全部局
+                            if(null == organIds){
+                                map.add("organId", getUsers(data.get("ORG_ID").toString()));
+                                setData(data,url,map,token,jsons);
+                            }
                             break;
                     }
-                    if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
-//                        map.remove("deptid");
-                        map.add("deptid",getUsers(data.get("ORG_ID").toString()));
-                    }
-                    setData(data,url,map,token,jsons);
 //                }
 //            });
         }

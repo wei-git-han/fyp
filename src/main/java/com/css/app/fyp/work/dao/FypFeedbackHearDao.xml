@@ -20,7 +20,7 @@
 				and SUBMIT_USER_ID =#{submitUserId}
 			</if>
 			<!--状态-->
-			<if test="status!=null and status!=''">
+			<if test="status!=null">
 				and STATUS =#{status}
 			</if>
 			<!--提出时间-->
