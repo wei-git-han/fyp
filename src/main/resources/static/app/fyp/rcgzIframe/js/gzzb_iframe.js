@@ -36,13 +36,10 @@ var pageModule = function () {
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val()},
+			data:{weekTableType:type,userId:$("#deptId").val(),date:$("#searchDate").val()},
 			success: function(res) {
-				if(!res.data){
+				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
-					return;
-				}
-				if (res.data.length<1) {
 					return;
 				}
 				var divHeight = $(".newpage113").height();
@@ -171,8 +168,19 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
+		$(".date-picker").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			format: "yyyy-mm-dd"
+		}).on("changeDate",function(){
+			getRole('grzb');
+		});
+		
 		//各局周表&本局周表 点击事件
 		$(".nav>li").click(function() {
+			$("#mainContent").html("");
 			$(this).addClass('active').siblings().removeClass('active');
 			initPlan($(".nav>li.active").attr("data"));
 			if($(".nav>li.active").attr("data") == "gjzb"){
