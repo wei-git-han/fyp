@@ -28,15 +28,17 @@ var pageModule = function () {
 	
 	var object1 = {};
 	var initPlan = function(type){
+		var weekTableDate='';
 		if(type=="bjzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
+			weekTableDate = $("#searchDate").val();
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val(),weekTableDate:$("#searchDate").val()},
+			data:{weekTableType:type,userId:$("#deptId").val(),weekTableDate:weekTableDate},
 			success: function(res) {
 				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
