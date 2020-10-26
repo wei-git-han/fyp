@@ -176,14 +176,14 @@ var pageModule = function () {
 		
 		//确定
 		$("#sure").click(function(){
-			var elementarry = ["userId","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","remark","status"];
+			var elementarry = ["userId","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
 		
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","remark","status"]);
+			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"]);
 			initgrid();
 		});
 	}

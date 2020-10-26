@@ -29,67 +29,15 @@
 			<form id="commentForm" class="pr100">
 				<table class="table">
 					<tr>
-						<td class="t_label">硬件/软件<br/>名称<span class="red">*</span></td>
-						<td class="t_inpt" colspan="3">
-							<input type="text" class="form-control" id="softname" name="softname"  required/>
-						</td>
-					</tr>
-					<tr>
-						<td class="t_label">提出人<span class="red">*</span></td>
-						<td class="t_inpt" colspan="3">
-							<div class="form-control" style="padding:0;background:#fff">
-								<div class="selecttree">
-									<input type="hidden" class="form-control"  id="submitUserId" name="submitUserId"  />
-									<input type="text" class="form-control"  id="submitUserName" name="submitUserName"  onfocus="blur()" style="background:#fff" required />
-								</div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="t_label">解决时限<span class="red">*</span></td>
-						<td class="t_inpt" >
-							<div style="float: right;" class="input-group input-large date-picker input-daterange"  data-date-format="yyyy-mm-dd">
-								<input type="text" class="form-control"  onfocus=""  readonly="readonly"  id="solveTime"  name="solveTime" style="background:#fff" required />
-								<span class="input-group-btn">
-									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-								</span>
-							</div>
-						</td>
-						<td class="t_label">工作进展</td>
-						<td class="t_inpt" >
-							<input type="text" class="form-control" id="march" name="march" />
-						</td>
-					</tr>
-					<tr>
-						<td class="t_label">状态</td>
-						<td class="t_inpt">
-							<select class="form-control" id="status" name="status" >
-								<option value="0">需求论证</option>
-								<option value="1">需求细化</option>
-								<option value="2">解决中</option>
-								<option value="3">已解决待升级</option>
-								<option value="4">已关闭</option>
-							</select>
-						</td>
-						<td class="t_label">问题分类</td>
-						<td class="t_inpt">
-							<select class="form-control" id="type" name="type" >
-								<option value="0">系统问题</option>
-								<option value="1">完善建议</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
 						<td class="t_label">问题描述</td>
 						<td class="t_inpt" colspan="3">
-							<textarea rows="" cols="" id="desc" placeholder="请输入500字以内的问题描述" name="desc" class="form-control" style="height:200px;resize:none;" maxlength="500"></textarea>
+							<textarea rows="" cols="" id="desc" name="desc" class="form-control" style="height:200px;resize:none;" maxlength="500"></textarea>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div class="bottom">
-			<!-- <button class="btn" type="button" id="reset">重置</button> -->
 			<button class="btn" type="button" id="save">确定</button>
 			<button class="btn closebtn" type="button" id="close">取消</button>
 		</div>
@@ -114,7 +62,7 @@
 <script src="../../../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 <script src="../../../../assets/global/plugins/gridtable/gridtable.js" type="text/javascript" ></script>
 <script src="../../common/js/commons.js" type="text/javascript"></script>
-<script src="../js/slqkadd.js" type="text/javascript"></script>
+<script src="../js/issueClassifyAdd.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
         pageModule.initControl();

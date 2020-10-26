@@ -29,7 +29,7 @@ html, body {
 	top:100px;
 	left:0;
 	width: 100%;
-	height:200px;
+	height:270px;
 	padding:20px;
 	
 }
@@ -74,7 +74,7 @@ html, body {
 .newlayout-content{
 	width:100%;
 	height:100%;
-	padding-top:310px;
+	padding-top:380px;
 }
 .newlayout-content-title{
 	position:absolute;

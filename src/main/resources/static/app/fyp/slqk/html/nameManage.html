@@ -29,90 +29,38 @@
 	<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:60px;text-align:center;color:#1273AA;display: table-cell;vertical-align: middle;"></i>
 </div>
 <div class="pr100">
-	<div class="newlayout-head">
-		用户反馈受理情况
+	<div class="newlayout-head newlayout-head1">
+		硬/软件名称管理
 	</div>
 	<div class="newlayout-search">
-		<div class="newlayout-search-main">
+		<div class="newlayout-search-main newlayout-search-main1">
 			<form>
 				<div class="form-group">
-					<label>提出单位</label><br/>
-					<div class="form-control" style="padding:0;width:195px;">
-						<div class="selecttree">
-							<input type="hidden" class="form-control"  id="submitDeptId" name="submitDeptId"  />
-							<input type="text" class="form-control"  id="submitDeptName" name="submitDeptName"  onfocus="blur()" placeholder="" style="background:#fff"  />
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label>提出人</label><br/>
-					<div class="form-control" style="padding:0;width:195px;background:#fff">
-						<div class="selecttree">
-							<input type="hidden" class="form-control"  id="submitUserId" name="submitUserId"  />
-							<input type="text" class="form-control"  id="submitUserName" name="submitUserName"  onfocus="blur()" placeholder=""  style="background:#fff" />
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label>状态</label><br/>
+					<label>种类</label><br/>
 					<select name="status" id="status" class="form-control" style="width:195px;">
-						<option value=""></option>
-						<option value="0">需求论证</option>
-						<option value="1">需求细化</option>
-						<option value="2">解决中</option>
-						<option value="3">已解决待升级</option>
-						<option value="4">已关闭</option>
+						<option value="">全部</option>
+						<option value="0">软件</option>
+						<option value="1">硬件</option>
 					</select>
 				</div>
-				<div class="form-group" style="width:25%;">
-					<label>提出时间</label><br/>
-					<div style="width:360px;" class="input-group input-large date-picker input-daterange"  data-date-format="yyyy-mm-dd">
-						<input type="text" class="form-control"  onfocus=""   id="submitTimeBegin"  name="submitTimeBegin" />
-						<span class="input-group-btn">
-					    	<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-					    </span>
-						<span class="input-group-addon" style="border: none;background: transparent;">至</span>
-						<input type="text" class="form-control" onfocus="blur()"  id="submitTimeEnd"  name="submitTimeEnd"  />
-						<span class="input-group-btn" >
-					    	<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-					    </span>
-					</div>
-				</div>
 				<div class="form-group">
-					<label>问题描述</label><br/>
-					<input type="text" name="desc" id="desc" class="form-control"  value="" placeholder="请输入问题描述关键词" />
+					<label>名称</label><br/>
+					<input type="text" name="productName" id="productName" class="form-control"  value="" placeholder="请输入名称关键词" />
 				</div>
 				
 				<div class="btn-group">
-					<button type="button" id="reset">重置</button>
-					<button type="button" id="sure">确定</button>
+					<button type="button" class="search" id="sure">确定</button>
 				</div>
 			</form>
 		</div>
 	</div>
-	<div class="newlayout-content">
+	<div class="newlayout-content newlayout-content1">
 		<div class="pr100">
 			<div class="newlayout-content-title">
 				<div class="line">
-					<span>管理员管理</span>
 					<button type="button" id="add">新增</button>
 					<button type="button" id="edit">编辑</button>
 					<button type="button" id="del" class="del">删除</button>
-					<div class="newbuttoncont">
-		        		<form class="form-horizontal" id="form3" target="iframe7" role="form" method="post" enctype="multipart/form-data" >
-							<input type="hidden"  id="idpdf" name="idpdf"/>
-							<div class="fileinput fileinput-new" data-provides="fileinput">
-		                        <span style="margin:0px!important">
-		                         	<button type="button" id="uploadFile" class="btn btn-newColor">上传文件</button>
-		                        	<input type="file" name="file" id="file" accept=".xls,.xlsx" style="display:none"/>
-		                        </span>
-		                    </div> 
-		                </form>
-		                <iframe name="iframe7" style="display: none;"></iframe>
-					</div>
-					<button type="button" class="importBtn" id="downloadBtn">下载</button>
-					<button type="button" class="importBtn" id="nameManageBtn">硬/软件名称管理</button>
-					<button type="button" class="importBtn" id="issueClassifyBtn">问题分类管理</button>
 				</div>
 			</div>
 			<div class="newlayout-grid">
@@ -142,7 +90,7 @@
 <script src="../../../../assets/global/plugins/gridtable/gridtable.js" type="text/javascript" ></script>
 <script src="../../common/js/jquery.form.js" type="text/javascript" ></script>
 <script src="../../common/js/commons.js" type="text/javascript"></script>
-<script src="../js/slqktable.js" type="text/javascript"></script>
+<script src="../js/nameManage.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
         pageModule.initControl();

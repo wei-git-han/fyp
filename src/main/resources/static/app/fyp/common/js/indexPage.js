@@ -76,6 +76,7 @@ var pageModule = function() {
           $('#set').show()
         }else{
           $('#set').hide()
+
         }
       }
     })
