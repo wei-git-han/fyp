@@ -128,7 +128,14 @@ public class DictController {
 
 		for (Object object :children) {
 			JSONObject jo = (JSONObject) object;
-			jo.get("id");
+			String dept = jo.get("id").toString();
+			for (Map<String,Object> map:list) {
+				if(dept.equals(map.get("DEPT_ID").toString())){
+					jo.put("dictType",map.get("TYPE"));
+				}else{
+					jo.put("dictType","0");
+				}
+			}
 
 			System.out.println();
 		}

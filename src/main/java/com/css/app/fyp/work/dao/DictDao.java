@@ -27,4 +27,8 @@ public interface DictDao extends BaseDao<Dict> {
     void insertConfigUser(String id,String userid, Date time);
     //查询统计人员
     List<Map<String,Object>> findUserids();
+
+    void deleteUserAll();
+
+    void deleteDeptByDeptId(String deptid);
 }
