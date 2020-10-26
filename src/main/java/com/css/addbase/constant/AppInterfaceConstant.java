@@ -574,7 +574,7 @@ public class AppInterfaceConstant {
 
     /********************************************************FYP(日常工作)start****************************************************************/
 
-    public final static String WEB_INTERFACE_QXJ_TO_FYP = "/app/qxjgl/leaveorback/qjCompletedUserCount";
+    public final static String WEB_INTERFACE_QXJ_TO_FYP = "/app/qxjgl/api/getQjNum";
 
     public final static String WEB_INTERFACE_QXJ_DATA_TO_FYP = "/app/qxjgl/leaveorback/qjCompletedUser";
 
@@ -769,4 +769,8 @@ public class AppInterfaceConstant {
      * 督查催办、负一屏统计接口
      */
     public final static String WEB_INERFACE_DCCB_MANAGETHING = "/app/db/documentjcdb/count";
+
+    public final static String WEB_INTERFACE_QXJ_statistics = "/app/qxjgl/leaveOrBack/getXLGLNumber";
+
+    public final static String WEB_INTERFACE_XLGLZXR = "/api/online/";
 }

@@ -154,4 +154,9 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 		return baseAppUserDao.queryListByRole(organid);
 	}
 
+	@Override
+	public List<BaseAppUser> queryByOrganidTREEPATH(Map<String, Object> map) {
+		return baseAppUserDao.queryByOrganidTREEPATH(map);
+	}
+
 }

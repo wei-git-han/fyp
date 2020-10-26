@@ -127,4 +127,6 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 			"left join fyp_role_edit b " +
 			"on 1 = 1 and a.ISDELETE = '0' and a.ORGANID = #{0} and a.user_id = b.USER_ID and b.role_type = '3'")
     List<BaseAppUser> queryListByRole(String organid);
+
+	List<BaseAppUser>  queryByOrganidTREEPATH(Map<String,Object> map);
 }
