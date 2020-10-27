@@ -129,6 +129,7 @@ var pageModule = function() {
         header: true,
         title: "业务配置信息",
         url: "set.html",
+        classed:"darkColor",
         style: {
           "background": "#fff"
         }

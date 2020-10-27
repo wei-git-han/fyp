@@ -8,7 +8,7 @@ var pageModule = function () {
 		  grid = $("#gridcont").createGrid({
 			columns:[
 						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
-							return `<span title="${rowdata.name}">${rowdata.name}</span>`;
+							return `<span title="${rowdata.softName}">${rowdata.softName}</span>`;
 						}},
 						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
 							return `<span title="${rowdata.desc}">${rowdata.desc}</span>`;
@@ -41,13 +41,13 @@ var pageModule = function () {
 		                    }
 						}},
 						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
-							if(rowdata.type == "0"){
-		                        return `<span title="系统问题">系统问题</span>`;
-		                    }else if(rowdata.type == "1"){
-		                        return `<span title="完善建议">完善建议</span>`;
-		                    }else{
-		                        return "";
-		                    }
+							// if(rowdata.type == "0"){
+		                        return `<span title="${rowdata.type}">${rowdata.type}</span>`;
+		                    // }else if(rowdata.type == "1"){
+		                    //     return `<span title="完善建议">完善建议</span>`;
+		                    // }else{
+		                    //     return "";
+		                    // }
 						}}
 					 ],
 			width:'100%',
