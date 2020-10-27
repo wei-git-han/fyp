@@ -4,7 +4,7 @@ var url1 = {
   "url": "",
   "dataType": "text"
 };
-var defaultTime = 30000;
+var defaultTime = 300000;
 var activeType = "start_page1";
 var pageList = {
   rcgz: [{
