@@ -13,7 +13,7 @@ var pageModule = function () {
 					} 
 					class="'+class1+'"
 					*/
-					arryHtml+=  '<dl style="cursor: pointer" onclick="window.top.openfn1(\''+o.appId+'\',\''+o.id+'\',\''+data.data.ip+'\',\''+i+'\')">'+
+					arryHtml+=  '<dl style="cursor: pointer" onclick="openById(\''+data.data.appId+'\',\''+o.contentid+'\',\''+data.data.ip+'\',\''+i+'\')">'+
 								'	<dt><span>'+parseInt(i+1)+'</span>'+o.title+'</dt>'+
 								'	<dd>'+o.releaseTime+'</dd>'+
 								'</dl>'
@@ -41,5 +41,5 @@ var pageModule = function () {
 
 
 function openById(appid,id,domain){
-	window.top.openfn1(appid,`/channelNews/newsDetails?nid=${id}`,domain)
+	window.top.openfn1(appid,`/affiche/viewInfo.html?cid=${id}`,domain)
 }
