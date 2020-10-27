@@ -53,6 +53,28 @@ public class FypFeedbackHear implements Serializable {
 	//工作进展
 	private String march;
 
+	//软硬件id
+	private String softId;
+
+	//问题分类id
+	private String typeId;
+
+	public String getSoftId() {
+		return softId;
+	}
+
+	public void setSoftId(String softId) {
+		this.softId = softId;
+	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}

@@ -56,7 +56,10 @@
 			"STATUS", 
 			"SUBMIT_DEPT_NAME", 
 			"SUBMIT_USER_NAME", 
-			"MARCH"
+			"MARCH",
+			"SOFT_ID",
+			"TYPE_ID"
+
 		)
 		values
 		(
@@ -71,7 +74,9 @@
 			#{status}, 
 			#{submitDeptName}, 
 			#{submitUserName}, 
-			#{march}
+			#{march},
+			#{softId},
+			#{typeId}
 		)
 	</insert>
 	 
@@ -88,7 +93,9 @@
 			<if test="status != null">"STATUS" = #{status}, </if>
 			<if test="submitDeptName != null">"SUBMIT_DEPT_NAME" = #{submitDeptName}, </if>
 			<if test="submitUserName != null">"SUBMIT_USER_NAME" = #{submitUserName}, </if>
-			<if test="march != null">"MARCH" = #{march}</if>
+			<if test="march != null">"MARCH" = #{march},</if>
+			<if test="softId != null">"SOFT_ID" = #{softId},</if>
+			<if test="typeId != null">"TYPE_ID" = #{typeId}</if>
 		</set>
 		where ID = #{id}
 	</update>
