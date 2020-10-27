@@ -24,6 +24,7 @@ import com.github.pagehelper.PageHelper;
 import com.css.base.utils.Response;
 import com.css.app.fyp.work.entity.FypRoleEdit;
 import com.css.app.fyp.work.service.FypRoleEditService;
+import sun.util.resources.cldr.fr.CalendarData_fr_YT;
 
 
 /**
@@ -98,12 +99,22 @@ public class FypRoleEditController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public void save( FypRoleEdit fypRoleEdit){
-		fypRoleEdit.setId(UUIDUtils.random());
-		fypRoleEdit.setCreateTime(new Date());
-		fypRoleEdit.setEditUserId(CurrentUser.getUserId());
-		fypRoleEdit.setEditUserName(CurrentUser.getUsername());
-		fypRoleEditService.save(fypRoleEdit);
+	public void save( String[] userId,String[] userName,Integer roleType,String deptId,String deptName) {
+		if (userId != null && userId.length > 0) {
+			for (int i = 0; i < userId.length; i++) {
+				FypRoleEdit fypRoleEdit = new FypRoleEdit();
+				fypRoleEdit.setId(UUIDUtils.random());
+				fypRoleEdit.setCreateTime(new Date());
+				fypRoleEdit.setUserId(userId[i]);
+				fypRoleEdit.setUserName(userName[i]);
+				fypRoleEdit.setRoleType(roleType);
+				fypRoleEdit.setDeptId(deptId);
+				fypRoleEdit.setDeptName(deptName);
+				fypRoleEdit.setEditUserId(CurrentUser.getUserId());
+				fypRoleEdit.setEditUserName(CurrentUser.getUsername());
+				fypRoleEditService.save(fypRoleEdit);
+			}
+		}
 		Response.json(new ResponseValueUtils().success());
 	}
 	
