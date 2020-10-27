@@ -80,13 +80,12 @@ public class GetJsonData {
                             if(null==organIds && organIds.contains(data.get("ORG_ID").toString())){
                                 map.remove("organId");
                                 map.add("organId", getUsers(data.get("ORG_ID").toString()));
-                                setData(data,url,map,token,jsons);
                             }
                             //默认查配置的全部局
                             if(null == organIds){
                                 map.add("organId", getUsers(data.get("ORG_ID").toString()));
-                                setData(data,url,map,token,jsons);
                             }
+                            setData(data,url,map,token,jsons);
                             break;
                     }
 //                }

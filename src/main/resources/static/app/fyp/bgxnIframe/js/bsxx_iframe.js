@@ -110,6 +110,9 @@ var pageModule = function() {
 			initNum();
 			initUnitTree();
 			initother();
+		},
+		refreshPage:function () {
+
 		}
 	}
 }();

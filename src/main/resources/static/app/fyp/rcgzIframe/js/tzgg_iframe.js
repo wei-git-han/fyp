@@ -34,7 +34,10 @@ var pageModule = function () {
         initControl: function () {
 			inittzgg($(".nav>li.active").attr("data"));
 			initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

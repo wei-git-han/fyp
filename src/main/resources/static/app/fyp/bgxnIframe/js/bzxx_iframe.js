@@ -140,7 +140,10 @@ var pageModule = function () {
         initControl: function () {
 			initProblem();
 			initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 function toBzInfo() {

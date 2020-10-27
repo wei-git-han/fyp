@@ -637,7 +637,10 @@ var pageModule = function () {
         	initUnitTree();
         	getBanwenAll();//默认加载办文
             initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 
