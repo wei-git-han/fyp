@@ -21,7 +21,7 @@ public interface FypPersonageWorkWeekService {
 	
 	List<FypPersonageWorkWeek> queryList(Map<String, Object> map);
 
-	List<FypPersonageWorkWeekVo> getPersonalWeekTableList(Date startDate, Map<String, Object> map, String userId);
+	List<FypPersonageWorkWeekVo> getPersonalWeekTableList(Date toDate, Map<String, Object> map, String userId);
 
 	void save(FypPersonageWorkWeek fypPersonageWorkWeek);
 	

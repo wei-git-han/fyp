@@ -36,7 +36,7 @@ var pageModule = function () {
 			initother();
         },
 		refreshPage:function () {
-
+			inittzgg($(".nav>li.active").attr("data"));
 		}
     }
 }();

@@ -50,110 +50,112 @@ var pageModule = function () {
 				var contentHeight = (divHeight - headHeight) / 7;
 				var planHtml = ""; //周工作安排
 				$("#mainContent").html("");
-				//for(key in res){
-					//if(res[key]!=null&&typeof(res[key])!="undefined"&&res[key]!=""){
-						$.each(res.data, function(i, item) {
-							var anpaihtml = "";
-							var html2 = "";
-							var html4 = "";
-							var htmlDate = "";
-							var height101 = "";
-							var month = item.weekMonth;
-							var day = item.weekDay;
-							var week = item.weekDate;
-							if($.trim(week) == "七"){
-								week="日";
-							}
-							var dates = month + "月" + day + "日";
-							var comparedates = month + "-" + day;
-							var comparedates2 = $("#monthAndday").val();
-							var today = new Date().format("M月d日");
-							
-							htmlDate += '	<div class="newpage17" style="background:transparent!important">' +
-										'		<div class="newpage21" >' +
-										'			<p>' + month+'月'+day+'日' + '</p><p>' + '星期'+ week + '</p>' +
-										'		</div>' +
-										'	</div>';
-							
-							$.each(item.amFypPersonageWorkWeekList, function(j, items) {
-								var createdTime = items.createdTime;
-								var html5 = "";
-								var html9 = "";
+				$.each(res.data, function(i, item) {
+					var anpaihtml = "";
+					var html2 = "";
+					var html4 = "";
+					var htmlDate = "";
+					var height101 = "";
+					var month = item.weekMonth;
+					var day = item.weekDay;
+					var week = item.weekDate;
+					if($.trim(week) == "七"){
+						week="日";
+					}
+					var dates = month + "月" + day + "日";
+					var comparedates = month + "-" + day;
+					var comparedates2 = $("#monthAndday").val();
+					var today = new Date().format("M月d日");
+					
+					htmlDate += '	<div class="newpage17" style="background:transparent!important">' +
+								'		<div class="newpage21" >' +
+								'			<p>' + month+'月'+day+'日' + '</p><p>' + '星期'+ week + '</p>' +
+								'		</div>' +
+								'	</div>';
 
-								var id = items.id;
-								object1[id] = items;
+					var amFypPersonageWorkWeekList = item.amFypPersonageWorkWeekList;
+					if(amFypPersonageWorkWeekList == null || amFypPersonageWorkWeekList == "" || typeof(amFypPersonageWorkWeekList) == "undefined" ){
+					    amFypPersonageWorkWeekList =[];
+					}
+				    $.each(amFypPersonageWorkWeekList, function(j, items) {
+                        var createdTime = items.createdTime;
+                        var html5 = "";
+                        var html9 = "";
 
-								html5 = '<dl>';
-								if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
-									createdTime = createdTime.substring(11,16);
-									html5 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
-								} else {
-									html5 += "<dt></dt>";
-								};
-								html5 += '	<dd>';
-								if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !=
-									"") {
-									html9 += '<span class="span1" title="' + items.weekTableContent + '">' + items.weekTableContent + '</span>';
-								};
-								if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
-									"") {
-									html9 += '<span class="span2" title="' + items.receiverUtil + '">（' + items.receiverUtil +
-										'主办）</span>';
-								};
-								if (html9 != "") {
-									html5 += '<p class="p1">' + html9 + '</p>';
-								};
-								html5 += '	</dd>';
-								'</dl>';
-								html2 += '<div class="newpage19"  onclick="editfn(\''+items.id+'\')" >' + html5 + '</div>'
-							});
-							
-							
-							
-							
-							var html1 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
-							html2 +
-							'</div></div>';
-							$.each(item.pmFypPersonageWorkWeekList, function(i, items) {
-								var createdTime = items.createdTime;
-								var html7 = "";
-								var html10 = "";
-								html7 = '<dl>';
-								if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
-									createdTime = createdTime.substring(11,16);
-									html7 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
-								} else {
-									html7 += "<dt></dt>";
-								};
-								html7 += '	<dd>';
-								if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !="") {
-									html10 += '<span class="span1" title="' + items.content + '">' + items.weekTableContent + '</span>';
-								};
-								if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
-									"") {
-									html10 += '<span class="span2" title="' + items.receiverUtil + '">（' + items.receiverUtil +
-										'主办）</span>';
-								};
-								if (html10 != "") {
-									html7 += '<p class="p1">' + html10 + '</p>';
-								};
-								html7 += '	</dd>';
-								'</dl>';
-								html4 += '<div class="newpage19" onclick="editfn(\''+items.id+'\')" >' + html7 + '</div>'
-							});
-							
-							
-							var html3 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
-								html4 +
-								'</div></div>';
-							
-							planHtml += '<div class="newpage20 ' + (today == dates ? "active" : "") + '" data="show_' + (i + 1) +
-								'" name="show_' + (i + 1) + '">' +
-								 htmlDate + html1 + html3 +
-								'</div>';
-						});
-					//}
-				//}
+                        var id = items.id;
+                        object1[id] = items;
+
+                        html5 = '<dl>';
+                        if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
+                            createdTime = createdTime.substring(11,16);
+                            html5 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
+                        } else {
+                            html5 += "<dt></dt>";
+                        };
+                        html5 += '	<dd>';
+                        if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !=
+                            "") {
+                            html9 += '<span class="span1" title="' + items.weekTableContent + '">' + items.weekTableContent + '</span>';
+                        };
+                        if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
+                            "") {
+                            html9 += '<span class="span2" title="' + items.receiverUtil + '">（' + items.receiverUtil +
+                                '主办）</span>';
+                        };
+                        if (html9 != "") {
+                            html5 += '<p class="p1">' + html9 + '</p>';
+                        };
+                        html5 += '	</dd>';
+                        '</dl>';
+                        html2 += '<div class="newpage19"  onclick="editfn(\''+items.id+'\')" >' + html5 + '</div>'
+                    });
+					var html1 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
+					html2 +
+					'</div></div>';
+
+
+                    var pmFypPersonageWorkWeekList = item.pmFypPersonageWorkWeekList;
+                    if(pmFypPersonageWorkWeekList == null || pmFypPersonageWorkWeekList == "" || typeof(pmFypPersonageWorkWeekList) == "undefined" ){
+                        pmFypPersonageWorkWeekList =[];
+                    }
+
+                    $.each(pmFypPersonageWorkWeekList, function(i, items) {
+                        var createdTime = items.createdTime;
+                        var html7 = "";
+                        var html10 = "";
+                        html7 = '<dl>';
+                        if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
+                            createdTime = createdTime.substring(11,16);
+                            html7 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
+                        } else {
+                            html7 += "<dt></dt>";
+                        };
+                        html7 += '	<dd>';
+                        if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !="") {
+                            html10 += '<span class="span1" title="' + items.weekTableContent + '">' + items.weekTableContent + '</span>';
+                        };
+                        if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
+                            "") {
+                            html10 += '<span class="span2" title="' + items.receiverUtil + '">（' + items.receiverUtil +
+                                '主办）</span>';
+                        };
+                        if (html10 != "") {
+                            html7 += '<p class="p1">' + html10 + '</p>';
+                        };
+                        html7 += '	</dd>';
+                        '</dl>';
+                        html4 += '<div class="newpage19" onclick="editfn(\''+items.id+'\')" >' + html7 + '</div>'
+                    });
+					
+					var html3 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
+						html4 +
+						'</div></div>';
+					
+					planHtml += '<div class="newpage20 ' + (today == dates ? "active" : "") + '" data="show_' + (i + 1) +
+						'" name="show_' + (i + 1) + '">' +
+						 htmlDate + html1 + html3 +
+						'</div>';
+				});
 				$("#mainContent").append(planHtml);
 			}
 		})
@@ -223,15 +225,15 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-          getRole('');
-          initUnitTree();
-		  initother();
+             getRole('grzb');
+             initUnitTree();
+		     initother();
         },
         refresh:function(){
         	getRole('grzb');
         },
 		refreshPage:function () {
-
+			getRole('grzb');
 		}
     }
 }();
