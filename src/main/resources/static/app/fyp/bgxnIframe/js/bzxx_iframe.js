@@ -133,6 +133,9 @@ var pageModule = function () {
 		$("#slqk").click(function(){
 			initgrid();
 		});
+		$("#wtzz").click(function(){
+			initProblem();
+		});
 	}
 	
     return {
@@ -142,7 +145,11 @@ var pageModule = function () {
 			initother();
         },
 		refreshPage:function () {
-
+			if ($('#wtzz').hasClass('active')) {
+				initProblem();
+			} else if ($('#slqk').hasClass('active')) {
+				initgrid();
+			}
 		}
     }
 }();
