@@ -86,11 +86,11 @@ public class WorkWeekTableController {
      */
     @ResponseBody
     @RequestMapping("/list")
-    public void list(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, Integer page, Integer limit){
+    public void list(@DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate, Integer page, Integer limit){
         Map<String, Object> map = new HashMap<>();
         String userId = CurrentUser.getUserId();
         //查询列表数据
-        List<FypPersonageWorkWeekVo> fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(startDate, map, userId);
+        List<FypPersonageWorkWeekVo> fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(toDate, map, userId);
         Response.json(new ResponseValueUtils().success(fypPersonageWorkWeekList));
     }
 

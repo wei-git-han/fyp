@@ -84,15 +84,9 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
             amMap.put("userId", userId);
             amMap.put("weekDate", weekDate);
             List<FypPersonageWorkWeekVo> amFypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getPersonalWeekTableList(amMap);
-            Date mondayStartTime = getDayStartTime(toDate);
-            Date sondayEndTime = getDayEndTime(toDate);
             List<FypPersonageWorkWeek> amFypPersonageWorkWeekList = new ArrayList<>();
             List<FypPersonageWorkWeek> pmFypPersonageWorkWeekList = new ArrayList<>();
             for (FypPersonageWorkWeekVo fypPersonageWorkWeekVo : amFypPersonageWorkWeekVos) {
-                Date createdTime = fypPersonageWorkWeekVo.getCreatedTime();
-                if(mondayStartTime.getTime() > createdTime.getTime() || sondayEndTime.getTime() < createdTime.getTime()) {
-                    continue;
-                }
                 String hourFlag = fypPersonageWorkWeekVo.getHourFlag();
                 switch (hourFlag) {
                     //AM
