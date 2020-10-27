@@ -285,7 +285,11 @@ var pageModule = function () {
         	initother();
         },
 		refreshPage:function () {
-
+			if($('#rchy').hasClass('active')){
+				getBar3dChartData();
+			}else{
+				getBarChartData();
+			}
 		}
     }
 }();

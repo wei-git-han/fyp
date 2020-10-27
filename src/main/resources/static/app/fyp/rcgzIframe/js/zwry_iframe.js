@@ -360,11 +360,11 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-          initUserStatus();
-		  initother();
+            initUserStatus();
+		    initother();
         },
 		refreshPage:function () {
-
+			initUserStatus();
 		}
     }
 }();

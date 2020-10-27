@@ -68,7 +68,9 @@ var pageModule = function() {
 		$("#gzbbLi").click(function() {
 			initZhoubiao();
 		});
-
+		$("#dccb").click(function() {
+			initNum();
+		});
 		$(".date-picker1").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
@@ -112,7 +114,11 @@ var pageModule = function() {
 			initother();
 		},
 		refreshPage:function () {
-
+			if($('#gzbbLi').hasClass('active')){
+				initZhoubiao();
+			}else{
+				initNum();
+			}
 		}
 	}
 }();

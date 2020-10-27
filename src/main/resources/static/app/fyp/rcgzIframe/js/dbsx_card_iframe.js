@@ -26,7 +26,7 @@ var pageModule = function () {
 		    initother();
         },
 		refreshPage:function () {
-
+			initdbsx();
 		}
     }
 }();

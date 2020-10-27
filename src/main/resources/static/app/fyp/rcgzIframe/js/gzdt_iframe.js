@@ -18,18 +18,6 @@ var pageModule = function () {
 								</dl>`
 				});
 				$("#gzdt").html(arryHtml);
-
-/*
-				coverImg ：图片路径
-                	title	 ：标题
-                	userName ：创建人名称
-                	userId	 ：创建人id
-                	content	 : 带有html标签的内容、图片
-                	organName：组织名称
-                	shortText：去掉html标签的内容仅有文字
-                	createDate：创建时间*/
-
-
 			}
 		})
 	}
@@ -42,7 +30,7 @@ var pageModule = function () {
 		    initother();
         },
 		refreshPage:function () {
-
+			initgzdt();
 		}
     }
 }();
