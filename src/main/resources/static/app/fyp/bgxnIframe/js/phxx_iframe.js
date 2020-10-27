@@ -9,7 +9,9 @@ var pageModule = function () {
 			initfw();
 			initanz();
 		});
-		
+		$("#zxph").click(function(){
+			getBarChartData();
+		});
 		//未开机数据
 		$("#wkjsj").click(function(){
 			getBarChartData2();
@@ -431,7 +433,12 @@ var pageModule = function () {
 			initother();
         },
 		refreshPage:function () {
-
+			if ($('#rjsj').hasClass('active')) {
+				initfw();
+				initanz()
+			} else if ($('#zxph').hasClass('active')) {
+				getBarChartData();
+			}
 		}
     }
 }();

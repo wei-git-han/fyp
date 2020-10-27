@@ -639,7 +639,15 @@ var pageModule = function () {
             initother();
         },
 		refreshPage:function () {
-
+			if ($('#bgxl').hasClass('active')) {
+				getCircleChartData()
+			} else if ($('#fzqs').hasClass('active')) {
+				getAreaChartData();
+			} else if ($('#fwqk').hasClass('active')) {
+				getFawenAll();
+			} else {
+				getBanwenAll();
+			}
 		}
     }
 }();
