@@ -346,6 +346,7 @@ select{
     color: #fff;
     font-size: 14px;
     padding: 6px 18px;
+    border-radius: 4px !important;
 }
 .caozuoBtn .add:hover{
 	border:1px solid #3C41BC;
