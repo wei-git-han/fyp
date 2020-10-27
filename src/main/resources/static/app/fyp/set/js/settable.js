@@ -34,7 +34,7 @@ var pageModule = function () {
 							return rowdata.editUserName;
 						}},
 						{display:"配置时间",name:"editTime",width:"15%",align:"center",render:function(rowdata){
-							return rowdata.editTime;                                         
+							return rowdata.editTime||rowdata.createTime||"";
 						}}
 					 ],
 			width:'100%',

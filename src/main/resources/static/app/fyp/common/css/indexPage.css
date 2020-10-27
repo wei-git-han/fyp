@@ -383,6 +383,27 @@ body {
   top: 0;
   bottom: 0;
 }
+.darkColor .modal-header{
+  background-color: #04192D;
+}
+.darkColor .modal-content{
+  /*border: 1px solid #2A92E3;*/
+  box-shadow: 0px 0px 5px #2A92E3;
+  background-color: #04172A;
+}
+.darkColor .modal-body{
+  background-color: #04172A!important;
+}
+.darkColor .newclose i{
+  color: #2A92E3;
+  font-size: 20px!important;
+  margin-right: 20px;
+}
+.darkColor .modal-title{
+  font-size: 28px!important;
+  font-family: "YOUSHEBIAOTIHEI-2_0";
+  padding-left: 16px;
+}
 /*.newlayout-center *{*/
 /*  overflow: visible;*/
 /*}*/
