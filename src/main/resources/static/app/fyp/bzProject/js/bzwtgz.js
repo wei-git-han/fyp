@@ -28,7 +28,7 @@ var pageModule = function () {
 						    }else if(rowdata.source == "2"){
                                 return "现场反馈";
                             }else{
-                                return "";
+                                return rowdata.source;
                             }
 						}},
 						{display:"问题描述",name:"remark",width:"15%",align:"left",render:function(rowdata){
@@ -108,8 +108,36 @@ var pageModule = function () {
 		    format: "yyyy-mm-dd HH:ii",
 		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
-		
-		
+		/*导入 */
+		$("#uploadFile").click(function(){
+			$("#file").unbind("click");
+			$("#file").unbind("change");
+			$("#file").click();
+			$("#file").change(function(){
+				$("#form3").submit();
+			});
+		});
+		$("#form3").validate({
+			submitHandler: function() {
+				$("#dialogzz").show();
+				$("#dialogzz").css("display","table");
+				var ajax_option ={
+					type: "post",
+					url:"/fyp/guaranteetacking/import",
+					success:function(data){
+						$("#dialogzz").hide();
+						if(data.result == "success"){
+							newbootbox.alert('上传成功！').done(function(){
+								initgrid();
+							});
+						}else{
+							newbootbox.alert("上传失败！");
+						}
+					}
+				}
+				$('#form3').ajaxSubmit(ajax_option);
+			}
+		});
 		/* 新增add */
 		$("#add").click(function(){
 			newbootbox.newdialog({
