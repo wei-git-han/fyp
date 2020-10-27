@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +100,9 @@ public class FypRoleEditController {
 	@RequestMapping("/save")
 	public void save( FypRoleEdit fypRoleEdit){
 		fypRoleEdit.setId(UUIDUtils.random());
+		fypRoleEdit.setCreateTime(new Date());
+		fypRoleEdit.setEditUserId(CurrentUser.getUserId());
+		fypRoleEdit.setEditUserName(CurrentUser.getUsername());
 		fypRoleEditService.save(fypRoleEdit);
 		Response.json(new ResponseValueUtils().success());
 	}
@@ -109,6 +113,7 @@ public class FypRoleEditController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public void update( FypRoleEdit fypRoleEdit){
+		fypRoleEdit.setCreateTime(new Date());
 		fypRoleEditService.update(fypRoleEdit);
 		Response.json(new ResponseValueUtils().success());
 	}

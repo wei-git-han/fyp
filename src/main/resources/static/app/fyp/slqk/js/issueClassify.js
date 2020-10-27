@@ -29,7 +29,7 @@ var pageModule = function () {
 	var initother = function(){
 		/*搜索 */
 		$("#sure").click(function(){
-			var elementarry = ["productName","status","type"];
+			var elementarry = ["dictName","dictValue"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});

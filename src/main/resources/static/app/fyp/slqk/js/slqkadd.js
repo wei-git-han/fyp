@@ -26,19 +26,19 @@ var pageModule = function(){
 	var initRyjName = function () {
 		$ajax({
 			url:slqkUrl,
-			data:{type:0,limit:1,page:100},
+			data:{type:0,limit:100,page:1},
 			success:function (data) {
-				initselectByName('softname',data.data.rows)
+				initselectByName('softId',data.data.rows)
 			}
 		})
 	}
 	var initWtfl = function () {
 		$ajax({
 			url:slqkUrl,
-			data:{type:1,limit:1,page:100},
+			data:{type:1,limit:100,page:1},
 			success:function (data) {
 				console.log(data)
-				initselectByName('type',data.data.rows)
+				initselectByName('typeId',data.data.rows)
 			}
 		})
 	}
@@ -48,10 +48,12 @@ var pageModule = function(){
 			data:{id:id},
 			success:function(data){
 				setformdata(data.data);
-				$('#softname').val(data.data.name||'')
-				if(!!data.data.solveTime){
-                    $("#solveTime").val((data.data.solveTime).substring(0,10));
-                }
+				// $('#softname').val(data.data.name||'')
+				if(data.data){
+					if(!!data.data.solveTime){
+						$("#solveTime").val((data.data.solveTime).substring(0,10));
+					}
+				}
 			}
 		})
 	}
@@ -75,9 +77,10 @@ var pageModule = function(){
 				}
 				saveLoading = true
 				$("#save").attr('disabled',true)
-			    var elementarry = ["submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
+			    var elementarry = ["softId","submitTime","submitUserId","submitUserName","solveTime","march","status","typeId","desc"];
 				var paramdata = getformdata(elementarry);
-				paramdata.name= $('#softname').val()
+				paramdata.softName= $('#softId').find('option:selected').text()
+				paramdata.type= $('#typeId').find('option:selected').text()
 				paramdata.id = id;
 				$ajax({
 					url:saveUrl,

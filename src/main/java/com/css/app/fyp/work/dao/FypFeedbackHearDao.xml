@@ -47,7 +47,7 @@
 		(
 			"ID", 
 			"SUBMIT_USER_ID", 
-			"NAME", 
+			"SOFT_NAME",
 			"SUBMIT_DEPT_ID", 
 			"SUBMIT_TIME", 
 			"TYPE", 
@@ -56,13 +56,16 @@
 			"STATUS", 
 			"SUBMIT_DEPT_NAME", 
 			"SUBMIT_USER_NAME", 
-			"MARCH"
+			"MARCH",
+			"SOFT_ID",
+			"TYPE_ID"
+
 		)
 		values
 		(
 			#{id}, 
 			#{submitUserId}, 
-			#{name}, 
+			#{softName},
 			#{submitDeptId}, 
 			#{submitTime}, 
 			#{type}, 
@@ -71,7 +74,9 @@
 			#{status}, 
 			#{submitDeptName}, 
 			#{submitUserName}, 
-			#{march}
+			#{march},
+			#{softId},
+			#{typeId}
 		)
 	</insert>
 	 
@@ -79,7 +84,7 @@
 		update FYP_FEEDBACK_HEAR 
 		<set>
 			<if test="submitUserId != null">"SUBMIT_USER_ID" = #{submitUserId}, </if>
-			<if test="name != null">"NAME" = #{name}, </if>
+			<if test="softName != null">"SOFT_NAME" = #{softName}, </if>
 			<if test="submitDeptId != null">"SUBMIT_DEPT_ID" = #{submitDeptId}, </if>
 			<if test="submitTime != null">"SUBMIT_TIME" = #{submitTime}, </if>
 			<if test="type != null">"TYPE" = #{type}, </if>
@@ -88,7 +93,9 @@
 			<if test="status != null">"STATUS" = #{status}, </if>
 			<if test="submitDeptName != null">"SUBMIT_DEPT_NAME" = #{submitDeptName}, </if>
 			<if test="submitUserName != null">"SUBMIT_USER_NAME" = #{submitUserName}, </if>
-			<if test="march != null">"MARCH" = #{march}</if>
+			<if test="march != null">"MARCH" = #{march},</if>
+			<if test="softId != null">"SOFT_ID" = #{softId},</if>
+			<if test="typeId != null">"TYPE_ID" = #{typeId}</if>
 		</set>
 		where ID = #{id}
 	</update>
