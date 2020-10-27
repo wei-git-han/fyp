@@ -74,9 +74,11 @@ public class FypGuaranteeTackingController {
 		String organId = "";
 		for(FypGuaranteeTacking f : fypGuaranteeTackingList) {
 			organId = f.getDeptId();
-			List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
-			String orgName= OrgUtil.getParentOrg(organs, organId);
-			f.setDeptName(orgName);
+			if(null!=organId) {
+				List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
+				String orgName = OrgUtil.getParentOrg(organs, organId);
+				f.setDeptName(orgName);
+			}
 		}
 		PageUtils pageUtil = new PageUtils(fypGuaranteeTackingList);
         Response.json(new ResponseValueUtils().success(pageUtil));
@@ -151,31 +153,29 @@ public class FypGuaranteeTackingController {
 			List<Object> objects = dataMap.get(key);
 			if(null!=objects&&0<objects.size()){
 				try {
+
+
 					fypGuaranteeTacking = new FypGuaranteeTacking();
 					fypGuaranteeTacking.setId(UUIDUtils.random());
 
 					//单位名称
-					fypGuaranteeTacking.setDeptName("1");
-					//单位id
-					fypGuaranteeTacking.setDeptId("1");
-					//用户id
-					fypGuaranteeTacking.setUserId("1");
+					fypGuaranteeTacking.setDeptName(objects.get(0).toString());
 					//用户名称
-					fypGuaranteeTacking.setUserName("1");
+					fypGuaranteeTacking.setUserName(objects.get(1).toString());
+					//问题来源
+					fypGuaranteeTacking.setSource(objects.get(2).toString());
+					//状态
+					fypGuaranteeTacking.setStatus(objects.get(3).toString());
 					//联系电话
-					fypGuaranteeTacking.setPhone("1");
+					fypGuaranteeTacking.setPhone(objects.get(4).toString());
+					//问题描述
+					fypGuaranteeTacking.setRemark(objects.get(5).toString());
+					//处理措施
+					fypGuaranteeTacking.setMeasures(objects.get(6).toString());
 					//报修时间
 					fypGuaranteeTacking.setWarrantyTime(new Date());
-					//问题来源
-					fypGuaranteeTacking.setSource("1");
-					//问题描述
-					fypGuaranteeTacking.setRemark("1");
-					//状态
-					fypGuaranteeTacking.setStatus("1");
 					//更新时间
 					fypGuaranteeTacking.setStatusTime(new Date());
-					//处理措施
-					fypGuaranteeTacking.setMeasures("1");
 					fypGuaranteeTackingService.save(fypGuaranteeTacking);
 				} catch (Exception e) {
 					e.printStackTrace();

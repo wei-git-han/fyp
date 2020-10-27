@@ -8,15 +8,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppOrganService;
-import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgan.util.OrgUtil;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.*;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import com.github.pagehelper.PageHelper;
 import com.css.app.fyp.work.entity.Dict;
@@ -160,13 +157,4 @@ public class DictController {
 		List<Map<String,Object>> list = dictService.findUserids();
 		Response.json(new ResponseValueUtils().success(list));
 	}
-
-	/**
-	 * 软硬件名称
-	 * 问题分类
-	 * 查询
-	 */
-
-
-
 }
