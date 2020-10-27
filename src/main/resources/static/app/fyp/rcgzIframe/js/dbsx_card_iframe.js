@@ -24,7 +24,10 @@ var pageModule = function () {
         initControl: function () {
 			initdbsx();
 		    initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

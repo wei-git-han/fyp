@@ -47,7 +47,10 @@ var pageModule = function () {
         initControl: function () {
 			initgrid();
 		    initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

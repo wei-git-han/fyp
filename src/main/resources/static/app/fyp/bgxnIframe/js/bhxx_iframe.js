@@ -283,7 +283,10 @@ var pageModule = function () {
         initControl: function () {
         	getBar3dChartData();
         	initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

@@ -40,7 +40,10 @@ var pageModule = function () {
         initControl: function () {
 			initgzdt();
 		    initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

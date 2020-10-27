@@ -429,7 +429,10 @@ var pageModule = function () {
         	//initUnitTree();
         	getBarChartData();
 			initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

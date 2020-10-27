@@ -229,7 +229,10 @@ var pageModule = function () {
         },
         refresh:function(){
         	getRole('grzb');
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 

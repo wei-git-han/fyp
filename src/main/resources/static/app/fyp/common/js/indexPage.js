@@ -4,6 +4,7 @@ var url1 = {
   "url": "",
   "dataType": "text"
 };
+var defaultTime = 30000;
 var activeType = "start_page1";
 var pageList = {
   rcgz: [{
@@ -117,7 +118,8 @@ var pageModule = function() {
       $('#start_page5 .c-title').html(typeArray[4].english)
       $('#start_page5 iframe').attr("src", typeArray[4].url)
       setPage('start_page1')
-      activeDoType = this.id
+      activeDoType = this.id;
+      setRefreshInterVal()
     })
 
     //业务配置
@@ -174,9 +176,27 @@ var pageModule = function() {
           })
         }
       });
+      setRefreshInterVal()
+    },
+    refreshPage:function () {
+      getNum()
     }
   }
 }();
+var refreshInterVal = null;
+
+function setRefreshInterVal() {
+  clearInterval(refreshInterVal)
+  refreshInterVal = null
+  refreshInterVal = setInterval(function () {
+    pageModule.refreshPage();
+    window.start_page1.pageModule.refreshPage();
+    window.start_page2.pageModule.refreshPage()
+    window.start_page3.pageModule.refreshPage()
+    window.start_page4.pageModule.refreshPage()
+    window.start_page5.pageModule.refreshPage()
+  },defaultTime)
+}
 /*  调用打开app的字段fyp专用 */
 var appdata = [];
 

@@ -362,7 +362,10 @@ var pageModule = function () {
         initControl: function () {
           initUserStatus();
 		  initother();
-        }
+        },
+		refreshPage:function () {
+
+		}
     }
 }();
 
