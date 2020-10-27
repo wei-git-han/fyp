@@ -39,7 +39,7 @@ var pageModule = function () {
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val(),time:time},
+			data:{weekTableType:type,userId:$("#deptId").val(),toDate:time},
 			success: function(res) {
 				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
@@ -50,19 +50,20 @@ var pageModule = function () {
 				var contentHeight = (divHeight - headHeight) / 7;
 				var planHtml = ""; //周工作安排
 				$("#mainContent").html("");
-				var res = res.data;
-				for(key in res){
-					if(res[key]!=null&&typeof(res[key])!="undefined"&&res[key]!=""){
-						$.each(res[key].itemList, function(i, item) {
-							console.log(item)
+				//for(key in res){
+					//if(res[key]!=null&&typeof(res[key])!="undefined"&&res[key]!=""){
+						$.each(res.data, function(i, item) {
 							var anpaihtml = "";
 							var html2 = "";
 							var html4 = "";
 							var htmlDate = "";
 							var height101 = "";
-							var month = item.month;
-							var day = item.day;
-							var week = item.week;
+							var month = item.weekMonth;
+							var day = item.weekDay;
+							var week = item.weekDate;
+							if($.trim(week) == "七"){
+								week="日";
+							}
 							var dates = month + "月" + day + "日";
 							var comparedates = month + "-" + day;
 							var comparedates2 = $("#monthAndday").val();
@@ -74,7 +75,8 @@ var pageModule = function () {
 										'		</div>' +
 										'	</div>';
 							
-							$.each(item.amItem, function(j, items) {
+							$.each(item.amFypPersonageWorkWeekList, function(j, items) {
+								var createdTime = items.createdTime;
 								var html5 = "";
 								var html9 = "";
 
@@ -82,15 +84,16 @@ var pageModule = function () {
 								object1[id] = items;
 
 								html5 = '<dl>';
-								if (items.beginTime != null && typeof(items.beginTime) != "undefined" && items.beginTime != "") {
-									html5 += "<dt title=" + items.beginTime + ">" + items.beginTime + "</dt>";
+								if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
+									createdTime = createdTime.substring(11,16);
+									html5 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
 								} else {
 									html5 += "<dt></dt>";
 								};
 								html5 += '	<dd>';
-								if (items.content != null && typeof(items.content) != "undefined" && items.content !=
+								if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !=
 									"") {
-									html9 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>';
+									html9 += '<span class="span1" title="' + items.weekTableContent + '">' + items.weekTableContent + '</span>';
 								};
 								if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
 									"") {
@@ -107,33 +110,25 @@ var pageModule = function () {
 							
 							
 							
-							/*if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
-								html2 = "<div class='wtj'>（未添加）</div>"
-							}
-							if((html2 == "" || html2 == null) && type=="grzb" && ($.trim(comparedates)== $.trim(comparedates2))){
-								html2 = "<div class='addBtn'  onclick='add(\""+dates+"\",\"am\")'><i class='fa fa-plus'></i></div>"
-							}*/
 							
 							var html1 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 							html2 +
 							'</div></div>';
-							$.each(item.pmItem, function(i, items) {
+							$.each(item.pmFypPersonageWorkWeekList, function(i, items) {
+								var createdTime = items.createdTime;
 								var html7 = "";
 								var html10 = "";
 								html7 = '<dl>';
-								if (items.beginTime != null && typeof(items.beginTime) != "undefined" && items.beginTime != "") {
-									html7 += "<dt title=" + items.beginTime + ">" + items.beginTime + "</dt>";
+								if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
+									createdTime = createdTime.substring(11,16);
+									html7 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
 								} else {
 									html7 += "<dt></dt>";
 								};
 								html7 += '	<dd>';
-								if (items.content != null && typeof(items.content) != "undefined" && items.content !="") {
-									html10 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>';
+								if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !="") {
+									html10 += '<span class="span1" title="' + items.content + '">' + items.weekTableContent + '</span>';
 								};
-								/*if (items.title != null && typeof(items.title) != "undefined" && items.title != "") {
-									html10 += '<span class="span3" title="' + items.title + '">' + items.title + '</span>';
-								};
-								*/
 								if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
 									"") {
 									html10 += '<span class="span2" title="' + items.receiverUtil + '">（' + items.receiverUtil +
@@ -147,12 +142,6 @@ var pageModule = function () {
 								html4 += '<div class="newpage19" onclick="editfn(\''+items.id+'\')" >' + html7 + '</div>'
 							});
 							
-							/*if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)!= $.trim(comparedates2))){
-								html4 = "<div class='wtj'>（未添加）</div>"
-							}
-							if((html4 == "" || html4 == null) && type=="grzb" && ($.trim(comparedates)== $.trim(comparedates2))){
-								html4 = "<div class='addBtn' onclick='add(\""+dates+"\",\"pm\")'><i class='fa fa-plus'></i></div>"
-							}*/
 							
 							var html3 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 								html4 +
@@ -163,8 +152,8 @@ var pageModule = function () {
 								 htmlDate + html1 + html3 +
 								'</div>';
 						});
-					}
-				}
+					//}
+				//}
 				$("#mainContent").append(planHtml);
 			}
 		})
