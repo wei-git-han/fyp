@@ -44,7 +44,7 @@ var pageModule = function(){
 						if(data.msg=="success"){
 						    newbootbox.newdialogClose("addModal");
 							newbootbox.alertInfo('保存成功！').done(function(){
-								window.top.pageModule.initgrid();
+								window.top.nameManageModal.pageModule.initgrid();
 							});
 						}else{
 							saveLoading = false;

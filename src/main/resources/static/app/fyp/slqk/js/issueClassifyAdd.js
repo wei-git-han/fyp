@@ -43,7 +43,7 @@ var pageModule = function(){
 						if(data.result=="success"){
 						    newbootbox.newdialogClose("addModal");
 							newbootbox.alertInfo('保存成功！').done(function(){
-								window.top.pageModule.initgrid();
+								window.top.issueClassifyModal.pageModule.initgrid();
 							});
 						}else{
 							saveLoading = false;
