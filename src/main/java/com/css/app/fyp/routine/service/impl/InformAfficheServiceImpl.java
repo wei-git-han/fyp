@@ -55,6 +55,7 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         //局用户
         //afficheType = "1";
         jsonData = this.getJsonArrayData(curentPage,pageSize, afficheType, userId, "", AppInterfaceConstant.WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC);
+        jsonData.put("ip", xxfwUrl);
         return jsonData;
     }
 
