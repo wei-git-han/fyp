@@ -19,13 +19,16 @@ import java.util.Map;
 @Mapper
 public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
 
-    @Select("select * from zf_new_fyp_db.base_app_org_mapped where org_id is not null and org_id!='' and org_name is not null and org_name !='' and type = #{0}")
+    @Select("select * \n" +
+            "from zf_new_fyp_db.base_app_org_mapped  as a\n" +
+            "left join zf_new_fyp_db.config_user_dept as b on a.org_id = b.dept_id \n" +
+            "where a.org_id is not null and a.org_id!='' and a.org_name is not null and a.org_name !='' and a.type = #{0} and b.type = '1'\n")
     List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
 
-    @Select("select a.user_id from zf_new_fyp_db.base_app_user as a \n" +
-            "left join zf_new_fyp_db.base_app_organ as b on a.organid = b.id \n" +
-            "left join zf_new_fyp_db.fyp_role_edit as c on a.user_id = c.user_id\n" +
-            "where b.tree_path like '%'||#{0}||'%' and c.role_type = '3'")
+    @Select("select a.user_id from zf_new_fyp_db.base_app_user as a\n" +
+            "left join zf_new_fyp_db.base_app_organ as b on a.organid = b.id\n" +
+            "left join zf_new_fyp_db.config_user_dept as c on a.id = c.user_id\n" +
+            "where b.tree_path like '%'||#{0}||'%' and c.user_id is not null and c.user_id !=''")
     List<String> findUsersByDeptidAndRoleType(String dpetid);
 
     @Select("select * from BASE_APP_ORG_MAPPED where APP_ID = #{0}")

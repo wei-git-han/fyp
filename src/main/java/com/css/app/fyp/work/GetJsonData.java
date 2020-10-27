@@ -102,9 +102,7 @@ public class GetJsonData {
      * @return List<String>
      */
     public List<String> getJson(String type){
-//        jsons = new ArrayList<>();
         String prefix = this.getPrefix(type);
-        List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
         String token = SSOAuthFilter.getToken();
 //        cacheThread.execute(new Runnable() {
 //            @Override
