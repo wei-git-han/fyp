@@ -23,7 +23,7 @@ public class FypFeedbackHear implements Serializable {
 	//提出人id
 	private String submitUserId;
 	//软件/硬件名称
-	private String name;
+	private String softName;
 	//提出的单位id
 	private String submitDeptId;
 	//提出时间
@@ -119,18 +119,7 @@ public class FypFeedbackHear implements Serializable {
 	public String getSubmitUserId() {
 		return submitUserId;
 	}
-	/**
-	 * 设置：软件/硬件名称
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * 获取：软件/硬件名称
-	 */
-	public String getName() {
-		return name;
-	}
+
 	/**
 	 * 设置：提出的单位id
 	 */
@@ -238,5 +227,13 @@ public class FypFeedbackHear implements Serializable {
 	 */
 	public String getMarch() {
 		return march;
+	}
+
+	public String getSoftName() {
+		return softName;
+	}
+
+	public void setSoftName(String softName) {
+		this.softName = softName;
 	}
 }

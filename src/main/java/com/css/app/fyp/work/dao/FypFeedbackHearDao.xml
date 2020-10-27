@@ -47,7 +47,7 @@
 		(
 			"ID", 
 			"SUBMIT_USER_ID", 
-			"NAME", 
+			"SOFT_NAME",
 			"SUBMIT_DEPT_ID", 
 			"SUBMIT_TIME", 
 			"TYPE", 
@@ -65,7 +65,7 @@
 		(
 			#{id}, 
 			#{submitUserId}, 
-			#{name}, 
+			#{softName},
 			#{submitDeptId}, 
 			#{submitTime}, 
 			#{type}, 
@@ -84,7 +84,7 @@
 		update FYP_FEEDBACK_HEAR 
 		<set>
 			<if test="submitUserId != null">"SUBMIT_USER_ID" = #{submitUserId}, </if>
-			<if test="name != null">"NAME" = #{name}, </if>
+			<if test="softName != null">"SOFT_NAME" = #{softName}, </if>
 			<if test="submitDeptId != null">"SUBMIT_DEPT_ID" = #{submitDeptId}, </if>
 			<if test="submitTime != null">"SUBMIT_TIME" = #{submitTime}, </if>
 			<if test="type != null">"TYPE" = #{type}, </if>
