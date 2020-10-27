@@ -142,7 +142,7 @@ public class FypFeedbackHearController {
 				try {
 					fypFeedbackHear = new FypFeedbackHear();
 					fypFeedbackHear.setId(UUIDUtils.random());
-					fypFeedbackHear.setName(objects.get(0).toString());//软件/硬件名称
+					fypFeedbackHear.setSoftName(objects.get(0).toString());//软件/硬件名称
 					fypFeedbackHear.setDesc(objects.get(1).toString());//问题描述
 					fypFeedbackHear.setSubmitTime(simpleDateFormat.parse(objects.get(2).toString()));//提出时间
 					fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人
