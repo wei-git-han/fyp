@@ -5,11 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
 import com.css.app.fyp.routine.service.FypPersonageWorkWeekService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
+import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.CrossDomainUtil;
-import com.css.base.utils.CurrentUser;
-import com.css.base.utils.Response;
-import com.css.base.utils.UUIDUtils;
+import com.css.base.utils.*;
+import com.github.pagehelper.PageHelper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -86,11 +86,11 @@ public class WorkWeekTableController {
      */
     @ResponseBody
     @RequestMapping("/list")
-    public void list(Integer page, Integer pagesize){
+    public void list(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, Integer page, Integer limit){
         Map<String, Object> map = new HashMap<>();
         String userId = CurrentUser.getUserId();
         //查询列表数据
-        JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
+        List<FypPersonageWorkWeekVo> fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(startDate, map, userId);
         Response.json(new ResponseValueUtils().success(fypPersonageWorkWeekList));
     }
 

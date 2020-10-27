@@ -1,9 +1,11 @@
 package com.css.app.fyp.routine.vo;
 
+import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -21,7 +23,7 @@ public class FypPersonageWorkWeekVo implements Serializable {
 	private String weekTableContent;
 	//上午周表内容
 	private String amWeekTableContent;
-	//上午周表内容
+	//下午周表内容
 	private String pmWeekTableContent;
 	//用户ID
 	private String userId;
@@ -35,12 +37,19 @@ public class FypPersonageWorkWeekVo implements Serializable {
 	private String pmWeekTime;
 	//日期
 	private String weekDate;
+	//月
+	private Integer weekMonth;
+	//日
+	private Integer weekDay;
 	//创建时间
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createdTime;
 	//修改时间
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updatedTime;
+
+	private List<FypPersonageWorkWeek> amFypPersonageWorkWeekList;
+	private List<FypPersonageWorkWeek> pmFypPersonageWorkWeekList;
 
 	public String getId() {
 		return id;
@@ -136,5 +145,37 @@ public class FypPersonageWorkWeekVo implements Serializable {
 
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
+	}
+
+	public List<FypPersonageWorkWeek> getAmFypPersonageWorkWeekList() {
+		return amFypPersonageWorkWeekList;
+	}
+
+	public void setAmFypPersonageWorkWeekList(List<FypPersonageWorkWeek> amFypPersonageWorkWeekList) {
+		this.amFypPersonageWorkWeekList = amFypPersonageWorkWeekList;
+	}
+
+	public List<FypPersonageWorkWeek> getPmFypPersonageWorkWeekList() {
+		return pmFypPersonageWorkWeekList;
+	}
+
+	public void setPmFypPersonageWorkWeekList(List<FypPersonageWorkWeek> pmFypPersonageWorkWeekList) {
+		this.pmFypPersonageWorkWeekList = pmFypPersonageWorkWeekList;
+	}
+
+	public Integer getWeekMonth() {
+		return weekMonth;
+	}
+
+	public void setWeekMonth(Integer weekMonth) {
+		this.weekMonth = weekMonth;
+	}
+
+	public Integer getWeekDay() {
+		return weekDay;
+	}
+
+	public void setWeekDay(Integer weekDay) {
+		this.weekDay = weekDay;
 	}
 }

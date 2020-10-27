@@ -2,7 +2,9 @@ package com.css.app.fyp.routine.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
+import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +21,7 @@ public interface FypPersonageWorkWeekService {
 	
 	List<FypPersonageWorkWeek> queryList(Map<String, Object> map);
 
-	JSONArray getPersonalWeekTableList(Map<String, Object> map, String userId);
+	List<FypPersonageWorkWeekVo> getPersonalWeekTableList(Date startDate, Map<String, Object> map, String userId);
 
 	void save(FypPersonageWorkWeek fypPersonageWorkWeek);
 	

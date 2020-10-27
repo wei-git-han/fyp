@@ -45,6 +45,12 @@
 		<if test="userId !=null">
 			and fpww.user_id = #{userId}
 		</if>
+		<if test="beginDayOfWeek !=null">
+			and to_char(fpww.created_time,'YYYY-MM-DD') >= #{beginDayOfWeek}
+		</if>
+		<if test="endDayOfWeek !=null">
+			and to_char(fpww.created_time,'YYYY-MM-DD') &lt;= #{endDayOfWeek}
+		</if>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

@@ -1,12 +1,16 @@
 package com.css.app.fyp.routine.controller;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONArray;
+import com.css.app.fyp.routine.vo.FypPersonageWorkWeekVo;
 import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +44,12 @@ public class FypPersonageWorkWeekController {
 	@ResponseBody
 	@RequestMapping("/list")
 	@RequiresPermissions("fyppersonageworkweek:list")
-	public void list(Integer page, Integer limit){
+	public void list(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, Integer page, Integer limit){
 		String userId = CurrentUser.getUserId();
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
 		//查询列表数据
-		JSONArray fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(map, userId);
+		List<FypPersonageWorkWeekVo> fypPersonageWorkWeekList = fypPersonageWorkWeekService.getPersonalWeekTableList(startDate, map, userId);
 		PageUtils pageUtil = new PageUtils(fypPersonageWorkWeekList);
 		Response.json("page",pageUtil);
 	}

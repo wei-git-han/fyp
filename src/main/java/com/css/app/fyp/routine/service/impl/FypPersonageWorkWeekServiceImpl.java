@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.css.app.fyp.routine.dao.FypPersonageWorkWeekDao;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
@@ -31,67 +33,106 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
 		return fypPersonageWorkWeekDao.queryList(map);
 	}
 
+    private List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekList () {
+        List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekList = new ArrayList<>();
+        FypPersonageWorkWeekVo MonDate = new FypPersonageWorkWeekVo();
+        MonDate.setWeekDate("一");
+        resultFypPersonageWorkWeekList.add(MonDate);
+        FypPersonageWorkWeekVo TueDate = new FypPersonageWorkWeekVo();
+        TueDate.setWeekDate("二");
+        resultFypPersonageWorkWeekList.add(TueDate);
+        FypPersonageWorkWeekVo WedDate = new FypPersonageWorkWeekVo();
+        WedDate.setWeekDate("三");
+        resultFypPersonageWorkWeekList.add(WedDate);
+        FypPersonageWorkWeekVo ThurDate = new FypPersonageWorkWeekVo();
+        ThurDate.setWeekDate("四");
+        resultFypPersonageWorkWeekList.add(ThurDate);
+        FypPersonageWorkWeekVo FriDate = new FypPersonageWorkWeekVo();
+        FriDate.setWeekDate("五");
+        resultFypPersonageWorkWeekList.add(FriDate);
+        FypPersonageWorkWeekVo SatDate = new FypPersonageWorkWeekVo();
+        SatDate.setWeekDate("六");
+        resultFypPersonageWorkWeekList.add(SatDate);
+        FypPersonageWorkWeekVo SunDate = new FypPersonageWorkWeekVo();
+        SunDate.setWeekDate("七");
+        resultFypPersonageWorkWeekList.add(SunDate);
+        return resultFypPersonageWorkWeekList;
+    }
     @Override
-    public JSONArray getPersonalWeekTableList(Map<String, Object> map, String userId){
+    public List<FypPersonageWorkWeekVo> getPersonalWeekTableList(Date toDate, Map<String, Object> map, String userId){
         Map<String, Object> allMap = new HashMap<>();
         allMap.put("userId", userId);
+        Date beginDayOfWeek = new Date();
+        Date endDayOfWeek = new Date();
+        if (null != toDate) {
+            beginDayOfWeek = this.getBeginDayOfWeek(toDate);
+            endDayOfWeek = this.getEndDayOfWeek(toDate);
+            allMap.put("beginDayOfWeek", beginDayOfWeek);
+            allMap.put("endDayOfWeek", endDayOfWeek);
+        }
+        List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekVos = this.resultFypPersonageWorkWeekList();
         List<String> fypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getWeekWorkDateList(allMap);
-        JSONArray jsonArray = new JSONArray();
+        List<FypPersonageWorkWeekVo> fypPersonageWorkWeekVoList = new ArrayList<>();
         for (String weekDate : fypPersonageWorkWeekVos) {
-            JSONObject jsonObject = new JSONObject();
-            JSONArray itemList = new JSONArray();
-            String week = this.getWeekOfDate(weekDate);
-            Date date = this.stringToDate(weekDate);
+            FypPersonageWorkWeekVo fypPersonageWorkWeek = new FypPersonageWorkWeekVo();
+            String week = this.getWeekOfDate(weekDate);//获取周
+            Date date = this.stringToDate(weekDate);//日期格式
             String[] f = new SimpleDateFormat("yyyy-MM-dd").format(date).toString().split("-");
-            Integer month = Integer.parseInt(f[1]);
-            Integer day = Integer.parseInt(f[2]);
-            JSONObject jsonObjectResult = new JSONObject();
+            Integer month = Integer.parseInt(f[1]);//月
+            Integer day = Integer.parseInt(f[2]);//日
             Map<String, Object> amMap = new HashMap<>();
             amMap.put("userId", userId);
             amMap.put("weekDate", weekDate);
             List<FypPersonageWorkWeekVo> amFypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getPersonalWeekTableList(amMap);
-            JSONArray amItem = new JSONArray();
-            JSONArray pmItem = new JSONArray();
-            Date mondayStartTime = getMondayStartTime();
-            Date sondayEndTime = getSundayEndTime();
+            Date mondayStartTime = getDayStartTime(toDate);
+            Date sondayEndTime = getDayEndTime(toDate);
+            List<FypPersonageWorkWeek> amFypPersonageWorkWeekList = new ArrayList<>();
+            List<FypPersonageWorkWeek> pmFypPersonageWorkWeekList = new ArrayList<>();
             for (FypPersonageWorkWeekVo fypPersonageWorkWeekVo : amFypPersonageWorkWeekVos) {
                 Date createdTime = fypPersonageWorkWeekVo.getCreatedTime();
                 if(mondayStartTime.getTime() > createdTime.getTime() || sondayEndTime.getTime() < createdTime.getTime()) {
                     continue;
                 }
-                String time = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
                 String hourFlag = fypPersonageWorkWeekVo.getHourFlag();
                 switch (hourFlag) {
                     //AM
                     case "0":
-                        JSONObject amJsonObject = new JSONObject();
-                        amJsonObject.put("content", fypPersonageWorkWeekVo.getWeekTableContent());
-                        amJsonObject.put("createdTime",time);
-                        amJsonObject.put("id",fypPersonageWorkWeekVo.getId());
-                        amItem.add(amJsonObject);
+                        FypPersonageWorkWeek amFypPersonageWorkWeek = new FypPersonageWorkWeek();
+                        amFypPersonageWorkWeek.setWeekTableContent(fypPersonageWorkWeekVo.getWeekTableContent());
+                        amFypPersonageWorkWeek.setCreatedTime(fypPersonageWorkWeekVo.getCreatedTime());
+                        amFypPersonageWorkWeek.setId(fypPersonageWorkWeekVo.getId());
+                        amFypPersonageWorkWeekList.add(amFypPersonageWorkWeek);
                         break;
                     //PM
                     case "1":
-                        JSONObject pmJsonObject = new JSONObject();
-                        pmJsonObject.put("content",fypPersonageWorkWeekVo.getWeekTableContent());
-                        pmJsonObject.put("createdTime",time);
-                        pmJsonObject.put("id",fypPersonageWorkWeekVo.getId());
-                        pmItem.add(pmJsonObject);
+                        FypPersonageWorkWeek pmFypPersonageWorkWeek = new FypPersonageWorkWeek();
+                        pmFypPersonageWorkWeek.setWeekTableContent(fypPersonageWorkWeekVo.getWeekTableContent());
+                        pmFypPersonageWorkWeek.setCreatedTime(fypPersonageWorkWeekVo.getCreatedTime());
+                        pmFypPersonageWorkWeek.setId(fypPersonageWorkWeekVo.getId());
+                        pmFypPersonageWorkWeekList.add(pmFypPersonageWorkWeek);
                         break;
                 }
             }
-            jsonObjectResult.put("amCounts",amItem.size());
-            jsonObjectResult.put("day",day);
-            jsonObjectResult.put("month",month);
-            jsonObjectResult.put("pmCounts",pmItem.size());
-            jsonObjectResult.put("week",week);
-            jsonObjectResult.put("pmItem",pmItem);
-            jsonObjectResult.put("amItem",amItem);
-            itemList.add(jsonObjectResult);
-            jsonObject.put("itemList",itemList);
-            jsonArray.add(jsonObject);
+            fypPersonageWorkWeek.setAmFypPersonageWorkWeekList(amFypPersonageWorkWeekList);
+            fypPersonageWorkWeek.setPmFypPersonageWorkWeekList(pmFypPersonageWorkWeekList);
+            fypPersonageWorkWeek.setWeekDate(week);
+            fypPersonageWorkWeek.setWeekMonth(month);
+            fypPersonageWorkWeek.setWeekDay(day);
+            fypPersonageWorkWeekVoList.add(fypPersonageWorkWeek);
         }
-        return jsonArray;
+        Map<String, FypPersonageWorkWeekVo> collect = fypPersonageWorkWeekVoList.stream().collect(Collectors.toMap(FypPersonageWorkWeekVo::getWeekDate, fypPersonageWorkWeekVo -> fypPersonageWorkWeekVo));
+        resultFypPersonageWorkWeekVos.forEach(
+                n -> {
+                    if (collect.containsKey(n.getWeekDate())) {
+                        FypPersonageWorkWeekVo fypPersonageWorkWeekVo = collect.get(n.getWeekDate());
+                        n.setAmFypPersonageWorkWeekList(fypPersonageWorkWeekVo.getAmFypPersonageWorkWeekList());
+                        n.setPmFypPersonageWorkWeekList(fypPersonageWorkWeekVo.getPmFypPersonageWorkWeekList());
+                        n.setWeekDate(fypPersonageWorkWeekVo.getWeekDate());
+                        n.setWeekMonth(fypPersonageWorkWeekVo.getWeekMonth());
+                        n.setWeekDay(fypPersonageWorkWeekVo.getWeekDay());                    }
+                }
+        );
+        return resultFypPersonageWorkWeekVos;
     }
 
 	private String getWeekOfDate(String dateTime) {
@@ -112,8 +153,8 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
 	}
 
 	// 获取本周的开始时间
-	public Date getBeginDayOfWeek() {
-	    Date date = new Date();
+	public Date getBeginDayOfWeek(Date date) {
+	    //Date date = new Date();
 	    if (date == null) {
 	        return null;
         }
@@ -127,13 +168,38 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
 	    return getDayStartTime(cal.getTime());
     }
 
+	// 获取本周的开始时间
+	public Date getBeginDayOfDate(Date date) {
+	    //Date date = new Date();
+	    if (date == null) {
+	        return null;
+        }
+        Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+	    if (dayOfWeek == 1) {
+	        dayOfWeek += 7;
+        }
+        cal.add(Calendar.DATE, 2 - dayOfWeek);
+	    return cal.getTime();
+    }
+
     //获取本周的结束时间
-    public Date getEndDayOfWeek() {
+    public Date getEndDayOfWeek(Date date) {
 	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(getBeginDayOfWeek());
+	    cal.setTime(getBeginDayOfWeek(date));
 	    cal.add(Calendar.DAY_OF_WEEK, 6);
 	    Date weekEndSta = cal.getTime();
 	    return getDayEndTime(weekEndSta);
+    }
+
+    //获取本周的结束时间
+    public Date getEndDayOfDate(Date date) {
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(getBeginDayOfWeek(date));
+	    cal.add(Calendar.DAY_OF_WEEK, 6);
+	    Date weekEndSta = cal.getTime();
+	    return weekEndSta;
     }
 
     public Date getDayEndTime(Date date) {
