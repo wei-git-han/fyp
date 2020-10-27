@@ -299,7 +299,14 @@ body {
   background: #007AFF;
   margin-top: 2px;
 }
-
+.flip-item .hiddenBg{
+  background: rgba(0,0,0,0);
+  bottom:0;
+  z-index: -1;
+}
+.flip-item.flip-prev .hiddenBg,.flip-item.flip-next .hiddenBg{
+  z-index: 1;
+}
 .statistics label {
   font-size: 16px;
   color: #fff;
@@ -328,7 +335,9 @@ body {
   color: #F7C517;
 }
 
-
+.modal-header{
+  /*background-color: #1C67E3;*/
+}
 .newlayout-l {
   transform: rotateX(0deg) rotateY(60deg) rotateZ(0deg) scaleX(0.8) scaleY(0.9);
   left: -4%;

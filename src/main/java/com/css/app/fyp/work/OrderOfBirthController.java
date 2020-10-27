@@ -88,10 +88,12 @@ public class OrderOfBirthController {
             }
             dataMap.put("onLineCount",onlineCount);//在线
             int leaveCount = 0;
-            for(String username:leaveList){
-                for(BaseAppUser user:baseAppUsers){
-                    if(username.equals(user.getTruename())){
-                        leaveCount++;
+            if(null!= leaveList) {
+                for (String username : leaveList) {
+                    for (BaseAppUser user : baseAppUsers) {
+                        if (username.equals(user.getTruename())) {
+                            leaveCount++;
+                        }
                     }
                 }
             }

@@ -23,13 +23,13 @@ public interface FypGuaranteeTackingDao extends BaseDao<FypGuaranteeTacking> {
      * 今日受理
      * @return
      */
-    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking where day(WARRANTY_TIME) = day(sysdate)")
+    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking where to_char(WARRANTY_TIME,'YYYY-MM-DD') = to_char(sysdate,'YYYY-MM-DD')")
     Map<String,Object> toDayAccept();
 
     /**
      * 已完成
      */
-    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking where day(WARRANTY_TIME) = day(sysdate) and status = '2' and day(STATUS_TIME) = day(sysdate)")
+    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking where status = '2'")
     Map<String,Object> toDayComplete();
 
     /**

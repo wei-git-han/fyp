@@ -31,7 +31,14 @@
 					<tr>
 						<td class="t_label">硬件/软件<br/>名称<span class="red">*</span></td>
 						<td class="t_inpt" colspan="3">
-							<input type="text" class="form-control" id="softname" name="softname"  required/>
+<!--							<input type="text" class="form-control" id="softname" name="softname"  required/>-->
+							<select class="form-control" id="softId" name="softId" >
+<!--								<option value="0">需求论证</option>-->
+<!--								<option value="1">需求细化</option>-->
+<!--								<option value="2">解决中</option>-->
+<!--								<option value="3">已解决待升级</option>-->
+<!--								<option value="4">已关闭</option>-->
+							</select>
 						</td>
 					</tr>
 					<tr>
@@ -73,16 +80,16 @@
 						</td>
 						<td class="t_label">问题分类</td>
 						<td class="t_inpt">
-							<select class="form-control" id="type" name="type" >
-								<option value="0">系统问题</option>
-								<option value="1">完善建议</option>
+							<select class="form-control" id="typeId" name="typeId" >
+<!--								<option value="0">系统问题</option>-->
+<!--								<option value="1">完善建议</option>-->
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="t_label">问题描述</td>
 						<td class="t_inpt" colspan="3">
-							<textarea rows="" cols="" id="desc" name="desc" class="form-control" style="height:200px;resize:none;" maxlength="500"></textarea>
+							<textarea rows="" cols="" id="desc" placeholder="请输入500字以内的问题描述" name="desc" class="form-control" style="height:200px;resize:none;" maxlength="500"></textarea>
 						</td>
 					</tr>
 				</table>

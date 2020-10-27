@@ -2,6 +2,7 @@ var saveUrl;
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树---待测试
 var returnDataUrl = {"url":"/fyp/feedbackhear/info","dataType":"text"}; //返回数据url
 var id=getUrlParam("id")||"";//编辑数据id
+var slqkUrl = {url:'/dict/list',"dataType":"text"};
 if(!!id){
 	saveUrl = {"url":"/fyp/feedbackhear/update","dataType":"json"};  //edit
 }else{
@@ -22,17 +23,37 @@ var pageModule = function(){
 			}
 		}); 
 	}
-	
+	var initRyjName = function () {
+		$ajax({
+			url:slqkUrl,
+			data:{type:0,limit:100,page:1},
+			success:function (data) {
+				initselectByName('softId',data.data.rows)
+			}
+		})
+	}
+	var initWtfl = function () {
+		$ajax({
+			url:slqkUrl,
+			data:{type:1,limit:100,page:1},
+			success:function (data) {
+				console.log(data)
+				initselectByName('typeId',data.data.rows)
+			}
+		})
+	}
 	var initdatafn = function(){
 		$ajax({
 			url:returnDataUrl,
 			data:{id:id},
 			success:function(data){
 				setformdata(data.data);
-				$('#softname').val(data.data.name||'')
-				if(!!data.data.solveTime){
-                    $("#solveTime").val((data.data.solveTime).substring(0,10));
-                }
+				// $('#softname').val(data.data.name||'')
+				if(data.data){
+					if(!!data.data.solveTime){
+						$("#solveTime").val((data.data.solveTime).substring(0,10));
+					}
+				}
 			}
 		})
 	}
@@ -47,7 +68,6 @@ var pageModule = function(){
 		$(".input-group-btn").click(function(){
 			$(this).prev().focus();
 		});
-		
 		$("#commentForm").validate({
 			ignore:'',
 		    submitHandler: function() {
@@ -57,9 +77,10 @@ var pageModule = function(){
 				}
 				saveLoading = true
 				$("#save").attr('disabled',true)
-			    var elementarry = ["submitTime","submitUserId","submitUserName","solveTime","march","status","type","desc"];
+			    var elementarry = ["softId","submitTime","submitUserId","submitUserName","solveTime","march","status","typeId","desc"];
 				var paramdata = getformdata(elementarry);
-				paramdata.name= $('#softname').val()
+				paramdata.softName= $('#softId').find('option:selected').text()
+				paramdata.type= $('#typeId').find('option:selected').text()
 				paramdata.id = id;
 				$ajax({
 					url:saveUrl,
@@ -112,6 +133,8 @@ var pageModule = function(){
 		//加载页面处理程序
 		initControl:function(){
 			initUnitTree();
+			initRyjName();
+			initWtfl();
 			initdatafn(); 
 			initother();
 		}

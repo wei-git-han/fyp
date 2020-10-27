@@ -8,7 +8,7 @@ var pageModule = function () {
 			success: function(data) {
 				var arryHtml = '';
 				$.each(data.data.recentnews, function(i, o) {
-					arryHtml+=`<dl onclick="window.top.openfn1('${o.appId}','${o.appUrlSuffix}','${o.appUrlPrefix}','${i}')" style="cursor: pointer">
+					arryHtml+=`<dl onclick="openById('${data.data.appId}','${o.id}','${data.data.ip}','${i}')" style="cursor: pointer">
 									<dt style="display: ${o.coverImg?'inline-block':'none'};overflow: hidden" ><img src="${data.data.ip+o.coverImg+top.location.search}" style="width: 100%;height: 100%"></dt>
 									<dd style="padding-left: ${o.coverImg?'':'20px'}">
 										<div class="title">${o.title}</div>
@@ -43,3 +43,7 @@ var pageModule = function () {
         }
     }
 }();
+
+function openById(appid,id,domain){
+	window.top.openfn1(appid,`/channelNews/newsDetails?nid=${id}`,domain)
+}

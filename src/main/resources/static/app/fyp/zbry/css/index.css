@@ -1,0 +1,171 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+	font-family: "Microsoft Yahei";
+	overflow: hidden;
+}
+.wh100{
+	width: 100%;
+	height: 100%;
+	position:relative
+}
+.newlayout-head{
+	position:absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height:100px;
+	line-height:100px;
+	font-size:22px;
+	font-weight: 700;
+	padding-left:25px;
+	color:#1C67E3;
+	border-bottom:1px solid #eee;
+	box-shadow: inset 0px 0px 2px #eee;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:120px;
+	padding:120px 20px 0px;
+}
+ul,li{
+	list-style:none;
+	padding:0;
+	margin:0
+}
+.BlueBor{
+	border: 1px solid #76ACEF;	
+}
+.TreeTitle{
+	line-height: 45px;
+	padding-left: 20px;
+	/*color: #3399FF;*/
+	font-size: 17px;
+	/*background-color: #E1F0FE;*/
+	border-bottom: 1px solid #DCDFE6;
+}
+.alreadyUserList{
+	padding:0 15px 0px 19px;
+}
+.alreadyUserList li{
+	height:50px;
+	line-height:50px;
+	padding: 0 10px 0 0;
+}
+.alreadyUserList li a{
+	padding-left: 10px;
+}
+.alreadyUserList li .do-icon{
+	display: none;
+}
+.alreadyUserList li:hover,.alreadyUserList li:hover a{
+	background-color: #DFEFFF;
+}
+.alreadyUserList li:hover .do-icon{
+	display: inline-block;
+}
+.alreadyUserList a{
+	display:block;
+	padding:1px 3px;
+	color:#333;
+	font-size:18px
+}
+.alreadyUserList a:hover{
+	background-color:#f4f4f4
+}
+.alreadyUserList a i{
+	color:#666;
+}
+.alreadyUserList a:hover i:hover{
+	color:#3399FF;
+}
+.whpb50{
+	width:100%;height:100%;
+	padding-bottom:60px;
+}
+.fwhp10{
+	float:left;
+	width:40%;
+	height:100%;
+	border-bottom: 1px solid #DCDFE6;
+}
+.fwhp5{
+	float:left;
+	width:20%;
+	height:100%;
+	/*padding-right:10px;*/
+	border-left: 1px solid #DCDFE6;
+	border-right: 1px solid #DCDFE6;
+	border-bottom: 1px solid #DCDFE6;
+}
+.pa0{
+	position:absolute;top:0px;width:100%
+}
+.whp1050{
+	width:100%;height:100%;padding:50px 0px 10px 10px;
+}
+.fwhpl10{
+	float:left;width:40%;height:100%;
+	border-bottom: 1px solid #DCDFE6;
+}
+.whpt50{
+	width:100%;height:100%;padding-top:50px;padding-bottom: 10px;
+}
+.footer_btns{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	height: 60px;
+	padding-top: 13px;
+}
+.no-tree-icon .jstree-themeicon-custom{
+	display: none;
+}
+.fwhp5 .do-div{
+	position: relative;
+	top:50%;
+	margin-top: -70px;
+	text-align: center;
+}
+.do-div .toCycle{
+	/*width: 50px;*/
+	height: 50px;
+	display: inline-block;
+	margin: 10px 100px;
+	cursor: pointer;
+	/*border-radius: 50%;*/
+}
+.toCycle img{
+	display: none;
+}
+.toRight {
+	transform:rotateZ(180deg);
+}
+.toCycle.defaultIcon .default{
+	display: inline-block;
+}
+.toCycle.activeIcon .active{
+	display: inline-block;
+}
+.toCycle.activeIcon:hover .hover{
+	display: inline-block;
+}
+.toCycle.activeIcon:hover .default,.toCycle:hover .active{
+	display: none;
+}
+.do-icon i {
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	background: #F7F7F7;
+	border: 1px solid #DCDFE6;
+	border-radius: 2px;
+	text-align: center;
+	line-height: 30px;
+}

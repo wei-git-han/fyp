@@ -45,6 +45,11 @@ p {
 	.table_portlet .has-success .checkbox-inline {
 	color: #6ac3b8;
 }
+.pr100{
+	width:100%;
+	height:100%;
+	position:relative;
+}
 
 .table_portlet .has-success .form-control {
 	border-color: #6ac3b8;

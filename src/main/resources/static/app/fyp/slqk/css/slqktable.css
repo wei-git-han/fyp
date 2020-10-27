@@ -172,3 +172,11 @@ html, body {
 	border-radius: 4px !important;
 	outline:none;
 }
+.newlayout-search-main1 .form-group{
+   width: 20%;
+   margin-right: 30px;
+}
+.newlayout-head1{
+    margin: 0px 20px;
+    width: 96%;
+}

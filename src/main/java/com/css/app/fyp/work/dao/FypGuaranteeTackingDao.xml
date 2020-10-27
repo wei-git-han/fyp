@@ -13,7 +13,7 @@
 			1=1
 			<!--姓名-->
 			<if test="userId!=null and userId!=''">
-				and USER_ID = #{userId}
+				and USER_ID like '%'||#{userId}||'%'
 			</if>
 			<!--单位-->
 			<if test="deptId!=null and deptId!=''">
@@ -30,7 +30,15 @@
 			</if>
 			<!--问题描述-->
 			<if test="remark!=null and remark!=''">
-				and REMARK = #{remark}
+				and REMARK like '%'||#{remark}||'%'
+			</if>
+			<!--电话-->
+			<if test="phone!=null and phone!=''">
+				and PHONE like '%'||#{phone}||'%'
+			</if>
+			<!--处理措施-->
+			<if test="measures!=null and measures!=''">
+				and MEASURES like '%'||#{measures}||'%'
 			</if>
 			<!--状态-->
 			<if test="status!=null and status!=''">

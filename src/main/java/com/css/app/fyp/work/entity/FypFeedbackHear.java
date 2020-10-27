@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -22,10 +23,11 @@ public class FypFeedbackHear implements Serializable {
 	//提出人id
 	private String submitUserId;
 	//软件/硬件名称
-	private String name;
+	private String softName;
 	//提出的单位id
 	private String submitDeptId;
 	//提出时间
+	@JSONField(format = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date submitTime;
 
@@ -37,6 +39,7 @@ public class FypFeedbackHear implements Serializable {
 	//问题分类
 	private String type;
 	//解决时限
+	@JSONField(format = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date solveTime;
 	//问题描述
@@ -49,6 +52,28 @@ public class FypFeedbackHear implements Serializable {
 	private String submitUserName;
 	//工作进展
 	private String march;
+
+	//软硬件id
+	private String softId;
+
+	//问题分类id
+	private String typeId;
+
+	public String getSoftId() {
+		return softId;
+	}
+
+	public void setSoftId(String softId) {
+		this.softId = softId;
+	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -94,18 +119,7 @@ public class FypFeedbackHear implements Serializable {
 	public String getSubmitUserId() {
 		return submitUserId;
 	}
-	/**
-	 * 设置：软件/硬件名称
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * 获取：软件/硬件名称
-	 */
-	public String getName() {
-		return name;
-	}
+
 	/**
 	 * 设置：提出的单位id
 	 */
@@ -213,5 +227,13 @@ public class FypFeedbackHear implements Serializable {
 	 */
 	public String getMarch() {
 		return march;
+	}
+
+	public String getSoftName() {
+		return softName;
+	}
+
+	public void setSoftName(String softName) {
+		this.softName = softName;
 	}
 }

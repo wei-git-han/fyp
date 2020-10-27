@@ -82,6 +82,9 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
                 Object objectResult = jsonData.get("returnJsonArr");
                 returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
             }
+            if(returnJsonArr ==null){
+                returnJsonArr = new JSONArray();
+            }
             //即时通讯数量
             BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx");
             JSONObject jstxJsonObj = new JSONObject();
@@ -153,7 +156,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
             dccbJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {
-                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("total"));
+                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("count"));
             }else {
                 dccbJsonObj.put("flowCount", "0");
             }

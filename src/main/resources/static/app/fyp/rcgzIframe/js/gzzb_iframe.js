@@ -28,21 +28,21 @@ var pageModule = function () {
 	
 	var object1 = {};
 	var initPlan = function(type){
+		var startDate='';
+		var endDate='';
 		if(type=="bjzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
+			time=$("#time").val();
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val()},
+			data:{weekTableType:type,userId:$("#deptId").val(),time:time},
 			success: function(res) {
-				if(!res.data){
+				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
-					return;
-				}
-				if (res.data.length<1) {
 					return;
 				}
 				var divHeight = $(".newpage113").height();
@@ -171,8 +171,18 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
+		$("#time").datepicker({
+		    language:"zh-CN",
+		    autoclose: true,
+		    isRTL: Metronic.isRTL(),
+		    format: "yyyy-mm-dd",
+		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
+		}).on("changeDate",function(){
+			getRole('grzb');
+		});
 		//各局周表&本局周表 点击事件
 		$(".nav>li").click(function() {
+			$("#mainContent").html("");
 			$(this).addClass('active').siblings().removeClass('active');
 			initPlan($(".nav>li.active").attr("data"));
 			if($(".nav>li.active").attr("data") == "gjzb"){

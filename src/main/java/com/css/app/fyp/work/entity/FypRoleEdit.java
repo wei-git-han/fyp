@@ -29,7 +29,7 @@ public class FypRoleEdit implements Serializable {
 	private String userName;
 	//创建时间
 	private Date createTime;
-	//当前人角色 0:超级管理员；1:系统管理员；2:局管理员；3:在编人员
+	//当前人角色 0:超级管理员；1:系统管理员；2:局管理员
 	private Integer roleType;
 	//配置人Id
 	private String editUserId;

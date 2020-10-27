@@ -191,4 +191,23 @@
 
 	</select>
 
+	<select id="queryByOrganidTREEPATH" resultType="com.css.addbase.apporgan.entity.BaseAppUser">
+		select * from BASE_APP_USER where ISDELETE = 0  and  ORGANID  != 'root'
+		<if test="departmentId != null and departmentId != null">
+			and ORGANID in(
+			select
+			id
+			from
+			BASE_APP_ORGAN
+			where
+			TREE_PATH like '%'||#{departmentId}||'%'
+			<if test="orgId == 'rootC'">
+				and TREE_PATH not like '%rootCPBM%'
+			</if>
+			and isdelete = 0
+			)
+		</if>
+
+	</select>
+
 </mapper>

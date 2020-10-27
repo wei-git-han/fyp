@@ -28,15 +28,15 @@
 			<form id="commentForm" class="pr100">
 				<table class="table">
 					<tr>
-						<td class="t_label">日程时间</td>
+						<td class="t_label">日程时间 <span class="required">*</span></td>
 						<td class="t_inpt" >
-							<input class="form-control input-group form_datetime" size="16" type="text" name="createdTime" id="createdTime" />
+							<input class="form-control input-group form_datetime" size="16" type="text" name="createdTime" id="createdTime" required />
 						</td>
 					</tr>
 					<tr>
-						<td class="t_label">日程内容</td>
+						<td class="t_label">日程内容 <span class="required">*</span></td>
 						<td class="t_inpt">
-						   <textarea class="form-control" id="weekTableContent" name="weekTableContent"  style="height:200px;resize:none;"></textarea>
+						   <textarea class="form-control" id="weekTableContent" name="weekTableContent" maxlength="500"  style="height:200px;resize:none;" placeholder="请输入500字以内的日程内容" required></textarea>
 						</td>
 					</tr>
 				</table>
@@ -44,7 +44,7 @@
 		</div>
 		<div class="bottom">
 			<button class="btn" style="display: none" type="button" id="reset">重置</button>
-			<button class="btn" type="button" id="save">确定</button>
+			<button class="btn save" type="button" id="save">确定</button>
 			<button class="btn closebtn" type="button" id="close">取消</button>
 		</div>
 	</div>

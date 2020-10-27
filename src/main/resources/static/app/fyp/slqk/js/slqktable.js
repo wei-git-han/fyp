@@ -9,21 +9,24 @@ var pageModule = function () {
 		grid = $("#gridcont").createGrid({
 				columns:[
 						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
-							return rowdata.name;                                         
+							return rowdata.softName;
 						}},
 						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
 							return rowdata.desc;                                         
 						}},
-						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
+						{display:"提出时间",name:"submitTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.submitTime;                                         
 						}},
-						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+						{display:"提出单位",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+							return rowdata.submitDeptName;
+						}},
+						{display:"提出人",name:"submitUserName",width:"6%",align:"center",render:function(rowdata){
 							return rowdata.submitUserName;                                         
 						}},
-						{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
+						{display:"解决时限",name:"solveTime",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.solveTime;                                         
 						}},
-						{display:"工作进展",name:"march",width:"12%",align:"center",render:function(rowdata){
+						{display:"工作进展",name:"march",width:"10%",align:"center",render:function(rowdata){
 							return rowdata.march;                                         
 						}},
 						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
@@ -42,13 +45,14 @@ var pageModule = function () {
                             }
 						}},
 						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
-							if(rowdata.type == "0"){
-                                return "系统问题";
-                            }else if(rowdata.type == "1"){
-                                return "完善建议";
-                            }else{
-                                return "";
-                            }
+							// if(rowdata.type == "0"){
+                            //     return "系统问题";
+                            // }else if(rowdata.type == "1"){
+                            //     return "完善建议";
+                            // }else{
+                            //     return "";
+                            // }
+						    return rowdata.type;
 						}}
 				 ],
 		width:'100%',
@@ -64,7 +68,7 @@ var pageModule = function () {
 	
 	//树
 	var initUnitTree = function(){
-		/*//单位
+		//单位
 		$("#submitDeptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
@@ -73,7 +77,7 @@ var pageModule = function () {
 				$("#submitDeptName").val(data.node.text);
 				$("#submitDeptId").val(data.node.id);
 			}
-		});*/
+		});
 		
 		//提出人
 		$("#submitUserName").createUserTree({
@@ -213,6 +217,28 @@ var pageModule = function () {
 				});
 			}
 		})
+		/* 硬软件名称管理 */
+        $("#nameManageBtn").click(function(){
+            newbootbox.newdialog({
+                id:"nameManageModal",
+                width:1000,
+                height:800,
+                header:true,
+                title:"硬/软件名称管理",
+                url:"nameManage.html",
+            })
+        });
+        /* 问题分类管理 */
+        $("#issueClassifyBtn").click(function(){
+            newbootbox.newdialog({
+                id:"issueClassifyModal",
+                width:1000,
+                height:800,
+                header:true,
+                title:"问题分类管理",
+                url:"issueClassify.html",
+            })
+        });
 	}
 	
     return {

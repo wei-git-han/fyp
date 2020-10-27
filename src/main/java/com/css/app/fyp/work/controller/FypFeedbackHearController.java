@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.alibaba.fastjson.JSON;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
+import com.css.addbase.apporgan.entity.BaseAppUser;
+import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.app.fyp.utils.PoiUtils;
 import com.css.app.fyp.utils.ResponseValueUtils;
@@ -41,6 +44,9 @@ public class FypFeedbackHearController {
 
 	@Autowired
 	private BaseAppUserService baseAppUserService;
+
+	@Autowired
+	private BaseAppOrganService baseAppOrganService;
 	
 	/**
 	 * 列表
@@ -82,9 +88,12 @@ public class FypFeedbackHearController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public void save(FypFeedbackHear fypFeedbackHear){
-		String orgName = CurrentUser.getOrgName();
 		fypFeedbackHear.setId(UUIDUtils.random());
 		fypFeedbackHear.setSubmitTime(new Date());
+		BaseAppUser baseAppUser = baseAppUserService.queryObject(fypFeedbackHear.getSubmitUserId());
+		BaseAppOrgan baseAppOrgan = baseAppOrganService.queryObject(baseAppUser.getOrganid());
+		fypFeedbackHear.setSubmitDeptName(baseAppOrgan.getName());
+		fypFeedbackHear.setSubmitDeptId(baseAppOrgan.getId());
 		fypFeedbackHearService.save(fypFeedbackHear);
 		Response.json(new ResponseValueUtils().success());
 	}
@@ -133,7 +142,7 @@ public class FypFeedbackHearController {
 				try {
 					fypFeedbackHear = new FypFeedbackHear();
 					fypFeedbackHear.setId(UUIDUtils.random());
-					fypFeedbackHear.setName(objects.get(0).toString());//软件/硬件名称
+					fypFeedbackHear.setSoftName(objects.get(0).toString());//软件/硬件名称
 					fypFeedbackHear.setDesc(objects.get(1).toString());//问题描述
 					fypFeedbackHear.setSubmitTime(simpleDateFormat.parse(objects.get(2).toString()));//提出时间
 					fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人

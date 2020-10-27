@@ -117,4 +117,6 @@ public interface BaseAppUserService {
 	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
 
 	List<BaseAppUser> queryListByRole(String organid);
+
+	List<BaseAppUser>  queryByOrganidTREEPATH(Map<String,Object> map);
 }
