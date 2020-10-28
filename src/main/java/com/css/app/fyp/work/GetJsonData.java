@@ -1,12 +1,14 @@
 package com.css.app.fyp.work;
 
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.CurrentUser;
 import com.css.base.utils.StringUtils;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class GetJsonData {
     @Autowired
     private BaseAppOrgMappedService baseAppOrgMappedService;
 
+    @Autowired
+    private BaseAppUserService baseAppUserService;
+
     private ExecutorService cacheThread = Executors.newCachedThreadPool();
 
 //    private List<JSONObject> jsons = null;
@@ -45,7 +50,7 @@ public class GetJsonData {
      * @return List<JSONObject>
      */
     public List<JSONObject> getJson(LinkedMultiValueMap<String, Object> map,String type){
-
+        String orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         List<JSONObject> jsons = new ArrayList<>();
         String prefix = this.getPrefix(type);
         List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
@@ -79,11 +84,11 @@ public class GetJsonData {
                             List<Object> organIds = map.get("organId");
                             if(null==organIds && organIds.contains(data.get("ORG_ID").toString())){
                                 map.remove("organId");
-                                map.add("organId", getUsers(data.get("ORG_ID").toString()));
+                                map.add("organId", orgId);
                             }
                             //默认查配置的全部局
                             if(null == organIds){
-                                map.add("organId", getUsers(data.get("ORG_ID").toString()));
+                                map.add("organId", orgId);
                             }
                             setData(data,url,map,token,jsons);
                             break;
