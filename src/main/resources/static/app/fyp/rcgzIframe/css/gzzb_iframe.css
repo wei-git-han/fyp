@@ -342,10 +342,11 @@ select{
 	float: left;
     margin-right: 10px;
     border: 1px solid #4C52E6;
-    background: #12246C;
+    background: transparent;
     color: #fff;
     font-size: 14px;
     padding: 6px 18px;
+    border-radius: 4px !important;
 }
 .caozuoBtn .add:hover{
 	border:1px solid #3C41BC;

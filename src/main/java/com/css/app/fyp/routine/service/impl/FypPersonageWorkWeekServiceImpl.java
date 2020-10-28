@@ -33,7 +33,7 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
 		return fypPersonageWorkWeekDao.queryList(map);
 	}
 
-    private List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekList () {
+    private List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekList (Date beginDayOfWeek, Date endDayOfWeek) {
         List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekList = new ArrayList<>();
         FypPersonageWorkWeekVo MonDate = new FypPersonageWorkWeekVo();
         MonDate.setWeekDate("一");
@@ -56,6 +56,22 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
         FypPersonageWorkWeekVo SunDate = new FypPersonageWorkWeekVo();
         SunDate.setWeekDate("七");
         resultFypPersonageWorkWeekList.add(SunDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(beginDayOfWeek);
+        if (null == beginDayOfWeek || null == endDayOfWeek) {
+            return resultFypPersonageWorkWeekList;
+        }
+        int index = 0;
+        while (beginDayOfWeek.getTime() < endDayOfWeek.getTime()) {
+            beginDayOfWeek = calendar.getTime();
+            String[] f = new SimpleDateFormat("yyyy-MM-dd").format(beginDayOfWeek).toString().split("-");
+            Integer month = Integer.parseInt(f[1]);//月
+            Integer day = Integer.parseInt(f[2]);//日
+            resultFypPersonageWorkWeekList.get(index).setWeekMonth(month);
+            resultFypPersonageWorkWeekList.get(index).setWeekDay(day);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            index += 1;
+        }
         return resultFypPersonageWorkWeekList;
     }
     @Override
@@ -70,7 +86,7 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
             allMap.put("beginDayOfWeek", beginDayOfWeek);
             allMap.put("endDayOfWeek", endDayOfWeek);
         }
-        List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekVos = this.resultFypPersonageWorkWeekList();
+        List<FypPersonageWorkWeekVo> resultFypPersonageWorkWeekVos = this.resultFypPersonageWorkWeekList(beginDayOfWeek, endDayOfWeek);
         List<String> fypPersonageWorkWeekVos = fypPersonageWorkWeekDao.getWeekWorkDateList(allMap);
         List<FypPersonageWorkWeekVo> fypPersonageWorkWeekVoList = new ArrayList<>();
         for (String weekDate : fypPersonageWorkWeekVos) {
@@ -146,54 +162,35 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
         return weekDays[w];
 	}
 
-	// 获取本周的开始时间
-	public Date getBeginDayOfWeek(Date date) {
-	    //Date date = new Date();
-	    if (date == null) {
-	        return null;
-        }
-        Calendar cal = Calendar.getInstance();
+    // 获取本周的开始时间
+    public Date getBeginDayOfWeek(Date date) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(date);
-	    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-	    if (dayOfWeek == 1) {
-	        dayOfWeek += 7;
+	    int dayWeek = cal.get(Calendar.DAY_OF_WEEK);
+	    if (1 == dayWeek) {
+	        cal.add(Calendar.DAY_OF_MONTH, -1);
         }
-        cal.add(Calendar.DATE, 2 - dayOfWeek);
-	    return getDayStartTime(cal.getTime());
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+	    int day = cal.get(Calendar.DAY_OF_WEEK);
+	    cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - day);
+        return cal.getTime();
     }
 
-	// 获取本周的开始时间
-	public Date getBeginDayOfDate(Date date) {
-	    //Date date = new Date();
-	    if (date == null) {
-	        return null;
-        }
-        Calendar cal = Calendar.getInstance();
-	    cal.setTime(date);
-	    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-	    if (dayOfWeek == 1) {
-	        dayOfWeek += 7;
-        }
-        cal.add(Calendar.DATE, 2 - dayOfWeek);
-	    return cal.getTime();
-    }
-
-    //获取本周的结束时间
+    // 获取本周的开始时间
     public Date getEndDayOfWeek(Date date) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(getBeginDayOfWeek(date));
-	    cal.add(Calendar.DAY_OF_WEEK, 6);
-	    Date weekEndSta = cal.getTime();
-	    return getDayEndTime(weekEndSta);
-    }
-
-    //获取本周的结束时间
-    public Date getEndDayOfDate(Date date) {
-	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(getBeginDayOfWeek(date));
-	    cal.add(Calendar.DAY_OF_WEEK, 6);
-	    Date weekEndSta = cal.getTime();
-	    return weekEndSta;
+	    cal.setTime(date);
+	    int dayWeek = cal.get(Calendar.DAY_OF_WEEK);
+	    if (1 == dayWeek) {
+	        cal.add(Calendar.DAY_OF_MONTH, -1);
+        }
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+	    int day = cal.get(Calendar.DAY_OF_WEEK);
+	    cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - day);
+	    cal.add(Calendar.DATE, 6);
+        return cal.getTime();
     }
 
     public Date getDayEndTime(Date date) {
