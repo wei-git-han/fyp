@@ -46,7 +46,62 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 					<div style="position:absolute;left:0;top:0;width:100%;height:100%;padding-top:45px;">
 						<div style="width:100%;height:100%;">
-							<div id="gridcont"></div>
+							<div style="width: 100%; height: 100%;" id="gridcont">
+								<div id="gridcont_hdtablediv" style="overflow:hidden;position:relative;height:40px">
+									<table class="table table-striped table-bordered table-advance table-hover" id="gridcont_hdtable" style="position: absolute; width: 100%; height: 100%; table-layout: fixed; box-sizing: border-box;">
+										<thead>
+											<tr style="box-sizing:border-box">
+												<th style="text-align: center; width: 50px; box-sizing: border-box; height: 40px;">
+													<input style="cursor:pointer" name="gridcont_checkth" type="checkbox">
+												</th>
+												<th style="text-align: center; width: 80px; box-sizing: border-box;">序号</th>
+												<th style="text-align: center; width: 174.8px; box-sizing: border-box; height: 40px;">字典名称</th>
+												<th style="text-align: left; width: 1398.4px; box-sizing: border-box; height: 40px;">字典值</th>
+												<th style="text-align: center; width: 174.8px; box-sizing: border-box; height: 40px;">操作</th>
+												<th style="box-sizing:border-box"></th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div id="gridcont_content" style="overflow-x: hidden; overflow-y: auto; background-color: transparent; max-height: 231px;">
+									<table style="width: 100%; table-layout: fixed; box-sizing: border-box;" class="table table-striped table-bordered table-advance table-hover pagegrid" id="gridcont_conttable">
+										<tbody>
+										<tr style="box-sizing:border-box" class="">
+											<td style="text-align: center; width: 50px; box-sizing: border-box;">
+												<input class="checkboxes" style="cursor:pointer;" id="gridcont_checkbox1" name="gridcont_checktd" data-name="软件/硬件名称" type="checkbox">
+											</td>
+											<td style="text-align: center; width: 80px; box-sizing: border-box;">1</td>
+											<td style="text-align: center; width: 174.8px; box-sizing: border-box; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="tabledatarowcol00">
+												<span style="cursor:pointer;">软件/硬件名称</span>
+											</td>
+											<td style="text-align: left; width: 1398.4px; box-sizing: border-box; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="tabledatarowcol01">
+												<!--<span style="cursor:pointer;" class="check"><input value="nameManagement&amp;b5981e0a-a578-4104-b874-93a2b5fb9026" type="checkbox">&nbsp;<span>软件1</span></span>&nbsp;&nbsp;&nbsp;&nbsp;-->
+											</td>
+											<td style="text-align: center; width: 174.8px; box-sizing: border-box; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="tabledatarowcol02">
+												<img src="../images/bianji.svg" style="cursor:pointer;padding:4px 5px;color:#fff;" onclick="editfn()" title="编辑">
+											</td>
+											<td style="box-sizing:border-box;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;"></td>
+										</tr>
+										<tr style="box-sizing:border-box" class="">
+											<td style="text-align: center; width: 50px; box-sizing: border-box;">
+												<input class="checkboxes" style="cursor:pointer;" id="gridcont_checkbox2" name="gridcont_checktd" data-name="问题种类" type="checkbox">
+											</td>
+											<td style="text-align: center; width: 80px; box-sizing: border-box;">2</td>
+											<td style="text-align: center; width: 174.8px; box-sizing: border-box; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="tabledatarowcol10">
+												<span style="cursor:pointer;">问题种类</span>
+											</td>
+											<td style="text-align: left; width: 1398.4px; box-sizing: border-box; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="tabledatarowcol11">
+												<!--<span style="cursor:pointer;" class="check"><input value="issueClassify&amp;b5981e0a-a578-4104-b874-93a2b5fb9026" type="checkbox">&nbsp;<span>问题一</span></span>&nbsp;&nbsp;&nbsp;&nbsp;-->
+											</td>
+											<td style="text-align: center; width: 174.8px; box-sizing: border-box; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" id="tabledatarowcol12">
+												<img src="../images/bianji.svg" style="cursor:pointer;padding:4px 5px;color:#fff;" onclick="editfn()" title="编辑">
+											</td>
+											<td style="box-sizing:border-box;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;"></td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
 					

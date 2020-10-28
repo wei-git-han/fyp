@@ -215,7 +215,33 @@
 	            ],
 	            "name": "紧急程度",
 	            "type": "emergency_gegree"
-	        }
+	        },
+			{
+				"children": [
+					{
+						"dictionaryTypeId": "nameManagement",
+						"dictionaryValue": "软件1",
+						"id": "b5981e0a-a578-4104-b874-93a2b5fb9026",
+						"sort": 1,
+						"sysType": 0
+					}
+				],
+				"name": "软件/硬件名称",
+				"type": "nameManagement"
+			},
+			{
+				"children": [
+					{
+						"dictionaryTypeId": "issueClassify",
+						"dictionaryValue": "问题一",
+						"id": "b5981e0a-a578-4104-b874-93a2b5fb9026",
+						"sort": 1,
+						"sysType": 0
+					}
+				],
+				"name": "问题种类",
+				"type": "issueClassify"
+			}
 	    ],
 	    "total": 2,
 	    "totalPage": 1

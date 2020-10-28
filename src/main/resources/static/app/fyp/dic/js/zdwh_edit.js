@@ -1,11 +1,13 @@
-var saveUrl = {"url":"/app/fyp/dic/data/deletezdx.json","dataType":"text"};
+//var saveUrl = {"url":"/app/fyp/dic/data/deletezdx.json","dataType":"text"};
+var saveUrl = {"url":"/dict/update","dataType":"json"};
 var id = getUrlParam("id");
-var value = decodeURI(getUrlParam("value"));
+var type = getUrlParam("type");
+var name = decodeURI(getUrlParam("name"));
 var pageModule = function(){
 	
 	var initother = function(){
-		if(value != '' && value != 'null'){
-			$("#dname").val(value);
+		if(name != '' && name != 'null'){
+			$("#dname").val(name);
 		}
 		
 		$("#quxiao").click(function(){
@@ -17,12 +19,11 @@ var pageModule = function(){
 			var value=$("#dname").val();
 			$ajax({
 				url:saveUrl,
-				data:{value:value,id:id},
-				type: "GET",
+				data:{dictName:$("#dname").val() ,id:id, dictType: type,dictValue:""},
+				type: "post",
 				success:function(data){
 					newbootbox.newdialogClose("addModal");
 					newbootbox.alertInfo('保存成功！').done(function(){
-						//window.location.href = "/app/gwcl/document/ywpz/zdwh/html/zdwh.html"
 						window.top.pageModule.initgrid();
 					});
 				}
