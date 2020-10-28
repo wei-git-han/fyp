@@ -136,32 +136,61 @@ public class DictController {
 		result.put("total", depts_count + users_count);
 		result.put("rows", list);
 		Response.json(result);
+
+		/**
+		 *
+		 * List<Map<String,Object>> list = dictService.findDeptids();
+		 *
+		 * 		String organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		 * 		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
+		 * 		JSONObject lists= OrgUtil.getOrganTree(organs, organId);
+		 * 		JSONArray children = (JSONArray)lists.get("children");
+		 *
+		 * 		for (Object object :children) {
+		 * 			JSONObject jo = (JSONObject) object;
+		 * 			String dept = jo.get("id").toString();
+		 * 			for (Map<String,Object> map:list) {
+		 * 				if(dept.equals(map.get("DEPT_ID").toString())){
+		 * 					jo.put("dictType",map.get("TYPE"));
+		 * 					break;
+		 *                                }else{
+		 * 					jo.put("dictType","0");
+		 *                }            * 			}
+		 * 		}
+		 * 		Response.json(new ResponseValueUtils().success(lists));
+		 */
 	}
 
 	public JSONArray getUserList(String id,JSONArray jsons){
+		List<Map<String,Object>> list = dictService.findDeptids();
 		List<BaseAppOrgan> depts = baseAppOrganService.findByParentId(id);
 		String organid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
 		for (int i = 0;i < depts.size();i++) {
 			BaseAppOrgan dept  = depts.get(i);
 			JSONObject json = new JSONObject();
-			if (organid.equals(id)) {
-				json.put("id", dept.getId());
-				json.put("name", dept.getName());
-				json.put("rownum", i+1);
-				json.put("phone", "");
-				json.put("auth", "");
-				json.put("lx", "dept");
-				json.put("state", "closed");
-			} else {
-				json.put("id", dept.getId());
-				json.put("name", dept.getName());
-				json.put("phone", "");
-				json.put("auth", "");
-				json.put("rownum", i+1);
-				json.put("lx", "dept");
-				json.put("_parentId", id);
-				json.put("state", "closed");
+			for(Map<String,Object> map : list){
+				if (organid.equals(id) && dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
+					json.put("id", dept.getId());
+					json.put("name", dept.getName());
+					json.put("rownum", i+1);
+					json.put("phone", "");
+					json.put("auth", "");
+					json.put("lx", "dept");
+					json.put("state", "closed");
+					json.put("dictType",map.get("TYPE"));
+				} else {
+					json.put("id", dept.getId());
+					json.put("name", dept.getName());
+					json.put("phone", "");
+					json.put("auth", "");
+					json.put("rownum", i+1);
+					json.put("lx", "dept");
+					json.put("_parentId", id);
+					json.put("state", "closed");
+					json.put("dictType","0");
+				}
 			}
+
 			jsons.add(json);
 			getUserList(dept.getId(),jsons);
 		}

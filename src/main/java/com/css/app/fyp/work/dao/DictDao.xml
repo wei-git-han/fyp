@@ -71,8 +71,8 @@
 
 	<select id="findDeptids" resultType="java.util.Map">
 		select a.*,b.name as NAME
-		from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" as a
-		left join "ZF_NEW_FYP_DB"."base_app_organ" as b on a.dept_id = b.ID
+		from CONFIG_USER_DEPT as a
+		left join base_app_organ as b on a.dept_id = b.ID
 		where a.DEPT_ID is not null and a.DEPT_ID != ''
 	</select>
 	<select id="findUserids" resultType="java.util.Map">
