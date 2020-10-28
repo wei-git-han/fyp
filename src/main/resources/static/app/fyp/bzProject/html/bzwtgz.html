@@ -82,14 +82,6 @@
 					<input type="text" name="remark" class="form-control"  id="phone" value="" placeholder="联系电话" style="width:180px;" />
 				</div>
 				<div class="form-group">
-					<label>问题描述</label><br/>
-					<input type="text" name="remark" class="form-control"  id="remark" value="" placeholder="请输入问题描述关键词" style="width:180px;" />
-				</div>
-				<div class="form-group">
-					<label>处理措施</label><br/>
-					<input type="text" name="remark" class="form-control"  id="measures" value="" placeholder="请输入处理措施关键词" style="width:180px;" />
-				</div>
-				<div class="form-group">
 					<label>状态</label><br/>
 					<select name="status" id="status" class="form-control" style="width:195px;">
 						<option value=""></option>
@@ -98,9 +90,19 @@
 						<option value="2">已完成</option>
 					</select>
 				</div>
+				<div class="form-group isshow">
+					<label>问题描述</label><br/>
+					<input type="text" name="remark" class="form-control"  id="remark" value="" placeholder="请输入问题描述关键词" style="width:180px;" />
+				</div>
+				<div class="form-group isshow">
+					<label>处理措施</label><br/>
+					<input type="text" name="remark" class="form-control"  id="measures" value="" placeholder="请输入处理措施关键词" style="width:180px;" />
+				</div> 
+				
 				<div class="btn-group">
 					<button type="button" id="reset">重置</button>
 					<button type="button" id="sure">确定</button>
+					<button type="button" class="more" id="more">展开更多</button>
 					<!-- <button type="button" class="closeBtn" >取消</button> -->
 				</div>
 			</form>

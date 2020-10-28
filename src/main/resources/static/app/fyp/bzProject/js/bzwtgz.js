@@ -214,6 +214,21 @@ var pageModule = function () {
 			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"]);
 			initgrid();
 		});
+		
+		//展开
+		$("#more").click(function(){
+			if($.trim($(this).text()) == "展开更多"){
+				$(".newlayout-search").css("height","282px");
+				$(".newlayout-content").css("padding-top","380px");
+				$(".isshow").show();
+				$(this).text("收起");
+			}else{
+				$(".newlayout-search").css("height","204px");
+				$(".newlayout-content").css("padding-top","314px");
+				$(".isshow").hide();
+				$(this).text("展开更多");
+			}
+		});
 	}
 	
 	
