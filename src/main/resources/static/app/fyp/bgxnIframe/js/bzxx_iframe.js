@@ -8,41 +8,41 @@ var pageModule = function () {
 		  grid = $("#gridcont").createGrid({
 			columns:[
 						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
-							return `<span title="${rowdata.softName}">${rowdata.softName}</span>`;
+							return `<span title="${rowdata.softName}" onclick="toSlqkInfo()" style="cursor: pointer">${rowdata.softName}</span>`;
 						}},
 						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
-							return `<span title="${rowdata.desc}">${rowdata.desc}</span>`;
+							return `<span title="${rowdata.desc}" onclick="toSlqkInfo()" style="cursor: pointer">${rowdata.desc}</span>`;
 						}},
 						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
-							return `<span title="${rowdata.submitTime}">${rowdata.submitTime}</span>`;
+							return `<span title="${rowdata.submitTime}" onclick="toSlqkInfo()" style="cursor: pointer">${rowdata.submitTime}</span>`;
 						}},
 						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
-							return `<span title="${rowdata.submitUserName}">${rowdata.submitUserName}</span>`;
+							return `<span title="${rowdata.submitUserName}" onclick="toSlqkInfo()" style="cursor: pointer">${rowdata.submitUserName}</span>`;
 						}},
 						{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
-							return `<span title="${rowdata.solveTime}">${rowdata.solveTime}</span>`;
+							return `<span title="${rowdata.solveTime}" onclick="toSlqkInfo()" style="cursor: pointer">${rowdata.solveTime}</span>`;
 						}},
 						{display:"工作进展",name:"march",width:"12%",align:"center",render:function(rowdata){
-							return `<span title="${rowdata.march}">${rowdata.march}</span>`;
+							return `<span title="${rowdata.march}" onclick="toSlqkInfo()"style="cursor: pointer">${rowdata.march}</span>`;
 						}},
 						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
 							if(rowdata.status == "0"){
-		                        return `<span title="需求论证">需求论证</span>`;
+		                        return `<span title="需求论证" onclick="toSlqkInfo()" style="cursor: pointer">需求论证</span>`;
 		                    }else if(rowdata.status == "1"){
-		                        return `<span title="需求细化">需求细化</span>`;
+		                        return `<span title="需求细化" onclick="toSlqkInfo()" style="cursor: pointer">需求细化</span>`;
 		                    }else if(rowdata.status == "2"){
-		                        return `<span title="解决中">解决中</span>`;
+		                        return `<span title="解决中" onclick="toSlqkInfo()" style="cursor: pointer">解决中</span>`;
 		                    }else if(rowdata.status == "3"){
-		                        return `<span title="已解决待升级">已解决待升级</span>`;
+		                        return `<span title="已解决待升级" onclick="toSlqkInfo()" style="cursor: pointer">已解决待升级</span>`;
 		                    }else if(rowdata.status == "4"){
-		                        return `<span title="已关闭">已关闭</span>`;
+		                        return `<span title="已关闭" onclick="toSlqkInfo()" style="cursor: pointer">已关闭</span>`;
 		                    }else{
 		                        return "";
 		                    }
 						}},
 						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
 							// if(rowdata.type == "0"){
-		                        return `<span title="${rowdata.type}">${rowdata.type}</span>`;
+		                        return `<span title="${rowdata.type}" onclick="toSlqkInfo()" style="cursor: pointer">${rowdata.type}</span>`;
 		                    // }else if(rowdata.type == "1"){
 		                    //     return `<span title="完善建议">完善建议</span>`;
 		                    // }else{
@@ -157,5 +157,8 @@ function toBzInfo() {
 	window.open('/app/fyp/bzProject/html/bzwtgz.html')
 }
 
+function toSlqkInfo() {
+	window.open('/app/fyp/slqk/html/slqktabel.html')
+}
 
 

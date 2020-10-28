@@ -2,6 +2,7 @@ var listUrl = {"url":"/fyp/feedbackhear/list","dataType":"text"};//表格数据
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树（调用方法暂时被注释）
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树（调用方法暂时被注释）
 var delUrl = {"url":"/fyp/feedbackhear/delete","dataType":"text"};//删除
+var isAdminUrl = {"url":"/fyp/roleedit/getRole","dataType":"text"}; //人员树
 var grid = null;
 
 var pageModule = function () {
@@ -240,13 +241,28 @@ var pageModule = function () {
             })
         });
 	}
-	
+	function isAdmin() {
+		$ajax({
+			url: isAdminUrl,
+			type: "GET",
+			success: function(data) {
+				if(data.flag!='1') {
+					$('.adminDiv').show()
+					$('.userDiv').hide()
+				}else{
+					$('.adminDiv').hide()
+					$('.userDiv').show()
+				}
+			}
+		})
+	}
     return {
         //加载页面处理程序
         initControl: function () {
 			initgrid();
 			initUnitTree();
 			initother();
+			isAdmin()
         },
         initgrid:function(){
             initgrid();
