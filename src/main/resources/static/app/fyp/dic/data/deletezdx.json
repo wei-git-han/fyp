@@ -1,0 +1,14 @@
+/****************
+功能：字典维护字典项删除功能，zdwh.html中引用
+进度：已完成
+request
+	idFlags:字典名称&需要删除的字典项的id，批量删除时数组形式以逗号隔开，如：
+	hostDepartment&a6e37b0d-520c-4457-a05c-632ed44307d3,hostDepartment&c815d9bd-e31e-4f8a-8eab-a89683262619
+
+response
+	返回是否成功
+******************/
+
+{
+	"result": "success"
+}

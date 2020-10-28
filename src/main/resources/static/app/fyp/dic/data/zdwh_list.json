@@ -1,0 +1,223 @@
+{
+	"data":{
+	    "currPage": 1,
+	    "nextpage": 0,
+	    "pageSize": 2,
+	    "prepage": 0,
+	    "rows": [
+	        {
+	            "children": [
+	                {
+	                    "createdTime": "2017-10-08 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "秘密",
+	                    "id": "77",
+	                    "sort": 7,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2017-10-08 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "机密",
+	                    "id": "88",
+	                    "sort": 8,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "8888",
+	                    "id": "0e2bd70a-130d-4e76-86ff-f33e44068309",
+	                    "sort": 5,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "999999",
+	                    "id": "f09a6cd4-be77-4294-b6b6-5f64b834342b",
+	                    "sort": 7,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "无密",
+	                    "id": "a0e7b274-038d-4c34-b6a2-f72b8ac99e76",
+	                    "sort": 0,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "秘密",
+	                    "id": "b0e7b274-038d-4c34-b6a2-f72b8ac99e76",
+	                    "sort": 1,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "机密",
+	                    "id": "633aefba-565a-40f4-b938-a20bb30f137f",
+	                    "sort": 2,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "绝密",
+	                    "id": "fde4af1f-5041-4bf4-b221-4011d79089b5",
+	                    "sort": 3,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "绝密★核心",
+	                    "id": "fde4af1f-5041-43f4-b221-4011d79089b7",
+	                    "sort": 3,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "机密",
+	                    "id": "f7a74084-8cff-4716-9c5b-2eb91a4441db",
+	                    "sort": 11,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "测试密级 1",
+	                    "id": "4bb74431-d47e-48b3-9def-1b5f3a0124b2",
+	                    "sort": 12,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "测试密级 2",
+	                    "id": "a92589ab-e199-4775-881e-0aa95390fdf3",
+	                    "sort": 13,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "测试密级 3     测试密级 4",
+	                    "id": "2fc74609-b32e-43ef-ba7a-e830dbe464d0",
+	                    "sort": 15,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "测试密级 5",
+	                    "id": "1f2aef8b-b7c5-49de-a299-1b3fca345c77",
+	                    "sort": 17,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2020-08-14 10:04:08",
+	                    "dictionaryTypeId": "security_classification",
+	                    "dictionaryValue": "测试3",
+	                    "id": "7cdfa254-c1bb-4350-b943-3b7754c08aaf",
+	                    "sort": 15,
+	                    "sysType": 0
+	                }
+	            ],
+	            "name": "密级",
+	            "type": "security_classification"
+	        },
+	        {
+	            "children": [
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "平件",
+	                    "id": "b5981e0a-a578-4104-b874-93a2b5fb9026",
+	                    "sort": 1,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "急件",
+	                    "id": "3864ce21-279e-4b3c-8f7e-fd039c024e97",
+	                    "sort": 2,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "加急",
+	                    "id": "2fa6e143-b668-4214-8666-a69662250ccf",
+	                    "sort": 3,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "特急",
+	                    "id": "7b16bd46-37c8-4fe4-9510-6464476d7d42",
+	                    "sort": 4,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "124567",
+	                    "id": "5419568f-63ee-443c-9c5b-a08c841e6eff",
+	                    "sort": 5,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "99",
+	                    "id": "2a0d70ec-c548-4d1c-8ed9-94df0f943a72",
+	                    "sort": 6,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "fgdfgdfgdf",
+	                    "id": "3de18998-3bbc-4086-8c93-0272ffc29304",
+	                    "sort": 8,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "正常件",
+	                    "id": "253a07c8-9444-46d3-ab0a-b82267cecb44",
+	                    "sort": 0,
+	                    "sysType": 0
+	                },
+	                {
+	                    "createdTime": "2018-06-26 00:00:00",
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "特急件",
+	                    "id": "9fe68c0d-0fc8-4a0c-9e01-41847cbb4165",
+	                    "sort": 2,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "sadsadasd",
+	                    "id": "f4b1e8bb-0e05-42ce-b5f1-16f6965740b5",
+	                    "sort": 10,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "ssssss",
+	                    "id": "4f9a9949-a2ac-43b3-8f6e-f5ca94846042",
+	                    "sort": 11,
+	                    "sysType": 0
+	                },
+	                {
+	                    "dictionaryTypeId": "emergency_gegree",
+	                    "dictionaryValue": "xvvxxvxv",
+	                    "id": "bc692522-8a94-41f3-bde7-ec918856b343",
+	                    "sort": 12,
+	                    "sysType": 0
+	                }
+	            ],
+	            "name": "紧急程度",
+	            "type": "emergency_gegree"
+	        }
+	    ],
+	    "total": 2,
+	    "totalPage": 1
+	}
+}
