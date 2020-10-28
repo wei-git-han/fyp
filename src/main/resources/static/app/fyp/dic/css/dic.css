@@ -1,0 +1,82 @@
+html,body{
+	background-color:#ffffff;
+	height:100%;
+	/*padding-top:10px;*/
+}
+body{
+}
+*{
+	box-sizing:border-box;
+}
+
+th{
+	text-align: center !important;
+}
+#gridcont_hdtable th ,#gridcont_hdtable td{
+	white-space: normal;
+	text-overflow: inherit;
+}
+.newlayout-head{
+	position:absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height:100px;
+	line-height:100px;
+	font-size:22px;
+	font-weight: 700;
+	padding-left:25px;
+	color:#1C67E3;
+	border-bottom:1px solid #eee;
+	box-shadow: inset 0px 0px 2px #eee;
+}
+.newlayout-main{
+	width:100%;
+	height:100%;
+	padding-top:120px;
+	padding:120px 20px 0px;
+}
+td{
+	vertical-align: middle!important;
+	white-space: normal!important;
+	text-overflow: inherit!important;
+}
+td span{
+	display: inline-block;
+}
+.control-label {
+    margin: 0px;
+}
+#textitem-error,#fieldValue-error{
+	color: #f00;
+}
+.btn-button1{
+	width:105px;height:33px;
+	text-align: center;
+	/*border-radius: 0px!important;*/
+}
+.btn-button2{
+	background: none;
+	border: 1px solid #3399FF;
+	color: #000;
+}
+.table-advance thead tr th {
+   background: #1C67E3;color:#fff
+}
+#gridcont_content td input[type=checkbox]{
+	margin:0px;
+	vertical-align:middle;
+}
+.newForm button {
+    padding: 3px 15px;
+    background: #1C67E3;
+    border: 1px solid #1C67E3;
+    border-radius: 4px !important;
+    color: #fff;
+    margin: 0 4px;
+}
+.newlayout-content-title button.del {
+    background: #DCEFFF;
+    color: #1C67E3;
+    border-color: #1C67E3;
+}

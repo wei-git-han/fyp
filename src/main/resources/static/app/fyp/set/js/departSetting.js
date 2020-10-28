@@ -57,6 +57,53 @@ var pageModule = function () {
 			  }
 	   });
 	}
+	
+	
+/*	var initgrid = function(){
+		$('#gridcont').treegrid({
+			columns : [ [
+					{title : '序号',field : 'rownum',width : 1,align : 'center'},
+					{title : '单位名称',field : 'text',width : 10,align : 'left'},
+					{title : '是否列入统计范围',field : 'dictType',width : 10,align : 'center'},
+				 ] ],
+			width : $('#gridcont').parent().width(),
+			height : $('#gridcont').parent().height(),
+			rownumbers : false,
+			animate : true,
+			autoRowHeight : false,
+			pagination : true,
+			pageSize : 20,
+			pageList : [ 5, 10, 20, 30 ],
+			fitColumns : true,
+			url : listurl,
+			async : true,
+			idField : 'id',
+			treeField : 'name',
+			loadingMessage : '请等待……',
+			loadMsg : '请稍等……',
+			onBeforeExpand : function(row) {
+				var id = row.id;
+				var type = row.lx;
+				$.ajax({
+					url : url_userlist,
+					data : {id : id,type : type},
+					success : function(data) {
+						if (!data) {
+							return;
+						}
+						for ( var i in data) {
+							var id_tmp = data[i]['id'];
+							var data_tmp = data[i];
+							$('#datagrid-row-r1-2-' + id_tmp).remove();
+						}
+						$('#gridcont').treegrid('append', {parent:id,data:data});
+					}
+				});
+			}
+		});
+	}
+	*/
+	
 	// 树
 	var initUnitTree = function(){
 
