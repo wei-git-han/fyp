@@ -1,17 +1,14 @@
-html,
-body {
+html, body {
 	width: 100%;
 	height: 100%;
-	background-color: #fff;
-	margin: 0;
-	padding: 0;
-	font-family: "Microsoft Yahei";
-	overflow: hidden;
+	position: relative;
+	color:#333;
 }
-.wh100{
+
+.pr100 {
 	width: 100%;
 	height: 100%;
-	position:relative
+	position: relative;
 }
 .newlayout-head{
 	position:absolute;
@@ -27,145 +24,225 @@ body {
 	border-bottom:1px solid #eee;
 	box-shadow: inset 0px 0px 2px #eee;
 }
-.newlayout-main{
+
+.newlayout-search-main{
+	border:1px dashed #8FB9F4;
 	width:100%;
 	height:100%;
-	padding-top:120px;
-	padding:120px 20px 0px;
+	border-radius: 2px!important;
+	padding:20px;
+	background: #DCEFFF;
+	font-size: 16px;
 }
-ul,li{
-	list-style:none;
-	padding:0;
-	margin:0
+.form-group{
+	float: left;
+	width:16.6%;
 }
-.BlueBor{
-	border: 1px solid #76ACEF;	
+.form-group input{
+	background: #fff;
+	font-size:15px;
+	border:1px solid #fff;
+	border-radius: 4px!important;
+	padding:5px 8px;
 }
-.TreeTitle{
-	line-height: 45px;
-	padding-left: 20px;
-	/*color: #3399FF;*/
-	font-size: 17px;
-	/*background-color: #E1F0FE;*/
-	border-bottom: 1px solid #DCDFE6;
+.btn-group{
+	width:100%;
+	text-align: center;
+	margin-top:10px;
 }
-.alreadyUserList{
-	padding:0 15px 0px 19px;
+.btn-group button{
+	padding:5px 25px;
+	background: #1C67E3;
+	border:1px solid #1C67E3;
+	border-radius: 4px!important;
+	color: #fff;
+	margin:0 8px;
 }
-.alreadyUserList li{
-	height:50px;
-	line-height:50px;
-	padding: 0 10px 0 0;
+.btn-group button.closeBtn{
+	background: #F1F1F1;
+	border:1px solid #F1F1F1;
+	color: #999;
 }
-.alreadyUserList li a{
-	padding-left: 10px;
-}
-.alreadyUserList li .do-icon{
-	display: none;
-}
-.alreadyUserList li:hover,.alreadyUserList li:hover a{
-	background-color: #DFEFFF;
-}
-.alreadyUserList li:hover .do-icon{
-	display: inline-block;
-}
-.alreadyUserList a{
-	display:block;
-	padding:1px 3px;
-	color:#333;
-	font-size:18px
-}
-.alreadyUserList a:hover{
-	background-color:#f4f4f4
-}
-.alreadyUserList a i{
-	color:#666;
-}
-.alreadyUserList a:hover i:hover{
-	color:#3399FF;
-}
-.whpb50{
-	width:100%;height:100%;
-	padding-bottom:60px;
-}
-.fwhp10{
-	float:left;
-	width:40%;
+.newlayout-content{
+	width:100%;
 	height:100%;
-	border-bottom: 1px solid #DCDFE6;
+	padding-top:75px;
 }
-.fwhp5{
-	float:left;
-	width:20%;
-	height:100%;
-	/*padding-right:10px;*/
-	border-left: 1px solid #DCDFE6;
-	border-right: 1px solid #DCDFE6;
-	border-bottom: 1px solid #DCDFE6;
-}
-.pa0{
-	position:absolute;top:0px;width:100%
-}
-.whp1050{
-	width:100%;height:100%;padding:50px 0px 10px 10px;
-}
-.fwhpl10{
-	float:left;width:40%;height:100%;
-	border-bottom: 1px solid #DCDFE6;
-}
-.whpt50{
-	width:100%;height:100%;padding-top:50px;padding-bottom: 10px;
-}
-.footer_btns{
-	position: absolute;
-	bottom: 0px;
+.newlayout-content-title{
+	position:absolute;
+	top:0px;
+	left:0;
 	width: 100%;
-	text-align: center;
-	height: 60px;
-	padding-top: 13px;
+	height:45px;
+	padding-left:20px;
 }
-.no-tree-icon .jstree-themeicon-custom{
-	display: none;
+.newlayout-content-title>div{
+	border-left:4px solid #1C67E3;
+	padding-left:5px;
 }
-.fwhp5 .do-div{
-	position: relative;
-	top:50%;
-	margin-top: -70px;
-	text-align: center;
+.newlayout-content-title button{
+	padding:3px 15px;
+	background: #1C67E3;
+	border:1px solid #1C67E3;
+	border-radius: 4px!important;
+	color: #fff;
+	margin:0 4px;
 }
-.do-div .toCycle{
-	/*width: 50px;*/
-	height: 50px;
-	display: inline-block;
-	margin: 10px 100px;
-	cursor: pointer;
-	/*border-radius: 50%;*/
+.newlayout-content-title button.del{
+	background: #DCEFFF;
+	color: #1C67E3;
+	border-color: #1C67E3;
 }
-.toCycle img{
-	display: none;
+.newlayout-content-title span{
+	font-size: 18px;
+	font-weight: 700;
+	margin-right:10px;
 }
-.toRight {
-	transform:rotateZ(180deg);
+
+.newlayout-grid {
+	width: 100%;
+	height: 100%;
+	padding:45px 20px 20px;
 }
-.toCycle.defaultIcon .default{
-	display: inline-block;
+
+
+/* .table-advance thead tr th {
+	background-color: #1C67E3;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
 }
-.toCycle.activeIcon .active{
-	display: inline-block;
+#gridcont_content{
+	background: #fff;
 }
-.toCycle.activeIcon:hover .hover{
-	display: inline-block;
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: #F1F1F1;
 }
-.toCycle.activeIcon:hover .default,.toCycle:hover .active{
-	display: none;
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: transparent;
 }
-.do-icon i {
-	display: inline-block;
-	width: 36px;
-	height: 36px;
-	background: #F7F7F7;
-	border: 1px solid #DCDFE6;
-	border-radius: 2px;
-	text-align: center;
-	line-height: 30px;
+.table > tbody > tr:hover,.table > tbody > tr td:hover{
+	color: #333;
+} 
+.table > thead > tr > th{
+	vertical-align: middle!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #DDDDDD;
+} 
+.table > tbody > tr > td{
+	border-color: #DDDDDD;
+}
+.table-bordered {
+    border-color: #DDDDDD;
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1C67E3;
+    border-color: #1C67E3;
+} */
+
+
+.datagrid *{
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box
+}
+.datagrid .panel-body {
+    padding: 0;
+}
+.pagination {
+    display: block;
+}
+.datagrid-header-row, .datagrid-row {
+    height: 42px;
+}
+.datagrid-header-inner{
+	background-color: #1C67E3;
+	height: 42px;
+	color:#fff;
+}
+.datagrid-header-inner .datagrid-header-row {
+	color:#fff;
+}
+.datagrid.panel {
+    margin-bottom: 0;
+}
+
+.tree-title {
+    font-size: 12px;
+}
+
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber {
+    font-size: 12px;
+    height:inherit;
+}
+.datagrid-cell span{font-size: 14px;}
+
+.tree-icon.tree-folder{
+	display:none;
+}
+.tree-icon.tree-file{
+	display:none;
+}
+.datagrid-header{
+	background-color:#1C67E3
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+    border-color: #ccc;
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+    border-style: solid;
+}
+.panel-header, .panel-body {
+    border-color:#ccc;
+}
+.datagrid-header, .datagrid-toolbar, .datagrid-pager, .datagrid-footer-inner {
+    border-color: #ccc;
+}
+.datagrid-header-rownumber,.datagrid-td-rownumber{
+	background:none;
+	background-color:#F1F1F1
+}
+
+.datagrid-row-selected {
+    background: #F1F1F1;
+    color: #000;
+}
+.datagrid-row-over{
+  background: #F1F1F1;
+  color: #000;
+}
+.datagrid-view2 .datagrid-row td:first-child{
+	border-left:none;
+}
+
+.datagrid-td-rownumber{
+	 background:#F1F1F1;
+}
+
+#gridcont .datagrid-cell{
+	text-align: center!important;
+}
+
+.indepartmenttree1{
+	overflow:auto;
+	height:300px;
+}
+.indepartmenttree2{
+	height:300px;
+}
+.datagrid-htable td div{
+	text-align: center!important;
+}
+tbody > tr:nth-of-type(2n) {
+    background-color: #F1F1F1;
+}
+.datagrid-htable tbody tr>td:hover{
+	background-color:#1C67E3;
+	color:#fff
 }
