@@ -185,7 +185,12 @@ public class DictController {
 					json.put("auth", "");
 					json.put("rownum", i+1);
 					json.put("lx", "dept");
-					json.put("_parentId", id);
+					if(organid.equals(dept.getParentId())){
+						json.put("_parentId", "");
+					}else {
+						json.put("_parentId", id);
+					}
+
 					json.put("state", "closed");
 					json.put("dictType","0");
 				}
