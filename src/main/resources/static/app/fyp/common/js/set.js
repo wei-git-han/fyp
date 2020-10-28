@@ -70,7 +70,12 @@ var pageModule = function () {
 		});
 		$('#zbManage').click(function(){
 			window.open("/app/fyp/set/html/departSetting.html")
-		})
+		});
+		
+		$('#dicbtn').click(function(){
+			window.open("/app/fyp/dic/html/dic.html")
+		});
+		
 	}
 	function isAdmin() {
 		$ajax({

@@ -106,7 +106,7 @@ html, body {
 }
 
 
-.table-advance thead tr th {
+/* .table-advance thead tr th {
 	background-color: #1C67E3;
 	font-size: 14px;
 	font-weight: 400;
@@ -144,4 +144,105 @@ html, body {
     cursor: default;
     background-color: #1C67E3;
     border-color: #1C67E3;
+} */
+
+
+.datagrid *{
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box
+}
+.datagrid .panel-body {
+    padding: 0;
+}
+.pagination {
+    display: block;
+}
+.datagrid-header-row, .datagrid-row {
+    height: 42px;
+}
+.datagrid-header-inner{
+	background-color: #1C67E3;
+	height: 42px;
+	color:#fff;
+}
+.datagrid-header-inner .datagrid-header-row {
+	color:#fff;
+}
+.datagrid.panel {
+    margin-bottom: 0;
+}
+
+.tree-title {
+    font-size: 12px;
+}
+
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber {
+    font-size: 12px;
+    height:inherit;
+}
+.datagrid-cell span{font-size: 14px;}
+
+.tree-icon.tree-folder{
+	display:none;
+}
+.tree-icon.tree-file{
+	display:none;
+}
+.datagrid-header{
+	background-color:#1C67E3
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+    border-color: #ccc;
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+    border-style: solid;
+}
+.panel-header, .panel-body {
+    border-color:#ccc;
+}
+.datagrid-header, .datagrid-toolbar, .datagrid-pager, .datagrid-footer-inner {
+    border-color: #ccc;
+}
+.datagrid-header-rownumber,.datagrid-td-rownumber{
+	background:none;
+	background-color:#F1F1F1
+}
+
+.datagrid-row-selected {
+    background: #F1F1F1;
+    color: #000;
+}
+.datagrid-row-over{
+  background: #F1F1F1;
+  color: #000;
+}
+.datagrid-view2 .datagrid-row td:first-child{
+	border-left:none;
+}
+
+.datagrid-td-rownumber{
+	 background:#F1F1F1;
+}
+
+#gridcont .datagrid-cell{
+	text-align: center!important;
+}
+
+.indepartmenttree1{
+	overflow:auto;
+	height:300px;
+}
+.indepartmenttree2{
+	height:300px;
+}
+.datagrid-htable td div{
+	text-align: center!important;
+}
+tbody > tr:nth-of-type(2n) {
+    background-color: #F1F1F1;
+}
+.datagrid-htable tbody tr>td:hover{
+	background-color:#1C67E3;
+	color:#fff
 }
