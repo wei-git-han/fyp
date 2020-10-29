@@ -1,5 +1,5 @@
 var listurl = {"url":"/dict/findConfigUser","dataType":"text"};//表格数据
-var hideUrl = {url:"/dict/insertConfigDept",type:'text'}
+var hideUrl = {url:"/dict/insertConfigUser",type:'text'}
 
 var pageModule = function () {
 	var initgrid = function(){
@@ -9,9 +9,9 @@ var pageModule = function () {
 					{title : '姓名',field : 'TRUENAME',width : 10,align : 'left'},
 					{title:'是否列入统计范围',field:'dictType',width:10,align:'center',formatter:function(value,rowdata){
 						if(rowdata.dictType=='1'){
-							return '<input type="checkbox" name="doType" value="'+rowdata.id +'" id="'+rowdata.id+'" data-name="'+rowdata.name +'">'
+							return '<input type="checkbox" name="doType" value="'+rowdata.USER_ID +'" id="'+rowdata.USER_ID+'" data-name="'+rowdata.name +'">'
 						}else{
-							return '<input type="checkbox" name="doType" checked value="'+rowdata.id +'" id="'+rowdata.id+'" data-name="'+rowdata.name +'">'
+							return '<input type="checkbox" name="doType" checked value="'+rowdata.USER_ID +'" id="'+rowdata.USER_ID+'" data-name="'+rowdata.name +'">'
 						}
 			    	}}
 				 ] ],
@@ -40,7 +40,7 @@ var pageModule = function () {
 					  onSwitchChange:function (event,state) {
 						  var type= state?'统计状态！':'不统计状态！';
 						  var typeNum = state?'0':'1'
-						  var data = {deptids:this.value,type:typeNum};
+						  var data = {userids:this.value,type:typeNum};
 						  var name = this.dataset.name
 						  $ajax({
 							  url:hideUrl,

@@ -31,4 +31,7 @@ public interface DictDao extends BaseDao<Dict> {
     void deleteUserAll();
 
     void deleteDeptByDeptId(String deptid);
+
+
+    void deleteUserById(String userid);
 }

@@ -33,4 +33,7 @@ public interface DictService {
 	void insertConfigUser(String userids);
 	//查询统计人员
 	List<Map<String,Object>> findUserids();
+
+	void deleteUserById(String userid);
+
 }

@@ -231,8 +231,12 @@ public class DictController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/insertConfigUser")
-	public void insertConfigUser(String userids){
-		dictService.insertConfigUser(userids);
+	public void insertConfigUser(String userids, String type){
+		if("1"==type){
+			dictService.insertConfigUser(userids);
+		}else{
+			dictService.deleteUserById(userids);
+		}
 		Response.ok();
 	}
 
@@ -243,6 +247,12 @@ public class DictController {
 	@RequestMapping(value = "/findConfigUser")
 	public void findConfigUser(){
 		List<Map<String,Object>> list = dictService.findUserids();
-		Response.json(new ResponseValueUtils().success(list));
+		JSONObject result = new JSONObject();
+		JSONArray jsons = new JSONArray();
+
+		result.put("total", list.size());
+		result.put("rows", list);
+		Response.json(result);
+//		Response.json(new ResponseValueUtils().success(list));
 	}
 }

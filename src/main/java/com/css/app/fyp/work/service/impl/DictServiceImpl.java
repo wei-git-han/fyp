@@ -51,11 +51,17 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public void insertConfigDept(String deptids,String type) {
-
-		if(null!=deptids) {
-			for (String deptid: deptids.split(",")){
-				dictDao.deleteDeptByDeptId(deptid);
-				dictDao.insertConfigDept(UUIDUtils.random(),deptid,new Date(),type);
+		if("1"==type){
+			if(null!=deptids) {
+				for (String deptid: deptids.split(",")){
+					dictDao.deleteDeptByDeptId(deptid);
+				}
+			}
+		}else{
+			if(null!=deptids) {
+				for (String deptid: deptids.split(",")){
+					dictDao.insertConfigDept(UUIDUtils.random(),deptid,new Date(),type);
+				}
 			}
 		}
 	}
@@ -67,7 +73,6 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public void insertConfigUser(String userids) {
-		dictDao.deleteUserAll();
 		if(null!=userids) {
 			for (String userid: userids.split(",")) {
 				dictDao.insertConfigUser(UUIDUtils.random(),userid,new Date());
@@ -78,6 +83,11 @@ public class DictServiceImpl implements DictService {
 	@Override
 	public List<Map<String, Object>> findUserids() {
 		return dictDao.findUserids();
+	}
+
+	@Override
+	public void deleteUserById(String userid) {
+		dictDao.deleteUserById(userid);
 	}
 
 }
