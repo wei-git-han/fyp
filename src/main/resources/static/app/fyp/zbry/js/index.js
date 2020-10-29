@@ -9,9 +9,9 @@ var pageModule = function () {
 					{title : '姓名',field : 'TRUENAME',width : 10,align : 'left'},
 					{title:'是否列入统计范围',field:'dictType',width:10,align:'center',formatter:function(value,rowdata){
 						if(rowdata.dictType=='1'){
-							return '<input type="checkbox" name="doType" value="'+rowdata.USER_ID +'" id="'+rowdata.USER_ID+'" data-name="'+rowdata.name +'">'
+							return '<input type="checkbox" name="doType" value="'+rowdata.USER_ID +'" id="'+rowdata.USER_ID+'" data-name="'+rowdata.TRUENAME +'">'
 						}else{
-							return '<input type="checkbox" name="doType" checked value="'+rowdata.USER_ID +'" id="'+rowdata.USER_ID+'" data-name="'+rowdata.name +'">'
+							return '<input type="checkbox" name="doType" checked value="'+rowdata.USER_ID +'" id="'+rowdata.USER_ID+'" data-name="'+rowdata.TRUENAME +'">'
 						}
 			    	}}
 				 ] ],
