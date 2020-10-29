@@ -161,46 +161,76 @@ public class DictController {
 		 */
 	}
 
-	public JSONArray getUserList(String id,JSONArray jsons){
-		List<Map<String,Object>> list = dictService.findDeptids();
+	public JSONArray getUserList(String id,JSONArray jsons) {
+		List<Map<String, Object>> list = dictService.findDeptids();
 		List<BaseAppOrgan> depts = baseAppOrganService.findByParentId(id);
 		String organid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
-		for (int i = 0;i < depts.size();i++) {
-			BaseAppOrgan dept  = depts.get(i);
+		for (int i = 0; i < depts.size(); i++) {
+			BaseAppOrgan dept = depts.get(i);
 			JSONObject json = new JSONObject();
-			for(Map<String,Object> map : list){
-				if (organid.equals(id) && dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
-					json.put("id", dept.getId());
-					json.put("name", dept.getName());
-					json.put("rownum", i+1);
-					json.put("phone", "");
-					json.put("auth", "");
-					json.put("lx", "dept");
-					json.put("state", "closed");
-					json.put("dictType",map.get("TYPE"));
-				} else {
-					json.put("id", dept.getId());
-					json.put("name", dept.getName());
-					json.put("phone", "");
-					json.put("auth", "");
-					json.put("rownum", i+1);
-					json.put("lx", "dept");
-					if(organid.equals(dept.getParentId())){
-						json.put("_parentId", "");
-					}else {
-						json.put("_parentId", id);
-					}
+			if (list != null && list.size() > 0) {
+				for (Map<String, Object> map : list) {
+					if (organid.equals(id) && dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
+						json.put("id", dept.getId());
+						json.put("name", dept.getName());
+						json.put("rownum", i + 1);
+						json.put("phone", "");
+						json.put("auth", "");
+						json.put("lx", "dept");
+						json.put("state", "closed");
+						json.put("dictType", map.get("TYPE"));
+					} else {
+						json.put("id", dept.getId());
+						json.put("name", dept.getName());
+						json.put("phone", "");
+						json.put("auth", "");
+						json.put("rownum", i + 1);
+						json.put("lx", "dept");
+						if (organid.equals(dept.getParentId())) {
+							json.put("_parentId", "");
+						} else {
+							json.put("_parentId", id);
+						}
 
-					json.put("state", "closed");
-					json.put("dictType","0");
+						json.put("state", "closed");
+						json.put("dictType", "0");
+					}
 				}
+			} else {
+				//for (Map<String, Object> map : list) {
+					if (organid.equals(id)) {
+						json.put("id", dept.getId());
+						json.put("name", dept.getName());
+						json.put("rownum", i + 1);
+						json.put("phone", "");
+						json.put("auth", "");
+						json.put("lx", "dept");
+						json.put("state", "closed");
+						json.put("dictType", "0");
+					} else {
+						json.put("id", dept.getId());
+						json.put("name", dept.getName());
+						json.put("phone", "");
+						json.put("auth", "");
+						json.put("rownum", i + 1);
+						json.put("lx", "dept");
+						if (organid.equals(dept.getParentId())) {
+							json.put("_parentId", "");
+						} else {
+							json.put("_parentId", id);
+						}
+
+						json.put("state", "closed");
+						json.put("dictType", "0");
+					}
+				//}
 			}
 
 			jsons.add(json);
-			getUserList(dept.getId(),jsons);
+			getUserList(dept.getId(), jsons);
 		}
-		if(organid.equals(id)){
-			jsonObject(jsons,id);
+		if (organid.equals(id)) {
+			jsonObject(jsons, id);
 		}
 		return jsons;
 	}
@@ -232,7 +262,7 @@ public class DictController {
 	@ResponseBody
 	@RequestMapping(value = "/insertConfigUser")
 	public void insertConfigUser(String userids, String type){
-		if("1"==type){
+		if("1".equals(type)){
 			dictService.insertConfigUser(userids);
 		}else{
 			dictService.deleteUserById(userids);

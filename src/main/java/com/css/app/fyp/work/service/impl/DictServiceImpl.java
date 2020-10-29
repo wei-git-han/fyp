@@ -51,7 +51,7 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public void insertConfigDept(String deptids,String type) {
-		if("1"==type){
+		if("0".equals(type)){
 			if(null!=deptids) {
 				for (String deptid: deptids.split(",")){
 					dictDao.deleteDeptByDeptId(deptid);
