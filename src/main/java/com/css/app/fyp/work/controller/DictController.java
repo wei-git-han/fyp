@@ -25,10 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * 
- * 
+ *
+ *
  * @author 中软信息系统工程有限公司
- * @email 
+ * @email
  * @date 2020-10-26 18:34:32
  */
 @RestController
@@ -42,7 +42,7 @@ public class DictController {
 	private BaseAppOrgMappedService baseAppOrgMappedService;
 	@Autowired
 	private BaseAppUserService baseAppUserService;
-	
+
 	/**
 	 * 列表
 	 */
@@ -52,15 +52,15 @@ public class DictController {
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
 		map.put("type",type);
-		
+
 		//查询列表数据
 		List<Dict> dictList = dictService.queryList(map);
-		
+
 		GwPageUtils pageUtil = new GwPageUtils(dictList);
 		Response.json(new ResponseValueUtils().success(pageUtil));
 	}
-	
-	
+
+
 	/**
 	 * 信息
 	 */
@@ -70,7 +70,7 @@ public class DictController {
 		Dict dict = dictService.queryObject(id);
 		Response.json("dict", dict);
 	}
-	
+
 	/**
 	 * 保存
 	 */
@@ -80,10 +80,10 @@ public class DictController {
 		dict.setId(UUIDUtils.random());
 		dict.setType(0);
 		dictService.save(dict);
-		
+
 		Response.ok();
 	}
-	
+
 	/**
 	 * 修改
 	 */
@@ -91,10 +91,10 @@ public class DictController {
 	@RequestMapping("/update")
 	public void update(Dict dict){
 		dictService.update(dict);
-		
+
 		Response.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -102,7 +102,7 @@ public class DictController {
 	@RequestMapping("/delete")
 	public void delete(String id){
 		dictService.delete(id);
-		
+
 		Response.ok();
 	}
 
@@ -242,6 +242,7 @@ public class DictController {
 			json.put("phone", user.getMobile());
 			json.put("newadd", "ok");
 			json.put("auth", "");
+			json.put("type", "0");
 			//授权
 			String roleNames = "";
 			json.put("auth",roleNames);

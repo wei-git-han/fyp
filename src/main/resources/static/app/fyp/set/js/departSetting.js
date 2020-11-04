@@ -1,6 +1,6 @@
 var listurl = {"url":"/dict/findConfigDept","dataType":"text"};//表格数据
 var hideUrl = {url:"/dict/insertConfigDept",type:'text'}
-
+var noId = ''
 var pageModule = function () {
 	var initgrid = function(){
 		$('#gridcont').treegrid({
@@ -24,14 +24,20 @@ var pageModule = function () {
 			pageSize : 20,
 			pageList : [ 5, 10, 20, 30 ],
 			fitColumns : true,
-			url : listurl.url,
+			url : listurl.url+'?id='+noId,
 			async : true,
 			idField : 'id',
 			treeField : 'name',
 			loadingMessage : '请等待……',
 			loadMsg : '请稍等……',
-			onBeforeExpand : function(row) {
-			},
+			// loader:function(){
+			// 	return false
+			// },
+			// onBeforeExpand : function(row) {
+			// 	// console.log(row.id)
+			// 	noId = row.id;
+			// 	$('#gridcont').treegrid('options').url =  listurl.url+'?id='+noId
+			// },
 			onLoadSuccess:function(row){
 				$('[name="doType"]').bootstrapSwitch({
 					  onText:'已统计',
@@ -53,10 +59,14 @@ var pageModule = function () {
 						  })
 					  }
 				  })
-			}
+			},
+			// loadFilter:function (data,parentId) {
+			// 	console.log(data,parentId)
+			// 	return data.rows
+			// }
 		});
 	}
-	
+
     return {
         //加载页面处理程序
         initControl: function () {
