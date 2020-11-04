@@ -1,10 +1,12 @@
 package com.css.app.fyp.work.dao;
 
+import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.app.fyp.work.entity.Dict;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.css.base.dao.BaseDao;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -34,4 +36,7 @@ public interface DictDao extends BaseDao<Dict> {
 
 
     void deleteUserById(String userid);
+
+    @Select("select * from CONFIG_USER_DEPT where USER_ID is not null")
+    List<BaseAppUser> findAllUsers();
 }

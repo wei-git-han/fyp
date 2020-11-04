@@ -159,4 +159,10 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 		return baseAppUserDao.queryByOrganidTREEPATH(map);
 	}
 
+	@Override
+	public List<BaseAppUser> queryAllUserByDeptId(String id){
+		return baseAppUserDao.queryAllUserByDeptId(id);
+	}
+
+
 }

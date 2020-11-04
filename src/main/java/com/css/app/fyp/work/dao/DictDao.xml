@@ -76,14 +76,14 @@
 		where a.DEPT_ID is not null and a.DEPT_ID != ''
 	</select>
 	<select id="findUserids" resultType="java.util.Map">
-		select a.*,b.truename as TRUENAME from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" as a
-		left join "ZF_NEW_FYP_DB"."base_app_user" as b on a.user_id = b.ID
+		select a.*,b.truename as TRUENAME from CONFIG_USER_DEPT as a
+		left join base_app_user as b on a.user_id = b.ID
 		where a.USER_ID is not null and a.USER_ID != ''
 	</select>
 
 
 	<insert id="insertConfigUser" parameterType="com.css.app.fyp.work.entity.Dict">
-		insert into "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT"
+		insert into CONFIG_USER_DEPT
 		(
 		"ID",
 		"USER_ID",
@@ -98,13 +98,13 @@
 	</insert>
 
 	<delete id="deleteUserAll">
-		delete from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" where user_id is not null and user_id != ''
+		delete from CONFIG_USER_DEPT where user_id is not null and user_id != ''
 	</delete>
 	<delete id="deleteUserById">
-		delete from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" where user_id = #{value}
+		delete from CONFIG_USER_DEPT where user_id = #{value}
 	</delete>
 	<insert id="insertConfigDept" parameterType="com.css.app.fyp.work.entity.Dict">
-		insert into "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT"
+		insert into CONFIG_USER_DEPT
 		(
 		"ID",
 		"DEPT_ID",
@@ -120,6 +120,6 @@
 		)
 	</insert>
 	<delete id="deleteDeptByDeptId">
-		delete from "ZF_NEW_FYP_DB"."CONFIG_USER_DEPT" where dept_id  = #{0}
+		delete from CONFIG_USER_DEPT where dept_id  = #{0}
 	</delete>
 </mapper>

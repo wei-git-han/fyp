@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.service.impl;
 
+import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.base.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,11 @@ public class DictServiceImpl implements DictService {
 	public void deleteUserById(String userid) {
 		dictDao.deleteUserById(userid);
 	}
+
+	@Override
+	public List<BaseAppUser> findAllUsers(){
+		return dictDao.findAllUsers();
+	}
+
 
 }

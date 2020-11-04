@@ -1,5 +1,6 @@
 package com.css.app.fyp.work.service;
 
+import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.app.fyp.work.entity.Dict;
 
 import java.util.List;
@@ -35,5 +36,7 @@ public interface DictService {
 	List<Map<String,Object>> findUserids();
 
 	void deleteUserById(String userid);
+
+	List<BaseAppUser> findAllUsers();
 
 }
