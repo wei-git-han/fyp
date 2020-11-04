@@ -117,13 +117,13 @@ var pageModule = function () {
  			},
 			onLoadSuccess:function(row){
 				$('[name="doType"]').bootstrapSwitch({
-					onText:'已统计',
-					offText:'不统计',
+					onText:'在编',
+					offText:'不在编',
 					size:'small',
 					onSwitchChange:function (event,state) {
-						var type= state?'统计状态！':'不统计状态！';
+						var type= state?'在编状态！':'不在编状态！';
 						var typeNum = state?'0':'1'
-						var data = {deptids:this.value,type:typeNum};
+						var data = {userids:this.value,type:typeNum};
 						var name = this.dataset.name
 						$ajax({
 							url:hideUrl,
