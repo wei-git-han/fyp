@@ -85,6 +85,54 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             if(returnJsonArr ==null){
                 returnJsonArr = new JSONArray();
             }
+
+            //请销假数量
+            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj");
+            JSONObject qxjJsonObj = new JSONObject();
+            String qxjUrl = qxjglUrl;
+            JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
+            qxjJsonObj.put("appId", "");
+            qxjJsonObj.put("appUrl", "url");
+            if (null != qxjJsonDataUrl) {
+                qxjJsonObj.put("flowCount", qxjJsonDataUrl.get("qxjsp"));
+            }else {
+                qxjJsonObj.put("flowCount", "0");
+            }
+            if (null != qxjBaseAppOrgMapped) {
+                qxjJsonObj.put("appId", qxjBaseAppOrgMapped.getAppId());
+                qxjJsonObj.put("appUrlPrefix", qxjBaseAppOrgMapped.getUrl());
+                qxjJsonObj.put("appUrlSuffix", qxjBaseAppOrgMapped.getWebUri());
+            }else {
+                qxjJsonObj.put("appId", "");
+                qxjJsonObj.put("appUrlPrefix", "");
+                qxjJsonObj.put("appUrlSuffix", "");
+            }
+            qxjJsonObj.put("typeName", "请销假");
+            qxjJsonObj.put("applyType", "7");
+            returnJsonArr.add(qxjJsonObj);
+            //督查催办数量
+            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb");
+            JSONObject dccbJsonObj = new JSONObject();
+            String dccbUrl = dbglUrl;
+            JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
+            dccbJsonObj.put("appId", "");
+            if (null != dccbJsonDataUrl) {
+                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("count"));
+            }else {
+                dccbJsonObj.put("flowCount", "0");
+            }
+            if (null != dccbBaseAppOrgMapped) {
+                dccbJsonObj.put("appId", dccbBaseAppOrgMapped.getAppId());
+                dccbJsonObj.put("appUrlPrefix", dccbBaseAppOrgMapped.getUrl());
+                dccbJsonObj.put("appUrlSuffix", dccbBaseAppOrgMapped.getWebUri());
+            }else {
+                dccbJsonObj.put("appId", "");
+                dccbJsonObj.put("appUrlPrefix", "");
+                dccbJsonObj.put("appUrlSuffix", "");
+            }
+            dccbJsonObj.put("typeName", "督查催办");
+            dccbJsonObj.put("applyType", "8");
+            returnJsonArr.add(dccbJsonObj);
             //即时通讯数量
             BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx");
             JSONObject jstxJsonObj = new JSONObject();
@@ -124,54 +172,6 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             emailJsonObj.put("typeName", "电子邮件");
             emailJsonObj.put("applyType", "6");
             returnJsonArr.add(emailJsonObj);
-            //请销假数量
-            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj");
-            JSONObject qxjJsonObj = new JSONObject();
-            String qxjUrl = qxjglUrl;
-            JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
-            qxjJsonObj.put("appId", "");
-            qxjJsonObj.put("appUrl", "url");
-            if (null != qxjJsonDataUrl) {
-                qxjJsonObj.put("flowCount", qxjJsonDataUrl.get("qxjsp"));
-            }else {
-                qxjJsonObj.put("flowCount", "0");
-            }
-            if (null != qxjBaseAppOrgMapped) {
-                qxjJsonObj.put("appId", qxjBaseAppOrgMapped.getAppId());
-                qxjJsonObj.put("appUrlPrefix", qxjBaseAppOrgMapped.getUrl());
-                qxjJsonObj.put("appUrlSuffix", qxjBaseAppOrgMapped.getWebUri());
-            }else {
-                qxjJsonObj.put("appId", "");
-                qxjJsonObj.put("appUrlPrefix", "");
-                qxjJsonObj.put("appUrlSuffix", "");
-            }
-            qxjJsonObj.put("typeName", "请销假");
-            qxjJsonObj.put("applyType", "7");
-
-            returnJsonArr.add(qxjJsonObj);
-            //督查催办数量
-            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb");
-            JSONObject dccbJsonObj = new JSONObject();
-            String dccbUrl = dbglUrl;
-            JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
-            dccbJsonObj.put("appId", "");
-            if (null != dccbJsonDataUrl) {
-                dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("count"));
-            }else {
-                dccbJsonObj.put("flowCount", "0");
-            }
-            if (null != dccbBaseAppOrgMapped) {
-                dccbJsonObj.put("appId", dccbBaseAppOrgMapped.getAppId());
-                dccbJsonObj.put("appUrlPrefix", dccbBaseAppOrgMapped.getUrl());
-                dccbJsonObj.put("appUrlSuffix", dccbBaseAppOrgMapped.getWebUri());
-            }else {
-                dccbJsonObj.put("appId", "");
-                dccbJsonObj.put("appUrlPrefix", "");
-                dccbJsonObj.put("appUrlSuffix", "");
-            }
-            dccbJsonObj.put("typeName", "督查催办");
-            dccbJsonObj.put("applyType", "8");
-            returnJsonArr.add(dccbJsonObj);
             result.put("returnJsonArr", returnJsonArr);
         }
         return result;
