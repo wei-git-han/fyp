@@ -87,7 +87,7 @@ var pageModule = function() {
     $('.btn-wrap>.btn').click(function() {
       setPage(this.dataset['target'])
     });
-    
+
     $('.newlayout-switch-btn>span').click(function() {
       if (activeDoType == this.id) {
         return;
@@ -174,6 +174,13 @@ var pageModule = function() {
               $(this).addClass('active')
             }
           })
+          $('iframe').each(function (e,frame) {
+            if($(frame).parents('li.flip-current').hasClass('flip-current')){
+              $('body',window[frame.name].document).addClass('min-size')
+            }else{
+              $('body',window[frame.name].document).removeClass('min-size')
+            }
+          })
         }
       });
       setRefreshInterVal()
@@ -238,10 +245,10 @@ function returnDate(){
 	var year = date.getFullYear();
 	var month = date.getMonth()+1<10? "0"+date.getMonth()+1:date.getMonth()+1;
 	var day = date.getDate()+1<10? "0"+date.getDate():date.getDate();
-	
+
 	var hour = date.getHours()<10? "0"+date.getHours():date.getHours();
 	var minute = date.getMinutes()<10? "0"+date.getMinutes():date.getMinutes();
-	
+
 	var week = date.getDay();
 	var weekArray = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
 	$(".datelayout").html(year+"-"+month+"-"+day+"&nbsp;"+hour+":"+minute+"&nbsp;&nbsp;"+weekArray[week]);

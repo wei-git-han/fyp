@@ -2,6 +2,7 @@ html, body {
 	/* background-color: ffffff; */
 	/* font-family: "Microsoft Yahei"; */
 	background-color: transparent;
+	font-size: 18px;
 }
 
 .table_portlet .table-advance thead tr th {
@@ -792,7 +793,7 @@ div, a, input, p, h1, h2, h3, h4, h5, h6 {
 	width:100%;
 	height:45px;
 	line-height:45px;
-	background: url(../../common/images/bt.png) no-repeat center; 
+	background: url(../../common/images/bt.png) no-repeat center;
 	background-size: 100%;
 }
 
@@ -815,21 +816,21 @@ div, a, input, p, h1, h2, h3, h4, h5, h6 {
     background-color: transparent;
 }
 .newtable .table > tbody > tr:hover,.newtable .table > tbody > tr td:hover{
-	box-shadow: inset 0px 0px 2px #2B5C97; 
+	box-shadow: inset 0px 0px 2px #2B5C97;
 	color: #F7B707;
-} 
+}
 .newtable .table > thead > tr > th{
 	vertical-align: middle!important;
 }
  .newtable .table-bordered > thead > tr > th{
 	border-color: #204E97;
-} 
+}
 .newtable .table > tbody > tr > td{
 	border-color: #204E97;
 }
 .newtable .table-bordered {
     border-color: #204E97;
-} 
+}
 label.error{
 	color:#f00;
 }
@@ -870,4 +871,15 @@ label.error{
 }
 .filterDate .selecttree input:-ms-input-placeholder,.filterUnit .selecttree input:-ms-input-placeholder{
 	color:#fff!important;
+}
+.nav-tabs > li > a, .nav-pills > li > a{
+	font-size: 24px;
+	line-height: 20px;
+}
+.min-size .nav-tabs> li > a,.min-size > li > a{
+	font-size: 20px;
+	line-height: 20px;
+}
+body.min-size{
+	font-size: 13px;
 }
