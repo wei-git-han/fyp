@@ -226,28 +226,6 @@ public class DictController {
 			jsons.add(json);
 			getAllUsers(dept.getId(), jsons);
 		}
-		List<BaseAppUser> appUserList = baseAppUserService.queryUserByOrgId(organid);
-		if(appUserList != null && appUserList.size() > 0){
-			for(int j = 0;j<appUserList.size();j++){
-				JSONObject json = new JSONObject();
-				json.put("id", appUserList.get(j).getUserId());
-				json.put("name", appUserList.get(j).getTruename());
-				json.put("rownum", j + 1);
-				json.put("phone", "");
-				json.put("auth", "");
-				json.put("lx", "dept");
-				json.put("state", "closed");
-				json.put("dictType", "0");
-				if (list != null && list.size() > 0) {
-					for (Map<String, Object> map : list) {
-						if (organid.equals(id) && appUserList.get(j).getOrganid().equals(map.get("DEPT_ID").toString())) {
-							json.put("dictType", "1");
-						}
-					}
-				}
-				jsons.add(json);
-			}
-		}
 		if (organid.equals(id)) {
 			jsonObject(jsons, id);
 		}
@@ -299,7 +277,7 @@ public class DictController {
 			json.put("phone", user.getMobile());
 			json.put("newadd", "ok");
 			json.put("auth", "");
-			json.put("type", "0");
+			json.put("type", "1");
 			//授权
 			String roleNames = "";
 			json.put("auth",roleNames);
