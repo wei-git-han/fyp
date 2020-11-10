@@ -3,6 +3,7 @@ html, body {
 	height: 100%;
 	position: relative;
 	color:#333;
+	font-size: 14px;
 }
 
 .pr100 {
@@ -124,13 +125,13 @@ html, body {
 }
 .table > tbody > tr:hover,.table > tbody > tr td:hover{
 	color: #333;
-} 
+}
 .table > thead > tr > th{
 	vertical-align: middle!important;
 }
  .table-bordered > thead > tr > th{
 	border-color: #DDDDDD;
-} 
+}
 .table > tbody > tr > td{
 	border-color: #DDDDDD;
 }
