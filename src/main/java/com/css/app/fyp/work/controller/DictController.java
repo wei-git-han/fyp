@@ -136,29 +136,28 @@ public class DictController {
 		result.put("total", depts_count + users_count);
 		result.put("rows", list);
 		Response.json(result);
+	}
 
-		/**
-		 *
-		 * List<Map<String,Object>> list = dictService.findDeptids();
-		 *
-		 * 		String organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
-		 * 		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
-		 * 		JSONObject lists= OrgUtil.getOrganTree(organs, organId);
-		 * 		JSONArray children = (JSONArray)lists.get("children");
-		 *
-		 * 		for (Object object :children) {
-		 * 			JSONObject jo = (JSONObject) object;
-		 * 			String dept = jo.get("id").toString();
-		 * 			for (Map<String,Object> map:list) {
-		 * 				if(dept.equals(map.get("DEPT_ID").toString())){
-		 * 					jo.put("dictType",map.get("TYPE"));
-		 * 					break;
-		 *                                }else{
-		 * 					jo.put("dictType","0");
-		 *                }            * 			}
-		 * 		}
-		 * 		Response.json(new ResponseValueUtils().success(lists));
-		 */
+	/**
+	 * 在编人员配置查询
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getAllUserList")
+	public void getAllUserList(HttpServletRequest request) {
+		JSONObject result = new JSONObject();
+		JSONArray jsons = new JSONArray();
+		String organid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		JSONArray list=  getAllUsers(organid,jsons);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("parentId", organid);
+		int depts_count= baseAppOrganService.queryTotal(map);
+		map=new HashMap<String,Object>();
+		map.put("departmentId", organid);
+		int users_count= baseAppUserService.queryTotal(map);
+
+		result.put("total", depts_count + users_count);
+		result.put("rows", list);
+		Response.json(result);
 	}
 
 	public JSONArray getUserList(String id,JSONArray jsons) {
@@ -190,6 +189,64 @@ public class DictController {
 			}
 			jsons.add(json);
 			getUserList(dept.getId(), jsons);
+		}
+		if (organid.equals(id)) {
+			jsonObject(jsons, id);
+		}
+		return jsons;
+	}
+
+	public JSONArray getAllUsers(String id,JSONArray jsons) {
+		List<Map<String, Object>> list = dictService.findDeptids();
+		List<BaseAppOrgan> depts = baseAppOrganService.findByParentId(id);
+		String organid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		for (int i = 0; i < depts.size(); i++) {
+			BaseAppOrgan dept = depts.get(i);
+			JSONObject json = new JSONObject();
+			json.put("id", dept.getId());
+			json.put("name", dept.getName());
+			json.put("rownum", i + 1);
+			json.put("phone", "");
+			json.put("auth", "");
+			json.put("lx", "dept");
+			json.put("state", "closed");
+			json.put("dictType", "0");
+			if (organid.equals(dept.getParentId())) {
+				json.put("_parentId", "");
+			} else {
+				json.put("_parentId", id);
+			}
+			if (list != null && list.size() > 0) {
+				for (Map<String, Object> map : list) {
+					if (organid.equals(id) && dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
+						json.put("dictType", "1");
+					}
+				}
+			}
+			jsons.add(json);
+			getAllUsers(dept.getId(), jsons);
+		}
+		List<BaseAppUser> appUserList = baseAppUserService.queryUserByOrgId(organid);
+		if(appUserList != null && appUserList.size() > 0){
+			for(int j = 0;j<appUserList.size();j++){
+				JSONObject json = new JSONObject();
+				json.put("id", appUserList.get(j).getUserId());
+				json.put("name", appUserList.get(j).getTruename());
+				json.put("rownum", j + 1);
+				json.put("phone", "");
+				json.put("auth", "");
+				json.put("lx", "dept");
+				json.put("state", "closed");
+				json.put("dictType", "0");
+				if (list != null && list.size() > 0) {
+					for (Map<String, Object> map : list) {
+						if (organid.equals(id) && appUserList.get(j).getOrganid().equals(map.get("DEPT_ID").toString())) {
+							json.put("dictType", "1");
+						}
+					}
+				}
+				jsons.add(json);
+			}
 		}
 		if (organid.equals(id)) {
 			jsonObject(jsons, id);

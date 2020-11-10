@@ -133,4 +133,8 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 
 	@Select("select  * from  BASE_APP_USER where  ORGANID in (select id  from BASE_APP_ORGAN start with ID = #{0}  and ISDELETE=0 connect by prior ID = PARENT_ID )")
 	List<BaseAppUser> queryAllUserByDeptId(String id);
+
+	@Select("select * from BASE_APP_USER where ORGANID = #{0}")
+	List<BaseAppUser> queryUserByOrgId(String orgId);
+
 }
