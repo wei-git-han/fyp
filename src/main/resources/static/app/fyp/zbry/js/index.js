@@ -1,4 +1,4 @@
-var listurl = {"url":"/dict/findConfigDept","dataType":"text"};//表格数据
+var listurl = {"url":"/dict/getAllUserList","dataType":"text"};//表格数据
 var list2url = {"url":"/dict/getAllUser","dataType":"text"};//表格数据
 var hideUrl = {url:"/dict/insertConfigUser",type:'text'}
 var noId = ""

@@ -3,10 +3,10 @@ var hideUrl = {url:"/dict/insertConfigDept",type:'text'}
 var noId = ''
 var pageModule = function () {
 	var initgrid = function(){
-		$('#gridcont').treegrid({
+		$('#gridcont').datagrid({
 			columns : [ [
 					{title : '序号',field : 'rownum',width : 1,align : 'center'},
-					{title : '单位名称',field : 'name',width : 10,align : 'left'},
+					{title : '单位名称',field : 'name',width : 10,align : 'center'},
 					{title:'是否列入统计范围',field:'dictType',width:10,align:'center',formatter:function(value,rowdata){
 						if(rowdata.dictType=='1'){
 							return '<input type="checkbox" name="doType" value="'+rowdata.id +'" id="'+rowdata.id+'" data-name="'+rowdata.name +'">'
