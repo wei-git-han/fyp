@@ -277,7 +277,7 @@ public class DictController {
 			json.put("phone", user.getMobile());
 			json.put("newadd", "ok");
 			json.put("auth", "");
-			json.put("type", "0");
+			json.put("type", "1");
 			//授权
 			String roleNames = "";
 			json.put("auth",roleNames);
