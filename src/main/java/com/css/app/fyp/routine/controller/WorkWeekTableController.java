@@ -2,6 +2,8 @@ package com.css.app.fyp.routine.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppUser;
+import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.app.fyp.routine.entity.FypPersonageWorkWeek;
 import com.css.app.fyp.routine.service.FypPersonageWorkWeekService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
@@ -44,12 +46,18 @@ public class WorkWeekTableController {
     @Value("${csse.work.table}")
     private  String url;
 
+    @Autowired
+    private BaseAppUserService baseAppUserService;
+
     /**
      * 本周周表/个人周表
      */
     @ResponseBody
     @RequestMapping("/statementTablesList")
     public void statementTablesList(String orgId, String weekTableType, String weekTableDate, String page, String pagesize) {
+        if(StringUtils.isBlank(orgId)){
+            orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+        }
         JSONArray maps = workWeekTableService.statementTablesList(orgId, weekTableType, weekTableDate, page, pagesize);
         Response.json(new ResponseValueUtils().success(maps));
     }
