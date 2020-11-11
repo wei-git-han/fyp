@@ -133,22 +133,6 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             dccbJsonObj.put("typeName", "督查催办");
             dccbJsonObj.put("applyType", "8");
             returnJsonArr.add(dccbJsonObj);
-            //即时通讯数量
-            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx");
-            JSONObject jstxJsonObj = new JSONObject();
-            jstxJsonObj.put("flowCount", "5");
-            jstxJsonObj.put("typeName", "即时通讯");
-            jstxJsonObj.put("applyType", "5");
-            if (null != jstxBaseAppOrgMapped) {
-                jstxJsonObj.put("appId", jstxBaseAppOrgMapped.getAppId());
-                jstxJsonObj.put("appUrlPrefix", jstxBaseAppOrgMapped.getUrl());
-                jstxJsonObj.put("appUrlSuffix", jstxBaseAppOrgMapped.getWebUri());
-            } else {
-                jstxJsonObj.put("appId", "");
-                jstxJsonObj.put("appUrlPrefix", "");
-                jstxJsonObj.put("appUrlSuffix", "");
-            }
-            returnJsonArr.add(jstxJsonObj);
             //电子邮件数量
             BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj");
             JSONObject emailJsonObj = new JSONObject();
@@ -172,6 +156,22 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             emailJsonObj.put("typeName", "电子邮件");
             emailJsonObj.put("applyType", "6");
             returnJsonArr.add(emailJsonObj);
+            //即时通讯数量
+            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx");
+            JSONObject jstxJsonObj = new JSONObject();
+            jstxJsonObj.put("flowCount", "5");
+            jstxJsonObj.put("typeName", "即时通讯");
+            jstxJsonObj.put("applyType", "5");
+            if (null != jstxBaseAppOrgMapped) {
+                jstxJsonObj.put("appId", jstxBaseAppOrgMapped.getAppId());
+                jstxJsonObj.put("appUrlPrefix", jstxBaseAppOrgMapped.getUrl());
+                jstxJsonObj.put("appUrlSuffix", jstxBaseAppOrgMapped.getWebUri());
+            } else {
+                jstxJsonObj.put("appId", "");
+                jstxJsonObj.put("appUrlPrefix", "");
+                jstxJsonObj.put("appUrlSuffix", "");
+            }
+            returnJsonArr.add(jstxJsonObj);
             result.put("returnJsonArr", returnJsonArr);
         }
         return result;

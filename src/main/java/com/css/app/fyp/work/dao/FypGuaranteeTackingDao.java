@@ -23,20 +23,20 @@ public interface FypGuaranteeTackingDao extends BaseDao<FypGuaranteeTacking> {
      * 今日受理
      * @return
      */
-    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking where to_char(WARRANTY_TIME,'YYYY-MM-DD') = to_char(sysdate,'YYYY-MM-DD')")
+    @Select("select count(1) as count from fyp_guarantee_tacking where to_char(WARRANTY_TIME,'YYYY-MM-DD') = to_char(sysdate,'YYYY-MM-DD')")
     Map<String,Object> toDayAccept();
 
     /**
      * 已完成
      */
-    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking where status = '2'")
+    @Select("select count(1) as count from fyp_guarantee_tacking where status = '2'")
     Map<String,Object> toDayComplete();
 
     /**
      * 累计受理
      * @return
      */
-    @Select("select count(1) as count from zf_new_fyp_db.fyp_guarantee_tacking")
+    @Select("select count(1) as count from fyp_guarantee_tacking")
     Map<String,Object> countAccept();
 
 

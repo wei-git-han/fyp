@@ -16,7 +16,7 @@ import com.css.app.fyp.utils.PoiUtils;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.app.fyp.work.entity.FypFeedbackHear;
 import com.css.base.filter.SSOAuthFilter;
-import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.css.base.utils.PageUtils;
-import com.css.base.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
-import com.css.base.utils.Response;
 import com.css.app.fyp.work.entity.FypGuaranteeTacking;
 import com.css.app.fyp.work.service.FypGuaranteeTackingService;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,13 +74,14 @@ public class FypGuaranteeTackingController {
 			if(null!=organId) {
 				List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
 				String orgName = OrgUtil.getParentOrg(organs, organId);
-				f.setDeptName(orgName);
+				String orgNameR = orgName.replace(",", "-");
+				f.setDeptName(orgNameR);
 			}
 		}
 		PageUtils pageUtil = new PageUtils(fypGuaranteeTackingList);
         Response.json(new ResponseValueUtils().success(pageUtil));
 	}
-	
+
 	
 	/**
 	 * 信息
