@@ -10,8 +10,8 @@ spring.profiles.include: url
  
 druid:
     dbType: dm
-    url: jdbc:dm://${csse.dmdba.url}/ZF_FYP_APP
-    username: ZF_FYP_APP
+    url: jdbc:dm://${csse.dmdba.url}/ZF_FYP_APP_NEW
+    username: ZF_FYP_APP_NEW
     #password: QNKN1ReWghEU95X/pZmu4rWzAlA3t9ayTeqNTdUILuj3eyQsU1V4S543u0dPyoOFbxbMMWrtn7S+dAAo5Ed9LQ==
     password: password01!
     initial-size: 1
