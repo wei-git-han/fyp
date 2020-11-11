@@ -77,7 +77,8 @@ public class FypGuaranteeTackingController {
 			if(null!=organId) {
 				List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
 				String orgName = OrgUtil.getParentOrg(organs, organId);
-				f.setDeptName(orgName);
+				String orgNameR = orgName.replace(",", "-");
+				f.setDeptName(orgNameR);
 			}
 		}
 		PageUtils pageUtil = new PageUtils(fypGuaranteeTackingList);
