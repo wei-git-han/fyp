@@ -40,7 +40,7 @@ function createtable(obj){
 	});
 	//此处是对默认属性值的设置
 	var getvalue = function(value,str){
-		if(value==null||typeof(value)=="undefined"){ 
+		if(value==null||typeof(value)=="undefined"){
 
 			var pobj = {
 						width:"100%",
@@ -77,7 +77,7 @@ function createtable(obj){
 		var columns = obj.columns;
 		var tablecontent = $("#"+obj.target);
 		$("#"+obj.target).html("");
-		
+
 		$(window).resize(function(){
 			o=window.o||'';
 			clearTimeout(o);
@@ -125,7 +125,7 @@ function createtable(obj){
 			numberth.css(getvalue(obj.headfont,"headfont"))//n
 			hdtable.find("thead").find("tr").append(numberth);
 		}
-		
+
 		$.each(columns,function(i){
 			var thdata = columns[i];
 			var thobj = $('<th>'+thdata.display+'</th>');
@@ -152,9 +152,9 @@ function createtable(obj){
 								$("#"+thdata.name+"_col").html('<i  style="position:absolute;right:0px;top:2px;" class="fa  fa-sort-desc"></i>')
 								sorttext = "asc";
 							}
-							
+
 							ajaxtable()
-							
+
 						}();
 					}
 				})
@@ -163,7 +163,7 @@ function createtable(obj){
 			hdtable.find("thead").find("tr").append(thobj);
 		})
 		hdtable.find("thead").find("tr").append('<th style="box-sizing:border-box"></th>');
-		//生成数据表格 
+		//生成数据表格
 		tablecontent.append('<div id="'+obj.target+'_content" style="overflow:auto;">'+
 								'<table class="table table-striped table-bordered table-advance table-hover" id="'+obj.target+'_conttable"><tbody></tbody></table>'+
 							'</div>');
@@ -207,7 +207,7 @@ function createtable(obj){
 			content.css({
 				"max-height":($("#"+obj.target).height()-($("#"+obj.target+"_hdtablediv").height())-($("#"+obj.target+"_tablepage").height()))+"px"
 			});
-			
+
 		}
 		ajaxtable();
 	}
@@ -337,7 +337,7 @@ function createtable(obj){
 							"text-overflow":"ellipsis",
 							"overflow":"hidden",
 							"white-space":"nowrap"
-							
+
 						});
 						if(title==true){
 							tdobj.attr({
@@ -349,8 +349,8 @@ function createtable(obj){
 					trobj.append('<td style="box-sizing:border-box;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;"></td>');
 					conttable.append(trobj);
 				});
-				
-				total = data.data.totalCount||data.data.total;
+
+				total = data.data.totalCount||data.data.total||0;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
@@ -361,7 +361,7 @@ function createtable(obj){
 					var tablepage = $("#"+obj.target+"_tablepage");
 					tablepage.html("");
 					var pagehtml = "";
-					
+
 					if(totalpage<8){
 						for(var i=1;i<totalpage+1;i++){
 								pagehtml += ""+
@@ -394,7 +394,7 @@ function createtable(obj){
 								}
 							}
 						}else if(newpage>4){
-							
+
 							if(newpage<(totalpage-4)){
 								for(var i=1;i<8;i++){
 									if(i==1){
@@ -455,8 +455,8 @@ function createtable(obj){
 						}
 
 					}
-					
-					
+
+
 					tablepage.append('<div style="width:100%;height:38px;">'+
 										'<div id="'+obj.target+'_tablepage1" style="float:left;box-sizing:border-box;padding-top:10px;">'+
 											'<font style="font-size:12px;float:left;">共<font id="'+obj.target+'_totol">0</font>条信息，</font>'+
@@ -491,7 +491,7 @@ function createtable(obj){
 			}
 		});
 	}
-	
+
 	//异步加载表格数据（只有数据）
 	var ajaxtableOnlyData = function(){
 		getvalue(obj.loadbefore,"loadbefore")();
@@ -580,7 +580,7 @@ function createtable(obj){
 					var tablepage = $("#"+obj.target+"_tablepage");
 					tablepage.html("");
 					var pagehtml = "";
-					
+
 					if(totalpage<8){
 						for(var i=1;i<totalpage+1;i++){
 								pagehtml += ""+
@@ -613,7 +613,7 @@ function createtable(obj){
 								}
 							}
 						}else if(newpage>4){
-							
+
 							if(newpage<(totalpage-4)){
 								for(var i=1;i<8;i++){
 									if(i==1){
@@ -674,8 +674,8 @@ function createtable(obj){
 						}
 
 					}
-					
-					
+
+
 					tablepage.append('<div style="width:100%;height:38px;padding-top:5px;">'+
 										'<div id="'+obj.target+'_tablepage1" style="float:left;box-sizing:border-box;padding-top:10px;">'+
 											'<font style="font-size:12px;float:left;">共<font id="'+obj.target+'_totol">0</font>条信息，</font>'+
@@ -721,7 +721,7 @@ function createtable(obj){
 		var tablepage2_Element = $("#"+obj.target+"_tablepage2");
 		var totol_Element = $("#"+obj.target+"_totol");
 		var limit_Element = $("#"+obj.target+"_limit");
-		
+
 		newpage_Element.val(newpage);
 		totolpage_Element.html(totalpage);
 		totol_Element.html(total);
@@ -764,7 +764,7 @@ function createtable(obj){
 				next_Element.unbind("mouseout");
 				next_Element.addClass("disabled");
 			}else{
-				
+
 				next_Element.unbind("click");
 				next_Element.click(function(){
 					if(loadfg!=0){
@@ -780,7 +780,7 @@ function createtable(obj){
 		refresh_Element.click(function(){
 			if(loadfg!=0){
 				pageval = parseInt($("#"+obj.target+"_newpage").val(),10);
-				var pagenum = /^[0-9]*$/;	
+				var pagenum = /^[0-9]*$/;
 				if(!pagenum.test(pageval)){
 					newbootbox.alertInfo("请输入数字！");
 					return ;
@@ -797,14 +797,14 @@ function createtable(obj){
 					newbootbox.alertInfo("输入数据不能为负数，请重新输入！");
 					return ;
 				}
-				
+
 				$("#gridcont_hdtable th input[name=gridcont_checkth]").attr("checked",false);
 				newpage = pageval;
 				obj.rememberStatue = false;
 				ajaxtable();
 			}
 		});
-		
+
 		$("."+obj.target+"pbtn1").click(function(){
 			//getCheckRow();//调用下面的方法
 			$("#gridcont_hdtable th input[name=gridcont_checkth]").attr("checked",false);
@@ -853,7 +853,7 @@ function createtable(obj){
 			};
 		}
 		return checkdata;
-	} 
+	}
 	//获取当前页的所有选中行的id
 	this.getcheckedIds=function(){
 		var rows=this.getcheckrow();
@@ -864,7 +864,7 @@ function createtable(obj){
 		}
 		return ids;
 	};
-	
+
 	//获取当前页所有id
 	this.getrowids = function(){
 		var checkarry = $('input[name='+obj.target+'_checktd]');
@@ -873,9 +873,9 @@ function createtable(obj){
 			checkdata[checkdata.length] = rowsdata[(((checkarry[i].id).split("_checkbox"))[1])-1]
 		}
 		return checkdata;
-	} 
-	
-	
+	}
+
+
 	//获取选中行
 	this.getrows = function(){
 		var checkarry = $('input[name='+obj.target+'_checktd]');
@@ -884,15 +884,15 @@ function createtable(obj){
 		   checkdata[checkdata.length] = rowsdata[(((checkarry[i].id).split("_checkbox"))[1])-1]
 		}
 		return checkdata;
-	} 
-	
+	}
+
 	this.getCheckRow = function(){
 		var datas = this.getcheckrow();
 		$.each(datas, function(i,obj) {
 			checkedarr.push(obj.id);
 		});
 	}
-	
+
 	this.getRowIds = function(){
 		var rowids = this.getrowids(); //所有id
 		for(var i=0;i<rowids.length;i++){
@@ -901,11 +901,11 @@ function createtable(obj){
 			}
 		}
 	}
-	
+
 	this.setparams = function(obj){
 		params = obj;
 	}
-	
+
 	//重载数据
 	this.loadtable = function(){
 		if(loadfg!=0){
@@ -914,11 +914,11 @@ function createtable(obj){
 			ajaxtable();
 		}
 	}
-	
+
 	this.setpagesize = function(n){
 		pagesize = n;
 	}
-	
+
 	this.refresh = function(){
 		ajaxtable();
 	}
@@ -926,6 +926,6 @@ function createtable(obj){
 	this.refreshData = function(){
 		ajaxtableOnlyData();
 	}
-	
+
 	create();
 }

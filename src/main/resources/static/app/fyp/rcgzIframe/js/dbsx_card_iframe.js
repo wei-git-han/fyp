@@ -7,16 +7,23 @@ var pageModule = function () {
 			success: function(data) {
 				var arryHtml = '';
 				$.each(data.data.returnJsonArr, function(i, o) {
-					arryHtml+=	'<div onclick="window.top.openfn1(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+i+'\')">'+
-								'	<p>'+o.flowCount+'</p>'+
-								'	<span>'+o.typeName+'</span>'+
-								'</div>'
+					if(o.typeName=="即时通讯"){
+						arryHtml+=	'<div style="cursor: not-allowed">'+
+							'	<p>'+o.flowCount+'</p>'+
+							'	<span>'+o.typeName+'</span>'+
+							'</div>'
+					}else{
+						arryHtml+=	'<div onclick="window.top.openfn1(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+i+'\')">'+
+							'	<p>'+o.flowCount+'</p>'+
+							'	<span>'+o.typeName+'</span>'+
+							'</div>'
+					}
 				});
 				$("#dbsx").html(arryHtml);
 			}
 		})
 	}
-	
+
 	var initother = function(){
 	}
     return {
@@ -31,3 +38,6 @@ var pageModule = function () {
     }
 }();
 
+function openFn() {
+	openfn1
+}
