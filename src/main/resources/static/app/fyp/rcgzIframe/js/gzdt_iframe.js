@@ -1,6 +1,6 @@
 var gzdtUrl = {"url":"/app/fyp/workTrendController/workTrendList","dataType":"text"};
 var pageModule = function () {
-	
+
 	var initgzdt = function(){
 		$ajax({
 			url: gzdtUrl,
@@ -9,8 +9,8 @@ var pageModule = function () {
 				var arryHtml = '';
 				$.each(data.data.recentnews, function(i, o) {
 					arryHtml+=`<dl onclick="openById('${data.data.appId}','${o.id}','${data.data.ip}','${i}')" style="cursor: pointer">
-									<dt style="display: ${o.coverImg?'inline-block':'none'};overflow: hidden" ><img src="${data.data.ip+o.coverImg+top.location.search}" style="width: 100%;height: 100%"></dt>
-									<dd style="padding-left: ${o.coverImg?'':'20px'}">
+									<dt style="overflow: hidden" ><img src="${o.coverImg?data.data.ip+o.coverImg+top.location.search:'/app/fyp/common/images/u11814.svg'}" style="width: 100%;height: 100%"></dt>
+									<dd>
 										<div class="title">${o.title}</div>
 										<div class="content">${o.content}</div>
 										<div class="btns"><span class="date">${o.createDate}</span>阅读<span class="num">${o.hits}</span><a id="${o.id}">查看详情</a></div>
