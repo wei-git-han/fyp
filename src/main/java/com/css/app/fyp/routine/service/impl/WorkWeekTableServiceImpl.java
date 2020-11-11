@@ -36,12 +36,12 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
         //当前用户是否为部首长
         if (StringUtils.equals("部首长",name)) {
             //部首长
-            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
+            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/count/publish";
             String zoneId = orgId;
             jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         } else {
             //局用户
-            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/item/";
+            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/count/publish";
             String zoneId = orgId;
             jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         }
@@ -96,7 +96,9 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
         if (StringUtils.isNotEmpty(week)) {
             infoMap.add("week", week);
         }
-        String mapperUrl = "http://servers:port";
+        //String mapperUrl = "http://servers:port";
+        String type = "fypzb";
+        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
