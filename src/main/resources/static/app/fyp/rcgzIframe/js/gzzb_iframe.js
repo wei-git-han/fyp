@@ -25,7 +25,7 @@ var pageModule = function () {
 			}
 		})
 	}
-	
+
 	var object1 = {};
 	var initPlan = function(type){
 		var startDate='';
@@ -66,7 +66,7 @@ var pageModule = function () {
 					var comparedates = month + "-" + day;
 					var comparedates2 = $("#monthAndday").val();
 					var today = new Date().format("M月d日");
-					
+
 					htmlDate += '	<div class="newpage17" style="background:transparent!important">' +
 								'		<div class="newpage21" >' +
 								'			<p>' + month+'月'+day+'日' + '</p><p>' + '星期'+ week + '</p>' +
@@ -146,11 +146,11 @@ var pageModule = function () {
                         '</dl>';
                         html4 += '<div class="newpage19" onclick="editfn(\''+items.id+'\')" >' + html7 + '</div>'
                     });
-					
+
 					var html3 = '<div class="newpage18" style="height:' + contentHeight + 'px; background:transparent;"><div class="newpage101">' +
 						html4 +
 						'</div></div>';
-					
+
 					planHtml += '<div class="newpage20 ' + (today == dates ? "active" : "") + '" data="show_' + (i + 1) +
 						'" name="show_' + (i + 1) + '">' +
 						 htmlDate + html1 + html3 +
@@ -160,15 +160,25 @@ var pageModule = function () {
 			}
 		})
 	}
-	
+
 	var initother = function(){
-		$("#time").datepicker({
-		    language:"zh-CN",
-		    autoclose: true,
-		    isRTL: Metronic.isRTL(),
-		    format: "yyyy-mm-dd",
-		    pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
+		// $("#time").datepicker({
+		//     language:"zh-CN",
+		//     autoclose: true,
+		//     isRTL: Metronic.isRTL(),
+		//     format: "yyyy-mm-dd",
+		//     pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
+		// }).on("changeDate",function(){
+		// 	getRole('grzb');
+		// });
+		$(".date-picker2").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
+			// getFawenAll();//发文情况
 			getRole('grzb');
 		});
 		//各局周表&本局周表 点击事件
@@ -185,7 +195,7 @@ var pageModule = function () {
 				$("#caozuoBtn").hide();
 			}
 		});
-		
+
 		//新增
 		$("#add").click(function(){
 			newbootbox.newdialog({
@@ -200,13 +210,13 @@ var pageModule = function () {
 			    }
 			})
 		});
-		
+
 		//编辑
 		$("#edit").click(function(){
 			newbootbox.alertInfo('请点击要修改的数据！');
 		});
 	}
-	
+
 
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
@@ -220,8 +230,8 @@ var pageModule = function () {
 			}
 		});
 	}
-	
-	
+
+
     return {
         //加载页面处理程序
         initControl: function () {
