@@ -54,7 +54,7 @@ public class FypPersonageWorkWeekServiceImpl implements FypPersonageWorkWeekServ
         SatDate.setWeekDate("六");
         resultFypPersonageWorkWeekList.add(SatDate);
         FypPersonageWorkWeekVo SunDate = new FypPersonageWorkWeekVo();
-        SunDate.setWeekDate("七");
+        SunDate.setWeekDate("日");
         resultFypPersonageWorkWeekList.add(SunDate);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(beginDayOfWeek);
