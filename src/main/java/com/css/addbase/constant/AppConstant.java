@@ -51,6 +51,9 @@ public class AppConstant {
 	 */
 	public final static String APP_GWCL = "gwcl";
 
+
+	public final static String APP_GWCL_BW = "gwclbw";
+
 	/**
 	 * 中宏利达视频
 	 */

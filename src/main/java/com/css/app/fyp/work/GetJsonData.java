@@ -138,7 +138,7 @@ public class GetJsonData {
         switch (type){
             case "办文":
                 //公文处理
-                data = AppConstant.APP_GWCL;
+                data = AppConstant.APP_GWCL_BW;
                 break;
             case "办会":
                 //中宏利达会议
