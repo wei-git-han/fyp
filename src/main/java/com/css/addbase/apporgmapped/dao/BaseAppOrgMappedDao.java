@@ -19,15 +19,15 @@ import java.util.Map;
 @Mapper
 public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
 
-    @Select("select * \n" +
-            "from base_app_org_mapped  as a\n" +
-            "left join config_user_dept as b on a.org_id = b.dept_id \n" +
-            "where a.org_id is not null and a.org_id!='' and a.org_name is not null and a.org_name !='' and a.type = #{0} and b.type = '1'\n")
+    @Select("select * " +
+            "from base_app_org_mapped  as a " +
+            "left join config_user_dept as b on a.org_id = b.dept_id " +
+            "where a.org_id is not null and a.org_id!='' and a.org_name is not null and a.org_name !='' and a.type = #{0} and b.type = '1'")
     List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
 
-    @Select("select a.user_id from base_app_user as a\n" +
-            "left join base_app_organ as b on a.organid = b.id\n" +
-            "left join config_user_dept as c on a.id = c.user_id\n" +
+    @Select("select a.user_id from base_app_user as a " +
+            "left join base_app_organ as b on a.organid = b.id " +
+            "left join config_user_dept as c on a.id = c.user_id " +
             "where b.tree_path like '%'||#{0}||'%' and c.user_id is not null and c.user_id !=''")
     List<String> findUsersByDeptidAndRoleType(String dpetid);
 

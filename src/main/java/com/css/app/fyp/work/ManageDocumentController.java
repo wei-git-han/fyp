@@ -93,7 +93,7 @@ public class ManageDocumentController {
         paramMap.add("time",null);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
         Object data;
-        if(null!=dataList){
+        if(null!=dataList&&dataList.size()>0){
             data = dataList.get(0).get("list");
         }else{
             data = null;

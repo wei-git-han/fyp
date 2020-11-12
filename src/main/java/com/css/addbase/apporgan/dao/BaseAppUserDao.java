@@ -123,10 +123,10 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 			+ " ) order by a.SORT")
 	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
 
-	@Select(" select * from \"ZF_NEW_FYP_DB\".\"BASE_APP_USER\" a \n" +
-			"left join \"ZF_NEW_FYP_DB\".\"CONFIG_USER_DEPT\" b on a.user_id = b.user_id  \n" +
-			"where\n" +
-			"a.organid = '7f894a47-45ad-45da-9945-eb2a54161ab8' and b.user_id is not null and b.user_id !=''")
+	@Select(" select * from BASE_APP_USER a " +
+			"left join CONFIG_USER_DEPT b on a.user_id = b.user_id " +
+			"where " +
+			"a.organid = #{0} and b.user_id is not null and b.user_id !=''")
     List<BaseAppUser> queryListByRole(String organid);
 
 	List<BaseAppUser>  queryByOrganidTREEPATH(Map<String,Object> map);
