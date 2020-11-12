@@ -395,9 +395,10 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 	}
 
 	@Override
-	public BaseAppOrgMapped getUrlByAppId(String appId){
-		BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedDao.getUrlByAppId(appId);
+	public BaseAppOrgMapped getUrlByAppId(String appId,String orgId){
+		BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedDao.getUrlByAppId(appId,orgId);
 		return baseAppOrgMapped;
 	}
-	
+
+
 }

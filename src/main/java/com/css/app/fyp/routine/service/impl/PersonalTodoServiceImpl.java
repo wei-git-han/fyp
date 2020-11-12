@@ -87,7 +87,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             }
 
             //请销假数量
-            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj");
+            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj",bareauByUserId);
             JSONObject qxjJsonObj = new JSONObject();
             String qxjUrl = qxjglUrl;
             JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
@@ -111,7 +111,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             qxjJsonObj.put("applyType", "7");
             returnJsonArr.add(qxjJsonObj);
             //督查催办数量
-            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb");
+            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb",bareauByUserId);
             JSONObject dccbJsonObj = new JSONObject();
             String dccbUrl = dbglUrl;
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
@@ -134,7 +134,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             dccbJsonObj.put("applyType", "8");
             returnJsonArr.add(dccbJsonObj);
             //电子邮件数量
-            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj");
+            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj",bareauByUserId);
             JSONObject emailJsonObj = new JSONObject();
             String emailUrl = dzyjUrl;
 
@@ -157,7 +157,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             emailJsonObj.put("applyType", "6");
             returnJsonArr.add(emailJsonObj);
             //即时通讯数量
-            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx");
+            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx",bareauByUserId);
             JSONObject jstxJsonObj = new JSONObject();
             jstxJsonObj.put("flowCount", "5");
             jstxJsonObj.put("typeName", "即时通讯");
