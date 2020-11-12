@@ -162,7 +162,7 @@ var pageModule = function () {
 	}
 	
 	var initother = function(){
-		$("#time").datepicker({
+		$(".date-picker").datepicker({
 		    language:"zh-CN",
 		    autoclose: true,
 		    isRTL: Metronic.isRTL(),
