@@ -57,4 +57,9 @@ public class FypRoleEditServiceImpl implements FypRoleEditService {
 		return fypRoleEditDao.findUserAll(deptid);
 	}
 
+	@Override
+	public String queryObjectByUserId(String userId) {
+		return fypRoleEditDao.queryObjectByUserId(userId);
+	}
+
 }

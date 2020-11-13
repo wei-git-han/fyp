@@ -677,6 +677,9 @@ public class AppInterfaceConstant {
     //查询局公告、部公告、系统公告未读数
     public final static String WEB_INFORMAFFICHE_TO_XXFW_FYP_SINRC = "/fypcontroller/selIsNotReadCount";
 
+    //首长版审批阅办列表查询接口
+    public final static String WEB_TO_SZ_SPYB = "/chairman/api/list";
+
     /**
      * @author mashuwen
      * @date 2018年3月30日

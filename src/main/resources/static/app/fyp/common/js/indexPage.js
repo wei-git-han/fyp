@@ -6,7 +6,7 @@ var url1 = {
 };
 var defaultTime = 300000;
 var activeType = "start_page1"
-var isSz = false
+var isSz = true
 var pageList = {
   rcgz: [{
       "title": "个人待办",

@@ -29,4 +29,6 @@ public interface FypRoleEditService {
 	List<Map<String,Object>> findDeptAll();
 	//获取所有用户信息
 	List<Map<String,Object>> findUserAll(String deptid);
+	//获取是否为首长标识
+	String queryObjectByUserId(String userId);
 }
