@@ -43,6 +43,9 @@ dl dt{
 	line-height:40px;
 	font-weight:100;
 	padding-right:150px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 dl dt span{
 	margin-right:10px;
