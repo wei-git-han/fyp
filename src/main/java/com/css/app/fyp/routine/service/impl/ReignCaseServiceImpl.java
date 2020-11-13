@@ -124,7 +124,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         String userId = CurrentUser.getUserId();
         this.analyseData(userId, "desktop_online_api", System.currentTimeMillis());
         BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
-        String organid = baseAppUser.getOrganid();
+        String organid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+        //String organid = baseAppUser.getOrganid();
         Map<String,Object> userFilter = new HashMap<>();
         userFilter.put("organid", organid);
         List<BaseAppUser> baseAppUserList = baseAppUserService.queryList(userFilter);
@@ -138,11 +139,17 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             int userCount = baseAppUserService.queryTotal(filter);
             reignCaseVo.setUserCount(userCount);
             //在线人数
-            List<String> collect = userIdList.stream().filter(item -> userCollect.contains(item)).collect(Collectors.toList());
+            //List<String> collect = userIdList.stream().filter(item -> userCollect.contains(item)).collect(Collectors.toList());
+            List<String> collect = userIdList;
             Integer peopleOnlineCount =  collect.size();
             reignCaseVo.setPeopleOnlineCount(peopleOnlineCount);
             //在线率
-            String onlineRate = this.txfloat(userCount, peopleOnlineCount);
+            String onlineRate = "";
+            if(userCount > 0){
+                onlineRate = this.txfloat(peopleOnlineCount,userCount);
+            }else {
+                onlineRate = "0";
+            }
             reignCaseVo.setOnlineRate(onlineRate);
             //本日峰值
             if (peopleOnlineCount > toDayCount) {
