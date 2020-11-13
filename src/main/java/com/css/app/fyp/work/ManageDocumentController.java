@@ -90,6 +90,7 @@ public class ManageDocumentController {
         }else{
             paramMap.add("deptid",deptid);
         }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         paramMap.add("time",null);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
         Object data;
