@@ -24,12 +24,12 @@ var pageModule = function () {
 			}
 		})
 	};
-	
+
 	var strlength = "";
     var initfn1 = function(array){
     	strlength = "";
     	$(".pagemenu").html("");
-    	
+
 		var eachfn = function(pid,array,el,n){
 			$.each(array,function(i,o){
 				var id = o.id;
@@ -51,7 +51,7 @@ var pageModule = function () {
 				var icon = '';
 				var img = '';
 				var dataid = o.dataid;
-				
+
 				if (flag == "1") {
 					img = '<img src="../images/dept.png" />&nbsp;';/*<i class="fa faimg fa-folder"></i>*/
 				} else {
@@ -68,7 +68,7 @@ var pageModule = function () {
 						icon = '<i class="fa fa-plus" style="color:transparent;width:30px;"></i>'
 					}
 				};
-			
+
 				//判断是单位则加数量统计
 				if(number!="" && number!=null && number!="undefined"){
 					numberhtml = '<span class="number" data="'+id+'" >'+number+'</span>';
@@ -80,8 +80,8 @@ var pageModule = function () {
 						qj:qj
 					}
 				}
-				
-				
+
+
 				if($("#filter_show").html() == "" || $("#filter_show").html() == null){
 					zxhtml = '';
 				}else{
@@ -91,8 +91,14 @@ var pageModule = function () {
 						}
 					}
 					if($("#filter_show").text()=="离线"){
+						if(lx!="" && lx!=null && lx!="undefined"){
+							zxhtml = '<span class="number" data="'+id+'">{'+lx+'}</span>';
+						}
 					}
 					if($("#filter_show").text()=="临时安排"){
+						if(bg!="" && bg!=null && bg!="undefined"){
+							zxhtml = '<span class="number" data="'+id+'">{'+bg+'}</span>';
+						}
 					}
 					if($("#filter_show").text()=="请假"){
 						if(qj!="" && qj!=null && qj!="undefined"){
@@ -101,7 +107,7 @@ var pageModule = function () {
 					}
 
 				}
-				
+
 				//判断是否在线，1在线，0离线
 				if(status!="" && status!=null && status!="undefined"){
 					if(status == "1"){
@@ -116,8 +122,8 @@ var pageModule = function () {
 				var typename = o.statename;
 				var typetime1 = getdateformtfn(o.begintime);
 				var typetime2 = getdateformtfn(o.endtime);
-				
-				
+
+
 				//菜单中的状态和时间
 				if(typename!="" && typename!=null && typename!="undefined"){
 					var data_info = `${typename}: ${typetime1} - ${typetime2}`
@@ -135,19 +141,19 @@ var pageModule = function () {
 						}
 					}
 				}
-				
-				
+
+
 			/* 	var li = 	$('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:'+(n*pl)+'px;" id="'+id+'" data="'+text+'" >'+icon+img+text+numberhtml+zxhtml+statushtml+typehtml+ifqjhtml+'</a>'+
 							'</li>'); */
-							
+
 				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:' + ((n-1) * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
 							'		<span class="newstatusL">'+img+text+'</span>'+
 							'		<span class="newstatusR"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
 							'	</a>'+
-							'</li>'); 	
-							
+							'</li>');
+
 				el.append(li);
 				var child = o.child;
 				if(child!="" && child!=null && child!="undefined"){
@@ -161,11 +167,11 @@ var pageModule = function () {
 					$("#"+loginUserId).parents("li").addClass("open active");
 				} */
 			})
-			
+
 		}
 		eachfn("",array,$(".pagemenu"),1);
     }
-	
+
 	var getdateformtfn = function(date){
     	var newdate = "";
     	if(typeof(date)!="undefined"&&date!=null&&$.trim(date)!=""){
@@ -174,7 +180,7 @@ var pageModule = function () {
     	newdate = newdate.replace(/-/g,".")
 		return newdate;
     }
-	
+
 	var initother = function(){
 		$(".pagemenu li>a").live("click", function() {
 			var treeId = $(this).attr("id");
@@ -224,22 +230,22 @@ var pageModule = function () {
                 $(".searchBox").fadeOut();
             }
        });
-		
+
        $("body").click(function(event){
             if($(event.target).hasClass("searchInput") || $(event.target).hasClass("searchButton") || $(event.target).hasClass("searchBox") || $(event.target).parents("div").hasClass("searchBox")){
                 return;
             }
             $(".searchBox").hide();
        });
-		
-       
+
+
        //人员在位筛选
        $("#filter label").click(function(){
 	       	var label = this;
         	var seachData = $(this).attr("data");//状态标识
         	var seachText = $(this).text();
 	       	$("#filter_show").html('<a><span>'+seachText+'</span><i class="fa fa-times-circle" id="delfilter"></i></a>');
-		   
+
 			var array1 = [];
     		var eachfn = function(array1,array,n){
     			$.each(array,function(i,o){
@@ -259,7 +265,7 @@ var pageModule = function () {
     				var statename = o.statename;
     				var begintime = o.begintime;
     				var endtime = o.endtime;
-    				
+
     				var object = {
         					id:id,
         					text:text,
@@ -278,7 +284,7 @@ var pageModule = function () {
         					begintime:begintime,
         					endtime:endtime
         				};
-    				
+
     				var child = o.child;
     				if(child!="" && child!=null && child!="undefined"){
     					if(child.length>0){
@@ -286,7 +292,7 @@ var pageModule = function () {
     						eachfn(object.child,child,n+1);
     					}
     				}
-    				
+
     				var typename = o.statename;
     				if($(label).hasClass("label1")){//过滤是否在线
         				if(status!="" && status!=null && status!="undefined"){
@@ -319,18 +325,18 @@ var pageModule = function () {
     		}
     		eachfn(array1,oodata,1);
         	initfn1(array1);
-			
+
 	       //	initUserStatus(seachText);
        });
-       
+
        $("body").delegate("#delfilter","click",function(){
 	       	$("#filter_show").html("");
 			initfn1(oodata);
 	       	//initUserStatus();
        });
-       
+
 	}
-	
+
 	//通讯录搜索
 	var o;
     var fn = function(obj,fullName){
@@ -356,7 +362,7 @@ var pageModule = function () {
             });
         },500)
     }
-	
+
     return {
         //加载页面处理程序
         initControl: function () {
