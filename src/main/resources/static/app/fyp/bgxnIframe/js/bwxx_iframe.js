@@ -356,7 +356,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			async:false,
