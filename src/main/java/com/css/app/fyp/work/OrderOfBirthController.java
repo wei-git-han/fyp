@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.processor.ITextNodeProcessorMatcher;
 
 import java.util.*;
 
@@ -99,7 +100,16 @@ public class OrderOfBirthController {
             }
             dataMap.put("leaveCount",leaveCount);//请假
             dataMap.put("otherCount",baseAppUsers.size() - (onlineCount + leaveCount));//其他
-            dataMap.put("percentage",(onlineCount / baseAppUsers.size())* 100);//在线率
+            int t = 0;
+            if(baseAppUsers != null && baseAppUsers.size() > 0){
+                t = baseAppUsers.size();
+            }
+            if(t > 0){
+                dataMap.put("percentage",(onlineCount / baseAppUsers.size())* 100);//在线率
+            }else{
+                dataMap.put("percentage",0);//在线率
+            }
+
             objects.add(dataMap);
         }
 

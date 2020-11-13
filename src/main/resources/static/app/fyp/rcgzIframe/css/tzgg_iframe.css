@@ -72,3 +72,17 @@ dl:hover{
 	color: #E2A848;
 	box-shadow: inset 0px 0px 3px #386DDE;
 }
+.red-point{
+    font-size: 14px;
+    border-radius: 16px;
+    background-color: rgb(255, 0, 0);
+    min-width: 14px;
+    text-align: center;
+    line-height: 2px;
+    font-style: unset;
+    display: inline-block;
+    padding: 0px 5px;
+    border: 1px solid rgb(255, 255, 255);
+    margin-left: 5px;
+    display:none
+}

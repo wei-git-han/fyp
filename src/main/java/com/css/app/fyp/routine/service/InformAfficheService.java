@@ -15,4 +15,5 @@ public interface InformAfficheService {
 
 	JSONObject informAfficheDetailList(String contentid);
 
+	JSONObject getNotReadCount();
 }

@@ -51,4 +51,12 @@ public class InformAfficheController {
         Response.json(new ResponseValueUtils().success(maps));
     }
 
+    //查询局公告、部公告、系统公告未读数
+    @ResponseBody
+    @RequestMapping("/getNotReadCount")
+    public void getNotReadCount(){
+        JSONObject maps = informAfficheService.getNotReadCount();
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
 }

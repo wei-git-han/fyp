@@ -1,4 +1,5 @@
 var tzggUrl = {"url":"/app/fyp/informAfficheController/informAfficheList","dataType":"text"};
+var notReadCountUrl = {"url":"/app/fyp/informAfficheController/getNotReadCount","dataType":"text"};
 var pageModule = function () {
 	var inittzgg = function(type){
 		$ajax({
@@ -19,10 +20,38 @@ var pageModule = function () {
 								'</dl>'
 				});
 				$("#mainContent").html(arryHtml);
+				initReadCount()
 			}
 		})
 	}
-	
+	var initReadCount = function(){
+        $ajax({
+            url:notReadCountUrl,
+            success:function(res){
+                if(res.data){
+                    if(res.data.notreadNumJu){
+                        $('.readNumJu').html(res.data.notreadNumJu)
+                        $('.readNumJu').show()
+                    }else{
+                        $('.readNumJu').hide()
+                    }
+                    if(res.data.notreadNumBu){
+                       $('.readNumBu').html(res.data.notreadNumBu)
+                       $('.readNumBu').show()
+                    }else{
+                      $('.readNumBu').hide()
+                    }
+                    if(res.data.notreadNumXt){
+                       $('.readNumXt').html(res.data.notreadNumXt)
+                       $('.readNumXt').show()
+                    }else{
+                      $('.readNumXt').hide()
+                    }
+                }
+            }
+        })
+	}
+
 	var initother = function(){
 		//点击事件
 		$(".nav li").click(function() {
