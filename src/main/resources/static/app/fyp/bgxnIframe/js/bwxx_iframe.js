@@ -26,12 +26,6 @@ var pageModule = function () {
 						getCircleChartData();
 					}
 				});
-			}
-		});
-
-		$ajax({
-			url:userTreeUrl,
-			success:function(data){
 				$("#deptName1").createSelecttree({
 					data : data,
 					width : '100%',
@@ -54,6 +48,32 @@ var pageModule = function () {
 				});
 			}
 		});
+
+		// $ajax({
+		// 	url:userTreeUrl,
+		// 	success:function(data){
+		// 		$("#deptName1").createSelecttree({
+		// 			data : data,
+		// 			width : '100%',
+		// 			success : function(data, treeobj) {},
+		// 			selectnode : function(e, data) {
+		// 				$("#deptName1").val(data.node.text);
+		// 				$("#deptId1").val(data.node.id);
+		// 				getBanwenAll();
+		// 			}
+		// 		});
+		// 		$("#deptName2").createSelecttree({
+		// 			data : data,
+		// 			width : '100%',
+		// 			success : function(data, treeobj) {},
+		// 			selectnode : function(e, data) {
+		// 				$("#deptName2").val(data.node.text);
+		// 				$("#deptId2").val(data.node.id);
+		// 				getFawenAll();
+		// 			}
+		// 		});
+		// 	}
+		// });
 	}
 
 
@@ -356,7 +376,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			async:false,
@@ -372,7 +392,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/handleEfficiency',
 			dataType:'json',
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			async:false,
@@ -389,7 +409,7 @@ var pageModule = function () {
 			dataType:'json',
 			async:false,
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			success:function(res){
@@ -502,7 +522,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj1.percentage),
+						value:parseInt(135-(obj1.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				},
@@ -534,7 +554,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj2.percentage),
+						value:parseInt(135-(obj2.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				},
@@ -564,7 +584,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj3.percentage),
+						value:parseInt(135-(obj3.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				}
