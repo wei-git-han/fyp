@@ -327,6 +327,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         return userList;
     }
 
+    JSONObject jsonObj = null;
+
     private JSONObject getUserTreeFyp(String id){
         String userId=CurrentUser.getUserId();
 //		long time1 =System.currentTimeMillis();
@@ -341,8 +343,10 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         //在线人员Id 集合
         List<String> onlineUserIds=getOnlineUserIds(onlineUsers);
 
-
-        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
+        if(jsonObj==null){
+            jsonObj =  userLeaveSettingService.getQxjJson();
+        }
+//        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
         JSONArray ja1=new JSONArray();
         JSONArray ja2=new JSONArray();
         if(jsonObj!=null) {
@@ -390,7 +394,16 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         result.put("zx", zxCount);
         result.put("lx", lxCount);
         //result.put("qj", qjCount);
-        int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+        int qjSum = 0;
+        if(StringUtils.equals("root",dept.getParentId())){
+            for (Object object : ja1) {
+                JSONObject jo = (JSONObject)object;
+                qjSum = Integer.valueOf(jo.getString("num"));
+            }
+        }else{
+            qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+        }
+
         result.put("qj", qjSum);
 
         //办公数量   总数-请假的数 =办公的数
