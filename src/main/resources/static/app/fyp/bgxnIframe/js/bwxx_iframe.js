@@ -502,7 +502,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj1.percentage),
+						value:parseInt(135-(obj1.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				},
@@ -534,7 +534,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj2.percentage),
+						value:parseInt(135-(obj2.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				},
@@ -564,7 +564,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj3.percentage),
+						value:parseInt(135-(obj3.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				}
