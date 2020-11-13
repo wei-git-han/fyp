@@ -138,7 +138,7 @@ public class FypFeedbackHearController {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		for (Object key:dataMap.keySet()) {
 			List<Object> objects = dataMap.get(key);
-			if(null!=objects&&0<objects.size()){
+			if(null!=objects && 1<objects.size()){
 				try {
 					fypFeedbackHear = new FypFeedbackHear();
 					fypFeedbackHear.setId(UUIDUtils.random());
@@ -149,6 +149,8 @@ public class FypFeedbackHearController {
 					fypFeedbackHear.setStatus(this.getStatus(objects.get(4).toString()));//状态
 					fypFeedbackHear.setType(this.getType(objects.get(5).toString()));//问题分类：完善建议、系统问题
 					fypFeedbackHear.setSolveTime(simpleDateFormat.parse(objects.get(6).toString()));//解决时限
+					fypFeedbackHear.setSubmitDeptName(objects.get(7).toString());//提出单位名称
+					fypFeedbackHear.setMarch(objects.get(8).toString());//进度
 					fypFeedbackHearService.save(fypFeedbackHear);
 				} catch (ParseException e) {
 					e.printStackTrace();
