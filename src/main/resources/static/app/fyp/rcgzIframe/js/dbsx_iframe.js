@@ -5,28 +5,31 @@ var pageModule = function () {
         grid = $("#gridcont").createGrid({
 			columns:[
 						/* {display:"应用",name:"app",width:"15%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+							return rowdata.app;
 						}},
 						{display:"内容",name:"content",width:"17%",align:"left",render:function(rowdata){
-							return rowdata.content;                                         
+							return rowdata.content;
 						}},
 						{display:"发起人",name:"userName",width:"17%",align:"center",render:function(rowdata){
-							return rowdata.departmentName;                                        
+							return rowdata.departmentName;
 						}},
 						{display:"时间",name:"date",width:"40%",align:"center",render:function(rowdata){
-							return rowdata.date;    
+							return rowdata.date;
 						}},
 						{display:"操作",name:"操作",width:"11%",align:"center",render:function(rowdata){
-							return '<i class="fa fa fa-pencil" style="cursor:pointer;color: #2E85E0;padding:4px 5px;" onclick="editfn()" title="编辑"></i>';                                        
+							return '<i class="fa fa fa-pencil" style="cursor:pointer;color: #2E85E0;padding:4px 5px;" onclick="editfn()" title="编辑"></i>';
 						}} */
 						{display:"文件名称",name:"app",width:"30%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+							return `<div title="${rowdata.app}">${rowdata.app}</div>`
 						}},
-						{display:"呈报单位",name:"app",width:"55%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+						{display:"呈报单位",name:"app",width:"40%",align:"center",render:function(rowdata,n){
+							return rowdata.app;
 						}},
 						{display:"承办人",name:"app",width:"15%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+							return rowdata.app;
+						}},
+						{display:"操作",name:"app",width:"15%",align:"center",render:function(rowdata,n){
+							return `<div onclick="openById('${rowdata.appId}','${rowdata.ip}','${n}')" >查看</div>`;
 						}},
 					 ],
 			width:"100%",
@@ -39,7 +42,7 @@ var pageModule = function () {
 			url: listurl
 	   });
 	}
-	
+
 	var initother = function(){
 	}
     return {
@@ -49,12 +52,12 @@ var pageModule = function () {
 		    initother();
         },
 		refreshPage:function () {
-
+			initgrid()
 		}
     }
 }();
 
 
-function editfn(){
-	alert(1)
+function openById(appid,domain){
+	window.top.openfn1(appid,'',domain)
 }

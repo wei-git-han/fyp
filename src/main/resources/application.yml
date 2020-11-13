@@ -4,10 +4,10 @@ server:
 app:
   ConnectTimeout: 100
   ReadTimeout: 5000
- 
+
 #子配置文件
 spring.profiles.include: url
- 
+
 druid:
     dbType: dm
     url: jdbc:dm://${csse.dmdba.url}/ZF_FYP_APP_NEW
@@ -16,11 +16,11 @@ druid:
     password: password01!
     initial-size: 1
     min-idle: 1
-    max-active: 10 
+    max-active: 10
     maxWait: 3000
     test-on-borrow: true
     testWhileIdle: true
-    validationQuery: select 1 from DUAL 
+    validationQuery: select 1 from DUAL
     #filters: config
     connectionProperties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIfduBXAcGaEuALCIFq8PUfhUdVfu+fJSb05UY8+de5qbHxK/hs0BEpzlinf9VXEZV6tifsclqVqD7ljrO0BBO8CAwEAAQ==
 
@@ -30,7 +30,7 @@ logging:
   file: ${csse.log.path}
   level:
 #    root: info
-    com: 
+    com:
       css: debug
 
 spring:
@@ -71,27 +71,27 @@ csse:
     fileservice:
       servers: http://10.1.150.3:7003
       tempDirPath: c:/temp/storetemp/
-  sso: 
-    server: 
+  sso:
+    server:
       url: ${csse.mircoservice.zuul}
       no-auth-suffixs: js,css,font,png,jpg,jpeg,htm,ico,pdf,ofd,wps,doc,noauth
-      api: 
-        checkToken: api/sso/valtoken/  
+      api:
+        checkToken: api/sso/valtoken/
         userinfo: api/sso/user/
 
 #消息格式
 msg:
   type: document
-  title: 
+  title:
   platform: all
   visible: true
-  icon: 
-  appid: 
-  redirect: 
-  group: 
-    name: 
-    redirect: 
-    
+  icon:
+  appid:
+  redirect:
+  group:
+    name:
+    redirect:
+
 #文件服务配置
 css.oauth2.accessTokenUri: ${csse.mircoservice.zuul}/api/uaa/oauth/token
 css.oauth2.clientId: ${csse.dccb.appId}
@@ -116,7 +116,7 @@ css.fileService.file.assignUploadConfirmPath: /assign/uploadConfirm
 css.fileService.file.assignDownloadPath: /assign/download
 css.fileService.file.assignMd5Path: /assign/md5
 
-#css.fileService.file.infoPath: 
+#css.fileService.file.infoPath:
 css.fileService.file.namePath: /
 css.fileService.file.updateNamePath: /updateName
 
@@ -139,14 +139,14 @@ csse.fileservice.port: 7003
 #文件服务生成文件的临时目录
 csse.fileservice.tempPath: c:/temp/storetemp/
 #本地文件路径（应用中下载操作的默认文件保存路径）
-filePath: D:/download/ 
+filePath: D:/download/
 #文件服务----------------------------------end
 
 #本war的所有应用日志输出路径
 csse.log.path: c:/temp/storetemp/zf_one_number_app.log
 #短信接口地址
 csse.mircoservice.smsUrl: http://192.168.0.55:50005/v1.0/plan
-#语音预定会议室 
+#语音预定会议室
 voicePreMeetUrl: http://localhost:8768
 
 #中控利达获取各局工作周表的接口
@@ -154,7 +154,7 @@ csse.work.table: http://localhost:8080/api/week/count/publish
 
 
 #信息服务对应的ip和端口
-xxfw.url: http://172.16.1.35:8080
+xxfw.url: http://10.1.151.81:8080
 
 #电子邮件对应的ip和端口
 dzyj.url: http://10.150.110.19/restful/newuser.php/g7_boxinfo?user=test@jskxy.com＆passkey=admin.1554262311.cc73fc8a417b5218f3553b0fda25ad6f＆onlyinbox=no
