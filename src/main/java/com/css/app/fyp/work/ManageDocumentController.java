@@ -174,6 +174,10 @@ public class ManageDocumentController {
         for (String userid: userList) {
             sb.append(userid+",");
         }
-        return sb.toString().substring(0,sb.length()-1);
+        String ss = "";
+        if (StringUtils.isNotBlank(sb.toString())){
+            ss = sb.toString().substring(0,sb.length()-1);
+        }
+        return ss;
     }
 }
