@@ -674,6 +674,9 @@ public class AppInterfaceConstant {
 
     public final static String WEB_INFORMAFFICHE_TO_GWCL_WDYJ_CKSC = "/fypcontroller/listFyp";
 
+    //查询局公告、部公告、系统公告未读数
+    public final static String WEB_INFORMAFFICHE_TO_XXFW_FYP_SINRC = "/fypcontroller/selIsNotReadCount";
+
     /**
      * @author mashuwen
      * @date 2018年3月30日

@@ -120,6 +120,29 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         return jsonData;
     }
 
+    //查询局公告、部公告、系统公告未读数
+    @Override
+    public JSONObject getNotReadCount() {
+        JSONObject jsonData = new JSONObject();
+        jsonData = this.getJsonArrayData(AppInterfaceConstant.WEB_INFORMAFFICHE_TO_XXFW_FYP_SINRC);
+        jsonData.put("ip", xxfwUrl);
+        return jsonData;
+    }
+
+    private JSONObject getJsonArrayData(String url) {
+        JSONObject jsonData =new JSONObject();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        String mapperUrl = xxfwUrl;
+        if (StringUtils.isNotEmpty(mapperUrl)) {
+            String sendUrl = mapperUrl + url;
+            jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+        } else {
+            logger.info("orgId为{}的局的信息服务的配置数据错误");
+            return null;
+        }
+        return jsonData;
+    }
+
     private JSONObject getJsonDetailData (String contentid, String userId, String type, String url) {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
