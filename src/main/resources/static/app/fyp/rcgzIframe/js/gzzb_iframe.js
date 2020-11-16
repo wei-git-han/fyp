@@ -188,7 +188,7 @@ var pageModule = function () {
 			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
 			// getFawenAll();//发文情况
-			getRole($(".nav>li.active").attr("data"));
+			initPlan($(".nav>li.active").attr("data"));
 		});
 		//各局周表&本局周表 点击事件
 		$(".nav>li").click(function() {
