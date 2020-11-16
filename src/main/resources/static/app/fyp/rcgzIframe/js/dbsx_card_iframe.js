@@ -13,7 +13,10 @@ var pageModule = function () {
 							'	<span>'+o.typeName+'</span>'+
 							'</div>'
 					}else{
-						arryHtml+=	'<div onclick="window.top.openfn1(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+i+'\')">'+
+						if(!o.menuId){
+							o.menuId=''
+						}
+						arryHtml+=	'<div onclick="openFn(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+o.menuId+'\')">'+
 							'	<p>'+o.flowCount+'</p>'+
 							'	<span>'+o.typeName+'</span>'+
 							'</div>'
@@ -38,6 +41,6 @@ var pageModule = function () {
     }
 }();
 
-function openFn() {
-	openfn1
+function openFn(appid,appUrlSuffix,appUrlPrefix,menuId) {
+	window.top.openfn1(appid,appUrlSuffix+'?show=0&menuIndex='+menuId,appUrlPrefix)
 }
