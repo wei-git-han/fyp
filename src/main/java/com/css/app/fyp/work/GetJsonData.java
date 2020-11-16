@@ -77,6 +77,13 @@ public class GetJsonData {
                             url = meeting.getUrl()+AppInterfaceConstant.WEB_INERFACE_ZHLD_MEETING;
                             setData(data,url,map,token,jsons);
                             break;
+                        case "首长督查催办":
+                            //首长督查催办
+                            BaseAppOrgMapped szThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                            url = szThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_SZDCCB_MANAGETHING;
+                            setData(data,url,map,token,jsons);
+                            break;
+
                         case "督查催办":
                             //督查催办
                             BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
@@ -154,6 +161,9 @@ public class GetJsonData {
                 break;
             case "请假":
                 //在线率排行-在线数
+                data = AppConstant.LEAVE;
+                break;
+            case "首长督查催办":
                 data = AppConstant.LEAVE;
                 break;
         }

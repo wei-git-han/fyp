@@ -70,6 +70,11 @@ public class AppConstant {
 	public final static String DCCB = "dccb";
 
 	/**
+	 * 首长督查催办
+	 */
+	public final static String SZDCCB = "szdccb";
+
+	/**
 	 * 在线人数
 	 */
 	public final static String ONLINE = "desktop_online_api";

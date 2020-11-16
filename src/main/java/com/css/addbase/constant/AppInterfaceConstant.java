@@ -775,6 +775,9 @@ public class AppInterfaceConstant {
      * 督查催办、负一屏统计接口
      */
     public final static String WEB_INERFACE_DCCB_MANAGETHING = "/app/db/documentjcdb/count";
+
+
+    public final static String WEB_INERFACE_SZDCCB_MANAGETHING = "/app/db/documentjcdb/szCount";
     /**
      * 通讯录，根据id获取详情接口
      */
