@@ -1,5 +1,9 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
+var isSz = window.top.isSz||false
+if(isSz==true){
+	deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //人员树
+}
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {

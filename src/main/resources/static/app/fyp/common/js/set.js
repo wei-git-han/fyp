@@ -9,15 +9,15 @@ var pageModule = function () {
 		  grid = $("#gridcont").createGrid({
 			columns:[
 						{display:"姓名",name:"userName",width:"15%",align:"center",render:function(rowdata,n){
-							return rowdata.userName;                                         
+							return rowdata.userName;
 						}},
 						{display:"单位",name:"deptName",width:"35%",align:"center",render:function(rowdata){
-							return rowdata.deptName;                                         
+							return rowdata.deptName;
 						}},
 						{display:"角色配置",name:" roleType",width:"15%",align:"center",render:function(rowdata){
 							var roleType = "";
 							if(rowdata.roleType ==0){
-								roleType = "超级管理员";
+								roleType = "保障管理员";
 							}
 							if(rowdata.roleType ==1){
 								roleType = "系统管理员";
@@ -28,7 +28,7 @@ var pageModule = function () {
 							if(rowdata.roleType ==3){
 								roleType = "在编人员";
 							}
-							return roleType;                                       
+							return roleType;
 						}},
 						{display:"配置人",name:"editUserId",width:"15%",align:"center",render:function(rowdata){
 							return rowdata.editUserName;
@@ -56,26 +56,26 @@ var pageModule = function () {
 		$("#setbtn").click(function(){
 	        window.open("/app/fyp/set/html/settabel.html");
 		});
-		
+
 		$("#slqkbtn").click(function(){
 			window.open("/app/fyp/slqk/html/slqktabel.html");
 		});
-		
+
 		$("#bzbtn").click(function(){
 	      window.open("/app/fyp/bzProject/html/bzwtgz.html");
 		});
-		
+
 		$("#setzbbtn").click(function(){
 	      window.open("/app/fyp/zbry/html/index.html");
 		});
 		$('#zbManage').click(function(){
 			window.open("/app/fyp/set/html/departSetting.html")
 		});
-		
+
 		$('#dicbtn').click(function(){
 			window.open("/app/fyp/dic/html/dic.html")
 		});
-		
+
 	}
 	function isAdmin() {
 		$ajax({
@@ -100,7 +100,7 @@ var pageModule = function () {
 			}
 		});
 	}
-	
+
     return {
         //加载页面处理程序
         initControl: function () {

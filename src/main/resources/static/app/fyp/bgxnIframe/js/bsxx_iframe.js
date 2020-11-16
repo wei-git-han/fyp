@@ -1,7 +1,12 @@
 var listurl = {"url": "/app/fyp/manageThing/weeklyTable","dataType": "text"};
-var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //单位树
 var grid = null;
-
+var isSz = window.top.isSz||false
+if(isSz==true){
+	$('.filterUnit').show()
+}else{
+	$('.filterUnit').hide()
+}
 var pageModule = function() {
 	var initZhoubiao = function() {
 		grid = $("#gridcont").createGrid({
@@ -60,7 +65,7 @@ var pageModule = function() {
 		})
 	}
 	var initother = function() {
-		
+
 		var allWidth = $("body").width();
 		$(".main-l").css("right", ((allWidth + 310) / 2) + 20 + "px");
 		$(".main-r").css("left", ((allWidth + 310) / 2) + 20 + "px");
