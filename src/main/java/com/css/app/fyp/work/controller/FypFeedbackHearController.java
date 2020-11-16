@@ -11,7 +11,9 @@ import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.app.fyp.utils.PoiUtils;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.CurrentUser;
+import com.css.app.fyp.work.entity.Dict;
+import com.css.app.fyp.work.service.DictService;
+import com.css.base.utils.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.css.base.utils.PageUtils;
-import com.css.base.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
-import com.css.base.utils.Response;
 import com.css.app.fyp.work.entity.FypFeedbackHear;
 import com.css.app.fyp.work.service.FypFeedbackHearService;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,6 +46,9 @@ public class FypFeedbackHearController {
 
 	@Autowired
 	private BaseAppOrganService baseAppOrganService;
+
+	@Autowired
+	private DictService dictService;
 	
 	/**
 	 * 列表
@@ -142,12 +144,18 @@ public class FypFeedbackHearController {
 				try {
 					fypFeedbackHear = new FypFeedbackHear();
 					fypFeedbackHear.setId(UUIDUtils.random());
-					fypFeedbackHear.setSoftName(objects.get(0).toString());//软件/硬件名称
+                    Dict d = getDic("0",objects.get(0).toString());
+                    fypFeedbackHear.setSoftName(d.getDictName());//软件/硬件名称
+                    fypFeedbackHear.setSoftId(d.getId());
+
+
 					fypFeedbackHear.setDesc(objects.get(1).toString());//问题描述
 					fypFeedbackHear.setSubmitTime(simpleDateFormat.parse(objects.get(2).toString()));//提出时间
 					fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人
 					fypFeedbackHear.setStatus(this.getStatus(objects.get(4).toString()));//状态
-					fypFeedbackHear.setType(this.getType(objects.get(5).toString()));//问题分类：完善建议、系统问题
+                    d = getDic("1",objects.get(5).toString());
+					fypFeedbackHear.setType(d.getDictName());//问题分类：完善建议、系统问题
+                    fypFeedbackHear.setTypeId(d.getId());
 					fypFeedbackHear.setSolveTime(simpleDateFormat.parse(objects.get(6).toString()));//解决时限
 					fypFeedbackHear.setSubmitDeptName(objects.get(7).toString());//提出单位名称
 					fypFeedbackHear.setMarch(objects.get(8).toString());//进度
@@ -166,6 +174,7 @@ public class FypFeedbackHearController {
 	 * @return
 	 */
 	private int getStatus(String status){
+
 		int i = 0;
 		switch (status){
 			case "需求论证":
@@ -186,17 +195,40 @@ public class FypFeedbackHearController {
 		}
 		return i;
 	}
+	private Dict getDic(String type,String value){
+        String reString = value;
+		Map<String, Object> map = new HashMap<>();
+		map.put("type",type);
 
+		//查询列表数据
+		List<Dict> dictList = dictService.queryList(map);
+        Dict dict = dictList.stream().filter(o -> StringUtils.equals(value, o.getDictName())).findAny().orElse(null);
+        if(dict==null){
+            dict = new Dict();
+            dict.setDictName(value);
+        }
+		return dict;
+	}
 	private String getType(String type){
-		int i = 0;
-		switch (type){
-			case "完善建议":
-				i = 0;
-				break;
-			case "系统问题":
-				i = 1;
-				break;
-		}
-		return String.valueOf(i);
+        String reString = type;
+		Map<String, Object> map = new HashMap<>();
+		map.put("type","1");
+
+		//查询列表数据
+		List<Dict> dictList = dictService.queryList(map);
+        Dict dict = dictList.stream().filter(o -> StringUtils.equals(type, o.getDictName())).findAny().orElse(null);
+        if(dict != null){
+            reString = dict.getId();
+        }
+//		int i = 0;
+//		switch (type){
+//			case "完善建议":
+//				i = 0;
+//				break;
+//			case "系统问题":
+//				i = 1;
+//				break;
+//		}
+		return reString;
 	}
 }

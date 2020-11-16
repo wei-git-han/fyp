@@ -37,7 +37,6 @@ var pageModule = function(){
 			url:slqkUrl,
 			data:{type:1,limit:100,page:1},
 			success:function (data) {
-				console.log(data)
 				initselectByName('typeId',data.data.rows)
 			}
 		})
@@ -135,8 +134,8 @@ var pageModule = function(){
 			initUnitTree();
 			initRyjName();
 			initWtfl();
-			initdatafn(); 
 			initother();
+			initdatafn();
 		}
 	};
 }();

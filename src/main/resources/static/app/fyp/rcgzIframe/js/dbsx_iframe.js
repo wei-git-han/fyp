@@ -49,7 +49,7 @@ var pageModule = function () {
                     url:e.data.weburl
 			    }
 			    if(e.data.total>0){
-					$('#dbNum').val(e.data.total);
+					$('#dbNum').html(e.data.total);
 					$('#dbNum').show()
 				}else{
 					$('#dbNum').hide()
