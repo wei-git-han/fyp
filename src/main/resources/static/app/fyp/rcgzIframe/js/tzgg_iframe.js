@@ -11,7 +11,7 @@ var pageModule = function () {
 					/*var class1 = "";
 					if(i<3){
 						class1 = "top3";
-					} 
+					}
 					class="'+class1+'"
 					*/
 					arryHtml+=  '<dl style="cursor: pointer" onclick="openById(\''+data.data.appId+'\',\''+o.contentid+'\',\''+data.data.ip+'\',\''+i+'\')">'+
@@ -73,5 +73,5 @@ var pageModule = function () {
 
 
 function openById(appid,id,domain){
-	window.top.openfn1(appid,`/affiche/viewInfo.html?cid=${id}`,domain)
+	window.top.openfn1(appid,`/affiche/viewInfo_fyp?cid=${id}`,domain)
 }

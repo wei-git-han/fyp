@@ -28,10 +28,11 @@ public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
     @Select("select * from BASE_APP_ORG_MAPPED where type = #{0}")
     List<Map<String,Object>> findAppIdAndDeptIdNameAll(String type);
 
-    @Select("select a.user_id from base_app_user as a " +
-            "left join base_app_organ as b on a.organid = b.id " +
-            "left join config_user_dept as c on a.id = c.user_id " +
-            "where b.tree_path like '%'||#{0}||'%' and c.user_id is not null and c.user_id !=''")
+    @Select("select bau.id from base_app_user bau" +
+            "left join config_user_dept as c on bau.id = c.user_id " +
+            "where bau.organid in " +
+            "(select id from BASE_APP_ORGAN start with ID=#{0}" +
+            "connect by prior ID = PARENT_ID) and c.user_id is not null and c.user_id !=''")
     List<String> findUsersByDeptidAndRoleType(String dpetid);
 
     @Select("select bau.id from base_app_user bau " +

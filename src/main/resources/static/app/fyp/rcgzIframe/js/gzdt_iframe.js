@@ -38,5 +38,5 @@ var pageModule = function () {
 }();
 
 function openById(appid,id,domain){
-	window.top.openfn1(appid,`/channelNews/newsDetails?nid=${id}`,domain)
+	window.top.openfn1(appid,`/channelNews/newsDetails_fyp?nid=${id}`,domain)
 }

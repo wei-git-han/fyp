@@ -1,8 +1,11 @@
 package com.css.app.fyp.work;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppUserService;
+import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
@@ -38,6 +41,9 @@ public class ManageThingController {
 
     @Value("${csse.work.table}")
     private  String url;
+
+    @Autowired
+    private BaseAppOrgMappedService baseAppOrgMappedService;
     /**
      * 督查催办
      * @param deptid
@@ -46,18 +52,37 @@ public class ManageThingController {
     @ResponseBody
     @RequestMapping("/dbCount")
     public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
-        if(StringUtils.isBlank(deptid)){
-            deptid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+
+        Boolean flag = false;
+        String userId = CurrentUser.getUserId();
+        String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
+        BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
+        String name = baseAppOrgan.getName();
+        //当前用户是否为部首长
+        if (StringUtils.equals("部首长",name)) {
+            flag = true;
         }
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(time);
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("year",String.valueOf(calendar.get(Calendar.YEAR)));//年
-        paramMap.add("month",String.valueOf(calendar.get(calendar.MONTH)));//月
-        if(StringUtils.isNotBlank(deptid)) {
-            paramMap.add("organId", deptid);//单位id
+        List<JSONObject> dataList = new ArrayList<JSONObject>();
+        if(flag && StringUtils.isBlank(deptid)){
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(time);
+            paramMap.add("year", String.valueOf(calendar.get(Calendar.YEAR)));//年
+            paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//月
+            dataList = getJsonData.getJson(paramMap, "首长督查催办");
+        }else {
+            if (StringUtils.isBlank(deptid)) {
+                deptid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(time);
+            paramMap.add("year", String.valueOf(calendar.get(Calendar.YEAR)));//年
+            paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//月
+            if (StringUtils.isNotBlank(deptid)) {
+                paramMap.add("organId", deptid);//单位id
+            }
+            dataList = getJsonData.getJson(paramMap, "督查催办");
         }
-        List<JSONObject> dataList = getJsonData.getJson(paramMap, "督查催办");
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("onTime",dataList.get(0).get("onTimebj"));//按时办结
         dataMap.put("timeOutEnd",dataList.get(0).get("overTimebj"));//超时办结
@@ -65,7 +90,7 @@ public class ManageThingController {
         dataMap.put("working",dataList.get(0).get("onTimeblz"));//时限内在办
         dataMap.put("dayNumber",dataList.get(0).get("aveDays"));//平均办理天数
         String bjl = dataList.get(0).get("wcl").toString();
-        bjl = bjl.substring(0,bjl.lastIndexOf(".")+2);
+        bjl = bjl.substring(0,bjl.lastIndexOf(".")+2)+"%";
         dataMap.put("percentage",bjl);//办结率
         dataMap.put("total",dataList.get(0).get("zsl"));//督办总量
         Response.json(new ResponseValueUtils().success(dataMap));
