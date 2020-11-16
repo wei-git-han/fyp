@@ -401,15 +401,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         result.put("zx", zxCount);
         result.put("lx", lxCount);
         //result.put("qj", qjCount);
-        int qjSum = 0;
-        if(StringUtils.equals("root",dept.getParentId())){
-            for (Object object : ja1) {
-                JSONObject jo = (JSONObject)object;
-                qjSum = Integer.valueOf(jo.getString("num"));
-            }
-        }else{
-            qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
-        }
+        int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
 
         result.put("qj", qjSum);
 
