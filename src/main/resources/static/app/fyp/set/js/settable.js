@@ -9,10 +9,10 @@ var pageModule = function () {
 		  grid = $("#gridcont").createGrid({
 			columns:[
 						{display:"姓名",name:"userName",width:"15%",align:"center",render:function(rowdata,n){
-							return rowdata.userName;
+							return rowdata.userName;                                         
 						}},
 						{display:"单位名称",name:"deptName",width:"40%",align:"center",render:function(rowdata){
-							return rowdata.deptName;
+							return rowdata.deptName;                                         
 						}},
 						{display:"角色配置",name:" roleType",width:"15%",align:"center",render:function(rowdata){
 							var roleType = "";
@@ -27,9 +27,6 @@ var pageModule = function () {
 							}
 							if(rowdata.roleType ==3){
 								roleType = "在编人员";
-							}
-							if(rowdata.roleType ==5){
-								roleType = "局首长";
 							}
 							return roleType;
 						}},
@@ -50,7 +47,7 @@ var pageModule = function () {
 			url: listurl
 	   });
 	}
-
+	
 	//树
 	var initUnitTree = function(){
 		//姓名
@@ -62,7 +59,7 @@ var pageModule = function () {
 				$("#userName").val(data.node.text);
 				$("#userId").val(data.node.id);
 			}
-		});
+		}); 
 		//单位
 		$("#deptName").createSelecttree({
 			url :deptTreeUrl,
@@ -74,7 +71,7 @@ var pageModule = function () {
 			}
 		});
 	}
-
+	
 	var initother = function(){
 		/*搜索 */
 		$("#sure").click(function(){
@@ -82,12 +79,12 @@ var pageModule = function () {
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
-
+		    
 		//重置
 		$("#reset").click(function(){
 			removeInputData(["userId","userName","deptId","deptName","roleType"]);
 		});
-
+		
 		/* 新增add */
 		$("#add").click(function(){
 			newbootbox.newdialog({
@@ -99,7 +96,7 @@ var pageModule = function () {
 				url:"setadd.html",
             })
 		});
-
+		
 		//编辑edit
 		$("#edit").click(function(){
 			var datas = grid.getcheckrow();
@@ -114,11 +111,11 @@ var pageModule = function () {
 					header:true,
 					title:"新增问题",
 					url:"setadd.html?id="+id
-				})
+				}) 
 			}
 		});
-
-
+		
+		
 		/* 删除del */
 		$("#del").click(function() {
 			var datas = grid.getcheckrow();
@@ -152,7 +149,7 @@ var pageModule = function () {
 			}
 		})
 	}
-
+	
     return {
         //加载页面处理程序
         initControl: function () {

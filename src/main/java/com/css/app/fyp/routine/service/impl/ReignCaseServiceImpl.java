@@ -124,7 +124,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         String userId = CurrentUser.getUserId();
         this.analyseData(userId, "desktop_online_api", System.currentTimeMillis());
         BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
-        String organid = baseAppUser.getOrganid();
+        String organid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+        //String organid = baseAppUser.getOrganid();
         Map<String,Object> userFilter = new HashMap<>();
         userFilter.put("organid", organid);
         List<BaseAppUser> baseAppUserList = baseAppUserService.queryList(userFilter);
@@ -138,11 +139,17 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             int userCount = baseAppUserService.queryTotal(filter);
             reignCaseVo.setUserCount(userCount);
             //在线人数
-            List<String> collect = userIdList.stream().filter(item -> userCollect.contains(item)).collect(Collectors.toList());
+            //List<String> collect = userIdList.stream().filter(item -> userCollect.contains(item)).collect(Collectors.toList());
+            List<String> collect = userIdList;
             Integer peopleOnlineCount =  collect.size();
             reignCaseVo.setPeopleOnlineCount(peopleOnlineCount);
             //在线率
-            String onlineRate = this.txfloat(userCount, peopleOnlineCount);
+            String onlineRate = "";
+            if(userCount > 0){
+                onlineRate = this.txfloat(peopleOnlineCount,userCount);
+            }else {
+                onlineRate = "0";
+            }
             reignCaseVo.setOnlineRate(onlineRate);
             //本日峰值
             if (peopleOnlineCount > toDayCount) {
@@ -327,6 +334,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         return userList;
     }
 
+    JSONObject jsonObj = null;
+
     private JSONObject getUserTreeFyp(String id){
         String userId=CurrentUser.getUserId();
 //		long time1 =System.currentTimeMillis();
@@ -341,8 +350,10 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         //在线人员Id 集合
         List<String> onlineUserIds=getOnlineUserIds(onlineUsers);
 
-
-        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
+        if(jsonObj==null){
+            jsonObj =  userLeaveSettingService.getQxjJson();
+        }
+//        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
         JSONArray ja1=new JSONArray();
         JSONArray ja2=new JSONArray();
         if(jsonObj!=null) {
@@ -391,6 +402,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         result.put("lx", lxCount);
         //result.put("qj", qjCount);
         int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+
         result.put("qj", qjSum);
 
         //办公数量   总数-请假的数 =办公的数

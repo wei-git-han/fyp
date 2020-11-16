@@ -90,6 +90,7 @@ public class ManageDocumentController {
         }else{
             paramMap.add("deptid",deptid);
         }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         paramMap.add("time",null);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
         Object data;
@@ -174,6 +175,10 @@ public class ManageDocumentController {
         for (String userid: userList) {
             sb.append(userid+",");
         }
-        return sb.toString().substring(0,sb.length()-1);
+        String ss = "";
+        if (StringUtils.isNotBlank(sb.toString())){
+            ss = sb.toString().substring(0,sb.length()-1);
+        }
+        return ss;
     }
 }

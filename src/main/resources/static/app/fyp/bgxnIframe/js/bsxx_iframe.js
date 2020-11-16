@@ -54,7 +54,7 @@ var pageModule = function() {
 					$('#dayNumber').html(res.data.dayNumber)
 					$('#timeOutEnd').html(res.data.timeOutEnd)
 					$('#working').html(res.data.working)
-					$('#percentage').html(res.data.percentage+'%')
+					$('#percentage').html(res.data.percentage)
 				}
 			}
 		})
@@ -72,10 +72,12 @@ var pageModule = function() {
 			initNum();
 		});
 		$(".date-picker1").datepicker({
-			language: "zh-CN",
-			rtl: Metronic.isRTL(),
-			orientation: "",
-			autoclose: true
+			language:"zh-CN",
+            rtl: Metronic.isRTL(),
+            orientation: "",
+            format: "yyyy-mm",
+            minViewMode: 1,
+            autoclose: true
 		}).on("changeDate",function(){
 			initNum();
  		});

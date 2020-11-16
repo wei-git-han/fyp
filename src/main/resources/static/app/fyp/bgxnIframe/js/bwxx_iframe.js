@@ -26,12 +26,6 @@ var pageModule = function () {
 						getCircleChartData();
 					}
 				});
-			}
-		});
-		
-		$ajax({
-			url:userTreeUrl,
-			success:function(data){
 				$("#deptName1").createSelecttree({
 					data : data,
 					width : '100%',
@@ -54,9 +48,35 @@ var pageModule = function () {
 				});
 			}
 		});
+
+		// $ajax({
+		// 	url:userTreeUrl,
+		// 	success:function(data){
+		// 		$("#deptName1").createSelecttree({
+		// 			data : data,
+		// 			width : '100%',
+		// 			success : function(data, treeobj) {},
+		// 			selectnode : function(e, data) {
+		// 				$("#deptName1").val(data.node.text);
+		// 				$("#deptId1").val(data.node.id);
+		// 				getBanwenAll();
+		// 			}
+		// 		});
+		// 		$("#deptName2").createSelecttree({
+		// 			data : data,
+		// 			width : '100%',
+		// 			success : function(data, treeobj) {},
+		// 			selectnode : function(e, data) {
+		// 				$("#deptName2").val(data.node.text);
+		// 				$("#deptId2").val(data.node.id);
+		// 				getFawenAll();
+		// 			}
+		// 		});
+		// 	}
+		// });
 	}
-	
-	
+
+
     var getBanwenAll= function(){
         $.ajax({
             url:"/app/fyp/manageDocument/total",
@@ -111,12 +131,12 @@ var pageModule = function () {
             }
         })
     }
-	
-	
+
+
 	var init3dBarChart = function(id,data){ //echart
 		var charts = echarts.init(document.getElementById(id));
 		charts.setOption({
-			color: ['#1A54F7'], 
+			color: ['#1A54F7'],
 			title: {
 			    text: '',
 			    x: 'center'
@@ -220,8 +240,8 @@ var pageModule = function () {
 			}]
 		});
 	}
-	
-	
+
+
 	var getAreaChartData = function () {
 		$.ajax({
 			url:'/app/fyp/manageDocument/trend',
@@ -283,7 +303,7 @@ var pageModule = function () {
 			}
 		})
 	}
-	
+
 	var initAreaChart = function(data){
 		var charts = echarts.init(document.getElementById("container3"));
 		charts.setOption({
@@ -356,7 +376,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/submitEfficiency',
 			dataType:'json',
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			async:false,
@@ -372,7 +392,7 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/handleEfficiency',
 			dataType:'json',
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			async:false,
@@ -389,7 +409,7 @@ var pageModule = function () {
 			dataType:'json',
 			async:false,
 			data:{
-				 deptid:'',
+				 deptid:$("#deptId4").val(),
 				 time:$("#searchDate4").val()
 			},
 			success:function(res){
@@ -402,7 +422,7 @@ var pageModule = function () {
 		})
 		initCircleChart(first,second,three);
 	}
- 
+
 	var initCircleChart = function(obj1,obj2,obj3){
 		var charts = echarts.init(document.getElementById("container4"));
 		var placeHolderStyle= {
@@ -420,7 +440,7 @@ var pageModule = function () {
 				color:'#04194D',
 				borderWidth:10
 			}
-				
+
 		}
 
 		var dataStyle = {
@@ -433,7 +453,7 @@ var pageModule = function () {
 					fontWeight:'bold',
 					color:'#0CB3F2'
 				}
-			},	
+			},
 		}
 		charts.setOption({
 			backgroundColor:'',
@@ -494,7 +514,7 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:obj1.percentage,
+						value:obj1.percentage||0,
 						itemStyle:{
 							normal:{
 								color:'#0CB1F2'
@@ -502,7 +522,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj1.percentage),
+						value:parseInt(135-(obj1.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				},
@@ -526,7 +546,7 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:obj2.percentage,
+						value:obj2.percentage||0,
 						itemStyle:{
 							normal:{
 								color:'#0CB1F2'
@@ -534,7 +554,7 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj2.percentage),
+						value:parseInt(135-(obj2.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				},
@@ -556,7 +576,7 @@ var pageModule = function () {
 						}
 					},
 					data:[{
-						value:obj3.percentage,
+						value:obj3.percentage||0,
 						itemStyle:{
 							normal:{
 								color:'#0CB1F2'
@@ -564,15 +584,15 @@ var pageModule = function () {
 						},
 						label:dataStyle
 					},{
-						value:parseInt(135-obj3.percentage),
+						value:parseInt(135-(obj3.percentage||0)),
 						itemStyle:placeHolderStyle
 					}],
 				}
 			]
 		});
 	}
-	
-	
+
+
 	var initother = function(){
 		//办文总量
 		$("#bwzl").click(function(){
@@ -590,7 +610,7 @@ var pageModule = function () {
 		$('#bgxl').click(function(){
 			getCircleChartData()
 		})
-		
+
 		$(".date-picker1").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
@@ -600,7 +620,7 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			getBanwenAll();//办文总量
 		});
-		
+
 		$(".date-picker2").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
@@ -610,7 +630,7 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			getFawenAll();//发文情况
 		});
-		
+
 		$(".date-picker4").datepicker({
 			language:"zh-CN",
 		    rtl: Metronic.isRTL(),
@@ -621,8 +641,8 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			getCircleChartData();//办公效率
 		});
-		
-		
+
+
 		$("#lineTypeBw").change(function(){
 			getBanwenAll();
 		});
@@ -630,7 +650,7 @@ var pageModule = function () {
 			getFawenAll();
 		});
 	}
-	
+
     return {
         //加载页面处理程序
         initControl: function () {
