@@ -146,6 +146,11 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 		return baseAppOrgMappedDao.findUsersByDeptidAndRoleType(dpetid);
 	}
 
+	@Override
+	public List<String> findUsersByDeptidNotConfig(String dpetid) {
+		return baseAppOrgMappedDao.findUsersByDeptidNotConfig(dpetid);
+	}
+
 
 	@Override
 	public String getUrlByType(String userId, String type) {
