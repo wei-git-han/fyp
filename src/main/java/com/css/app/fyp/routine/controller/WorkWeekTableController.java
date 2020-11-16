@@ -24,11 +24,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -54,11 +52,25 @@ public class WorkWeekTableController {
      */
     @ResponseBody
     @RequestMapping("/statementTablesList")
-    public void statementTablesList(String orgId, String weekTableType, String weekTableDate, String page, String pagesize) {
+    public void statementTablesList(String orgId, String weekTableType, String toDate, String page, String pagesize) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        int week = 0;
+        try {
+            Date date = new Date();
+            if(StringUtils.isNotBlank(toDate)){
+                date = format.parse(toDate);
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.setFirstDayOfWeek(Calendar.MONDAY);
+            calendar.setTime(date);
+            week = calendar.get(Calendar.WEEK_OF_YEAR);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         }
-        JSONArray maps = workWeekTableService.statementTablesList(orgId, weekTableType, weekTableDate, page, pagesize);
+        JSONArray maps = workWeekTableService.statementTablesList(orgId, weekTableType, String.valueOf(week), page, pagesize);
         Response.json(new ResponseValueUtils().success(maps));
     }
 

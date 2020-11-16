@@ -96,6 +96,9 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
         if (StringUtils.isNotEmpty(week)) {
             infoMap.add("week", week);
         }
+        if (StringUtils.isNotEmpty(userId)) {
+            infoMap.add("userId", userId);
+        }
         //String mapperUrl = "http://servers:port";
         String type = "fypzb";
         String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
