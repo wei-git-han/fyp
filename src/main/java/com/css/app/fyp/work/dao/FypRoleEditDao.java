@@ -41,4 +41,8 @@ public interface FypRoleEditDao extends BaseDao<FypRoleEdit> {
             "</if>" +
             "</script>")
     List<Map<String,Object>> findUserAll(String deptid);
+
+    //获取是否为首长标识
+    @Select("select role_type from fyp_role_edit where user_id = #{0}")
+    String queryObjectByUserId(String userId);
 }

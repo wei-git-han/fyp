@@ -1,32 +1,37 @@
-var listurl = {"url":"../data/grid.json","dataType":"text"};
+//var listurl = {"url":"../data/grid.json","dataType":"text"};
+var listurl = {"url":"/app/fyp/leadercadre/szList","dataType":"text"}
 var grid = null;
+var appInfo = {}
 var pageModule = function () {
 	var initgrid = function(){
         grid = $("#gridcont").createGrid({
 			columns:[
 						/* {display:"应用",name:"app",width:"15%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+							return rowdata.app;
 						}},
 						{display:"内容",name:"content",width:"17%",align:"left",render:function(rowdata){
-							return rowdata.content;                                         
+							return rowdata.content;
 						}},
 						{display:"发起人",name:"userName",width:"17%",align:"center",render:function(rowdata){
-							return rowdata.departmentName;                                        
+							return rowdata.departmentName;
 						}},
 						{display:"时间",name:"date",width:"40%",align:"center",render:function(rowdata){
-							return rowdata.date;    
+							return rowdata.date;
 						}},
 						{display:"操作",name:"操作",width:"11%",align:"center",render:function(rowdata){
-							return '<i class="fa fa fa-pencil" style="cursor:pointer;color: #2E85E0;padding:4px 5px;" onclick="editfn()" title="编辑"></i>';                                        
+							return '<i class="fa fa fa-pencil" style="cursor:pointer;color: #2E85E0;padding:4px 5px;" onclick="editfn()" title="编辑"></i>';
 						}} */
-						{display:"文件名称",name:"app",width:"30%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+						{display:"文件名称",name:"app",width:"50%",align:"center",render:function(rowdata,n){
+							return `<div title="${rowdata.documentTitle}">${rowdata.documentTitle}</div>`
 						}},
-						{display:"呈报单位",name:"app",width:"55%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+//						{display:"呈报单位",name:"app",width:"40%",align:"center",render:function(rowdata,n){
+//							return rowdata.app;
+//						}},
+						{display:"综合秘书",name:"app",width:"25%",align:"center",render:function(rowdata,n){
+                            return `<div title="${rowdata.zhmsName}">${rowdata.zhmsName}</div>`
 						}},
-						{display:"承办人",name:"app",width:"15%",align:"center",render:function(rowdata,n){
-							return rowdata.app;                                         
+						{display:"操作",name:"app",width:"25%",align:"center",render:function(rowdata,n){
+							return `<div onclick="openById('${rowdata.appId}','${rowdata.ip}','${n}')" >查看</div>`;
 						}},
 					 ],
 			width:"100%",
@@ -36,10 +41,23 @@ var pageModule = function () {
 			paramobj:{},
 			overflowx:false,
 			pageyno:false,
-			url: listurl
+			url: listurl,
+			loadafter:function(e){
+			    appInfo = {
+			        appId:e.data.appid,
+                    domain:e.data.url,
+                    url:e.data.weburl
+			    }
+			    if(e.data.total>0){
+					$('#dbNum').val(e.data.total);
+					$('#dbNum').show()
+				}else{
+					$('#dbNum').hide()
+				}
+			}
 	   });
 	}
-	
+
 	var initother = function(){
 	}
     return {
@@ -49,12 +67,10 @@ var pageModule = function () {
 		    initother();
         },
 		refreshPage:function () {
-
+			initgrid()
 		}
     }
 }();
-
-
-function editfn(){
-	alert(1)
+function openById(){
+	window.top.openfn1(appInfo.appId,appInfo.url+'/index.html',appInfo.domain)
 }

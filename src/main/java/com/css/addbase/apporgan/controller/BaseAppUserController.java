@@ -377,6 +377,19 @@ public class BaseAppUserController {
 		Response.json(flag);
 	}
 
-
+	@ResponseBody
+	@RequestMapping("/getSZ")
+	public void getSZ(){
+		Boolean flag = false;
+		String userId = CurrentUser.getUserId();
+		String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
+		BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
+		String name = baseAppOrgan.getName();
+		//当前用户是否为部首长
+		if (StringUtils.equals("首长",name)) {
+			flag = true;
+		}
+		Response.json(flag);
+	}
 
 }

@@ -12,6 +12,15 @@ html, body {
     border-color: #4C52E6;
     border-radius:0px !important
 }
+.filterDate > .form-control {
+	background: transparent;
+	border-color: #4C52E6;
+	/*border-radius:0px !important*/
+}
+.filterDate  .form-control[readonly]{
+	background: transparent;
+	color: #fff;
+}
 .filterDate .btn.default {
     border-radius: 0px !important;
 }
@@ -122,7 +131,7 @@ select{
 .newpage20 .newpage18:nth-child(2) {
 	background-position: 1px top;
 	/* border-bottom: 1px dashed #2E85E0 !important;*/
-	border-right: 1px dashed #2E85E0 !important; 
+	border-right: 1px dashed #2E85E0 !important;
 }
 
 .newpage20 .newpage18:nth-child(3) {

@@ -1,17 +1,29 @@
 var access_token=getUrlParam("access_token");
 var isAdminUrl = {"url":"/fyp/roleedit/getRole","dataType":"text"}; //人员树
+var getRoleUrl = {"url":"/app/base/user/getSZ","dataType":"text"}; //区分局内用户||部首长
 var url1 = {
   "url": "",
   "dataType": "text"
 };
 var defaultTime = 300000;
-var activeType = "start_page1";
+var activeType = "start_page1"
+var isSz = false
+$ajax({
+    url: getRoleUrl,
+    async:false,
+    data:{},
+    success: function(res) {
+        if(res==true){//true是部首长
+          isSz = true
+        }
+    }
+})
 var pageList = {
   rcgz: [{
       "title": "个人待办",
       "head": "个人待办",
       "english": "GIVE NOTICE",
-      "url": "/app/fyp/rcgzIframe/html/dbsx_card_iframe.html"
+      "url": isSz?"/app/fyp/rcgzIframe/html/dbsx_iframe.html":"/app/fyp/rcgzIframe/html/dbsx_card_iframe.html"
     }, {
       "title": "工作周表",
       "head": "工作周表",
@@ -66,7 +78,7 @@ var pageList = {
     }
   ]
 }
-var activeDoType = "rcgz"
+var activeDoType = ""
 var pageModule = function() {
   function isAdmin() {
     $ajax({
@@ -121,7 +133,7 @@ var pageModule = function() {
       activeDoType = this.id;
       setRefreshInterVal()
     })
-
+    $('.newlayout-switch-btn>span:first-child').click()
     //业务配置
     $("#set").click(function() {
       newbootbox.newdialog({
