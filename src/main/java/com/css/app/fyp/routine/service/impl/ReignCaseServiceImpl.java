@@ -334,7 +334,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         return userList;
     }
 
-    JSONObject jsonObj = null;
+//    JSONObject jsonObj = null;
 
     private JSONObject getUserTreeFyp(String id){
         String userId=CurrentUser.getUserId();
@@ -350,9 +350,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         //在线人员Id 集合
         List<String> onlineUserIds=getOnlineUserIds(onlineUsers);
 
-        if(jsonObj==null){
-            jsonObj =  userLeaveSettingService.getQxjJson();
-        }
+//        if(jsonObj==null){
+        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
+//        }
 //        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
         JSONArray ja1=new JSONArray();
         JSONArray ja2=new JSONArray();
