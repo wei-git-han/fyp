@@ -1,12 +1,23 @@
 var access_token=getUrlParam("access_token");
 var isAdminUrl = {"url":"/fyp/roleedit/getRole","dataType":"text"}; //人员树
+var getRoleUrl = {"url":"/app/base/user/getSZ","dataType":"text"}; //区分局内用户||部首长
 var url1 = {
   "url": "",
   "dataType": "text"
 };
 var defaultTime = 300000;
 var activeType = "start_page1"
-var isSz = true
+var isSz = false
+$ajax({
+    url: getRoleUrl,
+    async:false,
+    data:{},
+    success: function(res) {
+        if(res==true){//true是部首长
+          isSz = true
+        }
+    }
+})
 var pageList = {
   rcgz: [{
       "title": "个人待办",

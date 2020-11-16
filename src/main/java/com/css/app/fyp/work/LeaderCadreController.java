@@ -51,11 +51,6 @@ public class LeaderCadreController {
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObjectResult = new JSONObject();
         jsonObjectResult = leaderCadreService.szList ("1","1000", AppConstant.APP_SZBG, AppInterfaceConstant.WEB_TO_SZ_SPYB);
-//        String total = (String)jsonObjectResult.get("total");
-//        List list = new ArrayList();
-//        List list1 = newA
-//        list = (List)jsonObjectResult.get("rows");
-//        Object o = list.get(0);
         Response.json(new ResponseValueUtils().success(jsonObjectResult));
     }
 

@@ -1,6 +1,7 @@
 //var listurl = {"url":"../data/grid.json","dataType":"text"};
 var listurl = {"url":"/app/fyp/leadercadre/szList","dataType":"text"}
 var grid = null;
+var appInfo = {}
 var pageModule = function () {
 	var initgrid = function(){
         grid = $("#gridcont").createGrid({
@@ -42,7 +43,11 @@ var pageModule = function () {
 			pageyno:false,
 			url: listurl,
 			loadafter:function(e){
-			    console.log(e)
+			    appInfo = {
+			        appId:e.data.appid,
+                    domain:e.data.url,
+                    url:e.data.weburl
+			    }
 			}
 	   });
 	}
@@ -60,8 +65,6 @@ var pageModule = function () {
 		}
     }
 }();
-
-
-function openById(appid,domain){
-	window.top.openfn1(appid,'',domain)
+function openById(){
+	window.top.openfn1(appInfo.appId,appInfo.url+'/index.html',appInfo.domain)
 }

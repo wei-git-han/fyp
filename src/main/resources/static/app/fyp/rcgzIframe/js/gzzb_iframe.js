@@ -1,5 +1,5 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
-var getRoleUrl = {"url":"/app/base/user/getBSZ","dataType":"text"}; //区分局内用户||部首长
+var getRoleUrl = {"url":"/app/base/user/getSZ","dataType":"text"}; //区分局内用户||部首长
 var gzzbUrl;
 var pageModule = function () {
 	//区分局内用户||部首长
