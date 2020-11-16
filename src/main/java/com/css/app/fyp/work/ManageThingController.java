@@ -71,12 +71,6 @@ public class ManageThingController {
         Response.json(new ResponseValueUtils().success(dataMap));
     }
 
-    public static void main(String args[]){
-        String bjl = "1321.212";
-        bjl = bjl.substring(0,bjl.lastIndexOf(".")+2);
-        System.out.println(bjl);
-    }
-
     /**
      * 工作周表
      * @param time 年-月
