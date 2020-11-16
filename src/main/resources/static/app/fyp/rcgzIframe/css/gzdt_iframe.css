@@ -88,6 +88,9 @@ dl .content *{
 	line-height: 1.35em!important;
 	white-space: pre-wrap;
 }
+dl .content img{
+	display: none!important;
+}
 dl dt{
 	width: 200px;
 	height:125px;

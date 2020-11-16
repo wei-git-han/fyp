@@ -67,7 +67,7 @@ public class GetJsonData {
                             BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
                             url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
                             if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
-                                map.add("deptid", getUsers(data.get("ORG_ID").toString()));
+                                map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));
                             }
                             setData(data,url,map,token,jsons);
                             break;
@@ -247,6 +247,32 @@ public class GetJsonData {
     private String getUsers(String dpetid){
         //获取单位下且在编的人员
         List<String> userList = baseAppOrgMappedService.findUsersByDeptidAndRoleType(dpetid);
+        StringBuilder sb = new StringBuilder();
+        for (String userid: userList) {
+            sb.append(userid+",");
+        }
+        if(StringUtils.isBlank(sb.toString())) {
+            return "";
+        }
+        return sb.toString().substring(0,sb.length()-1);
+    }
+
+    private String getGwclUsers(String dpetid){
+        //获取单位下且在编的人员
+        List<String> userList = baseAppOrgMappedService.findUsersByDeptidAndRoleType(dpetid);
+        StringBuilder sb = new StringBuilder();
+        for (String userid: userList) {
+            sb.append(userid+",");
+        }
+        if(StringUtils.isBlank(sb.toString())) {
+            return "";
+        }
+        return sb.toString().substring(0,sb.length()-1);
+    }
+
+    private String findUsersByDeptidNotConfig(String dpetid){
+        //获取单位下且在编的人员
+        List<String> userList = baseAppOrgMappedService.findUsersByDeptidNotConfig(dpetid);
         StringBuilder sb = new StringBuilder();
         for (String userid: userList) {
             sb.append(userid+",");

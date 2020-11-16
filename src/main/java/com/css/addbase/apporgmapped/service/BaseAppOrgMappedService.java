@@ -178,6 +178,8 @@ public interface BaseAppOrgMappedService {
 	 */
 	List<String> findUsersByDeptidAndRoleType(String dpetid);
 
+	List<String> findUsersByDeptidNotConfig(String dpetid);
+
 	BaseAppOrgMapped getBaseAppOrgMapped(String type);
 
 	BaseAppOrgMapped getUrlByAppId(String appId,String orgId);

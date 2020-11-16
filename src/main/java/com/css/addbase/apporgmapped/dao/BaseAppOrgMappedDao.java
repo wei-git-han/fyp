@@ -34,6 +34,12 @@ public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
             "where b.tree_path like '%'||#{0}||'%' and c.user_id is not null and c.user_id !=''")
     List<String> findUsersByDeptidAndRoleType(String dpetid);
 
+    @Select("select bau.id from base_app_user bau " +
+            "where bau.organid in " +
+            "(select id from BASE_APP_ORGAN start with ID=#{0}" +
+            "connect by prior ID = PARENT_ID) and bau.id not in (select c.user_id from config_user_dept c)")
+    List<String> findUsersByDeptidNotConfig(String dpetid);
+
     @Select("select * from BASE_APP_ORG_MAPPED where TYPE = #{0} and ORG_ID = #{1}")
     BaseAppOrgMapped getUrlByAppId(String appId,String orgId);
 }
