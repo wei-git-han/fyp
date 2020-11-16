@@ -1,4 +1,4 @@
-var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //单位树
 var getRoleUrl = {"url":"/app/base/user/getSZ","dataType":"text"}; //区分局内用户||部首长
 var gzzbUrl;
 var pageModule = function () {
@@ -10,6 +10,8 @@ var pageModule = function () {
 			success: function(res) {
 				if(res){//true是部首长
 					$("#deptFilter,#gjzb").show();
+					$("#gjzb").addClass('active').siblings().removeClass("active");
+					$("#add").hide();
 					initPlan('gjzb');
 				}else{
 					if(flag == 'grzb'){
@@ -30,16 +32,23 @@ var pageModule = function () {
 	var initPlan = function(type){
 		var startDate='';
 		var endDate='';
+		var params = {
+			weekTableType:type,
+			toDate:$("#time").val()
+		}
 		if(type=="bjzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
 		}
 		if(type=="grzb"){
 			gzzbUrl = {"url":"/app/fyp/workWeekTable/list","dataType":"text"};
-			time=$("#time").val();
+		}
+		if(type=="gjzb"){
+			gzzbUrl = {"url":"/app/fyp/workWeekTable/statementTablesList","dataType":"text"};
+			params.orgId = $("#deptId").val()
 		}
 		$ajax({
 			url: gzzbUrl,
-			data:{weekTableType:type,userId:$("#deptId").val(),toDate:time},
+			data:params,
 			success: function(res) {
 				if (res.data.length<1 || !res.data) {
 					$("#mainContent").html("");
@@ -179,7 +188,7 @@ var pageModule = function () {
 			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
 			// getFawenAll();//发文情况
-			getRole('grzb');
+			getRole($(".nav>li.active").attr("data"));
 		});
 		//各局周表&本局周表 点击事件
 		$(".nav>li").click(function() {
@@ -190,9 +199,9 @@ var pageModule = function () {
 				$("#deptFilter").show();
 			}
 			if($(".nav>li.active").attr("data") == "grzb"){
-				$("#caozuoBtn").show();
+				$("#add").show();
 			}else{
-				$("#caozuoBtn").hide();
+				$("#add").hide();
 			}
 		});
 
