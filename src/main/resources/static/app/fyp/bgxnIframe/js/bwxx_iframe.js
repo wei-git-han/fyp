@@ -1,9 +1,6 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var isSz = window.top.isSz||false
-if(isSz==true){
-	deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //人员树
-}
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {
@@ -658,7 +655,12 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-        	initUnitTree();
+			if(isSz==true){
+				deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //人员树
+				initUnitTree();
+			}else{
+				$('.hiddenByUser').hide()
+			}
         	getBanwenAll();//默认加载办文
             initother();
         },

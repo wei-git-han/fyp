@@ -40,13 +40,13 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/total")
-    public void total(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
+    public void total(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date time,String deptid) {
 
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办文总量");
         paramMap.add("type",type);
         if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",getUsers(deptid));
+            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
         }else{
             paramMap.add("deptid",deptid);
         }
@@ -61,12 +61,12 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/overview")
-    public void overview(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
+    public void overview(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
         paramMap.add("type",type);
         if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",getUsers(deptid));
+            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
         }else{
             paramMap.add("deptid",deptid);
         }
@@ -86,7 +86,7 @@ public class ManageDocumentController {
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
         if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",getUsers(deptid));
+            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
         }else{
             paramMap.add("deptid",deptid);
         }
@@ -114,7 +114,7 @@ public class ManageDocumentController {
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
         if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",getUsers(deptid));
+            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
         }else{
             paramMap.add("deptid",deptid);
         }
@@ -134,7 +134,7 @@ public class ManageDocumentController {
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
         if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",getUsers(deptid));
+            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
         }else{
             paramMap.add("deptid",deptid);
         }
@@ -154,7 +154,7 @@ public class ManageDocumentController {
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);
         if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",getUsers(deptid));
+            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
         }else{
             paramMap.add("deptid",deptid);
         }
@@ -171,6 +171,25 @@ public class ManageDocumentController {
     private String getUsers(String dpetid){
         //获取单位下且在编的人员
         List<String> userList = baseAppOrgMappedService.findUsersByDeptidAndRoleType(dpetid);
+        StringBuilder sb = new StringBuilder();
+        for (String userid: userList) {
+            sb.append(userid+",");
+        }
+        String ss = "";
+        if (StringUtils.isNotBlank(sb.toString())){
+            ss = sb.toString().substring(0,sb.length()-1);
+        }
+        return ss;
+    }
+
+    /**
+     * 获取单位下的用户id
+     * @param dpetid
+     * @return
+     */
+    private String findUsersByDeptidNotConfig(String dpetid){
+        //获取单位下且在编的人员
+        List<String> userList = baseAppOrgMappedService.findUsersByDeptidNotConfig(dpetid);
         StringBuilder sb = new StringBuilder();
         for (String userid: userList) {
             sb.append(userid+",");

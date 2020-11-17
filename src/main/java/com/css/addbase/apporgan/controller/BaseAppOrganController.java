@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.css.app.fyp.work.service.FypRoleEditService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,8 @@ public class BaseAppOrganController {
 	private BaseAppUserService baseAppUserService;
 	@Autowired
 	private BaseAppOrgMappedService baseAppOrgMappedService;
+	@Autowired
+	private FypRoleEditService fypRoleEditService;
 
 	/**
 	 * 获取以当前登录人部门为根节点的部门树(获取全部的叶子节点)
@@ -46,7 +49,14 @@ public class BaseAppOrganController {
 	@RequestMapping(value = "/tree")
 	@ResponseBody
 	public Object getDeptTree() {
-		String organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		//查是否是保障管理员
+		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		String organId = "root";
+		if(role == 0){
+			organId = "root";
+		}else{
+			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		}
 		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
 		JSONObject list= OrgUtil.getOrganTree(organs, organId);
 		return list;

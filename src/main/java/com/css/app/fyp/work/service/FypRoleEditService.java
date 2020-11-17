@@ -31,4 +31,6 @@ public interface FypRoleEditService {
 	List<Map<String,Object>> findUserAll(String deptid);
 	//获取是否为首长标识
 	String queryObjectByUserId(String userId);
+
+	int queryTypeByUserId(String userId);
 }
