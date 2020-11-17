@@ -210,9 +210,9 @@ var pageModule = function () {
 								html5 += "<dt></dt>";
 							};
 							html5 += '	<dd>';
-							if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !=
+							if (items.content != null && typeof(items.content) != "undefined" && items.content !=
 								"") {
-								html9 += '<span class="span1" title="' + items.weekTableContent + '">' + items.weekTableContent + '</span>';
+								html9 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>';
 							};
 							if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
 								"") {
@@ -248,8 +248,8 @@ var pageModule = function () {
 								html7 += "<dt></dt>";
 							};
 							html7 += '	<dd>';
-							if (items.weekTableContent != null && typeof(items.weekTableContent) != "undefined" && items.weekTableContent !="") {
-								html10 += '<span class="span1" title="' + items.weekTableContent + '">' + items.weekTableContent + '</span>';
+							if (items.content != null && typeof(items.content) != "undefined" && items.content !="") {
+								html10 += '<span class="span1" title="' + items.content + '">' + items.content + '</span>';
 							};
 							if (items.receiverUtil != null && typeof(items.receiverUtil) != "undefined" && items.receiverUtil !=
 								"") {
