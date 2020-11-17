@@ -2,10 +2,13 @@ package com.css.app.fyp.routine.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
+import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.routine.service.WorkWeekTableService;
+import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
+import com.css.base.utils.HttpClientUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -38,12 +42,12 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
             //部首长
             String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/count/publish";
             String zoneId = orgId;
-            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableType, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         } else {
             //局用户
             String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/count/publish";
             String zoneId = orgId;
-            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableDate, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
+            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableType, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
         }
         return jsonData;
     }
@@ -81,34 +85,46 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     private JSONArray getJsonArrayData (String page, String pagesize, String userId, String year, String week, String zoneId, String url) {
         JSONArray jsonData =new JSONArray();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        if (StringUtils.isNotEmpty(page)) {
-            infoMap.add("page", page);
-        }
-        if (StringUtils.isNotEmpty(pagesize)) {
-            infoMap.add("pagesize", pagesize);
-        }
-        if (StringUtils.isNotEmpty(zoneId)) {
-            infoMap.add("zoneId", zoneId);
-        }
-        if (StringUtils.isNotEmpty(year)) {
-            infoMap.add("year", year);
-        }
-        if (StringUtils.isNotEmpty(week)) {
-            infoMap.add("week", week);
-        }
-        if (StringUtils.isNotEmpty(userId)) {
-            infoMap.add("userId", userId);
-        }
+//        if (StringUtils.isNotEmpty(page)) {
+//            infoMap.add("page", page);
+//        }
+//        if (StringUtils.isNotEmpty(pagesize)) {
+//            infoMap.add("pagesize", pagesize);
+//        }
+//        if (StringUtils.isNotEmpty(zoneId)) {
+//            infoMap.add("zoneId", zoneId);
+//        }
+//        if (StringUtils.isNotEmpty(year)) {
+//            infoMap.add("year", year);
+//        }
+//        if (StringUtils.isNotEmpty(week)) {
+//            infoMap.add("week", week);
+//        }
+//        if (StringUtils.isNotEmpty(userId)) {
+//            infoMap.add("userId", userId);
+//        }
         //String mapperUrl = "http://servers:port";
         String type = "fypzb";
-        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
-        if (StringUtils.isNotEmpty(mapperUrl)) {
-            String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
+//        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMapped("", userId, type);
+        String res = "";
+        if (bm != null) {
+//            String sendUrl = mapperUrl + url;
+            String sendUrl = bm.getUrl() + bm.getWebUri();
+            userId = userId.replace("-","");
+            zoneId = zoneId.replace("-","");
+            sendUrl += File.separator + userId + File.separator + year + File.separator + week + File.separator + zoneId;
+            sendUrl+="?access_token=" + SSOAuthFilter.getToken();
+//            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
+//            jsonData = CrossDomainUtil.getJsonArrayDataByGet(sendUrl, infoMap);
+            res = HttpClientUtils.requstByGetMethod(sendUrl);
+//            System.out.println("============="+res+"=============");
+//            logger.info(res);
         } else {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;
         }
+        jsonData = JSONArray.parseArray(res);
         return jsonData;
     }
 

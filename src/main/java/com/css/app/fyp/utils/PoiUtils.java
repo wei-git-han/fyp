@@ -2,6 +2,7 @@ package com.css.app.fyp.utils;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.formula.functions.T;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -70,6 +71,7 @@ public class PoiUtils {
                 for(int j =0;j < cell;j++){
                     //列内容
                     if(null!=row.getCell(j)) {
+                        row.getCell(j).setCellType(Cell.CELL_TYPE_STRING);
                         valueList.add(row.getCell(j).getStringCellValue());
                     }
                 }
