@@ -13,6 +13,7 @@ import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgan.util.OrgUtil;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.app.fyp.work.service.FypRoleEditService;
 import com.css.base.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,8 @@ public class DictController {
 	private BaseAppOrgMappedService baseAppOrgMappedService;
 	@Autowired
 	private BaseAppUserService baseAppUserService;
+	@Autowired
+	private FypRoleEditService fypRoleEditService;
 
 	/**
 	 * 列表
@@ -124,13 +127,20 @@ public class DictController {
 	public void getDeptList(HttpServletRequest request) {
 		JSONObject result = new JSONObject();
 		JSONArray jsons = new JSONArray();
-		String organid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
-		JSONArray list=  getUserList(organid,jsons);
+		//查是否是保障管理员
+		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		String organId = "root";
+		if(role == 0){
+			organId = "root";
+		}else{
+			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		}
+		JSONArray list=  getUserList(organId,jsons);
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("parentId", organid);
+		map.put("parentId", organId);
 		int depts_count= baseAppOrganService.queryTotal(map);
 		map=new HashMap<String,Object>();
-		map.put("departmentId", organid);
+		map.put("departmentId", organId);
 		int users_count= baseAppUserService.queryTotal(map);
 
 		result.put("total", depts_count + users_count);
@@ -146,13 +156,20 @@ public class DictController {
 	public void getAllUserList(HttpServletRequest request) {
 		JSONObject result = new JSONObject();
 		JSONArray jsons = new JSONArray();
-		String organid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
-		JSONArray list=  getAllUsers(organid,jsons);
+		//查是否是保障管理员
+		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		String organId = "root";
+		if(role == 0){
+			organId = "root";
+		}else{
+			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		}
+		JSONArray list=  getAllUsers(organId,jsons);
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("parentId", organid);
+		map.put("parentId", organId);
 		int depts_count= baseAppOrganService.queryTotal(map);
 		map=new HashMap<String,Object>();
-		map.put("departmentId", organid);
+		map.put("departmentId", organId);
 		int users_count= baseAppUserService.queryTotal(map);
 
 		result.put("total", depts_count + users_count);

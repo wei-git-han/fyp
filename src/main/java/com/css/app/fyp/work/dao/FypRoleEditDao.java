@@ -45,4 +45,7 @@ public interface FypRoleEditDao extends BaseDao<FypRoleEdit> {
     //获取是否为首长标识
     @Select("select role_type from fyp_role_edit where user_id = #{0}")
     String queryObjectByUserId(String userId);
+
+    @Select("select role_type from fyp_role_edit where user_id = #{0}")
+    int queryTypeByUserId(String userId);
 }

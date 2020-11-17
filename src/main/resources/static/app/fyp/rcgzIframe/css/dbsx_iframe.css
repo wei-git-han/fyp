@@ -60,3 +60,9 @@ select{
 	margin-left: 5px;
 	display:none
 }
+.viewBtn{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor:pointer
+}

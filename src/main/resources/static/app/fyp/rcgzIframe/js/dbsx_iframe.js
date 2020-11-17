@@ -21,23 +21,23 @@ var pageModule = function () {
 						{display:"操作",name:"操作",width:"11%",align:"center",render:function(rowdata){
 							return '<i class="fa fa fa-pencil" style="cursor:pointer;color: #2E85E0;padding:4px 5px;" onclick="editfn()" title="编辑"></i>';
 						}} */
-						{display:"文件名称",name:"app",width:"50%",align:"center",render:function(rowdata,n){
-							return `<div title="${rowdata.documentTitle}">${rowdata.documentTitle}</div>`
+						{display:"文件名称",name:"documentTitle",width:"40%",align:"center",render:function(rowdata,n){
+							return `<div class="viewBtn" title="${rowdata.documentTitle}">${rowdata.documentTitle}</div>`
 						}},
-//						{display:"呈报单位",name:"app",width:"40%",align:"center",render:function(rowdata,n){
-//							return rowdata.app;
-//						}},
-						{display:"综合秘书",name:"app",width:"25%",align:"center",render:function(rowdata,n){
-                            return `<div title="${rowdata.zhmsName}">${rowdata.zhmsName}</div>`
+						{display:"拟稿单位",name:"organName",width:"20%",align:"center",render:function(rowdata,n){
+							return `<div  class="viewBtn" onclick="openById()">${rowdata.organName}</div>`;
 						}},
-						{display:"操作",name:"app",width:"25%",align:"center",render:function(rowdata,n){
-							return `<div onclick="openById('${rowdata.appId}','${rowdata.ip}','${n}')" >查看</div>`;
+						{display:"拟稿人",name:"createMan",width:"25%",align:"center",render:function(rowdata,n){
+                            return `<div class="viewBtn" onclick="openById()" title="${rowdata.createMan}">${rowdata.createMan}</div>`
 						}},
+						{display:"拟稿时间",name:"date",width:"15%",align:"center",render:function(rowdata){
+                           return `<div class="viewBtn" onclick="openById()">${rowdata.createTime}</div>`
+                        }}
 					 ],
 			width:"100%",
 			height:"100%",
-			checkbox: true,
-			rownumberyon:true,
+			checkbox: false,
+			rownumberyon:false,
 			paramobj:{},
 			overflowx:false,
 			pageyno:false,

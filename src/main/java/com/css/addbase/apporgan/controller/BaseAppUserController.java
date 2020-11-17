@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.css.app.fyp.work.service.FypRoleEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +54,8 @@ public class BaseAppUserController {
 	private OrgService orgService;
 	@Autowired
 	private BaseAppConfigService baseAppConfigService;
+	@Autowired
+	private FypRoleEditService fypRoleEditService;
 	
 	/**
 	 * 获取指定部门下的人员列表
@@ -123,7 +127,14 @@ public class BaseAppUserController {
 	@RequestMapping(value = "/tree")
 	@ResponseBody
 	public Object getUserTree() {
-		String organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		//查是否是保障管理员
+		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		String organId = "root";
+		if(role == 0){
+			organId = "root";
+		}else{
+			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		}
 		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
 		List<BaseAppUser> users = baseAppUserService.queryList(null);
 		if (StringUtils.isNotEmpty(organId)) {
