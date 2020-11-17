@@ -55,6 +55,7 @@ public class WorkWeekTableController {
     public void statementTablesList(String orgId, String weekTableType, String toDate, String page, String pagesize) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         int week = 0;
+        int year = 0;
         try {
             Date date = new Date();
             if(StringUtils.isNotBlank(toDate)){
@@ -64,13 +65,14 @@ public class WorkWeekTableController {
             calendar.setFirstDayOfWeek(Calendar.MONDAY);
             calendar.setTime(date);
             week = calendar.get(Calendar.WEEK_OF_YEAR);
+            year = calendar.get(Calendar.YEAR);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         }
-        JSONArray maps = workWeekTableService.statementTablesList(orgId, weekTableType, String.valueOf(week), page, pagesize);
+        JSONArray maps = workWeekTableService.statementTablesList(orgId, String.valueOf(year), String.valueOf(week), page, pagesize);
         Response.json(new ResponseValueUtils().success(maps));
     }
 

@@ -7,10 +7,8 @@ import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.CrossDomainUtil;
-import com.css.base.utils.CurrentUser;
-import com.css.base.utils.Response;
-import com.css.base.utils.StringUtils;
+import com.css.base.filter.SSOAuthFilter;
+import com.css.base.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,8 +103,13 @@ public class ManageThingController {
     public void weeklyTable(@DateTimeFormat(pattern = "yyyy-MM") Date time) {
         JSONArray jsonArray = new JSONArray();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        jsonArray = CrossDomainUtil.getJsonArrayData(url, infoMap);
-        Response.json(jsonArray);
+        url+="?access_token=" + SSOAuthFilter.getToken();
+        String res = HttpClientUtils.requstByGetMethod(url);
+//        jsonArray = CrossDomainUtil.getJsonArrayData(url, infoMap);
+        jsonArray = JSONArray.parseArray(res);
+        JSONObject result = new JSONObject();
+        result.put("list",jsonArray);
+        Response.json("data",result);
     }
 
 }
