@@ -162,7 +162,7 @@ var pageModule = function () {
 					width:880,
 					height:600,
 					header:true,
-					title:"新增问题",
+					title:"编辑问题",
 					url:"add.html?id="+id,
 				}) 
 			}

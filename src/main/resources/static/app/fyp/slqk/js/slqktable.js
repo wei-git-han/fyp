@@ -179,7 +179,7 @@ var pageModule = function () {
 					width:880,
 					height:600,
 					header:true,
-					title:"新增",
+					title:"编辑",
 					url:"slqkadd.html?id="+id
 				}) 
 			}
