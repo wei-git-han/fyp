@@ -105,3 +105,52 @@ html, body {
 	background: -moz-linear-gradient(#053770, #038BB1);
 	background: -webkit-linear-gradient(#053770, #038BB1);
 }
+.dropdown-menu{
+	background-color: #073391;
+	color: #fff;
+}
+.datepicker table th{
+	color: #fff;
+}
+.datepicker table td{
+	color: #fff;
+}
+.datepicker table tr td.day:hover, .datepicker table tr td.day.focused {
+	background: #2686fc;
+	cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover, .datepicker tfoot tr th:hover {
+	background: #2686fc;
+}
+.datepicker table tr td span:hover {
+	background: #2686fc;
+}
+.dropdown-menu li{
+	background-color: #073391;
+	color: #FFF;
+}
+.dropdown-menu li > a span{
+	color: #fff;
+}
+.btn-default.active.focus,.open .btn-default.dropdown-toggle, .btn-default.active:focus, .btn-default.active:hover, .btn-default.focus:active, .btn-default:active:focus, .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
+	color: #fff;
+	background-color: #073391;
+	border-color: #8C8C8C;
+}
+.dropdown-menu li.selected a{
+	background-color: #073391;
+}
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
+	text-decoration: none;
+	background-image: none;
+	background-color: #2678FC;
+	color: #FFF;
+	filter: none;
+}
+.trees{
+	background-color: #041A51!important;
+	color: #fff9ec;
+}
+.jstree-wholerow-clicked,.jstree-wholerow-hovered{
+	background: #2686fc!important;
+}
