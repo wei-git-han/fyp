@@ -405,5 +405,11 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 		return baseAppOrgMapped;
 	}
 
+	@Override
+	public BaseAppOrgMapped queryByType(String type){
+		BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedDao.queryByType(type);
+		return baseAppOrgMapped;
+	}
+
 
 }

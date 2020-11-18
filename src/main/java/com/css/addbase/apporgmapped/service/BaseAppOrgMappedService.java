@@ -184,4 +184,6 @@ public interface BaseAppOrgMappedService {
 
 	BaseAppOrgMapped getUrlByAppId(String appId,String orgId);
 
+	BaseAppOrgMapped queryByType(String type);
+
 }

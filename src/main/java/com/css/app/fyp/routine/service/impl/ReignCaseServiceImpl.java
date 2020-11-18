@@ -87,7 +87,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             return;
         }
         String url = AppInterfaceConstant.WEB_INTERFACE_GWCL_ONLINE_SPGW;
-        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        //String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
+        BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedService.queryByType(type);
+        String mapperUrl = baseAppOrgMapped.getUrl();
         String sendUrl = mapperUrl + url;
         String leaveHref = qxjfzUrl;
         this.userIdList = this.getOnlineSituationApi(sendUrl);
@@ -286,11 +288,12 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         List<BaseAppUser> userList =new ArrayList<BaseAppUser>();
         String orgId = CurrentUser.getDepartmentId();
         String type = "desktop_online_api";
-        Object obj = baseAppOrgMappedService.orgMappedByOrgId("", "", type);
-        BaseAppOrgMapped mapper=null;
-        if(obj!=null && obj instanceof BaseAppOrgMapped) {
-            mapper =(BaseAppOrgMapped)obj;
-        }
+        //Object obj = baseAppOrgMappedService.orgMappedByOrgId("", "", type);
+        BaseAppOrgMapped mapper  = baseAppOrgMappedService.queryByType(type);
+       // BaseAppOrgMapped mapper=null;
+//        if(obj!=null && obj instanceof BaseAppOrgMapped) {
+//            mapper =(BaseAppOrgMapped)obj;
+//        }
         if(mapper==null) {
             System.err.println("desktop_online_api映射关系  配置错误...检查配置");
             throw new RuntimeException("desktop_online_api映射关系  配置错误...检查配置");

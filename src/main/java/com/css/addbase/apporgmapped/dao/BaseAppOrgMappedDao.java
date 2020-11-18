@@ -43,4 +43,7 @@ public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
 
     @Select("select * from BASE_APP_ORG_MAPPED where TYPE = #{0} and ORG_ID = #{1}")
     BaseAppOrgMapped getUrlByAppId(String appId,String orgId);
+
+    @Select("select * from BASE_APP_ORG_MAPPED where type = #{0}")
+    BaseAppOrgMapped queryByType(String type);
 }
