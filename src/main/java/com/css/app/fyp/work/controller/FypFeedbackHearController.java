@@ -58,6 +58,8 @@ public class FypFeedbackHearController {
 	public void list(Integer page, Integer limit,FypFeedbackHear fypFeedbackHear){
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
+		fypFeedbackHear.setSubmitUserId("");
+		fypFeedbackHear.setSubmitDeptId("");
 		Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(fypFeedbackHear), Map.class);
 		map.putAll(paramMap);
 		if(null!=fypFeedbackHear.getSubmitTimeBegin()&&null!=fypFeedbackHear.getSubmitTimeEnd()) {

@@ -13,6 +13,7 @@ import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgan.util.OrgUtil;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.utils.ResponseValueUtils;
+import com.css.app.fyp.work.entity.FypRoleEdit;
 import com.css.app.fyp.work.service.FypRoleEditService;
 import com.css.base.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,9 +129,9 @@ public class DictController {
 		JSONObject result = new JSONObject();
 		JSONArray jsons = new JSONArray();
 		//查是否是保障管理员
-		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		FypRoleEdit role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
 		String organId = "root";
-		if(role == 0){
+		if(role != null){
 			organId = "root";
 		}else{
 			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
@@ -157,9 +158,9 @@ public class DictController {
 		JSONObject result = new JSONObject();
 		JSONArray jsons = new JSONArray();
 		//查是否是保障管理员
-		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		FypRoleEdit role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
 		String organId = "root";
-		if(role == 0){
+		if(role != null){
 			organId = "root";
 		}else{
 			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
