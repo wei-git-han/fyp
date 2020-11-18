@@ -1,0 +1,80 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	color:#333;
+	font-size: 14px;
+}
+
+.pr100 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.newlayout-head{
+	position:absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height:100px;
+	line-height:100px;
+	font-size:22px;
+	font-weight: 700;
+	padding-left:25px;
+	color:#1C67E3;
+	border-bottom:1px solid #eee;
+	box-shadow: inset 0px 0px 2px #eee;
+}
+.newlayout-content{
+	width:100%;
+	height:100%;
+	padding-top:110px;
+}
+.divLeft{
+    float: left;
+    width: 200px;
+    height:100%;
+}
+.divRight{
+    height:100%;
+    overflow: hidden;
+}
+.table-advance thead tr th {
+	background-color: #1C67E3;
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	text-align: center!important;
+}
+#gridcont_content{
+	background: #fff;
+}
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: #F1F1F1;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: transparent;
+}
+.table > tbody > tr:hover,.table > tbody > tr td:hover{
+	color: #333;
+}
+.table > thead > tr > th{
+	vertical-align: middle!important;
+}
+ .table-bordered > thead > tr > th{
+	border-color: #DDDDDD;
+}
+.table > tbody > tr > td{
+	border-color: #DDDDDD;
+}
+.table-bordered {
+    border-color: #DDDDDD;
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1C67E3;
+    border-color: #1C67E3;
+}
