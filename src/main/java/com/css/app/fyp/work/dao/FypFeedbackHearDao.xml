@@ -19,6 +19,14 @@
 			<if test="submitUserId!=null and submitUserId!=''">
 				and SUBMIT_USER_ID =#{submitUserId}
 			</if>
+
+			<if test="submitDeptName != null and submitDeptName !=''">
+				and SUBMIT_DEPT_NAME = #{submitDeptName}
+			</if>
+
+			<if test="submitUserName != null and submitUserName !=''">
+				and SUBMIT_USER_NAME = #{submitUserName}
+			</if>
 			<!--状态-->
 			<if test="status!=null">
 				and STATUS =#{status}
