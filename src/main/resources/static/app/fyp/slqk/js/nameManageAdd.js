@@ -77,7 +77,10 @@ var pageModule = function(){
 		initControl:function(){
 			initdatafn();
 			initother();
-		}
+		},
+		refreshPage: function() {
+            initdatafn();
+        }
 	};
 }();
 

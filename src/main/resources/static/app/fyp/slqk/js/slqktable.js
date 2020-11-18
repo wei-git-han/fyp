@@ -266,6 +266,11 @@ var pageModule = function () {
         },
         initgrid:function(){
             initgrid();
+        },
+        refreshPage: function() {
+            initgrid();
+            initUnitTree();
+            isAdmin()
         }
     }
 }();

@@ -127,6 +127,10 @@ var pageModule = function(){
 			initUnitTree();
 			initdatafn(); 
 			initother();
+		},
+		refreshPage:function() {
+		    initUnitTree();
+            initdatafn();
 		}
 	};
 }();
