@@ -150,7 +150,10 @@ var pageModule = function () {
 		},
 		initgrid:function(){
 			initgrid();
-		}
+		},
+		refreshPage: function() {
+            location.reload()
+        }
 	}
 }();
 

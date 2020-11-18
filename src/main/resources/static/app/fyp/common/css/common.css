@@ -883,3 +883,21 @@ label.error{
 body.min-size{
 	font-size: 13px;
 }
+.positionTree::-webkit-scrollbar{
+	width: 5px;
+	height: 5px;
+}
+.positionTree::-webkit-scrollbar-track{
+/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0.3);*/
+}
+
+.positionTree::-webkit-scrollbar-thumb{
+	border-radius: 5px;
+	background-color: #2678FC;
+	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0.5);*/
+}
+
+.positionTree::-webkit-scrollbar-thumb:window-inactive{
+	background: #2678FC;
+}
+

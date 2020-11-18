@@ -97,6 +97,10 @@ $(window).resize(function(){
 		$(".slimScrollDiv,.scroller").each(function(){
 			$(this).css({"height":"100%"});
 		});
+		// 判断有没有pageModule.refreshPage()
+		if (pageModule.refreshPage) {
+		    pageModule.refreshPage();
+		}
 	},500)
 });
 /*end*/

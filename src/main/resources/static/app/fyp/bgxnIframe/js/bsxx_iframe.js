@@ -1,12 +1,12 @@
 var listurl = {"url": "/app/fyp/manageThing/weeklyTable","dataType": "text"};
 var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //单位树
 var grid = null;
-var isSz = window.top.isSz||false
-if(isSz==true){
-	$('.filterUnit').show()
-}else{
-	$('.filterUnit').hide()
-}
+// var isSz = window.top.isSz||false
+// if(isSz==true){
+// 	$('.filterUnit').show()
+// }else{
+// 	$('.filterUnit').hide()
+// }
 var pageModule = function() {
 	var initZhoubiao = function() {
 		grid = $("#gridcont").createGrid({
@@ -103,7 +103,7 @@ var pageModule = function() {
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
 			url: deptTreeUrl,
-			width: '100%',
+			width: '130%',
 			success: function(data, treeobj) {},
 			selectnode: function(e, data) {
 				$("#deptName").val(data.node.text);

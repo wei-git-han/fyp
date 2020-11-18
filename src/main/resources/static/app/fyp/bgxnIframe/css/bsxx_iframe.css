@@ -65,11 +65,11 @@ select{
 	width:100%;
 	height:100%;
 	padding-top:45px;
-} 
+}
 
 .tab2_main{
 	padding-top:50px;
-} 
+}
 /* tab1��ʽ */
 .main-l{
 	position:absolute;
@@ -141,7 +141,7 @@ select{
 	font-size: 42px;
 	font-family:"PIXEL LCD-7";
 	text-align: center;
-	
+
 }
 
 .main-l .pr100>div:nth-child(1) p span{
@@ -163,3 +163,31 @@ select{
 .main-r .pr100>div:nth-child(3) p span{
 	color:#F5C52B;
 }
+.dropdown-menu{
+	background-color: #073391;
+	color: #fff;
+}
+.datepicker table th{
+	color: #fff;
+}
+.datepicker table td{
+	color: #fff;
+}
+.datepicker table tr td.day:hover, .datepicker table tr td.day.focused {
+	background: #2686fc;
+	cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover, .datepicker tfoot tr th:hover {
+	background: #2686fc;
+}
+.datepicker table tr td span:hover {
+	background: #2686fc;
+}
+.trees{
+	background-color: #041A51!important;
+	color: #fff9ec;
+}
+.jstree-wholerow-clicked,.jstree-wholerow-hovered{
+	background: #2686fc!important;
+}
+

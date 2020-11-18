@@ -68,3 +68,28 @@ html, body {
 	margin-top:2px;
 }
 
+.dropdown-menu{
+	background-color: #073391;
+	color: #fff;
+}
+.datepicker table th{
+	color: #fff;
+}
+.datepicker table td{
+	color: #fff;
+}
+.datepicker table tr td.day:hover, .datepicker table tr td.day.focused {
+	background: #2686fc;
+	cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover, .datepicker tfoot tr th:hover {
+	background: #2686fc;
+}
+.datepicker table tr td span:hover {
+	background: #2686fc;
+}
+
+.trees{
+	background-color: #041A51!important;
+	color: #fff9ec;
+}

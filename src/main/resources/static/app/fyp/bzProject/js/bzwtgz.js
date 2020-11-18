@@ -242,7 +242,11 @@ var pageModule = function () {
         },
 		initgrid:function(){
 			initgrid();
-		}
+		},
+		refreshPage: function() {
+            isAdmin();
+            initUnitTree();
+        }
     }
 }();
 

@@ -1,6 +1,6 @@
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
-var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
-var isSz = window.top.isSz||false
+// var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
+var userTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {
@@ -9,7 +9,7 @@ var pageModule = function () {
 			success:function(data){
 				$("#deptName3").createSelecttree({
 					data : data,
-					width : '100%',
+					width : '130%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName3").val(data.node.text);
@@ -19,7 +19,7 @@ var pageModule = function () {
 				});
 				$("#deptName4").createSelecttree({
 					data : data,
-					width : '100%',
+					width : '130%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName4").val(data.node.text);
@@ -29,7 +29,7 @@ var pageModule = function () {
 				});
 				$("#deptName1").createSelecttree({
 					data : data,
-					width : '100%',
+					width : '130%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName1").val(data.node.text);
@@ -39,7 +39,7 @@ var pageModule = function () {
 				});
 				$("#deptName2").createSelecttree({
 					data : data,
-					width : '100%',
+					width : '130%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName2").val(data.node.text);
@@ -655,12 +655,13 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-			if(isSz==true){
-				deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //人员树
-				initUnitTree();
-			}else{
-				$('.hiddenByUser').hide()
-			}
+			// if(isSz==true){
+			// 	deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //人员树
+			// 	initUnitTree();
+			// }else{
+			// 	$('.hiddenByUser').hide()
+			// }
+			initUnitTree();
         	getBanwenAll();//默认加载办文
             initother();
         },
