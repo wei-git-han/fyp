@@ -32,5 +32,5 @@ public interface FypRoleEditService {
 	//获取是否为首长标识
 	String queryObjectByUserId(String userId);
 
-	int queryTypeByUserId(String userId);
+	FypRoleEdit  queryTypeByUserId(String userId);
 }

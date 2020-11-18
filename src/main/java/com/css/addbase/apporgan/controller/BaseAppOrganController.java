@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.css.app.fyp.work.entity.FypRoleEdit;
 import com.css.app.fyp.work.service.FypRoleEditService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +51,9 @@ public class BaseAppOrganController {
 	@ResponseBody
 	public Object getDeptTree() {
 		//查是否是保障管理员
-		int role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
+		FypRoleEdit role = fypRoleEditService.queryTypeByUserId(CurrentUser.getUserId());
 		String organId = "root";
-		if(role == 0){
+		if(role != null){
 			organId = "root";
 		}else{
 			organId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());

@@ -63,7 +63,7 @@ public class FypRoleEditServiceImpl implements FypRoleEditService {
 	}
 
 	@Override
-	public int queryTypeByUserId(String userId){
+	public FypRoleEdit  queryTypeByUserId(String userId){
 		return fypRoleEditDao.queryTypeByUserId(userId);
 	}
 

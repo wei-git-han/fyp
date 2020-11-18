@@ -46,6 +46,6 @@ public interface FypRoleEditDao extends BaseDao<FypRoleEdit> {
     @Select("select role_type from fyp_role_edit where user_id = #{0}")
     String queryObjectByUserId(String userId);
 
-    @Select("select role_type from fyp_role_edit where user_id = #{0}")
-    int queryTypeByUserId(String userId);
+    @Select("select * from fyp_role_edit where user_id = #{0}")
+    FypRoleEdit  queryTypeByUserId(String userId);
 }
