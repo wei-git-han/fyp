@@ -58,8 +58,14 @@ public class FypFeedbackHearController {
 	public void list(Integer page, Integer limit,FypFeedbackHear fypFeedbackHear){
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
+		if(StringUtils.isNotBlank(fypFeedbackHear.getSubmitDeptId()) && "root".equals(fypFeedbackHear.getSubmitDeptId())){
+			fypFeedbackHear.setSubmitDeptId("");
+		}
+		if(StringUtils.isNotBlank(fypFeedbackHear.getSubmitDeptName()) && "装备发展部".equals(fypFeedbackHear.getSubmitDeptName())){
+			fypFeedbackHear.setSubmitDeptName("");
+		}
 		fypFeedbackHear.setSubmitUserId("");
-		fypFeedbackHear.setSubmitDeptId("");
+		//fypFeedbackHear.setSubmitDeptId("");
 		Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(fypFeedbackHear), Map.class);
 		map.putAll(paramMap);
 		if(null!=fypFeedbackHear.getSubmitTimeBegin()&&null!=fypFeedbackHear.getSubmitTimeEnd()) {
