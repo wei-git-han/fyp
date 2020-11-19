@@ -54,6 +54,12 @@ public class FypGuaranteeTackingController {
 	@RequestMapping("/list")
 	public void list(Integer page, Integer limit,FypGuaranteeTacking tacking){
 
+		if(StringUtils.isNotBlank(tacking.getDeptId()) && "root".equals(tacking.getDeptId())){
+			tacking.setDeptId("");
+		}
+		if(StringUtils.isNotBlank(tacking.getDeptName()) && "装备发展部".equals(tacking.getDeptName())){
+			tacking.setDeptName("");
+		}
         Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(tacking), Map.class);
 
 		Map<String, Object> map = new HashMap<>();
