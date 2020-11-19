@@ -900,4 +900,7 @@ body.min-size{
 .positionTree::-webkit-scrollbar-thumb:window-inactive{
 	background: #2678FC;
 }
+.positionTree::-webkit-scrollbar-corner{
+	background: #083391;
+}
 
