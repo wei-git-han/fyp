@@ -103,7 +103,7 @@ var pageModule = function() {
 	var initUnitTree = function() {
 		$("#deptName").createSelecttree({
 			url: deptTreeUrl,
-			width: '130%',
+			width: '100%',
 			success: function(data, treeobj) {},
 			selectnode: function(e, data) {
 				$("#deptName").val(data.node.text);

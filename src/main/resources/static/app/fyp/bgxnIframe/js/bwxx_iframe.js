@@ -1,6 +1,6 @@
-var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
-// var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
-var userTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}
+// var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
+var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {
@@ -9,7 +9,7 @@ var pageModule = function () {
 			success:function(data){
 				$("#deptName3").createSelecttree({
 					data : data,
-					width : '130%',
+					width : '100%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName3").val(data.node.text);
@@ -19,7 +19,7 @@ var pageModule = function () {
 				});
 				$("#deptName4").createSelecttree({
 					data : data,
-					width : '130%',
+					width : '100%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName4").val(data.node.text);
@@ -29,7 +29,7 @@ var pageModule = function () {
 				});
 				$("#deptName1").createSelecttree({
 					data : data,
-					width : '130%',
+					width : '100%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName1").val(data.node.text);
@@ -39,7 +39,7 @@ var pageModule = function () {
 				});
 				$("#deptName2").createSelecttree({
 					data : data,
-					width : '130%',
+					width : '100%',
 					success : function(data, treeobj) {},
 					selectnode : function(e, data) {
 						$("#deptName2").val(data.node.text);
