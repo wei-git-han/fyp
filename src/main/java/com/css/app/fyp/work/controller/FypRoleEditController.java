@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.app.fyp.work.entity.FypGuaranteeTacking;
+import com.css.base.utils.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.css.base.utils.CurrentUser;
-import com.css.base.utils.PageUtils;
-import com.css.base.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
-import com.css.base.utils.Response;
 import com.css.app.fyp.work.entity.FypRoleEdit;
 import com.css.app.fyp.work.service.FypRoleEditService;
 // import sun.util.resources.cldr.fr.CalendarData_fr_YT;
@@ -48,6 +45,12 @@ public class FypRoleEditController {
 	public void list(Integer page, Integer limit, FypRoleEdit FypRoleEdit){
 		Map<String, Object> map = new HashMap<>();
 		PageHelper.startPage(page, limit);
+		if(StringUtils.isNotBlank(FypRoleEdit.getDeptId()) && "root".equals(FypRoleEdit.getDeptId())){
+			FypRoleEdit.setDeptId("");
+		}
+		if(StringUtils.isNotBlank(FypRoleEdit.getDeptName()) && "装备发展部".equals(FypRoleEdit.getDeptName())){
+			FypRoleEdit.setDeptName("");
+		}
 		Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(FypRoleEdit), Map.class);
 		map.putAll(paramMap);
 		//查询列表数据

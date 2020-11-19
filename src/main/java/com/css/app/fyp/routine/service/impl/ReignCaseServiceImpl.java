@@ -137,7 +137,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         try {
             //在编人数
             Map<String,Object> filter = new HashMap<>();
-            filter.put("departmentId", organid);
+            filter.put("departmentId", "root");
             int userCount = baseAppUserService.queryTotal(filter);
             reignCaseVo.setUserCount(userCount);
             //在线人数
