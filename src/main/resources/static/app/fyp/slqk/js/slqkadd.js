@@ -136,13 +136,7 @@ var pageModule = function(){
 			initWtfl();
 			initother();
 			initdatafn();
-		},
-		refreshPage: function() {
-            initUnitTree();
-            initRyjName();
-            initWtfl();
-            initdatafn();
-        }
+		}
 	};
 }();
 

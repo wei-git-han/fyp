@@ -162,7 +162,6 @@ var pageModule = function () {
         },
         refreshPage: function() {
             initgrid();
-            initUnitTree();
         }
     }
 }();
