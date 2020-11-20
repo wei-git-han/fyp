@@ -144,37 +144,38 @@ var pageModule = function () {
 	      data:{time:$("#searchDate2").val()},
 	      dataType:"json",
 	      success:function(res){
-			  var tableData = {
-				  "title":'',
-				  "legend":[
-					  "总时长",
-					  "场次"
-				  ],
-				  "xdata":[
-				  ],
-				  "ydata":[
-					  {
-						  "title":"总时长",
-						  "data":[
-	
-						  ]
-					  },
-					  {
-						  "title":"场次",
-						  "data":[
-	
-						  ]
-					  }
-				  ]
-			  }
-	        if(res.result=="success"){
-	        	res.data.forEach((e,index)=>{
-					tableData.xdata.push(e.deptName);
-					tableData.ydata[0].data.push(e.meetingTimeCount)
-					tableData.ydata[1].data.push(e.meetingCount)
-				})
-	          initBarChart(tableData)
-	        }
+              var tableData = {
+                  "title":'',
+                  "legend":[
+                      "总时长",
+                      "场次"
+                  ],
+                  "xdata":[
+                  ],
+                  "ydata":[
+                      {
+                          "title":"总时长",
+                          "data":[
+
+                          ]
+                      },
+                      {
+                          "title":"场次",
+                          "data":[
+
+                          ]
+                      }
+                  ]
+              }
+              if res.data.list.length > 0 ) {
+                    res.data.list.forEach((e,index)=>{
+                        // zoneName 单位名称   useTime 使用时长   useNumber 使用次数   zoneId 单位id
+                        tableData.xdata.push(e.zoneName);
+                        tableData.ydata[0].data.push(e.useTime)
+                        tableData.ydata[1].data.push(e.useNumber)
+                    })
+                  initBarChart(tableData)
+              }
 	      }
 	   })
 	}
@@ -259,6 +260,15 @@ var pageModule = function () {
 					}
 				}
 			],
+			dataZoom: [
+              {
+                type: 'inside',
+                start: 0,
+                throttle: 50,
+                minValueSpan: 4,
+                end: 100
+              }
+            ],
 			series: [
 				{
 					name: data.ydata[0].title,
