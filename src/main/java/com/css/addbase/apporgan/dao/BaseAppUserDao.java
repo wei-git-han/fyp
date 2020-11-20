@@ -123,10 +123,16 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 			+ " ) order by a.SORT")
 	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
 
-	@Select(" select * from BASE_APP_USER a " +
-			"left join CONFIG_USER_DEPT b on a.user_id = b.user_id " +
-			"where " +
-			"a.organid = #{0} and b.user_id is not null and b.user_id !=''")
+	@Select(" select * from BASE_APP_USER where" +
+			"        ORGANID in" +
+			"        (" +
+			"                select" +
+			"                        ID" +
+			"                from" +
+			"                        BASE_APP_ORGAN start" +
+			"                with ID         = #{0}" +
+			"                    and ISDELETE=0 connect by prior ID = PARENT_ID" +
+			"        )")
     List<BaseAppUser> queryListByRole(String organid);
 
 	List<BaseAppUser>  queryByOrganidTREEPATH(Map<String,Object> map);

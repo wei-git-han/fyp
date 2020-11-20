@@ -86,4 +86,9 @@ public class BaseAppOrganServiceImpl implements BaseAppOrganService {
 		return baseAppOrganDao.queryListByIds(ids);
 	}
 
+	@Override
+	public List<Map<String,Object>> queryAllDept(){
+		return baseAppOrganDao.queryAllDept();
+	}
+
 }

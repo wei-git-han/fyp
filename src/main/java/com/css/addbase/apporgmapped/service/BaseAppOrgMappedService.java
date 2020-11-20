@@ -186,4 +186,6 @@ public interface BaseAppOrgMappedService {
 
 	BaseAppOrgMapped queryByType(String type);
 
+
+
 }

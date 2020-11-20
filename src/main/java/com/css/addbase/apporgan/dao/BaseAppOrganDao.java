@@ -51,5 +51,8 @@ public interface BaseAppOrganDao extends BaseDao<BaseAppOrgan> {
 	void clearOrgan();
 	
 	List<BaseAppOrgan> queryListByIds(String[] ids);
+
+	@Select("select * from BASE_APP_ORGAN where PARENT_ID = 'root'")
+	List<Map<String,Object>> queryAllDept();
 	
 }

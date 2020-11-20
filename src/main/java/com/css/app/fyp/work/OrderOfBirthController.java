@@ -3,6 +3,7 @@ package com.css.app.fyp.work;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppUser;
+import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
@@ -44,6 +45,9 @@ public class OrderOfBirthController {
 
     @Autowired
     private GetJsonData getJsonData;
+
+    @Autowired
+    private BaseAppOrganService baseAppOrganService;
     /**
      * 在线率排行
      * @param type
@@ -55,7 +59,8 @@ public class OrderOfBirthController {
         List<Map<String,Object>> objects = new ArrayList<>();
 
         //获取所有参与统计的单位
-        List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrgMappedService.findAppIdAndDeptIdNameAll(AppConstant.APP_GWCL);
+        //List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrgMappedService.findAppIdAndDeptIdNameAll(AppConstant.APP_GWCL);
+        List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDept();
         //获取所有在线数
         List<String> onLineList = getJsonData.getJson("在线");
         //获取所有请假人数
@@ -65,11 +70,11 @@ public class OrderOfBirthController {
         Map<String,Object> dataMap;
         for(Map<String, Object> map:appIdAndDeptIdNameAll){
             dataMap = new HashMap<>();
-            dataMap.put("deptName",map.get("ORG_NAME"));//单位
+            dataMap.put("deptName",map.get("NAME"));//单位
             //获取所有在编人数
             paramMap = new HashMap<>();
-            paramMap.put("organid",map.get("ORG_ID"));
-            List<BaseAppUser> baseAppUsers = baseAppUserService.queryListByRole((String)map.get("ORG_ID"));
+            paramMap.put("organid",map.get("ID"));
+            List<BaseAppUser> baseAppUsers = baseAppUserService.queryListByRole((String)map.get("ID"));
             if(null!=baseAppUsers){
                 dataMap.put("permanentStaffCount",baseAppUsers.size());//在编
             }else{
