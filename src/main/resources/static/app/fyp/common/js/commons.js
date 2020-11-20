@@ -86,6 +86,7 @@ jQuery(document).ready(function() {
 	var year = pagedate.getFullYear();
 	$(".datee").val(year+"-"+month+"-"+day);
 	$(".yearAndmonth").val(year+"-"+month);
+	$(".year").val(year);
 	$(".monthAndday").val(month1+"-"+day1);
 });    
 

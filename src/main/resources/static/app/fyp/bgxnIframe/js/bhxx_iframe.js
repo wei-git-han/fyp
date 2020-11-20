@@ -23,8 +23,8 @@ var pageModule = function () {
 			language:"zh-CN",
 			rtl: Metronic.isRTL(),
 			orientation: "",
-			format: "yyyy-mm",
-			minViewMode: 1,
+			format: "yyyy",
+			minViewMode: 2,
 			autoclose: true
 		}).on("changeDate",function(){
 			getBarChartData();
@@ -38,15 +38,16 @@ var pageModule = function () {
 		      data:{time:$("#searchDate1").val()},
 		      dataType:"json",
 		      success:function(res){
-		        if(res.result=="success"){
+		        //if(res.result=="success"){
+		        if(res.code=="200"){
 		        	var data = {
                         "xdata":[],
                         "ydata":[]
                     }
-		        	$.each(res.data,function(i, o){
-						data.xdata.push(o.deptName);
-						data.ydata.push(o.count||null);
-					})
+		        	 // deptName  部门名称  duration  会议总时长   count 会议总次数
+                    data.xdata.push(res.deptName);
+                    data.ydata.push(res.data.duration||0);
+                    //data.ydata.push(res.data.count||null);
                     init3dBarChart('main',data);
 		        }
 		      }
@@ -57,6 +58,12 @@ var pageModule = function () {
 	var init3dBarChart = function(id,data){
 		var charts = echarts.init(document.getElementById(id));
 		charts.setOption({
+		    tooltip: {
+		        trigger: 'axis',
+		        formatter: function(params) {
+		            return '<p>单位：'+params[0].name+'<br/>总时长：'+params[0].value+'</p>'
+		        }
+		    },
 			xAxis: {
 		        data: data.xdata,
 		        axisLabel: {
