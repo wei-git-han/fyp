@@ -132,7 +132,7 @@ public class OrderOfBirthController {
 
         String apps = "";
         for(Map<String,Object> map:iaData){
-            apps += (String)map.get("appid,");
+            apps += (String)map.get("appid")+",";
         }
         LinkedMultiValueMap<Object, Object> paramMap = new LinkedMultiValueMap<>();
         if(StringUtils.isNotBlank(apps)){
@@ -140,6 +140,8 @@ public class OrderOfBirthController {
         }else{
             paramMap.add("apps","0");
         }
+        String[] app = apps.split(",");
+
 
         //应用信息
         List<Map<String,Object>> softwareData = this.getSoftwareData(AppConstant.INFO,paramMap);
@@ -152,15 +154,19 @@ public class OrderOfBirthController {
             accessMap = new HashMap<>();
             accessMap.put("appCount",map.get("visit"));//应用访问总数
             String appid = (String)map.get("appid");
-//            for(Map<String,Object> infoMap:softwareData){
-//                String id = (String) infoMap.get("id");
-//                if(appid.equals(id)){
-//                    String name = (String)infoMap.get("name");
-            String name = "平台应用";
-                    accessMap.put("appName",name);//应用名称
-//                    break;
-//                }
-//            }
+            //for(Map<String,Object> infoMap:softwareData){
+                for(int j = 0;j<softwareData.size();j++){
+                    Map<String,Object> infoMap = softwareData.get(j);
+                    String id = (String) infoMap.get("id");
+                    if(appid.equals(id)){
+                        String name = (String)infoMap.get("genericname");
+                        // String name = "平台应用";
+                        accessMap.put("appName",name);//应用名称
+                        break;
+                }
+
+               }
+           // }
             accessList.add(accessMap);
         }
         objects.put("access",accessList);
@@ -180,7 +186,7 @@ public class OrderOfBirthController {
 
         String apps = "";
         for(Map<String,Object> map:iaData){
-            apps += (String)map.get("appid,");
+            apps += (String)map.get("appid");
         }
         LinkedMultiValueMap<Object, Object> paramMap = new LinkedMultiValueMap<>();
         if(StringUtils.isNotBlank(apps)){
@@ -199,15 +205,19 @@ public class OrderOfBirthController {
             accessMap = new HashMap<>();
             accessMap.put("appCount",map.get("install"));//应用安装总数
             String appid = (String)map.get("appid");
-//            for(Map<String,Object> infoMap:softwareData){
-//                String id = (String) infoMap.get("id");
-//                if(appid.equals(id)){
-//                    String name = (String)infoMap.get("name");
-            String name = "平台应用";
+            //for(Map<String,Object> infoMap:softwareData){
+            for(int j = 0;j<softwareData.size();j++){
+                Map<String,Object> infoMap = softwareData.get(j);
+                String id = (String) infoMap.get("id");
+                if(appid.equals(id)){
+                    String name = (String)infoMap.get("genericname");
+                    //   String name = "平台应用";
                     accessMap.put("appName",name);//应用名称
-//                    break;
-//                }
-//            }
+                    break;
+                }
+            }
+
+            //}
             accessList.add(accessMap);
         }
         objects.put("install",accessList);
@@ -223,12 +233,15 @@ public class OrderOfBirthController {
         BaseAppOrgMapped software = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",type);
         String url = software.getUrl() +software.getWebUri();
         String token = SSOAuthFilter.getToken();
+        if("info".equals(type)){
+            url += token;
+        }
         String res = HttpClientUtils.requstByGetMethod(url);
         System.out.println(res);
         JSONObject tokenByJsonData = JSONObject.parseObject(res);
         String field = "data";//访问量、安装量
         if("info".equals(type)){//应用详情
-            field = "info";
+            field = "apps";
         }
         return (List<Map<String,Object>>)tokenByJsonData.get(field);
     }
