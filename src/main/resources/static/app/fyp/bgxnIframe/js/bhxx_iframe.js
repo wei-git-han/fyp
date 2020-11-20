@@ -167,7 +167,7 @@ var pageModule = function () {
                       }
                   ]
               }
-              if res.data.list.length > 0 ) {
+              if (res.data.list.length > 0 ) {
                     res.data.list.forEach((e,index)=>{
                         // zoneName 单位名称   useTime 使用时长   useNumber 使用次数   zoneId 单位id
                         tableData.xdata.push(e.zoneName);
