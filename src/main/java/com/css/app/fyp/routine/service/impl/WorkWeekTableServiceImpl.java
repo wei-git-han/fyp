@@ -124,7 +124,9 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;
         }
-        jsonData = JSONArray.parseArray(res);
+        if(StringUtils.isNotBlank(res)){
+            jsonData = JSONArray.parseArray(res);
+        }
         return jsonData;
     }
 

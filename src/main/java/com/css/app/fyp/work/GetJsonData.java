@@ -72,9 +72,11 @@ public class GetJsonData {
                             setData(data,url,map,token,jsons);
                             break;
                         case "办会":
-                            //中宏利达会议
+                            //会见
                             BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
-                            url = meeting.getUrl()+AppInterfaceConstant.WEB_INERFACE_ZHLD_MEETING;
+                            map.add("appId",meeting.getAppId());
+                            map.add("secretKey",meeting.getAppSecret());
+                            url = meeting.getUrl()+meeting.getWebUri();
                             setData(data,url,map,token,jsons);
                             break;
                         case "首长督查催办":
@@ -180,9 +182,10 @@ public class GetJsonData {
         JSONObject jsonData = null;
         if(CrossDomainUtil.getTokenByJsonData(url,map,token)!=null){
             jsonData = CrossDomainUtil.getTokenByJsonData(url,map,token);
-            jsonData.put("appId",datamap.get("APP_ID"));
-            jsonData.put("appSecret",datamap.get("APP_SECRET"));
-            jsonData.put("deptId",datamap.get("ORG_ID"));
+            System.out.println("===="+jsonData+"=====");
+//            jsonData.put("appId",datamap.get("APP_ID"));
+//            jsonData.put("appSecret",datamap.get("APP_SECRET"));
+//            jsonData.put("deptId",datamap.get("ORG_ID"));
             jsonData.put("deptName",datamap.get("ORG_NAME"));
             jsons.add(jsonData);
         }else{

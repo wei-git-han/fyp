@@ -303,12 +303,16 @@ public class DateUtil {
         if (date != null) {
             calendar.setTime(date);
         }
-        // 将日期设置为下一月第一天
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, 1);
+        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return calendar.getTime();
+    }
+    public static Date getMonthFirstDay(Date date) {
 
-        // 减去1天，得到的即本月的最后一天
-        calendar.add(Calendar.DATE, -1);
-
+        Calendar calendar = Calendar.getInstance();
+        if (date != null) {
+            calendar.setTime(date);
+        }
+        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
         return calendar.getTime();
     }
     

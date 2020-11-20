@@ -57,7 +57,7 @@ public class AppConstant {
 	/**
 	 * 中宏利达视频
 	 */
-	public final static String ZHLD = "zhld";
+	public final static String ZHLD = "hjrchy";
 
 	/**
 	 * 中宏利达视频
