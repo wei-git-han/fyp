@@ -1,5 +1,6 @@
 package com.css.app.fyp.work;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.addbase.apporgan.service.BaseAppUserService;
@@ -9,7 +10,9 @@ import com.css.addbase.constant.AppConstant;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.HttpClientUtils;
 import com.css.base.utils.Response;
+import com.css.base.utils.StringUtils;
 import com.google.common.collect.LinkedHashMultimap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -132,7 +135,12 @@ public class OrderOfBirthController {
             apps += (String)map.get("appid,");
         }
         LinkedMultiValueMap<Object, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("apps",apps.substring(apps.length()-1,apps.length()));
+        if(StringUtils.isNotBlank(apps)){
+            paramMap.add("apps",apps.substring(apps.length()-1,apps.length()));
+        }else{
+            paramMap.add("apps","0");
+        }
+
         //应用信息
         List<Map<String,Object>> softwareData = this.getSoftwareData(AppConstant.INFO,paramMap);
 
@@ -144,14 +152,15 @@ public class OrderOfBirthController {
             accessMap = new HashMap<>();
             accessMap.put("appCount",map.get("visit"));//应用访问总数
             String appid = (String)map.get("appid");
-            for(Map<String,Object> infoMap:softwareData){
-                String id = (String) infoMap.get("id");
-                if(appid.equals(id)){
-                    String name = (String)infoMap.get("name");
+//            for(Map<String,Object> infoMap:softwareData){
+//                String id = (String) infoMap.get("id");
+//                if(appid.equals(id)){
+//                    String name = (String)infoMap.get("name");
+            String name = "平台应用";
                     accessMap.put("appName",name);//应用名称
-                    break;
-                }
-            }
+//                    break;
+//                }
+//            }
             accessList.add(accessMap);
         }
         objects.put("access",accessList);
@@ -174,7 +183,11 @@ public class OrderOfBirthController {
             apps += (String)map.get("appid,");
         }
         LinkedMultiValueMap<Object, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("apps",apps.substring(apps.length()-1,apps.length()));
+        if(StringUtils.isNotBlank(apps)){
+            paramMap.add("apps",apps.substring(apps.length()-1,apps.length()));
+        }else{
+            paramMap.add("apps","0");
+        }
         //应用信息
         List<Map<String,Object>> softwareData = this.getSoftwareData(AppConstant.INFO,paramMap);
 
@@ -186,14 +199,15 @@ public class OrderOfBirthController {
             accessMap = new HashMap<>();
             accessMap.put("appCount",map.get("install"));//应用安装总数
             String appid = (String)map.get("appid");
-            for(Map<String,Object> infoMap:softwareData){
-                String id = (String) infoMap.get("id");
-                if(appid.equals(id)){
-                    String name = (String)infoMap.get("name");
+//            for(Map<String,Object> infoMap:softwareData){
+//                String id = (String) infoMap.get("id");
+//                if(appid.equals(id)){
+//                    String name = (String)infoMap.get("name");
+            String name = "平台应用";
                     accessMap.put("appName",name);//应用名称
-                    break;
-                }
-            }
+//                    break;
+//                }
+//            }
             accessList.add(accessMap);
         }
         objects.put("install",accessList);
@@ -209,7 +223,9 @@ public class OrderOfBirthController {
         BaseAppOrgMapped software = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",type);
         String url = software.getUrl() +software.getWebUri();
         String token = SSOAuthFilter.getToken();
-        JSONObject tokenByJsonData = CrossDomainUtil.getTokenByJsonData(url,map, token);
+        String res = HttpClientUtils.requstByGetMethod(url);
+        System.out.println(res);
+        JSONObject tokenByJsonData = JSONObject.parseObject(res);
         String field = "data";//访问量、安装量
         if("info".equals(type)){//应用详情
             field = "info";

@@ -87,7 +87,7 @@ public class ManageMeetingController {
     @ResponseBody
     @RequestMapping("/video")
     public void video(@DateTimeFormat(pattern = "yyyy") Date time) {
-        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.getMappedData("", "", "zhldsphy");
+        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMappedByOrgId("", "", "zhldsphy");
         String res = "";
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
@@ -127,6 +127,7 @@ public class ManageMeetingController {
 //        map.put("meetingCount",3636);
 //        objects.add(map);
         JSONArray jsonData = new JSONArray();
+        System.out.println("res===="+res+"=====");
         if(StringUtils.isNotBlank(res)){
             jsonData = JSONArray.parseArray(res);
         }
