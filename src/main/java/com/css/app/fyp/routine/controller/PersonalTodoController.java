@@ -36,8 +36,22 @@ public class PersonalTodoController {
      */
     @ResponseBody
     @RequestMapping("/backlogFlowStatisticsHeader")
-    public void backlogFlowStatisticsHeader(@DateTimeFormat(pattern = "yyyy") Date applyDate, String page, String pagesize) {
-        JSONObject maps = personalTodoService.backlogFlowStatisticsHeader(applyDate, page, pagesize);
+    public void backlogFlowStatisticsHeader(@DateTimeFormat(pattern = "yyyy") Date applyDate, String page, String pagesize, String type) {
+        JSONObject maps = personalTodoService.backlogFlowStatisticsHeader(applyDate, page, pagesize, type);
+        Response.json(new ResponseValueUtils().success(maps));
+    }
+
+    /**
+     * @Description 待批公文统计
+     * @Author gongan
+     * @Date 2020/8/14
+     * @Param [applyDate]
+     * @Return void
+     */
+    @ResponseBody
+    @RequestMapping("/getMenu")
+    public void getMenu(@DateTimeFormat(pattern = "yyyy") Date applyDate, String page, String pagesize, String type) {
+        JSONObject maps = personalTodoService.getMenu(applyDate, page, pagesize, type);
         Response.json(new ResponseValueUtils().success(maps));
     }
 
