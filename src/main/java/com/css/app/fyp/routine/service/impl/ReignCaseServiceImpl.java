@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -164,9 +165,10 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         return reignCaseVo;
     }
 
-    public static String txfloat(int a, Integer b) {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format((float) a/b);
+    public static String txfloat(int a, int b) {
+        DecimalFormat df = new DecimalFormat("###.#");
+        double d = new BigDecimal((float)a/b).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return df.format(d * 100);
     }
 
     private JSONArray getJsonArrayData (String mapperUrl, String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
