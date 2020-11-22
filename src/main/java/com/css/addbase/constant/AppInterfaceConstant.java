@@ -584,6 +584,11 @@ public class AppInterfaceConstant {
      */
 	public final static String WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW = "/app/gwcl/fypPersonalTodoController/numsList";
     /**
+     * @Description 公文菜单--局用户
+     * @Author gongan
+     */
+	public final static String WEB_INTERFACE_GWCL_MENU_SPGW = "/app/gwcl/fypPersonalTodoController/getMenu";
+    /**
      * @Description 电子数量
      * @Author gongan
      */

@@ -14,7 +14,9 @@ import java.util.Date;
  */
 public interface PersonalTodoService {
 
-	JSONObject backlogFlowStatisticsHeader(Date applyDate, String page, String pagesize);
+	JSONObject backlogFlowStatisticsHeader(Date applyDate, String page, String pagesize, String type);
+
+	JSONObject getMenu(Date applyDate, String page, String pagesize, String type);
 
 	JSONObject backlogFlowStatisticsDetail(String applyType, Date applyDate, String page, String pagesize);
 
