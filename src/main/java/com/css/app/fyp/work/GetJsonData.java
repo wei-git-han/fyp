@@ -1,5 +1,6 @@
 package com.css.app.fyp.work;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
@@ -126,14 +127,18 @@ public class GetJsonData {
                         //在线率排行-在线数
                         BaseAppOrgMapped onLine = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                         url = onLine.getUrl()+onLine.getWebUri();
+                        setZxData(url,new LinkedMultiValueMap(),token);
                         break;
                     case "请假":
                         //在线率排行-请假数
                         BaseAppOrgMapped leave = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                         url = leave.getUrl()+leave.getWebUri();
+                        setQjData(url,new LinkedMultiValueMap(),token);
                         break;
+
                 }
-                setData(url,new LinkedMultiValueMap(),token);
+
+
 //            }
 //        });
         return this.getDataAll();
@@ -203,6 +208,35 @@ public class GetJsonData {
         if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
             String data = CrossDomainUtil.getTokenByStringData(url,map,token);
             strs = Arrays.asList(data.split(","));
+        }
+    }
+
+    private void setZxData(String url, LinkedMultiValueMap<String, Object> map,String token){
+        strs = new ArrayList<>();
+        if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
+            String data = CrossDomainUtil.getTokenByStringData(url,map,token);
+            if(StringUtils.isNotBlank(data)){
+                JSONArray jsonArray = JSONArray.parseArray(data);
+                if(jsonArray != null && jsonArray.size() > 0){
+                    for(int i = 0;i<jsonArray.size();i++){
+                        strs.add(jsonArray.getString(i));
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void setQjData(String url, LinkedMultiValueMap<String, Object> map,String token){
+        if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
+            String reJson = CrossDomainUtil.getTokenByStringData(url,map,token);
+            JSONArray jsonArray = null;
+            if (StringUtils.isNotEmpty(reJson)) {
+                String accounts = reJson.substring(1,reJson.length()-1).replace("\"", "");
+                String [] accountArray = accounts.split("\\s*,\\s*");
+                strs = new ArrayList<String>(Arrays.asList(accountArray));
+            }
+
         }
     }
 

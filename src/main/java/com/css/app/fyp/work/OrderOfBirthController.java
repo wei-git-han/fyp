@@ -89,7 +89,7 @@ public class OrderOfBirthController {
             if(onLineList != null && onLineList.size() > 0){
             for(String username:onLineList){
                 for(BaseAppUser user:baseAppUsers){
-                    if(username.equals(user.getTruename())){
+                    if(username.equals(user.getAccount())){
                         onlineCount++;
                     }
                 }
