@@ -38,7 +38,7 @@ public interface BaseAppOrgMappedDao extends BaseDao<BaseAppOrgMapped> {
     @Select("select bau.id from base_app_user bau " +
             "where bau.organid in " +
             "(select id from BASE_APP_ORGAN start with ID=#{0}" +
-            "connect by prior ID = PARENT_ID) and bau.id not in (select c.user_id from config_user_dept c)")
+            "connect by prior ID = PARENT_ID) and bau.id not in (select c.user_id from config_user_dept c where user_id is not null)")
     List<String> findUsersByDeptidNotConfig(String dpetid);
 
     @Select("select * from BASE_APP_ORG_MAPPED where TYPE = #{0} and ORG_ID = #{1}")
