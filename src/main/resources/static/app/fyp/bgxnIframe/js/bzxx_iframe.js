@@ -7,25 +7,25 @@ var pageModule = function () {
 	var initgrid = function(){
 		  grid = $("#gridcont").createGrid({
 			columns:[
-						{display:"硬件/软件名称",name:"name",width:"16%",align:"center",render:function(rowdata,n){
+						{display:"硬件/软件名称",name:"name",width:"22%",align:"center",render:function(rowdata,n){
 							return `<span title="${rowdata.softName}" style="cursor: pointer">${rowdata.softName}</span>`;
 						}},
-						{display:"问题描述",name:"desc",width:"14%",align:"center",render:function(rowdata,n){
+						{display:"问题描述",name:"desc",width:"21%",align:"center",render:function(rowdata,n){
 							return `<span title="${rowdata.desc}" style="cursor: pointer">${rowdata.desc}</span>`;
 						}},
-						{display:"提出时间",name:"submitTime",width:"12%",align:"center",render:function(rowdata){
+						{display:"提出时间",name:"submitTime",width:"19%",align:"center",render:function(rowdata){
 							return `<span title="${rowdata.submitTime}" style="cursor: pointer">${rowdata.submitTime}</span>`;
 						}},
-						{display:"提出人",name:"submitUserName",width:"10%",align:"center",render:function(rowdata){
+						{display:"提出人",name:"submitUserName",width:"18%",align:"center",render:function(rowdata){
 							return `<span title="${rowdata.submitUserName}" style="cursor: pointer">${rowdata.submitUserName}</span>`;
 						}},
-						{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
+						/*{display:"解决时限",name:"solveTime",width:"12%",align:"center",render:function(rowdata){
 							return `<span title="${rowdata.solveTime}"  style="cursor: pointer">${rowdata.solveTime}</span>`;
 						}},
 						{display:"工作进展",name:"march",width:"12%",align:"center",render:function(rowdata){
 							return `<span title="${rowdata.march}" style="cursor: pointer">${rowdata.march}</span>`;
-						}},
-						{display:"状态",name:" status",width:"10%",align:"center",render:function(rowdata){
+						}},*/
+						{display:"状态",name:" status",width:"20%",align:"center",render:function(rowdata){
 							if(rowdata.status == "0"){
 		                        return `<span title="需求论证" style="cursor: pointer">需求论证</span>`;
 		                    }else if(rowdata.status == "1"){
@@ -40,7 +40,7 @@ var pageModule = function () {
 		                        return "";
 		                    }
 						}},
-						{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
+						/*{display:"问题分类",name:"type",width:"14%",align:"center",render:function(rowdata){
 							// if(rowdata.type == "0"){
 		                        return `<span title="${rowdata.type}" style="cursor: pointer">${rowdata.type}</span>`;
 		                    // }else if(rowdata.type == "1"){
@@ -48,7 +48,7 @@ var pageModule = function () {
 		                    // }else{
 		                    //     return "";
 		                    // }
-						}}
+						}}*/
 					 ],
 			width:'100%',
 			height:'100%',
