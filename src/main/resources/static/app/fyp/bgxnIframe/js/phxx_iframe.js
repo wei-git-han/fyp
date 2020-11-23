@@ -159,7 +159,7 @@ var pageModule = function () {
 //                    margin: 'auto',
 					show: true,
 					interval: 0,
-					rotate:25,
+					rotate:45,
 					textStyle: {
 						color: '#ACACAC',
 						fontSize: 12,
