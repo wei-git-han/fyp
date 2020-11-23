@@ -53,15 +53,30 @@
 		select count(*) from BASE_APP_USER where
 		ORGANID in
 		(
-		select
-		ID
-		from
-		BASE_APP_ORGAN start
-		with ID         = #{departmentId}
-		and ISDELETE=0 connect by prior ID = PARENT_ID
+			select
+			ID
+			from
+			BASE_APP_ORGAN start
+			with ID         = #{departmentId}
+			and ISDELETE=0 connect by prior ID = PARENT_ID
 		)
+		and ORGANID not in (select ifnull(dept_id,0) from config_user_dept cud)
+		and user_id not in (select ifnull(user_id,0) from config_user_dept cud)
 	</select>
-	
+
+ 	<select id="getNotAtConfigUserDept" resultType="java.lang.String">
+		select
+		account
+		from base_app_user bau
+		where
+		bau.account in
+		<foreach item="id" collection="list" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		and bau.user_id not in (select ifnull(user_id,0) from config_user_dept cud)
+		and bau.ORGANID  not in (select ifnull(dept_id,0) from config_user_dept cud)
+	</select>
+
 	<select id="queryObjectByUserIds" resultType="com.css.addbase.apporgan.entity.BaseAppUser" >
 		select  *  from BASE_APP_USER where USER_ID in 
 		<foreach item="userIds" collection="array" open="(" separator="," close=")">

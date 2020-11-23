@@ -132,10 +132,14 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 			"                        BASE_APP_ORGAN start" +
 			"                with ID         = #{0}" +
 			"                    and ISDELETE=0 connect by prior ID = PARENT_ID" +
-			"        )")
+			"        )" +
+			"and ORGANID  not in (select ifnull(dept_id,0) from config_user_dept cud)" +
+			"and user_id  not in (select ifnull(user_id,0) from config_user_dept cud)")
     List<BaseAppUser> queryListByRole(String organid);
 
 	List<BaseAppUser>  queryByOrganidTREEPATH(Map<String,Object> map);
+
+	List<String> getNotAtConfigUserDept(List<String> collect);
 
 	@Select("select  * from  BASE_APP_USER where  ORGANID in (select id  from BASE_APP_ORGAN start with ID = #{0}  and ISDELETE=0 connect by prior ID = PARENT_ID )")
 	List<BaseAppUser> queryAllUserByDeptId(String id);

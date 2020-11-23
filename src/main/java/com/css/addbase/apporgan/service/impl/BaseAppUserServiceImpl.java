@@ -155,6 +155,11 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 	}
 
 	@Override
+	public List<String> getNotAtConfigUserDept(List<String> collect) {
+		return baseAppUserDao.getNotAtConfigUserDept(collect);
+	}
+
+	@Override
 	public List<BaseAppUser> queryByOrganidTREEPATH(Map<String, Object> map) {
 		return baseAppUserDao.queryByOrganidTREEPATH(map);
 	}

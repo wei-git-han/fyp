@@ -111,9 +111,14 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             //请假人数远程服务地址(获取在线人数)
             String reJson = CrossDomainUtil.postJSONString(href, map);
             if (StringUtils.isNotEmpty(reJson)) {
-                String accounts = reJson.substring(1,reJson.length()-1).replace("\"", "");
-                String [] accountArray = accounts.split("\\s*,\\s*");
-                accountList = new ArrayList<String>(Arrays.asList(accountArray));
+                if(com.css.base.utils.StringUtils.isNotBlank(reJson)){
+                    JSONArray jsonArray = JSONArray.parseArray(reJson);
+                    if(jsonArray != null && jsonArray.size() > 0){
+                        for(int i = 0;i<jsonArray.size();i++){
+                            accountList.add(jsonArray.getString(i));
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             logger.info("PersonManagementController在线人员ID-LIST");
@@ -144,7 +149,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             //在线人数
             //List<String> collect = userIdList.stream().filter(item -> userCollect.contains(item)).collect(Collectors.toList());
             List<String> collect = userIdList;
-            Integer peopleOnlineCount =  collect.size();
+            List<String> notAtConfigUserDept = baseAppUserService.getNotAtConfigUserDept(collect);
+            Integer peopleOnlineCount =  notAtConfigUserDept.size();
             reignCaseVo.setPeopleOnlineCount(peopleOnlineCount);
             //在线率
             String onlineRate = "";
