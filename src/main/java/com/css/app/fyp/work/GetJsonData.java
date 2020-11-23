@@ -171,7 +171,7 @@ public class GetJsonData {
                 data = AppConstant.LEAVE;
                 break;
             case "首长督查催办":
-                data = AppConstant.LEAVE;
+                data = AppConstant.SZDCCB;
                 break;
         }
         return data;

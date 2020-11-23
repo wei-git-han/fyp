@@ -57,7 +57,7 @@ public class ManageThingController {
         BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
         String name = baseAppOrgan.getName();
         //当前用户是否为部首长
-        if (StringUtils.equals("部首长",name)) {
+        if (StringUtils.equals("部首长",name) || StringUtils.equals("首长",name)) {
             flag = true;
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
