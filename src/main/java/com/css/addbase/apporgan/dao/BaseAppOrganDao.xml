@@ -89,4 +89,37 @@
 		</foreach>
 	</select>
 
+	<select id="queryAllDept" resultType="map">
+		select
+        ID  ,
+        NAME,
+        ISDELETE  ,
+        PARENT_ID ,
+        SORT,
+
+        (
+                select
+                        count(0)
+                from
+                        BASE_APP_ORGAN a
+                WHERE
+                        a.PARENT_ID =b.ID
+                    and a.ISDELETE = 0
+        ) AS CODE
+
+
+from
+        BASE_APP_ORGAN b
+where
+        PARENT_ID   = 'root'
+    and b.ISDELETE = 0
+    and
+        (
+                ISDELETE  ='0'
+             or ISDELETE is null
+        )
+order by
+        SORT
+	</select>
+
 </mapper>
