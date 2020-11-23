@@ -142,7 +142,10 @@ var pageModule = function () {
 			    text: '',
 			    x: 'center'
 			},
-			tooltip: {},
+			tooltip: {
+				showContent: false,
+				show: false
+			},
 			xAxis3D: {
 			    type: 'category',
 			    data: data.xdata,
@@ -435,11 +438,11 @@ var pageModule = function () {
 					show:false
 				},
 				color:'#04194D',
-				borderWidth:10
+				borderWidth:5
 			},
 			emphasis:{
 				color:'#04194D',
-				borderWidth:10
+				borderWidth:5
 			}
 
 		}
