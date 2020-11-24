@@ -143,8 +143,8 @@ var pageModule = function () {
 						'<p>'+(data.name?data.name:"")+'<p>'+
 						'<p>在编：'+(data.zb?data.zb:0)+'</p>'+
 						'<p>在线：'+(data.zx?data.zx:0)+'</p>'+
-						'<p>请假：'+(data.qj?data.qj:0)+'</p>'+
-						'<p>其他：'+(data.qt?data.qt:0)+'</p>'+
+						/*'<p>请假：'+(data.qj?data.qj:0)+'</p>'+
+						'<p>其他：'+(data.qt?data.qt:0)+'</p>'+*/
 						'<p>在线率：'+(data.zwl?data.zwl+"%":0)+'</p>'+
 						//                    '<p><a href="index.html" target="_blank" style="color:#fff;">点击查看&nbsp;&gt;&nbsp; </a></p>'+
 						'</div>';
