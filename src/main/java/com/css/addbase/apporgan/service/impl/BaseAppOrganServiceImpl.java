@@ -55,6 +55,11 @@ public class BaseAppOrganServiceImpl implements BaseAppOrganService {
 	}
 
 	@Override
+	public List<BaseAppOrgan> findByParentId2(String parentId) {
+		return baseAppOrganDao.findByParentId2(parentId);
+	}
+
+	@Override
 	public List<BaseAppOrgan> findAllDeptById(String deptId) {
 		return baseAppOrganDao.findAllDeptById(deptId);
 	}

@@ -472,7 +472,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             //}
         }
 
-        List<BaseAppOrgan> organs = baseAppOrganService.findByParentId(id);
+        List<BaseAppOrgan> organs = baseAppOrganService.findByParentId2(id);
         if(organs != null && organs.size() > 0){
             for (BaseAppOrgan organ:organs) {
                 jsons.add(getUserTreeFyp(organ.getId()));
