@@ -151,6 +151,10 @@ var pageModule = function () {
 					return html;
 				}
 			},
+			grid:{
+				x:100, //控制x轴文字和底部的距离
+				y2: 100 //控制倾斜的文字域最右边的距离，防止倾斜的文字超过显示区域
+			},
 			xAxis: [{
 				clickable: true,
 				type: 'category',
@@ -191,7 +195,7 @@ var pageModule = function () {
 				name: '各局在线率统计',
 				type: 'bar',
 				data: yData,
-				barWidth:20,
+				barWidth:13,
 				itemStyle: {
 					normal: {
 						color: new echarts.graphic.LinearGradient(0,0,0,1,[{
