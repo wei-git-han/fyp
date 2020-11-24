@@ -27,7 +27,7 @@ var pageModule = function () {
 						getCircleChartData();
 					}
 				});
-				$("#deptName1").createSelecttree({
+				/*$("#deptName1").createSelecttree({
 					data : data,
 					width : '100%',
 					success : function(data, treeobj) {},
@@ -36,7 +36,7 @@ var pageModule = function () {
 						$("#deptId1").val(data.node.id);
 						getBanwenAll();
 					}
-				});
+				});*/
 				$("#deptName2").createSelecttree({
 					data : data,
 					width : '100%',
