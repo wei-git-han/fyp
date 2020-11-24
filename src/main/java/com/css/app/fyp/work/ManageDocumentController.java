@@ -40,7 +40,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/total")
-    public void total(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date time,String deptid) {
+    public void total(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
 
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办文总量");
@@ -61,7 +61,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/overview")
-    public void overview(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date time,String deptid) {
+    public void overview(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
         paramMap.add("type",type);
@@ -109,7 +109,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/submitEfficiency")
-    public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time,String deptid) {
+    public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
@@ -129,7 +129,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/handleEfficiency")
-    public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time,String deptid) {
+    public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
@@ -149,7 +149,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/readEfficiency")
-    public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time,String deptid) {
+    public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy") Date time,String deptid) {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);

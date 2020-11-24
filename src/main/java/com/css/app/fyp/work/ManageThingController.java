@@ -49,7 +49,7 @@ public class ManageThingController {
      */
     @ResponseBody
     @RequestMapping("/dbCount")
-    public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
+    public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy") Date time) {
 
         Boolean flag = false;
         String userId = CurrentUser.getUserId();
