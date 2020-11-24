@@ -173,7 +173,7 @@ var pageModule = function () {
 						var html4 = "";
 						var htmlDate = "";
 						var height101 = "";
-						var month = item.month;
+						var month = item.month + 1;
 						var day = item.day;
 						var week = item.week;
 						if($.trim(week) == "七"){
@@ -195,7 +195,7 @@ var pageModule = function () {
 							amFypPersonageWorkWeekList =[];
 						}
 						$.each(amFypPersonageWorkWeekList, function(j, items) {
-							var createdTime = items.createdTime;
+							var createdTime = items.beginTime ? items.beginTime :items.specialTime;
 							var html5 = "";
 							var html9 = "";
 
@@ -204,7 +204,7 @@ var pageModule = function () {
 
 							html5 = '<dl>';
 							if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
-								createdTime = createdTime.substring(11,16);
+								//createdTime = createdTime.substring(11,16);
 								html5 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
 							} else {
 								html5 += "<dt></dt>";
@@ -237,12 +237,12 @@ var pageModule = function () {
 						}
 
 						$.each(pmFypPersonageWorkWeekList, function(i, items) {
-							var createdTime = items.createdTime;
+							var createdTime = items.beginTime ? items.beginTime :items.specialTime;
 							var html7 = "";
 							var html10 = "";
 							html7 = '<dl>';
 							if (createdTime != null && typeof(createdTime) != "undefined" && createdTime != "") {
-								createdTime = createdTime.substring(11,16);
+								//createdTime = createdTime.substring(11,16);
 								html7 += "<dt title=" + createdTime + ">" + createdTime + "</dt>";
 							} else {
 								html7 += "<dt></dt>";
