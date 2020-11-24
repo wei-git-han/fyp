@@ -200,7 +200,7 @@ public class DictController {
 			}
 			if (list != null && list.size() > 0) {
 				for (Map<String, Object> map : list) {
-					if (organid.equals(id) && dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
+					if (dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
 						json.put("dictType", "1");
 					}
 				}
@@ -236,7 +236,7 @@ public class DictController {
 			}
 			if (list != null && list.size() > 0) {
 				for (Map<String, Object> map : list) {
-					if (organid.equals(id) && dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
+					if (dept.getId().toString().equals(map.get("DEPT_ID").toString())) {
 						json.put("dictType", "1");
 					}
 				}
