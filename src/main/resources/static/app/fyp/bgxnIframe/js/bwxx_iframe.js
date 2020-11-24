@@ -620,7 +620,8 @@ var pageModule = function () {
 			rtl: Metronic.isRTL(),
 			orientation: "",
 			autoclose: true,
-			format: "yyyy-mm-dd"
+			minViewMode: 2,
+			format: "yyyy"
 		}).on("changeDate",function(){
 			getBanwenAll();//办文总量
 		});
@@ -630,7 +631,8 @@ var pageModule = function () {
 			rtl: Metronic.isRTL(),
 			orientation: "",
 			autoclose: true,
-			format: "yyyy-mm-dd"
+			minViewMode: 2,
+			format: "yyyy"
 		}).on("changeDate",function(){
 			getFawenAll();//发文情况
 		});
@@ -639,8 +641,8 @@ var pageModule = function () {
 			language:"zh-CN",
 		    rtl: Metronic.isRTL(),
 		    orientation: "",
-		    format: "yyyy-mm",
-			minViewMode: 1,
+		    format: "yyyy",
+			minViewMode: 2,
 		    autoclose: true
 		}).on("changeDate",function(){
 			getCircleChartData();//办公效率
