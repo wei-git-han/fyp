@@ -56,7 +56,7 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 	 * @param deptId
 	 * @return
 	 */
-	@Select("select count(id) from BASE_APP_USER t where t.account not in('admin','sysadmin','secadmin','audadmin') and t.organId in (select id from BASE_APP_ORGAN start with id= #{0} connect by prior id = parent_id) and t.organId not in (select DEPT_ID from CONFIG_USER_DEPT where DEPT_ID is not null)   and ("
+	@Select("select count(id) from BASE_APP_USER t where t.account not in('admin','sysadmin','secadmin','audadmin') and t.organId in (select id from BASE_APP_ORGAN start with id= #{0} connect by prior id = parent_id) and t.organId not in (select DEPT_ID from CONFIG_USER_DEPT where DEPT_ID is not null) and t.USER_ID not in (select USER_ID from CONFIG_USER_DEPT where USER_ID is not null) and ("
 			+ "user_id not in (select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1 ) "
 			+ "or user_id = #{1}"
 			+ "or user_id in (select LEADER_ID from  USER_LEADER_ACCESS_STATE  where state=1  and user_id =#{1})  "
