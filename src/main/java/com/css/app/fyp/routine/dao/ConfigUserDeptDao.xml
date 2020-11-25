@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.ConfigUserDeptDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.ConfigUserDept">
+		select * from CONFIG_USER_DEPT where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.ConfigUserDept">
+		select * from CONFIG_USER_DEPT 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from CONFIG_USER_DEPT 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.ConfigUserDept">
+		insert into CONFIG_USER_DEPT
+		(
+			"ID", 
+			"USER_ID", 
+			"DEPT_ID", 
+			"TYPE", 
+			"CREATE_TIME"
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{deptId}, 
+			#{type}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.ConfigUserDept">
+		update CONFIG_USER_DEPT 
+		<set>
+			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="deptId != null">"DEPT_ID" = #{deptId}, </if>
+			<if test="type != null">"TYPE" = #{type}, </if>
+			<if test="createTime != null">"CREATE_TIME" = #{createTime}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from CONFIG_USER_DEPT where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from CONFIG_USER_DEPT where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
