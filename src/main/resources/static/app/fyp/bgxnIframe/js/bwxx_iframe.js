@@ -464,11 +464,11 @@ var pageModule = function () {
 			title:[{
 				text:'办结率',
 				left:'17%',
-				top:'75%',
+				top:'80%',
 				textAlign:'center',
 				textStyle:{
 					fontSize:'16',
-					fontWeight:'bold',
+					fontWeight:'normal',
 					color:'#fff',
 					textAlign:'center',
 					/*borderColor:'#f00',
@@ -480,7 +480,7 @@ var pageModule = function () {
 			{
 				text:'延期',
 				left:'50%',
-				top:'75%',
+				top:'80%',
 				textAlign:'center',
 				textStyle:{
 					fontSize:'16',
@@ -491,7 +491,7 @@ var pageModule = function () {
 			},{
 					text:'阅件完成率',
 					left:'82%',
-					top:'75%',
+					top:'80%',
 					textAlign:'center',
 					textStyle:{
 						fontSize:'16',
