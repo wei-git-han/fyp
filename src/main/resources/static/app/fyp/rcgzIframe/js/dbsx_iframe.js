@@ -22,7 +22,7 @@ var pageModule = function () {
 							return '<i class="fa fa fa-pencil" style="cursor:pointer;color: #2E85E0;padding:4px 5px;" onclick="editfn()" title="编辑"></i>';
 						}} */
 						{display:"文件名称",name:"documentTitle",width:"40%",align:"center",render:function(rowdata,n){
-							return `<div class="viewBtn" title="${rowdata.documentTitle}">${rowdata.documentTitle}</div>`
+							return `<div class="viewBtn" title="${rowdata.documentTitle}" onclick="openById()">${rowdata.documentTitle}</div>`
 						}},
 						{display:"拟稿单位",name:"organName",width:"20%",align:"center",render:function(rowdata,n){
 							return `<div  class="viewBtn" onclick="openById()">${rowdata.organName}</div>`;
