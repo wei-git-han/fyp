@@ -118,6 +118,7 @@ where
                 ISDELETE  ='0'
              or ISDELETE is null
         )
+         and b.id not in (select dept_id from CONFIG_USER_DEPT where dept_id is not null)
 order by
         SORT
 	</select>

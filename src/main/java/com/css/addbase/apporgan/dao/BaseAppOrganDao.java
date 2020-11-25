@@ -26,12 +26,15 @@ public interface BaseAppOrganDao extends BaseDao<BaseAppOrgan> {
 	 * 根据父Id获取部门信息
 	 * @author gengds
 	 */
-	@Select("select * from BASE_APP_ORGAN where ISDELETE=0 and PARENT_ID = #{parentId} order by SORT")
+	@Select("select * from BASE_APP_ORGAN t where t.ISDELETE=0 and t.PARENT_ID = #{parentId} order by SORT")
 	List<BaseAppOrgan> findByParentId(String parentId);
 
 	@Select("select id as ORG_ID, name as ORG_NAME from BASE_APP_ORGAN where id = #{0}")
 	Map<String,Object> findAppIdAndDeptIdNameById(String orgId);
-	
+
+	@Select("select * from BASE_APP_ORGAN t where t.ISDELETE=0 and t.PARENT_ID = #{parentId} and t.id not in (select dept_id from CONFIG_USER_DEPT where dept_id is not null) order by SORT")
+	List<BaseAppOrgan> findByParentId2(String parentId);
+
 	/**
 	 * 根据ID获取该部门及其全部子部门信息
 	 * @author gengds

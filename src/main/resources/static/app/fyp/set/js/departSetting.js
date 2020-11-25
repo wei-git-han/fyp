@@ -5,7 +5,9 @@ var pageModule = function () {
 	var initgrid = function(){
 		$('#gridcont').datagrid({
 			columns : [ [
-					{title : '序号',field : 'rownum',width : 1,align : 'center'},
+					{title : '序号',field : 'id',width : 1,align : 'center',formatter:function(value,index){
+						return $('#gridcont').datagrid('getRowIndex',index)+1
+					}},
 					{title : '单位名称',field : 'name',width : 10,align : 'center'},
 					{title:'是否列入统计范围',field:'dictType',width:10,align:'center',formatter:function(value,rowdata){
 						if(rowdata.dictType=='1'){

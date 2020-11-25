@@ -65,15 +65,15 @@ dl{
 	margin-top:10px;
 	padding:0px 10px;
 	font-size: 16px;
-	/*color:#3BA9FF;*/
+	color:#3BA9FF;
 	box-shadow: inset 0px 0px 1px #68A9D8;
 }
 dl.top3{
-	color: #3BA9FF;
+	color: #E2A848;
 }
-dl.top31{
+/* dl.top31{
 	color: #fff;
-}
+} */
 dl:hover{
 	color: #E2A848;
 	box-shadow: inset 0px 0px 3px #386DDE;
