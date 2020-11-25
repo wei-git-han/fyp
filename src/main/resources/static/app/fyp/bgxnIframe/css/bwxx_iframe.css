@@ -59,14 +59,13 @@ html, body {
 }
 .navTitle{
 	display:flex;
-	margin-top:20px;
+	margin-top:10px;
 	align-items:center;
 }
 .navTitle>div{
 	flex:1;
 	text-align: center;
 	font-size: 18px;
-	border-right: 1px solid #288ADA;
 }
 .main4>div{
 	width:33.3%;
@@ -76,7 +75,6 @@ html, body {
 }
 .main4>div>div{
 	height:40%;
-	margin-top:10px;
 	width:140px;
 	display: inline-block;
 	padding-top: 10px;
