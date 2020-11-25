@@ -208,7 +208,7 @@ public class OrderOfBirthController {
         //应用信息
         List<Map<String,Object>> softwareData = this.getSoftwareData(AppConstant.INFO,paramMap);
 
-        this.sort(iaData,"visit");//访问量排序
+        this.sort(iaData,"install");//访问量排序
 
         List<Map<String,Object>> accessList = new ArrayList<>();
         Map<String, Object> accessMap = null;
