@@ -71,7 +71,7 @@ public class GetJsonData {
                                 map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));
                             }
                             setData(data,url,map,token,jsons);
-                            break;
+                            continue;
                         case "办会":
                             //会见
                             BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
@@ -79,13 +79,13 @@ public class GetJsonData {
                             map.add("secretKey",meeting.getAppSecret());
                             url = meeting.getUrl()+meeting.getWebUri();
                             setData(data,url,map,token,jsons);
-                            break;
+                            continue;
                         case "首长督查催办":
                             //首长督查催办
                             BaseAppOrgMapped szThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                             url = szThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_SZDCCB_MANAGETHING;
                             setData(data,url,map,token,jsons);
-                            break;
+                            continue;
 
                         case "督查催办":
                             //督查催办
@@ -101,7 +101,7 @@ public class GetJsonData {
                                 map.add("organId", orgId);
                             }
                             setData(data,url,map,token,jsons);
-                            break;
+                            continue;
                     }
 //                }
 //            });
