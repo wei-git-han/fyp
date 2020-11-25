@@ -2,6 +2,8 @@ package com.css.app.fyp.work;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
+import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
@@ -11,6 +13,7 @@ import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.StringUtils;
+import com.github.pagehelper.util.StringUtil;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,6 +41,9 @@ public class GetJsonData {
     @Autowired
     private BaseAppUserService baseAppUserService;
 
+    @Autowired
+    private BaseAppOrganService baseAppOrganService;
+
     private ExecutorService cacheThread = Executors.newCachedThreadPool();
 
 //    private List<JSONObject> jsons = null;
@@ -54,60 +60,64 @@ public class GetJsonData {
         String orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         List<JSONObject> jsons = new ArrayList<>();
         String prefix = this.getPrefix(type);
-        List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
         String token = SSOAuthFilter.getToken();
-        for (Map<String, Object> data:appIdAndDeptIdNameAll) {
-//            cacheThread.execute(new Runnable() {
-//                @Override
-//                public void run() {
-                    System.out.println("`!!");
-                    String url = "";
-                    switch (type){
-                        case "办文":
-                            //公文处理
-                            BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
-                            url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
-                            if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
-                                map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));
-                            }
-                            setData(data,url,map,token,jsons);
-                            break;
-                        case "办会":
-                            //会见
-                            BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
-                            map.add("appId",meeting.getAppId());
-                            map.add("secretKey",meeting.getAppSecret());
-                            url = meeting.getUrl()+meeting.getWebUri();
-                            setData(data,url,map,token,jsons);
-                            break;
-                        case "首长督查催办":
-                            //首长督查催办
-                            BaseAppOrgMapped szThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
-                            url = szThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_SZDCCB_MANAGETHING;
-                            setData(data,url,map,token,jsons);
-                            break;
+        String deptid = map.get("deptid").toString();
+        if (StringUtils.isNotBlank(deptid)) {
+            Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(deptid);
+            this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, orgId);
+        }else {
+            List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
+            for (Map<String, Object> data:appIdAndDeptIdNameAll) {
+                this.getJsonsDate(type, data, prefix, jsons, token, map, orgId);
+            }
 
-                        case "督查催办":
-                            //督查催办
-                            BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
-                            url = manageThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_DCCB_MANAGETHING;
-                            List<Object> organIds = map.get("organId");
-                            if(null==organIds && organIds.contains(data.get("ORG_ID").toString())){
-                                map.remove("organId");
-                                map.add("organId", orgId);
-                            }
-                            //默认查配置的全部局
-                            if(null == organIds){
-                                map.add("organId", orgId);
-                            }
-                            setData(data,url,map,token,jsons);
-                            break;
-                    }
-//                }
-//            });
         }
-//        return this.getDataAll(appIdAndDeptIdNameAll.size(),jsons);
         return jsons;
+    }
+
+    private void getJsonsDate (String type, Map<String, Object> data, String prefix, List<JSONObject> jsons,String token, LinkedMultiValueMap<String, Object> map, String orgId) {
+        String url = "";
+        switch (type){
+            case "办文":
+                //公文处理
+                BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
+                url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
+                if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
+                    map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));
+                }
+                setData(data,url,map,token,jsons);
+                break;
+            case "办会":
+                //会见
+                BaseAppOrgMapped meeting = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                map.add("appId",meeting.getAppId());
+                map.add("secretKey",meeting.getAppSecret());
+                url = meeting.getUrl()+meeting.getWebUri();
+                setData(data,url,map,token,jsons);
+                break;
+            case "首长督查催办":
+                //首长督查催办
+                BaseAppOrgMapped szThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                url = szThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_SZDCCB_MANAGETHING;
+                setData(data,url,map,token,jsons);
+                break;
+
+            case "督查催办":
+                //督查催办
+                BaseAppOrgMapped manageThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                url = manageThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_DCCB_MANAGETHING;
+                List<Object> organIds = map.get("organId");
+                if(null==organIds && organIds.contains(data.get("ORG_ID").toString())){
+                    map.remove("organId");
+                    map.add("organId", orgId);
+                }
+                //默认查配置的全部局
+                if(null == organIds){
+                    map.add("organId", orgId);
+                }
+                setData(data,url,map,token,jsons);
+                break;
+        }
     }
 
     /**

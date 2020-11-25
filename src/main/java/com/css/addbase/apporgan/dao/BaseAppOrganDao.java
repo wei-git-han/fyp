@@ -28,6 +28,9 @@ public interface BaseAppOrganDao extends BaseDao<BaseAppOrgan> {
 	 */
 	@Select("select * from BASE_APP_ORGAN where ISDELETE=0 and PARENT_ID = #{parentId} order by SORT")
 	List<BaseAppOrgan> findByParentId(String parentId);
+
+	@Select("select id as ORG_ID, name as ORG_NAME from BASE_APP_ORGAN where id = #{0}")
+	Map<String,Object> findAppIdAndDeptIdNameById(String orgId);
 	
 	/**
 	 * 根据ID获取该部门及其全部子部门信息

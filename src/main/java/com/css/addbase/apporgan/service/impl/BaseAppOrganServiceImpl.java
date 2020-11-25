@@ -23,6 +23,11 @@ public class BaseAppOrganServiceImpl implements BaseAppOrganService {
 	public BaseAppOrgan queryObject(String id){
 		return baseAppOrganDao.queryObject(id);
 	}
+
+	@Override
+	public Map<String, Object> findAppIdAndDeptIdNameById(String orgId) {
+		return baseAppOrganDao.findAppIdAndDeptIdNameById(orgId);
+	}
 	
 	@Override
 	public List<BaseAppOrgan> queryList(Map<String, Object> map){
