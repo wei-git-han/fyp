@@ -386,9 +386,9 @@ var pageModule = function () {
 									'	<span>'+o.appName+'</span>'+
 									'	<span>'+o.appCount+'</span>'+
 									'</div>'
-					}else{
+					}else if (i< 10) {
 						arryHtml_r+='<div>'+
-									'	<span>TOP'+parseInt(i+5+1)+'</span>'+
+									'	<span>TOP'+parseInt(i+1)+'</span>'+
 									'	<span>'+o.appName+'</span>'+
 									'	<span>'+o.appCount+'</span>'+
 									'</div>'
@@ -416,9 +416,9 @@ var pageModule = function () {
 									'	<span>'+o.appName+'</span>'+
 									'	<span>'+o.appCount+'</span>'+
 									'</div>'
-					}else{
+					}else if (i< 10) {
 						arryHtml_r+='<div>'+
-									'	<span>TOP'+parseInt(i+5+1)+'</span>'+
+									'	<span>TOP'+parseInt(i+1)+'</span>'+
 									'	<span>'+o.appName+'</span>'+
 									'	<span>'+o.appCount+'</span>'+
 									'</div>'

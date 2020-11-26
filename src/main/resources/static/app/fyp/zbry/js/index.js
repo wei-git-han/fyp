@@ -80,7 +80,7 @@ var pageModule = function () {
 	var initgrid = function(){
 		$('#gridcont').treegrid({
 			columns : [ [
-				{title : '序号',field : 'rownum',width : 1,align : 'center'},
+//				{title : '序号',field : 'rownum',width : 1,align : 'center'},
 				{title : '名称',field : 'name',width : 10,align : 'left'},
 				{title:'是否在编',field:'dictType',width:10,align:'center',formatter:function(value,rowdata){
 						if(rowdata.type=='1'){
@@ -94,7 +94,7 @@ var pageModule = function () {
 			] ],
 			width : $('#gridcont').parent().width(),
 			height : $('#gridcont').parent().height(),
-			rownumbers : false,
+			rownumbers : true,
 			animate : true,
 			autoRowHeight : false,
 			pagination : true,

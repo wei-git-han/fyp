@@ -45,11 +45,7 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办文总量");
         paramMap.add("type",type);
-        if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
-        }else{
-            paramMap.add("deptid",deptid);
-        }
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -65,11 +61,7 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
         paramMap.add("type",type);
-        if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
-        }else{
-            paramMap.add("deptid",deptid);
-        }
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -85,11 +77,7 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
-        if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
-        }else{
-            paramMap.add("deptid",deptid);
-        }
+        paramMap.add("deptid",deptid);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         paramMap.add("time",null);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
@@ -113,11 +101,7 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
-        if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
-        }else{
-            paramMap.add("deptid",deptid);
-        }
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -133,11 +117,7 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
-        if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
-        }else{
-            paramMap.add("deptid",deptid);
-        }
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
@@ -153,11 +133,7 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);
-        if(StringUtils.isNotBlank(deptid)){
-            paramMap.add("deptid",findUsersByDeptidNotConfig(deptid));
-        }else{
-            paramMap.add("deptid",deptid);
-        }
+        paramMap.add("deptid",deptid);
         paramMap.add("time",this.getJsonData.getStringDate(time));
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }

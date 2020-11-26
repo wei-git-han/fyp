@@ -87,7 +87,7 @@ public class ManageThingController {
         dataMap.put("timeOutNotEnd",dataList.get(0).get("overTimewbj"));//超时未结
         dataMap.put("working",dataList.get(0).get("onTimeblz"));//时限内在办
         dataMap.put("dayNumber",dataList.get(0).get("aveDays"));//平均办理天数
-        String bjl = dataList.get(0).get("wcl").toString()+"%";
+        String bjl = dataList.get(0).get("wcl").toString();
         //bjl = bjl.substring(0,bjl.lastIndexOf(".")+2)+"%";
         dataMap.put("percentage",bjl);//办结率
         dataMap.put("total",dataList.get(0).get("zsl"));//督办总量

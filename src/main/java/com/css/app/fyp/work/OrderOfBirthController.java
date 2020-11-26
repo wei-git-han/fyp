@@ -160,7 +160,6 @@ public class OrderOfBirthController {
         Map<String, Object> accessMap = null;
         for(Map<String,Object> map:iaData){
             accessMap = new HashMap<>();
-            accessMap.put("appCount",map.get("visit"));//应用访问总数
             String appid = (String)map.get("appid");
             //for(Map<String,Object> infoMap:softwareData){
                 for(int j = 0;j<softwareData.size();j++){
@@ -170,12 +169,16 @@ public class OrderOfBirthController {
                         String name = (String)infoMap.get("genericname");
                         // String name = "平台应用";
                         accessMap.put("appName",name);//应用名称
+                        accessMap.put("appCount",map.get("visit"));//应用访问总数
                         break;
                 }
 
                }
            // }
-            accessList.add(accessMap);
+                if(accessMap !=null && accessMap.size() >0) {
+                	  accessList.add(accessMap);
+                }
+          
         }
         objects.put("access",accessList);
 
@@ -205,13 +208,13 @@ public class OrderOfBirthController {
         //应用信息
         List<Map<String,Object>> softwareData = this.getSoftwareData(AppConstant.INFO,paramMap);
 
-        this.sort(iaData,"visit");//访问量排序
+        this.sort(iaData,"install");//访问量排序
 
         List<Map<String,Object>> accessList = new ArrayList<>();
         Map<String, Object> accessMap = null;
         for(Map<String,Object> map:iaData){
             accessMap = new HashMap<>();
-            accessMap.put("appCount",map.get("install"));//应用安装总数
+          
             String appid = (String)map.get("appid");
             //for(Map<String,Object> infoMap:softwareData){
             for(int j = 0;j<softwareData.size();j++){
@@ -221,12 +224,15 @@ public class OrderOfBirthController {
                     String name = (String)infoMap.get("genericname");
                     //   String name = "平台应用";
                     accessMap.put("appName",name);//应用名称
+                    accessMap.put("appCount",map.get("install"));//应用安装总数
                     break;
                 }
             }
 
             //}
-            accessList.add(accessMap);
+            if(accessMap !=null && accessMap.size() >0) {
+          	  accessList.add(accessMap);
+          }
         }
         objects.put("install",accessList);
         Response.json(new ResponseValueUtils().success(objects));

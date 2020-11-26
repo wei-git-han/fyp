@@ -10,6 +10,7 @@ import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
+import com.css.app.fyp.routine.entity.ConfigUserDept;
 import com.css.app.fyp.routine.entity.UserLeaderAccessState;
 import com.css.app.fyp.routine.entity.UserLeaveSetting;
 import com.css.app.fyp.routine.service.*;
@@ -27,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
+import sun.text.resources.cldr.es.FormatData_es_419;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -65,6 +67,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     private String qxjfzUrl;
     @Value("${csse.mircoservice.zaiwei}")
     private String urls;
+
+    @Autowired
+    private ConfigUserDeptService configUserDeptService;
 
     /**
      * 在线人
@@ -393,8 +398,28 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         //在线机构ID 对应的在线人总数
         //Map<String,Object> dataMap =getOrgOnlineUserCount(onlineUsers);
         Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
+//        List list = new ArrayList();
+//        Iterator iterator = dataMap.keySet().iterator();
+//        while (iterator.hasNext()){
+//            String key = iterator.next().toString();
+//            list.add(key);
+//
+//        }
+
+//        if(list != null && list.size()>0){
+//            for(int j = 0;j<list.size();j++){
+//                String noUserId = (String)list.get(j);
+//                ConfigUserDept configUserDept = configUserDeptService.queryByUserId(noUserId);
+//                if(configUserDept != null){
+//                    list.remove(j);
+//                }
+//
+//            }
+//        }
+
 
         Integer zxCount = 0;
+        //zxCount = list.size();
         if(!dataMap.isEmpty()) {
             Object value = dataMap.get(id);
             if(value!=null) {
@@ -472,10 +497,13 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             //}
         }
 
-        List<BaseAppOrgan> organs = baseAppOrganService.findByParentId(id);
-        for (BaseAppOrgan organ:organs) {
-            jsons.add(getUserTreeFyp(organ.getId()));
+        List<BaseAppOrgan> organs = baseAppOrganService.findByParentId2(id);
+        if(organs != null && organs.size() > 0){
+            for (BaseAppOrgan organ:organs) {
+                jsons.add(getUserTreeFyp(organ.getId()));
+            }
         }
+
 
         if (jsons.size()>0) {
             result.put("child", jsons);

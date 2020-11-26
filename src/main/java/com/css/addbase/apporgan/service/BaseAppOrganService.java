@@ -17,7 +17,9 @@ public interface BaseAppOrganService {
 	BaseAppOrgan queryObject(String id);
 	
 	List<BaseAppOrgan> queryList(Map<String, Object> map);
-	
+
+	Map<String,Object> findAppIdAndDeptIdNameById(String orgId);
+
 	void save(BaseAppOrgan baseAppOrgan);
 	
 	void update(BaseAppOrgan baseAppOrgan);
@@ -32,6 +34,11 @@ public interface BaseAppOrganService {
 	 * @date 2017年11月29日
 	 */
 	List<BaseAppOrgan> findByParentId(String parentId);
+
+
+	List<BaseAppOrgan> findByParentId2(String parentId);
+
+
 	
 	/**
 	 * 根据ID获取该部门及其全部子部门信息
