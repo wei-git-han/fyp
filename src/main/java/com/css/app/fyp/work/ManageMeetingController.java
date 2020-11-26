@@ -56,7 +56,7 @@ public class ManageMeetingController {
         paramMap.add("fromDate",fromDate);
         paramMap.add("toDate",endTime);
         List<JSONObject> dataJson = getJsonData.getJson(paramMap, "办会");
-        System.out.println("dataJson===="+dataJson+"=====");
+//        System.out.println("dataJson===="+dataJson+"=====");
 //        for (JSONObject data:dataJson) {
 //            List<Map<String,Object>> list = (ArrayList)data.get("data");
 //            dataMap = new HashMap<>();
@@ -127,7 +127,7 @@ public class ManageMeetingController {
 //        map.put("meetingCount",3636);
 //        objects.add(map);
         JSONArray jsonData = new JSONArray();
-        System.out.println("res===="+res+"=====");
+//        System.out.println("res===="+res+"=====");
         if(StringUtils.isNotBlank(res)){
             jsonData = JSONArray.parseArray(res);
         }
