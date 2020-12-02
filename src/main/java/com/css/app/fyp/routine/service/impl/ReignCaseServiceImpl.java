@@ -397,27 +397,19 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
         //在线机构ID 对应的在线人总数
         //Map<String,Object> dataMap =getOrgOnlineUserCount(onlineUsers);
+        //在线人数中，去除不纳入统计范围的人
+        if(onlineUsers != null && onlineUsers.size() > 0) {
+            for(int j = 0;j<onlineUsers.size();j++){
+                BaseAppUser baseAppUser = onlineUsers.get(j);
+                String currentUserId = baseAppUser.getUserId();
+                ConfigUserDept configUserDept = configUserDeptService.queryByUserId(currentUserId);
+                if (configUserDept != null) {
+                    onlineUsers.remove(j);
+                    j--;
+                }
+            }
+        }
         Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
-//        List list = new ArrayList();
-//        Iterator iterator = dataMap.keySet().iterator();
-//        while (iterator.hasNext()){
-//            String key = iterator.next().toString();
-//            list.add(key);
-//
-//        }
-
-//        if(list != null && list.size()>0){
-//            for(int j = 0;j<list.size();j++){
-//                String noUserId = (String)list.get(j);
-//                ConfigUserDept configUserDept = configUserDeptService.queryByUserId(noUserId);
-//                if(configUserDept != null){
-//                    list.remove(j);
-//                }
-//
-//            }
-//        }
-
-
         Integer zxCount = 0;
         //zxCount = list.size();
         if(!dataMap.isEmpty()) {
