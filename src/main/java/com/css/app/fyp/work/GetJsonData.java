@@ -8,12 +8,14 @@ import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
+import com.css.addbase.token.TokenConfig;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.StringUtils;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.LinkedMultiValueMap;
 
@@ -44,6 +46,12 @@ public class GetJsonData {
 
     private ExecutorService cacheThread = Executors.newCachedThreadPool();
 
+    @Value("csse.dccb.appId")
+    private String appId;
+
+    @Value("csse.dccb.appSecret")
+    private String appSecret;
+
 //    private List<JSONObject> jsons = null;
 
     private List<String> strs = null;
@@ -66,6 +74,24 @@ public class GetJsonData {
             List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
             for (Map<String, Object> data:appIdAndDeptIdNameAll) {
                 this.getJsonsDate(type, data, prefix, jsons, token, map, orgId);
+            }
+
+        }
+        return jsons;
+    }
+
+    public List<JSONObject> getAllJson(LinkedMultiValueMap<String, Object> map,String type){
+        List<JSONObject> jsons = new ArrayList<>();
+        String prefix = this.getPrefix(type);
+        String token = TokenConfig.token(appId, appSecret);;
+        String deptId = (String)map.get("organId").get(0);
+        if (null != map.get("organId") && !"".equals(map.get("organId").get(0))) {
+            Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(map.get("organId").get(0).toString());
+            this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, deptId);
+        }else {
+            List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
+            for (Map<String, Object> data:appIdAndDeptIdNameAll) {
+                this.getJsonsDate(type, data, prefix, jsons, token, map, deptId);
             }
 
         }

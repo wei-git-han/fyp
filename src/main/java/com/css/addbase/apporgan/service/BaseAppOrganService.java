@@ -71,4 +71,6 @@ public interface BaseAppOrganService {
 	List<BaseAppOrgan> queryListByIds(String[] ids);
 
 	List<Map<String, Object>> queryAllDept();
+
+	List<BaseAppOrgan> getAllDeptIds();
 }
