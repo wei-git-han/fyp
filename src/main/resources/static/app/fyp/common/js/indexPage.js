@@ -265,6 +265,6 @@ function returnDate(){
 	var weekArray = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
 	$(".datelayout").html(year+"-"+month+"-"+day+"&nbsp;"+hour+":"+minute+"&nbsp;&nbsp;"+weekArray[week]);
 }
-function zanWeiKaiFang() {
-  newbootbox.alertInfo('暂不开放详情查看！')
+function zanWeiKaiFang(type) {
+  window.open("/app/fyp/zbqk/html/index.html?type="+type)
 }

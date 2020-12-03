@@ -1,7 +1,10 @@
-var listurl = {"url":"../data/grid.json","dataType":"text"};//表格数据
+var listurl = {"url":"/app/fyp/reignCaseController/reignOnlineUserList","dataType":"text"};//表格数据
+// http://127.0.0.1:11208/app/fyp/reignCaseController/reignOnlineUserList?afficheType=online
 var grid = null;
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
+var type = getUrlParam('type')||"reign"
 
+$('#type').val(type)
 var pageModule = function () {
 	var initgrid = function(){
 		grid = $('#gridcont').createGrid({
@@ -10,24 +13,24 @@ var pageModule = function () {
                     return n+1;
                 }},
                 {display:"姓名",name:"name",width:"20%",align:"center",render:function(rowdata,n){
-                    return rowdata.name;
+                    return rowdata.userName;
                 }},
                 {display:"职务",name:"deptName",width:"25%",align:"left",render:function(rowdata){
-                    return rowdata.deptName;
+                    return rowdata.post;
                 }},
                 {display:"手机号",name:"phone",width:"10%",align:"center",render:function(rowdata){
-                    return rowdata.phone;
+                    return rowdata.tel;
                 }},
                 {display:"房间号",name:"warrantyTime",width:"10%",align:"center",render:function(rowdata){
-                    return rowdata.warrantyTime;
+                    return rowdata.address;
                 }},
                 {display:"部门",name:"measures",width:"25%",align:"center",render:function(rowdata){
-                    return rowdata.measures;
+                    return rowdata.orgName;
                 }}
              ],
 			width:'100%',
             height:'100%',
-			paramobj:{},
+			paramobj:{'afficheType':type},
 			url : listurl
 		});
 	}
@@ -59,7 +62,7 @@ var pageModule = function () {
 
                 $("#tree_1").on("select_node.jstree", function(e,data) {
                     var id = $("#" + data.selected).attr("id");
-                    grid.setparams({deptid:id});
+                    grid.setparams({deptid:id,'afficheType':type});
                     grid.refresh();
                 });
             }
@@ -70,7 +73,17 @@ var pageModule = function () {
 		initControl: function () {
 		    initUnitTree();
 			initgrid();
-		}
+		},
+        refreshGrid: function () {
+            var id = $("#" + data.selected).attr("id");
+		    type = $('#type').val()
+            grid.setparams({deptid:id, 'afficheType': type});
+            grid.refresh();
+        }
 	}
 }();
+
+function refreshfn (){
+    pageModule.refreshGrid()
+}
 
