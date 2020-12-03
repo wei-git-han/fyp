@@ -639,8 +639,11 @@ public class OrgUtil {
 	public static String getParentOrg(List<BaseAppOrgan> organs, String organId) {
 		Map<String, BaseAppOrgan> orgMap = orgListToMapByOrganId(organs);
 		BaseAppOrgan org = getBaseAppOrgan(orgMap, organId);
-		BaseAppOrgan parentOrg = getBaseAppOrgan(orgMap, org.getParentId());
 		String orgName = org.getName();
+		if("-1".equals(org.getParentId())){
+			return orgName;
+		}
+		BaseAppOrgan parentOrg = getBaseAppOrgan(orgMap, org.getParentId());
 		if(StringUtils.equals(org.getParentId(), "root")) {
 			return orgName;
 		}
