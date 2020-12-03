@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.entity.BaseAppUser;
+import com.css.addbase.apporgan.entity.ReiOnlineUser;
 import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
@@ -17,7 +18,9 @@ import com.css.app.fyp.routine.service.*;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
+import com.css.base.utils.GwPageUtils;
 import com.css.base.utils.RestTemplateUtil;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -176,6 +179,58 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         return reignCaseVo;
     }
 
+    @Override
+    public GwPageUtils reignOnlineUserList(Integer page, Integer limit,String afficheType) {
+        PageHelper.startPage(page, limit);
+        List<ReiOnlineUser> reiOnlineUsers = new ArrayList<ReiOnlineUser>();
+        List<ReiOnlineUser> txlUsers = new ArrayList<ReiOnlineUser>();
+        JSONArray txlJson = new JSONArray();
+        if(StringUtils.equals(afficheType,"reign")){
+            Map<String,Object> filter = new HashMap<>();
+            filter.put("departmentId", "root");
+            reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
+            txlJson = getTxlJson("");
+        }else{
+            Map<String,Object> filter = new HashMap<>();
+            String[] acc = new String[userIdList.size()];
+            userIdList.toArray(acc);
+            filter.put("accounts", acc);
+            filter.put("departmentId", "root");
+            reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
+            String userIds = "";
+            for(ReiOnlineUser user : reiOnlineUsers){
+                userIds += "," + user.getUserId();
+            }
+            if(StringUtils.isNotBlank(userIds)){
+                userIds = userIds.substring(1);
+            }
+            txlJson = getTxlJson(userIds);
+        }
+        txlUsers = JSONObject.parseArray(txlJson.toJSONString(),ReiOnlineUser.class);
+        for(ReiOnlineUser rei : reiOnlineUsers){
+            for(ReiOnlineUser txl : txlUsers){
+                if(StringUtils.equals(rei.getUserId(),txl.getUserId())){
+                    rei.setAddress(txl.getAddress());
+                }
+            }
+        }
+        GwPageUtils pageUtil = new GwPageUtils(reiOnlineUsers);
+        return pageUtil;
+    }
+    private JSONArray getTxlJson(String userIds) {
+        // 查询列表数据
+        try {
+            LinkedMultiValueMap<Object, Object> map = new LinkedMultiValueMap<Object, Object>();
+            map.add("userIds", userIds);
+            String url = baseAppOrgMappedService.getWebUrlByType(AppConstant.APP_TXL,
+                    AppInterfaceConstant.WEB_INTERFACE_TXLREIONLINE_TO_FYP);
+            JSONArray newJsonArrayData = CrossDomainUtil.getNewJsonArrayData(url, map);
+            return newJsonArrayData;
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    }
     public static String txfloat(int a, int b) {
         DecimalFormat df = new DecimalFormat("###.#");
         double d = new BigDecimal((float)a/b).setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();

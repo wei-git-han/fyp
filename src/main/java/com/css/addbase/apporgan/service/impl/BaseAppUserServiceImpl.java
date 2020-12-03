@@ -1,5 +1,6 @@
 package com.css.addbase.apporgan.service.impl;
 
+import com.css.addbase.apporgan.entity.ReiOnlineUser;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 	@Override
 	public int queryTotal(Map<String, Object> map) {
 		return baseAppUserDao.queryTotal(map);
+	}
+
+	@Override
+	public List<ReiOnlineUser> queryReignUsers(Map<String, Object> map) {
+		return baseAppUserDao.queryReignUsers(map);
 	}
 	
 	@Override

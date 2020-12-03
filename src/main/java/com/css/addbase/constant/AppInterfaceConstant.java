@@ -263,6 +263,8 @@ public class AppInterfaceConstant {
      * 负一屏应用调用：负一屏调用通讯录信息接口定义
      */
     public final static String WEB_INTERFACE_TXL_TO_FYP = "/txluser/getTxlInfo";
+    public final static String WEB_INTERFACE_TXLREIONLINE_TO_FYP = "/api/search/fypUserSearch";
+
     /**
      * @author mashuwen
 	 * @date 2017年12月03日

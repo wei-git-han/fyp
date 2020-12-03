@@ -1,6 +1,8 @@
 package com.css.addbase.apporgan.service;
 
 import com.css.addbase.apporgan.entity.BaseAppUser;
+import com.css.addbase.apporgan.entity.ReiOnlineUser;
+
 import java.util.List;
 import java.util.Map;
 /**
@@ -13,7 +15,8 @@ import java.util.Map;
 public interface BaseAppUserService {
 	
 	int queryTotal(Map<String,Object> map);
-	
+
+	List<ReiOnlineUser> queryReignUsers(Map<String,Object> map);
 	BaseAppUser queryObject(String id);
 	
 	List<BaseAppUser> queryList(Map<String, Object> map);

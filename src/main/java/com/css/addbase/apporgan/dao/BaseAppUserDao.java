@@ -3,6 +3,7 @@ package com.css.addbase.apporgan.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.css.addbase.apporgan.entity.ReiOnlineUser;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -21,6 +22,8 @@ import com.css.base.dao.BaseDao;
 public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 	
 	int queryTotal(Map<String,Object> map);
+
+	List<ReiOnlineUser> queryReignUsers(Map<String,Object> map);
 	
 	/**
 	 * 根据用户ID获取人员信息

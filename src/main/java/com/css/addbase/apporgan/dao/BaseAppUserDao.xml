@@ -64,6 +64,28 @@
 		and user_id not in (select ifnull(user_id,0) from config_user_dept cud)
 	</select>
 
+	<select id="queryReignUsers" resultType="com.css.addbase.apporgan.entity.ReiOnlineUser">
+		select us.id id,us.USER_ID USER_ID,us.ORGANID BUREAU_ID,us.TRUENAME USER_NAME,org.NAME ORG_NAME,us.USEREMAIL POST,us.TELEPHONE PHONE,us.MOBILE TEL
+		 from BASE_APP_USER us left join BASE_APP_ORGAN org on us.ORGANID = org.id  where
+		ORGANID in
+		(
+		select
+		ID
+		from
+		BASE_APP_ORGAN start
+		with ID         = #{departmentId}
+		and ISDELETE=0 connect by prior ID = PARENT_ID
+		)
+		and ORGANID not in (select ifnull(dept_id,0) from config_user_dept cud)
+		and user_id not in (select ifnull(user_id,0) from config_user_dept cud)
+		<if test="accounts !=null and accounts != ''">
+			and account in
+			<foreach item="item" collection="accounts" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+
  	<select id="getNotAtConfigUserDept" resultType="java.lang.String">
 		select
 		account
@@ -77,7 +99,7 @@
 		and bau.ORGANID  not in (select ifnull(dept_id,0) from config_user_dept cud)
 	</select>
 
-	<select id="queryObjectByUserIds" resultType="com.css.addbase.apporgan.entity.BaseAppUser" >
+	<select id="queryObjectByUserIds" resultType="com.css.addbase.apporgan.entity.ReiOnlineUser" >
 		select  *  from BASE_APP_USER where USER_ID in 
 		<foreach item="userIds" collection="array" open="(" separator="," close=")">
 			#{userIds}

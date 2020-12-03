@@ -11,7 +11,9 @@ import com.css.app.fyp.routine.service.*;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CrossDomainUtil;
+import com.css.base.utils.GwPageUtils;
 import com.css.base.utils.Response;
+import com.css.base.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +94,13 @@ public class ReignCaseController {
     public void reignCaseSave(String trendType) {
         reignCaseService.reignCaseSave(trendType);
         Response.json("result", "success");
+    }
+
+    @ResponseBody
+    @RequestMapping("/reignOnlineUserList")
+    public void reignOnlineUserList(Integer page, Integer limit,String afficheType) {
+        GwPageUtils gwPageUtils = reignCaseService.reignOnlineUserList(page,limit,afficheType);
+        Response.json(gwPageUtils);
     }
 
     /**

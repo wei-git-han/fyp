@@ -154,7 +154,7 @@ csse.work.table: http://localhost:8080/api/week/count/publish
 
 
 #信息服务对应的ip和端口
-xxfw.url: http://10.1.151.81:8080
+xxfw.url: http://127.0.0.1:8080
 
 #电子邮件对应的ip和端口
 dzyj.url: http://10.150.110.19/restful/newuser.php/g7_boxinfo?user=test@jskxy.com＆passkey=admin.1554262311.cc73fc8a417b5218f3553b0fda25ad6f＆onlyinbox=no
