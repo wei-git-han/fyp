@@ -2,10 +2,33 @@ var listurl = {"url":"/app/fyp/reignCaseController/reignOnlineUserList","dataTyp
 // http://127.0.0.1:11208/app/fyp/reignCaseController/reignOnlineUserList?afficheType=online
 var grid = null;
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
-var type = getUrlParam('type')||"reign"
+var afficheType = getUrlParam('type')||"reign"
 
-$('#type').val(type)
+
 var pageModule = function () {
+   var initother = function () {
+       $('#afficheType').val(afficheType)
+    //单位
+        $("#deptName").createSelecttree({
+            url :deptTreeUrl,
+            width : '100%',
+            success : function(data, treeobj) {},
+            selectnode : function(e, data) {
+                $("#deptName").val(data.node.text);
+                $("#deptId").val(data.node.id);
+            }
+        });
+       $("#sure").click(function(){
+           var elementarry = ["deptId","afficheType"];
+           grid.setparams(getformdata(elementarry));
+           grid.refresh();
+       });
+
+       //重置
+       $("#reset").click(function(){
+           removeInputData(["deptId","deptName","afficheType"]);
+       });
+    }
 	var initgrid = function(){
 		grid = $('#gridcont').createGrid({
 			columns:[
@@ -30,60 +53,17 @@ var pageModule = function () {
              ],
 			width:'100%',
             height:'100%',
-			paramobj:{'afficheType':type},
+			paramobj:{'afficheType':$('#afficheType').val(),deptid:$("#deptId").val()},
 			url : listurl
 		});
 	}
-    var initUnitTree = function() {
-        $ajax({
-            url:deptTreeUrl,
-            success:function(data){
-
-                $("#tree_1").jstree({
-                    "plugins": ["wholerow", "types"],
-                    "core": {
-                    "themes" : {
-                        "responsive": false
-                    },
-                    "data": data,
-                    },
-                    "types" : {
-                        "default" : {
-                            "icon" : "peoples_img"
-                        },
-                        "file" : {
-                            "icon" : "peoples_img"
-                        },
-                        "1" : {
-                            "icon" : "people_img"
-                        }
-                    }
-                });
-
-                $("#tree_1").on("select_node.jstree", function(e,data) {
-                    var id = $("#" + data.selected).attr("id");
-                    grid.setparams({deptid:id,'afficheType':type});
-                    grid.refresh();
-                });
-            }
-        })
-    }
 	return {
 		//加载页面处理程序
 		initControl: function () {
-		    initUnitTree();
+		    // initUnitTree();
+            initother()
 			initgrid();
-		},
-        refreshGrid: function () {
-            var id = $("#" + data.selected).attr("id");
-		    type = $('#type').val()
-            grid.setparams({deptid:id, 'afficheType': type});
-            grid.refresh();
-        }
+		}
 	}
 }();
-
-function refreshfn (){
-    pageModule.refreshGrid()
-}
 
