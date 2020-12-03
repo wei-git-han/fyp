@@ -16,10 +16,7 @@ import com.css.app.fyp.routine.entity.UserLeaderAccessState;
 import com.css.app.fyp.routine.entity.UserLeaveSetting;
 import com.css.app.fyp.routine.service.*;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
-import com.css.base.utils.CrossDomainUtil;
-import com.css.base.utils.CurrentUser;
-import com.css.base.utils.GwPageUtils;
-import com.css.base.utils.RestTemplateUtil;
+import com.css.base.utils.*;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
@@ -180,22 +177,15 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     }
 
     @Override
-    public GwPageUtils reignOnlineUserList(Integer page, Integer limit,String afficheType) {
-        PageHelper.startPage(page, limit);
+    public JSONObject reignOnlineUserList(Integer page, Integer limit,String afficheType,String deptId) {
+//        PageHelper.startPage(page, limit);
         List<ReiOnlineUser> reiOnlineUsers = new ArrayList<ReiOnlineUser>();
         List<ReiOnlineUser> txlUsers = new ArrayList<ReiOnlineUser>();
-        JSONArray txlJson = new JSONArray();
+        JSONObject txlJson = new JSONObject();
         if(StringUtils.equals(afficheType,"reign")){
             Map<String,Object> filter = new HashMap<>();
             filter.put("departmentId", "root");
-            reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
-            txlJson = getTxlJson("");
-        }else{
-            Map<String,Object> filter = new HashMap<>();
-            String[] acc = new String[userIdList.size()];
-            userIdList.toArray(acc);
-            filter.put("accounts", acc);
-            filter.put("departmentId", "root");
+            filter.put("organid", deptId);
             reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
             String userIds = "";
             for(ReiOnlineUser user : reiOnlineUsers){
@@ -204,28 +194,47 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             if(StringUtils.isNotBlank(userIds)){
                 userIds = userIds.substring(1);
             }
-            txlJson = getTxlJson(userIds);
-        }
-        txlUsers = JSONObject.parseArray(txlJson.toJSONString(),ReiOnlineUser.class);
-        for(ReiOnlineUser rei : reiOnlineUsers){
-            for(ReiOnlineUser txl : txlUsers){
-                if(StringUtils.equals(rei.getUserId(),txl.getUserId())){
-                    rei.setAddress(txl.getAddress());
-                }
+            txlJson = getTxlJson(userIds,page,limit);
+        }else{
+            Map<String,Object> filter = new HashMap<>();
+            String[] acc = new String[userIdList.size()];
+            userIdList.toArray(acc);
+            filter.put("accounts", acc);
+            filter.put("departmentId", "root");
+            filter.put("organid", deptId);
+            reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
+            String userIds = "";
+            for(ReiOnlineUser user : reiOnlineUsers){
+                userIds += "," + user.getUserId();
             }
+            if(StringUtils.isNotBlank(userIds)){
+                userIds = userIds.substring(1);
+            }
+            txlJson = getTxlJson(userIds,page,limit);
         }
-        GwPageUtils pageUtil = new GwPageUtils(reiOnlineUsers);
-        return pageUtil;
+//        txlUsers = JSONObject.parseArray(txlJson.toJSONString(),ReiOnlineUser.class);
+//        for(ReiOnlineUser rei : reiOnlineUsers){
+//            for(ReiOnlineUser txl : txlUsers){
+//                if(StringUtils.equals(rei.getUserId(),txl.getUserId())){
+//                    rei.setAddress(txl.getAddress());
+//                    rei.setPost(txl.getPost());
+//                }
+//            }
+//        }
+//        PageUtils pageUtil = new PageUtils(reiOnlineUsers);
+        return txlJson;
     }
-    private JSONArray getTxlJson(String userIds) {
+    private JSONObject getTxlJson(String userIds,Integer page, Integer limit) {
         // 查询列表数据
         try {
-            LinkedMultiValueMap<Object, Object> map = new LinkedMultiValueMap<Object, Object>();
+            LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
             map.add("userIds", userIds);
+            map.add("page", String.valueOf(page));
+            map.add("limit", String.valueOf(limit));
             String url = baseAppOrgMappedService.getWebUrlByType(AppConstant.APP_TXL,
                     AppInterfaceConstant.WEB_INTERFACE_TXLREIONLINE_TO_FYP);
-            JSONArray newJsonArrayData = CrossDomainUtil.getNewJsonArrayData(url, map);
-            return newJsonArrayData;
+            JSONObject retInfo = CrossDomainUtil.getJsonData(url, map);
+            return retInfo;
         } catch (Exception e) {
             System.err.println(e);
             return null;

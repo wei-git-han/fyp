@@ -269,7 +269,10 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				if(data.data.list){
+				if(data.list){
+				    rowsdata = data.list;
+				}
+				else if(data.data.list){
 					rowsdata = data.data.list;
 				}else if(data.data.rows){
 					rowsdata = data.data.rows
@@ -350,7 +353,7 @@ function createtable(obj){
 					conttable.append(trobj);
 				});
 
-				total = data.data.totalCount||data.data.total||0;
+				total = data.totalCount||data.data.total|| data.total;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;

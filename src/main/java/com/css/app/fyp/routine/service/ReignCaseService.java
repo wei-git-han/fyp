@@ -3,6 +3,7 @@ package com.css.app.fyp.routine.service;
 import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.base.utils.GwPageUtils;
+import com.css.base.utils.PageUtils;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface ReignCaseService {
 
     ReignCaseVo reignCaseList(String afficheType);
 
-    GwPageUtils reignOnlineUserList(Integer page, Integer limit,String afficheType);
+    JSONObject reignOnlineUserList(Integer page, Integer limit, String afficheType,String deptId);
 
 	void reignCaseSave(String trendType) ;
 

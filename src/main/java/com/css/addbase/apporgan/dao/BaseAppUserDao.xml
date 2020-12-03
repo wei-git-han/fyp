@@ -65,7 +65,7 @@
 	</select>
 
 	<select id="queryReignUsers" resultType="com.css.addbase.apporgan.entity.ReiOnlineUser">
-		select us.id id,us.USER_ID USER_ID,us.ORGANID BUREAU_ID,us.TRUENAME USER_NAME,org.NAME ORG_NAME,us.USEREMAIL POST,us.TELEPHONE PHONE,us.MOBILE TEL
+		select us.id id,us.USER_ID USER_ID,us.ORGANID BUREAU_ID,us.TRUENAME USER_NAME,org.id OORDERID,org.NAME ORG_NAME,'' POST,us.TELEPHONE PHONE,us.MOBILE TEL
 		 from BASE_APP_USER us left join BASE_APP_ORGAN org on us.ORGANID = org.id  where
 		ORGANID in
 		(
@@ -78,12 +78,16 @@
 		)
 		and ORGANID not in (select ifnull(dept_id,0) from config_user_dept cud)
 		and user_id not in (select ifnull(user_id,0) from config_user_dept cud)
+		<if test="organid != null and organid != ''">
+			and us.ORGANID = #{organid}
+		</if>
 		<if test="accounts !=null and accounts != ''">
 			and account in
 			<foreach item="item" collection="accounts" open="(" separator="," close=")">
 				#{item}
 			</foreach>
 		</if>
+		order by OORDERID,BUREAU_ID
 	</select>
 
  	<select id="getNotAtConfigUserDept" resultType="java.lang.String">

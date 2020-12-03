@@ -35,19 +35,19 @@ var pageModule = function () {
 			    {display:"序号",name:"index",width:"10%",align:"center",render:function(rowdata,n){
                     return n+1;
                 }},
-                {display:"姓名",name:"name",width:"20%",align:"center",render:function(rowdata,n){
+                {display:"姓名",name:"userName",width:"20%",align:"center",render:function(rowdata,n){
                     return rowdata.userName;
                 }},
-                {display:"职务",name:"deptName",width:"25%",align:"left",render:function(rowdata){
+                {display:"职务",name:"post",width:"25%",align:"left",render:function(rowdata){
                     return rowdata.post;
                 }},
-                {display:"手机号",name:"phone",width:"10%",align:"center",render:function(rowdata){
+                {display:"手机号",name:"tel",width:"10%",align:"center",render:function(rowdata){
                     return rowdata.tel;
                 }},
-                {display:"房间号",name:"warrantyTime",width:"10%",align:"center",render:function(rowdata){
+                {display:"房间号",name:"address",width:"10%",align:"center",render:function(rowdata){
                     return rowdata.address;
                 }},
-                {display:"部门",name:"measures",width:"25%",align:"center",render:function(rowdata){
+                {display:"部门",name:"orgName",width:"25%",align:"center",render:function(rowdata){
                     return rowdata.orgName;
                 }}
              ],

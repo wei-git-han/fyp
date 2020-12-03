@@ -10,10 +10,7 @@ import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.service.*;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.CrossDomainUtil;
-import com.css.base.utils.GwPageUtils;
-import com.css.base.utils.Response;
-import com.css.base.utils.StringUtils;
+import com.css.base.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,8 +95,8 @@ public class ReignCaseController {
 
     @ResponseBody
     @RequestMapping("/reignOnlineUserList")
-    public void reignOnlineUserList(Integer page, Integer limit,String afficheType) {
-        GwPageUtils gwPageUtils = reignCaseService.reignOnlineUserList(page,limit,afficheType);
+    public void reignOnlineUserList(Integer page, Integer limit,String afficheType,String deptId) {
+        JSONObject gwPageUtils = reignCaseService.reignOnlineUserList(page,limit,afficheType,deptId);
         Response.json(gwPageUtils);
     }
 
