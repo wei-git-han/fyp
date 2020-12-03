@@ -73,7 +73,7 @@ public class ManageThingController {
         }
         String keyName = "dbCoutRedis_" + currentDeptId;
         String json = redisTemplate.opsForValue().get(keyName);
-        String data = redisTemplate.opsForValue().get("data");
+        String data = redisTemplate.opsForValue().get("dbData");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String curDay = format.format(new Date());
         try {
@@ -84,7 +84,7 @@ public class ManageThingController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue > 0) {
+        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
             JSONObject ret = JSONObject.parseObject(json);
             Response.json(ret);
         } else {
@@ -129,7 +129,7 @@ public class ManageThingController {
             dataMap.put("total", dataList.get(0).get("zsl"));//督办总量
             redisUtil.setString(keyName, new ResponseValueUtils().success(dataMap).toJSONString());
             Date date = new Date();
-            redisUtil.setString("data", format.format(date));
+            redisUtil.setString("dbData", format.format(date));
             Response.json(new ResponseValueUtils().success(dataMap));
         }
     }
@@ -190,5 +190,27 @@ public class ManageThingController {
         result.put("list",jsonArray);
         Response.json("data",result);
     }
+
+    /**
+     * 去除redis
+     */
+    @ResponseBody
+    @RequestMapping("/removeRedisData")
+    public void removeRedisData() {
+        List<BaseAppOrgan> appOrganList = baseAppOrganService.getAllDeptIds();
+        if (appOrganList != null && appOrganList.size() > 0) {
+            for (int i = 0; i < appOrganList.size(); i++) {
+                BaseAppOrgan baseAppOrgan = appOrganList.get(i);
+                String dbkey = "dbCoutRedis_" + baseAppOrgan.getId();
+                redisUtil.delByKey(dbkey);
+                redisUtil.delByKey("dbData");
+                String gwKey = "fyp_banwen_getGwTotal_" + baseAppOrgan.getId();
+                redisUtil.delByKey(gwKey);
+                redisUtil.delByKey("gwData");
+            }
+        }
+        Response.json("result", "success");
+    }
+
 
 }

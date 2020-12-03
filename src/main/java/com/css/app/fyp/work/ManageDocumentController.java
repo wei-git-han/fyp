@@ -66,7 +66,7 @@ public class ManageDocumentController {
         }
         String keyName = "fyp_banwen_getGwTotal_"+currentDeptId;
         String json = redisTemplate.opsForValue().get(keyName);
-        String data = redisTemplate.opsForValue().get("data");
+        String data = redisTemplate.opsForValue().get("gwData");
         String curDay = format.format(new Date());
         try{
             long nowData = format.parse(data).getTime();//redis缓存放进去的时间
@@ -87,7 +87,7 @@ public class ManageDocumentController {
             paramMap.add("time", this.getJsonData.getStringDate(time));
             redisUtil.setString(keyName,new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")).toJSONString());
             Date date = new Date();
-            redisUtil.setString("data",format.format(date));
+            redisUtil.setString("gwData",format.format(date));
             Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
         }
     }
