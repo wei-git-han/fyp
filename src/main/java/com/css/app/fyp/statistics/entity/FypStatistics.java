@@ -94,6 +94,15 @@ public class FypStatistics implements Serializable {
     private Integer YZTOTAL;
 	//处理速度-词语
     private String PHRASENAME;
+    private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getPHRASENAME() {
 		return PHRASENAME;
