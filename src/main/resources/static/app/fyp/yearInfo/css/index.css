@@ -8,6 +8,7 @@ html, body {
 	overflow-x: hidden;
 	-moz-user-select: none;
 	user-select: none;
+	min-height: 980px;
 }
 
 .pr100 {
@@ -347,18 +348,27 @@ div.card-left,div.card-right{
 }
 .card-bg2,.card-bg3,.card-bg4,.card-bg5,.card-bg6,.card-bg7,.card-bg8,.card-bg9{
 	color: #C52B17;
-	font-size: 60px;
+	font-size: 48px;
+	text-align: left;
+	padding-top: 30px;
+	font-family: "宋体","songti";
+	font-weight: 600;
 
 }
 .blue-text{
-	font-size: 60px;
+	font-family: "宋体","songti";
+	font-weight: 600;
+	font-size: 48px;
 	color:#339FDE;
 }
 .bottom-blue{
 	color:#339FDE;
 	position: relative;
-	font-size: 60px;
+	font-size: 48px;
+	font-family: "宋体","songti";
+	font-weight: 600;
 	z-index: 1;
+	padding: 0 2px;
 }
 .bottom-blue:before{
 	position: absolute;
@@ -366,6 +376,6 @@ div.card-left,div.card-right{
 	height: 12px;
 	background-color: #FED200;
 	width: 100%;
-	bottom: 10px;
+	bottom: 3px;
 	z-index: -1;
 }
