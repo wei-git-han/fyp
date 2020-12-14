@@ -8,9 +8,10 @@
 	</select>
 
 	<select id="queryList" resultType="com.css.app.fyp.statistics.entity.FypStatistics">
-		select b.name as "PHRASENAME",a.*
+		select us.truename as userNmae,b.name as "PHRASENAME",a.*
 		from "ZF_FYP_APP_NEW"."FYP_STATISTICS" AS a
 		left join "ZF_FYP_APP_NEW"."FYP_STATISTICS_PHRASE" as b on a.PHRASE_ID = b.id
+        left join "ZF_FYP_APP_NEW"."base_app_user" as us on us.user_id = a.user_id
 		where
 		1=1
 		<if test="userId != null and userId != null">
