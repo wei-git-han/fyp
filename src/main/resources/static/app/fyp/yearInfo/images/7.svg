@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="790px" height="540px" viewBox="0 0 790 540" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>7</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="年终盘点05" transform="translate(-100.000000, -414.000000)">
+            <g id="7" transform="translate(100.000000, 414.000000)">
+                <rect id="矩形" fill="#FED200" x="134" y="151" width="170" height="20"></rect>
+                <rect id="矩形" fill="#FED200" x="279" y="240" width="140" height="20"></rect>
+                <rect id="矩形" fill="#FED200" x="279" y="329" width="140" height="20"></rect>
+                <text id="您在2020年，处理阅件的完成率达到-9" font-family="STSongti-SC-Black, Songti SC" font-size="56" font-weight="700" line-spacing="90">
+                    <tspan x="5.544" y="59" fill="#C52B17">您在2020年，处理阅件的完成率</tspan>
+                    <tspan x="0" y="149" fill="#C52B17">达到  </tspan>
+                    <tspan x="137.624" y="149" font-size="80" fill="#109CE6">97.5</tspan>
+                    <tspan x="270.674" y="149" font-size="50" fill="#109CE6">%</tspan>
+                    <tspan x="311.23" y="149" fill="#C52B17"> </tspan>
+                    <tspan x="0" y="239" fill="#C52B17">阅件总数     </tspan>
+                    <tspan x="291.624" y="239" font-size="80" fill="#109CE6">266</tspan>
+                    <tspan x="406.56" y="239" fill="#C52B17"> 件</tspan>
+                    <tspan x="0" y="329" fill="#C52B17">已阅数量    </tspan>
+                    <tspan x="277.624" y="329" font-size="80" fill="#109CE6"> 286 </tspan>
+                    <tspan x="432.56" y="329" fill="#C52B17">件 </tspan>
+                    <tspan x="5.544" y="419" fill="#C52B17">工作尽职尽责，您是我们的榜</tspan>
+                    <tspan x="5.544" y="509" fill="#C52B17">样！</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

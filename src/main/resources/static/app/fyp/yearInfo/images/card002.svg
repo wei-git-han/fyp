@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1456px" height="556px" viewBox="0 0 1456 556" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>卡片002</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFF397" offset="0%"></stop>
+            <stop stop-color="#FFAD26" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#EA2F40" offset="0%"></stop>
+            <stop stop-color="#DD2939" offset="100%"></stop>
+        </linearGradient>
+        <path d="M1390,0 C1406.40286,-6.5303425e-15 1419.73106,13.1641715 1419.99598,29.5038951 L1420,30 L1420,30 C1436.56854,30 1450,43.4314575 1450,60 L1450,490 C1450,506.401515 1436.83798,519.728877 1420.50011,519.995916 L1420.5,520 L1420,520 L1420,520 C1420,536.568542 1406.56854,550 1390,550 L60,550 C43.4314575,550 30,536.568542 30,520 L29.5,520 C13.1625565,519.729422 7.10542736e-14,506.401851 7.10542736e-14,490 L4.26325641e-14,60 C4.26325641e-14,43.4314575 13.4314575,30 30,30 C30,13.4314575 43.4314575,3.04359188e-15 60,0 L1390,0 Z" id="path-3"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="年终盘点01" transform="translate(-232.000000, -348.000000)">
+            <g id="卡片002" transform="translate(235.000000, 351.000000)">
+                <g id="形状结合">
+                    <use fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+                    <use stroke="#A30B13" stroke-width="6" fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
+                </g>
+                <circle id="椭圆形" stroke="#A30B13" stroke-width="5" cx="10" cy="11" r="6"></circle>
+                <circle id="椭圆形" stroke="#A30B13" stroke-width="5" cx="1440" cy="11" r="6"></circle>
+                <circle id="椭圆形" stroke="#A30B13" stroke-width="5" cx="10" cy="539" r="6"></circle>
+                <circle id="椭圆形" stroke="#A30B13" stroke-width="5" cx="1440" cy="539" r="6"></circle>
+                <g id="闪" opacity="0.449637277" transform="translate(48.000000, 11.000000)" fill="#FFA15C">
+                    <polygon points="4 62 4 93 21 84"></polygon>
+                    <polygon points="67 62 57 73 74 73"></polygon>
+                    <polygon points="110 48 101 62 118 64"></polygon>
+                    <polygon points="118 11 110 31 135 33"></polygon>
+                    <polygon points="10 399 0 410 26 419"></polygon>
+                    <polygon points="41 198 31 209 48 209"></polygon>
+                    <polygon points="13 296 4 310 21 312"></polygon>
+                    <polygon points="53 128 45 148 70 150"></polygon>
+                    <polygon points="583 46 573 57 599 66"></polygon>
+                    <polygon points="251 16 241 27 258 27"></polygon>
+                    <polygon points="353 437 353 459 370 459"></polygon>
+                    <polygon points="399 468 389 479 406 479"></polygon>
+                    <polygon points="462 484 453 498 470 500"></polygon>
+                    <polygon points="542 428 542 459 559 450"></polygon>
+                    <polygon points="583 372 573 383 590 383"></polygon>
+                    <polygon points="836 74 836 105 853 96"></polygon>
+                    <polygon points="899 74 889 85 906 85"></polygon>
+                    <polygon points="950 23 942 43 967 45"></polygon>
+                    <polygon points="1042 34 1042 65 1059 56"></polygon>
+                    <polygon points="1083 28 1073 39 1090 39"></polygon>
+                    <polygon points="306 70 297 84 314 86"></polygon>
+                    <polygon points="314 33 306 53 331 55"></polygon>
+                    <polygon points="394 44 384 55 410 64"></polygon>
+                    <polygon points="93 460 93 491 110 482"></polygon>
+                    <polygon points="165 429 165 451 182 451"></polygon>
+                    <polygon points="237 491 227 502 244 502"></polygon>
+                    <polygon points="1125 448 1116 462 1133 464"></polygon>
+                    <polygon points="737 442 737 464 754 464"></polygon>
+                    <polygon points="919 465 909 476 926 476"></polygon>
+                    <polygon points="718 490 710 510 735 512"></polygon>
+                    <polygon points="441 1 441 23 458 23"></polygon>
+                    <polygon points="487 32 477 43 494 43"></polygon>
+                    <polygon points="503 85 495 105 520 107"></polygon>
+                    <polygon points="264 429 254 440 280 449"></polygon>
+                    <polygon points="1367 167 1367 198 1384 189"></polygon>
+                    <polygon points="1329 115 1329 137 1346 137"></polygon>
+                    <polygon points="1272 470 1263 484 1280 486"></polygon>
+                    <polygon points="1372 284 1354 293 1379 295"></polygon>
+                    <polygon points="1142 11 1142 42 1159 33"></polygon>
+                    <polygon points="1050 460 1050 482 1067 482"></polygon>
+                    <polygon points="1195 73 1185 84 1202 84"></polygon>
+                    <polygon points="1326 33 1316 44 1342 53"></polygon>
+                    <polygon points="1346 335 1346 357 1363 357"></polygon>
+                    <polygon points="1169 480 1159 491 1176 491"></polygon>
+                    <polygon points="1337 204 1329 224 1354 226"></polygon>
+                    <polygon points="745 23 745 54 762 45"></polygon>
+                    <polygon points="665 0 665 22 682 22"></polygon>
+                    <polygon points="831 460 821 471 847 480"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
