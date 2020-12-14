@@ -1,0 +1,174 @@
+{
+    "rows": [
+        {
+            "_parentId": "",
+            "auth": "",
+            "dictType": "0",
+            "id": "6e12e186-f609-4119-b105-f21572987009",
+            "lx": "dept",
+            "name": "收发室",
+            "phone": "",
+            "rownum": 1,
+            "state": "closed"
+        },
+        {
+            "_parentId": "",
+            "auth": "",
+            "dictType": "0",
+            "id": "11d92910-bb4a-4da8-b20b-717f352df514",
+            "lx": "dept",
+            "name": "业务部",
+            "phone": "",
+            "rownum": 1,
+            "state": "closed"
+        },
+        {
+            "_parentId": "6e12e186-f609-4119-b105-f21572987009",
+            "auth": "",
+            "dictType": "0",
+            "id": "821ffe73-e683-40c9-8589-4d76de0830dc",
+            "lx": "dept",
+            "name": "业务二部",
+            "phone": "",
+            "rownum": 2,
+            "state": "closed"
+        },
+        {
+            "_parentId": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "auth": "",
+            "dictType": "0",
+            "id": "5911aa20-2b8c-46f6-a903-0765945a7d6d",
+            "lx": "dept",
+            "name": "协办（综合处）",
+            "phone": "",
+            "rownum": 2,
+            "state": "closed"
+        },
+        {
+            "_parentId": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "auth": "",
+            "dictType": "0",
+            "id": "5f814aac-3f4d-493f-b2d4-2ed022321d66",
+            "lx": "dept",
+            "name": "秘书一处",
+            "phone": "",
+            "rownum": 3,
+            "state": "closed"
+        },
+        {
+            "_parentId": "5f814aac-3f4d-493f-b2d4-2ed022321d66",
+            "auth": "",
+            "dictType": "0",
+            "id": "6cb65490-0bf0-4ffe-a801-cb0612ab86f2",
+            "lx": "dept",
+            "name": "秘书办公室",
+            "phone": "",
+            "rownum": 1,
+            "state": "closed"
+        },
+        {
+            "_parentId": "5f814aac-3f4d-493f-b2d4-2ed022321d66",
+            "auth": "",
+            "dictType": "0",
+            "id": "65776172-3d86-4547-822b-76066cb0aa70",
+            "lx": "dept",
+            "name": "秘书办公室2",
+            "phone": "",
+            "rownum": 2,
+            "state": "closed"
+        },
+        {
+            "_parentId": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "auth": "",
+            "dictType": "0",
+            "id": "2d17c3b0-ad51-4d05-aaa2-e9623cfe9569",
+            "lx": "dept",
+            "name": "保密室",
+            "phone": "",
+            "rownum": 4,
+            "state": "closed"
+        },
+        {
+            "_parentId": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "auth": "",
+            "dictType": "0",
+            "id": "86751839-2be8-44c9-9bef-073ea0c10146",
+            "lx": "dept",
+            "name": "办公厅二局",
+            "phone": "",
+            "rownum": 5,
+            "state": "closed"
+        },
+        {
+            "_parentId": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "auth": "",
+            "dictType": "0",
+            "id": "f03dd303-b505-4385-ade1-0a2c98a1d6dc",
+            "lx": "dept",
+            "name": "院办综合处",
+            "phone": "",
+            "rownum": 6,
+            "state": "closed"
+        },
+        {
+            "_parentId": "7f894a47-45ad-45da-9945-eb2a54161ab8",
+            "auth": "",
+            "dictType": "0",
+            "id": "616d22c4-6aa6-4ffa-b6b7-ae57c9779cf5",
+            "lx": "dept",
+            "name": "办公大厅",
+            "phone": "",
+            "rownum": 7,
+            "state": "closed"
+        },
+        {
+            "auth": "",
+            "id": "127be94a-61f0-4787-a842-69ceec5e5ae1",
+            "lx": "user",
+            "name": "王主席",
+            "newadd": "ok",
+            "phone": "15262455324"
+        },
+        {
+            "auth": "",
+            "id": "9d650e9b-74c5-4b16-9c6b-38bca72ca111",
+            "lx": "user",
+            "name": "曹磊",
+            "newadd": "ok",
+            "phone": "15194934772"
+        },
+        {
+            "auth": "",
+            "id": "2062992e-90c1-45e6-84ec-735426bfa829",
+            "lx": "user",
+            "name": "王新",
+            "newadd": "ok",
+            "phone": "15262457895"
+        },
+        {
+            "auth": "",
+            "id": "f70bc27d-739e-4790-8ae5-66808115911a",
+            "lx": "user",
+            "name": "熊猫部长",
+            "newadd": "ok",
+            "phone": "15262455324"
+        },
+        {
+            "auth": "",
+            "id": "77fcbcea-29cc-4756-a6f1-9ac244fc0f9c",
+            "lx": "user",
+            "name": "pengq_部长",
+            "newadd": "ok",
+            "phone": "13592411688"
+        },
+        {
+            "auth": "",
+            "id": "fde95de6-2bfc-4557-9d64-876fd4eb1290",
+            "lx": "user",
+            "name": "马瑞乾_部长",
+            "newadd": "ok",
+            "phone": ""
+        }
+    ],
+    "total": 13
+}

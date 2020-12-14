@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="769px" height="540px" viewBox="0 0 769 540" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>10</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="年终盘点08" transform="translate(-143.000000, -394.000000)">
+            <g id="10" transform="translate(143.000000, 394.000000)">
+                <rect id="矩形" fill="#FED200" x="250" y="151" width="140" height="20"></rect>
+                <rect id="矩形" fill="#FED200" x="250" y="240" width="140" height="20"></rect>
+                <rect id="矩形" fill="#FED200" x="250" y="329" width="140" height="20"></rect>
+                <text id="2020年，综合管理处累计，您-接收公文" font-family="STSongti-SC-Black, Songti SC" font-size="56" font-weight="700" line-spacing="90">
+                    <tspan x="5.544" y="59" fill="#C52B17">2020年，</tspan>
+                    <tspan x="222.6" y="59" fill="#109DE7">综合管理处</tspan>
+                    <tspan x="502.6" y="59" fill="#C52B17">累计，您</tspan>
+                    <tspan x="0" y="149" fill="#C52B17">接收公文   </tspan>
+                    <tspan x="263.624" y="149" font-size="80" fill="#219EE4">226</tspan>
+                    <tspan x="378.56" y="149" fill="#C52B17"> 件</tspan>
+                    <tspan x="0" y="239" fill="#C52B17">参与会议   </tspan>
+                    <tspan x="263.624" y="239" font-size="80" fill="#219EE4">326</tspan>
+                    <tspan x="378.56" y="239" fill="#C52B17"> 场</tspan>
+                    <tspan x="0" y="329" fill="#C52B17">办理督办   </tspan>
+                    <tspan x="263.624" y="329" font-size="80" fill="#219EE4">436</tspan>
+                    <tspan x="378.56" y="329" fill="#C52B17"> 件</tspan>
+                    <tspan x="5.544" y="419" fill="#C52B17">在您的英明领导下，工作有条</tspan>
+                    <tspan x="5.544" y="509" fill="#C52B17">不紊的在进行！</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
