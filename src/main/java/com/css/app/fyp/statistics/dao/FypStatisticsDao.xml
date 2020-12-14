@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.statistics.dao.FypStatisticsDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.statistics.entity.FypStatistics">
+		select * from FYP_STATISTICS where USER_ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.statistics.entity.FypStatistics">
+		select b.name as "PHRASENAME",a.*
+		from "ZF_FYP_APP_NEW"."FYP_STATISTICS" AS a
+		left join "ZF_FYP_APP_NEW"."FYP_STATISTICS_PHRASE" as b on a.PHRASE_ID = b.id
+		where
+		1=1
+		<if test="userId != null and userId != null">
+			and a.USER_ID =#{userId}
+		</if>
+	</select>
+
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from FYP_STATISTICS 
+	</select>
+
+
+
+
+	<insert id="save" parameterType="com.css.app.fyp.statistics.entity.FypStatistics">
+		insert into FYP_STATISTICS
+		(
+			"ID", 
+			"OVER_PERCENTAGE", 
+			"DIVISION_NAME", 
+			"CHECK_NUM", 
+			"READKNOW_PERCENTAGE", 
+			"FAST", 
+			"PHRASE_ID", 
+			"DOCUMENT_NUM", 
+			"MEET_DAYS", 
+			"CREATE_TIME", 
+			"READPIECE_PERCENTAGE", 
+			"DOCUMENT_NAME", 
+			"DIRECTOR_NAME", 
+			"DIVISION_ID", 
+			"DOCUMENT_TYPE", 
+			"READ_NUM", 
+			"DIRECTOR_ID", 
+			"RENDER_PERCENTAGE", 
+			"DOPIECE_PERCENTAGE",
+			"ONLINE_DAYS", 
+			"ALREADY_NUM",
+            "USER_ID",
+            "ISREADTOTAL",
+            "TOTAL",
+            "FRISTDATE",
+            "BJOverPercentage",
+            "BJISREADTOTAL",
+            "BJTOTAL",
+            "YJOverPercentage",
+            "YJISREADTOTAL",
+            "YJTOTAL",
+            "YZoverPercentage",
+            "YZISREADTOTAL",
+            "YZTOTAL"
+		)
+		values
+		(
+			#{id}, 
+			#{overPercentage}, 
+			#{divisionName}, 
+			#{checkNum}, 
+			#{readknowPercentage}, 
+			#{fast},
+			(select id from fyp_statistics_phrase where level = #{phraseId} and type = #{documentType}),
+			#{documentNum}, 
+			#{meetDays}, 
+			#{createTime}, 
+			#{readpiecePercentage}, 
+			#{documentName}, 
+			#{directorName}, 
+			#{divisionId}, 
+			#{documentType}, 
+			#{readNum}, 
+			#{directorId}, 
+			#{renderPercentage}, 
+			#{dopiecePercentage},
+			#{onlineDays}, 
+			#{alreadyNum},
+            #{userId},
+            #{ISREADTOTAL},
+            #{TOTAL},
+            #{FRISTDATE},
+            #{BJOverPercentage},
+            #{BJISREADTOTAL},
+            #{BJTOTAL},
+            #{YJOverPercentage},
+            #{YJISREADTOTAL},
+            #{YJTOTAL},
+            #{YZoverPercentage},
+            #{YZISREADTOTAL},
+            #{YZTOTAL}
+
+		)
+	</insert>
+
+	<update id="update" parameterType="com.css.app.fyp.statistics.entity.FypStatistics">
+		update FYP_STATISTICS 
+		<set>
+			<if test="overPercentage != null">"OVER_PERCENTAGE" = #{overPercentage}, </if>
+			<if test="divisionName != null">"DIVISION_NAME" = #{divisionName}, </if>
+			<if test="checkNum != null">"CHECK_NUM" = #{checkNum}, </if>
+			<if test="readknowPercentage != null">"READKNOW_PERCENTAGE" = #{readknowPercentage}, </if>
+			<if test="fast != null">"FAST" = #{fast}, </if>
+			<if test="phraseId != null">"PHRASE_ID" = #{phraseId}, </if>
+			<if test="documentNum != null">"DOCUMENT_NUM" = #{documentNum}, </if>
+			<if test="meetDays != null">"MEET_DAYS" = #{meetDays}, </if>
+			<if test="createTime != null">"CREATE_TIME" = #{createTime}, </if>
+			<if test="readpiecePercentage != null">"READPIECE_PERCENTAGE" = #{readpiecePercentage}, </if>
+			<if test="documentName != null">"DOCUMENT_NAME" = #{documentName}, </if>
+			<if test="directorName != null">"DIRECTOR_NAME" = #{directorName}, </if>
+			<if test="divisionId != null">"DIVISION_ID" = #{divisionId}, </if>
+			<if test="documentType != null">"DOCUMENT_TYPE" = #{documentType}, </if>
+			<if test="readNum != null">"READ_NUM" = #{readNum}, </if>
+			<if test="directorId != null">"DIRECTOR_ID" = #{directorId}, </if>
+			<if test="renderPercentage != null">"RENDER_PERCENTAGE" = #{renderPercentage}, </if>
+			<if test="dopiecePercentage != null">"DOPIECE_PERCENTAGE" = #{dopiecePercentage}, </if>
+			<if test="onlineDays != null">"ONLINE_DAYS" = #{onlineDays}, </if>
+			<if test="alreadyNum != null">"ALREADY_NUM" = #{alreadyNum}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from FYP_STATISTICS where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from FYP_STATISTICS where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -202,6 +202,27 @@ public class CrossDomainUtil {
 		return null;
 	}
 
+	public static JSONObject getTokenByJsonDataParamObject(String url,LinkedMultiValueMap<Object, Object> map,String token){
+		//设置消息头
+		HttpHeaders headers = new HttpHeaders();
+		MediaType mediaType = MediaType.parseMediaType("application/x-www-form-urlencoded;charset=UTF-8");
+		headers.setContentType(mediaType);
+		//设置请求参数
+		HttpEntity<LinkedMultiValueMap<Object, Object>> formEntity = new HttpEntity<LinkedMultiValueMap<Object, Object>>(map, headers);
+		//创建RestTemplate对象
+		RestTemplate restTemplate = new RestTemplate();
+		url+="?access_token=" + token;
+		try{
+			//发送post请求
+			ResponseEntity<JSONObject> data = restTemplate.postForEntity(url, formEntity, JSONObject.class);
+			//返回请求数据
+			return data.getBody();
+		}catch(Exception e){
+			System.out.println("【报错信息】"+e.getMessage()+"，url="+url);
+		}
+		return null;
+	}
+
 	public static String getTokenByStringData(String url,LinkedMultiValueMap<String, Object> map,String token){
 		//设置消息头
 		HttpHeaders headers = new HttpHeaders();
