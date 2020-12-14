@@ -2,6 +2,7 @@ var dataUrl = {
   url: "/fypstatistics/list",
   type: 'text'
 }
+var cardIndex = 1;
 var pageText = [
   ['繁', '忙', '的', '2', '0', '2', '0', '年', '虽', '然', '过', '去', '了，', '但，', '2', '0', '2', '0', '年', '的', '年', '度',
     '回', '顾', '来', '了！'
@@ -60,9 +61,11 @@ var pageModule = function() {
   }
   var initPage = function(index) {
     var time = 0;
-    getStrByNum(time, pageText[index - 1], `.card-bg${index}`)
+    cardIndex = index;
+    getStrByNum(time, pageText[index - 1], `.card-bg${index}`,index)
   }
-  var getStrByNum = function(index, strList, id) {
+  var getStrByNum = function(index, strList, id,isIndex) {
+    var to = null
     if (index < strList.length) {
       var str = ''
       for (var j = 0; j < strList.length; j++) {
@@ -71,9 +74,13 @@ var pageModule = function() {
         }
       }
       str+='__'
-      setTimeout(function() {
+      var to = setTimeout(function() {
         index++
-        getStrByNum(index, strList, id)
+        if(cardIndex==isIndex){
+          getStrByNum(index, strList, id, isIndex)
+        }else{
+          clearTimeout(to)
+        }
       }, 300)
       $(id).html(str);
     }else{
@@ -84,6 +91,7 @@ var pageModule = function() {
         }
       }
       $(id).html(str);
+      clearTimeout(to)
     }
   }
   var showCard = function(index) {
