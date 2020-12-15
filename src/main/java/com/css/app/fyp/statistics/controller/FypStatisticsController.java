@@ -57,9 +57,9 @@ public class FypStatisticsController {
 	 */
 	@ResponseBody
 	@RequestMapping("/isShow")
-	public void info(String userId){
+	public void info(){
 	    //根据当前登录人id查询是否展示统计页
-		FypStatistics fypStatistics = fypStatisticsService.queryObject(userId);
+		FypStatistics fypStatistics = fypStatisticsService.queryObject(CurrentUser.getUserId());
 		Response.json(new ResponseValueUtils().success(fypStatistics));
 	}
 	
