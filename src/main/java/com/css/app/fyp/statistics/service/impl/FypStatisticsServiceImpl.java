@@ -234,6 +234,8 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		statistics.setAlreadyNum(Integer.parseInt(data.get("completeCountYj").toString()));
 		//用户id
         statistics.setUserId(data.get("userId").toString());
+        //用户角色
+		statistics.setROLE(data.get("role").toString());
 		return statistics;
 	}
 

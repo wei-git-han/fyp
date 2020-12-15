@@ -95,6 +95,16 @@ public class FypStatistics implements Serializable {
 	//处理速度-词语
     private String PHRASENAME;
     private String userName;
+	//当前人角色：3局长、4处长、1局秘、0参谋
+    private String ROLE;
+
+	public String getROLE() {
+		return ROLE;
+	}
+
+	public void setROLE(String ROLE) {
+		this.ROLE = ROLE;
+	}
 
 	public String getUserName() {
 		return userName;
