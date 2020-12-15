@@ -133,7 +133,7 @@ var pageModule = function() {
       '年', '的', '年', '度',
       '回', '顾', '来', '了！'
     ];
-    var indexArray2 = ['尊', '敬', '的'].concat(userlist).concat(['您', '好！', '<br>',
+    var indexArray2 = ['尊', '敬', '的'].concat(userlist).concat(['，','您', '好！', '<br>',
       `&nbsp;&nbsp;<span class="bottom-blue">${firstDate.getFullYear()}</span>`, '年',
       `<span class="bottom-blue">${firstDate.getMonth()-0+1}</span>`, '月',
       `<span class="bottom-blue">${firstDate.getDate()}</span>`, '日，', '我', '们', '第',
