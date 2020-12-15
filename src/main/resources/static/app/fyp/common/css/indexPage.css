@@ -409,3 +409,20 @@ body {
 /*.newlayout-center *{*/
 /*  overflow: visible;*/
 /*}*/
+.newYear{
+  display: inline-block;
+  height: 138px;
+  width: 73px;
+  margin: 0 2px;
+  background: url(../../yearInfo/images/lartern.svg) no-repeat;
+  background-size: contain;
+  position: absolute;
+  right: 20px;
+  z-index: 1;
+  cursor: pointer;
+  text-align: center;
+  line-height: 128px;
+  color: #FDCD00;
+  font-size: 26px;
+  font-weight: 600;
+}

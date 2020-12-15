@@ -23,7 +23,7 @@ var css={
 					var len=txt.length;
 					$this.val(txt).blur();
 				});
-				
+
 				var cancel=setInterval(function(){
 					var $cke=$('#cke_'+id);
 					if($cke.size()>0){
@@ -52,7 +52,7 @@ var css={
 			}else{
 				return '';
 			}
-			
+
 		},
 		cut:function(selector){
 			val=$(selector).val();
@@ -71,7 +71,7 @@ jQuery(document).ready(function() {
     Demo.init(); // init demo features
     initcomonother();
     initinclude();*/
-    
+
     var pagedate = new Date();
 	var month = pagedate.getMonth()+1;
 	var month1 = month;
@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
 	$(".yearAndmonth").val(year+"-"+month);
 	$(".year").val(year);
 	$(".monthAndday").val(month1+"-"+day1);
-});    
+});
 
 /*start设置bootstrap滚动条自适应浏览器高度*/
 var c2 = {};
@@ -107,7 +107,7 @@ $(window).resize(function(){
 /*end*/
 
 
-    
+
 function setformdata(data){
 	for(key in data){
 		if($("[name="+key+"]").attr("type")=="checkbox"){
@@ -135,9 +135,9 @@ function setformdata(data){
 			//alert(data[key])
 		}
 	}
-	
+
 }
-    
+
 /*	var elementarry = ["username","email","phone","password1","password2","ifduty","role"];
 	返回表单值{username:"username",...}
 	var paramdata = getformdata(elementarry);
@@ -286,7 +286,7 @@ function $ajax(obj){
 		error : error
 	});
 }
-	
+
 function getUrlParam(name){
 	var reg=new RegExp("(^|&)"+name+"=([^&]*)(&|$)","i");
 	var r=window.location.search.substr(1).match(reg);
@@ -309,7 +309,7 @@ function initcomonother(){
 		$(this).addClass("active");
 	})
 }
-	
+
 function initinclude(){
 	var include = $("[include]");
 	if(include!=null&&typeof(include)!="undefined"){
@@ -385,7 +385,7 @@ function createSelecttree(obj){
 			border:"none"
 		});
 		$("#"+obj.target)[0].readOnly=true;
-		
+
 		var width = obj.width;
 		if(width==null||typeof(width)=="undefined"){
 			width = "";
@@ -423,7 +423,7 @@ function createSelecttree(obj){
 			}
 			$("."+obj.target+"tree1").slideUp(50);
 		})
-		
+
 		if(!obj.data){
 			$ajax({
 				url:obj.url,
@@ -487,7 +487,7 @@ function createcheckboxtree(obj){
 			border:"none"
 		});
 		$("#"+obj.target)[0].readOnly=true;
-		
+
 		var width = obj.width;
 		if(width==null||typeof(width)=="undefined"){
 			width = "";
@@ -529,7 +529,7 @@ function createcheckboxtree(obj){
 			}
 			$("."+obj.target+"tree1").slideUp(50);
 		});
-		
+
 		if(!obj.data){
 			$ajax({
 				url:obj.url,
@@ -614,7 +614,7 @@ function createUserTree(obj){
 			border:"none"
 		});
 		$("#"+obj.target)[0].readOnly=true;
-		
+
 		var width = obj.width;
 		if(width==null||typeof(width)=="undefined"){
 			width = "";
@@ -629,13 +629,13 @@ function createUserTree(obj){
 		if(plugins==null||typeof(plugins)=="undefined"){
 			plugins = "";
 		}
-		$("#"+obj.target).parent().append( 
+		$("#"+obj.target).parent().append(
 			'<div class="'+obj.target+'tree1 trees"  style="max-height:300px;overflow-y:auto;overflow-x: auto;display:none;background:#ffffff;border:1px solid #cccccc;'+width+';padding:10px;position:absolute;z-index: 100;">'+
     		'	<div id="'+obj.target+'tree2" class="tree-demo" style="width:100%;">'+
 			'	</div>'+
     		'</div>'
 		);
-		
+
 		$("#"+obj.target).click(function(){
 			var objClass = obj.target+"tree1";
 			$(".trees").each(function(){
@@ -650,7 +650,7 @@ function createUserTree(obj){
 			}
 			return false;
 		})
-		
+
 		//增加判断，当点击展开和收起加减号时不隐藏树。
 		$("body").click(function(e){
 			if($(e.target).hasClass("jstree-ocl")){
@@ -664,8 +664,8 @@ function createUserTree(obj){
 			}
 			$("."+objClass).slideUp(50);
 		})
-		
-		
+
+
 		if(!obj.data){
 			$ajax({
 				url:obj.url,
@@ -775,7 +775,7 @@ function createinputTree(obj){
 			border:"none"
 		});
 		//$("#"+obj.target)[0].readOnly=true;
-		
+
 		var width = obj.width;
 		if(width==null||typeof(width)=="undefined"){
 			width = "";
@@ -787,12 +787,12 @@ function createinputTree(obj){
 			data = {};
 		}
 
-		
+
 		$("#"+obj.target).parent().append(
 			'<div class="'+obj.target+'tree1 trees" style="display:none;background:#ffffff;border:1px solid #cccccc;'+width+';position:absolute;z-index: 100;top:32px;">'+
 			//'	<div style="width:100%;height:40px;border-bottom:1px solid #cccccc;">'+
 			//'		<div style="float:right;padding-top:5px;padding-right:10px;">'+
-			//'			<a style="font-size:17px;color:#fff;" name="'+obj.target+'gbbtn">关闭</a>'+			
+			//'			<a style="font-size:17px;color:#fff;" name="'+obj.target+'gbbtn">关闭</a>'+
 			//'		</div>'+
 			//'		<div style="width:100%;height:40px;padding-top:3px;padding-left:10px;">'+
 			//'			<input class="newinput" type="text" style="width:80%;height:30px;border:1px solid #797979;border-radius:10px!important;padding-left:10px;"/>'+
@@ -804,7 +804,7 @@ function createinputTree(obj){
 			'	</div>'+
 			'</div>'
 		);
-		
+
 		var to = false;
 		//$("."+obj.target+"tree1 .newinput").keyup(function(){
 		$("#"+obj.target).keyup(function(){
@@ -816,7 +816,7 @@ function createinputTree(obj){
 				$("#"+obj.target+"tree2").jstree(true).search($("#"+obj.target).val());
 			},500)
 		})
-		
+
 		$("#"+obj.target).click(function(){
 			//$("."+obj.target+"tree1 .newinput").val("");
 			if(o1==0){
@@ -836,7 +836,7 @@ function createinputTree(obj){
 			}
 			return false;
 		})
-		
+
 		//增加判断，当点击展开和收起加减号时不隐藏树。
 		$("body").click(function(e){
 			if($(e.target).hasClass("newinput")){
@@ -853,28 +853,28 @@ function createinputTree(obj){
 			}
 			$("."+objClass).slideUp(50);
 		})
-		
+
 		$("[name="+obj.target+"gbbtn]").click(function(){
 			var objClass = obj.target+"tree1";
 			$("."+objClass).slideUp(50);
 		})
-		
-		
+
+
 	}
-	
+
 	var inittreefn = function(data){
-		
+
 		$ajax({
 			url:obj.url,
 			data:data,//{text:}
 			success:function(data){
-				
+
 				$("#"+obj.target+"tree2").jstree({
 				    "plugins": ["search","wholerow", "types",plugins],
 				    "core": {
 				    "themes" : {
 				        "responsive": false
-				    },    
+				    },
 				    "data": data,
 				    },
 				    "types" : {
@@ -909,7 +909,7 @@ function createinputTree(obj){
 					});
 				    obj.selectnode(e,data,treessname,treessid);
 				});
-				
+
 				$("#"+obj.target+"tree2").on("deselect_node.jstree", function(e,data) {
 					var nodes2 = $("#"+obj.target+"tree2").jstree("get_bottom_selected",true);
 					var treessid = [];
@@ -924,10 +924,10 @@ function createinputTree(obj){
 				});
 			}
 		})
-		
-		
+
+
 	}
-	
+
 	create();
 }
 
@@ -952,7 +952,7 @@ function getWebEquipmentOS(){
 	} else {
 		return 'no_init';
 	}
-	
+
 }
 
 
@@ -966,7 +966,7 @@ var newbootbox = {
 	            label: "确定",
 	            className: "btn-primary",
 	            callback: function() {
-					obj.callback1();	
+					obj.callback1();
 	            }
 	          },
 	          danger: {
@@ -990,7 +990,7 @@ var newbootbox = {
 	            label: "确定",
 	            className: "btn-primary",
 	            callback: function() {
-					obj.callback1();	
+					obj.callback1();
 	            }
 	          },
 	          danger: {
@@ -1057,12 +1057,12 @@ var newbootbox = {
 	  	            label: "确定",
 	  	            className: "btn-primary",
 	  	            callback: function() {
-	  					
+
 	  	            }
 	  	          }
 	            }
 	        });
-		
+
 		return dtd;
 	},
 	alertInfo:function(text,shi){
@@ -1196,7 +1196,7 @@ var vobject = {
 			var fn2 = obj.fn2;
 			var fg = 0;
 			var lg = 0;
-			
+
 			for(key in gz){
 				lg+=1;
 				var val = gz[key];
@@ -1205,10 +1205,10 @@ var vobject = {
 				var required = val.required;
 				var minlength = val.minlength;
 				var maxlength = val.maxlength;
-				
+
 				el.parents(".form-group").find(".newvalidate").removeClass("newvalidate");
 				el.parents(".form-group").find(".alert").remove();
-				
+
 				if(required==true){
 					if($.trim(value)==""){
 						el.parents(".form-group").append(
@@ -1257,7 +1257,7 @@ var vobject = {
 			}else{
 				if(fn2){fn2();}
 			}
-			
+
 		},
 		hide:function(el){
 			el.find(".newvalidate").removeClass("newvalidate");
@@ -1268,7 +1268,7 @@ var tpobject = {
 		init:function(obj){
 			var wz = obj.wz;
 			var html = obj.html;
-			
+
 			$(".tptext").live("mouseover",function(e){
 				$(".tpcontent").remove();
 				var y = $(this).offset().top+20;
@@ -1387,3 +1387,20 @@ String.prototype.endWith = function(str) {
   var reg = new RegExp(str + "$");
   return reg.test(this);
 };
+//关闭桌面浏览器
+function windowClose() {
+	if (navigator.userAgent.indexOf('OfficeBrowser') >= 0) {
+		if(window.top.__close__){
+			try{
+				window.top.__close__()
+			}
+			catch(e){
+				console.log(e)
+			}
+		}else{
+			window.location = 'cmd:close';
+		}
+	} else {
+		window.close();
+	}
+}

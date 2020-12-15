@@ -47,7 +47,7 @@ var dataUrl = {
 //   "status": 200
 // }
 var cardIndex = 1;
-var hasDepart = false
+var hasDepart = false // 是否只有单位
 var pageText = [
   ['繁', '忙', '的', '2', '0', '2', '0', '年', '虽', '然', '过', '去', '了，', '但，', '2', '0', '2', '0', '年', '的', '年', '度',
     '回', '顾', '来', '了！'
@@ -155,6 +155,7 @@ var pageModule = function() {
       "件", `${data.documentType==0?'公文':data.documentType==1?'办件':data.documentType==2?'阅件':'阅知'}`, "事", "项",
       '<br>', '<span>&nbsp;</span>', '<br>', "您", "真", "是"
     ].concat(timeChengYu)
+    indexArray4.push("!")
     var indexArray5 = ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "阅", "件", "的", "完",
       "成", "率", "达", "到",
       `<span class="bottom-blue">${data.yJOverPercentage}%</span>`, '<br>', "阅", "件", "总", "数",
@@ -243,4 +244,8 @@ var pageModule = function() {
 }();
 var changeStatus = function(index) {
   pageModule.changeStatus(index)
+}
+
+function topClose() {
+  windowClose()
 }

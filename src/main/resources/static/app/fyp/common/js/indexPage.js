@@ -99,7 +99,9 @@ var pageModule = function() {
     $('.btn-wrap>.btn').click(function() {
       setPage(this.dataset['target'])
     });
-
+    $('#showNewYear').click(function () {
+      window.open('/app/fyp/yearInfo/html/index.html')
+    })
     $('.newlayout-switch-btn>span').click(function() {
       if (activeDoType == this.id) {
         return;
@@ -168,7 +170,31 @@ var pageModule = function() {
     })
   }
 
-
+  var isShowNewYear = function () {
+    $.ajax({
+      url:'/fypstatistics/isShow',
+      success:function (data) {
+          if(data){
+            $('#showNewYear').show()
+            // newbootbox.newdialog({
+            //   id: "newYear",
+            //   width: 1900,
+            //   height: 1000,
+            //   header: false,
+            //   title: "年终盘点",
+            //   url: "/app/fyp/yearInfo/html/index.html",
+            //   // classed:"darkColor",
+            //   style: {
+            //     // "background": "#fff"
+            //   }
+            // })
+            // window.open('/app/fyp/yearInfo/html/index.html')
+          }else{
+            $('#showNewYear').show()
+          }
+      }
+    })
+  }
   return {
     //加载页面处理程序
     initControl: function() {
@@ -176,6 +202,7 @@ var pageModule = function() {
       getNum();
       initother();
       setPage(activeType);
+      isShowNewYear()
       $(".iframe-wrap").flipster({
         style: 'carousel',
         start: 0,
