@@ -324,11 +324,11 @@ div.card-left,div.card-right{
 	background: transparent url("../images/017.svg") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
-.card8 div.card-right{
-	background: transparent url("../images/018.svg") no-repeat scroll 0% 0%;
-	background-size: contain;
-}
-.card9 div.card-bg9{
+/*.card8 div.card-right{*/
+/*	background: transparent url("../images/018.svg") no-repeat scroll 0% 0%;*/
+/*	background-size: contain;*/
+/*}*/
+.card8 div.card-bg8{
 	width: 1460px;
 	height: 560px;
 	position: absolute;
@@ -346,7 +346,7 @@ div.card-left,div.card-right{
 .content-slider{
 	display: none;
 }
-.card-bg2,.card-bg3,.card-bg4,.card-bg5,.card-bg6,.card-bg7,.card-bg8,.card-bg9{
+.card-bg2,.card-bg3,.card-bg4,.card-bg5,.card-bg6,.card-bg7{
 	color: #C52B17;
 	font-size: 48px;
 	text-align: left;
