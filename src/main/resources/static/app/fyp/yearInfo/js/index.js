@@ -247,7 +247,7 @@ function topClose() {
 }
 
 function sortByPercent(data) {
-  var maxNum = [data.overPercentage,data.bJOverPercentage,data.yZoverPercentage,data.yJoverPercentage].sort()[0]
+  var maxNum = [data.overPercentage,data.bJOverPercentage,data.yZoverPercentage,data.yJoverPercentage].sort()[3]
  if(data.overPercentage==maxNum){
    return ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "公", "文", "的", "完",
      "成", "率", "达", "到",
