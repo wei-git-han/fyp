@@ -31,4 +31,9 @@ public interface FypStatisticsDao extends BaseDao<FypStatistics> {
 
     @Select("select value from base_app_config where type = 'lawDays'")
     String getConfigLayDyas();
+
+    @Select("select id from BASE_APP_ORGAN  where parent_id in (select dept_id from FYP_STATISTICS_DEPT)")
+    List<String> findDivision();
+    @Select("select user_id from BASE_APP_USER where organid = #{0}")
+    List<String> findUsersByDivision(String divisionId);
 }

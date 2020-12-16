@@ -153,7 +153,7 @@ var pageModule = function() {
       '优', '秀', '！',
     ]
     var indexArray4 = ["这", "一", "年", "，", "您", "最", "快", "一", "次", "处", "理", "公", "文", "用", "了",
-      `<span class="bottom-blue">${data.fast}</span>`,
+      `<span class="bottom-blue">${data.fast!='0'?data.fast:1}</span>`,
       "分", "钟", '<br>', "就", "处", "理", "了", "一",
       "件", `${data.documentType==0?'公文':data.documentType==1?'办件':data.documentType==2?'阅件':'阅知'}`, "事", "项",
       '<br>', '<span>&nbsp;</span>', '<br>', "您", "真", "是"
@@ -164,7 +164,7 @@ var pageModule = function() {
       `<span class="bottom-blue">${data.overPercentage}%</span>`, '<br>', "公", "文",
       "阅", "知", `<span class="bottom-blue">${data.yZoverPercentage}%</span>`, '<br>', "来", "文", "阅", "件",
       `<span class="bottom-blue">${data.yJOverPercentage}%</span>`, '<br>', "我", "的", "办", "件",
-      `<span class="bottom-blue">${data.yJOverPercentage}%</span>`,
+      `<span class="bottom-blue">${data.bJOverPercentage}%</span>`,
       '<br>', "X", "X",
       "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"
     ];
@@ -247,7 +247,7 @@ function topClose() {
 }
 
 function sortByPercent(data) {
-  var maxNum = [data.overPercentage,data.bJOverPercentage,data.yZoverPercentage,data.yJoverPercentage].sort()[3]
+  var maxNum = [data.overPercentage,data.bJOverPercentage,data.yZoverPercentage,data.yJOverPercentage].sort()[3]
  if(data.overPercentage==maxNum){
    return ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "公", "文", "的", "完",
      "成", "率", "达", "到",

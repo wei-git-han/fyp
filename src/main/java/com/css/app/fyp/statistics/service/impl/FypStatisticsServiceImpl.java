@@ -119,8 +119,12 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 
         List<Map<String, Object>> finalQxjData = qxjData;
         List<Map<String, Object>> finalDbData = dbData;
+        //获取总天数
 		int yearDyas = this.getYearDyas();
+		//判断词库
         this.overrideList(docuemntData);
+        //获取局、处总数量
+        this.getSum(docuemntData);
 		//获取法定节假日天数
 		String latDyas = fypStatisticsDao.getConfigLayDyas();
 		if(null!=docuemntData) {
@@ -205,7 +209,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		//成语id
 		statistics.setPhraseId(data.get("phraseId").toString());
 		//接收公文数量
-		statistics.setDocumentNum(Integer.parseInt(data.get("sumCount").toString()));
+		statistics.setDocumentNum(Integer.parseInt(data.get("documentNum").toString()));
 		//第一次使用到系统时间的天数
         try {
             statistics.setMeetDays(data.get("firstTime") ==  null ? null : this.beginEndDays(simpleDateFormat.parse(data.get("firstTime").toString()) ));
@@ -239,6 +243,48 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		return statistics;
 	}
 
+	/**
+	 * 公文接收数量
+	 * 获取局数量
+	 * 获取处数量
+	 */
+	public void getSum(List<Map<String,Object>> documents){
+		int bureauSum = 0;
+		//局总数量
+		for (Map<String,Object> bureau:documents) {
+			bureauSum +=Integer.parseInt(bureau.get("sumCount").toString());
+		}
+		Map<String, Object> divisionMap = new HashMap<>();
+		//获取所有处
+		List<String> divisions = fypStatisticsDao.findDivision();
+		for (String divisionId:divisions) {
+			int divisionSum = 0;
+			//获取处人员
+			List<String> users = fypStatisticsDao.findUsersByDivision(divisionId);
+			for (String divisionUserId:users) {
+				for (Map<String,Object> doc:documents) {
+					if(divisionUserId.equals(doc.get("userId").toString())){
+						divisionSum += Integer.parseInt(doc.get("sumCount").toString());
+					}
+				}
+			}
+			for (String divisionUserId:users) {
+				for (Map<String,Object> doc:documents) {
+					if(divisionUserId.equals(doc.get("userId").toString())){
+						//处数量
+						doc.put("documentNum", divisionSum);
+					}
+				}
+			}
+		}
+		//局数量
+		for (Map<String,Object> doc:documents) {
+			if(null!=doc.get("documentNum")){
+				//局数量
+				doc.put("documentNum",bureauSum);
+			}
+		}
+	}
 	/**
 	 * 获取督办数量
 	 */

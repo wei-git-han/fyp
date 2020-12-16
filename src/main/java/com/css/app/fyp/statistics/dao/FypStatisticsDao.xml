@@ -10,7 +10,12 @@
 	<select id="queryList" resultType="com.css.app.fyp.statistics.entity.FypStatistics">
 		select us.truename as userName,b.name as "PHRASENAME",
 		case a.role
-		when 3 then (select name from base_app_organ where id = (select organid from base_app_user where user_id = a.user_id))
+		when 3 then (
+		select name from ZF_FYP_APP_NEW.base_app_organ where id =(
+		select substr(tree_path,9,36) from ZF_FYP_APP_NEW.base_app_organ where id = (
+		select organid from base_app_user where user_id = a.user_id
+		)
+		))
 		end divisionName,
 		case a.role
 		when 4 then (select name from base_app_organ where id = (select organid from base_app_user where user_id = a.user_id))
