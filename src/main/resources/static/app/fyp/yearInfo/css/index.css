@@ -27,14 +27,15 @@ html, body {
 .footer .footer1{
 	/*height: 17px;*/
 	width: 100%;
-	animation: 5s ease-in-out 1s normal none infinite running footLeft;
+	animation: 5s ease-in-out normal none infinite running footLeft;
 	/*background: url("../images/foot.png");*/
 }
 .footer .footer2{
 	/*height: 25px;*/
 	width: 100%;
 	margin-top: -15px;
-	animation: 5s ease-in-out 2s normal none infinite running footLeft;
+	margin-left: -15px;
+	animation: 5s ease-in-out normal none infinite running footLeft2;
 	/*background: url("../images/foot1.png") no-repeat;*/
 }
 div.header{
@@ -407,10 +408,34 @@ div.card-left,div.card-right{
 	0% {
 		margin-left: 0px
 	}
+	25% {
+		margin-left: -15px
+	}
 	50% {
-		margin-left: -20px
+		margin-left: 0px
+	}
+	75% {
+		margin-left: 15px
 	}
 	100%{
 		margin-left: 0px
 	}
 }
+@keyframes footLeft2 {
+	0% {
+		margin-left: -15px
+	}
+	25% {
+		margin-left: 0px
+	}
+	50% {
+		margin-left: 15px
+	}
+	75% {
+		margin-left: 0px
+	}
+	100%{
+		margin-left: -15px
+	}
+}
+
