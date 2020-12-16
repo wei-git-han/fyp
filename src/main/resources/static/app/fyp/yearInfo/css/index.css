@@ -21,7 +21,21 @@ html, body {
 	bottom:0;
 	height: 35px;
 	width: 100%;
-	background: url(../images/footer.svg) 40% 0;
+	overflow: hidden;
+	/*background: url(../images/footer.svg) 40% 0;*/
+}
+.footer .footer1{
+	/*height: 17px;*/
+	width: 100%;
+	animation: 5s ease-in-out 1s normal none infinite running footLeft;
+	/*background: url("../images/foot.png");*/
+}
+.footer .footer2{
+	/*height: 25px;*/
+	width: 100%;
+	margin-top: -15px;
+	animation: 5s ease-in-out 2s normal none infinite running footLeft;
+	/*background: url("../images/foot1.png") no-repeat;*/
 }
 div.header{
 	position: absolute;
@@ -223,7 +237,8 @@ div.card-bg1{
 	text-shadow: 0 2px 2px rgba(0,0,0,0.50);
 }
 .card1 div.card-bg1{
-	background: url(../images/card002.svg) no-repeat ;
+	background: url(../images/card002.png) no-repeat ;
+	background-size: contain;
 }
 div.card-button{
 	width: 100%;
@@ -240,10 +255,15 @@ div.button1{
 	line-height: 54px;
 	font-size: 20px;
 	cursor: pointer;
+	background-size: contain;
+}
+div.button1:hover{
+	background: transparent url("../images/button01Hover.svg") no-repeat scroll 0% 0%;
 }
 div.button2{
 	display: inline-block;
 	background: transparent url("../images/button02.svg") no-repeat scroll 0% 0%;
+	background-size: contain;
 	width: 206px;
 	height: 54px;
 	margin: 0 40px;
@@ -251,6 +271,9 @@ div.button2{
 	line-height: 54px;
 	font-size: 20px;
 	cursor: pointer;
+}
+div.button2:hover{
+	background: transparent url("../images/button01Hover.svg") no-repeat scroll 0% 0%;
 }
 .full-content{
 	height: 100%;
@@ -301,27 +324,27 @@ div.card-left,div.card-right{
 	padding: 0 60px;
 }
 .card2 div.card-left{
-	background: transparent url("../images/012.svg") no-repeat scroll 0% 0%;
+	background: transparent url("../images/012.png") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
 .card3 div.card-left{
-	background: transparent url("../images/013.svg") no-repeat scroll 0% 0%;
+	background: transparent url("../images/013.png") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
 .card4 div.card-left{
-	background: transparent url("../images/014.svg") no-repeat scroll 0% 0%;
+	background: transparent url("../images/014.png") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
 .card5 div.card-right{
-	background: transparent url("../images/015.svg") no-repeat scroll 0% 0%;
+	background: transparent url("../images/015.png") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
 .card6 div.card-right{
-	background: transparent url("../images/016.svg") no-repeat scroll 0% 0%;
+	background: transparent url("../images/016.png") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
 .card7 div.card-right{
-	background: transparent url("../images/017.svg") no-repeat scroll 0% 0%;
+	background: transparent url("../images/017.png") no-repeat scroll 0% 0%;
 	background-size: contain;
 }
 /*.card8 div.card-right{*/
@@ -341,7 +364,8 @@ div.card-left,div.card-right{
 	color: #DDD100;
 	letter-spacing: 0;
 	text-shadow: 0 2px 2px rgba(0,0,0,0.50);
-	background: url(../images/card002.svg) no-repeat ;
+	background: url(../images/card002.png) no-repeat ;
+	background-size: contain;
 }
 .content-slider{
 	display: none;
@@ -378,4 +402,15 @@ div.card-left,div.card-right{
 	width: 100%;
 	bottom: 3px;
 	z-index: -1;
+}
+@keyframes footLeft {
+	0% {
+		margin-left: 0px
+	}
+	50% {
+		margin-left: -20px
+	}
+	100%{
+		margin-left: 0px
+	}
 }

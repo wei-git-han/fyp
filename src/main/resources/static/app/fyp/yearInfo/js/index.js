@@ -116,12 +116,15 @@ var pageModule = function() {
   }
   // 格式化数据
   var initListData = function(data) {
+    if(!data){
+      newbootbox.alertInfo('您的年终回顾还在计算中，请稍后再次查看！')
+      return;
+    }
     var userlist = data.userName.split(''); // 用户名
     var documentNameList = data.documentName.split(''); // 第一个公文名称
     var timeChengYu = data.pHRASENAME.split('') // 评价成语
-    var firstDate = new Date(data.fRISTDATE)
-    var departName = data.divisionName || data.directorName;
-    var departList = []
+    var firstDate = new Date(data.fRISTDATE.replace(/-/g, '/'))
+    var departName = data.divisionName || data.directorName;    var departList = []
     if (departName) {
       var list = departName.split('');
       list.forEach(function(e) {
@@ -247,5 +250,5 @@ var changeStatus = function(index) {
 }
 
 function topClose() {
-  windowClose()
+  window.close()
 }
