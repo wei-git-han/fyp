@@ -162,7 +162,7 @@ var pageModule = function() {
     var indexArray5 = ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "阅", "件", "的", "完",
       "成", "率", "达", "到",
       `<span class="bottom-blue">${data.yJOverPercentage}%</span>`, '<br>', "阅", "件", "总", "数",
-      `<span class="bottom-blue">${data.yJISREADTOTAL}</span>`, "件",
+      `<span class="bottom-blue">${data.yJTOTAL}</span>`, "件",
       '<br>', "已", "阅", "数", "量", `<span class="bottom-blue">${data.alreadyNum}</span>`, "件", '<br>', "工", "作",
       "尽", "职", "尽",
       "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"

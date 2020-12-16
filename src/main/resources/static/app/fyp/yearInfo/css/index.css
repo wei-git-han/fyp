@@ -27,15 +27,16 @@ html, body {
 .footer .footer1{
 	/*height: 17px;*/
 	width: 100%;
-	animation: 5s ease-in-out normal none infinite running footLeft;
+	margin-left: -15px;
+	animation: 2s ease normal none infinite running footLeft;
 	/*background: url("../images/foot.png");*/
 }
 .footer .footer2{
 	/*height: 25px;*/
 	width: 100%;
 	margin-top: -15px;
-	margin-left: -15px;
-	animation: 5s ease-in-out normal none infinite running footLeft2;
+	/*margin-left: -15px;*/
+	/*animation: 5s ease-in-out normal none infinite running footLeft2;*/
 	/*background: url("../images/foot1.png") no-repeat;*/
 }
 div.header{
@@ -406,22 +407,16 @@ div.card-left,div.card-right{
 }
 @keyframes footLeft {
 	0% {
-		margin-left: 0px
-	}
-	25% {
 		margin-left: -15px
 	}
 	50% {
-		margin-left: 0px
-	}
-	75% {
-		margin-left: 15px
+		margin-left: -10px
 	}
 	100%{
-		margin-left: 0px
+		margin-left: -15px
 	}
 }
-@keyframes footLeft2 {
+@keyframes footLeft2  {
 	0% {
 		margin-left: -15px
 	}
