@@ -159,14 +159,7 @@ var pageModule = function() {
       '<br>', '<span>&nbsp;</span>', '<br>', "您", "真", "是"
     ].concat(timeChengYu)
     indexArray4.push("!")
-    var indexArray5 = ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "阅", "件", "的", "完",
-      "成", "率", "达", "到",
-      `<span class="bottom-blue">${data.yJOverPercentage}%</span>`, '<br>', "阅", "件", "总", "数",
-      `<span class="bottom-blue">${data.yJTOTAL}</span>`, "件",
-      '<br>', "已", "阅", "数", "量", `<span class="bottom-blue">${data.alreadyNum}</span>`, "件", '<br>', "工", "作",
-      "尽", "职", "尽",
-      "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"
-    ]
+    var indexArray5 = sortByPercent(data)
     var indexArray6 = ["这", "一", "年", "，", "您", "的", "办", "文", "多", "元", "化", "，", "我", "的", "公", "文",
       `<span class="bottom-blue">${data.overPercentage}%</span>`, '<br>', "公", "文",
       "阅", "知", `<span class="bottom-blue">${data.yZoverPercentage}%</span>`, '<br>', "来", "文", "阅", "件",
@@ -251,4 +244,48 @@ var changeStatus = function(index) {
 
 function topClose() {
   window.close()
+}
+
+function sortByPercent(data) {
+  var maxNum = [data.overPercentage,data.bJOverPercentage,data.yZoverPercentage,data.yJoverPercentage].sort()[0]
+ if(data.overPercentage==maxNum){
+   return ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "公", "文", "的", "完",
+     "成", "率", "达", "到",
+     `<span class="bottom-blue">${data.overPercentage}%</span>`, '<br>', "公", "文", "总", "数",
+     `<span class="bottom-blue">${data.tOTAL}</span>`, "件",
+     '<br>', "完", "成", "数", "量", `<span class="bottom-blue">${data.iSREADTOTAL}</span>`, "件", '<br>', "工", "作",
+     "尽", "职", "尽",
+     "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"
+   ]
+
+ }else if(data.bJOverPercentage==maxNum){
+   return ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "办", "件", "的", "完",
+     "成", "率", "达", "到",
+     `<span class="bottom-blue">${data.bJOverPercentage}%</span>`, '<br>', "办", "件", "总", "数",
+     `<span class="bottom-blue">${data.bJTOTAL}</span>`, "件",
+     '<br>', "已", "办", "数", "量", `<span class="bottom-blue">${data.bJISREADTOTAL}</span>`, "件", '<br>', "工", "作",
+     "尽", "职", "尽",
+     "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"
+   ]
+
+ }else if(data.yZoverPercentage==maxNum){
+   return ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "阅", "知", "的", "完",
+     "成", "率", "达", "到",
+     `<span class="bottom-blue">${data.yZoverPercentage}%</span>`, '<br>', "阅", "知", "总", "数",
+     `<span class="bottom-blue">${data.yZTOTAL}</span>`, "件",
+     '<br>', "已", "阅",'知', "数", "量", `<span class="bottom-blue">${data.yZISREADTOTAL}</span>`, "件", '<br>', "工", "作",
+     "尽", "职", "尽",
+     "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"
+   ]
+
+ }else{
+    return ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "阅", "件", "的", "完",
+      "成", "率", "达", "到",
+      `<span class="bottom-blue">${data.yJOverPercentage}%</span>`, '<br>', "阅", "件", "总", "数",
+      `<span class="bottom-blue">${data.yJTOTAL}</span>`, "件",
+      '<br>', "已", "阅", "数", "量", `<span class="bottom-blue">${data.alreadyNum}</span>`, "件", '<br>', "工", "作",
+      "尽", "职", "尽",
+      "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"
+    ]
+ }
 }
