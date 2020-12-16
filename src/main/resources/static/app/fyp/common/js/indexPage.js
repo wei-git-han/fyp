@@ -293,5 +293,5 @@ function returnDate(){
 	$(".datelayout").html(year+"-"+month+"-"+day+"&nbsp;"+hour+":"+minute+"&nbsp;&nbsp;"+weekArray[week]);
 }
 function zanWeiKaiFang(type) {
-  window.open("/app/fyp/zbqk/html/index.html?type="+type)
+  window.open("/app/fyp/zbqk/html/index.html?type="+type,'','height=1200,weight=760,resizable=no')
 }
