@@ -793,4 +793,11 @@ public class AppInterfaceConstant {
     public final static String WEB_INTERFACE_QXJ_statistics = "/app/qxjgl/leaveOrBack/getXLGLNumber";
 
     public final static String WEB_INTERFACE_XLGLZXR = "/api/online/";
+
+    //年度统计-请销假
+    public final static String  WEB_QXJ_DAYS="leaveOrBack/getQXJlist";
+    //年度统计-公文
+    public final static String  WEB_GWCL_STATISTICS="/fypPersonalTodoController/gwAnnualSummary";
+    //年度统计-督办
+    public final static String  WEB_DCCB_STATISTICS="/api/getAllTaskByDept";
 }
