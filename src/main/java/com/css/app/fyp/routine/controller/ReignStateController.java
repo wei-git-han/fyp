@@ -56,6 +56,16 @@ public class ReignStateController {
 		ReignState reignState = reignStateService.queryObject(id);
 		Response.json("reignState", reignState);
 	}
+
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@RequestMapping("/saveOrUpdate")
+	public void saveOrUpdate(List<ReignState> reignState){
+		reignStateService.saveOrUpdate(reignState);
+		Response.ok();
+	}
 	
 	/**
 	 * 保存
@@ -65,7 +75,6 @@ public class ReignStateController {
 	public void save(ReignState reignState){
 		reignState.setId(UUIDUtils.random());
 		reignStateService.save(reignState);
-		
 		Response.ok();
 	}
 	

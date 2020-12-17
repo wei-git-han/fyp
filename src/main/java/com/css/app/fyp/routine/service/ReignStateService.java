@@ -25,4 +25,6 @@ public interface ReignStateService {
 	void delete(String id);
 	
 	void deleteBatch(String[] ids);
+
+    void saveOrUpdate(List<ReignState> reignState);
 }

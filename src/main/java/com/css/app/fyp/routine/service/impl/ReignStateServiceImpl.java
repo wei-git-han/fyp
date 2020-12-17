@@ -1,5 +1,6 @@
 package com.css.app.fyp.routine.service.impl;
 
+import com.css.base.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,17 @@ public class ReignStateServiceImpl implements ReignStateService {
 	public void deleteBatch(String[] ids){
 		reignStateDao.deleteBatch(ids);
 	}
-	
+
+	@Override
+	public void saveOrUpdate(List<ReignState> reignState) {
+		for (ReignState state : reignState) {
+			if(null == state.getId()){
+				state.setId(UUIDUtils.random());
+				reignStateDao.save(state);
+			}else{
+				reignStateDao.update(state);
+			}
+		}
+	}
+
 }
