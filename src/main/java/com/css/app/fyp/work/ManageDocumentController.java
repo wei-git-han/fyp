@@ -49,6 +49,13 @@ public class ManageDocumentController {
     @Autowired
     private BaseAppOrganService baseAppOrganService;
 
+    /**
+     * 默认时间
+     * 一年
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     private Map<String,Object> setDate(Date startTime,Date endTime){
         Calendar instance = Calendar.getInstance();
         int year = instance.get(Calendar.YEAR);
@@ -65,10 +72,10 @@ public class ManageDocumentController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        endTime = new Date();
+        SimpleDateFormat sims = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         HashMap<String, Object> resultMap = new HashMap<>();
-        resultMap.put("startTime",startTime);
-        resultMap.put("endTime",startTime);
+        resultMap.put("startTime",sims.format(startTime));
+        resultMap.put("endTime",sims.format(new Date()));
         return resultMap;
     }
     /**
@@ -79,10 +86,16 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/total")
     public void total(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTime = null;
+        String eTime = null;
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
-            startTime = (Date) map.get("startTime");
-            endTime = (Date) map.get("endTime");
+            sTime = (String) map.get("startTime");
+            eTime = (String) map.get("endTime");
+        }else{
+            sTime = simpleDateFormat.format(startTime);
+            eTime = simpleDateFormat.format(endTime);
         }
         int minitue = 0;
         SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -112,8 +125,8 @@ public class ManageDocumentController {
             paramMap.add("title", "办文总量");
             paramMap.add("type", type);
             paramMap.add("deptid", deptid);
-            paramMap.add("startTime", startTime);
-            paramMap.add("endTime", endTime);
+            paramMap.add("startTime", sTime);
+            paramMap.add("endTime", eTime);
             redisUtil.setString(keyName,new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")).toJSONString());
             Date date = new Date();
             redisUtil.setString("gwData",format.format(date));
@@ -152,12 +165,23 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/overview")
     public void overview(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTime = null;
+        String eTime = null;
+        if(null == startTime && null == endTime) {
+            Map<String, Object> map = this.setDate(startTime, endTime);
+            sTime = (String) map.get("startTime");
+            eTime = (String) map.get("endTime");
+        }else{
+            sTime = simpleDateFormat.format(startTime);
+            eTime = simpleDateFormat.format(endTime);
+        }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
         paramMap.add("type",type);
         paramMap.add("deptid",deptid);
-        paramMap.add("startTime",startTime);
-        paramMap.add("endTime",endTime);
+        paramMap.add("startTime",sTime);
+        paramMap.add("endTime",eTime);
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
 
@@ -169,13 +193,24 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/trend")
     public void trend(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTime = null;
+        String eTime = null;
+        if(null == startTime && null == endTime) {
+            Map<String, Object> map = this.setDate(startTime, endTime);
+            sTime = (String) map.get("startTime");
+            eTime = (String) map.get("endTime");
+        }else{
+            sTime = simpleDateFormat2.format(startTime);
+            eTime = simpleDateFormat2.format(endTime);
+        }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
         paramMap.add("deptid",deptid);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        paramMap.add("startTime",startTime);
-        paramMap.add("endTime",endTime);
+        paramMap.add("startTime",sTime);
+        paramMap.add("endTime",eTime);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
         Object data;
         if(null!=dataList&&dataList.size()>0){
@@ -194,12 +229,23 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/submitEfficiency")
     public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTime = null;
+        String eTime = null;
+        if(null == startTime && null == endTime) {
+            Map<String, Object> map = this.setDate(startTime, endTime);
+            sTime = (String) map.get("startTime");
+            eTime = (String) map.get("endTime");
+        }else{
+            sTime = simpleDateFormat2.format(startTime);
+            eTime = simpleDateFormat2.format(endTime);
+        }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
         paramMap.add("deptid",deptid);
-        paramMap.add("startTime",startTime);
-        paramMap.add("endTime",endTime);
+        paramMap.add("startTime",sTime);
+        paramMap.add("endTime",eTime);
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
 
@@ -211,12 +257,23 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/handleEfficiency")
     public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTime = null;
+        String eTime = null;
+        if(null == startTime && null == endTime) {
+            Map<String, Object> map = this.setDate(startTime, endTime);
+            sTime = (String) map.get("startTime");
+            eTime = (String) map.get("endTime");
+        }else{
+            sTime = simpleDateFormat2.format(startTime);
+            eTime = simpleDateFormat2.format(endTime);
+        }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
         paramMap.add("deptid",deptid);
-        paramMap.add("startTime",startTime);
-        paramMap.add("endTime",endTime);
+        paramMap.add("startTime",sTime);
+        paramMap.add("endTime",eTime);
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
 
@@ -228,12 +285,23 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/readEfficiency")
     public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTime = null;
+        String eTime = null;
+        if(null == startTime && null == endTime) {
+            Map<String, Object> map = this.setDate(startTime, endTime);
+            sTime = (String) map.get("startTime");
+            eTime = (String) map.get("endTime");
+        }else{
+            sTime = simpleDateFormat2.format(startTime);
+            eTime = simpleDateFormat2.format(endTime);
+        }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);
         paramMap.add("deptid",deptid);
-        paramMap.add("startTime",startTime);
-        paramMap.add("endTime",endTime);
+        paramMap.add("startTime",sTime);
+        paramMap.add("endTime",eTime);
         Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
     }
 

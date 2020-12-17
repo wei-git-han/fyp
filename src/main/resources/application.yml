@@ -37,8 +37,8 @@ spring:
   application:
     name: legacycpk.csse.zbfzbbgt_zyyy
   redis:
-      host: redis.appservice.marathon.mesos
-      port: 6379
+      host: 10.1.150.10
+      port: 10007
       timeout: 3000
       lettuce:
         pool:
