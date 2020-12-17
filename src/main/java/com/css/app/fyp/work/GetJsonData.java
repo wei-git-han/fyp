@@ -69,7 +69,7 @@ public class GetJsonData {
         String token = SSOAuthFilter.getToken();
         if (null != map.get("deptid") && !"".equals(map.get("deptid").get(0))) {
             Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(map.get("deptid").get(0).toString());
-            this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, orgId);
+            this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, map.get("deptid").toString());
         }else {
             List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
             for (Map<String, Object> data:appIdAndDeptIdNameAll) {
