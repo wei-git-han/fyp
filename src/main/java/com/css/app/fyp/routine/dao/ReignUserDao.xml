@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.ReignUserDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.ReignUser">
+		select b.name as stateName,* from REIGN_USER as a
+		left join REIGN_STATE as b on a.state_id = b.id
+		where a.user_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.ReignUser">
+		select b.name as stateName,* from REIGN_USER as a
+		left join REIGN_STATE as b on a.state_id = b.id
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from REIGN_USER 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.ReignUser">
+		insert into REIGN_USER
+		(
+			"ID", 
+			"USER_ID", 
+			"USER_NAME", 
+			"END_TIME", 
+			"START_TIME", 
+			"STATE_ID"
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{userName}, 
+			#{endTime}, 
+			#{startTime}, 
+			(select id from REIGN_STATE where name = #{stateName})
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.ReignUser">
+		update REIGN_USER 
+		<set>
+			<if test="userId != null">"USER_ID" = #{userId}, </if>
+			<if test="userName != null">"USER_NAME" = #{userName}, </if>
+			<if test="endTime != null">"END_TIME" = #{endTime}, </if>
+			<if test="startTime != null">"START_TIME" = #{startTime}, </if>
+			<if test="stateId != null">"STATE_ID" = #{stateId}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from REIGN_USER where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from REIGN_USER where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

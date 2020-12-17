@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.css.app.fyp.routine.dao.ReignStateDao">
+
+	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.ReignState">
+		select * from REIGN_STATE where ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.css.app.fyp.routine.entity.ReignState">
+		select * from REIGN_STATE
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from REIGN_STATE 
+	</select>
+	 
+	<insert id="save" parameterType="com.css.app.fyp.routine.entity.ReignState">
+		insert into REIGN_STATE
+		(
+			"ID", 
+			"NAME"
+		)
+		values
+		(
+			#{id}, 
+			#{name}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.css.app.fyp.routine.entity.ReignState">
+		update REIGN_STATE 
+		<set>
+			<if test="name != null">"NAME" = #{name}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from REIGN_STATE where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from REIGN_STATE where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
