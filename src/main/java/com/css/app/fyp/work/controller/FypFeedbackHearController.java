@@ -175,7 +175,7 @@ public class FypFeedbackHearController {
 					orgMap.put("name", objects.get(7).toString());
 					List<BaseAppOrgan> baseAppOrgans = baseAppOrganService.queryList(orgMap);
 					if (null != baseAppOrgans && baseAppOrgans.size() > 0) {
-						fypFeedbackHear.setSubmitDeptName(baseAppOrgans.get(0).getId());//提出单位名称
+						fypFeedbackHear.setSubmitDeptId(baseAppOrgans.get(0).getId());//提出单位名称
 					}
 					fypFeedbackHear.setSubmitDeptName(objects.get(7).toString());//提出单位名称
 					fypFeedbackHear.setMarch(objects.get(8).toString());//进度
