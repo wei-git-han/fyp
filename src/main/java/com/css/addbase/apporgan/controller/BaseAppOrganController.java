@@ -105,7 +105,7 @@ public class BaseAppOrganController {
 	@ResponseBody
 	public Object getDeptTreeOnlyRootChildren() {
 		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
-		JSONObject list= OrgUtil.getOrganTree(organs,"root",false,true);
+		JSONObject list= OrgUtil.getOrganTree(organs,"root",true,true);
 		return list;
 	}
 	
@@ -200,5 +200,20 @@ public class BaseAppOrganController {
 		JSONObject list= OrgUtil.getOrganTree(listOrg, organId);
 		return list;
 	}
+
+
+	/**
+	 * 获取以指定部门ID为根节点的部门树(获取全部的叶子节点)
+	 * @param organId 指定部门ID
+	 * @return
+	 */
+	/*@RequestMapping(value = "/divisiontree")
+	@ResponseBody
+	public Object divisiontree(String organId) {
+		CurrentUser.getUserId().
+		List<BaseAppOrgan> organs = baseAppOrganService.queryList(null);
+		JSONObject list= OrgUtil.getOrganTree(organs, organId);
+		return list;
+	}*/
 
 }
