@@ -21,6 +21,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -48,6 +49,28 @@ public class ManageDocumentController {
     @Autowired
     private BaseAppOrganService baseAppOrganService;
 
+    private Map<String,Object> setDate(Date startTime,Date endTime){
+        Calendar instance = Calendar.getInstance();
+        int year = instance.get(Calendar.YEAR);
+        int month = instance.get(Calendar.MONTH);
+        int day = instance.get(Calendar.DAY_OF_MONTH);
+        int hour = instance.get(Calendar.HOUR_OF_DAY);
+        int minute = instance.get(Calendar.MINUTE);
+        int second = instance.get(Calendar.SECOND);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        String date = String.valueOf(year-1)+"-"+ String.valueOf(month)+"-"+ String.valueOf(day)+ String.valueOf(hour)+ ":"+String.valueOf(minute) +":"+ String.valueOf(second);
+        try {
+            Date parse = simpleDateFormat.parse(date);
+            startTime = parse;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        endTime = new Date();
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("startTime",startTime);
+        resultMap.put("endTime",startTime);
+        return resultMap;
+    }
     /**
      * 办文总量
      * @param type
@@ -56,6 +79,11 @@ public class ManageDocumentController {
     @ResponseBody
     @RequestMapping("/total")
     public void total(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+        if(null == startTime && null == endTime) {
+            Map<String, Object> map = this.setDate(startTime, endTime);
+            startTime = (Date) map.get("startTime");
+            endTime = (Date) map.get("endTime");
+        }
         int minitue = 0;
         SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String currentDeptId = "";
