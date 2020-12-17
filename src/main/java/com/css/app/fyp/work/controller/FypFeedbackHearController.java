@@ -159,12 +159,24 @@ public class FypFeedbackHearController {
 
 					fypFeedbackHear.setDesc(objects.get(1).toString());//问题描述
 					fypFeedbackHear.setSubmitTime(simpleDateFormat.parse(objects.get(2).toString()));//提出时间
+					Map<String, Object> userMap = new HashMap<>();
+					userMap.put("trueName", objects.get(3).toString());
+					List<BaseAppUser> baseAppUsers = baseAppUserService.queryList(userMap);
+					if (null != baseAppUsers && baseAppUsers.size() > 0) {
+						fypFeedbackHear.setSubmitUserId(baseAppUsers.get(0).getUserId());//提出人
+					}
 					fypFeedbackHear.setSubmitUserName(objects.get(3).toString());//提出人
 					fypFeedbackHear.setStatus(this.getStatus(objects.get(4).toString()));//状态
                     d = getDic("1",objects.get(5).toString());
 					fypFeedbackHear.setType(d.getDictName());//问题分类：完善建议、系统问题
                     fypFeedbackHear.setTypeId(d.getId());
 					fypFeedbackHear.setSolveTime(simpleDateFormat.parse(objects.get(6).toString()));//解决时限
+					Map<String, Object> orgMap = new HashMap<>();
+					orgMap.put("name", objects.get(7).toString());
+					List<BaseAppOrgan> baseAppOrgans = baseAppOrganService.queryList(orgMap);
+					if (null != baseAppOrgans && baseAppOrgans.size() > 0) {
+						fypFeedbackHear.setSubmitDeptName(baseAppOrgans.get(0).getId());//提出单位名称
+					}
 					fypFeedbackHear.setSubmitDeptName(objects.get(7).toString());//提出单位名称
 					fypFeedbackHear.setMarch(objects.get(8).toString());//进度
 					fypFeedbackHearService.save(fypFeedbackHear);

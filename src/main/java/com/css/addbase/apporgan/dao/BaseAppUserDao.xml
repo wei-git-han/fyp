@@ -18,6 +18,9 @@
 		<if test="userId != null">
 		    and USER_ID = #{userId}
 		</if>
+		<if test="trueName != null">
+		    and TRUENAME = #{trueName}
+		</if>
 		<if test="userIds !=null and userIds.length >0">
 			and USER_ID in
 			<foreach item="userIds" collection="array" open="(" separator="," close=")">
