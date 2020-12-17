@@ -58,11 +58,24 @@
 											<option value="1">来文办理总量</option>
 										</select>
 
-										<div class="input-group input-small date date-picker date-picker1"  data-date-format="yyyy" data-date-viewmode="years" data-date-minviewmode="years" style="float: right;margin-left: 10px;">
-											<input type="text" class="form-control year" id="searchDate" name="searchDate" readonly>
+<!--										<div class="input-group input-small date date-picker date-picker1"  data-date-format="yyyy" data-date-viewmode="years" data-date-minviewmode="years" style="float: right;margin-left: 10px;">-->
+<!--											<input type="text" class="form-control year" id="searchDate" name="searchDate" readonly>-->
+<!--											<span class="input-group-btn">-->
+<!--											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>-->
+<!--											</span>-->
+<!--										</div>-->
+										<div class="input-group date date-picker date-picker1 end" style="width:160px;float:right;">
+											<input type="text" size="16" readonly class="form-control" id="endTime1"  name="endTime1" style="background:transparent;color:#fff;"  />
 											<span class="input-group-btn">
-											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
 											</span>
+										</div>
+										<div class="input-group date date-picker date-picker1 start" style="width:200px;float:right;">
+											<input type="text" size="16" readonly class="form-control" id="startTime1"  name="startTime1" style="background:transparent;color:#fff;"  />
+											<span class="input-group-btn">
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+											<span class="input-group-addon" style="border: none;background: transparent;color:#fff;">至</span>
 										</div>
 										<div class="form-control hiddenByUser" style="display:none;padding:0;width:195px;float: right;margin-left: 10px;background:transparent;border-color:#4C52E6">
 							    			<div class="selecttree">
@@ -88,11 +101,24 @@
 											<option value="0">申请用章</option>
 											<option value="1">发文</option>
 										</select>
-										<div class="input-group input-small date date-picker date-picker2"  data-date-format="yyyy" data-date-viewmode="years" data-date-minviewmode="years" style="float: right;margin-left: 10px;">
-											<input type="text" class="form-control year" id="searchDate2" name="searchDate2" readonly>
+<!--										<div class="input-group input-small date date-picker date-picker2"  data-date-format="yyyy" data-date-viewmode="years" data-date-minviewmode="years" style="float: right;margin-left: 10px;">-->
+<!--											<input type="text" class="form-control year" id="searchDate2" name="searchDate2" readonly>-->
+<!--											<span class="input-group-btn">-->
+<!--											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>-->
+<!--											</span>-->
+<!--										</div>-->
+										<div class="input-group date date-picker date-picker2 end" style="width:160px;float:right;">
+											<input type="text" size="16" readonly class="form-control" id="endTime2"  name="endTime2" style="background:transparent;color:#fff;"  />
 											<span class="input-group-btn">
-											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
 											</span>
+										</div>
+										<div class="input-group date date-picker date-picker2 start" style="width:200px;float:right;">
+											<input type="text" size="16" readonly class="form-control" id="startTime2"  name="startTime2" style="background:transparent;color:#fff;"  />
+											<span class="input-group-btn">
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+											<span class="input-group-addon" style="border: none;background: transparent;color:#fff;">至</span>
 										</div>
 										<div class="form-control hiddenByUser" style="display:none;padding:0;width:195px;float: right;margin-left: 10px;background:transparent;border-color:#4C52E6">
 							    			<div class="selecttree">
@@ -111,8 +137,21 @@
 				        </div>
 						<div class="tab-pane" id="tab_3">
 						    <div class="pr100">
-						    	<div class="tab2_title" style="text-align:left">
-						    		<div class="form-control hiddenByUser" style="padding:0;width:195px;float: right;background:transparent;border-color:#4C52E6">
+						    	<div class="tab2_title filterDate" style="text-align:left">
+									<div class="input-group date date-picker date-picker3 end" style="width:160px;float:right;">
+										<input type="text" size="16" readonly class="form-control" id="endTime3"  name="endTime3" style="background:transparent;color:#fff;"  />
+										<span class="input-group-btn">
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+									</div>
+									<div class="input-group date date-picker date-picker3 start" style="width:200px;float:right;">
+										<input type="text" size="16" readonly class="form-control" id="startTime3"  name="startTime3" style="background:transparent;color:#fff;"  />
+										<span class="input-group-btn">
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+										<span class="input-group-addon" style="border: none;background: transparent;color:#fff;">至</span>
+									</div>
+									<div class="form-control hiddenByUser" style="padding:0;width:195px;float: right;background:transparent;border-color:#4C52E6">
 						    			<div class="selecttree">
 						    				<input type="hidden" class="form-control"  id="deptId3" name="deptId3"  />
 						    				<input type="text" class="form-control"  id="deptName3" name="deptName3"  onfocus="blur()" placeholder="请选择筛选信息" style="background:transparent;color:#fff"  />
@@ -131,12 +170,25 @@
 						    	<div class="tab2_title">
 						    		<span class="line"></span>&nbsp;&nbsp;各单位办文效率表
 						    		<div class="filterDate">
-						    			<div class="input-group input-small date date-picker date-picker4" data-date-format="yyyy" data-date-viewmode="years" data-date-minviewmode="years" style="float:right;margin-left:10px;">
-						    				<input type="text" class="form-control year" id="searchDate4" name="searchDate4" readonly>
-						    				<span class="input-group-btn">
-						    				<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-						    				</span>
-						    			</div>
+<!--						    			<div class="input-group input-small date date-picker date-picker4" data-date-format="yyyy" data-date-viewmode="years" data-date-minviewmode="years" style="float:right;margin-left:10px;">-->
+<!--						    				<input type="text" class="form-control year" id="searchDate4" name="searchDate4" readonly>-->
+<!--						    				<span class="input-group-btn">-->
+<!--						    				<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>-->
+<!--						    				</span>-->
+<!--						    			</div>-->
+										<div class="input-group date date-picker date-picker4 end" style="width:160px;float:right;">
+											<input type="text" size="16" readonly class="form-control" id="endTime4"  name="endTime4" style="background:transparent;color:#fff;"  />
+											<span class="input-group-btn">
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+										</div>
+										<div class="input-group date date-picker date-picker4 start" style="width:200px;float:right;">
+											<input type="text" size="16" readonly class="form-control" id="startTime4"  name="startTime4" style="background:transparent;color:#fff;"  />
+											<span class="input-group-btn">
+												<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+											<span class="input-group-addon" style="border: none;background: transparent;color:#fff;">至</span>
+										</div>
 						    			<div class="form-control hiddenByUser" style="padding:0;width:195px;float: right;background:transparent;border-color:#4C52E6">
 							    			<div class="selecttree">
 							    				<input type="hidden" class="form-control"  id="deptId4" name="deptId4"  />

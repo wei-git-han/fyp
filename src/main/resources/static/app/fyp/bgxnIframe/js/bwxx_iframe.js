@@ -83,8 +83,10 @@ var pageModule = function () {
             url:"/app/fyp/manageDocument/total",
             data:{
                 type:$("#lineTypeBw option:selected").val(),
-				time:$("#searchDate").val(),
-				deptid:$("#deptId1").val()
+				// time:$("#searchDate").val(),
+				deptid:$("#deptId1").val(),
+				startTime: $("#startTime1").val(),
+				endTime: $("#endTime1").val()
             },
             dataType:"json",
             success:function(res){
@@ -110,8 +112,10 @@ var pageModule = function () {
             url:"/app/fyp/manageDocument/overview",
             data:{
             	type:$("#lineTypeFw option:selected").val(),
-                time:$("#searchDate2").val(),
-				deptid:$("#deptId2").val()
+                // time:$("#searchDate2").val(),
+				deptid:$("#deptId2").val(),
+				startTime: $("#startTime2").val(),
+				endTime: $("#endTime2").val()
             },
             dataType:"json",
             success:function(res){
@@ -251,7 +255,9 @@ var pageModule = function () {
 			url:'/app/fyp/manageDocument/trend',
 			dataType:'json',
 			data:{
-                deptid:$("#deptId3").val()
+                deptid:$("#deptId3").val(),
+				startTime: $("#startTime3").val(),
+				endTime: $("#endTime3").val()
             },
 			success:function(res){
 				if(res.result=='success'){
@@ -381,7 +387,8 @@ var pageModule = function () {
 			dataType:'json',
 			data:{
 				 deptid:$("#deptId4").val(),
-				 time:$("#searchDate4").val()
+				startTime: $("#startTime4").val(),
+				endTime: $("#endTime4").val()
 			},
 			async:false,
 			success:function(res){
@@ -397,7 +404,8 @@ var pageModule = function () {
 			dataType:'json',
 			data:{
 				 deptid:$("#deptId4").val(),
-				 time:$("#searchDate4").val()
+				startTime: $("#startTime4").val(),
+				endTime: $("#endTime4").val()
 			},
 			async:false,
 			success:function(res){
@@ -414,7 +422,8 @@ var pageModule = function () {
 			async:false,
 			data:{
 				 deptid:$("#deptId4").val(),
-				 time:$("#searchDate4").val()
+				startTime: $("#startTime4").val(),
+				endTime: $("#endTime4").val()
 			},
 			success:function(res){
 				if(res.result=='success'){
@@ -620,9 +629,21 @@ var pageModule = function () {
 			rtl: Metronic.isRTL(),
 			orientation: "",
 			autoclose: true,
-			minViewMode: 2,
-			format: "yyyy"
-		}).on("changeDate",function(){
+			// minViewMode: 2,
+			format: "yyyy-mm-dd"
+		}).on("changeDate",function(res){
+			var startTime = $('#startTime1').val()
+			var endTime = $('#endTime1').val()
+			var _this = $(this)
+			if(startTime&&endTime){
+				if(new Date(startTime).getTime()>new Date(endTime).getTime()){
+					if(_this.hasClass('end')){
+						$('#startTime1').val(endTime)
+					}else{
+						$('#endTime1').val(startTime)
+					}
+				}
+			}
 			getBanwenAll();//办文总量
 		});
 
@@ -631,24 +652,71 @@ var pageModule = function () {
 			rtl: Metronic.isRTL(),
 			orientation: "",
 			autoclose: true,
-			minViewMode: 2,
-			format: "yyyy"
+			// minViewMode: 2,
+			format: "yyyy-mm-dd"
 		}).on("changeDate",function(){
+			var startTime = $('#startTime2').val()
+			var endTime = $('#endTime2').val()
+			var _this = $(this)
+			if(startTime&&endTime){
+				if(new Date(startTime).getTime()>new Date(endTime).getTime()){
+					// $("#startTime2").datepicker("setDate",endTime)
+					if(_this.hasClass('end')){
+						$('#startTime2').val(endTime)
+					}else{
+						$('#endTime2').val(startTime)
+					}
+				}
+			}
 			getFawenAll();//发文情况
 		});
-
+		$(".date-picker3").datepicker({
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			// minViewMode: 2,
+			format: "yyyy-mm-dd"
+		}).on("changeDate",function(){
+			var startTime = $('#startTime3').val()
+			var endTime = $('#endTime3').val()
+			var _this = $(this)
+			if(startTime&&endTime){
+				if(new Date(startTime).getTime()>new Date(endTime).getTime()){
+					// $("#startTime3").datepicker("setDate",endTime)
+					if(_this.hasClass('end')){
+						$('#startTime3').val(endTime)
+					}else{
+						$('#endTime3').val(startTime)
+					}
+				}
+			}
+			getAreaChartData();
+		});
 		$(".date-picker4").datepicker({
 			language:"zh-CN",
 		    rtl: Metronic.isRTL(),
 		    orientation: "",
-		    format: "yyyy",
-			minViewMode: 2,
+		    format: "yyyy-mm-dd",
+			// minViewMode: 2,
 		    autoclose: true
 		}).on("changeDate",function(){
+			var startTime = $('#startTime4').val()
+			var endTime = $('#endTime4').val()
+			var _this = $(this)
+			if(startTime&&endTime){
+				if(new Date(startTime).getTime()>new Date(endTime).getTime()){
+					// $('#startTime4').val(endTime)
+					if(_this.hasClass('end')){
+						$('#startTime4').val(endTime)
+					}else{
+						$('#endTime4').val(startTime)
+					}
+					// $("#startTime4").datepicker("setDate",endTime)
+				}
+			}
 			getCircleChartData();//办公效率
 		});
-
-
 		$("#lineTypeBw").change(function(){
 			getBanwenAll();
 		});

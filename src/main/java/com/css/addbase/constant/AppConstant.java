@@ -252,4 +252,5 @@ public class AppConstant {
 	public final static String GATEWAY_URL = "gatewayUrl";
 
 	public final static String WORK_TABLE = "";
+
 }
