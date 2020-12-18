@@ -52,15 +52,22 @@ public class ReignUserServiceImpl implements ReignUserService {
 
 	@Override
 	public void saveOrUpdate(ReignUser reignUser) {
-		ReignUser isexist = reignUserDao.queryObject(reignUser.getUserId());
+		ReignUser isexist = reignUserDao.queryObject(CurrentUser.getUserId());
 		if(null!=isexist){
-			reignUserDao.update(isexist);
+			reignUser.setIsdelete(0);
+			reignUserDao.update(reignUser);
 		}else{
 			reignUser.setId(UUIDUtils.random());
 			reignUser.setUserId(CurrentUser.getUserId());
 			reignUser.setUserName(CurrentUser.getUsername());
+			reignUser.setIsdelete(0);
 			reignUserDao.save(reignUser);
 		}
+	}
+
+	@Override
+	public ReignUser queryObjectAll(String userid) {
+		return reignUserDao.queryObjectAll(userid);
 	}
 
 }

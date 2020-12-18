@@ -1,5 +1,6 @@
 package com.css.app.fyp.routine.service.impl;
 
+import com.css.base.utils.StringUtils;
 import com.css.base.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class ReignStateServiceImpl implements ReignStateService {
 	@Override
 	public void saveOrUpdate(List<ReignState> reignState) {
 		for (ReignState state : reignState) {
-			if(null == state.getId()){
+			if(StringUtils.isBlank(state.getId())){
 				state.setId(UUIDUtils.random());
 				reignStateDao.save(state);
 			}else{

@@ -107,5 +107,21 @@ public class ReignUserController {
 		
 		Response.ok();
 	}
-	
+
+	/**
+	 * 改变用户状态，不显示
+	 * @param userids
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/changeState")
+	public void changeState(String userids){
+		String[] split = userids.split(",");
+		for (String userid:split) {
+			ReignUser reignUser = reignUserService.queryObjectAll(userid);
+			if(null!=reignUser) {
+				reignUser.setIsdelete(1);
+				reignUserService.update(reignUser);
+			}
+		}
+	}
 }

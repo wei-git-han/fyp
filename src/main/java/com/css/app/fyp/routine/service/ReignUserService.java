@@ -27,4 +27,6 @@ public interface ReignUserService {
 	void deleteBatch(String[] ids);
 
     void saveOrUpdate(ReignUser reignUser);
+
+	ReignUser queryObjectAll(String userid);
 }

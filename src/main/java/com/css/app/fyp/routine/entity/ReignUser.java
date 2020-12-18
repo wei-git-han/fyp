@@ -31,9 +31,19 @@ public class ReignUser implements Serializable {
 	private Date startTime;
 	//状态关联id
 	private String stateId;
-
 	//状态名称
 	private String stateName;
+
+	//逻辑删除
+	private Integer isdelete;
+
+	public Integer getIsdelete() {
+		return isdelete;
+	}
+
+	public void setIsdelete(Integer isdelete) {
+		this.isdelete = isdelete;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

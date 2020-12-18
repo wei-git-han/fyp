@@ -6,16 +6,17 @@
 	<select id="queryObject" resultType="com.css.app.fyp.routine.entity.ReignUser">
 		select b.name as stateName,* from REIGN_USER as a
 		left join REIGN_STATE as b on a.state_id = b.id
-		where a.user_id = #{value}
+		where a.user_id = #{value} and isdelete = '0'
 	</select>
 
 	<select id="queryList" resultType="com.css.app.fyp.routine.entity.ReignUser">
 		select b.name as stateName,* from REIGN_USER as a
 		left join REIGN_STATE as b on a.state_id = b.id
+		where a.isdelete = '0'
 	</select>
 	
  	<select id="queryTotal" resultType="int">
-		select count(*) from REIGN_USER 
+		select count(*) from REIGN_USER where isdelete = '0'
 	</select>
 	 
 	<insert id="save" parameterType="com.css.app.fyp.routine.entity.ReignUser">
@@ -26,7 +27,8 @@
 			"USER_NAME", 
 			"END_TIME", 
 			"START_TIME", 
-			"STATE_ID"
+			"STATE_ID",
+			"ISDELETE,
 		)
 		values
 		(
@@ -35,7 +37,8 @@
 			#{userName}, 
 			#{endTime}, 
 			#{startTime}, 
-			(select id from REIGN_STATE where name = #{stateName})
+			(select id from REIGN_STATE where name = #{stateName}),
+			#{isdelete}
 		)
 	</insert>
 	 
@@ -46,7 +49,9 @@
 			<if test="userName != null">"USER_NAME" = #{userName}, </if>
 			<if test="endTime != null">"END_TIME" = #{endTime}, </if>
 			<if test="startTime != null">"START_TIME" = #{startTime}, </if>
-			<if test="stateId != null">"STATE_ID" = #{stateId}</if>
+			<if test="stateId != null">"STATE_ID" = #{stateId},</if>
+			<if test="isdelete != null">"ISDELETE" = #{isdelete},</if>
+
 		</set>
 		where ID = #{id}
 	</update>
@@ -61,5 +66,7 @@
 			#{id}
 		</foreach>
 	</delete>
+
+
 
 </mapper>
