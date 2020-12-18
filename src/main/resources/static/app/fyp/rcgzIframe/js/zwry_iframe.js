@@ -6,10 +6,29 @@ var url103 = {"url":"/reignuser/info","dataType":"text"};
 var url104 = {"url":"/reignstate/list","dataType":"text"};
 var url105 = {"url":"/reignstate/saveOrUpdate","dataType":"text"};
 var url106 = {"url":"/reignstate/delete","dataType":"text"};
+var roleUserUrl = {"url":'/reignuser/getUserRole',"dataType":"text"}
 var fullName="";
 var userobj = {};
 var loginUserId="";
 var pageModule = function () {
+	$('#set').show()
+	var getUserRole = function () {
+		$ajax({
+			url:roleUserUrl,
+			success:function(data){
+				if(data.data){
+					if(data.data.roleType=='1'){
+						$('#set').show()
+					}else{
+						$('#set').hide()
+					}
+				}else{
+					$('#set').hide()
+				}
+				$('#set').show()
+			}
+		})
+	}
 	var os = {};
     var oodata = [];
 	var initUserStatus = function() {
@@ -700,48 +719,31 @@ var pageModule = function () {
 				var username = data.userName;
 				var type = data.stateName;
 				var state = data.stateId;
-				var time1 = getdateformtfn(data.begintime)
-				var time2 = getdateformtfn(data.endtime);
+				var time1 = getdateformtfn(data.startTime)
+				var time2 = getdateformtfn(data.endTime);
 				var userid = data.userid;
 				userobj.id = id;
 				userobj.resultCode = resultCode;
 				userobj.username = username;
 				userobj.type = type;
 				userobj.state = data.stateId;
-				userobj.time1 = data.begintime;
-				userobj.time2 = data.endtime;
-
+				userobj.time1 = data.startTime;
+				userobj.time2 = data.endTime;
 				var html = `
 					<img src="../images/tip.png">
 					<font>${username}</font>
     			`;
-				//
-				// //if(typeof(type)!="undefined"&&type!=null&&$.trim(type)!=""){
-				// if(resultCode=='1'){
-				// 	data_info = `${type}:${time1}-${time2}`;
-				// 	html+= `
-    			// 		<font>(</font>
-    			// 		<font>${type}</font>
-    			// 		<font>${time1}</font>
-    			// 		<font>-</font>
-    			// 		<font>${time2}</font>
-    			// 		<i class="fa fa-info-circle tptext" data=${userid} datatype="0" data_info="${data_info}"></i>
-    			// 		<font>)</font>
-    			// 		<i class="fa fa-edit" id="editbutton"></i>
-        		// 	`
-				// }else{
-					html+= `<i class="fa fa-edit" id="editbutton"></i>`
-				// }
+				html+= `<i class="fa fa-edit" id="editbutton"></i>`
 				$(".newtitle").html(html)
-
 			}
 		})
 	}
     return {
         //加载页面处理程序
         initControl: function () {
-			inituser();
+			getUserRole()
             initUserStatus();
+			inituser()
 		    initother();
         },
 		refreshPage:function () {
@@ -766,15 +768,15 @@ var initzttype = function(fn){
 				});
 				$("#zttype").append(html);
 			}
-			if(userobj.state){
-				$('#zttype').val(userobj.state)
-			}
-			if(userobj.time1){
-				$('#time1').val(userobj.time1)
-			}
-			if(userobj.time2){
-				$('#time2').val(userobj.time2)
-			}
+			// if(userobj.state){
+			// 	$('#zttype').val(userobj.state)
+			// }
+			// if(userobj.time1){
+			// 	$('#time1').val(userobj.time1)
+			// }
+			// if(userobj.time2){
+			// 	$('#time2').val(userobj.time2)
+			// }
 			if(fn){fn()}
 		}
 	});
