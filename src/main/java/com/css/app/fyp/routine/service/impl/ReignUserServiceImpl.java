@@ -87,6 +87,7 @@ public class ReignUserServiceImpl implements ReignUserService {
 				reignUser.setIsdelete(1);
 				reignUserDao.update(reignUser);
 			}else{
+				reignUser = new ReignUser();
 				reignUser.setIsdelete(1);
 				reignUser.setId(UUIDUtils.random());
 				reignUser.setUserId(CurrentUser.getUserId());
