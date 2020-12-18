@@ -2,11 +2,26 @@
 //var jz_tree_whoUrl = {url:'/app/fyp/common/data/people_tree2.json',dataType:'text'};  //树
 //var qjd_tree = {url:'/app/fyp/common/data/qjd_tree.json',dataType:'text'};  //树
 
-var jz_tree = {url:'/app/fyp/usermanagersetting/jzTree',dataType:'text'};  //树
+var jz_tree = {url:'/app/base/user/allTree',dataType:'text'};  //树
 var jz_tree_whoUrl = {url:'/app/fyp/usermanagersetting/jjusertreeRange',dataType:'text'};  //树
 var select0 = {url:'/app/fyp/usermanagersetting/getUserViewRangeList',dataType:'text'};
-var fanweiurl = {url:'/app/fyp/usermanagersetting/saveLeaderRange',dataType:'text'};
+var fanweiurl = {url:'/reignuser/changeVisual',dataType:'text'};
+var notUserUrl = {"url":'/reignuser/getAllNotVisualUser'}
+var hasArray = [];
 var pageModule = function(){
+	var getNoUser = function () {
+		$ajax({
+			url:notUserUrl,
+			async:false,
+			success:function (data) {
+				if(data){
+					if(data.data){
+						hasArray = data.data||[]
+					}
+				}
+			}
+		})
+	}
 	//局长
 	var initJztree = function() {
 		$ajax({
@@ -16,7 +31,7 @@ var pageModule = function(){
 				array1.push(data);
 				data = array1;
 				$("#jz_tree").jstree({
-				    "plugins": ["wholerow", "types"],
+				    "plugins": ["wholerow", "types","checkbox"],
 				    "core": {
 				    "themes" : {
 				        "responsive": false
@@ -38,19 +53,24 @@ var pageModule = function(){
 				$("#jz_tree").on("ready.jstree", function(e,o) {
 					$("#jz_tree").jstree("open_all");
 				});
+				$("#jz_tree").on("load_node.jstree", function(e,data) {
+					for(var i=0;i<hasArray.length;i++){
+						$("#jz_tree").jstree("select_node",hasArray[i],true);
+					}
+				});
 				$("#jz_tree").on("select_node.jstree", function(e,data) {
-					var node = data.node;
-					var id = node.id;
-					$ajax({
-						url:select0,
-						data:{userId:id},
-						success:function(data){
-							$("#jz_tree_who").jstree("deselect_all");
-							$.each(data,function(){
-								$('#jz_tree_who').jstree().select_node(this);
-							});
-						}
-					})
+					// var node = data.node;
+					// var id = node.id;
+					// $ajax({
+					// 	url:select0,
+					// 	data:{userId:id},
+					// 	success:function(data){
+					// 		$("#jz_tree_who").jstree("deselect_all");
+					// 		$.each(data,function(){
+					// 			$('#jz_tree_who').jstree().select_node(this);
+					// 		});
+					// 	}
+					// })
 				});
 
 			}
@@ -302,41 +322,40 @@ var pageModule = function(){
 				}
 			});
 			if(userIdArray.length==0){
-				newbootbox.alert("请选择局领导!");
+				newbootbox.alert("请选择人员!");
 				return;
 			};
 
-			var userIdArray1 = [];
-			var orgIdArray1=[];
-			var array2 = $("#jz_tree_who").jstree("get_bottom_selected",true);
-			$.each(array2,function(){
-				var type = this.type;
-				if(type==1){
-					userIdArray1.push(this.id);
-					orgIdArray1.push(this.parent);
-				}
-			});
-			if(userIdArray1.length==0){
-				newbootbox.alert("请选择可见领导!");
-				return;
-			};
+			// var userIdArray1 = [];
+			// var orgIdArray1=[];
+			// var array2 = $("#jz_tree_who").jstree("get_bottom_selected",true);
+			// $.each(array2,function(){
+			// 	var type = this.type;
+			// 	if(type==1){
+			// 		userIdArray1.push(this.id);
+			// 		orgIdArray1.push(this.parent);
+			// 	}
+			// });
+			// if(userIdArray1.length==0){
+			// 	newbootbox.alert("请选择可见领导!");
+			// 	return;
+			// };
 
 			$ajax({
 				url:fanweiurl,
 				data:{
 						//leaderId:userIdArray.join(","),orgIdArray:orgIdArray.join(","),
 						//userIds:userIdArray1.join(","),orgIdArray1:orgIdArray1.join(",")
-						leaderId:userIdArray.join(","),userIds:userIdArray1.join(",")
+						userIds:userIdArray.join(",")
 				},
 				success:function(data){
-					if(data.result=="success"){
+					if(data.msg=="success"){
 						newbootbox.alert("设置成功!").done(function(){
 						})
 					}
 				}
 
 			})
-
 
 		})
 	}
@@ -347,12 +366,15 @@ var pageModule = function(){
         initControl:function(){
         	// initPeopletree();//人员
             initother();
-			initJztree();//局长
-			initJzWhotree();//选择局长可见谁的状态
+            getNoUser();
+			initJztree()
+			// initJzWhotree();//选择局长可见谁的状态
         },
 		refreshtree:function(){
         	// $('#jleader_tree').jstree('destroy');
         	// initJleadertree();
+			getNoUser()
+			initJztree()
         }
     };
 

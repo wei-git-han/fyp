@@ -21,7 +21,7 @@
 			<div class="relative">
 				<ul class="leftUl">
 <!--					<li class="peopleli active">创建管理员</li>-->
-					<li class="jzli active">局领导公开范围</li>
+					<li class="jzli active">人员公开范围</li>
 <!--					<li class="createqjdli">创建请假单</li>-->
 				</ul>
 				<div class="login_message">
@@ -56,31 +56,31 @@
 			<!-- 局领导 -->
 			<div id="jz"  class="relative jz choose activeMain">
 				<div class="topContent" style="padding-bottom: 85px;">
-					<div class="half" style="border-right:1px solid #DFDFDF">
+					<div class="half" style="border-right:1px solid #DFDFDF;width: 100%">
 						<div class="relative scroller">
-							<div class="title">选择局领导</div>
+							<div class="title">选择不展示人员</div>
 							<div class="content">
-								<div class="relative">
+								<div class="relative" style="overflow-y: auto">
 									<ul class="jz_tree" id="jz_tree" style="height:100%;">
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="half">
-						<div class="relative scroller">
-							<div class="title">选择谁可见局领导状态</div>
-							<div class="content">
-								<div class="relative">
-									<ul class="jz_tree_who" id="jz_tree_who" style="height:100%;">
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
+<!--					<div class="half">-->
+<!--						<div class="relative scroller">-->
+<!--							<div class="title">选择谁可见局领导状态</div>-->
+<!--							<div class="content">-->
+<!--								<div class="relative">-->
+<!--									<ul class="jz_tree_who" id="jz_tree_who" style="height:100%;">-->
+<!--									</ul>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
 				</div>
 				<div class="bottomContent" style="height:80px;">
-					<div style="height:30px;padding-left:20px;font-size:14px;"><i class="fa fa-info-circle" style="color:#A1A1A1"></i> 设置局长可以看到哪些人的状态</div>
+					<div style="height:30px;padding-left:20px;font-size:14px;"><i class="fa fa-info-circle" style="color:#A1A1A1"></i> 设置人员是否显示状态</div>
 					<div class="form-actions" style="text-align:center">
 				        <button type="button" class="btn btn-primary" id="save">确定</button>
 				        <button type="button" class="btn btn-primary" id="close">取消</button>
