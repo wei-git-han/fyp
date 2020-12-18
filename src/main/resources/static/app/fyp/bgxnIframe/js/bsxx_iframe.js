@@ -48,7 +48,8 @@ var pageModule = function() {
 			data: {
 				deptid: $("#deptId").val(),
 				deptname: $("#deptName").val(),
-				time: $("#searchDate").val()
+				startTime: $("#startTime1").val(),
+				endTime: $("#endTime1").val()
 			},
 			dataType: "json",
 			success: function(res) {
@@ -76,17 +77,38 @@ var pageModule = function() {
 		$("#dccb").click(function() {
 			initNum();
 		});
+		// $(".date-picker1").datepicker({
+		// 	language:"zh-CN",
+        //     rtl: Metronic.isRTL(),
+        //     orientation: "",
+        //     format: "yyyy",
+        //     minViewMode: 2,
+        //     autoclose: true
+		// }).on("changeDate",function(){
+		// 	initNum();
+ 		// });
 		$(".date-picker1").datepicker({
-			language:"zh-CN",
-            rtl: Metronic.isRTL(),
-            orientation: "",
-            format: "yyyy",
-            minViewMode: 2,
-            autoclose: true
-		}).on("changeDate",function(){
-			initNum();
- 		});
-
+			language: "zh-CN",
+			rtl: Metronic.isRTL(),
+			orientation: "",
+			autoclose: true,
+			// minViewMode: 2,
+			format: "yyyy-mm-dd"
+		}).on("changeDate",function(res){
+			var startTime = $('#startTime1').val()
+			var endTime = $('#endTime1').val()
+			var _this = $(this)
+			if(startTime&&endTime){
+				if(new Date(startTime).getTime()>new Date(endTime).getTime()){
+					if(_this.hasClass('end')){
+						$('#startTime1').val(endTime)
+					}else{
+						$('#endTime1').val(startTime)
+					}
+				}
+			}
+			initNum();//办文总量
+		});
 		$(".date-picker2").datepicker({
 			language:"zh-CN",
 		    rtl: Metronic.isRTL(),
