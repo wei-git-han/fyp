@@ -34,4 +34,6 @@ public interface ReignUserService {
 	FypRoleEdit getUserRole(String userId);
 
 	void changeVisual(String userIds);
+
+	List<String> getAllNotVisualUser();
 }

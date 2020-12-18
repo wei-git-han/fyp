@@ -148,4 +148,14 @@ public class ReignUserController {
         reignUserService.changeVisual(userIds);
         Response.ok();
     }
+
+	/**
+	 * 获取所有不可见人员id
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getAllNotVisualUser")
+	public void getAllNotVisualUser(){
+		List<String> users = reignUserService.getAllNotVisualUser();
+		Response.json(new ResponseValueUtils().success(users));
+	}
 }

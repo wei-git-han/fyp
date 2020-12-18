@@ -96,4 +96,9 @@ public class ReignUserServiceImpl implements ReignUserService {
 		}
 	}
 
+	@Override
+	public List<String> getAllNotVisualUser() {
+		return reignUserDao.getAllNotVisualUser();
+	}
+
 }
