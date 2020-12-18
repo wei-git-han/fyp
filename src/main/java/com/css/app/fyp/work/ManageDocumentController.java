@@ -85,7 +85,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/total")
-    public void total(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+    public void total(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,String deptid) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
@@ -164,7 +164,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/overview")
-    public void overview(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+    public void overview(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,String deptid) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
@@ -192,7 +192,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/trend")
-    public void trend(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+    public void trend(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,String deptid) {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
@@ -228,7 +228,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/submitEfficiency")
-    public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+    public void submitEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,String deptid) {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
@@ -256,7 +256,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/handleEfficiency")
-    public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+    public void handleEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,String deptid) {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
@@ -284,7 +284,7 @@ public class ManageDocumentController {
      */
     @ResponseBody
     @RequestMapping("/readEfficiency")
-    public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String deptid) {
+    public void readEfficiency(String type,@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,String deptid) {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
