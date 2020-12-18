@@ -2,67 +2,11 @@
 //var jz_tree_whoUrl = {url:'/app/fyp/common/data/people_tree2.json',dataType:'text'};  //树
 //var qjd_tree = {url:'/app/fyp/common/data/qjd_tree.json',dataType:'text'};  //树
 
-var people_tree = {url:'/app/fyp/usermanagersetting/jjusertreeMgr',dataType:'text'};  //树
 var jz_tree = {url:'/app/fyp/usermanagersetting/jzTree',dataType:'text'};  //树
 var jz_tree_whoUrl = {url:'/app/fyp/usermanagersetting/jjusertreeRange',dataType:'text'};  //树
-var qjd_tree = {url:'/app/fyp/usermanagersetting/jjusertreeLeave',dataType:'text'};  //树
 var select0 = {url:'/app/fyp/usermanagersetting/getUserViewRangeList',dataType:'text'};
-//var select1 = {url:'...',dataType:'text'};
-//var select2 = {url:'...',dataType:'text'};  //树
-//var select3 = {url:'...',dataType:'text'};  //树
-//var select4 = {url:'...',dataType:'text'};  //树
-var seturl = {url:'/app/fyp/usermanagersetting/saveUserManager',dataType:'text'};  //树
 var fanweiurl = {url:'/app/fyp/usermanagersetting/saveLeaderRange',dataType:'text'};
-var getuser={url:'/app/fyp/usermanagersetting/getLoginUser',dataType:'text'};
 var pageModule = function(){
-	//人员
-	var initPeopletree = function() {
-		$ajax({
-			url:people_tree,
-			success:function(data){
-				var array1 = [];
-				array1.push(data);
-				data = array1;
-				$("#people_tree").jstree({
-				    "plugins": ["wholerow", "types","checkbox"],
-				    "core": {
-				    "themes" : {
-				        "responsive": false
-				    },
-				    "data": data,
-				    },
-				    "types" : {
-				    	"default" : {
-					        "icon" : "fa faimg fa-folder"
-					    },
-					    "0" : {
-					        "icon" : "fa faimg fa-folder"
-					    },
-					    "1" : {
-					    	"icon" : "fa faimg fa-user"
-					    }
-				    }
-				});
-				$("#people_tree").on("ready.jstree", function(e,o) {
-					$("#people_tree").jstree("open_all");
-				});
-				/*
-				$("#people_tree").on("ready.jstree", function(e,o) {
-					return;
-					$ajax({
-						url:select1,
-						success:function(data){
-							$.each(data,function(){
-								$('#people_tree').jstree().select_node(this);
-							});
-						}
-					})
-				});
-				*/
-			}
-		})
-	}
-
 	//局长
 	var initJztree = function() {
 		$ajax({
