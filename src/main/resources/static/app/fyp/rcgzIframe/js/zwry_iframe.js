@@ -732,7 +732,6 @@ var pageModule = function () {
 				// }else{
 					html+= `<i class="fa fa-edit" id="editbutton"></i>`
 				// }
-				console.log(html)
 				$(".newtitle").html(html)
 
 			}
@@ -757,17 +756,6 @@ var initzttype = function(fn){
 	$ajax({
 		url:url101,
 		success:function(data){
-			if(data.length>0){
-
-//					var data =  [{
-//						text:"开会中",
-//						value:"01"
-//					},{
-//						text:"外出办事",
-//						value:"02"
-//					}];
-			}
-			// initselect("zttype",data);
 			if(data.data){
 				$("#zttype").html("");
 				var html = "<option value=''>--请选择--</option>";
