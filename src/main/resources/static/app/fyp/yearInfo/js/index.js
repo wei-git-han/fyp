@@ -49,7 +49,7 @@ var dataUrl = {
 var cardIndex = 1;
 var hasDepart = false // 是否只有单位
 var pageText = [
-  ['繁', '忙', '的', '2', '0', '2', '0', '年', '虽', '然', '过', '去', '了，', '但，', '2', '0', '2', '0', '年', '的', '年', '度',
+  ['繁', '忙', '的', '2', '0', '2', '0', '年', '虽', '然', '过', '去', '了，', '2', '0', '2', '0', '年', '的', '年', '度',
     '回', '顾', '来', '了！'
   ],
   ['尊', '敬', '的', '某', '领', '导，', '您', '好！', '<br>', '&nbsp;&nbsp;<span class="bottom-blue">2020</span>', '年',
@@ -66,12 +66,12 @@ var pageText = [
   ],
   ["这", "一", "年", "，", "您", "最", "快", "一", "次", "处", "理", "公", "文", "用", "了", '<span class="bottom-blue">3</span>',
     "小", "时", '<br>', "就", "处", "理", "了", "一",
-    "件", "督", "办", "事", "项", '<br>', '<span>&nbsp;</span>', '<br>', "您", "真", "是", "眼", "疾", "手", "快"
+    "件", "督", "办", "事", "项", '<br>', '<span>&nbsp;</span>', '<br>', "真", "是", "眼", "疾", "手", "快"
   ],
   ["您", "在", '<span class="bottom-blue">2020</span>', "年", "，", "处", "理", "阅", "件", "的", "完", "成", "率", "达", "到",
     '<span class="bottom-blue">76%</span>', '<br>', "阅", "件", "总", "数", '<span class="bottom-blue">456</span>', "件",
     '<br>', "已", "阅", "数", "量", '<span class="bottom-blue">666</span>', "件", '<br>', "工", "作", "尽", "职", "尽",
-    "责", "，", "您", "是", "我", "们", "的", "榜", "样", "！"
+    "责", "，", "是", "我", "们", "的", "榜", "样", "！"
   ],
   ["这", "一", "年", "，", "您", "的", "办", "文", "多", "元", "化", "，", "我", "的", "公", "文",
     '<span class="bottom-blue">26%</span>', '<br>', "公", "文",
@@ -85,7 +85,7 @@ var pageText = [
     "计", "，", "您", "接", "收", "公", "文", '<span class="bottom-blue">456</span>',
     "件", '<br>', "参", "与", "会", "议", '<span class="bottom-blue">326</span>', "场", '<br>', "办", "理", "督", "办",
     '<span class="bottom-blue">432</span>', "件", '<br>', "在", "您", "的",
-    "英", "明", "领", "导", "下", "，", "工", "作", "有", "条", "不", "紊", "的", "在", "进", "行"
+    "英", "明", "领", "导", "下", "，", "工", "作", "有", "条", "不", "紊", "的", "进", "行"
   ],
   // ["2", "0", "2", "0", "年", "，", '<span class="blue-text">信</span>', '<span class="blue-text">息</span>',
   //   '<span class="blue-text">系</span>', '<span class="blue-text">统</span>', '<span class="blue-text">局</span>', "累",
@@ -132,7 +132,7 @@ var pageModule = function() {
       })
       hasDepart = true
     }
-    var indexArray1 = ['繁', '忙', '的', '2', '0', '2', '0', '年', '虽', '然', '过', '去', '了，', '但，', '2', '0', '2', '0',
+    var indexArray1 = ['繁', '忙', '的', '2', '0', '2', '0', '年', '虽', '然', '过', '去', '了，', '2', '0', '2', '0',
       '年', '的', '年', '度',
       '回', '顾', '来', '了！'
     ];
@@ -149,14 +149,14 @@ var pageModule = function() {
     var indexArray3 = ['您', '在', '<span class="bottom-blue">2020</span>', '年,', '<br>', '共', '在', '线', '天', '数',
       '已', '达',
       `<span class="bottom-blue">${data.onlineDays}</span>`, '天。', '<br>', '<span>&nbsp;</span>', '<br>', '工',
-      '作', '这', '么', '努', '力', '，', '您', '一', '定', '非', '常',
+      '作', '这', '么', '努', '力', '，', '一', '定', '非', '常',
       '优', '秀', '！',
     ]
     var indexArray4 = ["这", "一", "年", "，", "您", "最", "快", "一", "次", "处", "理", "公", "文", "用", "了",
       `<span class="bottom-blue">${data.fast!='0'?data.fast:1}</span>`,
       "分", "钟", '<br>', "就", "处", "理", "了", "一",
       "件", `${data.documentType==0?'公文':data.documentType==1?'办件':data.documentType==2?'阅件':'阅知'}`, "事", "项",
-      '<br>', '<span>&nbsp;</span>', '<br>', "您", "真", "是"
+      '<br>', '<span>&nbsp;</span>', '<br>', "真", "是"
     ].concat(timeChengYu)
     indexArray4.push("!")
     var indexArray5 = sortByPercent(data)
@@ -170,7 +170,7 @@ var pageModule = function() {
     ];
     // if(departList.length>0){
       var indexArray7 = ["2", "0", "2", "0", "年", "，"].concat(departList).concat(["累",
-        "计", "，", "您", "接", "收", "公", "文", `<span class="bottom-blue">${data.documentNum}</span>`,
+        "计", "，", "接", "收", "公", "文", `<span class="bottom-blue">${data.documentNum}</span>`,
         "件", '<br>', '<br>', "办", "理", "督", "办",
         `<span class="bottom-blue">${data.checkNum}</span>`, "件", '<br>', "在", "您", "的",
         "英", "明", "领", "导", "下", "，", "工", "作", "有", "条", "不", "紊", "的", "在", "进", "行"
