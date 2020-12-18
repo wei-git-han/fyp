@@ -7,6 +7,7 @@ var url104 = {"url":"/reignstate/list","dataType":"text"};
 var url105 = {"url":"/reignstate/saveOrUpdate","dataType":"text"};
 var url106 = {"url":"/reignstate/delete","dataType":"text"};
 var fullName="";
+var userobj = {};
 var loginUserId="";
 var pageModule = function () {
 	var os = {};
@@ -348,7 +349,7 @@ var pageModule = function () {
 			startView:"day",
 			maxView:"month",
 			minView:"hour",
-			format: "yyyy-mm-dd hh:ii",
+			format: "yyyy-mm-dd hh:ii:ss",
 			pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
 		});
 		$("#editbutton").live("click",function(){
@@ -357,13 +358,13 @@ var pageModule = function () {
 				var id = userobj.id;
 				var username = userobj.username;
 				var resultCode = userobj.resultCode;
-				var type = userobj.type;
+				var type = userobj.state;
 				var time1 = userobj.time1;
 				var time2 = userobj.time2;
 
-				if(resultCode==1){//编辑状态
+				if(userobj.time1){//编辑状态
 					$("#zttype option").each(function(){
-						if($(this).text()==type){
+						if($(this).val()==type){
 							this.selected=true;
 						}
 					});
@@ -371,7 +372,7 @@ var pageModule = function () {
 					$("#time2").val(time2);
 				}else{//新增状态
 					var newdate = new Date();
-					newdate = newdate.format("yyyy-MM-dd hh:mm");
+					newdate = newdate.format("yyyy-MM-dd hh:mm:ss");
 					$("#time1").val(newdate);
 					$("#time2").val(newdate);
 				}
@@ -403,7 +404,7 @@ var pageModule = function () {
 						data:param,
 						type:"post",
 						success:function(data){
-							if(data.result=="success"){
+							if(data.msg=="success"){
 								$("#editmodal").modal("hide");
 								window.location.reload();
 							}
@@ -583,35 +584,37 @@ var pageModule = function () {
 
 					}
 				})
-				$ajax({
-					url:url105,
-					data:{list:JSON.stringify(glztarray)},
+				$.ajax({
+					url:url105.url,
+					"contentType":'application/json;charset=utf-8',
+					data:JSON.stringify({list:glztarray}),
+					type:'post',
 					success:function(data){
 						//var msg =data.errorMsg;
 						if(data.resultCode==1){
 							var msg =data.errorMsg;
 							newbootbox.alert(msg).done(function(){
-								if(data.result=="success"){
+								if(data.msg=="success"){
 									$("#glztmodal").modal("hide");
 								}
 							})
 						}else{
-							if(data.result=="success"){
+							if(data.msg=="success"){
 								$("#glztmodal").modal("hide");
 							}
 						}
 
 						initzttype(function(){//刷新下拉框
-							var resultCode = userobj.resultCode;
-							var type = userobj.type;
+							// var resultCode = userobj.resultCode;
+							// var type = userobj.type;
 
-							if(resultCode==1){//编辑状态
+							// if(resultCode==1){//编辑状态
 								$("#zttype option").each(function(){
-									if($(this).text()==type){
+									if($(this).val()==userobj.stateId){
 										this.selected=true;
 									}
 								});
-							}
+							// }
 						})
 
 					}
@@ -651,31 +654,30 @@ var pageModule = function () {
             });
         },500)
     }
-	var userobj = {};
 	var inituser = function(){
 		$ajax({
 			url:url103,
 			success:function(data){
-
+				data = data.data
+				console.log(data)
 				var id = data.id
 				var resultCode = data.resultCode;
-				var username = data.username;
+				var username = data.userName;
 				var type = data.stateName;
-				var state = data.state;
+				var state = data.stateId;
 				var time1 = getdateformtfn(data.begintime)
 				var time2 = getdateformtfn(data.endtime);
 				var userid = data.userid;
-
 				userobj.id = id;
 				userobj.resultCode = resultCode;
 				userobj.username = username;
 				userobj.type = type;
-				userobj.state = state;
+				userobj.state = data.stateId;
 				userobj.time1 = data.begintime;
 				userobj.time2 = data.endtime;
 
 				var html = `
-					<i class="fa fa-user"></i>
+					<img src="../images/tip.png">
 					<font>${username}</font>
     			`;
 				//
@@ -695,8 +697,8 @@ var pageModule = function () {
 				// }else{
 					html+= `<i class="fa fa-edit" id="editbutton"></i>`
 				// }
-
-				$(".newright-title1").html(html)
+				console.log(html)
+				$(".newtitle").html(html)
 
 			}
 		})
@@ -741,7 +743,15 @@ var initzttype = function(fn){
 				});
 				$("#zttype").append(html);
 			}
-
+			if(userobj.state){
+				$('#zttype').val(userobj.state)
+			}
+			if(userobj.time1){
+				$('#time1').val(userobj.time1)
+			}
+			if(userobj.time2){
+				$('#time2').val(userobj.time2)
+			}
 			if(fn){fn()}
 		}
 	});
