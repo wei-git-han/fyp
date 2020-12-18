@@ -245,7 +245,41 @@ var pageModule = function () {
             $(".searchBox").hide();
        });
 
+		//设置
+		$("#set").click(function(){
+			/*添加判断部或者局
+			 * //部
+			newbootbox.newdialog({
+				id:"bsetDialog",
+				width:825,
+				height:456,
+				header:true,
+				headerStyle:{
+					"background":"#428bca"
+				},
+				title:"人员在位状态设置",
+				style:{
+					"padding":"0px"
+				},
+				url:"/app/fyp/bset.html"
+			})*/
 
+			//局
+			newbootbox.newdialog({
+				id:"jsetDialog",
+				width:825,
+				height:456,
+				header:true,
+				headerStyle:{
+					"background":"#428bca"
+				},
+				title:"人员在位状态设置",
+				style:{
+					"padding":"0px"
+				},
+				url:"../jset.html"
+			})
+		});
        //人员在位筛选
        $("#filter label").click(function(){
 	       	var label = this;
@@ -395,7 +429,8 @@ var pageModule = function () {
 				fn1:function(){
 					var paramdata = getformdata(["zttype","time1","time2"]);
 					var param={}
-					param.state = paramdata.zttype
+					param.stateId = paramdata.zttype
+					param.stateName = paramdata.zttype
 					param.startTime = paramdata.time1
 					param.endTime = paramdata.time2
 					param.id = userobj.id;
@@ -735,7 +770,7 @@ var initzttype = function(fn){
 			// initselect("zttype",data);
 			if(data.data){
 				$("#zttype").html("");
-				var html = "";
+				var html = "<option value=''>--请选择--</option>";
 				$.each(data.data,function(i){
 					if(($.trim(data.data[i].name)).indexOf("请选择")==-1){
 						html+='<option value='+data.data[i].id+'>'+data.data[i].name+'</option>';
