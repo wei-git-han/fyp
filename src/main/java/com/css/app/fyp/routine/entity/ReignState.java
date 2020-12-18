@@ -2,7 +2,7 @@ package com.css.app.fyp.routine.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 
 
 /**
@@ -19,6 +19,20 @@ public class ReignState implements Serializable {
 	private String id;
 	//状态字
 	private String name;
+
+	private List<ReignState> list;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public List<ReignState> getList() {
+		return list;
+	}
+
+	public void setList(List<ReignState> list) {
+		this.list = list;
+	}
 
 	/**
 	 * 设置：
