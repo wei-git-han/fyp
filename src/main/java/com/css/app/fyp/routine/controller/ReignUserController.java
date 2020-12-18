@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
 import com.css.app.fyp.utils.ResponseValueUtils;
-import com.css.base.utils.CurrentUser;
+import com.css.app.fyp.work.entity.FypRoleEdit;
+import com.css.base.utils.*;
+import com.github.pagehelper.util.StringUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.css.base.utils.PageUtils;
-import com.css.base.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
-import com.css.base.utils.Response;
 import com.css.app.fyp.routine.entity.ReignUser;
 import com.css.app.fyp.routine.service.ReignUserService;
 
@@ -54,6 +54,9 @@ public class ReignUserController {
 	@RequestMapping("/info")
 	public void info(){
 		ReignUser reignUser = reignUserService.queryObject(CurrentUser.getUserId());
+		if(null!=reignUser && StringUtils.isBlank(reignUser.getStateName()) && StringUtils.isNotBlank(reignUser.getStateId())){
+		    reignUser.setStateId("");
+        }
 		if(null==reignUser ){
 			reignUser = new ReignUser();
 		}
@@ -124,4 +127,25 @@ public class ReignUserController {
 			}
 		}
 	}
+
+    /**
+     * 获取当前登录人角色
+     * return roleType 当前人角色 0:保障管理员；1:系统管理员；2:局管理员；3:在编人员
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getUserRole")
+    public void getUserRole(){
+        FypRoleEdit roleEdit =  reignUserService.getUserRole(CurrentUser.getUserId());
+        Response.json(new ResponseValueUtils().success(roleEdit));
+    }
+
+    /**
+     * 添加人员不可见状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/changeVisual")
+    public void changeVisual(String userIds){
+        reignUserService.changeVisual(userIds);
+        Response.ok();
+    }
 }

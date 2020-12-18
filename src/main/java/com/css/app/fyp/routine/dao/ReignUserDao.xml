@@ -28,7 +28,7 @@
 			"END_TIME", 
 			"START_TIME", 
 			"STATE_ID",
-			"ISDELETE,
+			"ISDELETE"
 		)
 		values
 		(
@@ -37,7 +37,7 @@
 			#{userName}, 
 			#{endTime}, 
 			#{startTime}, 
-			(select id from REIGN_STATE where name = #{stateName}),
+			#{stateId},
 			#{isdelete}
 		)
 	</insert>

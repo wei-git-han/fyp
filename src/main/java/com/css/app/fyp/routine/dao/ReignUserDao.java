@@ -17,8 +17,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ReignUserDao extends BaseDao<ReignUser> {
 
-    @Select("select b.name as stateName,* from REIGN_USER as a" +
-            "left join REIGN_STATE as b on a.state_id = b.id" +
-            "where a.user_id = #{0} ")
+    @Select("select b.name as stateName,* from REIGN_USER as a left join REIGN_STATE as b on a.state_id = b.id where a.user_id = #{0} ")
     ReignUser queryObjectAll(String userid);
 }

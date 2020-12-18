@@ -1,6 +1,7 @@
 package com.css.app.fyp.routine.service;
 
 import com.css.app.fyp.routine.entity.ReignUser;
+import com.css.app.fyp.work.entity.FypRoleEdit;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +30,8 @@ public interface ReignUserService {
     void saveOrUpdate(ReignUser reignUser);
 
 	ReignUser queryObjectAll(String userid);
+
+	FypRoleEdit getUserRole(String userId);
+
+	void changeVisual(String userIds);
 }

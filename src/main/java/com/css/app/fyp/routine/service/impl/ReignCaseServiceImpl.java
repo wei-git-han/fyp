@@ -12,6 +12,7 @@ import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.entity.ConfigUserDept;
+import com.css.app.fyp.routine.entity.ReignUser;
 import com.css.app.fyp.routine.entity.UserLeaderAccessState;
 import com.css.app.fyp.routine.entity.UserLeaveSetting;
 import com.css.app.fyp.routine.service.*;
@@ -47,6 +48,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     private final Logger logger = LoggerFactory.getLogger(ReignCaseServiceImpl.class);
     @Autowired
     private BaseAppOrgMappedService baseAppOrgMappedService;
+    @Autowired
+    private ReignUserService reignUserService;
+
     @Autowired
     private BaseAppUserService baseAppUserService;
     List<Map<String,Object>> userStateMapList =new ArrayList<Map<String,Object>>();
@@ -524,8 +528,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             jsonUser.put("deptid", sysUser.getOrganid());
             jsonUser.put("tel", sysUser.getMobile());
             jsonUser.put("usertype", userManagerSettingService.getUserType(sysUser.getUserId()));
-            //代表人0离线、1在线、2请假
+            //代表人0离线、1在线、2请假、3不显示、4自定义状态值
             String zwzt = "0";
+            String zwztName = "";
             //是否请假 0未请假  1 请假
             String ifqj="0";
             //List<String> filterIdList = getFileterIds();
@@ -538,8 +543,17 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             if(onlineUserIds.contains(sysUser.getUserId())) {
                 zwzt="1";
             }
-
+            ReignUser reignUser = reignUserService.queryObjectAll(sysUser.getUserId());
+            if(null!=reignUser) {
+                if (StringUtils.isNotBlank(reignUser.getUserId()) && "1".equals(reignUser.getIsdelete())) {
+                    zwzt = "3";
+                } else {
+                    zwzt = "4";
+                    zwztName = reignUser.getStateName();
+                }
+            }
             jsonUser.put("status", zwzt);
+            jsonUser.put("statusName", zwztName);
             jsonUser.put("ifqj", ifqj);
 
             //查询其他状态  自定的状态  2019年1月22日11:26:31
