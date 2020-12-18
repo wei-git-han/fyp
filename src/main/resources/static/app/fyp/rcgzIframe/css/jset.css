@@ -1,0 +1,102 @@
+html,body{
+	background:#fff;
+	height:100%;
+	font-size:16px;
+}
+ul{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+.topContent{
+	height:100%;
+	padding:15px;
+	padding-bottom:60px;
+}
+.bottomContent{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	height:50px;
+	padding-top:8px;
+	border-top:1px solid #DFDFDF;
+}
+.leftContent{
+	width:132px;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	background:#F2F2F2;
+}
+.rightContent {
+	padding-left:132px;
+	width:100%;
+	height:100%;
+}
+.btn-primary{
+	border-radius:3px!important;
+}
+.leftUl{
+	padding-top:10px;
+}
+.leftUl li{
+	padding:8px 15px;
+	font-size:15px;
+	cursor:pointer;
+	padding-right: 0px;
+}
+.leftUl .active{
+	background:#B3D9FF;
+}
+.title{
+	position:absolute;
+	top:0;bottom:0;
+	height:30px;
+	line-height:25px;
+	width:100%;
+}
+.content{
+	width:100%;
+	height:100%;
+	padding-top:35px;
+}
+.positionCss{
+	color:#3399FF;
+	margin-left:5px;
+}
+.choose{
+	width:100%;
+	height:100%;
+	display:none;
+}
+.activeMain{
+	display:block;
+}
+.half{
+	width:48%;
+	height:100%;
+	float:left;
+}
+.half:nth-child(2){
+	padding-left:2%;
+}
+.login_message{
+	position:absolute;
+	bottom:10px;
+	left:0;
+	width:100%;
+	text-align: center;
+}
+.login_message img{
+	width:28px;
+}
+.login_message p{
+	margin:0px;
+	text-align:center;
+}
+.addqjd{
+	float:right;
+	color: #3399FF;
+}
