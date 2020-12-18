@@ -59,7 +59,7 @@ public class ReignUserServiceImpl implements ReignUserService {
 
 	@Override
 	public void saveOrUpdate(ReignUser reignUser) {
-		ReignUser isexist = reignUserDao.queryObject(CurrentUser.getUserId());
+		ReignUser isexist = reignUserDao.queryObjectAll(CurrentUser.getUserId());
 		if(null!=isexist){
 			reignUser.setIsdelete(isexist.getIsdelete());
 			reignUserDao.update(reignUser);
