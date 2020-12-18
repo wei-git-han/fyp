@@ -277,7 +277,7 @@ var pageModule = function () {
 				style:{
 					"padding":"0px"
 				},
-				url:"../jset.html"
+				url:"/app/fyp/rcgzIframe/html/jset.html"
 			})
 		});
        //人员在位筛选
