@@ -1,5 +1,7 @@
 package com.css.app.fyp.routine.service.impl;
 
+import com.css.addbase.apporgan.dao.BaseAppUserDao;
+import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.app.fyp.work.dao.FypRoleEditDao;
 import com.css.app.fyp.work.entity.FypRoleEdit;
 import com.css.base.utils.CurrentUser;
@@ -23,6 +25,8 @@ public class ReignUserServiceImpl implements ReignUserService {
 	private ReignUserDao reignUserDao;
 	@Autowired
 	private FypRoleEditDao fypRoleEditDao;
+	@Autowired
+	private BaseAppUserDao baseAppUserDao;
 	@Override
 	public ReignUser queryObject(String id){
 		return reignUserDao.queryObject(id);
@@ -90,8 +94,9 @@ public class ReignUserServiceImpl implements ReignUserService {
 				reignUser = new ReignUser();
 				reignUser.setIsdelete(1);
 				reignUser.setId(UUIDUtils.random());
-				reignUser.setUserId(CurrentUser.getUserId());
-				reignUser.setUserName(CurrentUser.getUsername());
+				reignUser.setUserId(userid);
+				BaseAppUser baseAppUser = baseAppUserDao.queryObject(userid);
+				reignUser.setUserName(baseAppUser.getTruename());
 				reignUserDao.save(reignUser);
 			}
 		}
