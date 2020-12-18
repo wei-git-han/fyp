@@ -1,6 +1,13 @@
 var searchUrl = {url:'/app/fyp/reignCaseController/getTxlInfo',dataType:'text'};
 var pagemenu = {url:'/app/fyp/reignCaseController/reignCaseJsonObject',dataType:'text'};
+var url101 = {"url":"/reignstate/list","dataType":"text"};
+var url102 = {"url":"/reignuser/saveOrUpdate","dataType":"text"};
+var url103 = {"url":"/reignuser/info","dataType":"text"};
+var url104 = {"url":"/reignstate/list","dataType":"text"};
+var url105 = {"url":"/reignstate/saveOrUpdate","dataType":"text"};
+var url106 = {"url":"/reignstate/delete","dataType":"text"};
 var fullName="";
+var userobj = {};
 var loginUserId="";
 var pageModule = function () {
 	var os = {};
@@ -335,6 +342,291 @@ var pageModule = function () {
 	       	//initUserStatus();
        });
 
+		//editmodal
+		$(".form_datetime").datetimepicker({
+			language:"zh-CN",
+			autoclose: true,
+			startView:"day",
+			maxView:"month",
+			minView:"hour",
+			format: "yyyy-mm-dd hh:ii:ss",
+			pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left")
+		});
+		$("#editbutton").live("click",function(){
+			initzttype(function(){
+
+				var id = userobj.id;
+				var username = userobj.username;
+				var resultCode = userobj.resultCode;
+				var type = userobj.state;
+				var time1 = userobj.time1;
+				var time2 = userobj.time2;
+
+				if(userobj.time1){//编辑状态
+					$("#zttype option").each(function(){
+						if($(this).val()==type){
+							this.selected=true;
+						}
+					});
+					$("#time1").val(time1);
+					$("#time2").val(time2);
+				}else{//新增状态
+					var newdate = new Date();
+					newdate = newdate.format("yyyy-MM-dd hh:mm:ss");
+					$("#time1").val(newdate);
+					$("#time2").val(newdate);
+				}
+				$('#datetimepicker').datetimepicker('update');
+				$("#editmodal").modal("show");
+			})
+		})
+		$("#queding1").click(function(){
+			vobject.validate({
+				gz: {
+					zttype: {
+						required: true,
+					}
+				},
+				msg: {
+					zttype: {
+						required: "请输入状态"
+					}
+				},
+				fn1:function(){
+					var paramdata = getformdata(["zttype","time1","time2"]);
+					var param={}
+					param.state = paramdata.zttype
+					param.startTime = paramdata.time1
+					param.endTime = paramdata.time2
+					param.id = userobj.id;
+					$ajax({
+						url:url102,
+						data:param,
+						type:"post",
+						success:function(data){
+							if(data.msg=="success"){
+								$("#editmodal").modal("hide");
+								window.location.reload();
+							}
+						}
+					})
+				},
+				fn2:function(){},
+			});
+		});
+		$(".quxiao1").click(function(){
+			$("#editmodal").modal("hide");
+		})
+
+		$("#xzbj").click(function(){
+
+			$ajax({
+				url:url104,
+				success:function(data2){
+					//var glztdata = [
+					//	{id:"01",name:"开会中"},
+					//	{id:"02",name:"外出办事中"}
+					//]
+					var glztdata = data2.data
+					$("#glztcont").html("");
+					$.each(glztdata,function(i,o){
+						var id = o.id;
+						var name = o.name;
+						//字典类型  0：自定义 1：系统字典
+						// var type = o.type;
+
+						var edithtml = '<a class="glztview1 editglzt" >编辑</a>';
+						var deletehtml = '&nbsp;&nbsp;<a class="glztview1 deleteglzt" >删除</a>';
+						var savehtml = '<a class="glztview2 saveglzt" >保存</a>';
+						var qxhtml = '&nbsp;&nbsp;<a class="glztview2 qxglzt" >取消</a>';
+						//
+						//
+						// if(type==1){
+						// 	edithtml = '';
+						// 	deletehtml = '';
+						// 	savehtml = '';
+						// 	qxhtml = '';
+						// }
+
+						$("#glztcont").append(`
+							<div class="group1">
+						        <div class="form-group" id="${id}">
+						            <div class="glztview1 glztname">
+						            	${name}
+						            </div>
+						            <input type="text" class="form-control glztview2" name="newtype">
+						        </div>
+						        <div>${edithtml}${deletehtml}${savehtml}${qxhtml}
+						        </div>
+					        </div>
+						`);
+
+					});
+					$("#glztmodal").modal("show");
+
+
+
+				}
+
+			})
+
+
+		});
+
+
+
+		var deleteidarray = [];
+		//glztmodal
+		$(".editglzt").live("click",function(){
+			var value = $(this).parents(".group1").find(".glztname").text();
+			$(this).parents(".group1").find("[type=text]").val($.trim(value));
+			$(this).parents(".group1").find(".glztview1").hide();
+			$(this).parents(".group1").find(".glztview2").show();
+		});
+		$(".deleteglzt").live("click",function(){
+			var id = $(this).parents(".group1").find(".form-group").attr("id");
+			if($.trim(id)!=""){
+				deleteidarray.push(id);
+			}
+			$(this).parents(".group1").remove();
+		});
+		$(".saveglzt").live("click",function(){
+			var obj = this;
+			vobject.validate({
+				hobject:$(obj).parents(".group1"),
+				gz: {
+					newtype: {
+						required: true,
+						minlength: 2,
+						maxlength:10
+					}
+				},
+				msg: {
+					newtype: {
+						required: "请输入状态",
+						minlength: "最小长度为两个字符",
+						maxlength: "最大长度为十个字符"
+					}
+				},
+				fn1:function(){
+					var value = $(obj).parents(".group1").find("[type=text]").val();
+					$(obj).parents(".group1").find(".glztname").text(value);
+					$(obj).parents(".group1").find(".glztview1").show();
+					$(obj).parents(".group1").find(".glztview2").hide();
+				}
+			});
+		});
+		$(".qxglzt").live("click",function(){
+			vobject.hide($(this).parents(".group1"));
+			$(this).parents(".group1").find(".glztview1").show();
+			$(this).parents(".group1").find(".glztview2").hide();
+		});
+
+		$("#addglzt").click(function(){
+			vobject.validate({
+				gz: {
+					addtype: {
+						required: true,
+						minlength: 2,
+						maxlength:10
+					}
+				},
+				msg: {
+					addtype: {
+						required: "请输入状态",
+						minlength: "最小长度为两个字符",
+						maxlength: "最大长度为十个字符"
+					}
+				},
+				fn1:function(){
+					var value = $("#addtype").val();
+					$("#glztcont").prepend(`
+						<div class="group1">
+					        <div class="form-group" id="">
+					            <div class="glztview1 glztname">
+					            	${value}
+					            </div>
+					            <input type="text" class="form-control glztview2" name="newtype">
+					        </div>
+					        <div>
+				            	<a class="glztview1 editglzt" >编辑</a>
+				            	<a class="glztview1 deleteglzt" >删除</a>
+				            	<a class="glztview2 saveglzt" >保存</a>
+				            	<a class="glztview2 qxglzt" >取消</a>
+					        </div>
+				        </div>
+					`);
+					$("#addtype").val("");
+				}
+			});
+		});
+		$("#queding2").click(function(){
+			vobject.hide($("#glztmodal"));
+			$(".newvalidate").removeClass("newvalidate");
+			$("#alert").html("").hide();
+			if($(".glztview2:visible").length>0){
+				$(".glztview2:visible[type=text]").addClass("newvalidate");
+				$("#alert").html("请先保存编辑中的数据 !").show();
+			}else{
+				var glztarray = [];
+				$(".glztname").each(function(){
+					var obj = {
+						id:$(this).parent().attr("id"),
+						name:$.trim($(this).text())
+					}
+					glztarray.push(obj);
+				});
+				$ajax({
+					url:url106,
+					data:{ids:deleteidarray.join(",")},
+					async:false,
+					success:function (res) {
+
+					}
+				})
+				$.ajax({
+					url:url105.url,
+					"contentType":'application/json;charset=utf-8',
+					data:JSON.stringify({list:glztarray}),
+					type:'post',
+					success:function(data){
+						//var msg =data.errorMsg;
+						if(data.resultCode==1){
+							var msg =data.errorMsg;
+							newbootbox.alert(msg).done(function(){
+								if(data.msg=="success"){
+									$("#glztmodal").modal("hide");
+								}
+							})
+						}else{
+							if(data.msg=="success"){
+								$("#glztmodal").modal("hide");
+							}
+						}
+
+						initzttype(function(){//刷新下拉框
+							// var resultCode = userobj.resultCode;
+							// var type = userobj.type;
+
+							// if(resultCode==1){//编辑状态
+								$("#zttype option").each(function(){
+									if($(this).val()==userobj.stateId){
+										this.selected=true;
+									}
+								});
+							// }
+						})
+
+					}
+				})
+			};
+		});
+		$(".quxiao2").click(function(){
+			$(".newvalidate").removeClass("newvalidate");
+			$("#alert").html("").hide();
+			$("#glztmodal").modal("hide");
+		});
+
 	}
 
 	//通讯录搜索
@@ -362,10 +654,59 @@ var pageModule = function () {
             });
         },500)
     }
+	var inituser = function(){
+		$ajax({
+			url:url103,
+			success:function(data){
+				data = data.data
+				console.log(data)
+				var id = data.id
+				var resultCode = data.resultCode;
+				var username = data.userName;
+				var type = data.stateName;
+				var state = data.stateId;
+				var time1 = getdateformtfn(data.begintime)
+				var time2 = getdateformtfn(data.endtime);
+				var userid = data.userid;
+				userobj.id = id;
+				userobj.resultCode = resultCode;
+				userobj.username = username;
+				userobj.type = type;
+				userobj.state = data.stateId;
+				userobj.time1 = data.begintime;
+				userobj.time2 = data.endtime;
 
+				var html = `
+					<img src="../images/tip.png">
+					<font>${username}</font>
+    			`;
+				//
+				// //if(typeof(type)!="undefined"&&type!=null&&$.trim(type)!=""){
+				// if(resultCode=='1'){
+				// 	data_info = `${type}:${time1}-${time2}`;
+				// 	html+= `
+    			// 		<font>(</font>
+    			// 		<font>${type}</font>
+    			// 		<font>${time1}</font>
+    			// 		<font>-</font>
+    			// 		<font>${time2}</font>
+    			// 		<i class="fa fa-info-circle tptext" data=${userid} datatype="0" data_info="${data_info}"></i>
+    			// 		<font>)</font>
+    			// 		<i class="fa fa-edit" id="editbutton"></i>
+        		// 	`
+				// }else{
+					html+= `<i class="fa fa-edit" id="editbutton"></i>`
+				// }
+				console.log(html)
+				$(".newtitle").html(html)
+
+			}
+		})
+	}
     return {
         //加载页面处理程序
         initControl: function () {
+			inituser();
             initUserStatus();
 		    initother();
         },
@@ -377,3 +718,41 @@ var pageModule = function () {
 
 
 
+var initzttype = function(fn){
+	$ajax({
+		url:url101,
+		success:function(data){
+			if(data.length>0){
+
+//					var data =  [{
+//						text:"开会中",
+//						value:"01"
+//					},{
+//						text:"外出办事",
+//						value:"02"
+//					}];
+			}
+			// initselect("zttype",data);
+			if(data.data){
+				$("#zttype").html("");
+				var html = "";
+				$.each(data.data,function(i){
+					if(($.trim(data.data[i].name)).indexOf("请选择")==-1){
+						html+='<option value='+data.data[i].id+'>'+data.data[i].name+'</option>';
+					}
+				});
+				$("#zttype").append(html);
+			}
+			if(userobj.state){
+				$('#zttype').val(userobj.state)
+			}
+			if(userobj.time1){
+				$('#time1').val(userobj.time1)
+			}
+			if(userobj.time2){
+				$('#time2').val(userobj.time2)
+			}
+			if(fn){fn()}
+		}
+	});
+}

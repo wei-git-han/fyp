@@ -54,6 +54,13 @@ public class ReignUserController {
 	@RequestMapping("/info")
 	public void info(){
 		ReignUser reignUser = reignUserService.queryObject(CurrentUser.getUserId());
+		if(null==reignUser ){
+			reignUser = new ReignUser();
+		}
+		if(null == reignUser.getUserId()){
+			reignUser.setUserId(CurrentUser.getUserId());
+			reignUser.setUserName(CurrentUser.getUsername());
+		}
 		Response.json(new ResponseValueUtils().success(reignUser));
 	}
 
