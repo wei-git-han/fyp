@@ -25,7 +25,6 @@ var pageModule = function () {
 				}else{
 					$('#set').hide()
 				}
-				$('#set').show()
 			}
 		})
 	}
@@ -70,6 +69,7 @@ var pageModule = function () {
 				var bg = o.bg;
 				var qj = o.qj;
 				var status = o.status;
+				var statusName = o.statusName
 				var ifqj = o.ifqj;
 				var ifqjhtml = '';
 				var statushtml = '';
@@ -135,11 +135,13 @@ var pageModule = function () {
 				}
 
 				//判断是否在线，1在线，0离线
-				if(status!="" && status!=null && status!="undefined"){
+				if(status!="" && status!=null && status!="undefined" &&status!="3"){
 					if(status == "1"){
 						statushtml = '在线';
 						strlength += (pid+";"+o.id)+";";
-					}else{
+					}else if(status==4){
+						statushtml = statusName||"";
+					}else {
 						statushtml = '离线';
 					}
 				}
@@ -172,11 +174,11 @@ var pageModule = function () {
 			/* 	var li = 	$('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:'+(n*pl)+'px;" id="'+id+'" data="'+text+'" >'+icon+img+text+numberhtml+zxhtml+statushtml+typehtml+ifqjhtml+'</a>'+
 							'</li>'); */
-
+				console.log
 				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:' + ((n-1) * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
 							'		<span class="newstatusL">'+img+text+'</span>'+
-							'		<span class="newstatusR"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
+							'		<span class="newstatusR" style="display: '+`${status==3?"none":"inline-block"}`+'"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
 							'	</a>'+
 							'</li>');
 
@@ -460,7 +462,6 @@ var pageModule = function () {
 						success:function(data){
 							if(data.msg=="success"){
 								$("#editmodal").modal("hide");
-								window.location.reload();
 							}
 						}
 					})
@@ -650,6 +651,9 @@ var pageModule = function () {
 							newbootbox.alert(msg).done(function(){
 								if(data.msg=="success"){
 									$("#glztmodal").modal("hide");
+									getUserRole()
+									initUserStatus();
+									inituser()
 								}
 							})
 						}else{
