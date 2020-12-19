@@ -545,7 +545,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             }
             ReignUser reignUser = reignUserService.queryObjectAll(sysUser.getUserId());
             if(null!=reignUser) {
-                if (StringUtils.isNotBlank(reignUser.getUserId()) && "1".equals(reignUser.getIsdelete())) {
+                if (StringUtils.isNotBlank(reignUser.getUserId()) && 1==reignUser.getIsdelete()) {
                     zwzt = "3";
                 } else {
                     zwzt = "4";
