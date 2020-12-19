@@ -5,6 +5,7 @@ import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.app.fyp.work.dao.FypRoleEditDao;
 import com.css.app.fyp.work.entity.FypRoleEdit;
 import com.css.base.utils.CurrentUser;
+import com.css.base.utils.StringUtils;
 import com.css.base.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,20 +85,26 @@ public class ReignUserServiceImpl implements ReignUserService {
 
 	@Override
 	public void changeVisual(String userIds) {
-		String[] split = userIds.split(",");
-		for (String userid:split) {
-			ReignUser reignUser = reignUserDao.queryObjectAll(userid);
-			if(null!=reignUser){
-				reignUser.setIsdelete(1);
-				reignUserDao.update(reignUser);
-			}else{
-				reignUser = new ReignUser();
-				reignUser.setIsdelete(1);
-				reignUser.setId(UUIDUtils.random());
-				reignUser.setUserId(userid);
-				BaseAppUser baseAppUser = baseAppUserDao.queryObject(userid);
-				reignUser.setUserName(baseAppUser.getTruename());
-				reignUserDao.save(reignUser);
+		if(StringUtils.isBlank(userIds)){
+			ReignUser reignUser = new ReignUser();
+			reignUser.setIsdelete(0);
+			reignUserDao.updateAll(reignUser);
+		}else {
+			String[] split = userIds.split(",");
+			for (String userid : split) {
+				ReignUser reignUser = reignUserDao.queryObjectAll(userid);
+				if (null != reignUser) {
+					reignUser.setIsdelete(1);
+					reignUserDao.update(reignUser);
+				} else {
+					reignUser = new ReignUser();
+					reignUser.setIsdelete(1);
+					reignUser.setId(UUIDUtils.random());
+					reignUser.setUserId(userid);
+					BaseAppUser baseAppUser = baseAppUserDao.queryObject(userid);
+					reignUser.setUserName(baseAppUser.getTruename());
+					reignUserDao.save(reignUser);
+				}
 			}
 		}
 	}
@@ -105,6 +112,14 @@ public class ReignUserServiceImpl implements ReignUserService {
 	@Override
 	public List<String> getAllNotVisualUser() {
 		return reignUserDao.getAllNotVisualUser();
+	}
+
+
+	@Override
+	public void updateAll(Integer state) {
+		ReignUser reignUser = new ReignUser();
+		reignUser.setIsdelete(state);
+		reignUserDao.updateAll(reignUser);
 	}
 
 }

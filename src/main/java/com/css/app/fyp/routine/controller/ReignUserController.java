@@ -118,13 +118,17 @@ public class ReignUserController {
 	@ResponseBody
 	@RequestMapping(value = "/changeState")
 	public void changeState(String userids){
-		String[] split = userids.split(",");
-		for (String userid:split) {
-			ReignUser reignUser = reignUserService.queryObjectAll(userid);
-			if(null!=reignUser) {
-				reignUser.setIsdelete(1);
-				reignUserService.update(reignUser);
+		if(StringUtils.isNotBlank(userids)) {
+			String[] split = userids.split(",");
+			for (String userid : split) {
+				ReignUser reignUser = reignUserService.queryObjectAll(userid);
+				if (null != reignUser) {
+					reignUser.setIsdelete(1);
+					reignUserService.update(reignUser);
+				}
 			}
+		}else{
+			reignUserService.updateAll(0);
 		}
 	}
 
