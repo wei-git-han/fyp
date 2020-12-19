@@ -48,7 +48,7 @@ var pageModule = function () {
                     return rowdata.address;
                 }},
                 {display:"部门",name:"orgName",width:"25%",align:"center",render:function(rowdata){
-                    return rowdata.orgName;
+                    return rowdata.dept;
                 }}
              ],
 			width:'100%',

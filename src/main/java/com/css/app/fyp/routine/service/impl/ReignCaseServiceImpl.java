@@ -189,7 +189,12 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         if(StringUtils.equals(afficheType,"reign")){
             Map<String,Object> filter = new HashMap<>();
             filter.put("departmentId", "root");
-            filter.put("organid", deptId);
+            String orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+            if(StringUtils.isNotBlank(deptId)){
+                filter.put("organid", deptId);
+            }else{
+                filter.put("organid", orgId);
+            }
             reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
             String userIds = "";
             for(ReiOnlineUser user : reiOnlineUsers){

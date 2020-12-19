@@ -76,14 +76,14 @@
 		ID
 		from
 		BASE_APP_ORGAN start
-		with ID         = #{departmentId}
+		with ID         = #{organid}
 		and ISDELETE=0 connect by prior ID = PARENT_ID
 		)
 		and ORGANID not in (select ifnull(dept_id,0) from config_user_dept cud)
 		and user_id not in (select ifnull(user_id,0) from config_user_dept cud)
-		<if test="organid != null and organid != ''">
-			and us.ORGANID = #{organid}
-		</if>
+		<!--<if test="organid != null and organid != ''">-->
+			<!--and us.ORGANID = #{organid}-->
+		<!--</if>-->
 		<if test="accounts !=null and accounts != ''">
 			and account in
 			<foreach item="item" collection="accounts" open="(" separator="," close=")">
