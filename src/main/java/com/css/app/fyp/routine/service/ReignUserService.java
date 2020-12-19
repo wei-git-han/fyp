@@ -36,4 +36,6 @@ public interface ReignUserService {
 	void changeVisual(String userIds);
 
 	List<String> getAllNotVisualUser();
+
+	void updateAll(Integer state);
 }

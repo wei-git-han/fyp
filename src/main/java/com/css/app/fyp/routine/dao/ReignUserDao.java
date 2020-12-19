@@ -24,4 +24,6 @@ public interface ReignUserDao extends BaseDao<ReignUser> {
 
     @Select("select user_id from reign_user where isdelete = '1'")
     List<String> getAllNotVisualUser();
+
+    void updateAll(ReignUser reignUser);
 }

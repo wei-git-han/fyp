@@ -55,7 +55,14 @@
 		</set>
 		where ID = #{id}
 	</update>
-	
+
+	<update id="updateAll" parameterType="com.css.app.fyp.routine.entity.ReignUser">
+		update REIGN_USER
+		<set>
+			<if test="isdelete != null">"ISDELETE" = #{isdelete},</if>
+		</set>
+	</update>
+
 	<delete id="delete">
 		delete from REIGN_USER where ID = #{value}
 	</delete>

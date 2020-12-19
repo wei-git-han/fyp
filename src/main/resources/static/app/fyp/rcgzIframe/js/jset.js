@@ -321,10 +321,10 @@ var pageModule = function(){
 					orgIdArray.push(this.parent);
 				}
 			});
-			if(userIdArray.length==0){
-				newbootbox.alert("请选择人员!");
-				return;
-			};
+//			if(userIdArray.length==0){
+//				newbootbox.alert("请选择人员!");
+//				return;
+//			};
 
 			// var userIdArray1 = [];
 			// var orgIdArray1=[];
