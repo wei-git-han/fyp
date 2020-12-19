@@ -351,6 +351,7 @@ var pageModule = function(){
 				success:function(data){
 					if(data.msg=="success"){
 						newbootbox.alert("设置成功!").done(function(){
+							window.top.start_page5.pageModule.refreshPage()
 						})
 					}
 				}

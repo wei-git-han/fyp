@@ -646,22 +646,15 @@ var pageModule = function () {
 					type:'post',
 					success:function(data){
 						//var msg =data.errorMsg;
-						if(data.resultCode==1){
-							var msg =data.errorMsg;
-							newbootbox.alert(msg).done(function(){
-								if(data.msg=="success"){
-									$("#glztmodal").modal("hide");
-									getUserRole()
-									initUserStatus();
-									inituser()
-								}
-							})
-						}else{
-							if(data.msg=="success"){
-								$("#glztmodal").modal("hide");
-							}
+						if(data.msg=="success"){
+							$("#glztmodal").modal("hide");
+							getUserRole()
+							initUserStatus();
+							inituser()
 						}
-
+						getUserRole()
+						initUserStatus();
+						inituser()
 						initzttype(function(){//刷新下拉框
 							// var resultCode = userobj.resultCode;
 							// var type = userobj.type;
@@ -717,7 +710,6 @@ var pageModule = function () {
 			url:url103,
 			success:function(data){
 				data = data.data
-				console.log(data)
 				var id = data.id
 				var resultCode = data.resultCode;
 				var username = data.userName;
@@ -751,7 +743,9 @@ var pageModule = function () {
 		    initother();
         },
 		refreshPage:function () {
+			getUserRole()
 			initUserStatus();
+			inituser()
 		}
     }
 }();
