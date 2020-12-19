@@ -63,7 +63,7 @@ public class ManageThingController {
      */
     @ResponseBody
     @RequestMapping("/dbCount")
-    public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy") Date time) {
+    public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy") Date time,String startTime,String endTime) {
         int minitue = 0;
         String currentDeptId = "";
         if(StringUtils.isNotBlank(deptid)){
@@ -76,18 +76,18 @@ public class ManageThingController {
         String data = redisTemplate.opsForValue().get("dbData");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String curDay = format.format(new Date());
-        try {
-            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
-            long remindTime = format.parse(curDay).getTime();//当前时间
-            long minusTime = remindTime - nowData;
-            minitue = (int) minusTime / (1000 * 3600);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
-            JSONObject ret = JSONObject.parseObject(json);
-            Response.json(ret);
-        } else {
+//        try {
+//            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
+//            long remindTime = format.parse(curDay).getTime();//当前时间
+//            long minusTime = remindTime - nowData;
+//            minitue = (int) minusTime / (1000 * 3600);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
+//            JSONObject ret = JSONObject.parseObject(json);
+//            Response.json(ret);
+//        } else {
             Boolean flag = false;
             String userId = CurrentUser.getUserId();
             String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
@@ -101,18 +101,22 @@ public class ManageThingController {
             List<JSONObject> dataList = new ArrayList<JSONObject>();
             if (flag && StringUtils.isBlank(deptid)) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(time);
+                //calendar.setTime(time);
                 paramMap.add("year", String.valueOf(calendar.get(Calendar.YEAR)));//年
                 paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//月
+                paramMap.add("startTime",startTime);
+                paramMap.add("endTime",endTime);
                 dataList = getJsonData.getJson(paramMap, "首长督查催办");
             } else {
                 if (StringUtils.isBlank(deptid)) {
                     deptid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
                 }
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(time);
+                //calendar.setTime(time);
                 paramMap.add("year", String.valueOf(calendar.get(Calendar.YEAR)));//年
                 paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//月
+                paramMap.add("startTime",startTime);
+                paramMap.add("endTime",endTime);
                 if (StringUtils.isNotBlank(deptid)) {
                     paramMap.add("organId", deptid);//单位id
                 }
@@ -131,7 +135,7 @@ public class ManageThingController {
             Date date = new Date();
             redisUtil.setString("dbData", format.format(date));
             Response.json(new ResponseValueUtils().success(dataMap));
-        }
+       // }
     }
 
 //    @Scheduled(fixedRate=180)
