@@ -462,6 +462,9 @@ var pageModule = function () {
 						success:function(data){
 							if(data.msg=="success"){
 								$("#editmodal").modal("hide");
+								getUserRole()
+								initUserStatus();
+								inituser()
 							}
 						}
 					})
@@ -648,9 +651,6 @@ var pageModule = function () {
 						//var msg =data.errorMsg;
 						if(data.msg=="success"){
 							$("#glztmodal").modal("hide");
-							getUserRole()
-							initUserStatus();
-							inituser()
 						}
 						getUserRole()
 						initUserStatus();
