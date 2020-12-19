@@ -24,16 +24,26 @@ public class ReignUser implements Serializable {
 	//用户名称
 	private String userName;
 	//持续时间-结束
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-ddHH:mm:ss")
 	private Date endTime;
 	//持续时间-开始
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-ddHH:mm:ss")
 	private Date startTime;
 	//状态关联id
 	private String stateId;
-
 	//状态名称
 	private String stateName;
+
+	//逻辑删除
+	private Integer isdelete;
+
+	public Integer getIsdelete() {
+		return isdelete;
+	}
+
+	public void setIsdelete(Integer isdelete) {
+		this.isdelete = isdelete;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

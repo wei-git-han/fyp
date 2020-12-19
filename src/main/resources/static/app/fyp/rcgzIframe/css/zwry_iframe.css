@@ -3,6 +3,7 @@ html, body {
 	height: 100%;
 	position: relative;
 	color:#fff;
+	overflow: hidden;
 }
 
 .pr100 {
@@ -296,11 +297,19 @@ html, body {
 	height:34px;
 	line-height:29px;
 	text-align: center;
-	width:160px;
+	min-width:160px;
 	border: 1px solid #3184FF;
 	border-radius: 7px !important;
 	font-size: 20px;
+	padding: 0 4px;
 	box-shadow: 0px 0px 10px #3184FF inset;
+}
+.newtitle img{
+	margin-right: 5px;
+}
+.newtitle .fa{
+	margin-left: 5px;
+	cursor: pointer;
 }
 .newfilter{
 	float:right;
@@ -338,8 +347,11 @@ html, body {
 	bottom:100%;
 	height:300px;
 	width: 94%;
-	background: #0386db;
+	background: #041A4F;
 	padding:10px;
+	/*background: #0E246E none repeat scroll 0% 0%;*/
+	border: 1px solid #5066A2;
+	border-radius: 5px;
 }
 .searchList{
 	width:100%;
@@ -367,7 +379,7 @@ html, body {
 }
 
 .form-group label {
-    /*color: #333;*/
+    color: #333;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
@@ -378,7 +390,7 @@ html, body {
 }
 .newmodal1 .form-group label:hover, .form-group label:active {
 	cursor: inherit;
-    /*color: #333;*/
+    color: #333;
     background: #fff;
     border-radius: 0 !important;
 }
@@ -437,4 +449,110 @@ html, body {
 .dropdown-menu{
 	background-color: #073391;
 	color: #fff;
+}
+
+.cjDialog{
+	background-color:#fff;
+	right:inherit;
+	bottom:inherit;
+}
+.cjDialog .modal-dialog{
+	margin:0!important;
+}
+.cjDialog + .modal-backdrop{opacity:0!important}
+.cjDialog .modal-body,.alertInfo .modal-body{
+	min-height:130px;
+	border-bottom: 1px solid #e5e5e5;
+}
+.cjDialog .modal-footer,.alertInfo .modal-footer {
+	border-top:none;
+}
+.bootbox-body{
+	color:#000;
+	line-height:130px;
+	font-size:15px!important;
+	text-align:center;
+}
+.modal-dialog {
+	width: 400px;
+}
+.modal-footer {
+	text-align: center;
+}
+.newright-cont{
+	width:100%;height:100%;position:relative;
+}
+.newright-top{
+	width:100%;height:50px;position:absolute;top:0;left:0;background:rgba(38,58,79,.6);padding-left:20px;
+}
+.newright-title1{
+	color:#fff;font-size:20px;line-height:50px;
+}
+.newright-title1 .fa{
+	font-size:20px;
+}
+.newright-title1 .fa-edit{
+	color:#3399FF;cursor:pointer;
+}
+.newright-top-left{
+	float:left;
+}
+.newright-cent{
+	width:100%;position:absolute;top:50px;left:0;bottom:0;
+}
+.newmodal1 .form-group label:hover, .form-group label:active {
+	cursor: inherit;
+	color: #333;
+	background: #fff;
+	border-radius: none !important;
+}
+.form_datetime input.form-control{background-color:#fff;}
+.newmodal1 .newmodal-cont{padding:10px 30px 30px;}
+.newmodal1 .form-body{margin-bottom:30px;}
+.newmodal1 .form-actions{text-align:center;}
+.newgroup{display:table;width:100%;}
+.newcell{display:table-cell}
+.newcell.font{width:30px;text-align:center;vertical-align: top;padding-top:10px;}
+.required{color:red;padding-left:5px;}
+.xzbj{float:right;}
+.glztview1{}
+.glztview2{display:none;}
+.newvalidate{border:1px solid red}
+#alert{display:none;color:red;text-align:center;margin-bottom:10px;}
+.alert{display:none;color:red;text-align:center;margin-bottom:10px;padding:0;margin:0;padding-top:5px;}
+.labeltitle{font-weight:bold;margin-bottom:10px;color: #333}
+.newmodal1 a{color:#0099FF;}
+.group1{margin-bottom: 15px;}
+label{
+	color: #333;
+}
+.modal .form-group label{
+	color: #333;
+}
+.modal .modal-header .close{
+	margin: 8px 0px 0px 0px !important;
+}
+.group1 .form-group {margin-bottom: 0;}
+.tptext{cursor:pointer;}
+.tpcontent{position:absolute;z-index:1000;}
+.textcontent{min-width:100px;max-width:300px;background-color:#fff;border-radius:10px!important;padding:10px;}
+.textlist{margin-bottom:5px;}
+.modal-content {
+	background-color: #fff;
+}
+.alertInfo .modal-body{
+	background-color: #333!important;
+}
+.glztname{
+	color: #333;
+}
+#glztmodal .form-group .labeltitle {
+	padding-left: 0!important;
+}
+body.modal-open{
+	overflow: hidden!important;
+}
+.datetimepicker.dropdown-menu{
+	background-color: #fff;
+	color: #333;
 }

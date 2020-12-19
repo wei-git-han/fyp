@@ -62,7 +62,7 @@ public class ReignStateController {
 	 */
 	@ResponseBody
 	@RequestMapping("/saveOrUpdate")
-	public void saveOrUpdate(ReignState reignState){
+	public void saveOrUpdate(@RequestBody ReignState reignState){
 		reignStateService.saveOrUpdate(reignState.getList());
 		Response.ok();
 	}

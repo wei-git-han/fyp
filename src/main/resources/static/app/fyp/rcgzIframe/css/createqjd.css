@@ -1,0 +1,130 @@
+html,body{
+	background:rgba(255,255,255,.9);
+	height:100%;
+}
+ul,li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+.topContent{
+	height:100%;
+	padding:38px 20px 0px;
+	padding-bottom:67px;
+}
+.bottomContent{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	height:50px;
+	padding-top:8px;
+	border:1px solid #DFDFDF;
+}
+.title{
+	position:absolute;
+	top:0px;
+	left:10px;
+	right:0px;
+	line-height:30px;
+}
+.title i{
+	color: #5498EB;
+	margin-right:10px;
+}
+.content{
+	height:100%;
+	padding:33px 5px 0;
+}
+label.error{color:#ff0000}
+
+
+/*------------请假单--------------*/
+.u_name{
+	color:#426ACA;
+	font-size:20px;
+	font-weight:700;
+}
+.name{
+	color:#426ACA;
+	font-size:20px;
+	font-weight:700;
+}
+.u_pic{
+	float:left;
+	margin-right:13px;
+}
+.group{
+	overflow:hidden;
+	margin:15px 0px;
+}
+.group span:nth-child(1) {
+	font-size:16px;
+	color:#666666;
+	width:96px;
+	display:inline-block;
+	text-align:right;
+}
+.to{
+	font-size:16px;
+	color:#666666;
+	padding:0px 15px;
+}
+
+.group input{
+	font-size:16px;
+	color:#333;
+	display: inline-block;
+	width: 450px;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	border:1px solid #ccc;
+	margin-left:10px;
+}
+.group textarea{
+	font-size:16px;
+	color:#333;
+	display: inline-block;
+	width: 450px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	border:1px solid #ccc;
+	margin-left:10px;
+}
+.group span i{
+	font-style:normal;
+	color:red;
+	font-size:16px!important;
+	vertical-align:middle;
+}
+.group .u_date{
+	width:196px;
+}
+#sure{
+	height:36px;
+	width:82px;
+	color:#fff;
+	line-height:36px;
+	text-align:center;
+	background:#426ACA;
+	font-size:16px;
+	font-weight:700;
+	border:none;
+	border-radius:3px!important;
+}
+
+
+
+
+
+
+
+
+
+
+
