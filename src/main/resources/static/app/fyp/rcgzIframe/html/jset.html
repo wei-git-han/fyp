@@ -13,74 +13,74 @@
 	<link rel="stylesheet" type="text/css" href="../../../../assets/global/css/plugins.css"/>
 	<link rel="stylesheet" type="text/css" href="../../../../assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
 	<link rel="stylesheet" type="text/css" href="../../common/css/common.css"/>
-	<link rel="stylesheet" type="text/css" href="../../common/css/jset.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/jset.css"/>
 </head>
 <body>
 	<div class="relative">
 		<div class="leftContent">
 			<div class="relative">
 				<ul class="leftUl">
-					<li class="peopleli active">创建管理员</li>
-					<li class="jzli">局领导公开范围</li>
-					<li class="createqjdli">创建请假单</li>
+<!--					<li class="peopleli active">创建管理员</li>-->
+					<li class="jzli active">人员公开范围</li>
+<!--					<li class="createqjdli">创建请假单</li>-->
 				</ul>
 				<div class="login_message">
 					<img src="../../common/images/u126.png" />
 					<p id="username"></p>
-					<p>(<font id="gangwei"></font>)</p>
+					<p>(<font id="gangwei">管理员</font>)</p>
 				</div>
 			</div>
 		</div>
 		<div class="rightContent">
 			<!-- 人员 -->
-			<div id="people" class="relative people choose activeMain">
-				<div class="topContent">
-					<div class="relative scroller">
-						<div class="title">选择人员</div>
-						<div class="content">
-							<div class="relative">
-								<ul class="people_tree" id="people_tree" style="height:100%;">
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bottomContent">
-					<div class="form-actions" style="text-align:center">
-				        <button type="button" class="btn btn-primary" id="setj">设为局管理员</button>
-				        <button type="button" class="btn btn-primary" id="setno">设为非管理员</button>
-				    </div>
-				</div>
-			</div>
+<!--			<div id="people" class="relative people choose activeMain">-->
+<!--				<div class="topContent">-->
+<!--					<div class="relative scroller">-->
+<!--						<div class="title">选择人员</div>-->
+<!--						<div class="content">-->
+<!--							<div class="relative">-->
+<!--								<ul class="people_tree" id="people_tree" style="height:100%;">-->
+<!--								</ul>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="bottomContent">-->
+<!--					<div class="form-actions" style="text-align:center">-->
+<!--				        <button type="button" class="btn btn-primary" id="setj">设为局管理员</button>-->
+<!--				        <button type="button" class="btn btn-primary" id="setno">设为非管理员</button>-->
+<!--				    </div>-->
+<!--				</div>-->
+<!--			</div>-->
 
 			<!-- 局领导 -->
-			<div id="jz"  class="relative jz choose">
+			<div id="jz"  class="relative jz choose activeMain">
 				<div class="topContent" style="padding-bottom: 85px;">
-					<div class="half" style="border-right:1px solid #DFDFDF">
+					<div class="half" style="border-right:1px solid #DFDFDF;width: 100%">
 						<div class="relative scroller">
-							<div class="title">选择局领导</div>
+							<div class="title">选择不展示人员</div>
 							<div class="content">
-								<div class="relative">
+								<div class="relative" style="overflow-y: auto">
 									<ul class="jz_tree" id="jz_tree" style="height:100%;">
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="half">
-						<div class="relative scroller">
-							<div class="title">选择谁可见局领导状态</div>
-							<div class="content">
-								<div class="relative">
-									<ul class="jz_tree_who" id="jz_tree_who" style="height:100%;">
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
+<!--					<div class="half">-->
+<!--						<div class="relative scroller">-->
+<!--							<div class="title">选择谁可见局领导状态</div>-->
+<!--							<div class="content">-->
+<!--								<div class="relative">-->
+<!--									<ul class="jz_tree_who" id="jz_tree_who" style="height:100%;">-->
+<!--									</ul>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
 				</div>
 				<div class="bottomContent" style="height:80px;">
-					<div style="height:30px;padding-left:20px;font-size:14px;"><i class="fa fa-info-circle" style="color:#A1A1A1"></i> 设置局长可以看到哪些人的状态</div>
+					<div style="height:30px;padding-left:20px;font-size:14px;"><i class="fa fa-info-circle" style="color:#A1A1A1"></i> 设置人员是否显示状态</div>
 					<div class="form-actions" style="text-align:center">
 				        <button type="button" class="btn btn-primary" id="save">确定</button>
 				        <button type="button" class="btn btn-primary" id="close">取消</button>
@@ -89,27 +89,27 @@
 			</div>
 
 			<!-- 创建请假单 -->
-			<div id="createqjd"  class="relative createqjd choose">
-				<div class="topContent">
-					<div class="relative scroller">
-						<div class="title">选择局领导 <a class="addqjd" id="addqjd">创建请假单</a></div>
-						<div class="content">
-							<div class="relative">
-								<ul class="jleader_tree" id="jleader_tree" style="height:100%;">
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bottomContent">
-					<div class="form-actions" style="text-align:center">
-						<!--
-				        <button type="button" class="btn btn-primary" id="saveqjd">确定</button>
-				        -->
-				        <button type="button" class="btn btn-primary" id="closeqjd">取消</button>
-				    </div>
-				</div>
-			</div>
+<!--			<div id="createqjd"  class="relative createqjd choose">-->
+<!--				<div class="topContent">-->
+<!--					<div class="relative scroller">-->
+<!--						<div class="title">选择局领导 <a class="addqjd" id="addqjd">创建请假单</a></div>-->
+<!--						<div class="content">-->
+<!--							<div class="relative">-->
+<!--								<ul class="jleader_tree" id="jleader_tree" style="height:100%;">-->
+<!--								</ul>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="bottomContent">-->
+<!--					<div class="form-actions" style="text-align:center">-->
+<!--						&lt;!&ndash;-->
+<!--				        <button type="button" class="btn btn-primary" id="saveqjd">确定</button>-->
+<!--				        &ndash;&gt;-->
+<!--				        <button type="button" class="btn btn-primary" id="closeqjd">取消</button>-->
+<!--				    </div>-->
+<!--				</div>-->
+<!--			</div>-->
 
 		</div>
 	</div>

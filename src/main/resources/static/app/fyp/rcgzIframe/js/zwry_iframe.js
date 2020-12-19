@@ -6,10 +6,28 @@ var url103 = {"url":"/reignuser/info","dataType":"text"};
 var url104 = {"url":"/reignstate/list","dataType":"text"};
 var url105 = {"url":"/reignstate/saveOrUpdate","dataType":"text"};
 var url106 = {"url":"/reignstate/delete","dataType":"text"};
+var roleUserUrl = {"url":'/reignuser/getUserRole',"dataType":"text"}
 var fullName="";
 var userobj = {};
 var loginUserId="";
 var pageModule = function () {
+	$('#set').show()
+	var getUserRole = function () {
+		$ajax({
+			url:roleUserUrl,
+			success:function(data){
+				if(data.data){
+					if(data.data.roleType=='1'){
+						$('#set').show()
+					}else{
+						$('#set').hide()
+					}
+				}else{
+					$('#set').hide()
+				}
+			}
+		})
+	}
 	var os = {};
     var oodata = [];
 	var initUserStatus = function() {
@@ -51,6 +69,7 @@ var pageModule = function () {
 				var bg = o.bg;
 				var qj = o.qj;
 				var status = o.status;
+				var statusName = o.statusName
 				var ifqj = o.ifqj;
 				var ifqjhtml = '';
 				var statushtml = '';
@@ -116,11 +135,13 @@ var pageModule = function () {
 				}
 
 				//判断是否在线，1在线，0离线
-				if(status!="" && status!=null && status!="undefined"){
+				if(status!="" && status!=null && status!="undefined" &&status!="3"){
 					if(status == "1"){
 						statushtml = '在线';
 						strlength += (pid+";"+o.id)+";";
-					}else{
+					}else if(status==4){
+						statushtml = statusName||"";
+					}else {
 						statushtml = '离线';
 					}
 				}
@@ -153,11 +174,11 @@ var pageModule = function () {
 			/* 	var li = 	$('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:'+(n*pl)+'px;" id="'+id+'" data="'+text+'" >'+icon+img+text+numberhtml+zxhtml+statushtml+typehtml+ifqjhtml+'</a>'+
 							'</li>'); */
-
+				console.log
 				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
 							'	<a style="padding-left:' + ((n-1) * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
 							'		<span class="newstatusL">'+img+text+'</span>'+
-							'		<span class="newstatusR"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
+							'		<span class="newstatusR" style="display: '+`${status==3?"none":"inline-block"}`+'"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+
 							'	</a>'+
 							'</li>');
 
@@ -245,7 +266,41 @@ var pageModule = function () {
             $(".searchBox").hide();
        });
 
+		//设置
+		$("#set").click(function(){
+			/*添加判断部或者局
+			 * //部
+			newbootbox.newdialog({
+				id:"bsetDialog",
+				width:825,
+				height:456,
+				header:true,
+				headerStyle:{
+					"background":"#428bca"
+				},
+				title:"人员在位状态设置",
+				style:{
+					"padding":"0px"
+				},
+				url:"/app/fyp/bset.html"
+			})*/
 
+			//局
+			newbootbox.newdialog({
+				id:"jsetDialog",
+				width:825,
+				height:456,
+				header:true,
+				headerStyle:{
+					"background":"#428bca"
+				},
+				title:"人员在位状态设置",
+				style:{
+					"padding":"0px"
+				},
+				url:"/app/fyp/rcgzIframe/html/jset.html"
+			})
+		});
        //人员在位筛选
        $("#filter label").click(function(){
 	       	var label = this;
@@ -395,7 +450,8 @@ var pageModule = function () {
 				fn1:function(){
 					var paramdata = getformdata(["zttype","time1","time2"]);
 					var param={}
-					param.state = paramdata.zttype
+					param.stateId = paramdata.zttype
+					param.stateName = paramdata.zttype
 					param.startTime = paramdata.time1
 					param.endTime = paramdata.time2
 					param.id = userobj.id;
@@ -406,7 +462,6 @@ var pageModule = function () {
 						success:function(data){
 							if(data.msg=="success"){
 								$("#editmodal").modal("hide");
-								window.location.reload();
 							}
 						}
 					})
@@ -596,6 +651,9 @@ var pageModule = function () {
 							newbootbox.alert(msg).done(function(){
 								if(data.msg=="success"){
 									$("#glztmodal").modal("hide");
+									getUserRole()
+									initUserStatus();
+									inituser()
 								}
 							})
 						}else{
@@ -665,49 +723,31 @@ var pageModule = function () {
 				var username = data.userName;
 				var type = data.stateName;
 				var state = data.stateId;
-				var time1 = getdateformtfn(data.begintime)
-				var time2 = getdateformtfn(data.endtime);
+				var time1 = getdateformtfn(data.startTime)
+				var time2 = getdateformtfn(data.endTime);
 				var userid = data.userid;
 				userobj.id = id;
 				userobj.resultCode = resultCode;
 				userobj.username = username;
 				userobj.type = type;
 				userobj.state = data.stateId;
-				userobj.time1 = data.begintime;
-				userobj.time2 = data.endtime;
-
+				userobj.time1 = data.startTime;
+				userobj.time2 = data.endTime;
 				var html = `
 					<img src="../images/tip.png">
 					<font>${username}</font>
     			`;
-				//
-				// //if(typeof(type)!="undefined"&&type!=null&&$.trim(type)!=""){
-				// if(resultCode=='1'){
-				// 	data_info = `${type}:${time1}-${time2}`;
-				// 	html+= `
-    			// 		<font>(</font>
-    			// 		<font>${type}</font>
-    			// 		<font>${time1}</font>
-    			// 		<font>-</font>
-    			// 		<font>${time2}</font>
-    			// 		<i class="fa fa-info-circle tptext" data=${userid} datatype="0" data_info="${data_info}"></i>
-    			// 		<font>)</font>
-    			// 		<i class="fa fa-edit" id="editbutton"></i>
-        		// 	`
-				// }else{
-					html+= `<i class="fa fa-edit" id="editbutton"></i>`
-				// }
-				console.log(html)
+				html+= `<i class="fa fa-edit" id="editbutton"></i>`
 				$(".newtitle").html(html)
-
 			}
 		})
 	}
     return {
         //加载页面处理程序
         initControl: function () {
-			inituser();
+			getUserRole()
             initUserStatus();
+			inituser()
 		    initother();
         },
 		refreshPage:function () {
@@ -722,20 +762,9 @@ var initzttype = function(fn){
 	$ajax({
 		url:url101,
 		success:function(data){
-			if(data.length>0){
-
-//					var data =  [{
-//						text:"开会中",
-//						value:"01"
-//					},{
-//						text:"外出办事",
-//						value:"02"
-//					}];
-			}
-			// initselect("zttype",data);
 			if(data.data){
 				$("#zttype").html("");
-				var html = "";
+				var html = "<option value=''>--请选择--</option>";
 				$.each(data.data,function(i){
 					if(($.trim(data.data[i].name)).indexOf("请选择")==-1){
 						html+='<option value='+data.data[i].id+'>'+data.data[i].name+'</option>';
@@ -743,15 +772,15 @@ var initzttype = function(fn){
 				});
 				$("#zttype").append(html);
 			}
-			if(userobj.state){
-				$('#zttype').val(userobj.state)
-			}
-			if(userobj.time1){
-				$('#time1').val(userobj.time1)
-			}
-			if(userobj.time2){
-				$('#time2').val(userobj.time2)
-			}
+			// if(userobj.state){
+			// 	$('#zttype').val(userobj.state)
+			// }
+			// if(userobj.time1){
+			// 	$('#time1').val(userobj.time1)
+			// }
+			// if(userobj.time2){
+			// 	$('#time2').val(userobj.time2)
+			// }
 			if(fn){fn()}
 		}
 	});
