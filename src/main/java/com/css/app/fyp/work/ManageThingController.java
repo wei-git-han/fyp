@@ -71,23 +71,23 @@ public class ManageThingController {
         }else {
             currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "dbCoutRedis_" + currentDeptId;
+        String keyName = "dbCoutRedis_" + currentDeptId + startTime + endTime;
         String json = redisTemplate.opsForValue().get(keyName);
         String data = redisTemplate.opsForValue().get("dbData");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String curDay = format.format(new Date());
-//        try {
-//            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
-//            long remindTime = format.parse(curDay).getTime();//当前时间
-//            long minusTime = remindTime - nowData;
-//            minitue = (int) minusTime / (1000 * 3600);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
-//            JSONObject ret = JSONObject.parseObject(json);
-//            Response.json(ret);
-//        } else {
+        try {
+            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
+            long remindTime = format.parse(curDay).getTime();//当前时间
+            long minusTime = remindTime - nowData;
+            minitue = (int) minusTime / (1000 * 3600);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        } else {
             Boolean flag = false;
             String userId = CurrentUser.getUserId();
             String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
@@ -135,7 +135,7 @@ public class ManageThingController {
             Date date = new Date();
             redisUtil.setString("dbData", format.format(date));
             Response.json(new ResponseValueUtils().success(dataMap));
-       // }
+        }
     }
 
 //    @Scheduled(fixedRate=180)
