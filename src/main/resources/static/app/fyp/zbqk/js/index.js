@@ -4,7 +4,7 @@ var grid = null;
 var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var afficheType = getUrlParam('type')||"reign"
 
-
+var send = false
 var pageModule = function () {
    var initother = function () {
        $('#afficheType').val(afficheType)
@@ -19,6 +19,13 @@ var pageModule = function () {
             }
         });
        $("#sure").click(function(){
+           if(send){
+               return
+           }
+           send = true
+           setTimeout(function () {
+               send = false
+           },1000)
            var elementarry = ["deptId","afficheType"];
            grid.setparams(getformdata(elementarry));
            grid.refresh();
@@ -27,6 +34,7 @@ var pageModule = function () {
        //重置
        $("#reset").click(function(){
            removeInputData(["deptId","deptName","afficheType"]);
+           $('#afficheType').val(afficheType)
        });
     }
 	var initgrid = function(){
@@ -48,7 +56,7 @@ var pageModule = function () {
                     return rowdata.address;
                 }},
                 {display:"部门",name:"orgName",width:"25%",align:"center",render:function(rowdata){
-                    return rowdata.dept;
+                    return rowdata.orgName;
                 }}
              ],
 			width:'100%',
