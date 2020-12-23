@@ -9,16 +9,16 @@ var pageModule = function () {
 		  grid = $("#gridcont").createGrid({
 			columns:[
 						{display:"姓名",name:"name",width:"10%",align:"center",render:function(rowdata,n){
-							return rowdata.name;                                         
+							return rowdata.name;
 						}},
 						{display:"单位名称",name:"deptName",width:"15%",align:"left",render:function(rowdata){
-							return rowdata.deptName;                                         
+							return rowdata.deptName;
 						}},
 						{display:"联系电话",name:"phone",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.phone;                                         
+							return rowdata.phone;
 						}},
 						{display:"报修时间",name:"warrantyTime",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.warrantyTime;                                         
+							return rowdata.warrantyTime;
 						}},
 						{display:"问题来源",name:"source",width:"10%",align:"center",render:function(rowdata){
 						    if(rowdata.source == "0"){
@@ -46,7 +46,7 @@ var pageModule = function () {
                             }
 						}},
 						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
-							return rowdata.statusTime;                                         
+							return rowdata.statusTime;
 						}},
 						{display:"处理措施",name:"measures",width:"10%",align:"center",render:function(rowdata){
 							return `<span title="${rowdata.measures}">${rowdata.measures}</span>`;
@@ -62,7 +62,7 @@ var pageModule = function () {
 			url: listurl
 	   });
 	}
-	
+
 	//单位树
 	var initUnitTree = function(){
 	    //姓名
@@ -149,7 +149,10 @@ var pageModule = function () {
 				url:"add.html",
             })
 		});
-		
+		/*下载 */
+		$("#downloadBtn").click(function(){
+			window.location.href = "/app/fyp/common/downLoadFile2.xlsx";
+		});
 		//编辑edit
 		$("#edit").click(function(){
 			var datas = grid.getcheckrow();
@@ -164,11 +167,11 @@ var pageModule = function () {
 					header:true,
 					title:"编辑问题",
 					url:"add.html?id="+id,
-				}) 
+				})
 			}
 		});
-		
-		
+
+
 		/* 删除del */
 		$("#del").click(function() {
 			var datas = grid.getcheckrow();
@@ -201,20 +204,20 @@ var pageModule = function () {
 				});
 			}
 		});
-		
+
 		//确定
 		$("#sure").click(function(){
 			var elementarry = ["userId","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"];
 			grid.setparams(getformdata(elementarry));
 			grid.refresh();
 		});
-		
+
 		//重置
 		$("#reset").click(function(){
 			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"]);
 			initgrid();
 		});
-		
+
 		//展开
 		$("#more").click(function(){
 			if($.trim($(this).text()) == "展开更多"){
@@ -230,8 +233,8 @@ var pageModule = function () {
 			}
 		});
 	}
-	
-	
+
+
     return {
         //加载页面处理程序
         initControl: function () {
