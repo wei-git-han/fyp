@@ -357,6 +357,30 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	}
 
 	/**
+	 * 公文类型
+	 * 数字转汉字
+	 * @param type
+	 */
+	public String getDocumentTypeName(Integer type){
+		String result = "";
+		switch (type){
+			case 0://公文
+				result = "我的公文";
+				break;
+			case 1://办件
+				result = "我的办件";
+				break;
+			case 2://阅件
+				result = "我的阅件";
+				break;
+			case 3://阅知
+				result = "来文阅知";
+				break;
+		}
+		return result;
+	}
+
+	/**
 	 * 获取当前登录人的在线天数
 	 */
 	private int getOnlineDyas(String userid,List<Map<String, Object>> qxjList,int yearDays,int lawDays){
@@ -462,6 +486,9 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		List<FypStatistics> fypStatistics = fypStatisticsDao.queryList(new HashMap<>());
 		for (FypStatistics e:fypStatistics) {
 			map = new LinkedMultiValueMap();
+			//总量
+			int total = Integer.parseInt(e.getTOTAL().toString())+Integer.parseInt(e.getYZTOTAL().toString())+
+					Integer.parseInt(e.getBJTOTAL().toString())+Integer.parseInt(e.getYJTOTAL().toString());
 			//公文适配
 			map.add("official",true);
 			//账户名
@@ -469,19 +496,27 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//来文阅知 件
 			map.add("fileReadCount",e.getYZTOTAL());
 			//来文阅知占比
-			map.add("fileReadProportion",e.getYZoverPercentage());
+			map.add("fileReadProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / total)+"%");
+			//来文阅知完成率最高
+			map.add("fileReadRate",e.getYZoverPercentage());
 			//我的公文数 件
 			map.add("officialCount",e.getTOTAL());
-			//我的公文处理最快 分钟
+
+			//处理最快 分钟
 			map.add("officialFast",e.getFast());
+			//处理最快类型
+			map.add("officialType",this.getDocumentTypeName(e.getDocumentType()));
+
 			//我的公文占比
-			map.add("officialProportion",e.getOverPercentage());
+			map.add("officialProportion",String.valueOf(Integer.parseInt(e.getTOTAL().toString()) / total)+"%");
 			//我的公文完成率最高
-			map.add("officialRate",null);
+			map.add("officialRate",e.getOverPercentage());
 			//我的阅件 件
 			map.add("readPieceCount",e.getYZTOTAL());
 			//我的阅件占比
-			map.add("readPieceProportion",e.getYZoverPercentage());
+			map.add("readPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / total)+"%");
+			//我的阅件完成率最高
+			map.add("readPieceRate",e.getYZoverPercentage());
 			//年
 			map.add("timeYear",null);
 			//年 月
@@ -491,9 +526,9 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//我的办件 件
 			map.add("workPieceCount",e.getBJTOTAL());
 			//我的办件占比
-			map.add("workPieceProportion",e.getBJOverPercentage());
+			map.add("workPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / total)+"%");
 			//我的办件完成率最高
-			map.add("workPieceRate",null);
+			map.add("workPieceRate",e.getBJOverPercentage());
 
 			//督办件
 			map.add("superviseCount",e.getCheckNum());
