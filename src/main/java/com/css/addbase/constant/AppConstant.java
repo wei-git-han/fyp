@@ -69,6 +69,17 @@ public class AppConstant {
 	 */
 	public final static String DCCB = "dccb";
 
+
+	/**
+	 * 平台接口-年度统计 公文
+	 */
+	public final static String STATISTICS_GWCL = "statistics_gwcl";
+
+	/**
+	 * 平台接口-年度统计 督办
+	 */
+	public final static String STATISTICS_DB = "statistics_db";
+
 	/**
 	 * 首长督查催办
 	 */

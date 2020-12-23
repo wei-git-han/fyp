@@ -1,14 +1,14 @@
 package com.css.app.fyp.statistics.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +22,8 @@ import com.css.base.utils.Response;
 import com.css.app.fyp.statistics.entity.FypStatistics;
 import com.css.app.fyp.statistics.service.FypStatisticsService;
 
+import javax.annotation.PostConstruct;
+
 
 /**
  * 年度统计表
@@ -33,6 +35,7 @@ import com.css.app.fyp.statistics.service.FypStatisticsService;
 @Controller
 @RequestMapping("/fypstatistics")
 public class FypStatisticsController {
+
 	@Autowired
 	private FypStatisticsService fypStatisticsService;
 	
@@ -125,6 +128,42 @@ public class FypStatisticsController {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result","success");
 		Response.json(jsonObject);
+	}
+
+
+	@PostConstruct
+	public void timer(){
+		Calendar instance = Calendar.getInstance();
+		instance.set(Calendar.HOUR_OF_DAY,2);//控制时
+		instance.set(Calendar.MINUTE,0);//控制分
+		instance.set(Calendar.SECOND,0);//控制秒
+		Date date = instance.getTime();
+		//第一次执行任务的时间，默认第二天执行，否则会立即执行
+		if(date.before(new Date())){
+			date = this.addDay(date,1);
+		}
+		Timer timer = new Timer();
+		//毫秒
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					fypStatisticsService.syncData();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}, date,1000*60*60*168);//延时每天固定执行
+	}
+
+	/**
+	 * 增加或减少天数
+	 */
+	public Date addDay(Date date,int num){
+		Calendar startDT = Calendar.getInstance();
+		startDT.setTime(date);
+		startDT.add(Calendar.DAY_OF_MONTH,num);
+		return startDT.getTime();
 	}
 
 }

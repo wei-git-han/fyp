@@ -8,6 +8,7 @@ import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.*;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,18 +75,16 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	 */
 	@Override
 	public void syncData() {
-		List<String> deptid = fypStatisticsDao.findDeptid();
-		deptid.forEach((e)->{
-			BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", e, AppConstant.APP_GWCL);
-			BaseAppOrgMapped qxj = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", e, AppConstant.APP_QXJ);
-            BaseAppOrgMapped db = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", e, AppConstant.DCCB);
-			this.getDocument(
-					document.getUrl()+document.getWebUri()+ AppInterfaceConstant.WEB_GWCL_STATISTICS,
-					qxj.getUrl()+ qxj.getWebUri()+AppInterfaceConstant.WEB_QXJ_DAYS,
-                    db.getUrl()+AppInterfaceConstant.WEB_DCCB_STATISTICS,
-					SSOAuthFilter.getToken(),
-                    e);
-		});
+		String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getDepartmentId());
+		BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.APP_GWCL);
+		BaseAppOrgMapped qxj = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.APP_QXJ);
+		BaseAppOrgMapped db = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.DCCB);
+		this.getDocument(
+				document.getUrl()+document.getWebUri()+ AppInterfaceConstant.WEB_GWCL_STATISTICS,
+				qxj.getUrl()+ qxj.getWebUri()+AppInterfaceConstant.WEB_QXJ_DAYS,
+				db.getUrl()+AppInterfaceConstant.WEB_DCCB_STATISTICS,
+				SSOAuthFilter.getToken(),
+				bareauByUserId);
 	}
 
 
@@ -132,6 +131,8 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 				this.save(this.getData(e, finalQxjData, yearDyas, Integer.parseInt(latDyas + ""), finalDbData));
 			});
 		}
+		//推送到平台
+		pushDesktop();
 	}
 
     /**
@@ -201,7 +202,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
         statistics.setYZTOTAL(Integer.parseInt(data.get("yzCount").toString()));
 
 		//办理督办数量
-		statistics.setCheckNum(this.getDbCount(dbList,data.get("userId").toString()));
+		statistics.setCheckNum(Integer.parseInt(this.getDbCount(dbList,data.get("userId").toString()).get("userNum").toString()));
 		//阅知百分比
 		statistics.setReadknowPercentage(data.get("yzRate").toString());
 		//公文处理速度（最快）/分钟
@@ -240,6 +241,11 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
         statistics.setUserId(data.get("userId").toString());
         //用户角色
 		statistics.setROLE(data.get("role").toString());
+
+		//督办已办结事项平均天数
+		statistics.setFinishDay(this.getDbCount(dbList,data.get("userId").toString()).get("finishDay").toString());
+		//督办办结率
+		statistics.setFinishRate(this.getDbCount(dbList,data.get("userId").toString()).get("finishRate").toString());
 		return statistics;
 	}
 
@@ -288,16 +294,25 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	/**
 	 * 获取督办数量
 	 */
-	public int getDbCount(List<Map<String, Object>> dbList,String userId){
+	public Map<String,Object> getDbCount(List<Map<String, Object>> dbList,String userId){
 		int userNum = 0;
+		String finishDay = "";
+		String finishRate = "";
 		if(null!=dbList && 0<dbList.size()) {
 			for (Map<String, Object> e:dbList) {
 				if (null != e.get("userId") && userId.equals(e.get("userId").toString())) {
 					userNum = Integer.parseInt(e.get("taskNum").toString());
+					finishDay = e.get("finishDay").toString();
+					finishRate = e.get("finishRate").toString();
 				}
 			}
 		}
-		return  userNum;
+
+		Map<String, Object> retuMap = new HashMap<>();
+		retuMap.put("userNum",userNum);
+		retuMap.put("finishDay",finishDay);
+		retuMap.put("finishRate",finishRate);
+		return  retuMap;
 	}
 	/**
 	 * 第一次使用系统到现在的天数
@@ -433,5 +448,75 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 					return fast;
 				}
 		);
+	}
+
+
+	/**
+	 * 推送到平台年度统计数据
+	 */
+	public void pushDesktop(){
+		LinkedMultiValueMap<String,Object> map = null;
+		String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+		BaseAppOrgMapped deskTopGw = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.STATISTICS_GWCL);
+		BaseAppOrgMapped deskTopDb = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.STATISTICS_DB);
+		List<FypStatistics> fypStatistics = fypStatisticsDao.queryList(new HashMap<>());
+		for (FypStatistics e:fypStatistics) {
+			map = new LinkedMultiValueMap();
+			//公文适配
+			map.add("official",true);
+			//账户名
+			map.add("account",e.getAccount());
+			//来文阅知 件
+			map.add("fileReadCount",e.getYZTOTAL());
+			//来文阅知占比
+			map.add("fileReadProportion",e.getYZoverPercentage());
+			//我的公文数 件
+			map.add("officialCount",e.getTOTAL());
+			//我的公文处理最快 分钟
+			map.add("officialFast",e.getFast());
+			//我的公文占比
+			map.add("officialProportion",e.getOverPercentage());
+			//我的公文完成率最高
+			map.add("officialRate",null);
+			//我的阅件 件
+			map.add("readPieceCount",e.getYZTOTAL());
+			//我的阅件占比
+			map.add("readPieceProportion",e.getYZoverPercentage());
+			//年
+			map.add("timeYear",null);
+			//年 月
+			map.add("timeYearMonth",null);
+			//用户ID
+			map.add("userId",e.getUserId());
+			//我的办件 件
+			map.add("workPieceCount",e.getBJTOTAL());
+			//我的办件占比
+			map.add("workPieceProportion",e.getBJOverPercentage());
+			//我的办件完成率最高
+			map.add("workPieceRate",null);
+
+			//督办件
+			map.add("superviseCount",e.getCheckNum());
+			//已办结事项平均办理天数/天
+			map.add("superviseFinishDay",e.getFinishDay());
+			//办结率
+			map.add("superviseFinishRate",e.getFinishRate());
+
+			map.add("userId",e.getUserId());
+			JSONObject db = CrossDomainUtil.getTokenByJsonData(deskTopDb.getUrl(), map, SSOAuthFilter.getToken());
+			if(null!=db && "成功".equals(db.get("rsltmsg").toString())){
+				System.out.println(e.getUserId()+"-公文督办统计推送到平台成功");
+			}else{
+				System.out.println(e.getUserId()+"-公文督办统计推送到平台失败");
+			}
+			JSONObject gw = CrossDomainUtil.getTokenByJsonData(deskTopGw.getUrl(), map, SSOAuthFilter.getToken());
+			if(null!=gw && "成功".equals(gw.get("rsltmsg").toString())){
+				System.out.println(e.getUserId()+"-公文年度统计推送到平台成功");
+			}else{
+				System.out.println(e.getUserId()+"-公文年度统计推送到平台失败");
+			}
+
+
+		}
 	}
 }
