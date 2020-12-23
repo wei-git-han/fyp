@@ -113,11 +113,11 @@ public class ManageDocumentController {
             long nowData = format.parse(data).getTime();//redis缓存放进去的时间
             long remindTime = format.parse(curDay).getTime();//当前时间
             long minusTime = remindTime - nowData;
-            minitue =(int)minusTime/(1000 * 3600);
+            minitue =(int)minusTime/1000;
         }catch (Exception e){
             e.printStackTrace();
         }
-        if(StringUtils.isNotBlank(json) && minitue <=60 && minitue > 0){
+        if(StringUtils.isNotBlank(json) && minitue <=20 && minitue > 0){
             JSONObject ret = JSONObject.parseObject(json);
             Response.json(ret);
         }else {

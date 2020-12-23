@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="queryList" resultType="com.css.app.fyp.statistics.entity.FypStatistics">
-		select us.truename as userName,b.name as "PHRASENAME",
+		select us.truename as userName,b.name as "PHRASENAME",us.account as "account",a.FINISHDAY as "finishDay", a.FINISHRATE as "finishRate",
 		case a.role
 		when 3 then (
 		select name from ZF_FYP_APP_NEW.base_app_organ where id =(
@@ -75,7 +75,9 @@
             "YZoverPercentage",
             "YZISREADTOTAL",
             "YZTOTAL",
-			"ROLE"
+			"ROLE",
+			"FINISHDAY",
+			"FINISHRATE"
 		)
 		values
 		(
@@ -113,7 +115,9 @@
             #{YZoverPercentage},
             #{YZISREADTOTAL},
             #{YZTOTAL},
-			#{ROLE}
+			#{ROLE},
+			#{finishDay},
+			#{finishRate}
 		)
 	</insert>
 	

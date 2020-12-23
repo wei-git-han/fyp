@@ -97,6 +97,39 @@ public class FypStatistics implements Serializable {
     private String userName;
 	//当前人角色：3局长、4处长、1局秘、0参谋
     private String ROLE;
+    //账户名
+    private String account;
+
+
+    //督办已办结平均天数
+	private String finishDay;
+	//办结率
+	private String finishRate;
+
+
+	public String getFinishDay() {
+		return finishDay;
+	}
+
+	public void setFinishDay(String finishDay) {
+		this.finishDay = finishDay;
+	}
+
+	public String getFinishRate() {
+		return finishRate;
+	}
+
+	public void setFinishRate(String finishRate) {
+		this.finishRate = finishRate;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
 	public String getROLE() {
 		return ROLE;
