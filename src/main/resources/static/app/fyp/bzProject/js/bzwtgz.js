@@ -28,7 +28,7 @@ var pageModule = function () {
 						    }else if(rowdata.source == "2"){
                                 return "现场反馈";
                             }else{
-                                return rowdata.source;
+                                return rowdata.source||'';
                             }
 						}},
 						{display:"问题描述",name:"remark",width:"15%",align:"left",render:function(rowdata){
@@ -42,7 +42,7 @@ var pageModule = function () {
                             }else if(rowdata.status == "2"){
                                 return "已完成";
                             }else{
-                                return "";
+                                return rowdata.data.measures||'';
                             }
 						}},
 						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){

@@ -86,7 +86,7 @@ var pageModule = function () {
 				    }else if(problemFrom == "2"){
 				    	problemFrom = "现场反馈";
                     }else{
-                        return "";
+						problemFrom = problemFrom;
                     }
 
 					var problemDeration = o.remark;
@@ -105,6 +105,14 @@ var pageModule = function () {
 							problemClass="card_green";
 							problemName="已完成";
 						break;
+						default:
+							problemClass="card_yellow";
+							if(o.measures=='已完成'){
+								problemClass="card_green";
+							}else if(o.measures=='延后中'){
+								problemClass="card_red";
+							}
+							problemName= o.measures||'处理中';
 					}
 					arryHtml+=  '<div class="card-parent" onclick="toBzInfo()" style="cursor: pointer">' +
 								'	<div class="card '+problemClass+'">'+
