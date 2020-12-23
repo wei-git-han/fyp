@@ -189,12 +189,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         if(StringUtils.equals(afficheType,"reign")){
             Map<String,Object> filter = new HashMap<>();
             filter.put("departmentId", "root");
-            String orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
-            if(StringUtils.isNotBlank(deptId)){
-                filter.put("organid", deptId);
-            }else{
-                filter.put("organid", orgId);
-            }
+            filter.put("organid", deptId);
             reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
             String userIds = "";
             for(ReiOnlineUser user : reiOnlineUsers){
@@ -210,12 +205,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             userIdList.toArray(acc);
             filter.put("accounts", acc);
             filter.put("departmentId", "root");
-            String orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
-            if(StringUtils.isNotBlank(deptId)){
-                filter.put("organid", deptId);
-            }else{
-                filter.put("organid", orgId);
-            }
+            filter.put("organid", deptId);
             reiOnlineUsers = baseAppUserService.queryReignUsers(filter);
             String userIds = "";
             for(ReiOnlineUser user : reiOnlineUsers){
@@ -381,7 +371,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         String type = "desktop_online_api";
         //Object obj = baseAppOrgMappedService.orgMappedByOrgId("", "", type);
         BaseAppOrgMapped mapper  = baseAppOrgMappedService.queryByType(type);
-       // BaseAppOrgMapped mapper=null;
+        // BaseAppOrgMapped mapper=null;
 //        if(obj!=null && obj instanceof BaseAppOrgMapped) {
 //            mapper =(BaseAppOrgMapped)obj;
 //        }
