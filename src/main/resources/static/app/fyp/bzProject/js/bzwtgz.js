@@ -151,7 +151,7 @@ var pageModule = function () {
 		});
 		/*下载 */
 		$("#downloadBtn").click(function(){
-			window.location.href = "/app/fyp/common/downLoadFile2.xlsx";
+			window.location.href = "/app/fyp/common/downLoadFile2.xls";
 		});
 		//编辑edit
 		$("#edit").click(function(){

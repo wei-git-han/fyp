@@ -146,7 +146,8 @@ public class DictController {
 
 		result.put("total", depts_count + users_count);
 		result.put("rows", list);
-		Response.json(result);
+		GwPageUtils pageUtil = new GwPageUtils(list);
+		Response.json("page",pageUtil);
 	}
 
 	/**
@@ -175,7 +176,9 @@ public class DictController {
 
 		result.put("total", depts_count + users_count);
 		result.put("rows", list);
-		Response.json(result);
+		//Response.json(result);
+		GwPageUtils pageUtil = new GwPageUtils(list);
+		Response.json("page",pageUtil);
 	}
 
 	public JSONArray getUserList(String id,JSONArray jsons) {

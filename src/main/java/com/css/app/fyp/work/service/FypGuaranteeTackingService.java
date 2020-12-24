@@ -2,6 +2,7 @@ package com.css.app.fyp.work.service;
 
 import com.css.app.fyp.work.entity.FypGuaranteeTacking;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +28,6 @@ public interface FypGuaranteeTackingService {
 	void deleteBatch(String[] ids);
 
     Map<String, Object> findCount();
+
+    void importExcle(InputStream inputStream) throws Exception;
 }

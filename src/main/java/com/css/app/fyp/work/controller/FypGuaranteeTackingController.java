@@ -1,11 +1,14 @@
 package com.css.app.fyp.work.controller;
 
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import cn.com.css.filestore.impl.HTTPFile;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.FileBaseUtil;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.util.OrgUtil;
@@ -142,8 +145,17 @@ public class FypGuaranteeTackingController {
 	@ResponseBody
 	@RequestMapping("/import")
 	public void importExcel(MultipartFile file){
-		this.insertImportData(PoiUtils.importExcel(file));
-		Response.json(new ResponseValueUtils().success());
+		//this.insertImportData(PoiUtils.importExcel(file));
+		//Response.json(new ResponseValueUtils().success());
+		try {
+			String fileId = FileBaseUtil.fileServiceUpload(file);
+			HTTPFile httpFile = new HTTPFile(fileId);
+			InputStream inputStream = httpFile.getInputSteam();
+			fypGuaranteeTackingService.importExcle(inputStream);
+			Response.json(new ResponseValueUtils().success());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -158,28 +170,29 @@ public class FypGuaranteeTackingController {
 			if(null!=objects&&0<objects.size()){
 				try {
 
-
 					fypGuaranteeTacking = new FypGuaranteeTacking();
 					fypGuaranteeTacking.setId(UUIDUtils.random());
 
 					//单位名称
-					fypGuaranteeTacking.setDeptName(objects.get(0).toString());
+					fypGuaranteeTacking.setDeptName(objects.get(1).toString());
 					//用户名称
-					fypGuaranteeTacking.setUserName(objects.get(1).toString());
+					fypGuaranteeTacking.setUserName(objects.get(0).toString());
 					//问题来源
-					fypGuaranteeTacking.setSource(objects.get(2).toString());
+					fypGuaranteeTacking.setSource(objects.get(4).toString());
 					//状态
-					fypGuaranteeTacking.setStatus(objects.get(3).toString());
+					fypGuaranteeTacking.setStatus(objects.get(6).toString());
 					//联系电话
-					fypGuaranteeTacking.setPhone(objects.get(4).toString());
+					fypGuaranteeTacking.setPhone(objects.get(3).toString());
 					//问题描述
 					fypGuaranteeTacking.setRemark(objects.get(5).toString());
 					//处理措施
-					fypGuaranteeTacking.setMeasures(objects.get(6).toString());
+					fypGuaranteeTacking.setMeasures(objects.get(8).toString());
 					//报修时间
-					fypGuaranteeTacking.setWarrantyTime(new Date());
+					//String warrantyTime = objects.get(3).toString();
+					//fypGuaranteeTacking.setWarrantyTime(simpleDateFormat.parse(warrantyTime));
 					//更新时间
-					fypGuaranteeTacking.setStatusTime(new Date());
+					String statusTime = objects.get(7).toString();
+					fypGuaranteeTacking.setStatusTime(simpleDateFormat.parse(statusTime));
 					fypGuaranteeTackingService.save(fypGuaranteeTacking);
 				} catch (Exception e) {
 					e.printStackTrace();
