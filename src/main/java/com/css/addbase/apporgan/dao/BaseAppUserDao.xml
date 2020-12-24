@@ -82,7 +82,15 @@
 		and ORGANID not in (select ifnull(dept_id,0) from config_user_dept cud)
 		and user_id not in (select ifnull(user_id,0) from config_user_dept cud)
 		<if test="organid != null and organid != ''">
-			and us.ORGANID = #{organid}
+			and us.ORGANID in
+			(
+			select
+			ID
+			from
+			BASE_APP_ORGAN start
+			with ID         = #{organid}
+			and ISDELETE=0 connect by prior ID = PARENT_ID
+			)
 		</if>
 		<if test="accounts !=null and accounts != ''">
 			and account in
