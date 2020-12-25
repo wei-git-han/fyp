@@ -269,13 +269,17 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				if(data.list){
-				    rowsdata = data.list;
+				if(data.data){
+					if(data.data.list){
+						rowsdata = data.data.list;
+					}
+					else{
+						rowsdata = [];
+					}
+				}else{
+					rowsdata = []
 				}
-				else if(data.data.list){
-					rowsdata = data.data.list;
-				}
-				/*  rowsdata = data.rows;*/
+				/*  ROWSDATA = DATA.ROWS;*/
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+8)+"px");
 				}else{
@@ -347,7 +351,7 @@ function createtable(obj){
 					conttable.append(trobj);
 				});
 
-				total = data.pageResult.total
+				total = data.data.totalCount
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
