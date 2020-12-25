@@ -22,7 +22,7 @@ var pageModule = function () {
 			rownumbers : false,
 			animate : true,
 			autoRowHeight : false,
-			pagination : true,
+			// pagination : true,
 			pageSize : 20,
 			pageList : [ 5, 10, 20, 30 ],
 			fitColumns : true,
