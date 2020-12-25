@@ -66,7 +66,7 @@ public class FypGuaranteeTackingController {
         Map<String, Object> paramMap = JSON.parseObject(JSON.toJSONString(tacking), Map.class);
 
 		Map<String, Object> map = new HashMap<>();
-		PageHelper.startPage(page, limit);
+
         map.putAll(paramMap);
 		if(null!=tacking.getWarrantyTimeBegin()&&null!=tacking.getWarrantyTimeEnd()) {
 			map.put("warrantyTimeBegin", tacking.getWarrantyTimeBegin());
@@ -76,6 +76,7 @@ public class FypGuaranteeTackingController {
 			map.put("warrantyTimeEnd", warrantyTimeEndinstance.getTime());
 		}
 		//查询列表数据
+		PageHelper.startPage(page, limit);
 		List<FypGuaranteeTacking> fypGuaranteeTackingList = fypGuaranteeTackingService.queryList(map);
 		String organId = "";
 		for(FypGuaranteeTacking f : fypGuaranteeTackingList) {
@@ -88,7 +89,7 @@ public class FypGuaranteeTackingController {
 			}
 		}
 		PageUtils pageUtil = new PageUtils(fypGuaranteeTackingList);
-        Response.json(new ResponseValueUtils().success(pageUtil));
+		Response.json(pageUtil);
 	}
 
 	

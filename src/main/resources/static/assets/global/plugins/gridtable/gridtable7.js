@@ -269,13 +269,8 @@ function createtable(obj){
 				if(dataType=="text"){
 					data = eval("("+data+")");
 				}
-				if(data.data){
-					if(data.data.list){
-						rowsdata = data.data.list;
-					}
-					else{
-						rowsdata = [];
-					}
+				if(data){
+					rowsdata = data.list;
 				}else{
 					rowsdata = []
 				}
@@ -351,7 +346,7 @@ function createtable(obj){
 					conttable.append(trobj);
 				});
 
-				total = data.data.totalCount
+				total = data.totalCount
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
@@ -536,7 +531,7 @@ function createtable(obj){
 					data = eval("("+data+")");
 				}
 				/* rowsdata = data.rows; */
-				rowsdata = data.data.list;
+				rowsdata = data.list;
 				if(rowsdata.length==0){
 					$("#"+obj.target+"_hdtablediv").height((parseInt(getvalue(obj.headheight,"headheight"))+3)+"px");
 				}else{
@@ -570,7 +565,7 @@ function createtable(obj){
 					})
 				});
 				/* total = data.total; */
-				total = data.data.totalCount;
+				total = data.totalCount;
 				var fg = total%pagesize;
 				if(fg!=0){
 					totalpage = ((total-fg)/pagesize)+1;
