@@ -42,7 +42,7 @@ var pageModule = function () {
                             }else if(rowdata.status == "2"){
                                 return "已完成";
                             }else{
-                                return rowdata.data.measures||'';
+                                return rowdata.measures||'';
                             }
 						}},
 						{display:"更新时间",name:"statusTime",width:"10%",align:"center",render:function(rowdata){
@@ -151,7 +151,7 @@ var pageModule = function () {
 		});
 		/*下载 */
 		$("#downloadBtn").click(function(){
-			window.location.href = "/app/fyp/common/downLoadFile2.xlsx";
+			window.location.href = "/app/fyp/common/downLoadFile2.xls";
 		});
 		//编辑edit
 		$("#edit").click(function(){
