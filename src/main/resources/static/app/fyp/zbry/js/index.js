@@ -2,6 +2,7 @@ var listurl = {"url":"/dict/getAllUserList","dataType":"text"};//表格数据
 var list2url = {"url":"/dict/getAllUser","dataType":"text"};//表格数据
 var hideUrl = {url:"/dict/insertConfigUser",type:'text'}
 var noId = ""
+
 // var pageModule = function () {
 // 	var initgrid = function(){
 // 		$('#gridcont').treegrid({
@@ -97,9 +98,9 @@ var pageModule = function () {
 			rownumbers : true,
 			animate : true,
 			autoRowHeight : false,
-			pagination : true,
-			pageSize : 20,
-			pageList : [ 5, 10, 20, 30 ],
+			pagination : false,
+			pageSize : 100,
+			pageList : [ 100 ],
 			fitColumns : true,
 			url : listurl.url,
 			async : true,
@@ -111,7 +112,7 @@ var pageModule = function () {
 			// 	return false
 			// },
 			onBeforeExpand : function(row) {
-				// console.log(row.id)
+				 // console.log(row.id)
 				noId = row.id;
 				$('#gridcont').treegrid('options').url =  list2url.url
  			},
@@ -138,7 +139,11 @@ var pageModule = function () {
 				})
 			},
 			loadFilter:function (data,parentId) {
-				return data.rows
+				if(data.total){
+                    return {rows:data.rows,total:data.total}
+                }else{
+                    return data.rows
+                }
 			}
 		});
 	}
