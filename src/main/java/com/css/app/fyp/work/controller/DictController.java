@@ -147,7 +147,7 @@ public class DictController {
 		result.put("total", depts_count + users_count);
 		result.put("rows", list);
 		GwPageUtils pageUtil = new GwPageUtils(list);
-		Response.json("page",pageUtil);
+		Response.json(pageUtil);
 	}
 
 	/**
