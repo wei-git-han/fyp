@@ -29,7 +29,7 @@
 				and a.DEPT_NAME = #{deptName}
 			</if>
 			<!--角色-->
-			<if test="roleType!=null and roleType!=''">
+			<if test="roleType!=null">
 				and a.ROLE_TYPE = #{roleType}
 			</if>
 			<if test="offset != null and limit != null">
