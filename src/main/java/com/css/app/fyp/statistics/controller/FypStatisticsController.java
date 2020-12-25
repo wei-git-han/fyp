@@ -53,8 +53,16 @@ public class FypStatisticsController {
 //		PageUtils pageUtil = new PageUtils(fypStatisticsList);
 		Response.json(new ResponseValueUtils().success(fypStatisticsList));
 	}
-	
-	
+
+	/**
+	 * 推送至平台数据测试列表
+	 */
+	@ResponseBody
+	@RequestMapping("/desktopList")
+	public void desktopList(){
+		fypStatisticsService.pushDesktop();
+	}
+
 	/**
 	 * 信息
 	 */

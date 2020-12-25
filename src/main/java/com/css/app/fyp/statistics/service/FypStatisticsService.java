@@ -29,4 +29,6 @@ public interface FypStatisticsService {
     void insertDeptids(String[] deptArr);
 
 	void syncData();
+
+	void pushDesktop();
 }

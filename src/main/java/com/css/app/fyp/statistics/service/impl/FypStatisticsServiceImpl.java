@@ -484,6 +484,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		BaseAppOrgMapped deskTopGw = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.STATISTICS_GWCL);
 		BaseAppOrgMapped deskTopDb = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.STATISTICS_DB);
 		List<FypStatistics> fypStatistics = fypStatisticsDao.queryList(new HashMap<>());
+//		ArrayList<LinkedMultiValueMap<String,Object>> objects = new ArrayList<>();
 		for (FypStatistics e:fypStatistics) {
 			map = new LinkedMultiValueMap();
 			//总量
@@ -496,7 +497,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//来文阅知 件
 			map.add("fileReadCount",e.getYZTOTAL());
 			//来文阅知占比
-			map.add("fileReadProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / total)+"%");
+			map.add("fileReadProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / (total == 0? 1 : total))+"%");
 			//来文阅知完成率最高
 			map.add("fileReadRate",e.getYZoverPercentage());
 			//我的公文数 件
@@ -508,13 +509,13 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			map.add("officialType",this.getDocumentTypeName(e.getDocumentType()));
 
 			//我的公文占比
-			map.add("officialProportion",String.valueOf(Integer.parseInt(e.getTOTAL().toString()) / total)+"%");
+			map.add("officialProportion",String.valueOf(Integer.parseInt(e.getTOTAL().toString()) / (total == 0? 1 : total))+"%");
 			//我的公文完成率最高
 			map.add("officialRate",e.getOverPercentage());
 			//我的阅件 件
 			map.add("readPieceCount",e.getYZTOTAL());
 			//我的阅件占比
-			map.add("readPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / total)+"%");
+			map.add("readPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / (total == 0? 1 : total))+"%");
 			//我的阅件完成率最高
 			map.add("readPieceRate",e.getYZoverPercentage());
 			//年
@@ -526,7 +527,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//我的办件 件
 			map.add("workPieceCount",e.getBJTOTAL());
 			//我的办件占比
-			map.add("workPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / total)+"%");
+			map.add("workPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / (total == 0? 1 : total))+"%");
 			//我的办件完成率最高
 			map.add("workPieceRate",e.getBJOverPercentage());
 
@@ -536,8 +537,6 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			map.add("superviseFinishDay",e.getFinishDay());
 			//办结率
 			map.add("superviseFinishRate",e.getFinishRate());
-
-			map.add("userId",e.getUserId());
 			JSONObject db = CrossDomainUtil.getTokenByJsonData(deskTopDb.getUrl(), map, SSOAuthFilter.getToken());
 			if(null!=db && "成功".equals(db.get("rsltmsg").toString())){
 				System.out.println(e.getUserId()+"-公文督办统计推送到平台成功");
@@ -550,8 +549,15 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			}else{
 				System.out.println(e.getUserId()+"-公文年度统计推送到平台失败");
 			}
-
-
+			/*objects.add(map);
+			if(objects.size() >4){
+				break;
+			}*/
 		}
+		/*JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result","success");
+		jsonObject.put("list",objects);
+		Response.json(jsonObject);*/
+
 	}
 }
