@@ -28,7 +28,7 @@ var pageModule = function(){
             }
         });
 
-	/*	$("#deptName").createSelecttree({
+		$("#deptName").createSelecttree({
 			url :deptTreeUrl,
 			width : '100%',
 			success : function(data, treeobj) {},
@@ -36,7 +36,7 @@ var pageModule = function(){
 				$("#deptName").val(data.node.text);
 				$("#deptId").val(data.node.id);
 			}
-		});*/
+		});
 	}
 	
 	var initdatafn = function(){
