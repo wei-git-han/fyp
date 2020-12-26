@@ -13,16 +13,16 @@
 		 1=1
 			<!--单位-->
 			<if test="submitDeptId!=null and submitDeptId!=''">
-				and SUBMIT_DEPT_ID =#{submitDeptId}
+				and SUBMIT_DEPT_ID in (select ID from BASE_APP_ORGAN start with ID = #{submitDeptId}  and ISDELETE=0 connect by prior ID = PARENT_ID)
 			</if>
 			<!--提出人-->
 			<if test="submitUserId!=null and submitUserId!=''">
 				and SUBMIT_USER_ID =#{submitUserId}
 			</if>
 
-			<if test="submitDeptName != null and submitDeptName !=''">
-				and SUBMIT_DEPT_NAME = #{submitDeptName}
-			</if>
+			<!--<if test="submitDeptName != null and submitDeptName !=''">-->
+				<!--and SUBMIT_DEPT_NAME = #{submitDeptName}-->
+			<!--</if>-->
 
 			<if test="submitUserName != null and submitUserName !=''">
 				and SUBMIT_USER_NAME = #{submitUserName}
