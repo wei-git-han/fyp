@@ -73,4 +73,6 @@ public interface BaseAppOrganService {
 	List<Map<String, Object>> queryAllDept();
 
 	List<BaseAppOrgan> getAllDeptIds();
+
+	BaseAppOrgan queryDeptIdById(String deptId);
 }

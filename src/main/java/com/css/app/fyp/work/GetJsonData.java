@@ -2,6 +2,7 @@ package com.css.app.fyp.work;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgan.service.BaseAppUserService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
@@ -104,7 +105,14 @@ public class GetJsonData {
         switch (type){
             case "办文":
                 //公文处理
-                BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
+                BaseAppOrgMapped document = new BaseAppOrgMapped();
+                document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
+                if(document ==null){
+                    BaseAppOrgan baseAppOrgan = baseAppOrganService.queryDeptIdById(String.valueOf(data.get("ORG_ID")));
+                    String deptId = baseAppOrgan.getParentId();
+                    document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",deptId,prefix);
+                }
+
                 url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
                 if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
                     map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));
