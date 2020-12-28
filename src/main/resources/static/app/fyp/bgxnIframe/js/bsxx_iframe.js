@@ -7,6 +7,14 @@ var grid = null;
 // }else{
 // 	$('.filterUnit').hide()
 // }
+var date2 = new Date()
+var nowYear = date2.getFullYear();
+var nowMonth = date2.getMonth();
+if(nowMonth==0||nowMonth==1){
+	$('#startTime1').val(`${nowYear-1}-01-01`)
+	$('#endTime1').val(`${nowYear-1}-12-31`);
+	nowYear--
+}
 var pageModule = function() {
 	var initZhoubiao = function() {
 		grid = $("#gridcont").createGrid({
@@ -49,7 +57,8 @@ var pageModule = function() {
 				deptid: $("#deptId").val(),
 				deptname: $("#deptName").val(),
 				startTime: $("#startTime1").val(),
-				endTime: $("#endTime1").val()
+				endTime: $("#endTime1").val(),
+				year: nowYear
 			},
 			dataType: "json",
 			success: function(res) {

@@ -1,6 +1,13 @@
 // var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
 var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}
+var date2 = new Date()
+var nowYear = date2.getFullYear();
+var nowMonth = date2.getMonth();
+if(nowMonth==0||nowMonth==1){
+	$('#startTime1,#startTime2,#startTime3,#startTime4').val(`${nowYear-1}-01-01`)
+	$('#endTime1,#endTime2,#endTime3,#endTime4').val(`${nowYear-1}-12-31`)
+}
 var pageModule = function () {
 	//组织机构树
 	var initUnitTree = function() {
