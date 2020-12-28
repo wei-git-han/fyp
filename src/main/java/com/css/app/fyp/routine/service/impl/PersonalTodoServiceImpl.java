@@ -84,7 +84,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         JSONArray returnJsonArr = new JSONArray();
         if (StringUtils.equals(type, "qxj")) {
             //请销假数量
-            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj",bareauByUserId);
+            BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj","root");
             JSONObject qxjJsonObj = new JSONObject();
             String qxjUrl = qxjglUrl;
             JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
@@ -109,7 +109,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(qxjJsonObj);
         } else if (StringUtils.equals(type, "dccb")) {
             //督查催办数量
-            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb",bareauByUserId);
+            BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb","root");
             JSONObject dccbJsonObj = new JSONObject();
             String dccbUrl = dbglUrl;
             JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
