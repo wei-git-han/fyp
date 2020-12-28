@@ -89,13 +89,16 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
+        Date date1 = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat.format(startTime);
-            eTime = simpleDateFormat.format(endTime);
+            if(endTime == null){
+                eTime = simpleDateFormat.format(date1);
+            }
         }
         int minitue = 0;
         SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -168,13 +171,16 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
+        Date date = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat.format(startTime);
-            eTime = simpleDateFormat.format(endTime);
+            if(endTime == null){
+                eTime = simpleDateFormat.format(date);
+            }
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
@@ -196,13 +202,17 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
+        Date date = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            eTime = simpleDateFormat2.format(endTime);
+            if(endTime == null){
+                eTime = simpleDateFormat2.format(date);
+            }
+            //eTime = simpleDateFormat2.format(endTime);
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发展趋势");
@@ -232,13 +242,16 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
+        Date date = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            eTime = simpleDateFormat2.format(endTime);
+            if(endTime == null){
+                eTime = simpleDateFormat2.format(date);
+            }
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
@@ -260,13 +273,16 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
+        Date date = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            eTime = simpleDateFormat2.format(endTime);
+            if(endTime == null){
+                eTime = simpleDateFormat2.format(date);
+            }
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
@@ -288,13 +304,16 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
+        Date date = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            eTime = simpleDateFormat2.format(endTime);
+            if(endTime == null){
+                eTime = simpleDateFormat2.format(date);
+            }
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
