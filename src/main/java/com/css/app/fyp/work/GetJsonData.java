@@ -112,7 +112,9 @@ public class GetJsonData {
                     String deptId = baseAppOrgan.getParentId();
                     document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",deptId,prefix);
                 }
-
+                if(document == null){
+                    break;
+                }
                 url = document.getUrl()+AppInterfaceConstant.WEB_INERFACE_GWCL_DO_DOCUMENT;
                 if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
                     map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));

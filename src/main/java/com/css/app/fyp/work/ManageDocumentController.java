@@ -212,7 +212,7 @@ public class ManageDocumentController {
         paramMap.add("startTime",sTime);
         paramMap.add("endTime",eTime);
         List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
-        Object data;
+        Object data = new Object();
         if(null!=dataList&&dataList.size()>0){
             data = dataList.get(0).get("list");
         }else{

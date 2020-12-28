@@ -303,12 +303,15 @@ var pageModule = function () {
 							data:[]
 						}]
 					}
-					res.data.forEach(e=>{
-						data.xdata.push(e.month);
-						data.ydata[0].data.push(e.submitCount);
-						data.ydata[1].data.push(e.receiveCount)
-					})
-					initAreaChart(data)
+					if(!res.data){
+					}else{
+                        res.data.forEach(e=>{
+                            data.xdata.push(e.month);
+                            data.ydata[0].data.push(e.submitCount);
+                            data.ydata[1].data.push(e.receiveCount)
+                        })
+					}
+                    initAreaChart(data)
 				}
 			}
 		})
