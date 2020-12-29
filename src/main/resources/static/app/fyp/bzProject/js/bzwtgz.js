@@ -214,7 +214,7 @@ var pageModule = function () {
 
 		//重置
 		$("#reset").click(function(){
-			removeInputData(["name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"]);
+			removeInputData(["userId","name","deptId","deptName","phone","warrantyTimeBegin","warrantyTimeEnd","source","phone", "measures","remark","status"]);
 			initgrid();
 		});
 
