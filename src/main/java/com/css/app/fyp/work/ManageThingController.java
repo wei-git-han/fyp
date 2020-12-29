@@ -84,10 +84,10 @@ public class ManageThingController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
-            JSONObject ret = JSONObject.parseObject(json);
-            Response.json(ret);
-        } else {
+//        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
+//            JSONObject ret = JSONObject.parseObject(json);
+//            Response.json(ret);
+//        } else {
             Boolean flag = false;
             String userId = CurrentUser.getUserId();
             String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
@@ -135,7 +135,7 @@ public class ManageThingController {
             Date date = new Date();
             redisUtil.setString("dbData", format.format(date));
             Response.json(new ResponseValueUtils().success(dataMap));
-        }
+        //}
     }
 
 //    @Scheduled(fixedRate=180)
