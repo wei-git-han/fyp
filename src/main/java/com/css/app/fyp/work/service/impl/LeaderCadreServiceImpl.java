@@ -1,6 +1,7 @@
 package com.css.app.fyp.work.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.app.fyp.work.LeaderCadreController;
 import com.css.app.fyp.work.service.LeaderCadreService;
@@ -29,7 +30,11 @@ public class LeaderCadreServiceImpl implements LeaderCadreService {
         infoMap.add("page","1");
         infoMap.add("pagesize","1000");
         String type = "szbg";
-        String mapperUrl = baseAppOrgMappedService.getUrlByType(CurrentUser.getUserId(), type);
+        BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedService.queryByType(type);
+        String mapperUrl = "";
+        if(baseAppOrgMapped != null){
+            mapperUrl = baseAppOrgMapped.getUrl();
+        }
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);

@@ -12,8 +12,8 @@ var pageModule = function () {
 			language:"zh-CN",
 			rtl: Metronic.isRTL(),
 			orientation: "",
-			format: "yyyy-mm",
-			minViewMode: 1,
+			format: "yyyy",
+			minViewMode: 2,
 			autoclose: true
 		}).on("changeDate",function(){
 			getBar3dChartData();
@@ -34,7 +34,7 @@ var pageModule = function () {
 	//日常会议
 	var getBar3dChartData = function(){
 		 $.ajax({
-		      url:"/app/fyp/manageMeeting/common",
+		      url:"/app/fyp/manageMeeting/video",
 		      data:{time:$("#searchDate1").val()},
 		      dataType:"json",
 		      success:function(res){
@@ -140,7 +140,7 @@ var pageModule = function () {
 	//视频会议
 	var getBarChartData = function(){
 	  $.ajax({
-	      url:"/app/fyp/manageMeeting/video",
+	      url:"/app/fyp/manageMeeting/common",
 	      data:{time:$("#searchDate2").val()},
 	      dataType:"json",
 	      success:function(res){
