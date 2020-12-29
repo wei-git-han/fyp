@@ -103,7 +103,14 @@ public class ManageThingController {
                 Calendar calendar = Calendar.getInstance();
                 //calendar.setTime(time);
                 paramMap.add("year", String.valueOf(calendar.get(Calendar.YEAR)));//年
-                paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//月
+                paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//
+                String year = String.valueOf(calendar.get(Calendar.YEAR));
+                String startYearAndDay = year+"-01-01";
+                String endYearAndDay = year+"-12-31";
+                if(startYearAndDay.equals(startTime) && endYearAndDay.equals(endTime)){
+                    startTime = "";
+                    endTime = "";
+                }
                 paramMap.add("startTime",startTime);
                 paramMap.add("endTime",endTime);
                 dataList = getJsonData.getJson(paramMap, "首长督查催办");
@@ -115,6 +122,15 @@ public class ManageThingController {
                 //calendar.setTime(time);
                 paramMap.add("year", String.valueOf(calendar.get(Calendar.YEAR)));//年
                 paramMap.add("month", String.valueOf(calendar.get(calendar.MONTH)));//月
+                String year = String.valueOf(calendar.get(Calendar.YEAR));
+                //此处是配合督办修改-----start
+                String startYearAndDay = year+"-01-01";
+                String endYearAndDay = year+"-12-31";
+                if(startYearAndDay.equals(startTime) && endYearAndDay.equals(endTime)){
+                    startTime = "";
+                    endTime = "";
+                }
+                //-----end
                 paramMap.add("startTime",startTime);
                 paramMap.add("endTime",endTime);
                 if (StringUtils.isNotBlank(deptid)) {
