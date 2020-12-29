@@ -96,9 +96,7 @@ public class ManageDocumentController {
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat.format(startTime);
-            if(endTime == null){
-                eTime = simpleDateFormat.format(date1);
-            }
+            eTime = simpleDateFormat.format(endTime);
         }
         int minitue = 0;
         SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -178,9 +176,7 @@ public class ManageDocumentController {
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat.format(startTime);
-            if(endTime == null){
-                eTime = simpleDateFormat.format(date);
-            }
+            eTime = simpleDateFormat.format(endTime);
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发文情况");
@@ -209,9 +205,7 @@ public class ManageDocumentController {
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            if(endTime == null){
-                eTime = simpleDateFormat2.format(date);
-            }
+            eTime = simpleDateFormat2.format(endTime);
             //eTime = simpleDateFormat2.format(endTime);
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
@@ -249,9 +243,7 @@ public class ManageDocumentController {
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            if(endTime == null){
-                eTime = simpleDateFormat2.format(date);
-            }
+            eTime = simpleDateFormat2.format(endTime);
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
@@ -280,9 +272,7 @@ public class ManageDocumentController {
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            if(endTime == null){
-                eTime = simpleDateFormat2.format(date);
-            }
+            eTime = simpleDateFormat2.format(endTime);
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
@@ -311,9 +301,7 @@ public class ManageDocumentController {
             eTime = (String) map.get("endTime");
         }else{
             sTime = simpleDateFormat2.format(startTime);
-            if(endTime == null){
-                eTime = simpleDateFormat2.format(date);
-            }
+            eTime = simpleDateFormat2.format(endTime);
         }
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
