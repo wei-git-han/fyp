@@ -2,7 +2,7 @@ var fwUrl = {"url":"/app/fyp/orderOfBirth/appAccess","dataType":"text"};//访问
 var azUrl = {"url":"/app/fyp/orderOfBirth/appInstall","dataType":"text"};//安装量
 var deptTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //单位树--待定
 var pageModule = function () {
-	
+
 	var initother = function(){
 		//软件数据
 		$("#rjsj").click(function(){
@@ -16,7 +16,7 @@ var pageModule = function () {
 		$("#wkjsj").click(function(){
 			getBarChartData2();
 		});
-		
+
 		$(".date-picker1").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
@@ -25,7 +25,7 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			getBarChartData();
 		});
-		
+
 		$(".date-picker2").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
@@ -34,7 +34,7 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			initanz();
 		});
-		
+
 		$(".date-picker3").datepicker({
 			language: "zh-CN",
 			rtl: Metronic.isRTL(),
@@ -43,13 +43,13 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			getBarChartData2();
 		});
-		
+
 		$("#zxphType").change(function(){
 			getBarChartData();
 		});
-		
+
 	}
-	
+
 	//组织机构树
 	var initUnitTree = function() {
 		$ajax({
@@ -78,7 +78,7 @@ var pageModule = function () {
 			}
 		})
 	}
-	
+
 	//在线率排行
 	var getBarChartData = function(){
 		$.ajax({
@@ -95,7 +95,7 @@ var pageModule = function () {
 		  }
 		})
 	}
-	
+
 	var initChart = function(data){
 		/*
         * 在线率统计表数据
@@ -233,8 +233,8 @@ var pageModule = function () {
 			}
 		})
 	};
-	
-	
+
+
 	//未开机数据
 	var getBarChartData2 = function(){
 		$.ajax({
@@ -246,11 +246,11 @@ var pageModule = function () {
 		  success:function(res){
 			if(res.result=="success"){
 			    initBarChart(res.data,'main3');
-			} 
+			}
 		  }
 		})
 	}
-	
+
 	var initBarChart = function(data,id){
 		//解析后端数据
 		var xdata =[];
@@ -259,7 +259,7 @@ var pageModule = function () {
 			xdata.push(o.deptName);
 			ydata.push(o.count);
 		});
-		
+
 		var chart = echarts.init(document.getElementById(id));
 		chart.setOption({
 			title: {
@@ -383,14 +383,14 @@ var pageModule = function () {
 					if(i<5){
 						arryHtml_l+='<div>'+
 									'	<span class="topVS3">TOP'+parseInt(i+1)+'</span>'+
-									'	<span>'+o.appName+'</span>'+
-									'	<span>'+o.appCount+'</span>'+
+									'	<span title="'+o.appName+'" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 50%">'+o.appName+'</span>'+
+									'	<span style="width: 16.6%">'+o.appCount+'</span>'+
 									'</div>'
 					}else if (i< 10) {
 						arryHtml_r+='<div>'+
 									'	<span>TOP'+parseInt(i+1)+'</span>'+
-									'	<span>'+o.appName+'</span>'+
-									'	<span>'+o.appCount+'</span>'+
+									'	<span title="'+o.appName+'" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 50%">'+o.appName+'</span>'+
+									'	<span style="width: 16.6%">'+o.appCount+'</span>'+
 									'</div>'
 					}
 				});
@@ -399,10 +399,10 @@ var pageModule = function () {
 			}
 		})
 	}
-	
-	
+
+
 	//安装量
-	var initanz = function(){   
+	var initanz = function(){
 		$ajax({
 			url: azUrl,
 			data:{deptid:$("#deptId2").val(),time:$("#searchDate2").val()},
@@ -413,14 +413,14 @@ var pageModule = function () {
 					if(i<5){
 						arryHtml_l+='<div>'+
 									'	<span class="topVS3">TOP'+parseInt(i+1)+'</span>'+
-									'	<span>'+o.appName+'</span>'+
-									'	<span>'+o.appCount+'</span>'+
+									'	<span title="'+o.appName+'" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 66.6%">'+o.appName+'</span>'+
+									// '	<span>'+o.appCount+'</span>'+
 									'</div>'
 					}else if (i< 10) {
 						arryHtml_r+='<div>'+
 									'	<span>TOP'+parseInt(i+1)+'</span>'+
-									'	<span>'+o.appName+'</span>'+
-									'	<span>'+o.appCount+'</span>'+
+									'	<span title="'+o.appName+'" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 66.6%">'+o.appName+'</span>'+
+									// '	<span>'+o.appCount+'</span>'+
 									'</div>'
 					}
 				});
