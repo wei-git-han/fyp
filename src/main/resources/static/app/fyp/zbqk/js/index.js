@@ -41,7 +41,7 @@ var pageModule = function () {
 		grid = $('#gridcont').createGrid({
 			columns:[
 			    {display:"序号",name:"index",width:"10%",align:"center",render:function(rowdata,n){
-                    return n+1;
+                    return n;
                 }},
                 {display:"姓名",name:"userName",width:"20%",align:"center",render:function(rowdata,n){
                     return rowdata.userName;
