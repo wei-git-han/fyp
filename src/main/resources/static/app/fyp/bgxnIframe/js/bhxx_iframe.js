@@ -49,41 +49,6 @@ var pageModule = function () {
                     // data.ydata.push(res.data.duration||0);
                     // //data.ydata.push(res.data.count||null);
                     // init3dBarChart('main',data);
-				  // res.data = {
-				  // 	list:[{
-					// 	useTime:'400',
-					// 	zoneName: '1',
-					// 	useNumber:'777'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '2',
-					// 	useNumber:'777'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '3',
-					// 	useNumber:'99'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '4',
-					// 	useNumber:'7'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '5',
-					// 	useNumber:'777'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '6',
-					// 	useNumber:'777'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '7',
-					// 	useNumber:'99'
-					// },{
-					// 	useTime:'400',
-					// 	zoneName: '8',
-					// 	useNumber:'7'
-					// }]
-				  // }
 					var tableData = {
 						"title":'',
 						"legend":[
