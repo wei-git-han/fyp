@@ -7,6 +7,9 @@ var nowMonth = date2.getMonth();
 if(nowMonth==0||nowMonth==1){
 	$('#startTime1,#startTime2,#startTime3,#startTime4').val(`${nowYear-1}-01-01`)
 	$('#endTime1,#endTime2,#endTime3,#endTime4').val(`${nowYear-1}-12-31`)
+}else{
+	$('#startTime1,#startTime2,#startTime3,#startTime4').val(`${nowYear}-01-01`)
+	$('#endTime1,#endTime2,#endTime3,#endTime4').val(`${nowYear}-12-31`)
 }
 var pageModule = function () {
 	//组织机构树

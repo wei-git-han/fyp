@@ -13,7 +13,9 @@ var nowMonth = date2.getMonth();
 if(nowMonth==0||nowMonth==1){
 	$('#startTime1').val(`${nowYear-1}-01-01`)
 	$('#endTime1').val(`${nowYear-1}-12-31`);
-	nowYear--
+}else{
+	$('#startTime1').val(`${nowYear}-01-01`)
+	$('#endTime1').val(`${nowYear}-12-31`);
 }
 var pageModule = function() {
 	var initZhoubiao = function() {
@@ -57,8 +59,7 @@ var pageModule = function() {
 				deptid: $("#deptId").val(),
 				deptname: $("#deptName").val(),
 				startTime: $("#startTime1").val(),
-				endTime: $("#endTime1").val(),
-				year: nowYear
+				endTime: $("#endTime1").val()
 			},
 			dataType: "json",
 			success: function(res) {

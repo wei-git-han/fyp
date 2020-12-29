@@ -131,7 +131,12 @@ var pageModule = function() {
       $('#start_page5 .b-title').html(typeArray[4].title)
       $('#start_page5 .c-title').html(typeArray[4].english)
       $('#start_page5 iframe').attr("src", typeArray[4].url)
-      setPage('start_page1')
+      if(this.id != 'rcgz'){
+        setPage('start_page2')
+      }else{
+        setPage('start_page1')
+      }
+
       activeDoType = this.id;
       setRefreshInterVal()
     })
