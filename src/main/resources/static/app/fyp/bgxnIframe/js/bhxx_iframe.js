@@ -3,11 +3,11 @@ var pageModule = function () {
 		$("#rchy").click(function(){
 			getBar3dChartData();
 		});
-		
+
 		$("#sphy").click(function(){
 			getBarChartData();
 		});
-		
+
 		$(".date-picker1").datepicker({
 			language:"zh-CN",
 			rtl: Metronic.isRTL(),
@@ -18,7 +18,7 @@ var pageModule = function () {
 		}).on("changeDate",function(){
 			getBar3dChartData();
 		});
-		
+
 		$(".date-picker2").datepicker({
 			language:"zh-CN",
 			rtl: Metronic.isRTL(),
@@ -30,7 +30,7 @@ var pageModule = function () {
 			getBarChartData();
 		});
 	}
-	
+
 	//日常会议
 	var getBar3dChartData = function(){
 		 $.ajax({
@@ -39,21 +39,88 @@ var pageModule = function () {
 		      dataType:"json",
 		      success:function(res){
 		        //if(res.result=="success"){
-		        if(res.code=="200"){
-		        	var data = {
-                        "xdata":[],
-                        "ydata":[]
-                    }
-		        	 // deptName  部门名称  duration  会议总时长   count 会议总次数
-                    data.xdata.push(res.deptName);
-                    data.ydata.push(res.data.duration||0);
-                    //data.ydata.push(res.data.count||null);
-                    init3dBarChart('main',data);
+		        // if(res.code=="200"){
+		        	// var data = {
+                    //     "xdata":[],
+                    //     "ydata":[]
+                    // }
+		        	//  // deptName  部门名称  duration  会议总时长   count 会议总次数
+                    // data.xdata.push(res.deptName);
+                    // data.ydata.push(res.data.duration||0);
+                    // //data.ydata.push(res.data.count||null);
+                    // init3dBarChart('main',data);
+				  // res.data = {
+				  // 	list:[{
+					// 	useTime:'400',
+					// 	zoneName: '1',
+					// 	useNumber:'777'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '2',
+					// 	useNumber:'777'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '3',
+					// 	useNumber:'99'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '4',
+					// 	useNumber:'7'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '5',
+					// 	useNumber:'777'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '6',
+					// 	useNumber:'777'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '7',
+					// 	useNumber:'99'
+					// },{
+					// 	useTime:'400',
+					// 	zoneName: '8',
+					// 	useNumber:'7'
+					// }]
+				  // }
+					var tableData = {
+						"title":'',
+						"legend":[
+							"总时长",
+							"场次"
+						],
+						"xdata":[
+						],
+						"ydata":[
+							{
+								"title":"总时长",
+								"data":[
+
+								]
+							},
+							{
+								"title":"场次",
+								"data":[
+
+								]
+							}
+						]
+					}
+					if (res.data.list.length > 0 ) {
+						res.data.list.forEach((e,index)=>{
+							// zoneName 单位名称   useTime 使用时长   useNumber 使用次数   zoneId 单位id
+							tableData.xdata.push(e.zoneName);
+							tableData.ydata[0].data.push(e.useTime)
+							tableData.ydata[1].data.push(e.useNumber)
+						})
+						initBarChart('main',tableData)
+					}
 		        }
-		      }
+		      // }
 		 })
 	};
-	
+
 
 	var init3dBarChart = function(id,data){
 		var charts = echarts.init(document.getElementById(id));
@@ -112,7 +179,7 @@ var pageModule = function () {
 		    },{
 		            name:'a',
 		            tooltip:{
-		               show:false 
+		               show:false
 		            },
 		            type: 'pictorialBar',
 		            itemStyle: {
@@ -123,7 +190,7 @@ var pageModule = function () {
 		                            {offset: 0, color: '#2bc6dd'},
 		                            {offset: 1, color: '#18cde1'}
 		                        ]
-		                    ), 
+		                    ),
 		                    borderWidth:1,
 		                    borderColor:'#1B397C'
 		                }
@@ -136,7 +203,7 @@ var pageModule = function () {
 		        }]
 		});
 	}
-	
+
 	//视频会议
 	var getBarChartData = function(){
 	  $.ajax({
@@ -174,13 +241,13 @@ var pageModule = function () {
                         tableData.ydata[0].data.push(e.useTime)
                         tableData.ydata[1].data.push(e.useNumber)
                     })
-                  initBarChart(tableData)
+                  initBarChart('main1',tableData)
               }
 	      }
 	   })
 	}
-	var initBarChart = function(data){
-		var chart = echarts.init(document.getElementById('main1'))
+	var initBarChart = function(id,data){
+		var chart = echarts.init(document.getElementById(id))
 		chart.setOption({
 			title: {
 			  show: true,
@@ -188,7 +255,7 @@ var pageModule = function () {
 			  subtextStyle: {
 				color: '#DBDDF7',
 			  },
-			  /* padding:[100,100,100,100]  设置title位置，是具体固定的位置*/  
+			  /* padding:[100,100,100,100]  设置title位置，是具体固定的位置*/
 			},
 			/* grid:{
 				height:100   柱状图高度
@@ -199,7 +266,10 @@ var pageModule = function () {
 				axisPointer: {            // 坐标轴指示器，坐标轴触发有效
 					type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
 				},
-				color:'red'
+				color:'red',
+				formatter: function(params) {
+					return '<p>单位：'+(params[0].name||'')+'<br/>总时长：'+(params[0].value||0)+'小时'+'<br/>次数：'+(params[1].value||0)+'</p>'
+				}
 			},
 			legend: {
 				data:data.legend,
@@ -226,7 +296,7 @@ var pageModule = function () {
 					type: 'category',
 					axisTick: {show: false},
 					splitLine: {show: false},
-					interval: 0,
+					// interval: 0,
 					/* axisTick: {
 					  alignWithLabel: true
 					}, */
@@ -243,9 +313,9 @@ var pageModule = function () {
 			yAxis: [
 				{
 					type: 'value',
-					min: 0,
-					max: 500,
-					splitNumber: 5,
+					// min: 0,
+					// max: 500,
+					// splitNumber: 5,
 					axisLabel: {
 					  textStyle: {
 					    color: '#7783DE',
@@ -264,8 +334,8 @@ var pageModule = function () {
               {
                 type: 'inside',
                 start: 0,
-                throttle: 50,
-                minValueSpan: 4,
+                // throttle: 50,
+                // minValueSpan: 4,
                 end: 100
               }
             ],
@@ -273,18 +343,18 @@ var pageModule = function () {
 				{
 					name: data.ydata[0].title,
 					type: 'bar',
-					barGap: 5,
+					// barGap: 5,
 					barWidth:15,
-					barCategoryGap:'300',
+					// barCategoryGap:'300',
 					data: data.ydata[0].data
 				},
 				{
 					name: data.ydata[1].title,
 					type: 'bar',
-					barGap: 5,
+					// barGap: 5,
 					barWidth:15,
-					borderRadius: 30,
-					barCategoryGap:'300',
+					// borderRadius: 30,
+					// barCategoryGap:'300',
 					data: data.ydata[1].data,
 					itemStyle:{
 						borderRadius: 30
@@ -293,8 +363,8 @@ var pageModule = function () {
 			]
 		});
 	}
-	
-	
+
+
     return {
         //加载页面处理程序
         initControl: function () {
