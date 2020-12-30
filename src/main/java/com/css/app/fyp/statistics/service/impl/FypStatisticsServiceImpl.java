@@ -535,10 +535,10 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//来文阅知 件
 			map.put("fileReadCount",e.getYZTOTAL());
 			//来文阅知占比
-            int i = Integer.parseInt(e.getYJTOTAL().toString());
+            int i = Integer.parseInt(e.getYZTOTAL().toString());
             float fileReadProportion= ((float)i/ (float)(total == 0? 1 : total)) *100;
             String fileReadProportionFormat = decimalFormat.format(fileReadProportion);
-			map.put("fileReadProportion",String.valueOf(fileReadProportionFormat));
+			map.put("fileReadProportion",fileReadProportionFormat);
 			//来文阅知完成率最高
 			map.put("fileReadRate",e.getYZoverPercentage());
 			//我的公文数 件
@@ -557,7 +557,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//我的公文完成率最高
 			map.put("officialRate",e.getOverPercentage());
 			//我的阅件 件
-			map.put("readPieceCount",e.getYZTOTAL());
+			map.put("readPieceCount",e.getYJTOTAL());
 			//我的阅件占比
             int i3 = Integer.parseInt(e.getYJTOTAL().toString());
             float readPieceProportion= ((float)i3/ (float)(total == 0? 1 : total)) *100;
@@ -574,7 +574,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 			//我的办件 件
 			map.put("workPieceCount",e.getBJTOTAL());
 			//我的办件占比
-            int i4 = Integer.parseInt(e.getYJTOTAL().toString());
+            int i4 = Integer.parseInt(e.getBJTOTAL().toString());
             float workPieceProportion= ((float)i4/ (float)(total == 0? 1 : total)) *100;
             String workPieceProportionFormat = decimalFormat.format(workPieceProportion);
 			map.put("workPieceProportion",workPieceProportionFormat);
