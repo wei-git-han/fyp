@@ -93,9 +93,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     private static long executeTime = 0L;
 
     public void analyseData(String userId, String type, long wantExecuteTime) {
-        if(executeTime != 0L && wantExecuteTime - executeTime <= 60000 * 5L) {
-            return;
-        }
+//        if(executeTime != 0L && wantExecuteTime - executeTime <= 60000 * 5L) {
+//            return;
+//        }
         String url = AppInterfaceConstant.WEB_INTERFACE_GWCL_ONLINE_SPGW;
         //String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
         BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedService.queryByType(type);
@@ -121,11 +121,15 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             String reJson = CrossDomainUtil.postJSONString(href, map);
             if (StringUtils.isNotEmpty(reJson)) {
                 if(com.css.base.utils.StringUtils.isNotBlank(reJson)){
-                    JSONArray jsonArray = JSONArray.parseArray(reJson);
-                    if(jsonArray != null && jsonArray.size() > 0){
-                        for(int i = 0;i<jsonArray.size();i++){
-                            accountList.add(jsonArray.getString(i));
-                        }
+                    JSONObject jsonObject = JSONObject.parseObject(reJson);
+                    Map  map1 = new HashMap();
+                    map1 = (Map) jsonObject.get("onlineUser");
+                    Set<String> keySet = map1.keySet();
+                    Iterator<String> iterator = keySet.iterator();
+                    while (iterator.hasNext()){
+                        String key = iterator.next();
+                        String value = (String) map1.get(key);
+                        accountList.add(key);
                     }
                 }
             }

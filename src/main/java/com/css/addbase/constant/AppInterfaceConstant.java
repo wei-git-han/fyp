@@ -599,7 +599,7 @@ public class AppInterfaceConstant {
      * @Description 待批公文统计头--局用户
      * @Author gongan
      */
-	public final static String WEB_INTERFACE_GWCL_ONLINE_SPGW = "/api/online/";
+	public final static String WEB_INTERFACE_GWCL_ONLINE_SPGW = "/api/sso/onlineUser";
 	/**
 	 * @Description 待批公文统计明细--审批公文
 	 * @Author gongan
@@ -792,7 +792,7 @@ public class AppInterfaceConstant {
 
     public final static String WEB_INTERFACE_QXJ_statistics = "/app/qxjgl/leaveOrBack/getXLGLNumber";
 
-    public final static String WEB_INTERFACE_XLGLZXR = "/api/online/";
+    public final static String WEB_INTERFACE_XLGLZXR = "line/";
 
     //年度统计-请销假
     public final static String  WEB_QXJ_DAYS="leaveOrBack/getQXJlist";
