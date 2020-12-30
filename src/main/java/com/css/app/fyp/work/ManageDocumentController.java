@@ -211,6 +211,9 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","发展趋势");
         paramMap.add("type",type);
+        if("root".equals(deptid)){
+            deptid="";
+        }
         paramMap.add("deptid",deptid);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         paramMap.add("startTime",sTime);
@@ -248,6 +251,9 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","呈批效率");
         paramMap.add("type",type);
+        if("root".equals(deptid)){
+            deptid = "";
+        }
         paramMap.add("deptid",deptid);
         paramMap.add("startTime",sTime);
         paramMap.add("endTime",eTime);
@@ -277,6 +283,9 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","办件效率");
         paramMap.add("type",type);
+        if("root".equals(deptid)){
+            deptid = "";
+        }
         paramMap.add("deptid",deptid);
         paramMap.add("startTime",sTime);
         paramMap.add("endTime",eTime);
@@ -306,6 +315,9 @@ public class ManageDocumentController {
         LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
         paramMap.add("title","阅件效率");
         paramMap.add("type",type);
+        if("root".equals(deptid)){
+            deptid = "";
+        }
         paramMap.add("deptid",deptid);
         paramMap.add("startTime",sTime);
         paramMap.add("endTime",eTime);
