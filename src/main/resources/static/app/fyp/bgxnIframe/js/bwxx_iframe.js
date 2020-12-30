@@ -109,10 +109,10 @@ var pageModule = function () {
 					$.each(res.data,function(i, o){
 					    if(o!=null){
 					        data.xdata.push(o.deptName);
-                            data.ydata.push([i,0,o.count]);
+                            data.ydata.push({name:o.deptName,value:o.count});
 					    }
 					})
-                    init3dBarChart('container',data);
+					initBarChart('container',data);
                 }
             }
         })
@@ -138,16 +138,116 @@ var pageModule = function () {
 					$.each(res.data,function(i, o){
 						if(o!=null){
                             data.xdata.push(o.deptName);
-                            data.ydata.push([i,0,o.count]);
+                            data.ydata.push({name:o.deptName,value:o.count});
                         }
 					})
-					init3dBarChart('container2',data);
+					initBarChart('container2',data);
                 }
             }
         })
     }
+	var initBarChart = function(id,data){
+		var charts = echarts.init(document.getElementById(id));
+		/*
+        * 在线率统计表数据
+        * */
+		var option = {
+			title: {
+				show:false,
+				// subtext: '单位（人）',
+				subtextStyle: {
+					color: '#2f8fdc',
+				}
+			},
+			dataZoom:[
+				{
+					type:'inside',
+					start:0,
+					throttle:50,
+					minValueSpan:4,
+					end:100
+				}
+			],
+			tooltip: {
+				trigger: 'axis'
 
-
+			},
+			grid:{
+				x:100, //控制x轴文字和底部的距离
+				y2: 100 //控制倾斜的文字域最右边的距离，防止倾斜的文字超过显示区域
+			},
+			xAxis: [{
+				clickable: true,
+				type: 'category',
+				data: data.xdata,
+				axisLabel: {
+//                    margin: 'auto',
+					show: true,
+					interval: 0,
+					rotate:45,
+					textStyle: {
+						color: '#ACACAC',
+						fontSize: 12,
+					}
+				}
+			},],
+			yAxis: [{
+				type: 'value',
+				min:0,
+				max:100,
+				splitNumber:5,
+				axisLabel: {
+					textStyle: {
+						color: '#ACACAC',
+						fontSize: 12,
+					},
+					formatter:function(value){
+						return value+"%";
+					}
+				},
+				splitLine: {
+					lineStyle: {
+						type: "dotted",
+						color: "#ACACAC"
+					}
+				},
+			}],
+			series: [{
+				name: data.title,
+				type: 'bar',
+				data: data.ydata,
+				barWidth:13,
+				itemStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0,0,0,1,[{
+							offset:1,
+							color:'#C2CC23'
+						},{
+							offset:0,
+							color:'#C9CC78'
+						}]),
+//                       color:function(param){
+//                           return {
+//                               colorStops:[{
+//                                   offset:0,
+//                                   color:'#2C76EC'
+//                               },{
+//                                   offset:1,
+//                                   color:'#58B4FD'
+//                               }]
+//                           }
+//                       },
+						barBorderRadius:30,
+						label: {
+							show: false,
+						}
+					}
+				},
+			},
+			]
+		};
+		charts.setOption(option);
+	};
 	var init3dBarChart = function(id,data){ //echart
 		var charts = echarts.init(document.getElementById(id));
 		charts.setOption({

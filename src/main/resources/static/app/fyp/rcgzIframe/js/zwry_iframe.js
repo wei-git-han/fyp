@@ -175,7 +175,7 @@ var pageModule = function () {
 							'	<a style="padding-left:'+(n*pl)+'px;" id="'+id+'" data="'+text+'" >'+icon+img+text+numberhtml+zxhtml+statushtml+typehtml+ifqjhtml+'</a>'+
 							'</li>'); */
 				console.log
-				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"active":"")+' lis" >'+
+				var li =  $('<li class="l'+n+' '+(n==1&&i==0?"open active":"")+' lis" >'+
 							'	<a style="padding-left:' + ((n-1) * pl) + 'px;" id="' + id + '" data="' + text + '" >'+
 							'		<span class="newstatusL">'+img+text+'</span>'+
 							'		<span class="newstatusR" style="display: '+`${status==3?"none":"inline-block"}`+'"><font>'+numberhtml+zxhtml+typehtml+statushtml+'</font>'+icon+'</span>'+

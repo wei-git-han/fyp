@@ -353,15 +353,15 @@ var pageModule = function () {
     return {
         //加载页面处理程序
         initControl: function () {
-             getRole('grzb');
+             getRole('bjzb');
              initUnitTree();
 		     initother();
         },
         refresh:function(){
-        	getRole('grzb');
+        	getRole('bjzb');
         },
 		refreshPage:function () {
-			getRole('grzb');
+			getRole('bjzb');
 		}
     }
 }();

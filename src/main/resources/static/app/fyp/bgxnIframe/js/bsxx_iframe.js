@@ -123,8 +123,8 @@ var pageModule = function() {
 			language:"zh-CN",
 		    rtl: Metronic.isRTL(),
 		    orientation: "",
-		    format: "yyyy-mm",
-			minViewMode: 1,
+		    format: "yyyy",
+			minViewMode: 2,
 		    autoclose: true
 		}).on("changeDate",function(){
 			initZhoubiao();

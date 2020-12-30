@@ -53,19 +53,13 @@ var pageModule = function () {
 						"title":'',
 						"legend":[
 							"总时长",
-							"场次"
+							// "场次"
 						],
 						"xdata":[
 						],
 						"ydata":[
 							{
 								"title":"总时长",
-								"data":[
-
-								]
-							},
-							{
-								"title":"场次",
 								"data":[
 
 								]
@@ -76,8 +70,8 @@ var pageModule = function () {
 						res.data.list.forEach((e,index)=>{
 							// zoneName 单位名称   useTime 使用时长   useNumber 使用次数   zoneId 单位id
 							tableData.xdata.push(e.zoneName);
-							tableData.ydata[0].data.push(e.useTime)
-							tableData.ydata[1].data.push(e.useNumber)
+							tableData.ydata[0].data.push({value:e.useTime,number:e.useNumber})
+							// tableData.ydata[1].data.push(e.useNumber)
 						})
 						initBarChart('main',tableData)
 					}
@@ -233,7 +227,7 @@ var pageModule = function () {
 				},
 				color:'red',
 				formatter: function(params) {
-					return '<p>单位：'+(params[0].name||'')+'<br/>总时长：'+(params[0].value||0)+'小时'+'<br/>次数：'+(params[1].value||0)+'</p>'
+					return '<p>单位：'+(params[0].name||'')+'<br/>总时长：'+(params[0].value||0)+'小时'+'<br/>次数：'+(params[0].number||0)+'</p>'
 				}
 			},
 			legend: {
@@ -312,19 +306,19 @@ var pageModule = function () {
 					barWidth:15,
 					// barCategoryGap:'300',
 					data: data.ydata[0].data
-				},
-				{
-					name: data.ydata[1].title,
-					type: 'bar',
-					// barGap: 5,
-					barWidth:15,
-					// borderRadius: 30,
-					// barCategoryGap:'300',
-					data: data.ydata[1].data,
-					itemStyle:{
-						borderRadius: 30
-					}
 				}
+				// {
+				// 	name: data.ydata[1].title,
+				// 	type: 'bar',
+				// 	// barGap: 5,
+				// 	barWidth:15,
+				// 	// borderRadius: 30,
+				// 	// barCategoryGap:'300',
+				// 	data: data.ydata[1].data,
+				// 	itemStyle:{
+				// 		borderRadius: 30
+				// 	}
+				// }
 			]
 		});
 	}
