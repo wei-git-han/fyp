@@ -1,6 +1,6 @@
 package com.css.base.utils;
 
-import com.alibaba.fastjson.JSON;
+
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,11 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
 import com.css.base.filter.SSOAuthFilter;
-import sun.net.www.protocol.http.HttpURLConnection;
 
-import java.io.*;
-import java.net.URL;
-import java.nio.charset.Charset;
+
+
 import java.util.Map;
 
 /**
@@ -291,45 +289,6 @@ public class CrossDomainUtil {
 			System.out.println("【报错信息】"+e.getMessage()+"，url="+url);
 		}
 		return null;
-	}
-
-
-	public static JSONObject getTokenJSONObjectHttp(String url, Map<String, Object> map, String token){
-        JSONObject jsonObject = new JSONObject();
-        String input= "";
-        StringBuffer stringBuffer = new StringBuffer("");
-        try {
-            URL u = new URL(url);
-            HttpURLConnection con=(HttpURLConnection) u.openConnection();
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.setRequestMethod("POST");
-            con.setAllowUserInteraction(false);
-            con.setUseCaches(false);
-            con.setRequestProperty("Accept_Charset","UTf-8");
-            con.setRequestProperty("Content-Type", "application/json");
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
-            PrintWriter pw = new PrintWriter(outputStreamWriter);
-            pw.print(new JSONObject(map));
-            pw.flush();
-            BufferedOutputStream bo=new BufferedOutputStream(con.getOutputStream());
-            byte[] bdat=input.getBytes("utf-8");
-            bo.write(bdat,0,bdat.length);
-            BufferedInputStream inp=new BufferedInputStream(con.getInputStream());
-            InputStreamReader in=new InputStreamReader(inp, Charset.forName("utf8"));
-            BufferedReader reader=new BufferedReader(in);
-            String tempStr="";
-            while(tempStr!=null){
-                stringBuffer.append(tempStr);
-                tempStr=reader.readLine();
-            }
-            System.out.println(stringBuffer.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }finally {
-            return jsonObject;
-        }
 	}
 
 }
