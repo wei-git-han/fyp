@@ -47,8 +47,6 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	
 	@Override
 	public void save(FypStatistics fypStatistics){
-
-	    this.delete(fypStatistics.getUserId());
 		fypStatisticsDao.save(fypStatistics);
 	}
 	
@@ -107,7 +105,9 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		List<Map<String,Object>> docuemntData = null;
 		List<Map<String,Object>> qxjData = null;
 		List<Map<String,Object>> dbData = null;
-        JSONObject doc = CrossDomainUtil.getTokenByJsonData(documentUrl, new LinkedMultiValueMap<>(), token);
+        LinkedMultiValueMap<String, Object> objectObjectLinkedMultiValueMap = new LinkedMultiValueMap<String, Object>();
+        objectObjectLinkedMultiValueMap.add("deptId",deptId);
+        JSONObject doc = CrossDomainUtil.getTokenByJsonData(documentUrl,objectObjectLinkedMultiValueMap, token);
         if(null!=doc){
 			JSONObject tokenByJsonData = doc;
 			docuemntData = (List<Map<String,Object>>)tokenByJsonData.get("list");
@@ -136,7 +136,8 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		if(null!=docuemntData) {
 		    for(Map<String,Object> maps:docuemntData){
                 FypStatistics data = this.getData(maps, finalQxjData, yearDyas, Integer.parseInt(latDyas + ""), finalDbData);
-                this.save(data);
+                    this.deleteByUserId(data.getUserId());
+                    this.save(data);
             }
 		}
 		//推送到平台
@@ -617,4 +618,8 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		Response.json(jsonObject);*/
 
 	}
+    @Override
+    public void deleteByUserId(String id){
+        fypStatisticsDao.deleteByUserId(id);
+    }
 }

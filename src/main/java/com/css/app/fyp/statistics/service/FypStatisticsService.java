@@ -31,4 +31,6 @@ public interface FypStatisticsService {
 	void syncData();
 
 	boolean pushDesktop();
+
+    void deleteByUserId(String id);
 }

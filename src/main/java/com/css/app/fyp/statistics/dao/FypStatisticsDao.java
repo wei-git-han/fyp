@@ -2,6 +2,7 @@ package com.css.app.fyp.statistics.dao;
 
 import com.css.app.fyp.statistics.entity.FypStatistics;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.css.base.dao.BaseDao;
@@ -36,4 +37,7 @@ public interface FypStatisticsDao extends BaseDao<FypStatistics> {
     List<String> findDivision();
     @Select("select user_id from BASE_APP_USER where organid = #{0}")
     List<String> findUsersByDivision(String divisionId);
+
+    @Delete("delete from FYP_STATISTICS where USER_ID = #{0}")
+    void deleteByUserId(String id);
 }
