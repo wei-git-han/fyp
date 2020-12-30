@@ -76,17 +76,17 @@ public class FypGuaranteeTackingServiceImpl implements FypGuaranteeTackingServic
 			fypGuaranteeTacking.setId(UUIDUtils.random());
 			String steCell0 = sheet.getRow(i).getCell(0).getStringCellValue(); //姓名
 			String steCell1 = sheet.getRow(i).getCell(1).getStringCellValue(); //单位名称
-			String steCell2 = sheet.getRow(i).getCell(2).getNumericCellValue()+""; //联系电话
+			Double steCell2 = sheet.getRow(i).getCell(2).getNumericCellValue(); //联系电话
 			Date steCell3 = sheet.getRow(i).getCell(3).getDateCellValue(); //报修时间
 			String steCell4 = sheet.getRow(i).getCell(4).getStringCellValue()+""; //问题来源
 			String steCell5 = sheet.getRow(i).getCell(5).getStringCellValue()+""; //问题描述
 			String steCell6 = sheet.getRow(i).getCell(6).getStringCellValue()+""; //状态
 			Date steCell7 = sheet.getRow(i).getCell(7).getDateCellValue(); //更新时间
 			String steCell8 = sheet.getRow(i).getCell(8).getStringCellValue()+""; //处理措施
-
+			String phone = String.valueOf(steCell2);
 			fypGuaranteeTacking.setName(steCell0);
 			fypGuaranteeTacking.setDeptName(steCell1);
-			fypGuaranteeTacking.setPhone(steCell2);
+			fypGuaranteeTacking.setPhone(phone.substring(0,phone.indexOf(".")));
 			fypGuaranteeTacking.setWarrantyTime(steCell3);
 			fypGuaranteeTacking.setSource(steCell4);
 			fypGuaranteeTacking.setRemark(steCell5);
