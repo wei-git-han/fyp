@@ -259,11 +259,21 @@ public class GetJsonData {
         if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
             String data = CrossDomainUtil.getTokenByStringData(url,map,token);
             if(StringUtils.isNotBlank(data)){
-                JSONArray jsonArray = JSONArray.parseArray(data);
-                if(jsonArray != null && jsonArray.size() > 0){
-                    for(int i = 0;i<jsonArray.size();i++){
-                        strs.add(jsonArray.getString(i));
-                    }
+                //JSONArray jsonArray = JSONArray.parseArray(data);
+//                if(jsonArray != null && jsonArray.size() > 0){
+//                    for(int i = 0;i<jsonArray.size();i++){
+//                        strs.add(jsonArray.getString(i));
+//                    }
+//                }
+                JSONObject jsonObject = JSONObject.parseObject(data);
+                Map  map1 = new HashMap();
+                map1 = (Map) jsonObject.get("onlineUser");
+                Set<String> keySet = map1.keySet();
+                Iterator<String> iterator = keySet.iterator();
+                while (iterator.hasNext()){
+                    String key = iterator.next();
+                    String value = (String) map1.get(key);
+                    strs.add(key);
                 }
             }
         }
