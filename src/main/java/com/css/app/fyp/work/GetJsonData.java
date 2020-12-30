@@ -72,7 +72,7 @@ public class GetJsonData {
             Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(map.get("deptid").get(0).toString());
             this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, map.get("deptid").toString());
         }else {
-            List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
+            List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDeptByType("gwclbw");;
             for (Map<String, Object> data:appIdAndDeptIdNameAll) {
                 this.getJsonsDate(type, data, prefix, jsons, token, map, orgId);
             }

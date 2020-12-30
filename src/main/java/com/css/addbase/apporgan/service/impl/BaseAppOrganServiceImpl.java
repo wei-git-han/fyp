@@ -102,6 +102,11 @@ public class BaseAppOrganServiceImpl implements BaseAppOrganService {
 	}
 
 	@Override
+	public List<Map<String,Object>> queryAllDeptByType(String type){
+		return baseAppOrganDao.queryAllDeptByType(type);
+	}
+
+	@Override
 	public List<BaseAppOrgan> getAllDeptIds(){
 		return baseAppOrganDao.getAllDeptIds();
 	}
