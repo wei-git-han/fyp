@@ -123,4 +123,9 @@ order by
         SORT
 	</select>
 
+	<select id="queryAllDeptByType" resultType="map">
+		select  * from BASE_APP_ORG_MAPPED a where   a.type      = 'gwclbw'  and a.ORG_ID not in
+        (select dept_id from CONFIG_USER_DEPT where dept_id is not null)  and a.sort is not null order by SORT
+	</select>
+
 </mapper>
