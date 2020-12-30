@@ -20,7 +20,11 @@ var pageModule = function () {
 				$("#deptName3").createSelecttree({
 					data : data,
 					width : '100%',
-					success : function(data, treeobj) {},
+					success : function(data, treeobj) {
+						if(data&&data.id&&data.text){
+							$("#deptName3").val(data.text);
+						}
+					},
 					selectnode : function(e, data) {
 						$("#deptName3").val(data.node.text);
 						$("#deptId3").val(data.node.id);
@@ -30,7 +34,11 @@ var pageModule = function () {
 				$("#deptName4").createSelecttree({
 					data : data,
 					width : '100%',
-					success : function(data, treeobj) {},
+					success : function(data, treeobj) {
+						if(data&&data.id&&data.text){
+							$("#deptName4").val(data.text);
+						}
+					},
 					selectnode : function(e, data) {
 						$("#deptName4").val(data.node.text);
 						$("#deptId4").val(data.node.id);
