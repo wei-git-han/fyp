@@ -30,5 +30,5 @@ public interface FypStatisticsService {
 
 	void syncData();
 
-	void pushDesktop();
+	boolean pushDesktop();
 }

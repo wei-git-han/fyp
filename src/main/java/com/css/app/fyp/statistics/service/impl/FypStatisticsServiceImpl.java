@@ -2,6 +2,7 @@ package com.css.app.fyp.statistics.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.css.addbase.apporgan.service.BaseAppOrganService;
 import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
@@ -31,6 +32,8 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 
 	@Autowired
 	private BaseAppOrgMappedService baseAppOrgMappedService;
+	@Autowired
+    private BaseAppOrganService baseAppOrganService;
 
 	@Override
 	public FypStatistics queryObject(String id){
@@ -44,6 +47,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	
 	@Override
 	public void save(FypStatistics fypStatistics){
+
 	    this.delete(fypStatistics.getUserId());
 		fypStatisticsDao.save(fypStatistics);
 	}
@@ -75,16 +79,19 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	 */
 	@Override
 	public void syncData() {
-		String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getDepartmentId());
-		BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.APP_GWCL);
-		BaseAppOrgMapped qxj = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.APP_QXJ);
-		BaseAppOrgMapped db = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.DCCB);
-		this.getDocument(
-				document.getUrl()+document.getWebUri()+ AppInterfaceConstant.WEB_GWCL_STATISTICS,
-				qxj.getUrl()+ qxj.getWebUri()+AppInterfaceConstant.WEB_QXJ_DAYS,
-				db.getUrl()+AppInterfaceConstant.WEB_DCCB_STATISTICS,
-				SSOAuthFilter.getToken(),
-				bareauByUserId);
+        BaseAppOrgMapped qxj = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.APP_QXJ);
+        BaseAppOrgMapped db = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.DCCB);
+        List<BaseAppOrgMapped> mappedData = baseAppOrgMappedService.getMappedData("", null, AppConstant.APP_GWCL);
+        if(mappedData !=null && mappedData.size()>0){
+            for (BaseAppOrgMapped baseAppOrgMapped : mappedData){
+                this.getDocument(
+                        baseAppOrgMapped.getUrl()+baseAppOrgMapped.getWebUri()+ AppInterfaceConstant.WEB_GWCL_STATISTICS,
+                        qxj.getUrl()+ qxj.getWebUri()+AppInterfaceConstant.WEB_QXJ_DAYS,
+                        db.getUrl()+AppInterfaceConstant.WEB_DCCB_STATISTICS,
+                        SSOAuthFilter.getToken(),
+                        baseAppOrgMapped.getOrgId());
+            }
+        }
 	}
 
 
@@ -127,9 +134,10 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		//获取法定节假日天数
 		String latDyas = fypStatisticsDao.getConfigLayDyas();
 		if(null!=docuemntData) {
-			docuemntData.forEach((e) -> {
-				this.save(this.getData(e, finalQxjData, yearDyas, Integer.parseInt(latDyas + ""), finalDbData));
-			});
+		    for(Map<String,Object> maps:docuemntData){
+                FypStatistics data = this.getData(maps, finalQxjData, yearDyas, Integer.parseInt(latDyas + ""), finalDbData);
+                this.save(data);
+            }
 		}
 		//推送到平台
 		pushDesktop();
@@ -210,7 +218,12 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		//成语id
 		statistics.setPhraseId(data.get("phraseId").toString());
 		//接收公文数量
-		statistics.setDocumentNum(Integer.parseInt(data.get("documentNum").toString()));
+        Object o = data.get("documentNum");
+        if(o !=null){
+            statistics.setDocumentNum(Integer.parseInt(o.toString()));
+        }else{
+            statistics.setDocumentNum(0);
+        }
 		//第一次使用到系统时间的天数
         try {
             statistics.setMeetDays(data.get("firstTime") ==  null ? null : this.beginEndDays(simpleDateFormat.parse(data.get("firstTime").toString()) ));
@@ -300,10 +313,26 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		String finishRate = "";
 		if(null!=dbList && 0<dbList.size()) {
 			for (Map<String, Object> e:dbList) {
-				if (null != e.get("userId") && userId.equals(e.get("userId").toString())) {
-					userNum = Integer.parseInt(e.get("taskNum").toString());
-					finishDay = e.get("finishDay").toString();
-					finishRate = e.get("finishRate").toString();
+				if (null != e.get("userId") && userId.equals(e.get("userId").toString()) ) {
+                    Object o = e.get("taskNum");
+                    if(o !=null){
+                        userNum = Integer.parseInt(e.get("taskNum").toString());
+                    }else{
+                        userNum = 0;
+                    }
+                    Object o1 = e.get("finishDay");
+                    if (o1 !=null){
+                        finishDay = e.get("finishDay").toString();
+                    }else{
+                        finishDay = "0";
+                    }
+                    Object o2 = e.get("finishRate");
+                    if(o2 !=null){
+                        finishRate = e.get("finishRate").toString();
+                    }else{
+                        finishRate = "0";
+                    }
+
 				}
 			}
 		}
@@ -385,14 +414,17 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	 */
 	private int getOnlineDyas(String userid,List<Map<String, Object>> qxjList,int yearDays,int lawDays){
 		int qj = 0;//请假天数
-		for (Map<String, Object> e:qxjList) {
-			if(null!=e.get("deleteMark")&&
-					null!=e.get("vacationSortId")&&
-					userid.equals(e.get("deleteMark").toString())&&
-					"事假".equals(e.get("vacationSortId"))){
-				qj++;
-			}
-		}
+        if(qxjList!=null && qxjList.size() >0){
+            for (Map<String, Object> e:qxjList) {
+                if(null!=e.get("deleteMark")&&
+                        null!=e.get("vacationSortId")&&
+                        userid.equals(e.get("deleteMark").toString())&&
+                        "事假".equals(e.get("vacationSortId"))){
+                    qj++;
+                }
+            }
+        }
+
 		return yearDays-(qj+lawDays);
 	}
 
@@ -478,83 +510,108 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	/**
 	 * 推送到平台年度统计数据
 	 */
-	public void pushDesktop(){
-		LinkedMultiValueMap<String,Object> map = null;
+	public boolean pushDesktop(){
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        Map<String,Object> map = null;
 		String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
-		BaseAppOrgMapped deskTopGw = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.STATISTICS_GWCL);
-		BaseAppOrgMapped deskTopDb = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", bareauByUserId, AppConstant.STATISTICS_DB);
+		BaseAppOrgMapped deskTopGw = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.STATISTICS_GWCL);
+		BaseAppOrgMapped deskTopDb = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.STATISTICS_DB);
 		List<FypStatistics> fypStatistics = fypStatisticsDao.queryList(new HashMap<>());
-//		ArrayList<LinkedMultiValueMap<String,Object>> objects = new ArrayList<>();
-		for (FypStatistics e:fypStatistics) {
-			map = new LinkedMultiValueMap();
+		ArrayList<Map<String,Object>> objects = new ArrayList<>();
+		JSONArray jsonArray = new JSONArray();
+        HashMap<String, Object> stringListHashMap = new HashMap<>();
+        boolean result = false;
+        for (FypStatistics e:fypStatistics) {
+            new JSONObject();
+            map = new HashMap<>();
 			//总量
 			int total = Integer.parseInt(e.getTOTAL().toString())+Integer.parseInt(e.getYZTOTAL().toString())+
 					Integer.parseInt(e.getBJTOTAL().toString())+Integer.parseInt(e.getYJTOTAL().toString());
 			//公文适配
-			map.add("official",true);
+			map.put("official",true);
 			//账户名
-			map.add("account",e.getAccount());
+			map.put("account",e.getAccount());
 			//来文阅知 件
-			map.add("fileReadCount",e.getYZTOTAL());
+			map.put("fileReadCount",e.getYZTOTAL());
 			//来文阅知占比
-			map.add("fileReadProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / (total == 0? 1 : total))+"%");
+            int i = Integer.parseInt(e.getYJTOTAL().toString());
+            float fileReadProportion= ((float)i/ (float)(total == 0? 1 : total)) *100;
+            String fileReadProportionFormat = decimalFormat.format(fileReadProportion);
+			map.put("fileReadProportion",String.valueOf(fileReadProportionFormat));
 			//来文阅知完成率最高
-			map.add("fileReadRate",e.getYZoverPercentage());
+			map.put("fileReadRate",e.getYZoverPercentage());
 			//我的公文数 件
-			map.add("officialCount",e.getTOTAL());
+			map.put("officialCount",e.getTOTAL());
 
 			//处理最快 分钟
-			map.add("officialFast",e.getFast());
+			map.put("officialFast",e.getFast());
 			//处理最快类型
-			map.add("officialType",this.getDocumentTypeName(e.getDocumentType()));
+			map.put("officialType",this.getDocumentTypeName(e.getDocumentType()));
 
 			//我的公文占比
-			map.add("officialProportion",String.valueOf(Integer.parseInt(e.getTOTAL().toString()) / (total == 0? 1 : total))+"%");
+            int i2 = Integer.parseInt(e.getTOTAL().toString());
+            float officialProportion= ((float)i2/ (float)(total == 0? 1 : total)) *100;
+            String officialProportionFormat = decimalFormat.format(officialProportion);
+			map.put("officialProportion",officialProportionFormat);
 			//我的公文完成率最高
-			map.add("officialRate",e.getOverPercentage());
+			map.put("officialRate",e.getOverPercentage());
 			//我的阅件 件
-			map.add("readPieceCount",e.getYZTOTAL());
+			map.put("readPieceCount",e.getYZTOTAL());
 			//我的阅件占比
-			map.add("readPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / (total == 0? 1 : total))+"%");
+            int i3 = Integer.parseInt(e.getYJTOTAL().toString());
+            float readPieceProportion= ((float)i3/ (float)(total == 0? 1 : total)) *100;
+            String readPieceProportionFormat = decimalFormat.format(readPieceProportion);
+			map.put("readPieceProportion",readPieceProportionFormat);
 			//我的阅件完成率最高
-			map.add("readPieceRate",e.getYZoverPercentage());
+			map.put("readPieceRate",e.getYZoverPercentage());
 			//年
-			map.add("timeYear",null);
+			map.put("timeYear",null);
 			//年 月
-			map.add("timeYearMonth",null);
+			map.put("timeYearMonth",null);
 			//用户ID
-			map.add("userId",e.getUserId());
+			map.put("userId",e.getUserId());
 			//我的办件 件
-			map.add("workPieceCount",e.getBJTOTAL());
+			map.put("workPieceCount",e.getBJTOTAL());
 			//我的办件占比
-			map.add("workPieceProportion",String.valueOf(Integer.parseInt(e.getYJTOTAL().toString()) / (total == 0? 1 : total))+"%");
+            int i4 = Integer.parseInt(e.getYJTOTAL().toString());
+            float workPieceProportion= ((float)i4/ (float)(total == 0? 1 : total)) *100;
+            String workPieceProportionFormat = decimalFormat.format(workPieceProportion);
+			map.put("workPieceProportion",workPieceProportionFormat);
 			//我的办件完成率最高
-			map.add("workPieceRate",e.getBJOverPercentage());
+			map.put("workPieceRate",e.getBJOverPercentage());
 
 			//督办件
-			map.add("superviseCount",e.getCheckNum());
+			map.put("superviseCount",e.getCheckNum());
 			//已办结事项平均办理天数/天
-			map.add("superviseFinishDay",e.getFinishDay());
+			map.put("superviseFinishDay",e.getFinishDay());
 			//办结率
-			map.add("superviseFinishRate",e.getFinishRate());
-			JSONObject db = CrossDomainUtil.getTokenByJsonData(deskTopDb.getUrl(), map, SSOAuthFilter.getToken());
-			if(null!=db && "成功".equals(db.get("rsltmsg").toString())){
-				System.out.println(e.getUserId()+"-公文督办统计推送到平台成功");
-			}else{
-				System.out.println(e.getUserId()+"-公文督办统计推送到平台失败");
-			}
-			JSONObject gw = CrossDomainUtil.getTokenByJsonData(deskTopGw.getUrl(), map, SSOAuthFilter.getToken());
-			if(null!=gw && "成功".equals(gw.get("rsltmsg").toString())){
-				System.out.println(e.getUserId()+"-公文年度统计推送到平台成功");
-			}else{
-				System.out.println(e.getUserId()+"-公文年度统计推送到平台失败");
-			}
-			/*objects.add(map);
-			if(objects.size() >4){
-				break;
-			}*/
+			map.put("superviseFinishRate",e.getFinishRate());
+			objects.add(map);
+            JSONObject jsonObject = new JSONObject(map);
+            jsonArray.add(jsonObject);
+
 		}
-		/*JSONObject jsonObject = new JSONObject();
+        String url = deskTopDb.getUrl()+deskTopDb.getWebUri();
+        JSONObject db = CrossDomainUtil.getTokenJSONObject(url, jsonArray, SSOAuthFilter.getToken());
+        if(null!=db && "成功".equals(db.get("rsltmsg").toString())){
+            result =true;
+            System.out.println("-督办统计推送到平台成功");
+        }else{
+            System.out.println("-督办统计推送到平台失败");
+        }
+        if (result){
+            url = deskTopGw.getUrl()+deskTopGw.getWebUri();
+            JSONObject gw = CrossDomainUtil.getTokenJSONObject(url, jsonArray, SSOAuthFilter.getToken());
+            if(null!=gw && "成功".equals(gw.get("rsltmsg").toString())){
+                result =true;
+                System.out.println("-公文年度统计推送到平台成功");
+            }else{
+                result = false;
+                System.out.println("-公文年度统计推送到平台失败");
+            }
+        }
+        return result;
+        /*JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result","success");
 		jsonObject.put("list",objects);
 		Response.json(jsonObject);*/

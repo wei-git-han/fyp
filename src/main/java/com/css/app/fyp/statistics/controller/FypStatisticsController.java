@@ -74,7 +74,7 @@ public class FypStatisticsController {
 		Response.json(new ResponseValueUtils().success(fypStatistics));
 	}
 	
-	/**-、
+	/**
 	 * 保存
 	 */
 	@ResponseBody
@@ -141,7 +141,7 @@ public class FypStatisticsController {
 
 	@PostConstruct
 	public void timer(){
-		Calendar instance = Calendar.getInstance();
+/*		Calendar instance = Calendar.getInstance();
 		instance.set(Calendar.HOUR_OF_DAY,2);//控制时
 		instance.set(Calendar.MINUTE,0);//控制分
 		instance.set(Calendar.SECOND,0);//控制秒
@@ -161,7 +161,8 @@ public class FypStatisticsController {
 					e.printStackTrace();
 				}
 			}
-		}, date,1000*60*60*168);//延时每天固定执行
+		},120000);//延时每天固定执行*/
+		// date,1000*60*60*168
 	}
 
 	/**
