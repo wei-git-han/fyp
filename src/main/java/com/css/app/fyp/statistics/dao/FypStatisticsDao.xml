@@ -11,8 +11,8 @@
 		select us.truename as userName,b.name as "PHRASENAME",us.account as "account",a.FINISHDAY as "finishDay", a.FINISHRATE as "finishRate",
 		case a.role
 		when 3 then (
-		select name from ZF_FYP_APP_NEW.base_app_organ where id =(
-		select substr(tree_path,9,36) from ZF_FYP_APP_NEW.base_app_organ where id = (
+		select name from base_app_organ where id =(
+		select substr(tree_path,9,36) from base_app_organ where id = (
 		select organid from base_app_user where user_id = a.user_id
 		)
 		))
@@ -21,9 +21,9 @@
 		when 4 then (select name from base_app_organ where id = (select organid from base_app_user where user_id = a.user_id))
 		end directorName,
 		a.*
-		from "ZF_FYP_APP_NEW"."FYP_STATISTICS" AS a
-		left join "ZF_FYP_APP_NEW"."FYP_STATISTICS_PHRASE" as b on a.PHRASE_ID = b.id
-        left join "ZF_FYP_APP_NEW"."base_app_user" as us on us.user_id = a.user_id
+		from FYP_STATISTICS AS a
+		left join FYP_STATISTICS_PHRASE as b on a.PHRASE_ID = b.id
+        left join base_app_user as us on us.user_id = a.user_id
 		where
 		1=1
 		<if test="userId != null and userId != null">

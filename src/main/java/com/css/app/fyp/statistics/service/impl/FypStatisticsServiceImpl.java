@@ -30,7 +30,7 @@ import org.springframework.util.LinkedMultiValueMap;
 
 @Service("fypStatisticsService")
 public class FypStatisticsServiceImpl implements FypStatisticsService {
-	private final Logger logger = LoggerFactory.getLogger(FypStatisticsController.class);
+	private final Logger logger = LoggerFactory.getLogger(FypStatisticsServiceImpl.class);
 	@Autowired
 	private FypStatisticsDao fypStatisticsDao;
 
@@ -88,6 +88,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		logger.info("请销假返回数据-------------"+db);
         List<BaseAppOrgMapped> mappedData = baseAppOrgMappedService.getMappedData("", null, AppConstant.APP_GWCL);
 		logger.info("请销假返回数据-------------"+mappedData);
+		String gwData = "";
         if(mappedData !=null && mappedData.size()>0){
             for (BaseAppOrgMapped baseAppOrgMapped : mappedData){
                 this.getDocument(
@@ -115,20 +116,24 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 		List<Map<String,Object>> dbData = null;
         LinkedMultiValueMap<String, Object> objectObjectLinkedMultiValueMap = new LinkedMultiValueMap<String, Object>();
         objectObjectLinkedMultiValueMap.add("deptId",deptId);
+        logger.info("公文请求前========"+deptId);
+        logger.info("公文请求地址======"+documentUrl+token);
         JSONObject doc = CrossDomainUtil.getTokenByJsonData(documentUrl,objectObjectLinkedMultiValueMap, token);
-		logger.info("返回数据-------------"+doc);
+		logger.info("返回数据-------------"+doc+token);
         if(null!=doc){
 			JSONObject tokenByJsonData = doc;
 			docuemntData = (List<Map<String,Object>>)tokenByJsonData.get("list");
 		}
-		logger.info("请销假-----返回数据-------------"+docuemntData);
+		logger.info("请销假-----请求地址-------------"+qxjUrl+token);
         JSONObject qxj = CrossDomainUtil.getTokenByJsonDataParamObject(qxjUrl, paramQxj(new LinkedMultiValueMap<Object, Object>()), token);
+		logger.info("请销假接口返回数据-------------"+qxj+token);
         if(null!=qxj){
 			JSONObject tokenByJsonData = qxj;
 			qxjData = (List<Map<String,Object>>)tokenByJsonData.get("list");
 		}
-		logger.info("请销假qxj返回数据-------------"+docuemntData);
+		logger.info("督办请求前地址-------------"+dburl+token);
         JSONObject db = CrossDomainUtil.getTokenByJsonDataParamObject(dburl, paramDb(new LinkedMultiValueMap<Object, Object>(), deptId),token);
+		logger.info("督办接口范虎数据-------------"+db+token);
         if(null!=db){
             JSONObject tokenByJsonData = db;
             dbData = (List<Map<String,Object>>)tokenByJsonData.get("list");
