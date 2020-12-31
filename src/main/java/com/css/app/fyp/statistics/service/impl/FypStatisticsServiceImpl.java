@@ -7,9 +7,12 @@ import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
+import com.css.app.fyp.statistics.controller.FypStatisticsController;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.*;
 import org.apache.commons.collections.map.MultiValueMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,7 @@ import org.springframework.util.LinkedMultiValueMap;
 
 @Service("fypStatisticsService")
 public class FypStatisticsServiceImpl implements FypStatisticsService {
+	private final Logger logger = LoggerFactory.getLogger(FypStatisticsController.class);
 	@Autowired
 	private FypStatisticsDao fypStatisticsDao;
 
@@ -77,9 +81,13 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
 	 */
 	@Override
 	public void syncData() {
+
         BaseAppOrgMapped qxj = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.APP_QXJ);
+		logger.info("请销假返回数据-------------"+qxj);
         BaseAppOrgMapped db = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.DCCB);
+		logger.info("请销假返回数据-------------"+db);
         List<BaseAppOrgMapped> mappedData = baseAppOrgMappedService.getMappedData("", null, AppConstant.APP_GWCL);
+		logger.info("请销假返回数据-------------"+mappedData);
         if(mappedData !=null && mappedData.size()>0){
             for (BaseAppOrgMapped baseAppOrgMapped : mappedData){
                 this.getDocument(
@@ -108,21 +116,24 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
         LinkedMultiValueMap<String, Object> objectObjectLinkedMultiValueMap = new LinkedMultiValueMap<String, Object>();
         objectObjectLinkedMultiValueMap.add("deptId",deptId);
         JSONObject doc = CrossDomainUtil.getTokenByJsonData(documentUrl,objectObjectLinkedMultiValueMap, token);
+		logger.info("返回数据-------------"+doc);
         if(null!=doc){
 			JSONObject tokenByJsonData = doc;
 			docuemntData = (List<Map<String,Object>>)tokenByJsonData.get("list");
 		}
+		logger.info("请销假-----返回数据-------------"+docuemntData);
         JSONObject qxj = CrossDomainUtil.getTokenByJsonDataParamObject(qxjUrl, paramQxj(new LinkedMultiValueMap<Object, Object>()), token);
         if(null!=qxj){
 			JSONObject tokenByJsonData = qxj;
 			qxjData = (List<Map<String,Object>>)tokenByJsonData.get("list");
 		}
+		logger.info("请销假qxj返回数据-------------"+docuemntData);
         JSONObject db = CrossDomainUtil.getTokenByJsonDataParamObject(dburl, paramDb(new LinkedMultiValueMap<Object, Object>(), deptId),token);
         if(null!=db){
             JSONObject tokenByJsonData = db;
             dbData = (List<Map<String,Object>>)tokenByJsonData.get("list");
         }
-
+		logger.info("督办db返回数据-------------"+dbData);
         List<Map<String, Object>> finalQxjData = qxjData;
         List<Map<String, Object>> finalDbData = dbData;
         //获取总天数
@@ -138,10 +149,12 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
                 FypStatistics data = this.getData(maps, finalQxjData, yearDyas, Integer.parseInt(latDyas + ""), finalDbData);
                     this.deleteByUserId(data.getUserId());
                     this.save(data);
+				logger.info("保存成功-------------");
             }
 		}
 		//推送到平台
 		pushDesktop();
+		logger.info("推送平常成功-------------");
 	}
 
     /**

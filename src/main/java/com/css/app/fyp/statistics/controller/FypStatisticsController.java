@@ -6,6 +6,8 @@ import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CurrentUser;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -35,6 +37,7 @@ import javax.annotation.PostConstruct;
 @Controller
 @RequestMapping("/fypstatistics")
 public class FypStatisticsController {
+	private final Logger logger = LoggerFactory.getLogger(FypStatisticsController.class);
 
 	@Autowired
 	private FypStatisticsService fypStatisticsService;
@@ -115,6 +118,7 @@ public class FypStatisticsController {
 	@RequestMapping(value = "/syncData")
 	@ResponseBody
 	public void syncData(){
+		logger.info("开始接口----------------------------------");
 		fypStatisticsService.syncData();
 		Response.json(new ResponseValueUtils().success());
 	}
