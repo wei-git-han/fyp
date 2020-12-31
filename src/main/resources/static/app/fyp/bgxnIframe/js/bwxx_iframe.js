@@ -199,27 +199,48 @@ var pageModule = function () {
 					}
 				}
 			},],
-			yAxis: [{
-				type: 'value',
-				min:0,
-				max:100,
-				splitNumber:5,
-				axisLabel: {
-					textStyle: {
-						color: '#ACACAC',
-						fontSize: 12,
-					},
-					formatter:function(value){
-						return value+"%";
-					}
-				},
-				splitLine: {
-					lineStyle: {
-						type: "dotted",
-						color: "#ACACAC"
-					}
-				},
-			}],
+            yAxis: [{
+                type: 'value',
+                min:0,
+                //max:100,
+                //splitNumber:5,
+                axisLabel: {
+                    textStyle: {
+                        color: '#ACACAC',
+                        fontSize: 12,
+                    },
+                    // formatter:function(value){
+                    //     return value+"%";
+                    // }
+                },
+                splitLine: {
+                    lineStyle: {
+                        type: "dotted",
+                        color: "#ACACAC"
+                    }
+                },
+            }],
+			// yAxis: [{
+			// 	type: 'value',
+			// 	min:0,
+			// 	max:100,
+			// 	splitNumber:5,
+			// 	axisLabel: {
+			// 		textStyle: {
+			// 			color: '#ACACAC',
+			// 			fontSize: 12,
+			// 		},
+			// 		formatter:function(value){
+			// 			return value+"%";
+			// 		}
+			// 	},
+			// 	splitLine: {
+			// 		lineStyle: {
+			// 			type: "dotted",
+			// 			color: "#ACACAC"
+			// 		}
+			// 	},
+			// }],
 			series: [{
 				name: data.title,
 				type: 'bar',
