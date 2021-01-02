@@ -146,17 +146,17 @@ public class FypGuaranteeTackingController {
 	@ResponseBody
 	@RequestMapping("/import")
 	public void importExcel(MultipartFile file){
-		this.insertImportData(PoiUtils.importExcel(file));
-		Response.json(new ResponseValueUtils().success());
-//		try {
-//			String fileId = FileBaseUtil.fileServiceUpload(file);
-//			HTTPFile httpFile = new HTTPFile(fileId);
-//			InputStream inputStream = httpFile.getInputSteam();
-//			fypGuaranteeTackingService.importExcle(inputStream);
-//			Response.json(new ResponseValueUtils().success());
-//		}catch (Exception e){
-//			e.printStackTrace();
-//		}
+		//this.insertImportData(PoiUtils.importExcel(file));
+		//Response.json(new ResponseValueUtils().success());
+		try {
+			String fileId = FileBaseUtil.fileServiceUpload(file);
+			HTTPFile httpFile = new HTTPFile(fileId);
+			InputStream inputStream = httpFile.getInputSteam();
+			fypGuaranteeTackingService.importExcle(inputStream);
+			Response.json(new ResponseValueUtils().success());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	/**

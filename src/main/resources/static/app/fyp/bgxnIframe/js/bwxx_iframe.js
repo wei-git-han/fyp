@@ -312,10 +312,10 @@ var pageModule = function () {
 					}
 					if(!res.data){
 					}else{
-                        res.data.forEach(e=>{
-                            data.xdata.push(e.month);
-                            data.ydata[0].data.push(e.submitCount);
-                            data.ydata[1].data.push(e.receiveCount)
+                        res.data.forEach((e,index)=>{
+                            data.xdata.push(e.month|| index+1);
+                            data.ydata[0].data.push(e.submitCount||0);
+                            data.ydata[1].data.push(e.receiveCount||0)
                         })
 					}
                     initAreaChart(data)
