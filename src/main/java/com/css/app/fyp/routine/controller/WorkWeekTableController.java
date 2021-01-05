@@ -74,7 +74,7 @@ public class WorkWeekTableController {
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getWorkWeek_"+orgId;
+        String keyName = "fyp_gzzb_getWorkWeek_"+orgId;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONArray ret = JSONArray.parseArray(json);
