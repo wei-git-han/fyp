@@ -134,7 +134,7 @@ var pageModule = function() {
       if(this.id != 'rcgz'){
         setPage('start_page2')
       }else{
-        setPage('start_page1')
+        setPage('start_page2')  //切换日常工作默认显示工作周表
       }
 
       activeDoType = this.id;
@@ -210,7 +210,7 @@ var pageModule = function() {
       // isShowNewYear()
       $(".iframe-wrap").flipster({
         style: 'carousel',
-        start: 0,
+        start: 1,  //初始化页面日常工作默认显示工作周表
         onItemSwitch:function(data){
           var id = data[0].id
           $('.btn-wrap>.btn').removeClass('active').each(function(){
