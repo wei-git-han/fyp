@@ -96,7 +96,7 @@ var pageModule = function () {
 				};
 
 				//判断是单位则加数量统计
-				if(number!="" && number!=null && number!="undefined"){
+				if((number!="" && number!=null && number!="undefined") || number==0){
 					numberhtml = '<span class="number" data="'+id+'" >'+number+'</span>';
 					os[id] = {
 						number:number,
