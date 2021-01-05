@@ -1,5 +1,6 @@
 package com.css.app.fyp.routine.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.apporgan.entity.BaseAppOrgan;
@@ -422,26 +423,12 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         return userList;
     }
 
-//    JSONObject jsonObj = null;
-
     private JSONObject getUserTreeFyp(String id){
         String userId=CurrentUser.getUserId();
-//		long time1 =System.currentTimeMillis();
-//		logger.info("============time1:"+time1);
-//		//获取在线人对象集合
-//		List<BaseAppUser> onlineUsers = getOnlineUsers();
-//
-//		long time2 =System.currentTimeMillis();
-//		logger.info("============time2:"+time2);
-//		logger.info("============time2-time1:"+(time2-time1)+"ms");
-//		List<BaseAppUser> onlineUsers = new ArrayList<>();
         //在线人员Id 集合
         List<String> onlineUserIds=getOnlineUserIds(onlineUsers);
 
-//        if(jsonObj==null){
         JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
-//        }
-//        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
         JSONArray ja1=new JSONArray();
         JSONArray ja2=new JSONArray();
         if(jsonObj!=null) {
@@ -454,21 +441,24 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         if(com.css.base.utils.StringUtils.isNotBlank(userIds)) {
             qjIdList=Arrays.asList(userIds.split(","));
         }
-        JSONObject result = new JSONObject();
-        JSONArray jsons = new JSONArray();
+        JSONObject rootresult = new JSONObject();
+
+        JSONArray rjsons = new JSONArray();
         BaseAppOrgan dept = baseAppOrganService.queryObject(id);
-        result.put("id", id);
-        result.put("text", dept.getName());
-        result.put("flag", "1");
+//        rootresult.put("id", id);
+//        rootresult.put("text", dept.getName());
+//        rootresult.put("flag", "1");
 
         //查询总数
-        //int sumCount = baseAppUserService.getUserCountByOrgId(id);
-        int sumCount = baseAppUserService.getUserCountByOrgIdExclude(id,userId);
-        //查询机构ID 下的总人数
-        result.put("number", sumCount);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("orgId",id);
+        map.put("userId",userId);
 
-        //在线机构ID 对应的在线人总数
-        //Map<String,Object> dataMap =getOrgOnlineUserCount(onlineUsers);
+        List<BaseAppOrgan> deptCountList = baseAppUserService.selectCountDept(map);
+        List<BaseAppUser> userCountList = baseAppUserService.selectCountUser(map);
+        List<BaseAppOrgan> rootList = new ArrayList<BaseAppOrgan>();
+        rootList.add(dept);
+
         //在线人数中，去除不纳入统计范围的人
         if(onlineUsers != null && onlineUsers.size() > 0) {
             for(int j = 0;j<onlineUsers.size();j++){
@@ -482,108 +472,346 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             }
         }
         Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
-        Integer zxCount = 0;
-        //zxCount = list.size();
-        if(!dataMap.isEmpty()) {
-            Object value = dataMap.get(id);
-            if(value!=null) {
-                zxCount= Integer.parseInt(value.toString());
-            }
+
+        int rootSum = 0;
+        JSONArray jsonRootList = JSONArray.parseArray(JSON.toJSONString(rootList));
+        JSONArray jsonAllList = JSONArray.parseArray(JSON.toJSONString(deptCountList));
+        getUserTreeCount(jsonRootList,jsonAllList,userCountList,id,qjIdList,onlineUserIds,ja2,dataMap);
+        JSONObject re = new JSONObject();
+        if(jsonRootList.size()>0){
+            re = jsonRootList.getJSONObject(0);
         }
-        //离线人数  总人数 - 在线人数
-        int lxCount = sumCount-zxCount;
-        if(lxCount<0) {lxCount=0;}
-        //请假人数	普通人请假
-        String qjCount = getOrgQxjCount(ja2, dept.getId());
-        //局长请假统计数 2018年10月10日16:23:35
-        String jzqjCount=getJzQxjCount(dept.getId(), userId);
+        return re;
 
-        result.put("zx", zxCount);
-        result.put("lx", lxCount);
-        //result.put("qj", qjCount);
-        int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+    }
 
-        result.put("qj", qjSum);
-
-        //办公数量   总数-请假的数 =办公的数
-        //（目前和 暂时和在线离线 一样，  当前无出差APP 统计的情况 ）
-        //2019年1月22日11:02:04
-        //int bgSum=sumCount-qjSum;
-        int bgSum=zxCount-qjSum;
-        if(bgSum<0) {bgSum=0;}
-        result.put("bg", bgSum);
-
-
-//		List<BaseAppUser> sysUsers = baseAppUserService.findByOrganid(id);
-        List<BaseAppUser> sysUsers = baseAppUserService.findByOrganidExclude(id,userId);
-
-        //局长请假id集合 2018年10月10日19:37:36
-        List<String> jzqxjUserIds=getJzQxjUserIds(dept.getId(), userId);
-        //添加请销假 集合中区
-        //qjIdList.addAll(jzqxjUserIds);
-        //
-        //List<Map<String,Object>> userStateMapList = getUserStateMapList();
-        for (BaseAppUser sysUser:sysUsers) {
-            //if (!StringUtils.contains("admin,sysadmin,secadmin,audadmin", sysUser.getAccount())) {
-            JSONObject jsonUser = new JSONObject();
-            jsonUser.put("id", sysUser.getUserId());
-            jsonUser.put("text", sysUser.getTruename());
-            jsonUser.put("flag", "0");
-            jsonUser.put("deptid", sysUser.getOrganid());
-            jsonUser.put("tel", sysUser.getMobile());
-            jsonUser.put("usertype", userManagerSettingService.getUserType(sysUser.getUserId()));
-            //代表人0离线、1在线、2请假、3不显示、4自定义状态值
-            String zwzt = "0";
-            String zwztName = "";
-            //是否请假 0未请假  1 请假
-            String ifqj="0";
-            //List<String> filterIdList = getFileterIds();
-
-            //请假IdList 普通人
-            //添加局长请假人
-            if(qjIdList.contains(sysUser.getUserId()) || jzqxjUserIds.contains(sysUser.getUserId())) {
-                ifqj="1";
-            }
-            if(onlineUserIds.contains(sysUser.getUserId())) {
-                zwzt="1";
-            }
-            ReignUser reignUser = reignUserService.queryObjectAll(sysUser.getUserId());
-            if(null!=reignUser) {
-                if (StringUtils.isNotBlank(reignUser.getUserId()) && 1==reignUser.getIsdelete()) {
-                    zwzt = "3";
-                } else {
-                    zwzt = "4";
-                    zwztName = reignUser.getStateName();
+    private void getUserTreeCount(JSONArray perDeptCountList,JSONArray deptCountList,List<BaseAppUser> userCountList,String id,List<String> qjIdList,List<String> onlineUserIds,JSONArray ja2,Map<String,Object> dataMap){
+        String userId=CurrentUser.getUserId();
+        //循环父机构，查找下面的子机构
+        for(int i = 0; i<perDeptCountList.size(); i++){
+            JSONObject result = perDeptCountList.getJSONObject(i);
+            JSONArray cjsons = new JSONArray();
+            JSONArray rjsons = new JSONArray();
+            result.put("text", result.getString("name"));
+            result.put("flag", "1");
+            //在所有集中取子机构
+            for(int j = 0; j<deptCountList.size(); j++){
+                JSONObject cnode = deptCountList.getJSONObject(j);
+                if(StringUtils.equals(result.getString("id"),cnode.getString("parentId"))){
+                    cnode.put("text", cnode.getString("name"));
+                    cnode.put("flag", "1");
+                    cjsons.add(cnode);
                 }
             }
-            jsonUser.put("status", zwzt);
-            jsonUser.put("statusName", zwztName);
-            jsonUser.put("ifqj", ifqj);
+            if (cjsons.size()>0) {
+                result.put("child", cjsons);
+                getUserTreeCount(result.getJSONArray("child"),deptCountList,userCountList,id,qjIdList,onlineUserIds,ja2,dataMap);
 
-            //查询其他状态  自定的状态  2019年1月22日11:26:31
-            Map<String,Object> stateMap = getUserStateMap(userStateMapList,sysUser.getUserId());
-            jsonUser.put("statename", stateMap.get("state"));
-            jsonUser.put("begintime", stateMap.get("begintime"));
-            jsonUser.put("endtime", stateMap.get("endtime"));
-            //添加额外的状态
+                int sumCount = 0;
+                for(int k = 0; k<result.getJSONArray("child").size(); k++){
+                    JSONObject numnode = result.getJSONArray("child").getJSONObject(k);
+                    if(numnode.getInteger("number")!=null){
+                        sumCount += numnode.getInteger("number");
+                    }
 
-            jsons.add(jsonUser);
-            //}
-        }
+                }
+                //查询机构ID 下的总人数
+                result.put("number", sumCount);
 
-        List<BaseAppOrgan> organs = baseAppOrganService.findByParentId2(id);
-        if(organs != null && organs.size() > 0){
-            for (BaseAppOrgan organ:organs) {
-                jsons.add(getUserTreeFyp(organ.getId()));
+                Integer zxCount = 0;
+                //zxCount = list.size();
+                if(!dataMap.isEmpty()) {
+                    Object value = dataMap.get(result.getString("id"));
+                    if(value!=null) {
+                        zxCount= Integer.parseInt(value.toString());
+                    }
+                }
+
+                //离线人数  总人数 - 在线人数
+                int lxCount = sumCount-zxCount;
+                if(lxCount<0) {lxCount=0;}
+                //请假人数	普通人请假
+                String qjCount = getOrgQxjCount(ja2, id);
+                //局长请假统计数 2018年10月10日16:23:35
+                String jzqjCount=getJzQxjCount(id, userId);
+
+                result.put("zx", zxCount);
+                result.put("lx", lxCount);
+                //result.put("qj", qjCount);
+                int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+
+                result.put("qj", qjSum);
+
+                //办公数量   总数-请假的数 =办公的数
+                //（目前和 暂时和在线离线 一样，  当前无出差APP 统计的情况 ）
+                //2019年1月22日11:02:04
+                //int bgSum=sumCount-qjSum;
+                int bgSum=zxCount-qjSum;
+                if(bgSum<0) {bgSum=0;}
+                result.put("bg", bgSum);
+            }else{
+                for(BaseAppUser sysUser : userCountList){
+                    if(sysUser.getOrganid().equals(result.getString("id"))){
+                        //添加请销假 集合中区
+                        JSONObject jsonUser = new JSONObject();
+                        jsonUser.put("id", sysUser.getUserId());
+                        jsonUser.put("text", sysUser.getTruename());
+                        jsonUser.put("flag", "0");
+                        jsonUser.put("deptid", sysUser.getOrganid());
+                        jsonUser.put("tel", sysUser.getMobile());
+                        jsonUser.put("usertype", sysUser.getUserType());
+                        //代表人0离线、1在线、2请假、3不显示、4自定义状态值
+                        String zwzt = "0";
+                        String zwztName = "";
+                        //是否请假 0未请假  1 请假
+                        String ifqj="0";
+                        //List<String> filterIdList = getFileterIds();
+
+                        //请假IdList 普通人
+                        //添加局长请假人
+                        if(qjIdList.contains(sysUser.getUserId()) || StringUtils.isNotBlank(sysUser.getCount())) {
+                            ifqj="1";
+                        }
+                        if(onlineUserIds.contains(sysUser.getUserId())) {
+                            zwzt="1";
+                        }
+//                    ReignUser reignUser = reignUserService.queryObjectAll(sysUser.getUserId());
+//                    if(null!=reignUser) {
+                        if(sysUser.getEisdelete()!=null){
+                            if (StringUtils.equals("1",sysUser.getEisdelete())) {
+                                zwzt = "3";
+                            } else {
+                                zwzt = "4";
+                                zwztName = sysUser.getStateName();
+                            }
+                        }
+
+//                    }
+                        jsonUser.put("status", zwzt);
+                        jsonUser.put("statusName", zwztName);
+                        jsonUser.put("ifqj", ifqj);
+
+                        //查询其他状态  自定的状态  2019年1月22日11:26:31
+                        Map<String,Object> stateMap = getUserStateMap(userStateMapList,sysUser.getUserId());
+                        jsonUser.put("statename", stateMap.get("state"));
+                        jsonUser.put("begintime", stateMap.get("begintime"));
+                        jsonUser.put("endtime", stateMap.get("endtime"));
+                        //添加额外的状态
+                        rjsons.add(jsonUser);
+                    }
+                }
+            }
+            if (rjsons.size()>0) {
+                result.put("child", rjsons);
+                Integer zxCount = 0;
+                //zxCount = list.size();
+                if(!dataMap.isEmpty()) {
+                    Object value = dataMap.get(id);
+                    if(value!=null) {
+                        zxCount= Integer.parseInt(value.toString());
+                    }
+                }
+                int sumCount = rjsons.size();
+                //查询机构ID 下的总人数
+                result.put("number", sumCount);
+
+                //离线人数  总人数 - 在线人数
+                int lxCount = sumCount-zxCount;
+                if(lxCount<0) {lxCount=0;}
+                //请假人数	普通人请假
+                String qjCount = getOrgQxjCount(ja2, id);
+                //局长请假统计数 2018年10月10日16:23:35
+                String jzqjCount=getJzQxjCount(id, userId);
+
+                result.put("zx", zxCount);
+                result.put("lx", lxCount);
+                //result.put("qj", qjCount);
+                int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+
+                result.put("qj", qjSum);
+
+                //办公数量   总数-请假的数 =办公的数
+                //（目前和 暂时和在线离线 一样，  当前无出差APP 统计的情况 ）
+                //2019年1月22日11:02:04
+                //int bgSum=sumCount-qjSum;
+                int bgSum=zxCount-qjSum;
+                if(bgSum<0) {bgSum=0;}
+                result.put("bg", bgSum);
+            }else{
+                if(result.get("number") == null){
+                    result.put("number", 0);
+                    result.put("zx", 0);
+                    result.put("lx", 0);
+                    result.put("qj", 0);
+                    result.put("bg", 0);
+                }
+
             }
         }
-
-
-        if (jsons.size()>0) {
-            result.put("child", jsons);
-        }
-        return result;
     }
+
+//    JSONObject jsonObj = null;
+
+//    private JSONObject getUserTreeFyp(String id){
+//        String userId=CurrentUser.getUserId();
+////		long time1 =System.currentTimeMillis();
+////		logger.info("============time1:"+time1);
+////		//获取在线人对象集合
+////		List<BaseAppUser> onlineUsers = getOnlineUsers();
+////
+////		long time2 =System.currentTimeMillis();
+////		logger.info("============time2:"+time2);
+////		logger.info("============time2-time1:"+(time2-time1)+"ms");
+////		List<BaseAppUser> onlineUsers = new ArrayList<>();
+//        //在线人员Id 集合
+//        List<String> onlineUserIds=getOnlineUserIds(onlineUsers);
+//
+////        if(jsonObj==null){
+//        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
+////        }
+////        JSONObject jsonObj =  userLeaveSettingService.getQxjJson();
+//        JSONArray ja1=new JSONArray();
+//        JSONArray ja2=new JSONArray();
+//        if(jsonObj!=null) {
+//            ja1 =jsonObj.getJSONArray("jsons");
+//            ja2 =jsonObj.getJSONArray("detps");
+//        }
+//
+//        String userIds =getQxjUserIds(ja1);
+//        List<String> qjIdList =new ArrayList<String>();
+//        if(com.css.base.utils.StringUtils.isNotBlank(userIds)) {
+//            qjIdList=Arrays.asList(userIds.split(","));
+//        }
+//        JSONObject result = new JSONObject();
+//        JSONArray jsons = new JSONArray();
+//        BaseAppOrgan dept = baseAppOrganService.queryObject(id);
+//        result.put("id", id);
+//        result.put("text", dept.getName());
+//        result.put("flag", "1");
+//
+//        //查询总数
+//        //int sumCount = baseAppUserService.getUserCountByOrgId(id);
+//        int sumCount = baseAppUserService.getUserCountByOrgIdExclude(id,userId);
+//        //查询机构ID 下的总人数
+//        result.put("number", sumCount);
+//
+//        //在线机构ID 对应的在线人总数
+//        //Map<String,Object> dataMap =getOrgOnlineUserCount(onlineUsers);
+//        //在线人数中，去除不纳入统计范围的人
+//        if(onlineUsers != null && onlineUsers.size() > 0) {
+//            for(int j = 0;j<onlineUsers.size();j++){
+//                BaseAppUser baseAppUser = onlineUsers.get(j);
+//                String currentUserId = baseAppUser.getUserId();
+//                ConfigUserDept configUserDept = configUserDeptService.queryByUserId(currentUserId);
+//                if (configUserDept != null) {
+//                    onlineUsers.remove(j);
+//                    j--;
+//                }
+//            }
+//        }
+//        Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
+//        Integer zxCount = 0;
+//        //zxCount = list.size();
+//        if(!dataMap.isEmpty()) {
+//            Object value = dataMap.get(id);
+//            if(value!=null) {
+//                zxCount= Integer.parseInt(value.toString());
+//            }
+//        }
+//        //离线人数  总人数 - 在线人数
+//        int lxCount = sumCount-zxCount;
+//        if(lxCount<0) {lxCount=0;}
+//        //请假人数	普通人请假
+//        String qjCount = getOrgQxjCount(ja2, dept.getId());
+//        //局长请假统计数 2018年10月10日16:23:35
+//        String jzqjCount=getJzQxjCount(dept.getId(), userId);
+//
+//        result.put("zx", zxCount);
+//        result.put("lx", lxCount);
+//        //result.put("qj", qjCount);
+//        int qjSum = Integer.parseInt(qjCount)+Integer.parseInt(jzqjCount);
+//
+//        result.put("qj", qjSum);
+//
+//        //办公数量   总数-请假的数 =办公的数
+//        //（目前和 暂时和在线离线 一样，  当前无出差APP 统计的情况 ）
+//        //2019年1月22日11:02:04
+//        //int bgSum=sumCount-qjSum;
+//        int bgSum=zxCount-qjSum;
+//        if(bgSum<0) {bgSum=0;}
+//        result.put("bg", bgSum);
+//
+//
+////		List<BaseAppUser> sysUsers = baseAppUserService.findByOrganid(id);
+//        List<BaseAppUser> sysUsers = baseAppUserService.findByOrganidExclude(id,userId);
+//
+//        //局长请假id集合 2018年10月10日19:37:36
+//        List<String> jzqxjUserIds=getJzQxjUserIds(dept.getId(), userId);
+//        //添加请销假 集合中区
+//        //qjIdList.addAll(jzqxjUserIds);
+//        //
+//        //List<Map<String,Object>> userStateMapList = getUserStateMapList();
+//        for (BaseAppUser sysUser:sysUsers) {
+//            //if (!StringUtils.contains("admin,sysadmin,secadmin,audadmin", sysUser.getAccount())) {
+//            JSONObject jsonUser = new JSONObject();
+//            jsonUser.put("id", sysUser.getUserId());
+//            jsonUser.put("text", sysUser.getTruename());
+//            jsonUser.put("flag", "0");
+//            jsonUser.put("deptid", sysUser.getOrganid());
+//            jsonUser.put("tel", sysUser.getMobile());
+//            jsonUser.put("usertype", userManagerSettingService.getUserType(sysUser.getUserId()));
+//            //代表人0离线、1在线、2请假、3不显示、4自定义状态值
+//            String zwzt = "0";
+//            String zwztName = "";
+//            //是否请假 0未请假  1 请假
+//            String ifqj="0";
+//            //List<String> filterIdList = getFileterIds();
+//
+//            //请假IdList 普通人
+//            //添加局长请假人
+//            if(qjIdList.contains(sysUser.getUserId()) || jzqxjUserIds.contains(sysUser.getUserId())) {
+//                ifqj="1";
+//            }
+//            if(onlineUserIds.contains(sysUser.getUserId())) {
+//                zwzt="1";
+//            }
+//            ReignUser reignUser = reignUserService.queryObjectAll(sysUser.getUserId());
+//            if(null!=reignUser) {
+//                if (StringUtils.isNotBlank(reignUser.getUserId()) && 1==reignUser.getIsdelete()) {
+//                    zwzt = "3";
+//                } else {
+//                    zwzt = "4";
+//                    zwztName = reignUser.getStateName();
+//                }
+//            }
+//            jsonUser.put("status", zwzt);
+//            jsonUser.put("statusName", zwztName);
+//            jsonUser.put("ifqj", ifqj);
+//
+//            //查询其他状态  自定的状态  2019年1月22日11:26:31
+//            Map<String,Object> stateMap = getUserStateMap(userStateMapList,sysUser.getUserId());
+//            jsonUser.put("statename", stateMap.get("state"));
+//            jsonUser.put("begintime", stateMap.get("begintime"));
+//            jsonUser.put("endtime", stateMap.get("endtime"));
+//            //添加额外的状态
+//
+//            jsons.add(jsonUser);
+//            //}
+//        }
+//
+//        List<BaseAppOrgan> organs = baseAppOrganService.findByParentId2(id);
+//        if(organs != null && organs.size() > 0){
+//            for (BaseAppOrgan organ:organs) {
+//                jsons.add(getUserTreeFyp(organ.getId()));
+//            }
+//        }
+//
+//
+//        if (jsons.size()>0) {
+//            result.put("child", jsons);
+//        }
+//        return result;
+//    }
 
     /**
      * 获取在线的人员id集合
@@ -893,8 +1121,13 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     private JSONObject getNumber(LinkedMultiValueMap<String, Object> map) {
         // 获取清销假app的接口
-        String elecPath = baseAppOrgMappedService.getWebUrl(AppConstant.APP_QXJGL,
-                AppInterfaceConstant.WEB_INTERFACE_QXJ_statistics);
+//        String elecPath = baseAppOrgMappedService.getWebUrl(AppConstant.APP_QXJGL,
+//                AppInterfaceConstant.WEB_INTERFACE_QXJ_statistics);
+        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.APP_QXJGL);
+        String elecPath = "";
+        if(bm != null){
+            elecPath = bm.getUrl() + AppInterfaceConstant.WEB_INTERFACE_QXJ_statistics;
+        }
         JSONObject jsonData = CrossDomainUtil.getJsonData(elecPath, map);
         return jsonData;
     }

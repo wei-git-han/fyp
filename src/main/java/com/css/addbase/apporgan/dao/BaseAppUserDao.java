@@ -3,6 +3,7 @@ package com.css.addbase.apporgan.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.entity.ReiOnlineUser;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -73,6 +74,9 @@ public interface BaseAppUserDao extends BaseDao<BaseAppUser> {
 	 */
 	@Select("select a.*,b.name as organid from BASE_APP_USER a,BASE_APP_ORGAN b where a.ISDELETE=0 and b.ISDELETE=0 and a.ORGANID = #{organid} and b.ID=a.ORGANID order by a.SORT")
 	List<BaseAppUser> findByOrganid(String organid);
+
+	List<BaseAppOrgan> selectCountDept(Map<String,Object> map);
+	List<BaseAppUser> selectCountUser(Map<String,Object> map);
 	
 	/**
 	 * 根据用户ID获取人员信息

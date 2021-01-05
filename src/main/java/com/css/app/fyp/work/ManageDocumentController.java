@@ -108,17 +108,17 @@ public class ManageDocumentController {
         }
         String keyName = "fyp_banwen_getGwTotal_"+currentDeptId;
         String json = redisTemplate.opsForValue().get(keyName);
-        String data = redisTemplate.opsForValue().get("gwData");
-        String curDay = format.format(new Date());
-        try{
-            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
-            long remindTime = format.parse(curDay).getTime();//当前时间
-            long minusTime = remindTime - nowData;
-            minitue =(int)minusTime/1000;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        if(StringUtils.isNotBlank(json) && minitue <=20 && minitue > 0){
+//        String data = redisTemplate.opsForValue().get("gwData");
+//        String curDay = format.format(new Date());
+//        try{
+//            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
+//            long remindTime = format.parse(curDay).getTime();//当前时间
+//            long minusTime = remindTime - nowData;
+//            minitue =(int)minusTime/1000;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);
             Response.json(ret);
         }else {
@@ -129,8 +129,9 @@ public class ManageDocumentController {
             paramMap.add("startTime", sTime);
             paramMap.add("endTime", eTime);
             redisUtil.setString(keyName,new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")).toJSONString());
-            Date date = new Date();
-            redisUtil.setString("gwData",format.format(date));
+//            Date date = new Date();
+//            redisUtil.setString("gwData",format.format(date));
+            redisUtil.expire(keyName,12*60*60);
             Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
         }
     }

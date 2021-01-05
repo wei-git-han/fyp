@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.css.addbase.appconfig.entity.BaseAppConfig;
 import com.css.addbase.appconfig.service.BaseAppConfigService;
+import com.css.addbase.apporgmapped.entity.BaseAppOrgMapped;
 import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
@@ -99,8 +100,11 @@ public class UserLeaveSettingServiceImpl implements UserLeaveSettingService {
 		map.add("userId", userId);
 		//TODO 待修改为实际的地址
 		//String url = baseAppOrgMappedService.getWebUrlByType(AppConstant.APP_QXJ,AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP);
-		String url = baseAppOrgMappedService.getUrlByType(userId, AppConstant.APP_QXJ);
-		if(StringUtils.isNotBlank(url)) {
+//		String url = baseAppOrgMappedService.getUrlByType(userId, AppConstant.APP_QXJ);
+		BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.APP_QXJ);
+		String url = "";
+		if( bm != null) {
+			url = bm.getUrl();
 			url+= AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP;
 		}
 		System.out.println("请销假请求路径："+url);

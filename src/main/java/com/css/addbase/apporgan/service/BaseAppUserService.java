@@ -1,5 +1,6 @@
 package com.css.addbase.apporgan.service;
 
+import com.css.addbase.apporgan.entity.BaseAppOrgan;
 import com.css.addbase.apporgan.entity.BaseAppUser;
 import com.css.addbase.apporgan.entity.ReiOnlineUser;
 
@@ -118,6 +119,10 @@ public interface BaseAppUserService {
 	List<BaseAppUser> selectUserByNameAndUnitId(String name,String unitId);
 
 	List<BaseAppUser> findByOrganidExclude(String organid,String user_id);
+
+	List<BaseAppOrgan> selectCountDept(Map<String,Object> map);
+
+	List<BaseAppUser> selectCountUser(Map<String,Object> map);
 
 	List<BaseAppUser> queryListByRole(String organid);
 

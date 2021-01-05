@@ -36,6 +36,35 @@
 		select * from BASE_APP_USER where ISDELETE = 0 and truename=#{0} and organid in (
 		select ID from BASE_APP_ORGAN start with  id=#{1} and ISDELETE=0 connect by prior id=parent_Id)
 	</select>
+
+	<!--<select id="selectCount" resultType="com.css.addbase.apporgan.entity.BaseAppUser">-->
+		<!--select count(t.organId) count,b.id organid,b.name organName from BASE_APP_USER t right join-->
+		<!--(select  * from BASE_APP_ORGAN start with id= #{orgId} connect by prior id = parent_id) b-->
+		<!--on t.organId=b.id  where t.account not in('admin', 'sysadmin', 'secadmin', 'audadmin')  and t.organId not in-->
+		<!--( select DEPT_ID from CONFIG_USER_DEPT where DEPT_ID is not null ) and t.USER_ID not in-->
+		<!--( select USER_ID from CONFIG_USER_DEPT where USER_ID is not null ) and-->
+		<!--( user_id not in ( select LEADER_ID from USER_LEADER_ACCESS_STATE where state=1 )-->
+		<!--or user_id = #{userId} or user_id in (-->
+		<!--select LEADER_ID from USER_LEADER_ACCESS_STATE where state=1 and user_id =#{userId} )-->
+		<!--) group by b.id,b.name-->
+	<!--</select>-->
+
+    <select id="selectCountDept" resultType="com.css.addbase.apporgan.entity.BaseAppOrgan">
+        select * from BASE_APP_ORGAN start with id= #{orgId} connect by prior id = parent_id
+    </select>
+
+	<select id="selectCountUser" resultType="com.css.addbase.apporgan.entity.BaseAppUser">
+		select a.*, b.name as organName, (select state from USER_LEAVE_SETTING c WHERE a.user_id = c.user_id and state =1) as count,d.user_type user_type,e.isdelete eisdelete,e.stateName
+        from BASE_APP_USER a right join (select  * from BASE_APP_ORGAN start with id= #{orgId} connect by prior id = parent_id) b
+		on a.organId=b.id left join USER_MANAGER_SETTING d on a.user_id = d.user_id
+        left join (select b.name as stateName,* from REIGN_USER as a left join REIGN_STATE as b on a.state_id = b.id) e on a.user_id=e.user_id
+        where a.account not in('admin', 'sysadmin', 'secadmin', 'audadmin') and b.ID =a.ORGANID
+		and a.ORGANID not in ( select DEPT_ID from CONFIG_USER_DEPT where DEPT_ID is not null ) and a.USER_ID not in
+        ( select USER_ID from CONFIG_USER_DEPT where USER_ID is not null ) and ( a.user_id not in
+		(  select LEADER_ID from USER_LEADER_ACCESS_STATE where state=1 ) or a.user_id = #{userId} or a.user_id in
+		(  select LEADER_ID from USER_LEADER_ACCESS_STATE where state=1 and user_id =#{userId} ) ) order by a.SORT
+	</select>
+
 	<select id="queryListBySet" resultType="com.css.addbase.apporgan.entity.BaseAppUser">
 		select u.* from BASE_APP_USER u inner join DOCUMENT_BANJIAN_TREE_SET s
 		on u.user_id=s.user_id where u.ISDELETE=0

@@ -156,6 +156,16 @@ public class BaseAppUserServiceImpl implements BaseAppUserService {
 	}
 
 	@Override
+	public List<BaseAppOrgan> selectCountDept(Map<String,Object> map) {
+		return baseAppUserDao.selectCountDept(map);
+	}
+
+	@Override
+	public List<BaseAppUser> selectCountUser(Map<String,Object> map) {
+		return baseAppUserDao.selectCountUser(map);
+	}
+
+	@Override
 	public List<BaseAppUser> queryListByRole(String organid) {
 		return baseAppUserDao.queryListByRole(organid);
 	}

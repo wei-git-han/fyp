@@ -40,7 +40,53 @@ public class BaseAppUser implements Serializable {
 	private String sex;
 	
 	private String telephone;
-	
+
+	private String organName;
+	private String count;
+    private String userType;
+    private String eisdelete;
+    private String stateName;
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getEisdelete() {
+        return eisdelete;
+    }
+
+    public void setEisdelete(String eisdelete) {
+        this.eisdelete = eisdelete;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getOrganName() {
+		return organName;
+	}
+
+	public void setOrganName(String organName) {
+		this.organName = organName;
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
+	}
+
 	/**
 	 * 设置：主键
 	 */
