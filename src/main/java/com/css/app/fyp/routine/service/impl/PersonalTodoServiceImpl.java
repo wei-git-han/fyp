@@ -11,8 +11,11 @@ import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.app.fyp.routine.service.PersonalTodoService;
 import com.css.app.fyp.routine.vo.PersonalTodoVo;
+import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
+import com.css.base.utils.RedisUtil;
+import com.css.base.utils.Response;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +50,9 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
     @Value("${db.url}")
     private String dbglUrl;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
      * @Description 待批公文统计
      * @Author gongan
@@ -72,15 +78,9 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
      */
     @Override
     public JSONObject backlogFlowStatisticsHeader(Date applyDate, String page, String pagesize, String type) {
-        JSONObject jsonData = new JSONObject();
-        JSONObject jsonObjectResult = new JSONObject();
         JSONObject result = new JSONObject();
-        JSONObject jsonObject = new JSONObject();
-        JSONArray chairmanJsonArray = new JSONArray();
         String userId = CurrentUser.getUserId();
-        String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
-        BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
-        String name = baseAppOrgan.getName();
+
         JSONArray returnJsonArr = new JSONArray();
         if (StringUtils.equals(type, "qxj")) {
             //请销假数量
@@ -133,7 +133,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(dccbJsonObj);
         } else if (StringUtils.equals(type, "dzyj")) {
             //电子邮件数量
-            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj",bareauByUserId);
+            BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj","root");
             JSONObject emailJsonObj = new JSONObject();
             String emailUrl = dzyjUrl;
 
@@ -157,7 +157,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(emailJsonObj);
         } else if (StringUtils.equals(type, "jstx")) {
             //即时通讯数量
-            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx",bareauByUserId);
+            BaseAppOrgMapped jstxBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("jstx","root");
             JSONObject jstxJsonObj = new JSONObject();
             jstxJsonObj.put("flowCount", "5");
             jstxJsonObj.put("typeName", "即时通讯");
@@ -174,7 +174,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             returnJsonArr.add(jstxJsonObj);
         } else {
             //局用户
-            jsonData = this.getJsonData (type,"", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
+            JSONObject jsonData = this.getJsonData(type,"", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
             if(null != jsonData){
                 Object objectResult = jsonData.get("returnJsonArr");
                 returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));

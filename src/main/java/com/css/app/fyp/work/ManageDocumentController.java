@@ -97,8 +97,6 @@ public class ManageDocumentController {
             sTime = simpleDateFormat.format(startTime);
             eTime = simpleDateFormat.format(endTime);
         }
-//        int minitue = 0;
-//        SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String currentDeptId = "";
         if(StringUtils.isNotBlank(deptid)){
             currentDeptId = deptid;
@@ -107,16 +105,6 @@ public class ManageDocumentController {
         }
         String keyName = "fyp_banwen_getGwTotal_"+ currentDeptId + sTime + eTime;
         String json = redisTemplate.opsForValue().get(keyName);
-//        String data = redisTemplate.opsForValue().get("gwData");
-//        String curDay = format.format(new Date());
-//        try{
-//            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
-//            long remindTime = format.parse(curDay).getTime();//当前时间
-//            long minusTime = remindTime - nowData;
-//            minitue =(int)minusTime/1000;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);
             Response.json(ret);
@@ -136,29 +124,6 @@ public class ManageDocumentController {
             Response.json(new ResponseValueUtils().success(re));
         }
     }
-
-//    @Scheduled(fixedRate=1800000)
-//    public void getGwTotal(){
-//        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-//        paramMap.add("title","办文总量");
-//        paramMap.add("type","0");
-//        //paramMap.add("deptid",deptid);
-//        Calendar calendar = Calendar.getInstance();
-//        paramMap.add("time",String.valueOf(calendar.get(Calendar.YEAR)));
-//        List<BaseAppOrgan> appOrganList = baseAppOrganService.getAllDeptIds();
-//        if(appOrganList != null && appOrganList.size() > 0){
-//            for(int i = 0;i<appOrganList.size();i++){
-//                BaseAppOrgan baseAppOrgan = appOrganList.get(i);
-//                String deptId = baseAppOrgan.getId();
-//                String keyName = "fyp_banwen_getGwTotal_"+deptId;
-//                paramMap.add("organId",deptId);
-//                redisUtil.setString(keyName,new ResponseValueUtils().success(this.getJsonData.getAllJson(paramMap, "办文")).toJSONString());
-//            }
-//        }
-//
-//
-//        //Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
-//    }
 
     /**
      * 发文情况

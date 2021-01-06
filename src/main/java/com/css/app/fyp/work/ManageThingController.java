@@ -65,32 +65,19 @@ public class ManageThingController {
     @RequestMapping("/dbCount")
     public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy") Date time,String startTime,String endTime) {
         int minitue = 0;
-        String currentDeptId = "";
+        String bareauByUserId = "";
         if(StringUtils.isNotBlank(deptid)){
-            currentDeptId = deptid;
+            bareauByUserId = deptid;
         }else {
-            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+            bareauByUserId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banshi_getDbCount_" + currentDeptId + startTime + endTime;
+        String keyName = "fyp_banshi_getDbCount_" + bareauByUserId + startTime + endTime;
         String json = redisUtil.getString(keyName);
-        String data = redisTemplate.opsForValue().get("dbData");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String curDay = format.format(new Date());
-        try {
-            long nowData = format.parse(data).getTime();//redis缓存放进去的时间
-            long remindTime = format.parse(curDay).getTime();//当前时间
-            long minusTime = remindTime - nowData;
-            minitue = (int) minusTime / (1000 * 3600);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);
             Response.json(ret);
         }else{
             Boolean flag = false;
-            String userId = CurrentUser.getUserId();
-            String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
             BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
             String name = baseAppOrgan.getName();
             //当前用户是否为部首长
@@ -116,7 +103,7 @@ public class ManageThingController {
                 dataList = getJsonData.getJson(paramMap, "首长督查催办");
             } else {
                 if (StringUtils.isBlank(deptid)) {
-                    deptid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+                    deptid = bareauByUserId;
                 }
                 Calendar calendar = Calendar.getInstance();
                 //calendar.setTime(time);
@@ -148,9 +135,8 @@ public class ManageThingController {
                 String bjl = dataList.get(0).get("wcl").toString();
                 dataMap.put("percentage", bjl);//办结率
                 dataMap.put("total", dataList.get(0).get("zsl"));//督办总量
-                redisUtil.setString(keyName, new ResponseValueUtils().success(dataMap).toJSONString());
-                Date date = new Date();
-                redisUtil.setString("dbData", format.format(date));
+                redisUtil.setString(keyName,new ResponseValueUtils().success(dataMap).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
             }
 
             Response.json(new ResponseValueUtils().success(dataMap));

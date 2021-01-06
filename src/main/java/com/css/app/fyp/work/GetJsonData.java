@@ -161,29 +161,22 @@ public class GetJsonData {
     public List<String> getJson(String type){
         String prefix = this.getPrefix(type);
         String token = SSOAuthFilter.getToken();
-//        cacheThread.execute(new Runnable() {
-//            @Override
-//            public void run() {
-                String url = "";
-                switch (type){
-                    case "在线":
-                        //在线率排行-在线数
-                        BaseAppOrgMapped onLine = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
-                        url = onLine.getUrl()+onLine.getWebUri();
-                        setZxData(url,new LinkedMultiValueMap(),token);
-                        break;
-                    case "请假":
-                        //在线率排行-请假数
-                        BaseAppOrgMapped leave = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
-                        url = leave.getUrl()+leave.getWebUri();
-                        setQjData(url,new LinkedMultiValueMap(),token);
-                        break;
+        String url = "";
+        switch (type){
+            case "在线":
+                //在线率排行-在线数
+                BaseAppOrgMapped onLine = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                url = onLine.getUrl()+onLine.getWebUri();
+                setZxData(url,new LinkedMultiValueMap(),token);
+                break;
+            case "请假":
+                //在线率排行-请假数
+                BaseAppOrgMapped leave = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
+                url = leave.getUrl()+leave.getWebUri();
+                setQjData(url,new LinkedMultiValueMap(),token);
+                break;
 
-                }
-
-
-//            }
-//        });
+        }
         return this.getDataAll();
     }
 
@@ -227,12 +220,8 @@ public class GetJsonData {
      * @return JSONObject
      */
     private void setData(Map<String,Object> datamap, String url, LinkedMultiValueMap<String, Object> map, String token, List<JSONObject> jsons){
-        JSONObject jsonData = null;
-        if(CrossDomainUtil.getTokenByJsonData(url,map,token)!=null){
-            jsonData = CrossDomainUtil.getTokenByJsonData(url,map,token);
-//            jsonData.put("appId",datamap.get("APP_ID"));
-//            jsonData.put("appSecret",datamap.get("APP_SECRET"));
-//            jsonData.put("deptId",datamap.get("ORG_ID"));
+        JSONObject jsonData = CrossDomainUtil.getTokenByJsonData(url,map,token);
+        if(jsonData!=null){
             jsonData.put("deptName",datamap.get("ORG_NAME"));
             jsons.add(jsonData);
         }else{
@@ -241,81 +230,31 @@ public class GetJsonData {
         map.remove("deptid");
     }
 
-    /**
-     * 获取外部应用返回数据,部
-     * @param url
-     * @param map
-     * @return String
-     */
-    private void setData(String url, LinkedMultiValueMap<String, Object> map,String token){
-        if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
-            String data = CrossDomainUtil.getTokenByStringData(url,map,token);
-            strs = Arrays.asList(data.split(","));
-        }
-    }
-
     private void setZxData(String url, LinkedMultiValueMap<String, Object> map,String token){
         strs = new ArrayList<>();
-        if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
-            String data = CrossDomainUtil.getTokenByStringData(url,map,token);
-            if(StringUtils.isNotBlank(data)){
-                //JSONArray jsonArray = JSONArray.parseArray(data);
-//                if(jsonArray != null && jsonArray.size() > 0){
-//                    for(int i = 0;i<jsonArray.size();i++){
-//                        strs.add(jsonArray.getString(i));
-//                    }
-//                }
-                JSONObject jsonObject = JSONObject.parseObject(data);
-                Map  map1 = new HashMap();
-                map1 = (Map) jsonObject.get("onlineUser");
-                Set<String> keySet = map1.keySet();
-                Iterator<String> iterator = keySet.iterator();
-                while (iterator.hasNext()){
-                    String key = iterator.next();
-                    String value = (String) map1.get(key);
-                    strs.add(key);
-                }
+        String data = CrossDomainUtil.getTokenByStringData(url,map,token);
+        if(StringUtils.isNotBlank(data)){
+            JSONObject jsonObject = JSONObject.parseObject(data);
+            Map  map1 = new HashMap();
+            map1 = (Map) jsonObject.get("onlineUser");
+            Set<String> keySet = map1.keySet();
+            Iterator<String> iterator = keySet.iterator();
+            while (iterator.hasNext()){
+                String key = iterator.next();
+                strs.add(key);
             }
         }
 
     }
 
     private void setQjData(String url, LinkedMultiValueMap<String, Object> map,String token){
-        if(CrossDomainUtil.getTokenByStringData(url,map,token)!=null){
-            String reJson = CrossDomainUtil.getTokenByStringData(url,map,token);
-            JSONArray jsonArray = null;
-            if (StringUtils.isNotEmpty(reJson)) {
-                String accounts = reJson.substring(1,reJson.length()-1).replace("\"", "");
-                String [] accountArray = accounts.split("\\s*,\\s*");
-                strs = new ArrayList<String>(Arrays.asList(accountArray));
-            }
-
+        String reJson = CrossDomainUtil.getTokenByStringData(url,map,token);
+        if (StringUtils.isNotEmpty(reJson)) {
+            String accounts = reJson.substring(1,reJson.length()-1).replace("\"", "");
+            String [] accountArray = accounts.split("\\s*,\\s*");
+            strs = new ArrayList<String>(Arrays.asList(accountArray));
         }
     }
-
-    /**
-     * 返回所有局数据
-     * @param size
-     * @return List<JSONObject>
-     */
-//    private List<JSONObject> getDataAll(int size,List<JSONObject> jsons){
-//        List<JSONObject>  newJsons = null;
-////        while (true){
-//            if(jsons.size()==size){
-//                newJsons = new ArrayList<>();
-//                newJsons.addAll(jsons);
-//                jsons.clear();
-//                break;
-//            }else{
-//                try {
-//                    Thread.sleep(10);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-////        }
-//        return newJsons;
-//    }
 
     /**
      * 返回所有部数据

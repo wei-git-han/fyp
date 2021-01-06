@@ -31,83 +31,18 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     private BaseAppOrgMappedService baseAppOrgMappedService;
 
     @Override
-    public JSONArray statementTablesList(String orgId, String weekTableType, String weekTableDate, String page, String pagesize) {
-        JSONArray jsonData = new JSONArray();
+    public JSONArray statementTablesList(String orgId, String weekTableType, String weekTableDate) {
         String userId = CurrentUser.getUserId();
-        String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
-        BaseAppOrgan baseAppOrgan = baseAppOrgMappedService.getbyId(bareauByUserId);
-        String name = baseAppOrgan.getName();
-        //当前用户是否为部首长
-        if (StringUtils.equals("部首长",name)) {
-            //部首长
-            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/count/publish";
-            String zoneId = orgId;
-            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableType, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
-        } else {
-            //局用户
-            String WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST = "/api/week/count/publish";
-            String zoneId = orgId;
-            jsonData = this.getJsonArrayData(page, pagesize, userId, weekTableType, weekTableDate, zoneId, WEB_INTERFACE_WORK_WEEK_GETDOCUMENT_FLOW_LIST);
-        }
+        String zoneId = orgId;
+        JSONArray jsonData = this.getJsonArrayData( userId, weekTableType, weekTableDate, zoneId);
         return jsonData;
     }
 
-    private JSONArray getWorkWeekData (String page, String pagesize, String applyType, String listType, Date applyDate, String userId, String type, String url) {
+    private JSONArray getJsonArrayData (String userId, String year, String week, String zoneId) {
         JSONArray jsonData =new JSONArray();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-        infoMap.add("userId", userId);
-        if (StringUtils.isNotEmpty(applyType)) {
-            infoMap.add("type", applyType);
-        }
-        if (StringUtils.isNotEmpty(listType)) {
-            infoMap.add("documentTopStatus", listType);
-        }
-        if (applyDate != null) {
-            infoMap.add("applyDate", applyDate);
-        }
-        if (StringUtils.isNotEmpty(page)) {
-            infoMap.add("page", page);
-        }
-        if (StringUtils.isNotEmpty(pagesize)) {
-            infoMap.add("pagesize", pagesize);
-        }
-        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
-        if (StringUtils.isNotEmpty(mapperUrl)) {
-            String sendUrl = mapperUrl + url;
-            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
-        } else {
-            logger.info("orgId为{}的局的电子保密室的配置数据错误");
-            return null;
-        }
-        return jsonData;
-    }
-
-    private JSONArray getJsonArrayData (String page, String pagesize, String userId, String year, String week, String zoneId, String url) {
-        JSONArray jsonData =new JSONArray();
-        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
-//        if (StringUtils.isNotEmpty(page)) {
-//            infoMap.add("page", page);
-//        }
-//        if (StringUtils.isNotEmpty(pagesize)) {
-//            infoMap.add("pagesize", pagesize);
-//        }
-//        if (StringUtils.isNotEmpty(zoneId)) {
-//            infoMap.add("zoneId", zoneId);
-//        }
-//        if (StringUtils.isNotEmpty(year)) {
-//            infoMap.add("year", year);
-//        }
-//        if (StringUtils.isNotEmpty(week)) {
-//            infoMap.add("week", week);
-//        }
-//        if (StringUtils.isNotEmpty(userId)) {
-//            infoMap.add("userId", userId);
-//        }
-        //String mapperUrl = "http://servers:port";
         String type = "fypzb";
-//        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
         BaseAppOrgMapped bm = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","root",type);
-//        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMapped("", userId, type);
         String res = "";
         if (bm != null) {
 //            String sendUrl = mapperUrl + url;
@@ -116,11 +51,7 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
             zoneId = zoneId.replace("-","");
             sendUrl += File.separator + userId + File.separator + year + File.separator + week + File.separator + zoneId;
             sendUrl+="?access_token=" + SSOAuthFilter.getToken();
-//            jsonData = CrossDomainUtil.getJsonArrayData(sendUrl, infoMap);
-//            jsonData = CrossDomainUtil.getJsonArrayDataByGet(sendUrl, infoMap);
             res = HttpClientUtils.requstByGetMethod(sendUrl);
-//            System.out.println("============="+res+"=============");
-//            logger.info(res);
         } else {
             logger.info("orgId为{}的局的电子保密室的配置数据错误");
             return null;

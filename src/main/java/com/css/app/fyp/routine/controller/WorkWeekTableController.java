@@ -59,7 +59,7 @@ public class WorkWeekTableController {
      */
     @ResponseBody
     @RequestMapping("/statementTablesList")
-    public void statementTablesList(String orgId, String weekTableType, String toDate, String page, String pagesize) {
+    public void statementTablesList(String orgId, String toDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         int week = 0;
         int year = 0;
@@ -79,13 +79,13 @@ public class WorkWeekTableController {
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_gzzb_getStatementTablesList_"+orgId;
+        String keyName = "fyp_gzzb_getStatementTablesList_"+orgId + year + week;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONArray ret = JSONArray.parseArray(json);
             Response.json(new ResponseValueUtils().success(ret));
         }else{
-            JSONArray maps = workWeekTableService.statementTablesList(orgId, String.valueOf(year), String.valueOf(week), page, pagesize);
+            JSONArray maps = workWeekTableService.statementTablesList(orgId, String.valueOf(year), String.valueOf(week));
             if(maps != null){
                 redisUtil.setString(keyName,maps.toJSONString());
                 redisUtil.expire(keyName,12*60*60);

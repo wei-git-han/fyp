@@ -78,8 +78,7 @@ public class BaseAppOrgMappedServiceImpl implements BaseAppOrgMappedService {
 	}
 	
 	public Object orgMapped(String appId,String appLevel, String userId, String type) {
-//		String bareauId = getBareauByUserId(userId);
-		
+
 		return orgMappedByOrgId(appId,null,type,appLevel);
 	}
 	

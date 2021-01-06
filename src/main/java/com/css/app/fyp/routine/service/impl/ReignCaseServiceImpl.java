@@ -145,7 +145,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     public ReignCaseVo reignCaseList(String afficheType) {
         String userId = CurrentUser.getUserId();
         this.analyseData(userId, "desktop_online_api", System.currentTimeMillis());
-        BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
+//        BaseAppUser baseAppUser = baseAppUserService.queryObject(userId);
         String organid = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         //String organid = baseAppUser.getOrganid();
         Map<String,Object> userFilter = new HashMap<>();

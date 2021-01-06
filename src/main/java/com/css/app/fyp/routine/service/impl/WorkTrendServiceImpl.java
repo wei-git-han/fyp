@@ -47,7 +47,6 @@ public class WorkTrendServiceImpl implements WorkTrendService {
     @Override
     public JSONObject workTrendList(String trendType) {
         String userId = CurrentUser.getUserId();
-        String gwcl_appId = baseAppOrgMappedService.getAppIdByUserId("gwcl");
         //局用户
         JSONObject jsonData = this.getJsonData(userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_WORK_TREND_VIEWINFO_FYP);
         jsonData.put("ip", xwdt);
