@@ -10,10 +10,7 @@ import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.filter.SSOAuthFilter;
-import com.css.base.utils.CrossDomainUtil;
-import com.css.base.utils.HttpClientUtils;
-import com.css.base.utils.Response;
-import com.css.base.utils.StringUtils;
+import com.css.base.utils.*;
 import com.google.common.collect.LinkedHashMultimap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +46,9 @@ public class OrderOfBirthController {
 
     @Autowired
     private BaseAppOrganService baseAppOrganService;
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
      * 在线率排行
      * @param type
@@ -57,74 +57,86 @@ public class OrderOfBirthController {
     @ResponseBody
     @RequestMapping("/onLine")
     public void onLine(String type,@DateTimeFormat(pattern = "yyyy-MM") Date time) {
-        List<Map<String,Object>> objects = new ArrayList<>();
+        String keyName = "fyp_paihang_getOnLine" ;
+        String json = redisUtil.getString(keyName);
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        }else{
+            List<Map<String,Object>> objects = new ArrayList<>();
 
-        //获取所有参与统计的单位
-        //List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrgMappedService.findAppIdAndDeptIdNameAll(AppConstant.APP_GWCL);
-        List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDept();
-        //获取所有在线数
-        List<String> onLineList = getJsonData.getJson("在线");
-        //获取所有请假人数
-        List<String> leaveList = getJsonData.getJson("请假");
+            //获取所有参与统计的单位
+            //List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrgMappedService.findAppIdAndDeptIdNameAll(AppConstant.APP_GWCL);
+            List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDept();
+            //获取所有在线数
+            List<String> onLineList = getJsonData.getJson("在线");
+            //获取所有请假人数
+            List<String> leaveList = getJsonData.getJson("请假");
 
-        Map<String,Object> paramMap;
-        Map<String,Object> dataMap;
-        for(Map<String, Object> map:appIdAndDeptIdNameAll){
-            dataMap = new HashMap<>();
-            dataMap.put("deptName",map.get("NAME"));//单位
-            //获取所有在编人数
-            paramMap = new HashMap<>();
-            paramMap.put("organid",map.get("ID"));
-            List<BaseAppUser> baseAppUsers = baseAppUserService.queryListByRole((String)map.get("ID"));
-            if(null!=baseAppUsers){
-                dataMap.put("permanentStaffCount",baseAppUsers.size());//在编
-            }else{
-                dataMap.put("permanentStaffCount",0);//在编
-                dataMap.put("onLineCount",0);//在线
-                dataMap.put("leaveCount",0);//请假
-                dataMap.put("otherCount",0);//其他
-                dataMap.put("percentage",0);//在线率
-                continue;
-            }
-            int onlineCount = 0;
-            if(onLineList != null && onLineList.size() > 0){
-            for(String username:onLineList){
-                for(BaseAppUser user:baseAppUsers){
-                    if(username.equals(user.getAccount())){
-                        onlineCount++;
-                    }
+            Map<String,Object> paramMap;
+            Map<String,Object> dataMap;
+            for(Map<String, Object> map:appIdAndDeptIdNameAll){
+                dataMap = new HashMap<>();
+                dataMap.put("deptName",map.get("NAME"));//单位
+                //获取所有在编人数
+                paramMap = new HashMap<>();
+                paramMap.put("organid",map.get("ID"));
+                List<BaseAppUser> baseAppUsers = baseAppUserService.queryListByRole((String)map.get("ID"));
+                if(null!=baseAppUsers){
+                    dataMap.put("permanentStaffCount",baseAppUsers.size());//在编
+                }else{
+                    dataMap.put("permanentStaffCount",0);//在编
+                    dataMap.put("onLineCount",0);//在线
+                    dataMap.put("leaveCount",0);//请假
+                    dataMap.put("otherCount",0);//其他
+                    dataMap.put("percentage",0);//在线率
+                    continue;
                 }
-            }
-            }
-            dataMap.put("onLineCount",onlineCount);//在线
-            int leaveCount = 0;
-            if(null!= leaveList) {
-                for (String username : leaveList) {
-                    for (BaseAppUser user : baseAppUsers) {
-                        if (username.equals(user.getTruename())) {
-                            leaveCount++;
+                int onlineCount = 0;
+                if(onLineList != null && onLineList.size() > 0){
+                    for(String username:onLineList){
+                        for(BaseAppUser user:baseAppUsers){
+                            if(username.equals(user.getAccount())){
+                                onlineCount++;
+                            }
                         }
                     }
                 }
+                dataMap.put("onLineCount",onlineCount);//在线
+                int leaveCount = 0;
+                if(null!= leaveList) {
+                    for (String username : leaveList) {
+                        for (BaseAppUser user : baseAppUsers) {
+                            if (username.equals(user.getTruename())) {
+                                leaveCount++;
+                            }
+                        }
+                    }
+                }
+                dataMap.put("leaveCount",leaveCount);//请假
+                dataMap.put("otherCount",baseAppUsers.size() - (onlineCount + leaveCount));//其他
+                int t = 0;
+                if(baseAppUsers != null && baseAppUsers.size() > 0){
+                    t = baseAppUsers.size();
+                }
+                if(t > 0){
+                    double lv  = ((new BigDecimal((float) onlineCount / baseAppUsers.size()).doubleValue()) * 100);
+                    String zxl = String.valueOf(lv);
+                    dataMap.put("percentage",zxl.substring(0,zxl.indexOf(".")+2));//在线率
+                }else{
+                    dataMap.put("percentage",0);//在线率
+                }
+                objects.add(dataMap);
             }
-            dataMap.put("leaveCount",leaveCount);//请假
-            dataMap.put("otherCount",baseAppUsers.size() - (onlineCount + leaveCount));//其他
-            int t = 0;
-            if(baseAppUsers != null && baseAppUsers.size() > 0){
-                t = baseAppUsers.size();
+            if(objects != null && objects.size()>0){
+                redisUtil.setString(keyName,new ResponseValueUtils().success(objects).toJSONString());
+                redisUtil.expire(keyName,60*60);
             }
-            if(t > 0){
-                double lv  = ((new BigDecimal((float) onlineCount / baseAppUsers.size()).doubleValue()) * 100);
-                String zxl = String.valueOf(lv);
-                dataMap.put("percentage",zxl.substring(0,zxl.indexOf(".")+2));//在线率
-            }else{
-                dataMap.put("percentage",0);//在线率
-            }
-
-            objects.add(dataMap);
+            Response.json(new ResponseValueUtils().success(objects));
         }
 
-        Response.json(new ResponseValueUtils().success(objects));
+
+
     }
 
     /**

@@ -71,8 +71,8 @@ public class ManageThingController {
         }else {
             currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "dbCoutRedis_" + currentDeptId + startTime + endTime;
-        String json = redisTemplate.opsForValue().get(keyName);
+        String keyName = "fyp_banshi_getDbCount_" + currentDeptId + startTime + endTime;
+        String json = redisUtil.getString(keyName);
         String data = redisTemplate.opsForValue().get("dbData");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String curDay = format.format(new Date());
@@ -84,10 +84,10 @@ public class ManageThingController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        if (StringUtils.isNotBlank(json) && minitue <= 60 && minitue >= 0) {
-//            JSONObject ret = JSONObject.parseObject(json);
-//            Response.json(ret);
-//        } else {
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        }else{
             Boolean flag = false;
             String userId = CurrentUser.getUserId();
             String bareauByUserId = baseAppOrgMappedService.getBareauByUserId(userId);
@@ -139,18 +139,23 @@ public class ManageThingController {
                 dataList = getJsonData.getJson(paramMap, "督查催办");
             }
             Map<String, Object> dataMap = new HashMap<>();
-            dataMap.put("onTime", dataList.get(0).get("onTimebj"));//按时办结
-            dataMap.put("timeOutEnd", dataList.get(0).get("overTimebj"));//超时办结
-            dataMap.put("timeOutNotEnd", dataList.get(0).get("overTimewbj"));//超时未结
-            dataMap.put("working", dataList.get(0).get("onTimeblz"));//时限内在办
-            dataMap.put("dayNumber", dataList.get(0).get("aveDays"));//平均办理天数
-            String bjl = dataList.get(0).get("wcl").toString();
-            dataMap.put("percentage", bjl);//办结率
-            dataMap.put("total", dataList.get(0).get("zsl"));//督办总量
-            redisUtil.setString(keyName, new ResponseValueUtils().success(dataMap).toJSONString());
-            Date date = new Date();
-            redisUtil.setString("dbData", format.format(date));
+            if(dataList != null&&dataList.size()>0){
+                dataMap.put("onTime", dataList.get(0).get("onTimebj"));//按时办结
+                dataMap.put("timeOutEnd", dataList.get(0).get("overTimebj"));//超时办结
+                dataMap.put("timeOutNotEnd", dataList.get(0).get("overTimewbj"));//超时未结
+                dataMap.put("working", dataList.get(0).get("onTimeblz"));//时限内在办
+                dataMap.put("dayNumber", dataList.get(0).get("aveDays"));//平均办理天数
+                String bjl = dataList.get(0).get("wcl").toString();
+                dataMap.put("percentage", bjl);//办结率
+                dataMap.put("total", dataList.get(0).get("zsl"));//督办总量
+                redisUtil.setString(keyName, new ResponseValueUtils().success(dataMap).toJSONString());
+                Date date = new Date();
+                redisUtil.setString("dbData", format.format(date));
+            }
+
             Response.json(new ResponseValueUtils().success(dataMap));
+        }
+
         //}
     }
 

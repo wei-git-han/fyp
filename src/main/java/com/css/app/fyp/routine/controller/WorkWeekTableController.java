@@ -49,6 +49,11 @@ public class WorkWeekTableController {
     @Autowired
     private RedisUtil redisUtil;
 
+    @ResponseBody
+    @RequestMapping("/test")
+    public void test(){
+        redisUtil.deleteForHkey("fyp_*");
+    }
     /**
      * 本周周表/个人周表
      */
@@ -74,15 +79,17 @@ public class WorkWeekTableController {
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_gzzb_getWorkWeek_"+orgId;
+        String keyName = "fyp_gzzb_getStatementTablesList_"+orgId;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONArray ret = JSONArray.parseArray(json);
             Response.json(new ResponseValueUtils().success(ret));
         }else{
             JSONArray maps = workWeekTableService.statementTablesList(orgId, String.valueOf(year), String.valueOf(week), page, pagesize);
-            redisUtil.setString(keyName,maps.toJSONString());
-            redisUtil.expire(keyName,12*60*60);
+            if(maps != null){
+                redisUtil.setString(keyName,maps.toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }
             Response.json(new ResponseValueUtils().success(maps));
         }
 

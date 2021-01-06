@@ -106,7 +106,8 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
         //String mapperUrl = "http://servers:port";
         String type = "fypzb";
 //        String mapperUrl = baseAppOrgMappedService.getUrlByType(userId, type);
-        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMapped("", userId, type);
+        BaseAppOrgMapped bm = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","root",type);
+//        BaseAppOrgMapped bm = (BaseAppOrgMapped) baseAppOrgMappedService.orgMapped("", userId, type);
         String res = "";
         if (bm != null) {
 //            String sendUrl = mapperUrl + url;

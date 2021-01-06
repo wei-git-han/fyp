@@ -97,35 +97,6 @@ public class ManageMeetingController {
             sendUrl+="?access_token=" + SSOAuthFilter.getToken() + "&year=" + year;
             res = HttpClientUtils.requstByGetMethod(sendUrl);
         }
-//        ArrayList<Map<String, Object>> objects = new ArrayList<>();
-//        Map<String, Object> dataMap = null;
-//        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-//        //中宏利达开始时间结束时间传入参数,当前时间与time的时间差
-//        paramMap.add("endDiff",this.getMin(new Date(),time));
-        /*List<JSONObject> dataJson = getJsonData.getJson(paramMap, "办会");
-        for (JSONObject data:dataJson) {
-            List<Map<String,Object>> list = (ArrayList)data.get("list");
-            dataMap = new HashMap<>();
-            int min = 0;
-            int count = 0;
-            if(null!=list) {
-                for (Map<String, Object> map : list) {
-                    if ("1".equals(map.get("videoEnable"))) {//开启视频
-                        min += Integer.parseInt(this.getMin((Date) map.get("endTime"), (Date) map.get("startTime")));
-                        count++;
-                    }
-                }
-            }
-            dataMap.put("deptName",data.get("deptName"));
-            dataMap.put("meetingTimeCount",min);
-            dataMap.put("meetingCount",count);
-            objects.add(dataMap);
-        }*/
-//        HashMap<String, Object> map = new HashMap<>();
-//        map.put("deptName","办公厅");
-//        map.put("meetingTimeCount",36);
-//        map.put("meetingCount",3636);
-//        objects.add(map);
         JSONArray jsonData = new JSONArray();
 //        System.out.println("res===="+res+"=====");
         if(StringUtils.isNotBlank(res)){

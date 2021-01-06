@@ -89,7 +89,6 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
-        Date date1 = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
@@ -98,15 +97,15 @@ public class ManageDocumentController {
             sTime = simpleDateFormat.format(startTime);
             eTime = simpleDateFormat.format(endTime);
         }
-        int minitue = 0;
-        SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//        int minitue = 0;
+//        SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String currentDeptId = "";
         if(StringUtils.isNotBlank(deptid)){
             currentDeptId = deptid;
         }else {
             currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getGwTotal_"+currentDeptId;
+        String keyName = "fyp_banwen_getGwTotal_"+ currentDeptId + sTime + eTime;
         String json = redisTemplate.opsForValue().get(keyName);
 //        String data = redisTemplate.opsForValue().get("gwData");
 //        String curDay = format.format(new Date());
@@ -128,11 +127,13 @@ public class ManageDocumentController {
             paramMap.add("deptid", deptid);
             paramMap.add("startTime", sTime);
             paramMap.add("endTime", eTime);
-            redisUtil.setString(keyName,new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")).toJSONString());
-//            Date date = new Date();
-//            redisUtil.setString("gwData",format.format(date));
-            redisUtil.expire(keyName,12*60*60);
-            Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
+            List<JSONObject> re = this.getJsonData.getJson(paramMap, "办文");
+            if(re != null && re.size()>0){
+                redisUtil.setString(keyName,new ResponseValueUtils().success(re).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }
+
+            Response.json(new ResponseValueUtils().success(re));
         }
     }
 
@@ -170,7 +171,6 @@ public class ManageDocumentController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sTime = null;
         String eTime = null;
-        Date date = new Date();
         if(null == startTime && null == endTime) {
             Map<String, Object> map = this.setDate(startTime, endTime);
             sTime = (String) map.get("startTime");
@@ -179,13 +179,34 @@ public class ManageDocumentController {
             sTime = simpleDateFormat.format(startTime);
             eTime = simpleDateFormat.format(endTime);
         }
-        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("title","发文情况");
-        paramMap.add("type",type);
-        paramMap.add("deptid",deptid);
-        paramMap.add("startTime",sTime);
-        paramMap.add("endTime",eTime);
-        Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
+
+        String currentDeptId = "";
+        if(StringUtils.isNotBlank(deptid)){
+            currentDeptId = deptid;
+        }else {
+            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+        }
+        String keyName = "fyp_banwen_getFwOverview_" + currentDeptId + sTime + eTime;
+        String json = redisUtil.getString(keyName);
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        }else{
+
+            LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("title","发文情况");
+            paramMap.add("type",type);
+            paramMap.add("deptid",deptid);
+            paramMap.add("startTime",sTime);
+            paramMap.add("endTime",eTime);
+            List<JSONObject> re = this.getJsonData.getJson(paramMap, "办文");
+            if(re != null && re.size()>0){
+                redisUtil.setString(keyName,new ResponseValueUtils().success(re).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }
+            Response.json(new ResponseValueUtils().success(re));
+        }
+
     }
 
     /**
@@ -209,24 +230,41 @@ public class ManageDocumentController {
             eTime = simpleDateFormat2.format(endTime);
             //eTime = simpleDateFormat2.format(endTime);
         }
-        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("title","发展趋势");
-        paramMap.add("type",type);
-        if("root".equals(deptid)){
-            deptid="";
+
+        String currentDeptId = "";
+        if(StringUtils.isNotBlank(deptid)){
+            currentDeptId = deptid;
+        }else {
+            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        paramMap.add("deptid",deptid);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        paramMap.add("startTime",sTime);
-        paramMap.add("endTime",eTime);
-        List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
-        Object data = new Object();
-        if(null!=dataList&&dataList.size()>0){
-            data = dataList.get(0).get("list");
+        String keyName = "fyp_banwen_getTrend_" + currentDeptId + sTime + eTime;
+        String json = redisUtil.getString(keyName);
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
         }else{
-            data = null;
+            LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("title","发展趋势");
+            paramMap.add("type",type);
+            if("root".equals(deptid)){
+                deptid="";
+            }
+            paramMap.add("deptid",deptid);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+            paramMap.add("startTime",sTime);
+            paramMap.add("endTime",eTime);
+            List<JSONObject> dataList = this.getJsonData.getJson(paramMap, "办文");
+            Object data = new Object();
+            if(null!=dataList&&dataList.size()>0){
+                data = dataList.get(0).get("list");
+                redisUtil.setString(keyName,new ResponseValueUtils().success(data).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }else{
+                data = null;
+            }
+            Response.json(new ResponseValueUtils().success(data));
         }
-        Response.json(new ResponseValueUtils().success(data));
+
     }
 
     /**
@@ -249,16 +287,35 @@ public class ManageDocumentController {
             sTime = simpleDateFormat2.format(startTime);
             eTime = simpleDateFormat2.format(endTime);
         }
-        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("title","呈批效率");
-        paramMap.add("type",type);
-        if("root".equals(deptid)){
-            deptid = "";
+        String currentDeptId = "";
+        if(StringUtils.isNotBlank(deptid)){
+            currentDeptId = deptid;
+        }else {
+            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        paramMap.add("deptid",deptid);
-        paramMap.add("startTime",sTime);
-        paramMap.add("endTime",eTime);
-        Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
+        String keyName = "fyp_banwen_getSubmitEfficiency_" + currentDeptId + sTime + eTime;
+        String json = redisUtil.getString(keyName);
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        }else{
+            LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("title","呈批效率");
+            paramMap.add("type",type);
+            if("root".equals(deptid)){
+                deptid = "";
+            }
+            paramMap.add("deptid",deptid);
+            paramMap.add("startTime",sTime);
+            paramMap.add("endTime",eTime);
+            List<JSONObject> re = this.getJsonData.getJson(paramMap, "办文");
+            if(re != null && re.size()>0){
+                redisUtil.setString(keyName,new ResponseValueUtils().success(re).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }
+            Response.json(new ResponseValueUtils().success(re));
+        }
+
     }
 
     /**
@@ -281,16 +338,35 @@ public class ManageDocumentController {
             sTime = simpleDateFormat2.format(startTime);
             eTime = simpleDateFormat2.format(endTime);
         }
-        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("title","办件效率");
-        paramMap.add("type",type);
-        if("root".equals(deptid)){
-            deptid = "";
+        String currentDeptId = "";
+        if(StringUtils.isNotBlank(deptid)){
+            currentDeptId = deptid;
+        }else {
+            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        paramMap.add("deptid",deptid);
-        paramMap.add("startTime",sTime);
-        paramMap.add("endTime",eTime);
-        Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
+        String keyName = "fyp_banwen_getHandleEfficiency_" + currentDeptId + sTime + eTime;
+        String json = redisUtil.getString(keyName);
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        }else{
+            LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("title","办件效率");
+            paramMap.add("type",type);
+            if("root".equals(deptid)){
+                deptid = "";
+            }
+            paramMap.add("deptid",deptid);
+            paramMap.add("startTime",sTime);
+            paramMap.add("endTime",eTime);
+            List<JSONObject> re = this.getJsonData.getJson(paramMap, "办文");
+            if(re != null && re.size()>0){
+                redisUtil.setString(keyName,new ResponseValueUtils().success(re).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }
+            Response.json(new ResponseValueUtils().success(re));
+        }
+
     }
 
     /**
@@ -313,16 +389,34 @@ public class ManageDocumentController {
             sTime = simpleDateFormat2.format(startTime);
             eTime = simpleDateFormat2.format(endTime);
         }
-        LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-        paramMap.add("title","阅件效率");
-        paramMap.add("type",type);
-        if("root".equals(deptid)){
-            deptid = "";
+        String currentDeptId = "";
+        if(StringUtils.isNotBlank(deptid)){
+            currentDeptId = deptid;
+        }else {
+            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        paramMap.add("deptid",deptid);
-        paramMap.add("startTime",sTime);
-        paramMap.add("endTime",eTime);
-        Response.json(new ResponseValueUtils().success(this.getJsonData.getJson(paramMap, "办文")));
+        String keyName = "fyp_banwen_getReadEfficiency_" + currentDeptId + sTime + eTime;
+        String json = redisUtil.getString(keyName);
+        if(StringUtils.isNotBlank(json)){
+            JSONObject ret = JSONObject.parseObject(json);
+            Response.json(ret);
+        }else{
+            LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("title","阅件效率");
+            paramMap.add("type",type);
+            if("root".equals(deptid)){
+                deptid = "";
+            }
+            paramMap.add("deptid",deptid);
+            paramMap.add("startTime",sTime);
+            paramMap.add("endTime",eTime);
+            List<JSONObject> re = this.getJsonData.getJson(paramMap, "办文");
+            if(re != null && re.size()>0){
+                redisUtil.setString(keyName,new ResponseValueUtils().success(re).toJSONString());
+                redisUtil.expire(keyName,12*60*60);
+            }
+            Response.json(new ResponseValueUtils().success(re));
+        }
     }
 
 
