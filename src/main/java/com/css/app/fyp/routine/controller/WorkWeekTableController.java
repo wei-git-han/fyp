@@ -63,6 +63,7 @@ public class WorkWeekTableController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         int week = 0;
         int year = 0;
+        long time1 =System.currentTimeMillis();
         try {
             Date date = new Date();
             if(StringUtils.isNotBlank(toDate)){
@@ -79,6 +80,10 @@ public class WorkWeekTableController {
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
         }
+
+        long time2 =System.currentTimeMillis();
+        logger.info("计算周数时间============:"+(time2-time1)+"ms");
+
         String keyName = "fyp_gzzb_getStatementTablesList_"+orgId + year + week;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){

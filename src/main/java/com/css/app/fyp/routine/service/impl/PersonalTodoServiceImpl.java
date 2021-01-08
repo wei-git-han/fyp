@@ -87,7 +87,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             BaseAppOrgMapped qxjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("qxj","root");
             JSONObject qxjJsonObj = new JSONObject();
             String qxjUrl = qxjglUrl;
-            JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", qxjUrl, "", applyDate);
+            JSONObject qxjJsonDataUrl = this.getJsonDataUrl("", "", "", qxjUrl, "", applyDate);
             qxjJsonObj.put("appId", "");
             qxjJsonObj.put("appUrl", "url");
             if (null != qxjJsonDataUrl) {
@@ -112,7 +112,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             BaseAppOrgMapped dccbBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dccb","root");
             JSONObject dccbJsonObj = new JSONObject();
             String dccbUrl = dbglUrl;
-            JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", userId, "", dccbUrl, "", applyDate);
+            JSONObject dccbJsonDataUrl = this.getJsonDataUrl("", "", "", dccbUrl, "", applyDate);
             dccbJsonObj.put("appId", "");
             if (null != dccbJsonDataUrl) {
                 dccbJsonObj.put("flowCount", dccbJsonDataUrl.get("count"));
@@ -136,8 +136,8 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
             BaseAppOrgMapped dzyjBaseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId("dzyj","root");
             JSONObject emailJsonObj = new JSONObject();
             String emailUrl = dzyjUrl;
-
-            JSONObject emailJsonDataUrl = this.getJsonData("", "", "", userId, AppConstant.DZYJ, emailUrl, AppInterfaceConstant.WEB_INTERFACE_DZYJ_GETDOCUMENT_SPGW, applyDate);
+            JSONObject emailJsonDataUrl = this.getJsonDataUrl("", "", "", emailUrl, "", applyDate);
+//            JSONObject emailJsonDataUrl = this.getJsonData("", "", "", userId, AppConstant.DZYJ, emailUrl, AppInterfaceConstant.WEB_INTERFACE_DZYJ_GETDOCUMENT_SPGW, applyDate);
             if (null != emailJsonDataUrl) {
                 emailJsonObj.put("flowCount", emailJsonDataUrl.get("total"));
             }else {
@@ -245,7 +245,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         return jsonData;
     }
 
-    public JSONObject getJsonDataUrl (String applyType, String page, String pagesize, String userId, String type, String url, String documentTopStatus, Date applyDate) {
+    public JSONObject getJsonDataUrl (String applyType, String page, String pagesize, String url, String documentTopStatus, Date applyDate) {
         JSONObject jsonData =new JSONObject();
         LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
         if (StringUtils.isNotEmpty(applyType)) {

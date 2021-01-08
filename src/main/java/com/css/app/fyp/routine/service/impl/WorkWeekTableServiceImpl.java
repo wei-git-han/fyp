@@ -34,7 +34,30 @@ public class WorkWeekTableServiceImpl implements WorkWeekTableService {
     public JSONArray statementTablesList(String orgId, String weekTableType, String weekTableDate) {
         String userId = CurrentUser.getUserId();
         String zoneId = orgId;
-        JSONArray jsonData = this.getJsonArrayData( userId, weekTableType, weekTableDate, zoneId);
+
+        JSONArray jsonData =new JSONArray();
+        LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+        String type = "fypzb";
+        BaseAppOrgMapped bm = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","root",type);
+        String res = "";
+        if (bm != null) {
+//            String sendUrl = mapperUrl + url;
+            String sendUrl = bm.getUrl() + bm.getWebUri();
+            userId = userId.replace("-","");
+            zoneId = zoneId.replace("-","");
+            sendUrl += File.separator + userId + File.separator + weekTableType + File.separator + weekTableDate + File.separator + zoneId;
+            sendUrl+="?access_token=" + SSOAuthFilter.getToken();
+            long time1 =System.currentTimeMillis();
+            res = HttpClientUtils.requstByGetMethod(sendUrl);
+            long time2 =System.currentTimeMillis();
+            logger.info("调用中宏利达周表接口地址："+sendUrl+",时间============:"+(time2-time1)+"ms");
+        } else {
+            logger.info("orgId为{}的局的电子保密室的配置数据错误");
+            return null;
+        }
+        if(StringUtils.isNotBlank(res)){
+            jsonData = JSONArray.parseArray(res);
+        }
         return jsonData;
     }
 

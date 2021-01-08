@@ -349,12 +349,12 @@ public class ReignCaseServiceImpl implements ReignCaseService {
     public JSONObject reignCaseJsonObject() {
         userStateMapList = getUserStateMapList();
         //获取在线人对象集合
-        long time1 =System.currentTimeMillis();
-        logger.info("============time1:"+time1);
+//        long time1 =System.currentTimeMillis();
+//        logger.info("============time1:"+time1);
         onlineUsers = getOnlineUsers();
-        long time2 =System.currentTimeMillis();
-        logger.info("============time2:"+time2);
-        logger.info("============time2-time1:"+(time2-time1)+"ms");
+//        long time2 =System.currentTimeMillis();
+//        logger.info("============time2:"+time2);
+//        logger.info("============time2-time1:"+(time2-time1)+"ms");
         String orgid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         if (com.css.base.utils.StringUtils.isNotEmpty(orgid)) {
             JSONObject list=  getUserTreeFyp(orgid);
