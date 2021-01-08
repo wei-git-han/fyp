@@ -83,9 +83,6 @@ public class WorkWeekTableController {
             logger.info("查询组织机构时间============:"+(time3-time1)+"ms");
         }
 
-        long time2 =System.currentTimeMillis();
-        logger.info("计算周数时间============:"+(time2-time1)+"ms");
-
         String keyName = "fyp_gzzb_getStatementTablesList_"+orgId + year + week;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
