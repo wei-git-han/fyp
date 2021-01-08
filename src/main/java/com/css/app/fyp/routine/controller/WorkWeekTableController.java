@@ -79,6 +79,8 @@ public class WorkWeekTableController {
         }
         if(StringUtils.isBlank(orgId)){
             orgId = baseAppUserService.getBareauByUserId(CurrentUser.getUserId());
+            long time3 =System.currentTimeMillis();
+            logger.info("查询组织机构时间============:"+(time3-time1)+"ms");
         }
 
         long time2 =System.currentTimeMillis();

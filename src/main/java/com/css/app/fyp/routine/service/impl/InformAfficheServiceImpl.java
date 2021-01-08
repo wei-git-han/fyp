@@ -85,7 +85,6 @@ public class InformAfficheServiceImpl implements InformAfficheService {
             return null;
         }
         List<Map<String,String>> resList = (List) jsonData.get("resList");
-        JSONObject releaseTime = new JSONObject();
         long date_temp = 0;
         String date_String = "0";
         for(Map<String,String> res : resList) {
