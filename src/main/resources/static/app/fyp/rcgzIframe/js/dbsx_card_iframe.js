@@ -29,15 +29,15 @@ var menuMap = {
 var pageModule = function () {
 
 	var initdbsx = function(){
-		var map =
-		menuList.forEach(function (e,index) {
+//		menuList.forEach(function (e,index) {
 			$ajax({
 				url: dbsxUrl,
-				data:{type:e},
+				data:{type:'gwcl'},
 				success: function(data) {
 					// console.log(data)
 					// var arryHtml = '';
-					$.each(data.data.returnJsonArr, function(i, o) {
+					$.each(data.data, function(i, o) {
+					    o=o[0]
 						// if(o.typeName=="即时通讯"){
 						// 	arryHtml+=	'<div style="cursor: not-allowed">'+
 						// 		'	<p>'+o.flowCount+'</p>'+
@@ -52,19 +52,53 @@ var pageModule = function () {
 						// 		'	<span>'+o.typeName+'</span>'+
 						// 		'</div>'
 						// }
-						$("#"+e+'> p').html(o.flowCount||0)
-						if(index>=4){
-							$("#"+e+'> span').html(o.typeName||'')
+						$("#"+i+'> p').html(o.flowCount||0)
+						if(o.applyType>4){
+							$("#"+i+'> span').html(o.typeName||'')
 						}
 						// arryHtml=
 						// 	'	<p>'+o.flowCount+'</p>'+
 						// 	'	<span>'+(o.typeName||menuMap[e].typeName||'')+'</span>'
-						keyMap[e] = o
+						keyMap[i] = o
 					});
 					// $("#"+e).html(arryHtml);
 				}
 			})
-		})
+            $ajax({
+                url: dbsxUrl,
+                data:{type:'other'},
+                success: function(data) {
+                    // console.log(data)
+                    // var arryHtml = '';
+                    $.each(data.data, function(i, o) {
+                        o=o[0]
+                        // if(o.typeName=="即时通讯"){
+                        // 	arryHtml+=	'<div style="cursor: not-allowed">'+
+                        // 		'	<p>'+o.flowCount+'</p>'+
+                        // 		'	<span>'+o.typeName+'</span>'+
+                        // 		'</div>'
+                        // }else{
+                        // 	if(!o.menuId){
+                        // 		o.menuId=''
+                        // 	}
+                        // 	arryHtml+=	'<div onclick="openFn(\''+o.appId+'\',\''+o.appUrlSuffix+'\',\''+o.appUrlPrefix+'\',\''+o.menuId+'\')">'+
+                        // 		'	<p>'+o.flowCount+'</p>'+
+                        // 		'	<span>'+o.typeName+'</span>'+
+                        // 		'</div>'
+                        // }
+                        $("#"+i+'> p').html(o.flowCount||0)
+                        if(o.applyType>4){
+                            $("#"+i+'> span').html(o.typeName||'')
+                        }
+                        // arryHtml=
+                        // 	'	<p>'+o.flowCount+'</p>'+
+                        // 	'	<span>'+(o.typeName||menuMap[e].typeName||'')+'</span>'
+                        keyMap[i] = o
+                    });
+                    // $("#"+e).html(arryHtml);
+                }
+            })
+//		})
 		$ajax({
 			url: dbsxUrl2,
 			success: function (data) {

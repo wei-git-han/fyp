@@ -81,7 +81,6 @@ public class ManageDocumentController {
     /**
      * 办文总量
      * @param type
-     * @param time 年
      */
     @ResponseBody
     @RequestMapping("/total")

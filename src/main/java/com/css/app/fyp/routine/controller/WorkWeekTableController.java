@@ -53,6 +53,7 @@ public class WorkWeekTableController {
     @RequestMapping("/test")
     public void test(){
         redisUtil.deleteForHkey("fyp_*");
+        Response.json("清除成功");
     }
     /**
      * 本周周表/个人周表
@@ -92,7 +93,7 @@ public class WorkWeekTableController {
             JSONArray maps = workWeekTableService.statementTablesList(orgId, String.valueOf(year), String.valueOf(week));
             if(maps != null){
                 redisUtil.setString(keyName,maps.toJSONString());
-                redisUtil.expire(keyName,12*60*60);
+                redisUtil.expire(keyName,60*60);
             }
             Response.json(new ResponseValueUtils().success(maps));
         }

@@ -100,7 +100,12 @@ public class ManageMeetingController {
         JSONArray jsonData = new JSONArray();
 //        System.out.println("res===="+res+"=====");
         if(StringUtils.isNotBlank(res)){
-            jsonData = JSONArray.parseArray(res);
+            try {
+                jsonData = JSONArray.parseArray(res);
+            }catch (Exception e){
+                jsonData = null;
+            }
+
         }
         JSONObject result = new JSONObject();
         result.put("list",jsonData);

@@ -64,7 +64,7 @@ public class ManageThingController {
     @ResponseBody
     @RequestMapping("/dbCount")
     public void dbCount(String deptid,@DateTimeFormat(pattern = "yyyy") Date time,String startTime,String endTime) {
-        int minitue = 0;
+        List<JSONObject> dataList = null;
         String bareauByUserId = "";
         if(StringUtils.isNotBlank(deptid)){
             bareauByUserId = deptid;
@@ -85,7 +85,7 @@ public class ManageThingController {
                 flag = true;
             }
             LinkedMultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
-            List<JSONObject> dataList = new ArrayList<JSONObject>();
+
             if (flag && StringUtils.isBlank(deptid)) {
                 Calendar calendar = Calendar.getInstance();
                 //calendar.setTime(time);
@@ -100,6 +100,7 @@ public class ManageThingController {
                 }
                 paramMap.add("startTime",startTime);
                 paramMap.add("endTime",endTime);
+                paramMap.add("deptid",deptid);
                 dataList = getJsonData.getJson(paramMap, "首长督查催办");
             } else {
                 if (StringUtils.isBlank(deptid)) {
@@ -121,6 +122,7 @@ public class ManageThingController {
                 paramMap.add("startTime",startTime);
                 paramMap.add("endTime",endTime);
                 if (StringUtils.isNotBlank(deptid)) {
+                    paramMap.add("deptid", deptid);
                     paramMap.add("organId", deptid);//单位id
                 }
                 dataList = getJsonData.getJson(paramMap, "督查催办");

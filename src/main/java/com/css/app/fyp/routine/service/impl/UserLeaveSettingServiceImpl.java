@@ -107,8 +107,7 @@ public class UserLeaveSettingServiceImpl implements UserLeaveSettingService {
 			url = bm.getUrl();
 			url+= AppInterfaceConstant.WEB_INTERFACE_QXJ_TO_FYP;
 		}
-		System.out.println("请销假请求路径："+url);
-		//排除的人ID  
+		//排除的人ID
 		List<String> idList = getFilterIds();
 		map.add("leaveIds", StringUtils.join(idList,","));
 		

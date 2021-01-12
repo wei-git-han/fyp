@@ -85,9 +85,9 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
         BaseAppOrgMapped qxj = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.APP_QXJ);
 		logger.info("请销假返回数据-------------"+qxj);
         BaseAppOrgMapped db = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("", "root", AppConstant.DCCB);
-		logger.info("请销假返回数据-------------"+db);
+//		logger.info("请销假返回数据-------------"+db);
         List<BaseAppOrgMapped> mappedData = baseAppOrgMappedService.getMappedData("", null, AppConstant.APP_GWCL);
-		logger.info("请销假返回数据-------------"+mappedData);
+//		logger.info("请销假返回数据-------------"+mappedData);
 		String gwData = "";
         if(mappedData !=null && mappedData.size()>0){
             for (BaseAppOrgMapped baseAppOrgMapped : mappedData){
@@ -119,7 +119,7 @@ public class FypStatisticsServiceImpl implements FypStatisticsService {
         logger.info("公文请求前========"+deptId);
         logger.info("公文请求地址======"+documentUrl+token);
         JSONObject doc = CrossDomainUtil.getTokenByJsonData(documentUrl,objectObjectLinkedMultiValueMap, token);
-		logger.info("返回数据-------------"+doc+token);
+//		logger.info("返回数据-------------"+doc+token);
         if(null!=doc){
 			JSONObject tokenByJsonData = doc;
 			docuemntData = (List<Map<String,Object>>)tokenByJsonData.get("list");

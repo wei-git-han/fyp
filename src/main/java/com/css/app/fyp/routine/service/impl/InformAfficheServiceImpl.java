@@ -134,7 +134,10 @@ public class InformAfficheServiceImpl implements InformAfficheService {
         String mapperUrl = xxfwUrl;
         if (StringUtils.isNotEmpty(mapperUrl)) {
             String sendUrl = mapperUrl + url;
+            long time1 =System.currentTimeMillis();
             jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+            long time2 =System.currentTimeMillis();
+            logger.info("getNotReadCount请求接口时间============:"+(time2-time1)+"ms");
         } else {
             logger.info("orgId为{}的局的信息服务的配置数据错误");
             return null;

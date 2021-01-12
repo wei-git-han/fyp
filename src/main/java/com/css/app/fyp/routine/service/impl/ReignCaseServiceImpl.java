@@ -18,8 +18,10 @@ import com.css.app.fyp.routine.entity.UserLeaderAccessState;
 import com.css.app.fyp.routine.entity.UserLeaveSetting;
 import com.css.app.fyp.routine.service.*;
 import com.css.app.fyp.routine.vo.ReignCaseVo;
+import com.css.app.fyp.utils.ResponseValueUtils;
 import com.css.base.utils.*;
 import com.github.pagehelper.PageHelper;
+import com.google.gson.JsonArray;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -75,7 +77,8 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     @Autowired
     private ConfigUserDeptService configUserDeptService;
-
+    @Autowired
+    private RedisUtil redisUtil;
     /**
      * 在线人
      */
@@ -350,10 +353,17 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         userStateMapList = getUserStateMapList();
         //获取在线人对象集合
 //        long time1 =System.currentTimeMillis();
-//        logger.info("============time1:"+time1);
-        onlineUsers = getOnlineUsers();
+//        String keyName = "fyp_zwqk_getReignCaseJsonObject_onlineUsers";
+//        String json = redisUtil.getString(keyName);
+//        if(com.css.base.utils.StringUtils.isNotBlank(json)){
+//            onlineUsers = JSONObject.parseArray(json,BaseAppUser.class);
+//        }else{
+            onlineUsers = getOnlineUsers();
+//            redisUtil.setString(keyName,JSON.toJSONString(onlineUsers));
+//            redisUtil.expire(keyName,30*60);
+//        }
+
 //        long time2 =System.currentTimeMillis();
-//        logger.info("============time2:"+time2);
 //        logger.info("============time2-time1:"+(time2-time1)+"ms");
         String orgid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         if (com.css.base.utils.StringUtils.isNotEmpty(orgid)) {
@@ -361,7 +371,6 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             return list;
         } else {
             JSONObject list=  getUserTreeFyp("root");
-            System.out.println(list);
             return list;
         }
     }
@@ -395,7 +404,6 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         try {
             client.executeMethod(post);
             int statusCode = post.getStatusCode();
-            System.out.println("post.getStatusCode()======="+post.getStatusCode());
             if(statusCode!=200) {
                 System.err.println("URL:"+url+"请求返回错误，错误代码statusCode:"+statusCode);
                 throw new RuntimeException("URL:"+url+"请求返回错误，错误代码statusCode:"+statusCode);
@@ -441,9 +449,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         if(com.css.base.utils.StringUtils.isNotBlank(userIds)) {
             qjIdList=Arrays.asList(userIds.split(","));
         }
-        JSONObject rootresult = new JSONObject();
 
-        JSONArray rjsons = new JSONArray();
         BaseAppOrgan dept = baseAppOrganService.queryObject(id);
 //        rootresult.put("id", id);
 //        rootresult.put("text", dept.getName());
@@ -454,7 +460,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         map.put("orgId",id);
         map.put("userId",userId);
 
+
         List<BaseAppOrgan> deptCountList = baseAppUserService.selectCountDept(map);
+
         List<BaseAppUser> userCountList = baseAppUserService.selectCountUser(map);
         List<BaseAppOrgan> rootList = new ArrayList<BaseAppOrgan>();
         rootList.add(dept);
@@ -473,7 +481,6 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         }
         Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
 
-        int rootSum = 0;
         JSONArray jsonRootList = JSONArray.parseArray(JSON.toJSONString(rootList));
         JSONArray jsonAllList = JSONArray.parseArray(JSON.toJSONString(deptCountList));
         getUserTreeCount(jsonRootList,jsonAllList,userCountList,id,qjIdList,onlineUserIds,ja2,dataMap);
@@ -648,6 +655,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
             }
         }
+
     }
 
 //    JSONObject jsonObj = null;
@@ -1156,7 +1164,6 @@ public class ReignCaseServiceImpl implements ReignCaseService {
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         paramMap.put("time", time);
         List<Map<String, Object>> mapList = userStateSettingService.getUserStateDataMap(paramMap);
-        System.out.println("###########################################################");
         return mapList;
     }
 

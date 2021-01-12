@@ -263,7 +263,6 @@ public class OrderOfBirthController {
             url += token;
         }
         String res = HttpClientUtils.requstByGetMethod(url);
-        System.out.println(res);
         JSONObject tokenByJsonData = JSONObject.parseObject(res);
         String field = "data";//访问量、安装量
         if("info".equals(type)){//应用详情

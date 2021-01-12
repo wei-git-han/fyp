@@ -10,11 +10,14 @@ import com.css.addbase.apporgmapped.service.BaseAppOrgMappedService;
 import com.css.addbase.constant.AppConstant;
 import com.css.addbase.constant.AppInterfaceConstant;
 import com.css.addbase.token.TokenConfig;
+import com.css.app.fyp.routine.service.impl.ReignCaseServiceImpl;
 import com.css.base.filter.SSOAuthFilter;
 import com.css.base.utils.CrossDomainUtil;
 import com.css.base.utils.CurrentUser;
 import com.css.base.utils.StringUtils;
 import com.google.gson.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -32,7 +35,7 @@ import java.util.concurrent.Executors;
  */
 @Repository
 public class GetJsonData {
-
+    private final Logger logger = LoggerFactory.getLogger(GetJsonData.class);
     public GetJsonData() {
     }
 
@@ -69,10 +72,16 @@ public class GetJsonData {
         String prefix = this.getPrefix(type);
         String token = SSOAuthFilter.getToken();
         if (null != map.get("deptid") && !"".equals(map.get("deptid").get(0))) {
+            long time1 =System.currentTimeMillis();
             Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(map.get("deptid").get(0).toString());
+            long time2 =System.currentTimeMillis();
+            logger.info("查询dept时间============:"+(time2-time1)+"ms");
             this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, map.get("deptid").toString());
         }else {
-            List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDeptByType("gwclbw");;
+            long time1 =System.currentTimeMillis();
+            List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDeptByType("gwclbw");
+            long time2 =System.currentTimeMillis();
+            logger.info("查询deptList时间============:"+(time2-time1)+"ms");
             for (Map<String, Object> data:appIdAndDeptIdNameAll) {
                 this.getJsonsDate(type, data, prefix, jsons, token, map, orgId);
             }
@@ -81,32 +90,12 @@ public class GetJsonData {
         return jsons;
     }
 
-    public List<JSONObject> getAllJson(LinkedMultiValueMap<String, Object> map,String type){
-        List<JSONObject> jsons = new ArrayList<>();
-        String prefix = this.getPrefix(type);
-        String token = TokenConfig.token(appId, appSecret);;
-        String deptId = (String)map.get("organId").get(0);
-        if (null != map.get("organId") && !"".equals(map.get("organId").get(0))) {
-            Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(map.get("organId").get(0).toString());
-            this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, deptId);
-        }else {
-            List<Map<String, Object>> appIdAndDeptIdNameAll = this.getAppIdAndDeptIdNameAll(prefix);
-            for (Map<String, Object> data:appIdAndDeptIdNameAll) {
-                this.getJsonsDate(type, data, prefix, jsons, token, map, deptId);
-            }
-
-        }
-        return jsons;
-    }
-
     private void getJsonsDate (String type, Map<String, Object> data, String prefix, List<JSONObject> jsons,String token, LinkedMultiValueMap<String, Object> map, String orgId) {
-        System.out.println("`!!");
         String url = "";
         switch (type){
             case "办文":
                 //公文处理
-                BaseAppOrgMapped document = new BaseAppOrgMapped();
-                document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
+                BaseAppOrgMapped document = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("",data.get("ORG_ID").toString(),prefix);
                 if(document ==null){
                     BaseAppOrgan baseAppOrgan = baseAppOrganService.queryDeptIdById(String.valueOf(data.get("ORG_ID")));
                     String deptId = baseAppOrgan.getParentId();
@@ -119,7 +108,10 @@ public class GetJsonData {
                 if(StringUtils.isNotBlank(data.get("ORG_ID").toString())) {
                     map.add("deptid", findUsersByDeptidNotConfig(data.get("ORG_ID").toString()));
                 }
+                long time1 =System.currentTimeMillis();
                 setData(data,url,map,token,jsons);
+                long time2 =System.currentTimeMillis();
+                logger.info("办文total/overview/trend/submitEfficiency/handleEfficiency/readEfficiency请求接口时间============:"+(time2-time1)+"ms");
                 break;
             case "办会":
                 //会见
@@ -127,13 +119,19 @@ public class GetJsonData {
                 map.add("appId",meeting.getAppId());
                 map.add("secretKey",meeting.getAppSecret());
                 url = meeting.getUrl()+meeting.getWebUri();
+                time1 =System.currentTimeMillis();
                 setData(data,url,map,token,jsons);
+                time2 =System.currentTimeMillis();
+                logger.info("办会请求接口时间============:"+(time2-time1)+"ms");
                 break;
             case "首长督查催办":
                 //首长督查催办
                 BaseAppOrgMapped szThing = (BaseAppOrgMapped)baseAppOrgMappedService.orgMappedByOrgId("","",prefix);
                 url = szThing.getUrl()+AppInterfaceConstant.WEB_INERFACE_SZDCCB_MANAGETHING;
+                time1 =System.currentTimeMillis();
                 setData(data,url,map,token,jsons);
+                time2 =System.currentTimeMillis();
+                logger.info("首长督查催办dbcount请求接口时间============:"+(time2-time1)+"ms");
                 break;
             case "督查催办":
                 //督查催办
@@ -148,7 +146,10 @@ public class GetJsonData {
                 if(null == organIds){
                     map.add("organId", orgId);
                 }
+                time1 =System.currentTimeMillis();
                 setData(data,url,map,token,jsons);
+                time2 =System.currentTimeMillis();
+                logger.info("督查催办dbcount请求接口时间============:"+(time2-time1)+"ms");
                 break;
         }
     }
@@ -223,8 +224,6 @@ public class GetJsonData {
         JSONObject jsonData = CrossDomainUtil.getTokenByJsonData(url,map,token);
         if(jsonData!=null){
             jsonData.put("deptName",datamap.get("ORG_NAME"));
-            jsons.add(jsonData);
-        }else{
             jsons.add(jsonData);
         }
         map.remove("deptid");
