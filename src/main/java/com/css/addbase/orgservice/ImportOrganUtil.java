@@ -111,7 +111,6 @@ public class ImportOrganUtil {
 				baseAppOrganService.save(appOrgan);
 			}
 			System.out.println(organ.getOrganId()+":"+organ.getOrganName()+"导入成功！");
-			appOrgan = null;
 			importOrg(sysOrgan.getOrganId());
 		}
 		UserInfo[] userInfos = orgService.getUserInfos(organId);
@@ -137,7 +136,6 @@ public class ImportOrganUtil {
 				baseAppUserService.save(baseAppUser);
 			}
 			System.out.println(userInfo.getUserid()+":"+userInfo.getFullname()+"导入成功！");
-			baseAppUser = null;
 		}
 	}
 

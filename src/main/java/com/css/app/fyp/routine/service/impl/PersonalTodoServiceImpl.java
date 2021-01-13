@@ -195,25 +195,56 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
 
     private JSONObject getAllJson(Date applyDate, String type){
         String userId = CurrentUser.getUserId();
+        String orgId = baseAppOrgMappedService.getBareauByUserId(userId);
         JSONObject result = new JSONObject();
         if(StringUtils.equals("gwcl",type)){
-            String[] types = {"wdgw","pbgw","gwyz","lwyj"};
-            for(String typeg : types){
-                JSONArray returnJsonArr = new JSONArray();
-                JSONObject jsonData = this.getJsonData(typeg,"", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
-                if(null != jsonData){
-                    Object objectResult = jsonData.get("returnJsonArr");
-                    returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
+            String keyName = "fyp_banwen_getBacklogFlowStatisticsHeader_gwcl_"+userId;
+            String json = redisUtil.getString(keyName);
+            if(com.css.base.utils.StringUtils.isNotBlank(json)){
+                result = JSONObject.parseObject(json);
+            }else{
+//                BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId(AppConstant.APP_GWCL,orgId);
+//                String[] types = {"wdgw","pbgw","gwyz","lwyj"};
+//                for(String typeg : types){
+//                    JSONArray returnJsonArr = new JSONArray();
+//                    JSONObject jsonData = new JSONObject();
+////                JSONObject jsonData = this.getJsonData(typeg,"", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
+//                    LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+//                    if (StringUtils.isNotEmpty(typeg)) {
+//                        infoMap.add("applyType", typeg);
+//                    }
+//                    if (baseAppOrgMapped != null) {
+//                        String sendUrl = baseAppOrgMapped.getUrl() + AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW;
+//                        jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+//                    } else {
+//                        logger.info("orgId为{}的局的电子保密室的配置数据错误");
+//                        return null;
+//                    }
+//                    if(null != jsonData){
+//                        Object objectResult = jsonData.get("returnJsonArr");
+//                        returnJsonArr = JSON.parseArray(JSONObject.toJSONString(objectResult));
+//                    }
+//                    if(returnJsonArr != null){
+//                        result.put(typeg,returnJsonArr);
+//                    }
+//                }
+                //公文发布后启动
+                JSONObject jsonData = new JSONObject();
+                BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId(AppConstant.APP_GWCL,orgId);
+                LinkedMultiValueMap<String,Object> infoMap = new LinkedMultiValueMap<String,Object>();
+                if (baseAppOrgMapped != null) {
+                    String sendUrl = baseAppOrgMapped.getUrl() + AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW;
+                    jsonData = CrossDomainUtil.getJsonData(sendUrl, infoMap);
+                } else {
+                    logger.info("orgId为{}的局的电子保密室的配置数据错误");
+                    return null;
                 }
-                if(returnJsonArr != null){
-                    result.put(typeg,returnJsonArr);
+                if(jsonData != null){
+                    result.putAll(jsonData);
                 }
             }
-            //公文发布后启动
-//            JSONObject jsonData = this.getJsonData("","", "", userId, AppConstant.APP_GWCL, AppInterfaceConstant.WEB_INTERFACE_GWCL_GETDOCUMENT_FLOW_SPGW, "", applyDate);
-//            if(jsonData != null){
-//                result.putAll(jsonData);
-//            }
+            redisUtil.setString(keyName,result.toJSONString());
+            redisUtil.expire(keyName,60*60);
         }else{
             String keyName = "fyp_banwen_getBacklogFlowStatisticsHeader";
             String json = redisUtil.getString(keyName);
