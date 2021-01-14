@@ -18,6 +18,18 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
+
+	<select id="queryNotCountList" resultType="com.css.addbase.apporgan.entity.BaseAppOrgan">
+		select * from BASE_APP_ORGAN where ISDELETE = 0
+		and id not in (select dept_id from CONFIG_USER_DEPT where dept_id is not null)
+		<if test="name != null and name != ''">
+			and NAME=#{name}
+		</if>
+		order by SORT asc
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
 	
  	<select id="queryTotal" resultType="int">
 		select count(*) from BASE_APP_ORGAN where ISDELETE = 0

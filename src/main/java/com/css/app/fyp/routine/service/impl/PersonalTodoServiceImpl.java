@@ -200,7 +200,7 @@ public class PersonalTodoServiceImpl implements PersonalTodoService {
         if(StringUtils.equals("gwcl",type)){
             String keyName = "fyp_banwen_getBacklogFlowStatisticsHeader_gwcl_"+userId;
             String json = redisUtil.getString(keyName);
-            if(com.css.base.utils.StringUtils.isNotBlank(json)){
+            if(com.css.base.utils.StringUtils.isNotBlank(json)&&!StringUtils.equals("{}",json)){
                 result = JSONObject.parseObject(json);
             }else{
 //                BaseAppOrgMapped baseAppOrgMapped = baseAppOrgMappedService.getUrlByAppId(AppConstant.APP_GWCL,orgId);

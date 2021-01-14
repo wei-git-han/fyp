@@ -21,6 +21,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -102,7 +103,7 @@ public class ManageDocumentController {
         }else {
             currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getGwTotal_"+ currentDeptId + sTime + eTime;
+        String keyName = "fyp_banwen_getGwTotal_"+ currentDeptId + sTime + eTime + type;
         String json = redisTemplate.opsForValue().get(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);
@@ -150,7 +151,7 @@ public class ManageDocumentController {
         }else {
             currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getFwOverview_" + currentDeptId + sTime + eTime;
+        String keyName = "fyp_banwen_getFwOverview_" + currentDeptId + sTime + eTime + type;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);

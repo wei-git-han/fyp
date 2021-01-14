@@ -33,6 +33,11 @@ public class BaseAppOrganServiceImpl implements BaseAppOrganService {
 	public List<BaseAppOrgan> queryList(Map<String, Object> map){
 		return baseAppOrganDao.queryList(map);
 	}
+
+	@Override
+	public List<BaseAppOrgan> queryNotCountList(Map<String, Object> map){
+		return baseAppOrganDao.queryNotCountList(map);
+	}
 	
 	@Override
 	public void save(BaseAppOrgan baseAppOrgan){

@@ -108,6 +108,17 @@ public class BaseAppOrganController {
 		JSONObject list= OrgUtil.getOrganTree(organs,"root",true,true);
 		return list;
 	}
+
+	/**
+	 * 只获取root节点下的叶子节点
+	 */
+	@RequestMapping(value = "/queryNotCountList")
+	@ResponseBody
+	public Object queryNotCountList() {
+		List<BaseAppOrgan> organs = baseAppOrganService.queryNotCountList(null);
+		JSONObject list= OrgUtil.getOrganTree(organs,"root",true,true);
+		return list;
+	}
 	
 	/**
 	 * 根据部门ID获取子部门信息

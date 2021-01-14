@@ -17,6 +17,7 @@ public interface BaseAppOrganService {
 	BaseAppOrgan queryObject(String id);
 	
 	List<BaseAppOrgan> queryList(Map<String, Object> map);
+	List<BaseAppOrgan> queryNotCountList(Map<String, Object> map);
 
 	Map<String,Object> findAppIdAndDeptIdNameById(String orgId);
 
