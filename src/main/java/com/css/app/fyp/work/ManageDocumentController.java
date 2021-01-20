@@ -252,13 +252,10 @@ public class ManageDocumentController {
             sTime = simpleDateFormat2.format(startTime);
             eTime = simpleDateFormat2.format(endTime);
         }
-        String currentDeptId = "";
-        if(StringUtils.isNotBlank(deptid)){
-            currentDeptId = deptid;
-        }else {
-            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+        if(StringUtils.isBlank(deptid)){
+            deptid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getSubmitEfficiency_" + currentDeptId + sTime + eTime;
+        String keyName = "fyp_banwen_getSubmitEfficiency_" + deptid + sTime + eTime;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);
@@ -303,13 +300,10 @@ public class ManageDocumentController {
             sTime = simpleDateFormat2.format(startTime);
             eTime = simpleDateFormat2.format(endTime);
         }
-        String currentDeptId = "";
-        if(StringUtils.isNotBlank(deptid)){
-            currentDeptId = deptid;
-        }else {
-            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+        if(StringUtils.isBlank(deptid)){
+            deptid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getHandleEfficiency_" + currentDeptId + sTime + eTime;
+        String keyName = "fyp_banwen_getHandleEfficiency_" + deptid + sTime + eTime;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);
@@ -354,13 +348,10 @@ public class ManageDocumentController {
             sTime = simpleDateFormat2.format(startTime);
             eTime = simpleDateFormat2.format(endTime);
         }
-        String currentDeptId = "";
-        if(StringUtils.isNotBlank(deptid)){
-            currentDeptId = deptid;
-        }else {
-            currentDeptId = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
+        if(StringUtils.isBlank(deptid)){
+            deptid = baseAppOrgMappedService.getBareauByUserId(CurrentUser.getUserId());
         }
-        String keyName = "fyp_banwen_getReadEfficiency_" + currentDeptId + sTime + eTime;
+        String keyName = "fyp_banwen_getReadEfficiency_" + deptid + sTime + eTime;
         String json = redisUtil.getString(keyName);
         if(StringUtils.isNotBlank(json)){
             JSONObject ret = JSONObject.parseObject(json);

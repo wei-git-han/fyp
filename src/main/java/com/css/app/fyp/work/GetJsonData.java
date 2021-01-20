@@ -76,7 +76,10 @@ public class GetJsonData {
             Map<String, Object> appIdAndDeptIdNameById = baseAppOrganService.findAppIdAndDeptIdNameById(map.get("deptid").get(0).toString());
             long time2 =System.currentTimeMillis();
             logger.info("查询dept时间============:"+(time2-time1)+"ms");
-            this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, map.get("deptid").toString());
+            if(appIdAndDeptIdNameById != null && appIdAndDeptIdNameById.size()>0){
+                this.getJsonsDate(type, appIdAndDeptIdNameById, prefix, jsons, token, map, map.get("deptid").toString());
+            }
+
         }else {
             long time1 =System.currentTimeMillis();
             List<Map<String, Object>> appIdAndDeptIdNameAll = baseAppOrganService.queryAllDeptByType("gwclbw");

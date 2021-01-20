@@ -275,11 +275,13 @@
 	</delete>
 
 	<select id="queryObjectByAccounts" resultType="com.css.addbase.apporgan.entity.BaseAppUser" >
-		select  *  from BASE_APP_USER where account in
+		select  a.*,e.isdelete eisdelete,e.stateName
+		from BASE_APP_USER a left join (select b.name as stateName,* from REIGN_USER as a left join REIGN_STATE as b on a.state_id = b.id) e on a.user_id=e.user_id where account in
 		<foreach item="account" collection="array" open="(" separator="," close=")">
 			#{account}
 		</foreach>
-
+		and a.user_id not in (select ifnull(user_id,0) from config_user_dept cud)
+		and a.ORGANID  not in (select ifnull(dept_id,0) from config_user_dept cud)
 	</select>
 
 	<select id="queryByOrganidTREEPATH" resultType="com.css.addbase.apporgan.entity.BaseAppUser">

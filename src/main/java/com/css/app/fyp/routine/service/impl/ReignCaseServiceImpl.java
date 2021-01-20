@@ -410,12 +410,18 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             }
             String response = post.getResponseBodyAsString();
             //response="[\"chims\",\"jiangcm\"]";
-            if(com.css.base.utils.StringUtils.isNotBlank(response) && response.length()>2) {
-                String accounts = response.substring(1,response.length()-1).replace("\"", "");
-                String []accountArray = accounts.split("\\s*,\\s*");
-                List<BaseAppUser> tempUserList = baseAppUserService.queryObjectByAccounts(accountArray);
-                List<String> fileterIds =getFilterIds();
+            JSONObject reJson = JSONObject.parseObject(response);
+            if(StringUtils.isNotBlank(response) && StringUtils.equals("success",reJson.get("result").toString())){
 
+                JSONObject accountJson = JSONObject.parseObject(JSONObject.parseObject(response).get("onlineUser").toString());
+                String[] users = new String[accountJson.size()];
+                int i = 0;
+                for(String key : accountJson.keySet()){
+                    users[i] = key;
+                    i++;
+                }
+                List<BaseAppUser> tempUserList = baseAppUserService.queryObjectByAccounts(users);
+                List<String> fileterIds =getFilterIds();
                 for (BaseAppUser o : tempUserList) {
                     if(!fileterIds.contains(o.getUserId())) {
                         userList.add(o);
@@ -473,6 +479,12 @@ public class ReignCaseServiceImpl implements ReignCaseService {
                 BaseAppUser baseAppUser = onlineUsers.get(j);
                 String currentUserId = baseAppUser.getUserId();
                 ConfigUserDept configUserDept = configUserDeptService.queryByUserId(currentUserId);
+                baseAppUser.getEisdelete();
+                if(StringUtils.equals("0",baseAppUser.getEisdelete())&&!StringUtils.equals("在线",baseAppUser.getStateName())){
+                    onlineUsers.remove(j);
+                    j--;
+                    continue;
+                }
                 if (configUserDept != null) {
                     onlineUsers.remove(j);
                     j--;
@@ -483,7 +495,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
         JSONArray jsonRootList = JSONArray.parseArray(JSON.toJSONString(rootList));
         JSONArray jsonAllList = JSONArray.parseArray(JSON.toJSONString(deptCountList));
-        getUserTreeCount(jsonRootList,jsonAllList,userCountList,id,qjIdList,onlineUserIds,ja2,dataMap);
+        getUserTreeCount(jsonRootList,jsonAllList,userCountList,qjIdList,onlineUserIds,ja2,dataMap);
         JSONObject re = new JSONObject();
         if(jsonRootList.size()>0){
             re = jsonRootList.getJSONObject(0);
@@ -492,7 +504,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
 
     }
 
-    private void getUserTreeCount(JSONArray perDeptCountList,JSONArray deptCountList,List<BaseAppUser> userCountList,String id,List<String> qjIdList,List<String> onlineUserIds,JSONArray ja2,Map<String,Object> dataMap){
+    private void getUserTreeCount(JSONArray perDeptCountList,JSONArray deptCountList,List<BaseAppUser> userCountList,List<String> qjIdList,List<String> onlineUserIds,JSONArray ja2,Map<String,Object> dataMap){
         String userId=CurrentUser.getUserId();
         //循环父机构，查找下面的子机构
         for(int i = 0; i<perDeptCountList.size(); i++){
@@ -512,7 +524,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             }
             if (cjsons.size()>0) {
                 result.put("child", cjsons);
-                getUserTreeCount(result.getJSONArray("child"),deptCountList,userCountList,id,qjIdList,onlineUserIds,ja2,dataMap);
+                getUserTreeCount(result.getJSONArray("child"),deptCountList,userCountList,qjIdList,onlineUserIds,ja2,dataMap);
 
                 int sumCount = 0;
                 for(int k = 0; k<result.getJSONArray("child").size(); k++){
@@ -538,9 +550,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
                 int lxCount = sumCount-zxCount;
                 if(lxCount<0) {lxCount=0;}
                 //请假人数	普通人请假
-                String qjCount = getOrgQxjCount(ja2, id);
+                String qjCount = getOrgQxjCount(ja2, result.getString("id"));
                 //局长请假统计数 2018年10月10日16:23:35
-                String jzqjCount=getJzQxjCount(id, userId);
+                String jzqjCount=getJzQxjCount(result.getString("id"), userId);
 
                 result.put("zx", zxCount);
                 result.put("lx", lxCount);
@@ -613,7 +625,7 @@ public class ReignCaseServiceImpl implements ReignCaseService {
                 Integer zxCount = 0;
                 //zxCount = list.size();
                 if(!dataMap.isEmpty()) {
-                    Object value = dataMap.get(id);
+                    Object value = dataMap.get(result.getString("id"));
                     if(value!=null) {
                         zxCount= Integer.parseInt(value.toString());
                     }
@@ -626,9 +638,9 @@ public class ReignCaseServiceImpl implements ReignCaseService {
                 int lxCount = sumCount-zxCount;
                 if(lxCount<0) {lxCount=0;}
                 //请假人数	普通人请假
-                String qjCount = getOrgQxjCount(ja2, id);
+                String qjCount = getOrgQxjCount(ja2, result.getString("id"));
                 //局长请假统计数 2018年10月10日16:23:35
-                String jzqjCount=getJzQxjCount(id, userId);
+                String jzqjCount=getJzQxjCount(result.getString("id"), userId);
 
                 result.put("zx", zxCount);
                 result.put("lx", lxCount);

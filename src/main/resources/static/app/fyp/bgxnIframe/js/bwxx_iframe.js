@@ -1,6 +1,6 @@
 // var deptTreeUrl = {"url":"/app/base/dept/tree","dataType":"text"}; //单位树
 var userTreeUrl = {"url":"/app/base/user/tree","dataType":"text"}; //人员树
-var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}
+var deptTreeUrl = {"url":"/app/base/dept/queryNotCountList","dataType":"text"}
 var date2 = new Date()
 var nowYear = date2.getFullYear();
 var nowMonth = date2.getMonth();

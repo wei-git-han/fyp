@@ -1,5 +1,5 @@
 var listurl = {"url": "/app/fyp/manageThing/weeklyTable","dataType": "text"};
-var deptTreeUrl = {"url":"/app/base/dept/tree_onlyroot","dataType":"text"}; //单位树
+var deptTreeUrl = {"url":"/app/base/dept/queryNotCountList","dataType":"text"}; //单位树
 var grid = null;
 // var isSz = window.top.isSz||false
 // if(isSz==true){
