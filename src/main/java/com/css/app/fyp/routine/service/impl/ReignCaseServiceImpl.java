@@ -478,17 +478,17 @@ public class ReignCaseServiceImpl implements ReignCaseService {
             for(int j = 0;j<onlineUsers.size();j++){
                 BaseAppUser baseAppUser = onlineUsers.get(j);
                 String currentUserId = baseAppUser.getUserId();
-                ConfigUserDept configUserDept = configUserDeptService.queryByUserId(currentUserId);
+//                ConfigUserDept configUserDept = configUserDeptService.queryByUserId(currentUserId);
                 baseAppUser.getEisdelete();
                 if(StringUtils.equals("0",baseAppUser.getEisdelete())&&!StringUtils.equals("在线",baseAppUser.getStateName())){
                     onlineUsers.remove(j);
                     j--;
                     continue;
                 }
-                if (configUserDept != null) {
-                    onlineUsers.remove(j);
-                    j--;
-                }
+//                if (configUserDept != null) {
+//                    onlineUsers.remove(j);
+//                    j--;
+//                }
             }
         }
         Map<String,Object> dataMap =getOrgCountMap(onlineUsers);
